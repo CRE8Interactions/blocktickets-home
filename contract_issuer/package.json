@@ -1,0 +1,11 @@
+{
+  "name": "contract_issuer",
+  "version": "1.0.0",
+  "description": "Tool for creating smart contracts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chaz Haskins",
+  "license": "ISC"
+}

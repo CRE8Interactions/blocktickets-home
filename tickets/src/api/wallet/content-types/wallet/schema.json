@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wallets",
+  "info": {
+    "singularName": "wallet",
+    "pluralName": "wallets",
+    "displayName": "wallet"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "account": {
+      "type": "json",
+      "required": true
+    },
+    "wallet": {
+      "type": "json",
+      "required": true
+    },
+    "keystore": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

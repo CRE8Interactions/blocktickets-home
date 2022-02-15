@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "verifies",
+  "info": {
+    "singularName": "verify",
+    "pluralName": "verifies",
+    "displayName": "verify",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "biginteger",
+      "required": false,
+      "unique": true
+    },
+    "addedAt": {
+      "type": "datetime"
+    }
+  }
+}

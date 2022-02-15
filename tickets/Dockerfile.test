@@ -1,0 +1,19 @@
+FROM node:14
+
+# set working directory
+
+WORKDIR /usr/src/app/tickets
+
+COPY package*.json ./
+
+RUN npm install -g jest 
+RUN npm install
+
+# add app
+COPY . .
+
+ENV NODE_ENV=test
+
+EXPOSE 1337
+
+CMD ["npm", "run", "test"]

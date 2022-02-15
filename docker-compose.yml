@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  contract:
+    build:
+      context: ./contract_issuer
+      dockerfile: Dockerfile
+    depends_on:
+      - ganache
+    volumes:
+      - ./contract_issuer:/usr/src/app/contract_issuer
+      - /usr/src/app/contract_issuer/node_modules
+    ports:
+      - '9545:9545'
+    networks:
+      - block-network
+  tickets:
+    build:
+      context: ./tickets
+      dockerfile: Dockerfile
+    volumes:
+      - ./tickets:/usr/src/app/tickets
+      - /usr/src/app/tickets/node_modules
+    ports:
+      - '1337:1337'
+    networks:
+      - block-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
+    ports:
+      - '3000:3000'
+    networks:
+      - block-network
+networks:
+  block-network:
+    driver: bridge
