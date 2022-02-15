@@ -1,0 +1,20 @@
+@import 'breakpoints';
+
+@mixin breakpoint($key, $width: min-width) {
+	// get breakpoint from array of breakpoints
+	$breakpoint: map-get($breakpoints, $key);
+	@media screen and ($width: $breakpoint) {
+		// content within breakpoint
+		@content;
+	}
+}
+
+/* Convert pixels to rem */
+@function rem($pixels, $base: 16) {
+	@return ($pixels/$base) * 1rem;
+}
+
+/* Convert pixels to em */
+@function em($pixels, $base: 16) {
+	@return ($pixels/$base) * 1em;
+}

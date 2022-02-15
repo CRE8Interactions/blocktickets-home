@@ -1,0 +1,20 @@
+/* Set core root defaults */
+html,
+body {
+	height: 100%;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #000;
+}
