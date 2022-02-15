@@ -1,13 +1,11 @@
-import './App.css';
-import { Outlet } from "react-router-dom";
+import Router from './Router';
 
 function App() {
-  return (
-    <div className="App">
-        <h1>BlockTickets</h1>
-        <Outlet />
-    </div>
-  );
+	return (
+		<div className="container">
+			<Router />
+		</div>
+	);
 }
 
 export default App;
