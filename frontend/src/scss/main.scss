@@ -1,3 +1,11 @@
-@use 'abstracts';
 @use 'base';
+@use 'abstracts';
 @use 'utilities';
+
+*:focus {
+	box-shadow: none;
+}
+
+input::placeholder {
+	color: abstracts.$clr-grey;
+}
