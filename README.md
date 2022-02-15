@@ -10,6 +10,8 @@ Strapi gives you many possible deployment options for your project. Find the one
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The UI is built using [Material UI components](https://mui.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:
