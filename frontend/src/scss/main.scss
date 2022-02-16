@@ -1,5 +1,5 @@
 @use 'base';
-@use 'abstracts';
+@use 'abstracts' as *;
 @use 'utilities';
 
 *:focus {
@@ -7,5 +7,5 @@
 }
 
 input::placeholder {
-	color: abstracts.$clr-grey;
+	color: $clr-grey;
 }
