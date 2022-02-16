@@ -1,11 +1,8 @@
 @use 'base';
 @use 'abstracts' as *;
-@use 'utilities';
+@use 'components';
+@use 'layout';
 
 *:focus {
 	box-shadow: none;
-}
-
-input::placeholder {
-	color: $clr-grey;
 }
