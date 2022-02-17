@@ -1,4 +1,2 @@
-@forward 'container';
-@forward 'header';
-@forward 'nav';
-@forward 'footer';
+@use 'container';
+@use 'forms';

@@ -1,0 +1,9 @@
+@use "../abstracts" as *;
+
+// Buttons
+$btn-font-family: $font-heading;
+$btn-font-weight: $fw-bold;
+$btn-box-shadow: none;
+$btn-focus-box-shadow: none;
+$btn-padding-y: rem(12);
+$btn-padding-x: rem(27);
