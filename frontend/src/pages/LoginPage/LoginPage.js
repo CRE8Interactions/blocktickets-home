@@ -61,7 +61,9 @@ function LoginPage() {
 				if (res.status === 200) {
 					AuthService.setUser(res.data)
 					navigate('/dashboard')
-				} 
+				} else if (res.status === 203) {
+					setStep(2)
+				}
 			})
 			.catch((err) => console.error(err))
 	}
@@ -82,6 +84,18 @@ function LoginPage() {
 			<Typography variant="body2">
 				Must include your country-code, for example +1
 			</Typography>
+		</CardContent>
+	} else if (step === 2) {
+		fields = 
+		<CardContent>
+			<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+				Enter a email address
+			</Typography>
+			<input type="email" />
+			<Typography sx={{ fontSize: 14 }} component="div">
+				Enter a username
+			</Typography>
+			<input type="text" />
 		</CardContent>
 	} else {
 		fields =
