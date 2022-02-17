@@ -57,6 +57,12 @@ module.exports = createCoreController('api::verify.verify', ({ strapi }) => ({
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 
     ctx.send(tokenData)    
+  },
+  async create(ctx) {
+    const response = await super.create(ctx);
+    delete response.data.id
+    delete response.data.attributes.code
+    return response
   }
 })
 );
