@@ -84,7 +84,7 @@ module.exports = {
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
-            .then(message => console.log(message))
+            .then(message => console.log(message.body))
             .done()
         }
 
