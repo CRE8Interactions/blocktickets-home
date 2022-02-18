@@ -1,5 +1,14 @@
+@use '../abstracts' as *;
+
+$spacer: rem(80);
+$mb: rem(26);
+
 /* container for max-width-wrapper class */
 .container {
 	max-width: 1120px;
 	margin: 0 auto;
+}
+
+.spacer {
+	margin-bottom: $spacer;
 }

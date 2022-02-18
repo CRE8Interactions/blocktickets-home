@@ -2,7 +2,15 @@
 
 // Fonts
 $font-family-sans-serif: $font-body;
-$h1-font-size: rem($h1);
-$h2-font-size: rem($h2);
-$h3-font-size: rem($h3);
-$h4-font-size: rem($h4);
+$small-font-size: rem(12);
+
+$display-font-weight: $fw-bold;
+$headings-font-family: $font-heading;
+$headings-font-weight: $fw-semi-bold;
+$headings-line-height: 1;
+$headings-margin-bottom: rem(43);
+
+$h1-font-size: $h1-font-size;
+$h2-font-size: $h2-font-size;
+$h3-font-size: $h3-font-size;
+$h4-font-size: $h4-font-size;

@@ -29,7 +29,7 @@ export default function Navigation() {
 						<Form className="d-flex">
 							<FormControl
 								type="search"
-								placeholder="Search"
+								placeholder="Search for events"
 								className="me-2"
 								aria-label="Search"
 							/>

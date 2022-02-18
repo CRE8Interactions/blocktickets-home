@@ -5,11 +5,14 @@
 	box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4 {
-	margin: 0;
+/* Set core root defaults */
+html,
+body {
+	height: 100%;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
 }
 
 p {
