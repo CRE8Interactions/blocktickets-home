@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { verifyUser, verifiyCode } from '../../api';
-import AuthService from '../../services/auth.service';
+import { verifyUser, verifiyCode } from '../../utilities/api';
+import AuthService from '../../utilities/services/auth.service';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
