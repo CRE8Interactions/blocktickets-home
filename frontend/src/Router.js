@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { HomePage, LoginPage, DashboardPage } from './pages';
-import { RequireAuth } from './useAuth';
+import { RequireAuth } from './context/Auth/useAuth';
 
 /**
  * @description Handle all the routes

@@ -1,3 +1,5 @@
+@use './mixins' as *;
+
 // Fonts
 $font-body: 'Poppins', sans-serif;
 $font-heading: 'DM Sans', sans-serif;
@@ -8,7 +10,7 @@ $fw-medium: 500;
 $fw-semi-bold: 600;
 $fw-bold: 700;
 
-$h1: 64;
-$h2: 48;
-$h3: 40;
-$h4: 32;
+$h1-font-size: rem(64);
+$h2-font-size: rem(48);
+$h3-font-size: rem(40);
+$h4-font-size: rem(32);

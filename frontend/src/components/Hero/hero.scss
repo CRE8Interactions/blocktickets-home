@@ -1,0 +1,25 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+
+.small {
+	color: $clr-neutral-4;
+	font-weight: $fw-semi-bold;
+}
+
+header {
+	.row {
+		@include breakpoint(max-width, medium) {
+			text-align: center;
+			align-items: center;
+		}
+	}
+	.display-1 {
+		font-size: $h1-font-size;
+		margin-bottom: $mb;
+	}
+	padding: $spacer 0px;
+
+	div {
+		margin-bottom: $mb;
+	}
+}
