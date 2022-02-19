@@ -1,17 +1,4 @@
 import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { verifyUser, verifiyCode } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import { useNavigate } from 'react-router-dom';
@@ -86,70 +73,73 @@ function LoginPage() {
 
 	if (step === 0) {
 		fields = 
-		<CardContent>
-			<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-				Verify your mobile number
-			</Typography>
-			<Typography sx={{ fontSize: 14 }} component="div">
-				Enter your mobile number including your country code. You'll receive an access
-				code via text message.
-			</Typography>
-			<input type="text" onBlur={(e) => setPhoneNumber(e.target.value)} />
-			<Typography variant="body2">
-				Must include your country-code, for example +1
-			</Typography>
-		</CardContent>
+		<h1>Form Here</h1>
+		// <CardContent>
+		// 	<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+		// 		Verify your mobile number
+		// 	</Typography>
+		// 	<Typography sx={{ fontSize: 14 }} component="div">
+		// 		Enter your mobile number including your country code. You'll receive an access
+		// 		code via text message.
+		// 	</Typography>
+		// 	<input type="text" onBlur={(e) => setPhoneNumber(e.target.value)} />
+		// 	<Typography variant="body2">
+		// 		Must include your country-code, for example +1
+		// 	</Typography>
+		// </CardContent>
 	} else if (step === 2) {
 		fields = 
-		<CardContent>
-			<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-				Enter a email address
-			</Typography>
-			<input type="email" />
-			<Typography sx={{ fontSize: 14 }} component="div">
-				Enter a username
-			</Typography>
-			<input type="text" />
-			<FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={gender}
-          label="Gender"
-          onChange={handleChange}
-        >
-          <MenuItem value={'male'}>Male</MenuItem>
-          <MenuItem value={'female'}>Female</MenuItem>
-        </Select>
-      </FormControl>
-		</CardContent>
+		<h1>Form Here</h1>
+		// <CardContent>
+		// 	<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+		// 		Enter a email address
+		// 	</Typography>
+		// 	<input type="email" />
+		// 	<Typography sx={{ fontSize: 14 }} component="div">
+		// 		Enter a username
+		// 	</Typography>
+		// 	<input type="text" />
+		// 	<FormControl fullWidth>
+    //     <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+    //     <Select
+    //       labelId="demo-simple-select-label"
+    //       id="demo-simple-select"
+    //       value={gender}
+    //       label="Gender"
+    //       onChange={handleChange}
+    //     >
+    //       <MenuItem value={'male'}>Male</MenuItem>
+    //       <MenuItem value={'female'}>Female</MenuItem>
+    //     </Select>
+    //   </FormControl>
+		// </CardContent>
 	} else {
 		fields =
-		<CardContent>
-			<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-				Check your mobile phone
-			</Typography>
-			<Typography sx={{ fontSize: 14 }} component="div">
-				A text message has been sent to <br />
-				{phoneNumber}. Enter the 4-digit code.
-			</Typography>
-			<List>
-				<ListItem>
-					<input type="text"  name="pincode" maxLength="1"  id="num1" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
-				</ListItem>
-				<ListItem>
-					<input type="text"  name="pincode" maxLength="1"  id="num2" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
-				</ListItem>
-				<ListItem>
-					<input type="text"  name="pincode" maxLength="1"  id="num3" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
-				</ListItem>
-				<ListItem>
-					<input type="text"  name="pincode" maxLength="1"  id="num4" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
-				</ListItem>
-			</List>
+		// <CardContent>
+		// 	<Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+		// 		Check your mobile phone
+		// 	</Typography>
+		// 	<Typography sx={{ fontSize: 14 }} component="div">
+		// 		A text message has been sent to <br />
+		// 		{phoneNumber}. Enter the 4-digit code.
+		// 	</Typography>
+		// 	<List>
+		// 		<ListItem>
+		// 			<input type="text"  name="pincode" maxLength="1"  id="num1" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
+		// 		</ListItem>
+		// 		<ListItem>
+		// 			<input type="text"  name="pincode" maxLength="1"  id="num2" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
+		// 		</ListItem>
+		// 		<ListItem>
+		// 			<input type="text"  name="pincode" maxLength="1"  id="num3" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
+		// 		</ListItem>
+		// 		<ListItem>
+		// 			<input type="text"  name="pincode" maxLength="1"  id="num4" pattern="^0[1-9]|[1-9]\d$" required onChange={(e) => setVal(e)} />
+		// 		</ListItem>
+		// 	</List>
 
-		</CardContent>
+		// </CardContent>
+		<h1>Form Here</h1>
 	}
 }
 
