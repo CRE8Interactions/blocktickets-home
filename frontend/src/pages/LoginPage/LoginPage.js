@@ -8,7 +8,13 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { verifyUser, verifiyCode } from '../../api';
 import AuthService from '../../services/auth.service';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 function LoginPage() {
 	const [
@@ -21,6 +27,7 @@ function LoginPage() {
 		setStep ] = useState(0)
 	
 	const [code, setCode ] = useState('')
+	const [gender, setGender] = React.useState('');
 
 	const navigate = useNavigate()
 
@@ -68,6 +75,10 @@ function LoginPage() {
 			.catch((err) => console.error(err))
 	}
 
+	const handleChange = (event) => {
+		setGender(event.target.value)
+	}
+
 	let fields;
 
 	if (step === 0) {
@@ -96,6 +107,19 @@ function LoginPage() {
 				Enter a username
 			</Typography>
 			<input type="text" />
+			<FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={gender}
+          label="Gender"
+          onChange={handleChange}
+        >
+          <MenuItem value={'male'}>Male</MenuItem>
+          <MenuItem value={'female'}>Female</MenuItem>
+        </Select>
+      </FormControl>
 		</CardContent>
 	} else {
 		fields =
