@@ -1,0 +1,16 @@
+@use './../../scss/abstracts' as *;
+
+.card {
+	&-img {
+		&-top {
+			height: 303px;
+			background-color: $clr-neutral-6;
+			border-radius: 30%;
+		}
+	}
+
+	&-body {
+		display: flex;
+		flex-direction: column;
+	}
+}

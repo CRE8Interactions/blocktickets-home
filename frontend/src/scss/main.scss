@@ -1,8 +1,15 @@
+@use 'theme/custom';
 @use 'base';
-@use 'abstracts';
-@use 'components';
+@use 'abstracts' as *;
 @use 'layout';
 
-*:focus {
-	box-shadow: none;
+.section-heading {
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+	}
+
+	margin-bottom: rem(43);
 }
