@@ -1,0 +1,20 @@
+FROM node:14
+
+# set working directory
+
+WORKDIR /app/tickets
+
+COPY package*.json ./
+
+RUN npm install
+
+ENV NODE_ENV=preview
+
+RUN npm run build
+
+# add app
+COPY . .
+
+EXPOSE 1337
+
+CMD ["npm", "run", "start"]
