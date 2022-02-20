@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { verifyUser, verifiyCode } from '../../utilities/api';
+import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, Col, Row } from 'react-bootstrap'
+import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
@@ -25,6 +25,9 @@ function LoginPage() {
 	] = useState('');
 
 	const [phoneNumber, setValue] = useState()
+
+	const [formValid, setFormValid] = useState(false)
+	const [formData, setFormData] = useState({})
 
 	const navigate = useNavigate();
 
@@ -76,8 +79,48 @@ function LoginPage() {
 			.catch((err) => console.error(err));
 	}
 
+	let myData = {
+		email: '',
+		username: '',
+		dob: '',
+		gender: '',
+		phoneNumber
+	}
+
+	const isValid = () => {
+		let nv = myData['email'] !== ''
+		let uv = myData['username'] !== ''
+		let dv = myData['dob'] !== ''
+		let gv = myData['gender'] !== ''
+		if (nv && uv && dv && gv) {
+			setFormValid(true)
+			setFormData(myData)
+		}
+	}
+
 	const handleChange = (event) => {
-		setGender(event.target.value)
+		let name = event.target.name;
+		let value = event.target.value;
+		myData[name] = value;
+		isValid()
+	}
+
+	const submitForm = () => {
+		let data = {
+			data: {
+				dob: formData.dob,
+				email: formData.email,
+				username: formData.username,
+				gender: formData.gender,
+				phoneNumber: formData.phoneNumber
+			}
+		}
+		createNewUser(data).then((res) => {
+			if (res.status === 200) {
+				AuthService.setUser(res.data);
+				navigate('/');
+			}
+		})
 	}
 
 	let cardTitle;
@@ -89,6 +132,8 @@ function LoginPage() {
 	} else if (step === 1) {
 		cardTitle = 'Check your mobile phone';
 		cardText = `A text message has been sent to ${phoneNumber}. Enter the 4-digit code.`;
+	} else if (step === 2) {
+		cardTitle = `Lets setup your profile`
 	}
 	
 	return (
@@ -130,7 +175,32 @@ function LoginPage() {
 						}
 						{step === 2 &&
 							<div>
-								<p>Create Profile</p>
+								<Form>
+									<Form.Group className="mb-3" controlId="formBasicEmail">
+										<Form.Control type="email" placeholder="Enter email" name="email" onChange={(e) => handleChange(e)}/>
+									</Form.Group>
+
+									<Form.Group className="mb-3" controlId="formBasicUsername">
+										<Form.Control type="text" placeholder="Enter a username" name="username" onChange={(e) => handleChange(e)}/>
+									</Form.Group>
+									<Form.Group className="mb-3" controlId="formBasicDob">
+										<Form.Control type="date" name="dob" onChange={(e) => handleChange(e)}/>
+										<Form.Text className="text-muted">
+											Enter your Date of Birth.
+										</Form.Text>
+									</Form.Group>
+									<Form.Group className="mb-3" controlId="formBasicDob">
+									<Form.Select aria-label="Default select gender" name="gender" onChange={(e) => handleChange(e)}>
+										<option>Select your gender</option>
+										<option value="male">Male</option>
+										<option value="female">Female</option>
+										<option value="other">Other</option>
+									</Form.Select>
+									</Form.Group>
+									<Button variant="primary" type="button" disabled={!formValid} onClick={(e) => submitForm()}>
+										Submit
+									</Button>
+								</Form>
 							</div>
 						}
 					</Card.Body>
