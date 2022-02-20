@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -6,11 +6,16 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import authService from '../../utilities/services/auth.service';
 
 import logo from '../../assets/logo.svg';
 import './navigation.scss';
 
 export default function Navigation() {
+	const logout = () => {
+		authService.logoutUser()
+	}
+
 	return (
 		<Navbar collapseOnSelect bg="light" expand="lg">
 			<Container>
@@ -33,7 +38,12 @@ export default function Navigation() {
 								className="me-2"
 								aria-label="Search"
 							/>
-							<Button variant="primary">Login</Button>
+							{!authService.isLoggedIn() && 
+								<Button variant="primary" href="/login">Login</Button>
+							}
+							{authService.isLoggedIn() && 
+								<Button variant="primary" onClick={(e) => logout()}>Logout</Button>
+							}
 						</Form>
 					</Nav>
 				</Navbar.Collapse>

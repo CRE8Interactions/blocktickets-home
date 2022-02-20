@@ -12,3 +12,7 @@ export const verifyUser = (data) => {
 export const verifiyCode = (data) => {
   return instance.post('/verifies/byPhone', data)
 }
+
+export const createNewUser = (data) => {
+  return instance.post('/verifies/newUser', data)
+}
