@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect } from 'react';
+import React, { Component, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -7,13 +7,17 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import authService from '../../utilities/services/auth.service';
+import UserContext from '../../context/User/user';
 
 import logo from '../../assets/logo.svg';
 import './navigation.scss';
 
 export default function Navigation() {
+	const { setAuthenticated } = useContext(UserContext);
+
 	const logout = () => {
 		authService.logoutUser()
+		setAuthenticated({})
 	}
 
 	return (
