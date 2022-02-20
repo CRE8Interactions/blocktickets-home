@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
+import UserContext from '../../context/User/user';
 
 
 function LoginPage() {
@@ -28,6 +29,7 @@ function LoginPage() {
 
 	const [formValid, setFormValid] = useState(false)
 	const [formData, setFormData] = useState({})
+	const { setAuthenticated } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -70,6 +72,7 @@ function LoginPage() {
 			.then((res) => {
 				if (res.status === 200) {
 					AuthService.setUser(res.data);
+					setAuthenticated(res.data)
 					navigate('/');
 				}
 				else if (res.status === 203) {
