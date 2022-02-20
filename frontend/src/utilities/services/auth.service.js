@@ -9,17 +9,23 @@ const getUser = () => {
   if (user) {
     return user
   } else {
-    return {}
+    return undefined
   }
 }
 
 const isLoggedIn = () => {
   const user = getUser()
+  if (!user) return false
   return Object.keys(user).length !== 0;
+}
+
+const logoutUser = () => {
+  sessionStorage.removeItem('user')
 }
 
 export default {
   setUser,
   getUser,
-  isLoggedIn
+  isLoggedIn,
+  logoutUser
 };
