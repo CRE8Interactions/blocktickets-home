@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'http://localhost:1337/api',
+  baseURL: process.env.REACT_APP_API,
   timeout: 3000
 })
 
@@ -11,4 +11,8 @@ export const verifyUser = (data) => {
 
 export const verifiyCode = (data) => {
   return instance.post('/verifies/byPhone', data)
+}
+
+export const createNewUser = (data) => {
+  return instance.post('/verifies/newUser', data)
 }

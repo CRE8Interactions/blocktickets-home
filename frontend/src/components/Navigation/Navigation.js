@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import authService from '../../utilities/services/auth.service';
+import UserContext from '../../context/User/user';
 
 import logo from '../../assets/logo.svg';
 import shoppingCart from '../../assets/icons/shopping-cart.svg';
@@ -13,6 +15,13 @@ import shoppingCart from '../../assets/icons/shopping-cart.svg';
 import './navigation.scss';
 
 export default function Navigation() {
+	const { setAuthenticated } = useContext(UserContext);
+
+	const logout = () => {
+		authService.logoutUser();
+		setAuthenticated({});
+	};
+
 	return (
 		<Navbar collapseOnSelect expand="lg">
 			<Container>
@@ -39,7 +48,15 @@ export default function Navigation() {
 						<div className="notificatins align-self-center">
 							<img src={shoppingCart} />
 						</div>
-						<Button variant="primary">Login</Button>
+						{!authService.isLoggedIn() && (
+							<Button variant="primary" href="/login">
+								Login
+							</Button>
+						)}
+
+						{authService.isLoggedIn() && (
+							<Button variant="outline-light">My Wallet</Button>
+						)}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

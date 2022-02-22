@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.preview
+    restart: always # because it is routing traffic to our entire app
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - block-network
+  tickets:
+    build:
+      context: ./tickets
+      dockerfile: Dockerfile.preview
+    volumes:
+      - ./tickets:/usr/src/app/tickets
+      - /usr/src/app/tickets/node_modules
+    ports:
+      - '1337:1337'
+    networks:
+      - block-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.preview
+    volumes:
+      - ./frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
+    ports:
+      - '3000:3000'
+    networks:
+      - block-network
+networks:
+  block-network:
+    driver: bridge
