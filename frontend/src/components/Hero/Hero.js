@@ -23,7 +23,7 @@ export default function Hero() {
 				onSwiper={(swiper) => console.log(swiper)}
 				onSlideChange={() => console.log('slide change')}>
 				<SwiperSlide>
-					<Container className="hero">
+					<div className="hero">
 						<Row className="justify-content-between">
 							<Col md={7}>
 								<img src={profile} alt="image" />
@@ -31,23 +31,27 @@ export default function Hero() {
 							<Col md={4} className="d-flex flex-column">
 								<h1 className="display-1">Nic Fanciulli</h1>
 								<div>
-									<p className="small">Time</p>
-									<p className="bold">
-										Fri Mar 11, 2020 <span>9:00 PM</span>
+									<p className="small time">Time</p>
+									<p className="bold date body-lg">
+										Mar 13 <span>9:00 PM</span>
 									</p>
 								</div>
 								<div>
-									<p className="small">Venue</p>
-									<p className="text-uppercase bold">CODA</p>
+									<p className="small venue">Venue</p>
+									<p className="bold body-lg">
+										CODA or venue long name here as another example
+									</p>
 								</div>
 								<div>
-									<p className="small">Location</p>
-									<p>794 Bathurst Street Toronto, ON M5R 3G1</p>
+									<p className="small location">Location</p>
+									<p>Toronto, ON</p>
 								</div>
-								<Button variant="primary">Get Tickets</Button>
+								<Button variant="secondary" className="btn--tickets">
+									Get Tickets
+								</Button>
 							</Col>
 						</Row>
-					</Container>
+					</div>
 				</SwiperSlide>
 				<SwiperNavigationButtons />
 			</Swiper>

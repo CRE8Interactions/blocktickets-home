@@ -2,11 +2,12 @@
 
 .navbar {
 	padding: rem(24);
+	border: 1px solid $clr-neutral-6;
 }
 
 .navbar-light .navbar-nav .nav-link {
 	&:hover,
-	:focus {
+	&:focus {
 		color: $clr-primary;
 	}
 }
