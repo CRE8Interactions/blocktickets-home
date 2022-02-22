@@ -3,7 +3,7 @@ import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
-import 'react-phone-number-input/styles.css';
+// import 'react-phone-number-input/styles.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
 import UserContext from '../../context/User/user';
