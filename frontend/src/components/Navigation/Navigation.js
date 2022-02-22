@@ -10,18 +10,20 @@ import authService from '../../utilities/services/auth.service';
 import UserContext from '../../context/User/user';
 
 import logo from '../../assets/logo.svg';
+import shoppingCart from '../../assets/icons/shopping-cart.svg';
+
 import './navigation.scss';
 
 export default function Navigation() {
 	const { setAuthenticated } = useContext(UserContext);
 
 	const logout = () => {
-		authService.logoutUser()
-		setAuthenticated({})
-	}
+		authService.logoutUser();
+		setAuthenticated({});
+	};
 
 	return (
-		<Navbar collapseOnSelect bg="light" expand="lg">
+		<Navbar collapseOnSelect expand="lg">
 			<Container>
 				<Navbar.Brand href="/" className="app-name">
 					<img src={logo} alt="blocktickets" />
@@ -34,7 +36,7 @@ export default function Navigation() {
 						navbarScroll>
 						<Nav.Link href="#action1">Browse</Nav.Link>
 					</Nav>
-					<Nav>
+					<Nav className="gap-4">
 						<Form className="d-flex">
 							<FormControl
 								type="search"
@@ -42,13 +44,19 @@ export default function Navigation() {
 								className="me-2"
 								aria-label="Search"
 							/>
-							{!authService.isLoggedIn() && 
-								<Button variant="primary" href="/login">Login</Button>
-							}
-							{authService.isLoggedIn() && 
-								<Button variant="primary" onClick={(e) => logout()}>Logout</Button>
-							}
 						</Form>
+						<div className="notificatins align-self-center">
+							<img src={shoppingCart} />
+						</div>
+						{!authService.isLoggedIn() && (
+							<Button variant="primary" href="/login">
+								Login
+							</Button>
+						)}
+
+						{authService.isLoggedIn() && (
+							<Button variant="outline-light">My Wallet</Button>
+						)}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

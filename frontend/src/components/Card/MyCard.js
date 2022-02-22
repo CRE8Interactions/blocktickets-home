@@ -2,20 +2,28 @@ import React, { Fragment, useContext, useEffect } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import { IconButton } from '../IconButton';
 
 import './card.scss';
 
 export default function MyCard() {
 	return (
-		<Card style={{ width: '18rem' }}>
+		<Card>
 			<Card.Img variant="top" src="holder.js/100px180" />
 			<Card.Body>
-				<Card.Title>Event name goes here</Card.Title>
-				<Card.Subtitle>Artist Name</Card.Subtitle>
+				<Card.Title>Dua Lipa: The future Nostalgic Tour</Card.Title>
+				<Card.Subtitle>Coda venue with a long long name</Card.Subtitle>
 				<hr />
-				<Card.Text />
-				<Button variant="outline-secondary">Get Tickets</Button>
+				<Row>
+					<span className="col small">Mar 13 9:30PM</span>
+					<span className="col small text-end">Toronto, CA</span>
+				</Row>
+				<IconButton
+					variant="outline-light"
+					styles="icon-button btn--tickets text-secondary"
+					text="Get Tickets"
+				/>
 			</Card.Body>
 		</Card>
 	);
