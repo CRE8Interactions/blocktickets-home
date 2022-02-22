@@ -17,7 +17,7 @@ export default function Events() {
 	return (
 		<section>
 			<div className="section-heading d-flex justify-content-between align-items-center">
-				<h3>Trending Events</h3>
+				<h1>Trending Events</h1>
 				<SwiperNavigationButtons />
 			</div>
 			<div>

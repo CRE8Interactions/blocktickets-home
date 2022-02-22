@@ -8,11 +8,13 @@ import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import logo from '../../assets/logo.svg';
+import shoppingCart from '../../assets/icons/shopping-cart.svg';
+
 import './navigation.scss';
 
 export default function Navigation() {
 	return (
-		<Navbar collapseOnSelect bg="light" expand="lg">
+		<Navbar collapseOnSelect expand="lg">
 			<Container>
 				<Navbar.Brand href="/" className="app-name">
 					<img src={logo} alt="blocktickets" />
@@ -25,7 +27,7 @@ export default function Navigation() {
 						navbarScroll>
 						<Nav.Link href="#action1">Browse</Nav.Link>
 					</Nav>
-					<Nav>
+					<Nav className="gap-4">
 						<Form className="d-flex">
 							<FormControl
 								type="search"
@@ -33,8 +35,11 @@ export default function Navigation() {
 								className="me-2"
 								aria-label="Search"
 							/>
-							<Button variant="primary">Login</Button>
 						</Form>
+						<div className="notificatins align-self-center">
+							<img src={shoppingCart} />
+						</div>
+						<Button variant="primary">Login</Button>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

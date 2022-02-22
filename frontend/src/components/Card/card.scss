@@ -1,16 +1,29 @@
 @use './../../scss/abstracts' as *;
 
 .card {
-	&-img {
-		&-top {
+	width: rem(256);
+	.card {
+		&-img-top {
 			height: 303px;
 			background-color: $clr-neutral-6;
-			border-radius: 30%;
+			border-radius: $br-textile;
 		}
-	}
 
-	&-body {
-		display: flex;
-		flex-direction: column;
+		&-body {
+			display: flex;
+			flex-direction: column;
+			padding-left: 0px;
+		}
+
+		&-title {
+			font-family: $font-body;
+			font-size: $body-2;
+			font-weight: $fw-medium;
+		}
+
+		&-subtitle {
+			margin-top: initial;
+			font-size: rem(14);
+		}
 	}
 }

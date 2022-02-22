@@ -1,3 +1,54 @@
+@use '../abstracts' as *;
+
 .bold {
 	font-weight: 600;
+}
+
+.body-lg {
+	@include breakpoint(min-width, medium) {
+		font-size: $body-1;
+	}
+}
+
+.section-heading {
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+	}
+
+	margin-bottom: rem(43);
+}
+
+h1,
+.h1 {
+	font-size: $h1-font-size;
+}
+h2,
+.h2 {
+	font-size: $h2-font-size;
+}
+h3,
+.h3 {
+	font-size: $h3-font-size;
+}
+h4,
+.h4 {
+	font-size: $h4-font-size;
+}
+
+.section-heading h1 {
+	font-size: $h4-font-size;
+	@include breakpoint(min-width, medium) {
+		font-size: $h3-font-size;
+	}
+}
+
+.card-title,
+.card-subtitle {
+	white-space: nowrap;
+	width: inherit;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
