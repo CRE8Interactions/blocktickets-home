@@ -13,6 +13,7 @@ import logo from '../../assets/logo.svg';
 import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
 import './navigation.scss';
+import SearchBar from './../SearchBar/SearchBar';
 
 export default function Navigation() {
 	const { setAuthenticated } = useContext(UserContext);
@@ -24,29 +25,19 @@ export default function Navigation() {
 
 	return (
 		<div className="navigation">
-			<Navbar collapseOnSelect expand="lg">
+			<Navbar collapseOnSelect expand="md">
 				<Container>
-					<Navbar.Brand href="/" className="app-name">
+					<Navbar.Brand href="/">
 						<img src={logo} alt="blocktickets" />
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-					<Navbar.Collapse id="responsive-navbar-nav">
-						<Nav
-							className="me-auto my-2 my-lg-0"
-							style={{ maxHeight: '100px' }}
-							navbarScroll>
-							<Nav.Link href="#action1">Browse</Nav.Link>
+					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
+						<Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }}>
+							<Nav.Link href="/">Browse</Nav.Link>
 						</Nav>
-						<Nav className="gap-4">
-							<Form className="d-flex">
-								<FormControl
-									type="search"
-									placeholder="Search for events"
-									className="me-2"
-									aria-label="Search"
-								/>
-							</Form>
-							<div className="notificatins align-self-center">
+						<Nav className="gap-4 align-items-md-center">
+							<SearchBar />
+							<div className="notificatins align-self-md-center">
 								<img src={shoppingCart} />
 							</div>
 							{!authService.isLoggedIn() && (

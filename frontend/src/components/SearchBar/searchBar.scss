@@ -1,0 +1,18 @@
+@use '../../scss/abstracts' as *;
+
+.search {
+	position: relative;
+	width: 256px;
+
+	.form-control {
+		border-radius: 8px;
+		padding-top: $input-padding-sm-top;
+		padding-bottom: $input-padding-sm-bottom;
+	}
+	&-icon {
+		position: absolute;
+		top: $input-padding-sm-top;
+		right: rem(12);
+		z-index: 9999;
+	}
+}

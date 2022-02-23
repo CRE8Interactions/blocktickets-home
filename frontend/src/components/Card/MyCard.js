@@ -16,12 +16,10 @@ export default function MyCard() {
 				<Card.Subtitle>Coda venue with a long long name</Card.Subtitle>
 				<hr />
 				<Row>
-					<span className="col small">Mar 13 9:30PM</span>
-					<span className="col small text-end">Toronto, CA</span>
+					<span className="col caption">Mar 13 9:30PM</span>
+					<span className="col caption text-end">Toronto, CA</span>
 				</Row>
-				<IconButton
-					variant="outline-light"
-					styles="icon-button btn--tickets text-secondary">
+				<IconButton variant="outline-light" styles="btn--tickets text-secondary">
 					Get Tickets
 				</IconButton>
 			</Card.Body>
