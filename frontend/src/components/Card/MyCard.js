@@ -21,9 +21,9 @@ export default function MyCard() {
 				</Row>
 				<IconButton
 					variant="outline-light"
-					styles="icon-button btn--tickets text-secondary"
-					text="Get Tickets"
-				/>
+					styles="icon-button btn--tickets text-secondary">
+					Get Tickets
+				</IconButton>
 			</Card.Body>
 		</Card>
 	);

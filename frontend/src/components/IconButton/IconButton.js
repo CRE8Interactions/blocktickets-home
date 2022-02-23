@@ -5,10 +5,10 @@ import Button from 'react-bootstrap/Button';
 
 import './iconButton.scss';
 
-export default function IconButton({ styles, variant, text }) {
+export default function IconButton({ children, styles, variant }) {
 	return (
 		<Button className={styles} variant={variant}>
-			{text}
+			{children}
 		</Button>
 	);
 }
