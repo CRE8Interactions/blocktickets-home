@@ -1,4 +1,5 @@
 @use "../abstracts" as *;
+@use './input' as *;
 
 // Buttons
 $btn-font-family: $font-heading;
@@ -7,5 +8,5 @@ $btn-box-shadow: none;
 $btn-focus-box-shadow: none;
 $btn-padding-y: rem(10);
 $btn-padding-x: rem(21);
-$btn-border-radius: $br-btn;
-$btn-border-width: 2px;
+$btn-border-radius: $border-radius;
+$btn-border-width: $border-width;

@@ -1,13 +1,8 @@
 @use '../../scss/abstracts' as *;
 
-.navbar {
-	padding: rem(24);
-	border: 1px solid $clr-neutral-6;
-}
-
-.navbar-light .navbar-nav .nav-link {
-	&:hover,
-	&:focus {
-		color: $clr-primary;
+.navigation {
+	.navbar {
+		padding: rem(26) 0px;
+		border: 1px solid $clr-neutral-6;
 	}
 }
