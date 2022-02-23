@@ -1,14 +1,5 @@
-@use '../abstracts' as *;
-
-$spacer: rem(58);
-$mb: rem(26);
-
 /* container */
 .container {
 	max-width: 1120px;
 	margin: 0 auto;
-}
-
-.spacer {
-	margin-bottom: $spacer;
 }
