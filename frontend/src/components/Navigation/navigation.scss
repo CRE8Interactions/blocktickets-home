@@ -7,7 +7,7 @@
 
 		@include breakpoint(min-width, medium) {
 			&.navbar-expand-md .navbar-nav .nav-link {
-				padding-left: rem(24);
+				padding-left: rem(36);
 			}
 		}
 		.nav-link {
