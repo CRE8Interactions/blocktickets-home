@@ -1,0 +1,9 @@
+@use '../abstracts' as *;
+
+$banner-padding: rem(58);
+$spacer: rem(74);
+$banner-spacer: rem(26);
+
+.spacer {
+	margin-top: $spacer;
+}

@@ -9,16 +9,16 @@ header {
 
 	.display-1 {
 		font-size: $h4-font-size;
-		margin-bottom: $mb;
+		margin-bottom: $banner-spacer;
 
 		@include breakpoint(min-width, medium) {
 			font-size: $h1-font-size;
 		}
 	}
-	padding: $spacer 0px;
+	padding: $banner-padding 0px;
 
 	div {
-		margin-bottom: $mb;
+		margin-bottom: $banner-spacer;
 	}
 
 	.date {
