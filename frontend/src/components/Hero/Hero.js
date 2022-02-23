@@ -7,7 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+
+import { IconButton } from '../IconButton';
 
 import profile from '../../assets/01.png';
 import './hero.scss';
@@ -31,24 +32,24 @@ export default function Hero() {
 							<Col md={4} className="d-flex flex-column">
 								<h1 className="display-1">Nic Fanciulli</h1>
 								<div>
-									<p className="small time">Time</p>
+									<p className="caption time">Time</p>
 									<p className="bold date body-lg">
 										Mar 13 <span>9:00 PM</span>
 									</p>
 								</div>
 								<div>
-									<p className="small venue">Venue</p>
+									<p className="caption venue">Venue</p>
 									<p className="bold body-lg">
 										CODA or venue long name here as another example
 									</p>
 								</div>
 								<div>
-									<p className="small location">Location</p>
+									<p className="caption location">Location</p>
 									<p>Toronto, ON</p>
 								</div>
-								<Button variant="secondary" className="btn--tickets">
+								<IconButton variant="secondary" styles="btn--tickets ">
 									Get Tickets
-								</Button>
+								</IconButton>
 							</Col>
 						</Row>
 					</div>

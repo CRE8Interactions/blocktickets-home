@@ -1,6 +1,8 @@
 @use './mixins' as *;
 
 // Fonts
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
 $font-body: 'Poppins', sans-serif;
 $font-heading: 'DM Sans', sans-serif;
 
@@ -17,4 +19,5 @@ $h4-font-size: rem(32);
 
 $body-1: rem(24);
 $body-2: 1rem;
-$small: rem(12);
+$small: rem(14);
+$caption: rem(12);

@@ -32,6 +32,10 @@ select {
 	font: inherit;
 }
 
+button:focus {
+	box-shadow: none !important;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

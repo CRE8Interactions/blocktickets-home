@@ -11,10 +11,10 @@ import './swiperNavigationButtons.scss';
 export default function SwiperNavigationButtons() {
 	return (
 		<div className="d-flex justify-content-center">
-			<Button variant="outline-light" className="btn--circle">
+			<Button variant="outline-light" className="btn--icon">
 				<img src={leftArrow} />
 			</Button>
-			<Button variant="outline-light" className="btn--circle">
+			<Button variant="outline-light" className="btn--icon">
 				<img src={rightArrow} />
 			</Button>
 		</div>

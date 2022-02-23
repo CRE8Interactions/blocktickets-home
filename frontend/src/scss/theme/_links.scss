@@ -3,6 +3,11 @@
 $link-color: $secondary;
 $link-hover-color: rgba($secondary, .7);
 
+@include breakpoint(max-width, medium) {
+	$nav-link-font-size: rem(24);
+}
+
+$navbar-brand-margin-end: rem(50);
 $nav-link-font-weight: $btn-font-weight;
 $navbar-light-color: $clr-neutral-4;
 $navbar-light-hover-color: $secondary;

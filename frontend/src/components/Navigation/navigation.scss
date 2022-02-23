@@ -3,6 +3,24 @@
 .navigation {
 	.navbar {
 		padding: rem(26) 0px;
-		border: 1px solid $clr-neutral-6;
+		border-bottom: 1px solid $clr-neutral-6;
+
+		@include breakpoint(min-width, medium) {
+			&.navbar-expand-md .navbar-nav .nav-link {
+				padding-left: rem(24);
+			}
+		}
+		.nav-link {
+			font-family: $font-heading;
+			border-left: 2px solid $clr-neutral-6;
+			padding-left: 1.5rem;
+		}
+		.btn {
+			margin-top: 0px;
+		}
+
+		&-light-toggler {
+			border-radius: 0px;
+		}
 	}
 }

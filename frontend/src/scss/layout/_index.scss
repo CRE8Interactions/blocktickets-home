@@ -2,3 +2,10 @@
 @use 'buttons';
 @use 'forms';
 @use 'typography';
+
+%icon-text-box {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	line-height: 0;
+}
