@@ -47,7 +47,7 @@ export default function Hero() {
 									<p className="caption location">Location</p>
 									<p>Toronto, ON</p>
 								</div>
-								<IconButton variant="secondary" styles="btn--tickets btn--large">
+								<IconButton variant="secondary" styles="btn--tickets btn--medium">
 									Get Tickets
 								</IconButton>
 							</Col>
