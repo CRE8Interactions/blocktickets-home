@@ -1,15 +1,8 @@
 @use 'container';
+@forward 'spacing';
 @use 'buttons';
 @use 'forms';
 @use 'typography';
-@forward 'spacing';
-
-%icon-text-box {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-	line-height: 0;
-}
 
 .section-heading {
 	display: flex;

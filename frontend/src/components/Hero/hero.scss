@@ -33,6 +33,7 @@ header {
 	.venue,
 	.location {
 		@extend %icon-text-box;
+		gap: $gap-sm;
 	}
 	.time {
 		&::before {

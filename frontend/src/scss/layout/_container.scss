@@ -1,5 +1,14 @@
+@use './spacing' as *;
+
 /* container */
 .container {
 	max-width: 1120px;
 	margin: 0 auto;
+}
+
+%icon-text-box {
+	display: flex;
+	gap: $gap;
+	align-items: center;
+	line-height: 0;
 }

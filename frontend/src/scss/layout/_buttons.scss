@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../theme/buttons' as *;
 
 .btn + .btn {
 	margin-left: 1rem;
@@ -12,14 +13,11 @@
 	padding: rem(8);
 }
 
-.btn-primary,
-.btn-secondary {
-	color: $clr-neutral-8;
+.btn--large {
+	padding: $btn-padding-y-lg $btn-padding-x-lg;
+}
 
-	&:hover,
-	&:focus {
-		color: $clr-neutral-8;
-	}
+.btn--small {
 }
 
 .btn--tickets {
