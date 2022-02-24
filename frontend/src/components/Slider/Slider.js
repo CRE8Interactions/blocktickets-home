@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import './slider.scss';
 
-export default function Slider() {
+export default function Slider({ prefix }) {
 	return (
 		<Swiper
 			spaceBetween={20}
@@ -14,7 +14,7 @@ export default function Slider() {
 			onSwiper={(swiper) => console.log(swiper)}
 			onSlideChange={() => console.log('slide change')}>
 			<SwiperSlide>
-				<MyCard />
+				<MyCard prefix={prefix} />
 			</SwiperSlide>
 		</Swiper>
 	);
