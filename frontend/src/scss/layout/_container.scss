@@ -1,14 +1,18 @@
 @use './spacing' as *;
+@use '../abstracts' as *;
 
 /* container */
 .container {
 	max-width: 1120px;
 	margin: 0 auto;
+	padding: 0px rem(32);
 }
 
 %icon-text-box {
 	display: flex;
 	gap: $gap;
 	align-items: center;
-	line-height: 0;
+	&::before {
+		line-height: 0;
+	}
 }

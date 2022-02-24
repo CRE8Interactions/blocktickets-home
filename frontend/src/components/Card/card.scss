@@ -1,4 +1,5 @@
 @use './../../scss/abstracts' as *;
+@use './../../scss/layout' as *;
 
 .card {
 	width: rem(256);
@@ -16,15 +17,28 @@
 			padding-right: 0px;
 		}
 
+		&-text {
+			font-size: $caption;
+		}
+
 		&-title {
 			font-family: $font-body;
 			font-size: $body-2;
 			font-weight: $fw-medium;
+			@extend %text-truncate;
 		}
 
 		&-subtitle {
+			@extend %text-truncate;
 			margin-top: initial;
 			font-size: $small;
 		}
+	}
+	.row + .row {
+		margin-top: $card-body-spacer;
+	}
+
+	.caption {
+		@extend %text-truncate;
 	}
 }

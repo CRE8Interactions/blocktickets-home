@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 // import UserContext from '../../context/User/user';
-import { Events, Hero } from '../../components';
+import { Venues, Hero, Events } from '../../components';
 
 export default function HomePage() {
 	// const user = useContext(UserContext);
@@ -9,6 +9,7 @@ export default function HomePage() {
 		<main style={{ padding: '1rem 0' }}>
 			<Hero />
 			<Events />
+			<Venues />
 		</main>
 	);
 }

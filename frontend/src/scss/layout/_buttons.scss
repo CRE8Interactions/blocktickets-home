@@ -13,11 +13,13 @@
 	padding: rem(8);
 }
 
-.btn--large {
-	padding: $btn-padding-y-lg $btn-padding-x-lg;
+.btn--medium {
+	padding: $btn-padding-y-md $btn-padding-x-md;
+	font-size: $btn-font-size-md;
 }
 
-.btn--small {
+.btn--xsmall {
+	padding: $btn-padding-y-xs $btn-padding-x-xs;
 }
 
 .btn--tickets {
