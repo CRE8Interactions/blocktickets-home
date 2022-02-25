@@ -1,21 +1,48 @@
 @use '../abstracts' as *;
 @use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
 .btn + .btn {
-	margin-left: 1rem;
+	margin-left: em(16);
 }
 
 .btn {
-	margin-top: rem(10);
+	margin-top: em(10);
+}
+
+.btn-link {
+	margin-top: 0px;
+	padding: 0px;
 }
 
 .btn--icon {
-	padding: rem(8);
+	padding: em(8);
+	margin-top: 0px;
 }
 
 .btn--medium {
 	padding: $btn-padding-y-md $btn-padding-x-md;
 	font-size: $btn-font-size-md;
+}
+
+.btn--input {
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: em(16);
+
+	&-default {
+		background-color: $primary;
+		background-image: url('../../assets/icons/right-arrow-white.svg');
+	}
+
+	&-loading {
+		background-image: url('../../assets/icons/loading.svg');
+	}
+
+	&-success {
+		background-color: $green;
+		background-image: url('../../assets/icons/checkmark.svg');
+	}
 }
 
 .btn--xsmall {

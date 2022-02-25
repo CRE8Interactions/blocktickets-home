@@ -1,9 +1,15 @@
 @use '../abstracts' as *;
 
-$border-radius: $br-primary;
-$border-width: $border-width;
+$input-font-size: rem(14);
+$input-font-size-sm: rem(12);
+$input-padding-y: em(6);
+$input-padding-x: em(15);
+$input-padding-x-sm: em(10);
+$input-padding-y-sm: em(7);
 
+$border-radius: $br-primary;
+$border-radius-sm: $br-sm;
+$border-width: $border-width;
 $input-border-width: $border-width;
-$input-padding-y: $input-padding-y;
-$input-padding-x: $input-padding-x;
-$input-font-size: $small;
+$input-focus-border-color: transparent;
+$input-focus-box-shadow: none;

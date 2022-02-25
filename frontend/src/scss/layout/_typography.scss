@@ -47,7 +47,15 @@ h4,
 
 .caption {
 	font-size: $caption;
-	margin-bottom: rem(3);
+	margin-bottom: em(3);
+}
+
+.caption--uppercase {
+	@extend .caption;
+	text-transform: uppercase;
+	font-weight: $fw-bold;
+	font-family: $font-body;
+	margin-bottom: em(40);
 }
 
 %text-truncate {
@@ -55,4 +63,8 @@ h4,
 	width: inherit;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+.nav-link {
+	font-family: $font-heading;
 }

@@ -10,9 +10,8 @@
 			}
 		}
 		.nav-link {
-			font-family: $font-heading;
 			border-left: 2px solid $clr-neutral-6;
-			padding-left: 1.5rem;
+			padding-left: rem(24);
 		}
 		.btn {
 			margin-top: 0px;

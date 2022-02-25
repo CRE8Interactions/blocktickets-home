@@ -13,7 +13,7 @@ import logo from '../../assets/logo.svg';
 import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
 import './navigation.scss';
-import SearchBar from './../SearchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Navigation() {
 	const { setAuthenticated } = useContext(UserContext);
@@ -33,11 +33,7 @@ export default function Navigation() {
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }}>
-							<ul>
-								<li>
-									<Nav.Link href="/">Browse</Nav.Link>
-								</li>
-							</ul>
+							<Nav.Link href="/">Browse</Nav.Link>
 						</Nav>
 						<Nav className="gap-4 align-items-md-center">
 							<SearchBar />

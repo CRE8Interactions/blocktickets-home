@@ -4,6 +4,11 @@
 @use 'forms';
 @use 'typography';
 
+.nav-link {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 .section-heading {
 	display: flex;
 	justify-content: space-between;
