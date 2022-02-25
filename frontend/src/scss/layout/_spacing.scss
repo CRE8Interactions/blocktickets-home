@@ -1,12 +1,17 @@
 @use '../abstracts' as *;
 
-$banner-padding: rem(58);
-$spacer: rem(74);
+$banner-padding: em(58);
+$spacer: em(63);
+$spacer-sm: em(30);
 $banner-spacer: rem(26);
-$gap: rem(14);
-$gap-sm: rem(4);
-$card-body-spacer: rem(7);
+$gap: em(14);
+$gap-sm: em(4);
+$card-body-spacer: em(7);
 
 .spacer {
-	margin-top: $spacer;
+	padding: $spacer 0px;
+}
+
+.spacer-sm {
+	padding: $spacer-sm 0px;
 }
