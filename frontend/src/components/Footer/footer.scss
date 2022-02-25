@@ -1,0 +1,11 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+
+.main-content {
+	border-bottom: $border-width solid $clr-neutral-6;
+}
+
+.footer-nav-list-title,
+.brand-logo {
+	margin-bottom: $card-body-spacer;
+}

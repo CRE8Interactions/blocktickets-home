@@ -1,0 +1,5 @@
+@use './../../scss/layout/forms' as *;
+
+.input-wrapper {
+	@include input-icon-box();
+}
