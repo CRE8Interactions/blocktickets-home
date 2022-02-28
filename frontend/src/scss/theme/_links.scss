@@ -5,11 +5,10 @@ $link-hover-color: $secondary;
 $link-decoration: none;
 $nav-link-color: $muted;
 
-@include breakpoint(max-width, medium) {
+@include breakpoint(medium, max-width) {
 	$nav-link-font-size: rem(24);
 }
 
-$navbar-brand-margin-end: em(38);
 $nav-link-font-weight: $btn-font-weight;
 $navbar-light-color: $clr-neutral-4;
 $navbar-light-hover-color: $secondary;

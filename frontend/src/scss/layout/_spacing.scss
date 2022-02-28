@@ -8,6 +8,11 @@ $gap: em(14);
 $gap-sm: em(4);
 $card-body-spacer: em(7);
 
+.banner-spacer {
+	// could be paragraph margin
+	margin-bottom: $banner-spacer;
+}
+
 .spacer {
 	padding: $spacer 0px;
 }

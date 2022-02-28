@@ -8,9 +8,9 @@ import rightArrow from '../../assets/icons/right-arrow.svg';
 import leftArrow from '../../assets/icons/left-arrow.svg';
 import './swiperNavigationButtons.scss';
 
-export default function SwiperNavigationButtons() {
+export default function SwiperNavigationButtons({ styles }) {
 	return (
-		<div className="d-flex justify-content-center">
+		<div className={`d-flex ${styles}`}>
 			<Button variant="outline-light" className="btn--icon">
 				<img src={leftArrow} />
 			</Button>

@@ -5,7 +5,9 @@
 .container {
 	max-width: 1120px;
 	margin: 0 auto;
-	padding: 0px em(32);
+	@include breakpoint(medium, max-width) {
+		padding: 0px em(32);
+	}
 }
 
 %icon-text-box {
