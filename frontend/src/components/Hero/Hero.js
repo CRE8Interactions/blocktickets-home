@@ -15,7 +15,7 @@ import './hero.scss';
 
 export default function Hero() {
 	return (
-		<header>
+		<header className="spacer">
 			<Row>
 				<Col>
 					<Swiper
@@ -26,26 +26,26 @@ export default function Hero() {
 						onSwiper={(swiper) => console.log(swiper)}
 						onSlideChange={() => console.log('slide change')}>
 						<SwiperSlide>
-							<Row className="justify-content-between">
-								<Col md={7}>
+							<Row className="justify-content-lg-between">
+								<Col md={8}>
 									<img src={profile} alt="image" className="mb-4" />
 								</Col>
 								<Col md={4} className="d-flex flex-column">
 									<h1 className="display-1">Nic Fanciulli</h1>
-									<div className="banner-spacer">
-										<p className="caption time">Time</p>
+									<div className="time">
+										<p className="caption ">Time</p>
 										<p className="bold date body-lg">
 											Mar 13 <span>9:00 PM</span>
 										</p>
 									</div>
-									<div className="banner-spacer">
-										<p className="caption venue">Venue</p>
+									<div className="venue">
+										<p className="caption">Venue</p>
 										<p className="bold body-lg">
 											CODA or venue long name here as another example
 										</p>
 									</div>
-									<div className="banner-spacer">
-										<p className="caption location">Location</p>
+									<div className="location">
+										<p className="caption ">Location</p>
 										<p>Toronto, ON</p>
 									</div>
 									<IconButton

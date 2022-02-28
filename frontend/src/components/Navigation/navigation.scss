@@ -5,6 +5,8 @@
 		border-bottom: 1px solid $clr-neutral-6;
 
 		@include breakpoint(medium) {
+			padding-top: em(19);
+			padding-bottom: em(19);
 			&.navbar-expand-md .navbar-nav .nav-link {
 				padding-left: rem(36);
 			}
@@ -12,6 +14,10 @@
 		.nav-link {
 			border-left: 2px solid $clr-neutral-6;
 			padding-left: rem(24);
+		}
+
+		.notifications {
+			padding: 0px em(4);
 		}
 		.btn {
 			margin-top: 0px;

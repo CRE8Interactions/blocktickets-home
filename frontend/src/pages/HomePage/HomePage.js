@@ -6,7 +6,7 @@ export default function HomePage() {
 	// const user = useContext(UserContext);
 
 	return (
-		<main style={{ padding: '1rem 0' }}>
+		<main>
 			<Hero />
 			<Events />
 			<Venues />
