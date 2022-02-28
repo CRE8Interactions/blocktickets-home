@@ -4,7 +4,7 @@
 	.navbar {
 		border-bottom: 1px solid $clr-neutral-6;
 
-		@include breakpoint(min-width, medium) {
+		@include breakpoint(medium) {
 			&.navbar-expand-md .navbar-nav .nav-link {
 				padding-left: rem(36);
 			}

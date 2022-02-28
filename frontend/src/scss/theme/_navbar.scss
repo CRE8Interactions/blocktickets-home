@@ -1,1 +1,4 @@
-$navbar-padding-y: 1rem;
+@use '../abstracts' as *;
+
+$navbar-padding-y: em(19);
+$navbar-brand-margin-end: rem(31);

@@ -1,6 +1,6 @@
 @use 'breakpoints' as *;
 
-@mixin breakpoint($width: min-width, $key) {
+@mixin breakpoint($key, $width: min-width) {
 	// get breakpoint from array of breakpoints
 	$breakpoint: map-get($breakpoints, $key);
 	@media screen and ($width: $breakpoint) {
