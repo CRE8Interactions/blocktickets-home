@@ -1,9 +1,9 @@
 @use '../abstracts' as *;
 
-$banner-padding: em(58);
-$spacer: em(63);
-$spacer-sm: em(30);
-$banner-spacer: rem(26);
+$spacer-sm: em(64);
+$spacer-md: em(100);
+$banner-spacer: rem(21);
+$heading-spacer: rem(47);
 $gap: em(14);
 $gap-sm: em(4);
 $card-body-spacer: em(7);
@@ -14,7 +14,11 @@ $card-body-spacer: em(7);
 }
 
 .spacer {
-	padding: $spacer 0px;
+	padding: $spacer-sm 0px;
+
+	@include breakpoint(medium) {
+		padding: $spacer-md 0px;
+	}
 }
 
 .spacer-sm {

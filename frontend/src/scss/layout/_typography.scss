@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use 'spacing' as *;
 
 .bold {
 	font-weight: 600;
@@ -18,7 +19,7 @@
 		margin: 0;
 	}
 
-	margin-bottom: rem(43);
+	margin-bottom: $heading-spacer;
 }
 
 h1,
@@ -49,20 +50,30 @@ h4,
 	font-size: $caption;
 	margin-bottom: em(3);
 }
-
 .caption--uppercase {
-	@extend .caption;
+	@extend .caption !optional;
 	text-transform: uppercase;
 	font-weight: $fw-bold;
 	font-family: $font-body;
 	margin-bottom: em(40);
 }
 
-%text-truncate {
+%truncate {
 	white-space: nowrap;
 	width: inherit;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+%text-truncate {
+	@extend %truncate !optional;
+}
+
+%multi-line-truncate {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
 }
 
 .nav-link {
