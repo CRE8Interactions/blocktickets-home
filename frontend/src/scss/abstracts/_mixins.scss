@@ -9,6 +9,10 @@
 	}
 }
 
+@mixin border($border-width: $border-width, $color: $clr-neutral-6,$border-style: solid) {
+	border-bottom: $border-width $border-style $color;
+}
+
 /* Convert pixels to rem */
 @function rem($pixels, $base: 16) {
 	@return ($pixels/$base) * 1rem;

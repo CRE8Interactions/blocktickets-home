@@ -74,9 +74,9 @@ header {
 	}
 
 	.navigation-buttons {
-		margin-top: $banner-para-spacer;
+		margin-top: em(28);
 		@include breakpoint(large) {
-			margin-top: em(-54);
+			margin-top: em(-39);
 		}
 	}
 }
