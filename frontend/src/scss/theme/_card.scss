@@ -1,1 +1,5 @@
+@use '../abstracts' as *;
+
 $card-border-color: transparent;
+$card-title-spacer-y: em(10);
+$card-spacer-y: em(21);

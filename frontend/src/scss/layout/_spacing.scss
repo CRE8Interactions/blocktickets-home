@@ -6,12 +6,11 @@ $banner-spacer-md-bottom: em(110);
 $spacer-md-top: em(80);
 $spacer-md-bottom: em(100);
 $spacer-sm-top: em(64);
-$spacer-sm-bottom: em(84);
+$spacer-sm-bottom: em(64);
 $banner-para-spacer: rem(21);
 $heading-spacer: rem(64);
 $gap: em(14);
 $gap-sm: em(4);
-$card-body-spacer: em(7);
 
 .spacer {
 	padding: $spacer-sm-top 0px $spacer-sm-bottom;

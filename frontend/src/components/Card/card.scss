@@ -1,5 +1,5 @@
 @use './../../scss/abstracts' as *;
-@use './../../scss/layout' as *;
+@use '../../scss/theme/custom' as *;
 
 .card {
 	width: rem(256);
@@ -15,6 +15,10 @@
 			flex-direction: column;
 			padding-left: 0px;
 			padding-right: 0px;
+
+			hr {
+				margin: rem(12) 0px;
+			}
 		}
 
 		&-text {
@@ -35,7 +39,7 @@
 		}
 	}
 	.row + .row {
-		margin-top: $card-body-spacer;
+		margin-top: $card-title-spacer-y;
 	}
 
 	.caption {

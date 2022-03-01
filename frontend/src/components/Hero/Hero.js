@@ -58,8 +58,8 @@ export default function Hero() {
 						</SwiperSlide>
 					</Swiper>
 				</Col>
-				<Col md={4} className="ms-auto navigation-buttons">
-					<SwiperNavigationButtons styles="justify-content-center justify-content-md-start" />
+				<Col xxl={4} className="ms-auto navigation-buttons">
+					<SwiperNavigationButtons styles="justify-content-center justify-content-xxl-start" />
 				</Col>
 			</Row>
 		</header>
