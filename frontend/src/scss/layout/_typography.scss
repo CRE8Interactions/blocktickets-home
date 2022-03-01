@@ -6,7 +6,7 @@
 }
 
 .body-lg {
-	@include breakpoint(medium) {
+	@include breakpoint(lg) {
 		font-size: $body-1;
 	}
 }
@@ -41,7 +41,7 @@ h4,
 
 .section-heading h1 {
 	font-size: $h4-font-size;
-	@include breakpoint(medium) {
+	@include breakpoint(md) {
 		font-size: $h3-font-size;
 	}
 }
@@ -55,7 +55,6 @@ h4,
 	text-transform: uppercase;
 	font-weight: $fw-bold;
 	font-family: $font-body;
-	margin-bottom: em(40);
 }
 
 %truncate {
@@ -69,11 +68,11 @@ h4,
 	@extend %truncate !optional;
 }
 
-%multi-line-truncate {
+@mixin multi-line-truncate($lines: 2) {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: $lines;
 }
 
 .nav-link {

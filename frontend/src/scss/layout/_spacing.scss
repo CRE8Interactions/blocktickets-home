@@ -6,9 +6,10 @@ $banner-spacer-md-bottom: em(110);
 $spacer-md-top: em(80);
 $spacer-md-bottom: em(100);
 $spacer-sm-top: em(64);
-$spacer-sm-bottom: em(64);
-$banner-para-spacer: rem(21);
+$spacer-sm-bottom: em(32);
+$banner-spacer: rem(21);
 $heading-spacer: rem(64);
+$title-spacer: rem(30);
 $gap: em(14);
 $gap-sm: em(4);
 
@@ -21,5 +22,5 @@ $gap-sm: em(4);
 }
 
 .spacer-sm {
-	padding: $spacer-sm-top 0px;
+	padding: $spacer-sm-top 0px $spacer-sm-bottom;
 }

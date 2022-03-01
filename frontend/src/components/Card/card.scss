@@ -1,5 +1,6 @@
 @use './../../scss/abstracts' as *;
-@use '../../scss/theme/custom' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/layout' as *;
 
 .card {
 	width: rem(256);
@@ -18,6 +19,7 @@
 
 			hr {
 				margin: rem(12) 0px;
+				background-color: $clr-neutral-4;
 			}
 		}
 

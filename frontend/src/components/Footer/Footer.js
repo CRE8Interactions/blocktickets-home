@@ -19,10 +19,10 @@ export default function Footer() {
 						<h1 className="brand-logo">
 							<img src={logo} alt="blocktickets" />
 						</h1>
-						<p>The future of ticketing is here</p>
+						<p className="tag-line">The future of ticketing is here</p>
 					</Col>
-					<Col xs={2}>
-						<h3 className="footer-navlist-title caption--uppercase">Blocktickets</h3>
+					<Col md={2} className="col">
+						<h3 className="footer-nav-list-title caption--uppercase">Blocktickets</h3>
 						<ul>
 							<li>
 								<Nav.Link href="">cta 1</Nav.Link>
@@ -35,8 +35,8 @@ export default function Footer() {
 							</li>
 						</ul>
 					</Col>
-					<Col xs={2}>
-						<h3 className="footer-navlist-title caption--uppercase">Info</h3>
+					<Col md={2} className="col">
+						<h3 className="footer-nav-list-title caption--uppercase">Info</h3>
 						<ul>
 							<li>
 								<Nav.Link href="">cta 1</Nav.Link>
@@ -50,14 +50,16 @@ export default function Footer() {
 						</ul>
 					</Col>
 					<Col>
-						<h3 className="footer-navlist-title caption--uppercase">Join Newsletter</h3>
-						<p>Subscribe to our newsletter to get notified over the latest releases</p>
+						<h3 className="footer-nav-list-title ">Join Newsletter</h3>
+						<p className="small">
+							Subscribe to our newsletter to get notified over the latest releases
+						</p>
 						<InputField type="email" placeholder="Enter your email" color="primary" />
 					</Col>
 				</Row>
 			</Container>
 
-			<div className="container d-flex flex-column flex-md-row justify-content-md-between align-items-center my-4 caption">
+			<div className="container d-flex flex-column flex-md-row justify-content-md-between align-items-center mt-4 caption">
 				<p className="text-muted">
 					Copyright &copy; {copyright()} Blocktickets. All rights reserved
 				</p>

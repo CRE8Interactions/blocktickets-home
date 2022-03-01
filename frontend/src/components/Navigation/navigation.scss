@@ -2,17 +2,23 @@
 
 .navigation {
 	.navbar {
-		border-bottom: 1px solid $clr-neutral-6;
+		border-bottom: border();
 
-		@include breakpoint(medium) {
+		@include breakpoint(md) {
 			padding-top: em(19);
 			padding-bottom: em(19);
+		}
+		@include breakpoint(lg) {
 			&.navbar-expand-md .navbar-nav .nav-link {
 				padding-left: rem(36);
 			}
+
+			.navbar-brand {
+				margin-right: rem(31);
+			}
 		}
 		.nav-link {
-			border-left: 2px solid $clr-neutral-6;
+			border-left: border(2px);
 			padding-left: rem(24);
 		}
 

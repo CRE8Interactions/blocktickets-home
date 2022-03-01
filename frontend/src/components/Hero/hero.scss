@@ -1,5 +1,7 @@
 @use '../../scss/abstracts' as *;
-@use '../../scss/layout' as *;
+@use '../../scss/layout/spacing' as *;
+@use '../../scss/layout/container' as *;
+@use '../../scss/layout/typography' as *;
 
 header {
 	@extend .spacer;
@@ -9,7 +11,7 @@ header {
 	}
 
 	.banner-image {
-		@include breakpoint(medium, max-width) {
+		@include breakpoint(md, max-width) {
 			margin-bottom: em(24);
 		}
 	}
@@ -20,10 +22,10 @@ header {
 
 	.display-1 {
 		font-size: $h4-font-size;
-		margin-bottom: $banner-para-spacer;
-		@extend %multi-line-truncate;
+		margin-bottom: $banner-spacer;
+		@include multi-line-truncate();
 
-		@include breakpoint(medium) {
+		@include breakpoint(lg) {
 			font-size: $h1-font-size;
 			margin-top: 0px;
 		}
@@ -31,7 +33,7 @@ header {
 
 	.date {
 		span {
-			@include breakpoint(medium) {
+			@include breakpoint(md) {
 				display: block;
 			}
 		}
@@ -40,7 +42,7 @@ header {
 	.time,
 	.venue,
 	.location {
-		margin-bottom: $banner-para-spacer;
+		margin-bottom: $banner-spacer;
 
 		.caption {
 			@extend %icon-text-box;
@@ -58,7 +60,9 @@ header {
 
 	.venue {
 		p:not(.caption) {
-			@extend %multi-line-truncate;
+			@include breakpoint(xl, max-width) {
+				@include multi-line-truncate(1);
+			}
 		}
 		.caption {
 			&::before {
@@ -75,7 +79,7 @@ header {
 
 	.navigation-buttons {
 		margin-top: em(28);
-		@include breakpoint(large) {
+		@include breakpoint(xl) {
 			margin-top: em(-39);
 		}
 	}
