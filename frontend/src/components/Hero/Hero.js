@@ -27,7 +27,7 @@ export default function Hero() {
 						onSlideChange={() => console.log('slide change')}>
 						<SwiperSlide>
 							<Row className="justify-content-lg-between">
-								<Col md={8}>
+								<Col md={7} xl={8}>
 									<img src={profile} alt="image" className="banner-image" />
 								</Col>
 								<Col md={4} className="d-flex flex-column">
@@ -58,8 +58,8 @@ export default function Hero() {
 						</SwiperSlide>
 					</Swiper>
 				</Col>
-				<Col xxl={4} className="ms-auto navigation-buttons">
-					<SwiperNavigationButtons styles="justify-content-center justify-content-xxl-start" />
+				<Col xl={4} className="ms-auto navigation-buttons">
+					<SwiperNavigationButtons styles="justify-content-center justify-content-xl-start" />
 				</Col>
 			</Row>
 		</header>

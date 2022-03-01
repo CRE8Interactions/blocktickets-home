@@ -1,11 +1,38 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/theme/card' as *;
+@use '../../scss/layout/spacing' as *;
 
-.main-content {
-	border-bottom: $border-width solid $clr-neutral-6;
-}
+footer {
+	.main-content {
+		border-bottom: border();
+	}
 
-.footer-nav-list-title,
-.brand-logo {
-	margin-bottom: $card-title-spacer-y;
+	.col:not(:last-child) {
+		@include breakpoint(md, max-width) {
+			border-bottom: border();
+		}
+	}
+
+	.col {
+		padding-bottom: $spacer-sm-bottom;
+
+		&:last-of-type .footer-nav-list-title {
+			font-size: initial;
+			font-family: $font-body;
+			font-weight: $fw-medium;
+		}
+	}
+
+	.brand-logo,
+	.footer-nav-list-title {
+		margin-bottom: $title-spacer;
+	}
+
+	.tag-line {
+		width: 21ch;
+
+		@include breakpoint(lg) {
+			font-size: rem(24);
+		}
+	}
 }
