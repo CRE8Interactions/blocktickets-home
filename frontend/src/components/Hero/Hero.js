@@ -15,7 +15,7 @@ import './hero.scss';
 
 export default function Hero() {
 	return (
-		<header className="spacer">
+		<header>
 			<Row>
 				<Col>
 					<Swiper
@@ -28,7 +28,7 @@ export default function Hero() {
 						<SwiperSlide>
 							<Row className="justify-content-lg-between">
 								<Col md={8}>
-									<img src={profile} alt="image" className="mb-4" />
+									<img src={profile} alt="image" className="banner-image" />
 								</Col>
 								<Col md={4} className="d-flex flex-column">
 									<h1 className="display-1">Nic Fanciulli</h1>
