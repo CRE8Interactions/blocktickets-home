@@ -1,26 +1,26 @@
 @use '../abstracts' as *;
 
-$spacer-sm: em(64);
-$spacer-md: em(100);
-$banner-spacer: rem(21);
-$heading-spacer: rem(47);
+$banner-spacer-md-top: em(100);
+$banner-spacer-md-bottom: em(110);
+
+$spacer-md-top: em(80);
+$spacer-md-bottom: em(100);
+$spacer-sm-top: em(64);
+$spacer-sm-bottom: em(84);
+$banner-para-spacer: rem(21);
+$heading-spacer: rem(64);
 $gap: em(14);
 $gap-sm: em(4);
 $card-body-spacer: em(7);
 
-.banner-spacer {
-	// could be paragraph margin
-	margin-bottom: $banner-spacer;
-}
-
 .spacer {
-	padding: $spacer-sm 0px;
+	padding: $spacer-sm-top 0px $spacer-sm-bottom;
 
 	@include breakpoint(medium) {
-		padding: $spacer-md 0px;
+		padding: $spacer-md-top 0px $spacer-md-bottom;
 	}
 }
 
 .spacer-sm {
-	padding: $spacer-sm 0px;
+	padding: $spacer-sm-top 0px;
 }

@@ -2,6 +2,17 @@
 @use '../../scss/layout' as *;
 
 header {
+	@extend .spacer;
+
+	@include breakpoint(medium) {
+		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
+	}
+
+	.banner-image {
+		@include breakpoint(medium, max-width) {
+			margin-bottom: em(24);
+		}
+	}
 	.caption {
 		color: $clr-neutral-4;
 		font-weight: $fw-semi-bold;
@@ -9,7 +20,7 @@ header {
 
 	.display-1 {
 		font-size: $h4-font-size;
-		margin-bottom: $banner-spacer;
+		margin-bottom: $banner-para-spacer;
 		@extend %multi-line-truncate;
 
 		@include breakpoint(medium) {
@@ -29,7 +40,7 @@ header {
 	.time,
 	.venue,
 	.location {
-		margin-bottom: $banner-spacer;
+		margin-bottom: $banner-para-spacer;
 
 		.caption {
 			@extend %icon-text-box;
@@ -63,7 +74,7 @@ header {
 	}
 
 	.navigation-buttons {
-		margin-top: $banner-spacer;
+		margin-top: $banner-para-spacer;
 		@include breakpoint(large) {
 			margin-top: em(-54);
 		}
