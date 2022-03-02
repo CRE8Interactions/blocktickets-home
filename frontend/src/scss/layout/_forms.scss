@@ -10,12 +10,16 @@ input::placeholder {
 	align-items: center;
 	border-radius: $radius;
 	padding: $padding-y $padding-x;
-	padding-right: em(6);
 	border: $input-border-width solid $color;
+
+	@include breakpoint(xl) {
+		padding-left: em(10);
+	}
 
 	.form-control {
 		border: none;
 		padding: 0px;
 		min-height: auto;
+		margin-right: rem(6);
 	}
 }

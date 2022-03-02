@@ -8,7 +8,7 @@ import './inputField.scss';
 
 export default function InputField({ state, type, placeholder }) {
 	return (
-		<Form className="input-wrapper my-4">
+		<Form className="input-wrapper mt-4">
 			<FormControl type={type} aria-label={placeholder} placeholder={placeholder} />
 			<Button className="btn--icon btn--input btn--input-default" type="submit" />
 		</Form>

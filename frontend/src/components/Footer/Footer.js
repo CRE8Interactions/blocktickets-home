@@ -12,9 +12,9 @@ import InputField from './../InputField/InputField';
 
 export default function Footer() {
 	return (
-		<footer className="spacer-sm">
+		<footer className="footer-spacer">
 			<Container>
-				<Row className="main-content d-flex flex-column gap-5 gap-md-3 flex-md-row">
+				<Row className="main-content d-flex flex-column gap-md-3 flex-md-row">
 					<Col>
 						<h1 className="brand-logo">
 							<img src={logo} alt="blocktickets" />
@@ -50,7 +50,7 @@ export default function Footer() {
 						</ul>
 					</Col>
 					<Col>
-						<h3 className="footer-nav-list-title ">Join Newsletter</h3>
+						<h3 className="footer-title ">Join Newsletter</h3>
 						<p className="small">
 							Subscribe to our newsletter to get notified over the latest releases
 						</p>
@@ -59,7 +59,7 @@ export default function Footer() {
 				</Row>
 			</Container>
 
-			<div className="container d-flex flex-column flex-md-row justify-content-md-between align-items-center mt-4 caption">
+			<div className="container d-flex flex-column flex-md-row justify-content-md-between align-items-center pt-4 copyright caption">
 				<p className="text-muted">
 					Copyright &copy; {copyright()} Blocktickets. All rights reserved
 				</p>

@@ -4,12 +4,6 @@
 @use '../../scss/layout/typography' as *;
 
 header {
-	@extend .spacer;
-
-	@include breakpoint(medium) {
-		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
-	}
-
 	.banner-image {
 		@media (max-width: 767px) {
 			margin-bottom: em(24);

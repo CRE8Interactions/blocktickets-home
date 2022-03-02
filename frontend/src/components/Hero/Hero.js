@@ -15,7 +15,7 @@ import './hero.scss';
 
 export default function Hero() {
 	return (
-		<header>
+		<header className="spacer-lg">
 			<Row>
 				<Col>
 					<Swiper
