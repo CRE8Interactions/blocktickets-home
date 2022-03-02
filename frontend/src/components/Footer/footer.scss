@@ -3,8 +3,9 @@
 @use '../../scss/layout/spacing' as *;
 
 footer {
-	.main-content {
-		border-bottom: border();
+	.copyright {
+		border-top: border();
+		margin-top: $copyright-spacer;
 	}
 
 	.col:not(:last-child) {
@@ -14,25 +15,41 @@ footer {
 	}
 
 	.col {
-		padding-bottom: $spacer-sm-bottom;
+		padding-bottom: $spacer-footer-sm-bottom;
 
-		&:last-of-type .footer-nav-list-title {
+		&:not(:first-of-type) {
+			@include breakpoint(md, max-width) {
+				padding-top: em(28);
+			}
+		}
+
+		.brand-logo,
+		.footer-title {
+			margin-bottom: $title-spacer;
+		}
+
+		.footer-title {
 			font-size: initial;
 			font-family: $font-body;
 			font-weight: $fw-medium;
 		}
-	}
+		.footer-nav-list-title {
+			@include breakpoint(md, max-width) {
+				margin-bottom: rem(17);
+			}
 
-	.brand-logo,
-	.footer-nav-list-title {
-		margin-bottom: $title-spacer;
-	}
-
-	.tag-line {
-		width: 21ch;
-
-		@include breakpoint(lg) {
-			font-size: rem(24);
+			@include breakpoint(md) {
+				margin-bottom: $title-spacer;
+			}
 		}
+	}
+}
+
+.tag-line {
+	width: 21ch;
+
+	@include breakpoint(xl) {
+		font-size: rem(24);
+		width: 18ch;
 	}
 }

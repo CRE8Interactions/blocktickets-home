@@ -1,26 +1,42 @@
 @use '../abstracts' as *;
 
+// Banner Spacers
 $banner-spacer-md-top: em(100);
 $banner-spacer-md-bottom: em(110);
-
-$spacer-md-top: em(80);
-$spacer-md-bottom: em(100);
-$spacer-sm-top: em(64);
-$spacer-sm-bottom: em(32);
 $banner-spacer: rem(21);
+
+// Page Spacers
+$spacer-sm: em(64);
+$spacer-md: em(80);
+$spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
+$copyright-spacer: rem(17); // change variable name when you get more pages
+
+// Text Spacers
 $heading-spacer: rem(64);
 $title-spacer: rem(30);
 $gap: em(14);
 $gap-sm: em(4);
 
 .spacer {
-	padding: $spacer-sm-top 0px $spacer-sm-bottom;
+	padding: $spacer-sm 0px;
 
-	@include breakpoint(medium) {
-		padding: $spacer-md-top 0px $spacer-md-bottom;
+	@include breakpoint(md) {
+		padding: $spacer-md 0px;
 	}
 }
 
-.spacer-sm {
-	padding: $spacer-sm-top 0px $spacer-sm-bottom;
+.spacer-lg {
+	padding: $spacer-sm 0px;
+
+	@include breakpoint(md) {
+		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
+	}
+}
+
+.footer-spacer {
+	padding: $spacer-sm 0px $spacer-footer-sm-bottom;
+
+	@include breakpoint(md) {
+		padding-top: $spacer-md;
+	}
 }
