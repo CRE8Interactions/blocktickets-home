@@ -68,11 +68,11 @@ h4,
 	@extend %truncate !optional;
 }
 
-@mixin multi-line-truncate($lines: 2) {
+%multi-line-truncate {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-	-webkit-line-clamp: $lines;
+	-webkit-line-clamp: 2;
 }
 
 .nav-link {
