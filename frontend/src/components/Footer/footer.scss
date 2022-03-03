@@ -9,7 +9,7 @@ footer {
 	}
 
 	.col:not(:last-child) {
-		@include breakpoint(md, max-width) {
+		@include breakpoint-max(md) {
 			border-bottom: border();
 		}
 	}
@@ -18,7 +18,7 @@ footer {
 		padding-bottom: $spacer-footer-sm-bottom;
 
 		&:not(:first-of-type) {
-			@include breakpoint(md, max-width) {
+			@include breakpoint-max(md) {
 				padding-top: em(28);
 			}
 		}
@@ -34,11 +34,11 @@ footer {
 			font-weight: $fw-medium;
 		}
 		.footer-nav-list-title {
-			@include breakpoint(md, max-width) {
+			@include breakpoint-max(md) {
 				margin-bottom: rem(17);
 			}
 
-			@include breakpoint(md) {
+			@include breakpoint-min(md) {
 				margin-bottom: $title-spacer;
 			}
 		}
@@ -48,7 +48,7 @@ footer {
 .tag-line {
 	width: 21ch;
 
-	@include breakpoint(xl) {
+	@include breakpoint-min(xl) {
 		font-size: rem(24);
 		width: 18ch;
 	}

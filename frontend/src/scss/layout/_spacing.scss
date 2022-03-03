@@ -20,7 +20,7 @@ $gap-sm: em(4);
 .spacer {
 	padding: $spacer-sm 0px;
 
-	@include breakpoint(md) {
+	@include breakpoint-min(md) {
 		padding: $spacer-md 0px;
 	}
 }
@@ -28,7 +28,7 @@ $gap-sm: em(4);
 .spacer-lg {
 	padding: $spacer-sm 0px;
 
-	@include breakpoint(md) {
+	@include breakpoint-min(md) {
 		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
 	}
 }
@@ -36,7 +36,7 @@ $gap-sm: em(4);
 .footer-spacer {
 	padding: $spacer-sm 0px $spacer-footer-sm-bottom;
 
-	@include breakpoint(md) {
+	@include breakpoint-min(md) {
 		padding-top: $spacer-md;
 	}
 }

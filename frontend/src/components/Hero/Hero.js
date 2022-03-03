@@ -27,10 +27,10 @@ export default function Hero() {
 						onSlideChange={() => console.log('slide change')}>
 						<SwiperSlide>
 							<Row className="justify-content-lg-between">
-								<Col md={7} xl={8}>
+								<Col lg={7} xl={8}>
 									<img src={profile} alt="image" className="banner-image" />
 								</Col>
-								<Col md={4} className="d-flex flex-column">
+								<Col lg={4} className="d-flex flex-column">
 									<h1 className="display-1">Nic Fanciulli</h1>
 									<div className="time">
 										<p className="caption ">Time</p>
