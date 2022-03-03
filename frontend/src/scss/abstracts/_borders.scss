@@ -7,6 +7,6 @@ $br-textile: 5%;
 $border-width: 2px;
 $border-color: $clr-neutral-6;
 
-@function border($border-width: 1px, $border-style: solid, $color: $border-color) {
+@function border($border-width: 1px, $color: $border-color, $border-style: solid) {
 	@return $border-width $border-style $color;
 }

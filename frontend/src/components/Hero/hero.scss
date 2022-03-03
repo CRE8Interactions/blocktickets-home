@@ -5,7 +5,7 @@
 
 header {
 	.banner-image {
-		@media (max-width: 767px) {
+		@include breakpoint-max(lg) {
 			margin-bottom: em(24);
 		}
 	}
@@ -19,7 +19,7 @@ header {
 		margin-bottom: $banner-spacer;
 		@extend %multi-line-truncate;
 
-		@include breakpoint(lg) {
+		@include breakpoint-min(lg) {
 			font-size: $h1-font-size;
 			margin-top: 0px;
 		}
@@ -27,7 +27,7 @@ header {
 
 	.date {
 		span {
-			@include breakpoint(xl) {
+			@include breakpoint-min(xl) {
 				display: block;
 			}
 		}
@@ -77,7 +77,7 @@ header {
 
 	.navigation-buttons {
 		margin-top: em(28);
-		@include breakpoint(xl) {
+		@include breakpoint-min(xl) {
 			margin-top: em(-39);
 		}
 	}

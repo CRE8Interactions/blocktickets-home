@@ -6,7 +6,7 @@
 }
 
 .body-lg {
-	@include breakpoint(lg) {
+	@include breakpoint-min(lg) {
 		font-size: $body-1;
 	}
 }
@@ -41,7 +41,7 @@ h4,
 
 .section-heading h1 {
 	font-size: $h4-font-size;
-	@include breakpoint(md) {
+	@include breakpoint-min(md) {
 		font-size: $h3-font-size;
 	}
 }

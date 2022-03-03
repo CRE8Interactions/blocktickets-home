@@ -2,3 +2,21 @@
 @use 'base';
 @use 'abstracts' as *;
 @use 'layout';
+
+.mobile-only {
+	@include breakpoint-min(lg) {
+		display: none;
+	}
+}
+
+.desktop-only {
+	display: none;
+
+	@include breakpoint-min(lg) {
+		display: block;
+	}
+}
+
+body .navbar-nav-show {
+	overflow-y: hidden;
+}

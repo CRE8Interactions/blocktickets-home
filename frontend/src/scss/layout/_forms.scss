@@ -12,7 +12,7 @@ input::placeholder {
 	padding: $padding-y $padding-x;
 	border: $input-border-width solid $color;
 
-	@include breakpoint(xl) {
+	@include breakpoint-min(xl) {
 		padding-left: em(10);
 	}
 

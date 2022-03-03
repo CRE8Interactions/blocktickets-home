@@ -6,10 +6,10 @@
 	max-width: 1130px;
 	margin: 0 auto;
 
-	@media screen and (max-width: 1199px) {
+	@include breakpoint-max(xl) {
 		padding: 0px em(81);
 	}
-	@include breakpoint(lg, max-width) {
+	@include breakpoint-max(lg) {
 		padding: 0px em(32);
 	}
 }

@@ -1,15 +1,33 @@
 @use '../../scss/abstracts' as *;
 
 .navigation {
+	.desktop-btns {
+		@include breakpoint-min(md) {
+			order: 4;
+		}
+	}
+
 	.navbar {
 		border-bottom: border();
 
-		@include breakpoint(md) {
-			padding-top: em(19);
-			padding-bottom: em(19);
+		&-nav {
+			@include breakpoint-max(md) {
+				height: calc(100vh - 90px);
+			}
 		}
-		@include breakpoint(lg) {
-			&.navbar-expand-md .navbar-nav .nav-link {
+
+		&-brand {
+			@include breakpoint-min(lg) {
+				margin-right: rem(31);
+			}
+		}
+
+		@include breakpoint-min(md) {
+			padding-top: em(16);
+			padding-bottom: em(16);
+		}
+		@include breakpoint-min(lg) {
+			.navbar-nav .nav-link {
 				padding-left: rem(36);
 			}
 
@@ -17,17 +35,42 @@
 				margin-right: rem(31);
 			}
 		}
+
+		li {
+			&::before {
+				@include breakpoint-max(lg) {
+					content: 'Home';
+					display: block;
+					margin-bottom: 1rem;
+					font-size: 1rem;
+					color: $clr-neutral-4;
+					padding-left: rem(24);
+					font-weight: 500;
+				}
+			}
+		}
 		.nav-link {
 			border-left: border(2px);
 			padding-left: rem(24);
+
+			@include breakpoint-max(md) {
+				font-size: rem(24);
+
+				border-left: border(2px, $clr-primary);
+			}
 		}
 
 		.notifications {
 			padding: 0px em(4);
 		}
+
 		.btn {
 			margin-top: 0px;
-			min-width: 102px;
+
+			&-primary,
+			&-outline {
+				min-width: 102px;
+			}
 		}
 
 		&-light-toggler {
