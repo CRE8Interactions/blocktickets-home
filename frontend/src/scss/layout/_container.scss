@@ -6,11 +6,11 @@
 	max-width: 1130px;
 	margin: 0 auto;
 
-	@include breakpoint-max(xl) {
-		padding: 0px em(81);
-	}
-	@include breakpoint-max(lg) {
+	@include breakpoint-max(md) {
 		padding: 0px em(32);
+	}
+	@include breakpoint-inBetween(md, xl) {
+		padding: 0px em(81);
 	}
 }
 
@@ -21,4 +21,22 @@
 	&::before {
 		line-height: 0;
 	}
+}
+
+.mobile-only {
+	@include breakpoint-min(lg) {
+		display: none;
+	}
+}
+
+.desktop-only {
+	display: none;
+
+	@include breakpoint-min(lg) {
+		display: block;
+	}
+}
+
+body .navbar-nav-show {
+	overflow-y: hidden;
 }

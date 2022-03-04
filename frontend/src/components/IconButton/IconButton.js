@@ -7,8 +7,8 @@ import './iconButton.scss';
 
 export default function IconButton({ children, styles, variant }) {
 	return (
-		<Button className={`d-flex icon-button ${styles}`} variant={variant}>
-			{children}
+		<Button className={styles} variant={variant}>
+			<span className="d-flex btn--tickets icon-button">{children}</span>
 		</Button>
 	);
 }

@@ -16,7 +16,7 @@ export default function EventCardTop() {
 				<span className="col caption">Mar 13 9:30PM</span>
 				<span className="col caption text-end">Toronto, CA</span>
 			</Row>
-			<IconButton variant="outline-light" styles="btn--tickets text-secondary">
+			<IconButton variant="outline-light" styles="text-secondary">
 				Get Tickets
 			</IconButton>
 		</Fragment>
