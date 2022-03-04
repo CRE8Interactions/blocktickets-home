@@ -6,7 +6,7 @@
 }
 
 .body-lg {
-	@include breakpoint-min(lg) {
+	@include breakpoint-min(md) {
 		font-size: $body-1;
 	}
 }

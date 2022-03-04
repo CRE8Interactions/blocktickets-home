@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
+import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import authService from '../../utilities/services/auth.service';
@@ -14,7 +15,8 @@ import desktopLogo from '../../assets/logo.svg';
 import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
 import './navigation.scss';
-import SearchBar from './../SearchBar/SearchBar';
+import { SearchBar } from './../SearchBar';
+// import { ProfileMenu } from './../ProfileMenu';
 
 export default function Navigation() {
 	const { setAuthenticated } = useContext(UserContext);
@@ -23,7 +25,7 @@ export default function Navigation() {
 		setWindowSize
 	] = useState(window.innerWidth);
 
-	const logo = windowSize < 768 ? mobileLogo : desktopLogo;
+	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	useEffect(() => {
 		const changeWindowSize = () => setWindowSize(window.innerWidth);
@@ -45,9 +47,9 @@ export default function Navigation() {
 					<Navbar.Brand href="/">
 						<img src={logo} alt="blocktickets" />
 					</Navbar.Brand>
-					<div className="desktop-btns d-flex gap-md-3 align-items-center">
+					<Stack direction="horizontal" className="desktop-btns gap-lg-3">
 						<SearchBar />
-						<div className="notificatins align-self-md-center">
+						<div className="cart">
 							<Button variant="default">
 								<img src={shoppingCart} />
 							</Button>
@@ -63,33 +65,27 @@ export default function Navigation() {
 							</Button>
 						)}
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-					</div>
+					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
-						<Nav className="pt-5 pb-3  justify-content-between py-md-0">
+						<Nav className="pt-5 pb-3 justify-content-between py-lg-0">
 							<ul>
 								<li>
 									<Nav.Link href="/">Browse</Nav.Link>
 								</li>
 							</ul>
+							{/* {authService.isLoggedIn() && (
+								<ul>
+									<li>
+										<ProfileMenu />
+									</li>
+								</ul>
+							)} */}
+
 							{!authService.isLoggedIn() && (
 								<Button variant="primary" href="/login" className="mobile-only">
 									Login
 								</Button>
 							)}
-						</Nav>
-						<Nav className="gap-4 align-items-md-center">
-							{/* <SearchBar />
-							<div className="notificatins align-self-md-center">
-								<img src={shoppingCart} />
-							</div> */}
-							{/* {!authService.isLoggedIn() && (
-								<Button variant="primary" href="/login">
-									Login
-								</Button>
-							)}
-							{authService.isLoggedIn() && (
-								<Button variant="outline-light">My Wallet</Button>
-							)} */}
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

@@ -8,6 +8,9 @@ header {
 		@include breakpoint-max(lg) {
 			margin-bottom: em(24);
 		}
+		@include breakpoint-inBetween(md, lg) {
+			margin-bottom: em(57);
+		}
 	}
 	.caption {
 		color: $clr-neutral-4;
@@ -19,9 +22,8 @@ header {
 		margin-bottom: $banner-spacer;
 		@extend %multi-line-truncate;
 
-		@include breakpoint-min(lg) {
+		@include breakpoint-min(md) {
 			font-size: $h1-font-size;
-			margin-top: 0px;
 		}
 	}
 
@@ -37,6 +39,10 @@ header {
 	.venue,
 	.location {
 		margin-bottom: $banner-spacer;
+
+		@include breakpoint-inBetween(md, lg) {
+			margin-bottom: 0px;
+		}
 
 		.caption {
 			@extend %icon-text-box;
@@ -69,14 +75,22 @@ header {
 		}
 	}
 
-	.btn {
-		@media only screen and (max-width: 1199px) {
+	.btn--medium {
+		@include breakpoint-inBetween(md, lg) {
+			width: 50%;
+			margin-top: rem(30);
+		}
+		@include breakpoint-inBetween(lg, xl) {
 			margin-top: auto;
 		}
 	}
 
 	.navigation-buttons {
 		margin-top: em(28);
+		@include breakpoint-inBetween(md, lg) {
+			margin-top: em(-49);
+			justify-content: flex-start;
+		}
 		@include breakpoint-min(xl) {
 			margin-top: em(-39);
 		}

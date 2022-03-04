@@ -14,8 +14,8 @@ $copyright-spacer: rem(17); // change variable name when you get more pages
 // Text Spacers
 $heading-spacer: rem(64);
 $title-spacer: rem(30);
-$gap: em(14);
-$gap-sm: em(4);
+$gap: rem(14);
+$gap-sm: rem(4);
 
 .spacer {
 	padding: $spacer-sm 0px;
@@ -28,7 +28,7 @@ $gap-sm: em(4);
 .spacer-lg {
 	padding: $spacer-sm 0px;
 
-	@include breakpoint-min(md) {
+	@include breakpoint-min(lg) {
 		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
 	}
 }

@@ -9,10 +9,10 @@ import './searchBar.scss';
 export default function SearchBar() {
 	return (
 		<Fragment>
-			<Button variant="default" className="d-md-none">
+			<Button variant="default" className="mobile-only">
 				<img src={searchIcon} alt="" />
 			</Button>
-			<Form className="search d-none d-md-flex">
+			<Form className="search d-none d-lg-flex">
 				<FormControl
 					type="search"
 					placeholder="Search for events"

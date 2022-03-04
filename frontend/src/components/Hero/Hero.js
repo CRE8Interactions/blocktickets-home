@@ -30,27 +30,34 @@ export default function Hero() {
 								<Col lg={7} xl={8}>
 									<img src={profile} alt="image" className="banner-image" />
 								</Col>
-								<Col lg={4} className="d-flex flex-column">
+								<Col lg={4} className=" d-flex flex-column">
 									<h1 className="display-1">Nic Fanciulli</h1>
-									<div className="time">
-										<p className="caption ">Time</p>
-										<p className="bold date body-lg">
-											Mar 13 <span>9:00 PM</span>
-										</p>
-									</div>
-									<div className="venue">
-										<p className="caption">Venue</p>
-										<p className="bold body-lg">
-											CODA or venue long name here as another example
-										</p>
-									</div>
-									<div className="location">
-										<p className="caption ">Location</p>
-										<p>Toronto, ON</p>
-									</div>
-									<IconButton
-										variant="secondary"
-										styles="btn--tickets btn--medium">
+									<Row>
+										<Col md={6} lg={12}>
+											<div className="time">
+												<p className="caption ">Time</p>
+												<p className="bold date body-lg">
+													Mar 13 <span>9:00 PM</span>
+												</p>
+											</div>
+										</Col>
+										<Col md={6} lg={12}>
+											<div className="venue">
+												<p className="caption">Venue</p>
+												<p className="bold body-lg">
+													CODA or venue long name here as another example
+												</p>
+											</div>
+										</Col>
+										<Col>
+											<div className="location">
+												<p className="caption ">Location</p>
+												<p>Toronto, ON</p>
+											</div>
+										</Col>
+									</Row>
+
+									<IconButton variant="secondary" styles="btn--medium">
 										Get Tickets
 									</IconButton>
 								</Col>
@@ -58,7 +65,7 @@ export default function Hero() {
 						</SwiperSlide>
 					</Swiper>
 				</Col>
-				<Col xl={4} className="ms-auto navigation-buttons">
+				<Col md={6} lg={12} xl={4} className="ms-auto navigation-buttons">
 					<SwiperNavigationButtons styles="justify-content-center justify-content-xl-start" />
 				</Col>
 			</Row>

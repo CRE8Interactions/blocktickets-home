@@ -2,7 +2,7 @@
 
 .navigation {
 	.desktop-btns {
-		@include breakpoint-min(md) {
+		@include breakpoint-min(lg) {
 			order: 4;
 		}
 	}
@@ -11,7 +11,7 @@
 		border-bottom: border();
 
 		&-nav {
-			@include breakpoint-max(md) {
+			@include breakpoint-max(lg) {
 				height: calc(100vh - 90px);
 			}
 		}
@@ -36,32 +36,54 @@
 			}
 		}
 
-		li {
-			&::before {
-				@include breakpoint-max(lg) {
-					content: 'Home';
-					display: block;
-					margin-bottom: 1rem;
-					font-size: 1rem;
-					color: $clr-neutral-4;
-					padding-left: rem(24);
-					font-weight: 500;
+		ul {
+			& + ul {
+				margin-top: 3rem;
+			}
+			&:first-of-type {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'Home';
+						display: block;
+						margin-bottom: 1rem;
+						font-size: 1rem;
+						color: $clr-neutral-4;
+						padding-left: rem(24);
+						font-weight: 500;
+					}
+				}
+
+				li {
+					.nav-link {
+						border-left: border(2px);
+						padding-left: rem(24);
+
+						@include breakpoint-max(lg) {
+							font-size: rem(24);
+
+							border-left: border(2px, $clr-primary);
+						}
+					}
+				}
+			}
+
+			&:nth-of-type(2) {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'My Wallet';
+						display: block;
+						margin-bottom: 1rem;
+						font-size: 1rem;
+						color: $clr-neutral-4;
+						padding-left: rem(24);
+						font-weight: 500;
+					}
 				}
 			}
 		}
-		.nav-link {
-			border-left: border(2px);
-			padding-left: rem(24);
 
-			@include breakpoint-max(md) {
-				font-size: rem(24);
-
-				border-left: border(2px, $clr-primary);
-			}
-		}
-
-		.notifications {
-			padding: 0px em(4);
+		.card {
+			// padding: 0px em(4);
 		}
 
 		.btn {

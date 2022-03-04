@@ -9,12 +9,22 @@
 		@content;
 	}
 }
+@mixin breakpoint-inBetween($min, $max) {
+	// get breakpoint from array of breakpoints
+
+	$minBreakpoint: map-get($breakpoints, $min);
+	$maxBreakpoint: map-get($breakpoints, $max);
+	@media screen and (min-width: $minBreakpoint) and (max-width: ($maxBreakpoint - 0.01em)) {
+		// content within breakpoint
+		@content;
+	}
+}
 
 @mixin breakpoint-max($key) {
 	// get breakpoint from array of breakpoints
 
 	$breakpoint: map-get($breakpoints, $key);
-	@media screen and (max-width: $breakpoint) {
+	@media screen and (max-width: ($breakpoint - 0.01em)) {
 		// content within breakpoint
 		@content;
 	}
