@@ -4,8 +4,10 @@
 @use '../../scss/layout' as *;
 
 .wallet {
-	top: rem(81);
-	left: 72%;
+	@include breakpoint-min(lg) {
+		top: rem(81);
+		left: 72%;
+	}
 
 	&.dropdown {
 		border-radius: 12px;
@@ -13,6 +15,10 @@
 	}
 	.list-group {
 		font-weight: 600;
+
+		.name {
+			font-size: $body-1;
+		}
 
 		&-item {
 			font-weight: 700;
@@ -49,9 +55,6 @@
 					content: url($data-svg-prefix + map-get($icons, 'logout'));
 				}
 			}
-		}
-		.name {
-			font-size: $body-1;
 		}
 	}
 }
