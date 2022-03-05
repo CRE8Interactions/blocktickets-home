@@ -17,7 +17,7 @@ export default function MyWallet({ style }) {
 	};
 
 	return (
-		<ul className={`wallet ${style}`} style={{ position: style ? 'absolute' : 'relative' }}>
+		<div className={`wallet ${style}`} style={{ position: style ? 'absolute' : 'relative' }}>
 			<ListGroup variant="flush">
 				<p className="name pb-4">Harrison Cogan</p>
 				<ListGroup.Item as={Link} to={''}>
@@ -33,6 +33,6 @@ export default function MyWallet({ style }) {
 					Log out
 				</ListGroup.Item>
 			</ListGroup>
-		</ul>
+		</div>
 	);
 }
