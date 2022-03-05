@@ -5,10 +5,10 @@
 .container {
 	max-width: 1130px;
 	margin: 0 auto;
-
 	@include breakpoint-max(md) {
 		padding: 0px em(32);
 	}
+
 	@include breakpoint-inBetween(md, xl) {
 		padding: 0px em(81);
 	}

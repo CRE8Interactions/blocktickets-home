@@ -11,10 +11,10 @@ import './swiperNavigationButtons.scss';
 export default function SwiperNavigationButtons({ styles }) {
 	return (
 		<div className={`d-flex ${styles}`}>
-			<Button variant="outline-light" className="btn--icon">
+			<Button variant="outline-light" className="btn--icon swiper-button-prev">
 				<img src={leftArrow} />
 			</Button>
-			<Button variant="outline-light" className="btn--icon">
+			<Button variant="outline-light" className="btn--icon swiper-button-next">
 				<img src={rightArrow} />
 			</Button>
 		</div>

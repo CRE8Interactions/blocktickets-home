@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useRef } from 'react';
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
@@ -14,6 +14,8 @@ import profile from '../../assets/01.png';
 import './hero.scss';
 
 export default function Hero() {
+	const navigationNextRef = useRef(null);
+	const navigationPrevRef = useRef(null);
 	return (
 		<header className="spacer-lg">
 			<Row>
@@ -21,10 +23,11 @@ export default function Hero() {
 					<Swiper
 						spaceBetween={20}
 						slidesPerView={1}
-						navigation
-						pagination={{ clickable: true }}
-						onSwiper={(swiper) => console.log(swiper)}
-						onSlideChange={() => console.log('slide change')}>
+						navigation={{
+							nextEl: navigationNextRef.current,
+							prevRef: navigationPrevRef.current
+						}}
+						pagination={{ clickable: true }}>
 						<SwiperSlide>
 							<Row className="justify-content-lg-between">
 								<Col lg={7} xl={8}>
@@ -57,7 +60,10 @@ export default function Hero() {
 										</Col>
 									</Row>
 
-									<IconButton variant="secondary" styles="btn--medium">
+									<IconButton
+										variant="secondary"
+										styles="btn--medium"
+										color="plain">
 										Get Tickets
 									</IconButton>
 								</Col>
