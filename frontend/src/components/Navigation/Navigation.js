@@ -1,14 +1,12 @@
-import React, { Component, useContext, useState, useEffect } from 'react';
+import React, { Fragment, useContext, useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Dropdown from 'react-bootstrap/Dropdown';
 import authService from '../../utilities/services/auth.service';
-import UserContext from '../../context/User/user';
 
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
@@ -16,10 +14,9 @@ import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
 import './navigation.scss';
 import { SearchBar } from './../SearchBar';
-// import { ProfileMenu } from './../ProfileMenu';
+import { MyWallet } from './../MyWallet';
 
 export default function Navigation() {
-	const { setAuthenticated } = useContext(UserContext);
 	const [
 		windowSize,
 		setWindowSize
@@ -35,16 +32,16 @@ export default function Navigation() {
 		return () => window.removeEventListener('resize', changeWindowSize);
 	}, []);
 
-	const logout = () => {
-		authService.logoutUser();
-		setAuthenticated({});
-	};
+	const [
+		show,
+		setShow
+	] = useState(false);
 
 	return (
 		<div className="navigation">
-			<Navbar collapseOnSelect expand="lg">
+			<Navbar collapseOnSelect expand="lg" sticky="top">
 				<Container>
-					<Navbar.Brand href="/">
+					<Navbar.Brand as={NavLink} to="/">
 						<img src={logo} alt="blocktickets" />
 					</Navbar.Brand>
 					<Stack direction="horizontal" className="desktop-btns gap-lg-3">
@@ -55,34 +52,57 @@ export default function Navigation() {
 							</Button>
 						</div>
 						{!authService.isLoggedIn() && (
-							<Button variant="primary" href="/login" className="desktop-only">
+							<Button
+								as={NavLink}
+								to={'/login'}
+								variant="primary"
+								className="desktop-only">
 								Login
 							</Button>
 						)}
 						{authService.isLoggedIn() && (
-							<Button variant="outline-light" className="desktop-only">
-								My Wallet
-							</Button>
+							<Fragment>
+								<Button
+									onClick={() => {
+										setShow(!show);
+									}}
+									variant="outline-light"
+									className="desktop-only">
+									My Wallet
+								</Button>
+
+								<div className="desktop-only">
+									{show && <MyWallet style="dropdown" />}
+								</div>
+							</Fragment>
 						)}
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav className="pt-5 pb-3 justify-content-between py-lg-0">
-							<ul>
-								<li>
-									<Nav.Link href="/">Browse</Nav.Link>
-								</li>
-							</ul>
-							{/* {authService.isLoggedIn() && (
+							<div>
 								<ul>
 									<li>
-										<ProfileMenu />
+										<Nav.Link as={NavLink} to="/">
+											Browse
+										</Nav.Link>
 									</li>
 								</ul>
-							)} */}
+								{authService.isLoggedIn() && (
+									<ul className="mobile-only">
+										<li>
+											<MyWallet />
+										</li>
+									</ul>
+								)}
+							</div>
 
 							{!authService.isLoggedIn() && (
-								<Button variant="primary" href="/login" className="mobile-only">
+								<Button
+									variant="primary"
+									as={NavLink}
+									to={'/login'}
+									className="mobile-only">
 									Login
 								</Button>
 							)}
