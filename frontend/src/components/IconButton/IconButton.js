@@ -5,10 +5,10 @@ import Button from 'react-bootstrap/Button';
 
 import './iconButton.scss';
 
-export default function IconButton({ children, styles, variant }) {
+export default function IconButton({ children, styles, variant, color }) {
 	return (
 		<Button className={styles} variant={variant}>
-			<span className="d-flex btn--tickets icon-button">{children}</span>
+			<span className={`d-flex btn--tickets icon-button ${color}`}>{children}</span>
 		</Button>
 	);
 }
