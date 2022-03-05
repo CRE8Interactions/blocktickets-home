@@ -52,11 +52,7 @@ export default function Navigation() {
 							</Button>
 						</div>
 						{!authService.isLoggedIn() && (
-							<Button
-								as={NavLink}
-								to={'/login'}
-								variant="primary"
-								className="desktop-only">
+							<Button href="/login" variant="primary" className="desktop-only">
 								Login
 							</Button>
 						)}
@@ -98,11 +94,7 @@ export default function Navigation() {
 							</div>
 
 							{!authService.isLoggedIn() && (
-								<Button
-									variant="primary"
-									as={NavLink}
-									to={'/login'}
-									className="mobile-only">
+								<Button variant="primary" href="/login" className="mobile-only">
 									Login
 								</Button>
 							)}
