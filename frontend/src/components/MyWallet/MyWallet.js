@@ -17,9 +17,9 @@ export default function MyWallet({ style }) {
 	};
 
 	return (
-		<div className={`wallet ${style}`} style={{ position: style ? 'absolute' : 'relative' }}>
+		<div className="wallet">
 			<ListGroup variant="flush">
-				<p className="name pb-4">Harrison Cogan</p>
+				<p className="name pb-2 ">Harrison Cogan</p>
 				<ListGroup.Item as={Link} to={''}>
 					Upcoming Events
 				</ListGroup.Item>

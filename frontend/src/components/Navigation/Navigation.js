@@ -1,20 +1,22 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import authService from '../../utilities/services/auth.service';
+
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
-import authService from '../../utilities/services/auth.service';
 
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
 import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
-import './navigation.scss';
 import { SearchBar } from './../SearchBar';
 import { MyWallet } from './../MyWallet';
+import { Dropdown } from './../Dropdown';
+
+import './navigation.scss';
 
 export default function Navigation() {
 	const [
@@ -67,9 +69,7 @@ export default function Navigation() {
 									My Wallet
 								</Button>
 
-								<div className="desktop-only">
-									{show && <MyWallet style="dropdown" />}
-								</div>
+								<div className="desktop-only">{show && <Dropdown />}</div>
 							</Fragment>
 						)}
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
