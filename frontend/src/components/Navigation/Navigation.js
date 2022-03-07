@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react';
+import React, { Fragment, useRef, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import authService from '../../utilities/services/auth.service';
 
@@ -14,7 +14,7 @@ import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
 import { SearchBar } from './../SearchBar';
 import { MyWallet } from './../MyWallet';
-import { Dropdown } from './../Dropdown';
+import { NavButtons } from './NavButtons';
 
 import './navigation.scss';
 
@@ -24,20 +24,35 @@ export default function Navigation() {
 		setWindowSize
 	] = useState(window.innerWidth);
 
+	const [
+		expanded,
+		setExpanded
+	] = useState(false);
+
+	const collapse = useRef();
+	console.log(collapse.current);
+
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
-	useEffect(() => {
-		const changeWindowSize = () => setWindowSize(window.innerWidth);
+	useEffect(
+		() => {
+			const changeWindowSize = () => setWindowSize(window.innerWidth);
 
-		window.addEventListener('resize', changeWindowSize);
+			window.addEventListener('resize', changeWindowSize);
 
-		return () => window.removeEventListener('resize', changeWindowSize);
-	}, []);
+			const originalStyle = window.getComputedStyle(document.body).overflow;
 
-	const [
-		show,
-		setShow
-	] = useState(false);
+			if (expanded) document.body.style.overflow = 'hidden';
+
+			return () => {
+				window.removeEventListener('resize', changeWindowSize);
+				document.body.style.overflow = originalStyle;
+			};
+		},
+		[
+			expanded
+		]
+	);
 
 	return (
 		<div className="navigation">
@@ -53,26 +68,11 @@ export default function Navigation() {
 								<img src={shoppingCart} />
 							</Button>
 						</div>
-						{!authService.isLoggedIn() && (
-							<Button href="/login" variant="primary" className="desktop-only">
-								Login
-							</Button>
-						)}
-						{authService.isLoggedIn() && (
-							<Fragment>
-								<Button
-									onClick={() => {
-										setShow(!show);
-									}}
-									variant="outline-light"
-									className="desktop-only">
-									My Wallet
-								</Button>
-
-								<div className="desktop-only">{show && <Dropdown />}</div>
-							</Fragment>
-						)}
-						<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+						<NavButtons styles="desktop-only" />
+						<Navbar.Toggle
+							aria-controls="responsive-navbar-nav"
+							onClick={() => setExpanded(!expanded)}
+						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav className="pt-5 pb-3 justify-content-between py-lg-0">
@@ -92,12 +92,7 @@ export default function Navigation() {
 									</ul>
 								)}
 							</div>
-
-							{!authService.isLoggedIn() && (
-								<Button variant="primary" href="/login" className="mobile-only">
-									Login
-								</Button>
-							)}
+							<NavButtons styles="mobile-only" />
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

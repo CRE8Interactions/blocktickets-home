@@ -12,15 +12,12 @@ header {
 			margin-bottom: em(57);
 		}
 	}
-	.caption {
-		color: $clr-neutral-4;
-		font-weight: $fw-semi-bold;
-	}
 
 	.display-1 {
 		font-size: $h4-font-size;
 		margin-bottom: $banner-spacer;
 		@extend %multi-line-truncate;
+		display: block;
 
 		@include breakpoint-min(md) {
 			font-size: $h1-font-size;
@@ -43,37 +40,11 @@ header {
 		@include breakpoint-inBetween(md, lg) {
 			margin-bottom: 0px;
 		}
-
-		.caption {
-			@extend %icon-text-box;
-			gap: $gap-sm;
-		}
-	}
-
-	.time {
-		.caption {
-			&::before {
-				content: url($data-svg-prefix + map-get($icons, 'calendar'));
-			}
-		}
 	}
 
 	.venue {
-		p:not(.caption) {
+		p:not(.venue-caption) {
 			@extend %multi-line-truncate;
-		}
-		.caption {
-			&::before {
-				content: url($data-svg-prefix + map-get($icons, 'venue'));
-			}
-		}
-	}
-
-	.location {
-		.caption {
-			&::before {
-				content: url($data-svg-prefix + map-get($icons, 'location'));
-			}
 		}
 	}
 

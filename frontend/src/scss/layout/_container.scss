@@ -1,7 +1,7 @@
 @use './spacing' as *;
 @use '../abstracts' as *;
+@use './typography';
 
-/* container */
 .container {
 	max-width: 1130px;
 	margin: 0 auto;
@@ -23,6 +23,34 @@
 	}
 }
 
+.time-caption,
+.venue-caption,
+.location-caption {
+	@extend .caption !optional;
+	@extend %icon-text-box !optional;
+	gap: $gap-sm;
+	color: $clr-neutral-4;
+	font-weight: $fw-semi-bold;
+}
+
+.time-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'calendar'));
+	}
+}
+
+.venue-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'venue'));
+	}
+}
+
+.location-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'location'));
+	}
+}
+
 .mobile-only {
 	@include breakpoint-min(lg) {
 		display: none;
@@ -37,6 +65,10 @@
 	}
 }
 
-body .navbar-nav-show {
+.fixed {
 	overflow-y: hidden;
+}
+
+.scroll {
+	overflow-y: auto;
 }

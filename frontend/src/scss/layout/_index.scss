@@ -1,8 +1,8 @@
 @use 'container';
+@use 'typography';
 @forward 'spacing';
 @use 'buttons';
 @use 'forms';
-@use 'typography';
 
 .nav-link {
 	padding-left: 0px;
