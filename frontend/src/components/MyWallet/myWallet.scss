@@ -4,26 +4,23 @@
 @use '../../scss/layout' as *;
 
 .wallet {
-	@include breakpoint-min(lg) {
-		top: rem(81);
-		left: 72%;
-	}
-
-	&.dropdown {
-		border-radius: 12px;
-		box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
-	}
 	.list-group {
-		font-weight: 600;
+		font-weight: 700;
+		font-family: $font-heading;
 
 		.name {
-			font-size: $body-1;
+			@include breakpoint-max(lg) {
+				font-size: $body-1;
+			}
 		}
 
 		&-item {
-			font-weight: 700;
-			font-family: $font-heading;
+			// color: $clr-neutral-3;
 			padding: em(16) 0px;
+
+			@include breakpoint-min(lg) {
+				font-size: rem(14);
+			}
 
 			@extend %icon-text-box;
 
