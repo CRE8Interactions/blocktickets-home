@@ -1,0 +1,39 @@
+@use './../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/layout/typography' as *;
+
+.ticket {
+	header {
+		border-bottom: border();
+		.details {
+			.subtitle,
+			h1,
+			.row > .col > * {
+				@extend %text-truncate;
+			}
+
+			.row {
+				.col {
+					min-width: 0;
+					flex: 1;
+				}
+			}
+
+			.subtitle {
+				order: -1;
+			}
+			.col:nth-of-type(2) {
+				border-left: border();
+			}
+
+			.artist-name {
+				font-size: rem(16);
+				margin-bottom: 1rem;
+
+				@include breakpoint-min(md) {
+					font-size: $body-1;
+				}
+			}
+		}
+	}
+}

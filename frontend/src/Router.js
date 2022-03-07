@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { HomePage, LoginPage, DashboardPage } from './pages';
+import { HomePage, LoginPage, DashboardPage, TicketsPage } from './pages';
 import { RequireAuth } from './context/Auth/useAuth';
 
 /**
@@ -19,6 +19,9 @@ const Router = () => {
 					</RequireAuth>
 				}
 			/>
+			<Route path="/tickets/:id" element={<TicketsPage />} />
+
+			{/* default route */}
 			<Route path="*" element={<Navigate to="/" />} />
 		</Routes>
 	);

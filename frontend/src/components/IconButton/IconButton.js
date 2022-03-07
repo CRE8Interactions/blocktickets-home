@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from 'react-bootstrap/Button';
 
 import './iconButton.scss';
@@ -8,7 +8,9 @@ import './iconButton.scss';
 export default function IconButton({ children, styles, variant, color }) {
 	return (
 		<Button className={styles} variant={variant}>
-			<span className={`d-flex btn--tickets icon-button ${color}`}>{children}</span>
+			<Link to={'tickets/1'}>
+				<span className={`d-flex btn--tickets icon-button ${color}`}>{children}</span>
+			</Link>
 		</Button>
 	);
 }

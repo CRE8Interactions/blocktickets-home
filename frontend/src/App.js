@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Router from './Router';
 import UserContext from './context/User/user';
 import AuthService from './utilities/services/auth.service';
-import { Navigation, Footer } from './components';
+import { Navigation } from './components';
 
 function App() {
 	const user = AuthService.getUser();
@@ -18,7 +18,6 @@ function App() {
 				<div className="container">
 					<Router />
 				</div>
-				<Footer />
 			</UserContext.Provider>
 		</Fragment>
 	);
