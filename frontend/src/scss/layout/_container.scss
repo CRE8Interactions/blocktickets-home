@@ -12,7 +12,7 @@ $pad-md: rem(81);
 		padding: 0px $pad-sm;
 	}
 
-	@include breakpoint-inBetween(md, xxl) {
+	@include breakpoint-inBetween(md, xl) {
 		padding: 0px $pad-md;
 	}
 }
