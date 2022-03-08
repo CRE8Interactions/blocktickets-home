@@ -2,6 +2,10 @@
 @use '../../scss/layout/typography' as *;
 
 .navigation {
+	&.position-sticky {
+		top: 0;
+		z-index: 999;
+	}
 	.desktop-btns {
 		@include breakpoint-min(lg) {
 			order: 4;
@@ -11,7 +15,6 @@
 	.navbar {
 		background-color: $clr-white;
 		border-bottom: border();
-		position: relative;
 
 		&-nav {
 			@include breakpoint-max(lg) {
@@ -101,13 +104,9 @@
 			margin-top: 0px;
 
 			&-primary,
-			&-outline {
+			&-outline-light {
 				min-width: 102px;
 			}
-		}
-
-		&-light-toggler {
-			border-radius: 0px;
 		}
 	}
 }

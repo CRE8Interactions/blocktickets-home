@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import authService from '../../../utilities/services/auth.service';
-
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { Dropdown } from '../../Dropdown';
 
@@ -15,9 +15,9 @@ export default function NavButtons({ styles }) {
 	return (
 		<Fragment>
 			{!authService.isLoggedIn() && (
-				<Button href="/login" variant="primary" className={styles}>
+				<Link to="/login" className={`btn btn-primary ${styles}`}>
 					Login
-				</Button>
+				</Link>
 			)}
 			{authService.isLoggedIn() && (
 				<Fragment>
@@ -26,7 +26,8 @@ export default function NavButtons({ styles }) {
 							setShowMenu(!showMenu);
 						}}
 						variant="outline-light"
-						className={styles}>
+						className={styles}
+						id="btn-wallet">
 						My Wallet
 					</Button>
 					<div className={styles}>{showMenu && <Dropdown />}</div>

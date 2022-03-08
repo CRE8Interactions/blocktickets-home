@@ -1,3 +1,3 @@
-export const copyright = () => {
+export const getCopyrightYear = () => {
 	return new Date().getFullYear();
 };

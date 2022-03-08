@@ -1,5 +1,5 @@
 import React from 'react';
-import { Venues, Hero, Events, Footer } from '../../components';
+import { Venues, Hero, Events } from '../../components';
 
 import './homePage.scss';
 
@@ -9,7 +9,6 @@ export default function HomePage() {
 			<Hero />
 			<Events />
 			<Venues />
-			<Footer />
 		</main>
 	);
 }
