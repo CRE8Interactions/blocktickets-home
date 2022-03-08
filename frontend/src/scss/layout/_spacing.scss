@@ -40,3 +40,7 @@ $gap-sm: rem(4);
 		padding-top: $spacer-md;
 	}
 }
+
+.row + .row {
+	margin-top: rem(6);
+}

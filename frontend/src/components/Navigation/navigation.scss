@@ -9,6 +9,7 @@
 	}
 
 	.navbar {
+		background-color: $clr-white;
 		border-bottom: border();
 		position: relative;
 
@@ -21,6 +22,12 @@
 		&-brand {
 			@include breakpoint-min(lg) {
 				margin-right: rem(31);
+			}
+		}
+
+		&-collapse {
+			@include breakpoint-max(lg) {
+				border-top: border();
 			}
 		}
 
@@ -69,6 +76,11 @@
 
 			li {
 				.nav-link {
+					// left: 48%;
+					// right: 50%;
+					// margin-left: -48vw;
+					// margin-right: -50vw;
+
 					@include breakpoint-max(lg) {
 						font-size: rem(24);
 						padding-left: em(16);

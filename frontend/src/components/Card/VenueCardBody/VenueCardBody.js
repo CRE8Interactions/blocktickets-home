@@ -10,7 +10,7 @@ export default function EventCardTop() {
 	return (
 		<Fragment>
 			<Card.Title>Celebrities nightclub Venue</Card.Title>
-			<Card.Text>Toronto, ON M5R 3G1</Card.Text>
+			<Card.Text>Toronto, ON</Card.Text>
 			<hr />
 			<Row>
 				<span className="col caption">Mar 13 9:30PM</span>

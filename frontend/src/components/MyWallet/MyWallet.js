@@ -29,7 +29,7 @@ export default function MyWallet({ style }) {
 				<ListGroup.Item as={Link} to={''}>
 					Settings
 				</ListGroup.Item>
-				<ListGroup.Item as={Link} to={''}>
+				<ListGroup.Item as={Link} to={''} onClick={logout}>
 					Log out
 				</ListGroup.Item>
 			</ListGroup>

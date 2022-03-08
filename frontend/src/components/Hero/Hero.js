@@ -38,7 +38,7 @@ export default function Hero() {
 									<Row>
 										<Col md={6} lg={12}>
 											<div className="time">
-												<p className="caption ">Time</p>
+												<p className="time-caption">Time</p>
 												<p className="bold date body-lg">
 													Mar 13 <span>9:00 PM</span>
 												</p>
@@ -46,7 +46,7 @@ export default function Hero() {
 										</Col>
 										<Col md={6} lg={12}>
 											<div className="venue">
-												<p className="caption">Venue</p>
+												<p className="venue-caption">Venue</p>
 												<p className="bold body-lg">
 													CODA or venue long name here as another example
 												</p>
@@ -54,7 +54,7 @@ export default function Hero() {
 										</Col>
 										<Col>
 											<div className="location">
-												<p className="caption ">Location</p>
+												<p className="location-caption">Location</p>
 												<p>Toronto, ON</p>
 											</div>
 										</Col>
