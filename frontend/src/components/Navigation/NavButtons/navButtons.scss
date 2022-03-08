@@ -2,7 +2,10 @@
 
 .navigation .navbar .navbar-nav .mobile-only {
 	&.btn {
-		// margin-bottom: rem(30);
+		margin-top: auto;
+		@include breakpoint-max(md) {
+			margin-bottom: rem(55);
+		}
 	}
 
 	&#btn-wallet {
