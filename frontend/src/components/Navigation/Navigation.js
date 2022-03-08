@@ -29,9 +29,6 @@ export default function Navigation() {
 		setExpanded
 	] = useState(false);
 
-	const collapse = useRef();
-	console.log(collapse.current);
-
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	useEffect(
@@ -55,8 +52,8 @@ export default function Navigation() {
 	);
 
 	return (
-		<div className="navigation">
-			<Navbar collapseOnSelect expand="lg" sticky="top">
+		<div className="navigation position-sticky">
+			<Navbar collapseOnSelect expand="lg">
 				<Container>
 					<Navbar.Brand as={NavLink} to="/">
 						<img src={logo} alt="blocktickets" />
@@ -76,22 +73,20 @@ export default function Navigation() {
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav className="pt-5 pb-3 justify-content-between py-lg-0">
-							<div>
-								<ul>
+							<ul>
+								<li>
+									<Nav.Link as={NavLink} to="/">
+										Browse
+									</Nav.Link>
+								</li>
+							</ul>
+							{authService.isLoggedIn() && (
+								<ul className="mobile-only">
 									<li>
-										<Nav.Link as={NavLink} to="/">
-											Browse
-										</Nav.Link>
+										<MyWallet />
 									</li>
 								</ul>
-								{authService.isLoggedIn() && (
-									<ul className="mobile-only">
-										<li>
-											<MyWallet />
-										</li>
-									</ul>
-								)}
-							</div>
+							)}
 							<NavButtons styles="mobile-only" />
 						</Nav>
 					</Navbar.Collapse>

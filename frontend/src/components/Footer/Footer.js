@@ -6,9 +6,9 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import logo from '../../assets/logo.svg';
-import { copyright } from './../../utilities/helper';
-import './footer.scss';
+import { getCopyrightYear } from './../../utilities/helper';
 import InputField from './../InputField/InputField';
+import './footer.scss';
 
 export default function Footer() {
 	return (
@@ -61,7 +61,7 @@ export default function Footer() {
 
 			<div className="container d-flex flex-column flex-md-row justify-content-md-between align-items-center pt-4 copyright caption">
 				<p className="text-muted">
-					Copyright &copy; {copyright()} Blocktickets. All rights reserved
+					Copyright &copy; {getCopyrightYear()} Blocktickets. All rights reserved
 				</p>
 				<p>
 					We use cookies for better service. <Button variant="link">Accept</Button>

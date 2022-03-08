@@ -1,1 +1,11 @@
+@use '../../../scss/abstracts' as *;
 
+.navigation .navbar .navbar-nav .mobile-only {
+	&.btn {
+		// margin-bottom: rem(30);
+	}
+
+	&#btn-wallet {
+		display: none;
+	}
+}
