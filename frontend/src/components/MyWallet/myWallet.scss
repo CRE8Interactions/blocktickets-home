@@ -1,6 +1,7 @@
 @use './../../scss/abstracts' as *;
 @use '../../scss/theme/card' as *;
 @use '../../scss/theme/colors' as *;
+@use '../../scss/theme/links' as *;
 @use '../../scss/layout' as *;
 
 .wallet {
@@ -15,7 +16,7 @@
 		}
 
 		&-item {
-			// color: $clr-neutral-3;
+			color: $clr-neutral-3;
 			padding: em(16) 0px;
 
 			@include breakpoint-min(lg) {
@@ -26,6 +27,7 @@
 
 			&:hover,
 			&:focus {
+				color: $link-color;
 				&::before {
 					filter: brightness(0) saturate(100%) invert(78%) sepia(48%) saturate(4629%)
 						hue-rotate(179deg) brightness(102%) contrast(95%);

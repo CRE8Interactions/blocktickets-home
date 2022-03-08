@@ -82,10 +82,9 @@ h4,
 %nav-mobile-headings {
 	@include breakpoint-max(lg) {
 		display: block;
-		margin-bottom: 1rem;
+		margin-bottom: rem(12);
 		font-size: 1rem;
 		color: $clr-neutral-4;
-		padding-left: em(28);
 		font-weight: 500;
 	}
 }

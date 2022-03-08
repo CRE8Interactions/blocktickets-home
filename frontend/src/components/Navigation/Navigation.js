@@ -72,7 +72,7 @@ export default function Navigation() {
 						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
-						<Nav className="pt-5 pb-3 justify-content-between py-lg-0">
+						<Nav className=" pb-3 py-lg-0">
 							<ul>
 								<li>
 									<Nav.Link as={NavLink} to="/">
@@ -80,9 +80,9 @@ export default function Navigation() {
 									</Nav.Link>
 								</li>
 							</ul>
-							{authService.isLoggedIn() && (
+							{!authService.isLoggedIn() && (
 								<ul className="mobile-only">
-									<li>
+									<li className="pt-2">
 										<MyWallet />
 									</li>
 								</ul>

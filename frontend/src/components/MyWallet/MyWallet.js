@@ -8,7 +8,7 @@ import UserContext from '../../context/User/user';
 
 import './myWallet.scss';
 
-export default function MyWallet({ style }) {
+export default function MyWallet() {
 	const { setAuthenticated } = useContext(UserContext);
 
 	const logout = () => {

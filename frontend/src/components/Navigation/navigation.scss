@@ -1,5 +1,6 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout/typography' as *;
+@use '../../scss/layout/container' as *;
 
 .navigation {
 	&.position-sticky {
@@ -17,6 +18,12 @@
 		border-bottom: border();
 
 		&-nav {
+			padding-top: em(20);
+
+			@media screen and (min-device-height: 812px) {
+				padding-top: em(73);
+			}
+
 			@include breakpoint-max(lg) {
 				height: calc(100vh - 90px);
 			}
@@ -54,7 +61,11 @@
 			}
 
 			& + ul {
-				margin-top: 3rem;
+				margin-top: rem(16);
+
+				@media screen and(min-device-height: 812px) {
+					margin-top: rem(48);
+				}
 			}
 
 			&::before {
@@ -77,36 +88,39 @@
 				}
 			}
 
-			li {
-				.nav-link {
-					// left: 48%;
-					// right: 50%;
-					// margin-left: -48vw;
-					// margin-right: -50vw;
+			.nav-link {
+				@include breakpoint-max(lg) {
+					font-size: rem(24);
+					&.active {
+						border-left: border(2px, $clr-primary);
+						position: relative;
+						width: 100vw;
+						left: 50%;
+						margin-left: -50vw;
+						right: 50%;
+						margin-right: -50vw;
 
-					@include breakpoint-max(lg) {
-						font-size: rem(24);
-						padding-left: em(16);
+						padding-left: calc($pad-sm - rem(2));
 
-						&.active {
-							border-left: border(2px, $clr-primary);
+						@include breakpoint-min(md) {
+							padding-left: calc($pad-md - rem(2));
 						}
 					}
 				}
 			}
 		}
+	}
 
-		.card {
-			// padding: 0px em(4);
-		}
+	.card {
+		// padding: 0px em(4);
+	}
 
-		.btn {
-			margin-top: 0px;
+	.btn {
+		margin-top: 0px;
 
-			&-primary,
-			&-outline-light {
-				min-width: 102px;
-			}
+		&-primary,
+		&-outline-light {
+			min-width: 102px;
 		}
 	}
 }
