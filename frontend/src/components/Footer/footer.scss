@@ -1,0 +1,55 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/layout/spacing' as *;
+
+footer {
+	.copyright {
+		border-top: border();
+		margin-top: $copyright-spacer;
+	}
+
+	.col:not(:last-child) {
+		@include breakpoint-max(md) {
+			border-bottom: border();
+		}
+	}
+
+	.col {
+		padding-bottom: $spacer-footer-sm-bottom;
+
+		&:not(:first-of-type) {
+			@include breakpoint-max(md) {
+				padding-top: em(28);
+			}
+		}
+
+		.brand-logo,
+		.footer-title {
+			margin-bottom: $title-spacer;
+		}
+
+		.footer-title {
+			font-size: initial;
+			font-family: $font-body;
+			font-weight: $fw-medium;
+		}
+		.footer-nav-list-title {
+			@include breakpoint-max(md) {
+				margin-bottom: rem(17);
+			}
+
+			@include breakpoint-min(md) {
+				margin-bottom: $title-spacer;
+			}
+		}
+	}
+}
+
+.tag-line {
+	width: 21ch;
+
+	@include breakpoint-min(xl) {
+		font-size: rem(24);
+		width: 18ch;
+	}
+}

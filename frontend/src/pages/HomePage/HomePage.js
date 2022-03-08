@@ -1,14 +1,15 @@
-import React, { useContext, useEffect } from 'react';
-// import UserContext from '../../context/User/user';
-import { Events, Hero } from '../../components';
+import React from 'react';
+import { Venues, Hero, Events, Footer } from '../../components';
+
+import './homePage.scss';
 
 export default function HomePage() {
-	// const user = useContext(UserContext);
-
 	return (
-		<main style={{ padding: '1rem 0' }}>
+		<main>
 			<Hero />
 			<Events />
+			<Venues />
+			<Footer />
 		</main>
 	);
 }

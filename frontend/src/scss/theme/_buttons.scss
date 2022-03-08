@@ -1,12 +1,44 @@
 @use "../abstracts" as *;
 @use './input' as *;
+@use './colors' as *;
 
 // Buttons
 $btn-font-family: $font-heading;
 $btn-font-weight: $fw-bold;
+$btn-font-size: rem(14);
+$btn-font-size-md: rem(16);
+$btn-padding-y-md: em(16);
+$btn-padding-x-md: em(24);
+$btn-padding-x: em(16);
+$btn-padding-y: em(12);
+$btn-padding-y-xs: em(8);
+$btn-padding-x-xs: em(12);
+$btn-border-radius: $br-primary;
+$btn-border-width: $border-width;
+$btn-line-height: 1;
 $btn-box-shadow: none;
 $btn-focus-box-shadow: none;
-$btn-padding-y: rem(10);
-$btn-padding-x: rem(21);
-$btn-border-radius: $border-radius;
-$btn-border-width: $border-width;
+
+button,
+.btn {
+	&:focus {
+		box-shadow: none !important;
+	}
+}
+
+.btn-primary,
+.btn-secondary {
+	color: $white;
+
+	&:hover,
+	&:focus {
+		color: $white;
+	}
+}
+
+.btn-outline-light {
+	color: $body-color;
+}
+
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,%3Csvg width='22' height='12' viewBox='0 0 22 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.66683 0.666656C0.93045 0.666656 0.333496 1.26361 0.333496 1.99999C0.333496 2.73637 0.93045 3.33332 1.66683 3.33332H20.3335C21.0699 3.33332 21.6668 2.73637 21.6668 1.99999C21.6668 1.26361 21.0699 0.666656 20.3335 0.666656H1.66683Z' fill='%23777E91'/%3E%3Cpath d='M1.66683 8.66666C0.93045 8.66666 0.333496 9.26361 0.333496 9.99999C0.333496 10.7364 0.93045 11.3333 1.66683 11.3333H20.3335C21.0699 11.3333 21.6668 10.7364 21.6668 9.99999C21.6668 9.26361 21.0699 8.66666 20.3335 8.66666H1.66683Z' fill='%23777E91'/%3E%3C/svg%3E%0A");
+$navbar-light-toggler-border-color: transparent;

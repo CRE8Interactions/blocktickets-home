@@ -25,6 +25,31 @@ module.exports = {
    * run jobs, or perform some special logic.
    */
   bootstrap(/*{ strapi }*/) {
+
+    let initCategories = async() => {
+      const count = await strapi.db.query('api::category.category').count()
+      console.log(count)
+      if (count === 0) {
+        const arr = [
+          'music',
+          'concerts',
+          'sports',
+          'arts & theater',
+          'family',
+          'vip',
+          'deals'
+        ]
+
+        arr.map(async (a) => await strapi.db.query('api::category.category').create({
+          data: {
+            name: a
+          }
+        }))
+      }
+    }
+
+    initCategories()
+
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify'],
       async afterCreate(event) {

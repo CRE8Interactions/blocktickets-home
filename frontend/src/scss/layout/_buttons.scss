@@ -1,32 +1,63 @@
 @use '../abstracts' as *;
+@use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
 .btn + .btn {
-	margin-left: 1rem;
+	margin-left: em(16);
 }
 
 .btn {
-	margin-top: rem(10);
+	margin-top: em(14);
 }
 
-.btn--circle {
-	padding: rem(8);
+.btn-link {
+	margin-top: 0px;
+	padding: 0px;
 }
 
-.btn-primary,
-.btn-secondary {
-	color: $clr-neutral-8;
+.btn--icon {
+	padding: em(7);
+	margin-top: 0px;
+}
 
-	&:hover,
-	&:focus {
-		color: $clr-neutral-8;
+.btn--medium {
+	padding: $btn-padding-y-md $btn-padding-x-md;
+	font-size: $btn-font-size-md;
+}
+
+.btn--input {
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: em(16);
+
+	&-default {
+		background-color: $primary;
+		background-image: url('../../assets/icons/right-arrow-white.svg');
+	}
+
+	&-loading {
+		background-image: url('../../assets/icons/loading.svg');
+	}
+
+	&-success {
+		background-color: $green;
+		background-image: url('../../assets/icons/checkmark.svg');
 	}
 }
 
+.btn--xsmall {
+	padding: $btn-padding-y-xs $btn-padding-x-xs;
+}
+
 .btn--tickets {
-	display: flex;
-	gap: 10px;
-	justify-content: center;
-	&::before {
-		content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.8284 0.45753C10.3077 -0.0631698 9.46344 -0.0631689 8.94274 0.457531L0.457466 8.94282C-0.0632315 9.46352 -0.0632316 10.3077 0.457467 10.8284L0.817571 11.1885C1.17468 11.5457 1.70788 11.6556 2.21291 11.6534C2.68633 11.6514 3.28177 11.7671 3.75729 12.2426C4.23281 12.7182 4.34858 13.3136 4.34652 13.787C4.34433 14.292 4.45427 14.8252 4.81139 15.1824L5.1715 15.5425C5.6922 16.0632 6.53642 16.0632 7.05712 15.5425L15.5424 7.05719C16.0631 6.53649 16.0631 5.69227 15.5424 5.17157L15.1823 4.81146C14.8252 4.45434 14.292 4.3444 13.787 4.34659C13.3135 4.34865 12.7181 4.23288 12.2426 3.75736C11.767 3.28184 11.6513 2.6864 11.6533 2.21298C11.6555 1.70795 11.5456 1.17476 11.1885 0.817647L10.8284 0.45753Z' fill='%23FCFCFD'/%3E%3C/svg%3E%0A");
+	&.plain {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'ticketWhite'));
+		}
+	}
+	&.secondary {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'ticketSecondary'));
+		}
 	}
 }

@@ -1,8 +1,113 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/typography' as *;
 
 .navigation {
+	.desktop-btns {
+		@include breakpoint-min(lg) {
+			order: 4;
+		}
+	}
+
 	.navbar {
-		padding: rem(26) 0px;
-		border: 1px solid $clr-neutral-6;
+		background-color: $clr-white;
+		border-bottom: border();
+		position: relative;
+
+		&-nav {
+			@include breakpoint-max(lg) {
+				height: calc(100vh - 90px);
+			}
+		}
+
+		&-brand {
+			@include breakpoint-min(lg) {
+				margin-right: rem(31);
+			}
+		}
+
+		&-collapse {
+			@include breakpoint-max(lg) {
+				border-top: border();
+			}
+		}
+
+		@include breakpoint-min(md) {
+			padding-top: em(16);
+			padding-bottom: em(16);
+		}
+		@include breakpoint-min(lg) {
+			.navbar-nav .nav-link {
+				padding-left: rem(36);
+			}
+
+			.navbar-brand {
+				margin-right: rem(31);
+			}
+		}
+
+		ul {
+			@include breakpoint-min(lg) {
+				border-left: border(2px);
+			}
+
+			& + ul {
+				margin-top: 3rem;
+			}
+
+			&::before {
+				@extend %nav-mobile-headings;
+			}
+
+			&:first-of-type {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'Home';
+					}
+				}
+			}
+
+			&:nth-of-type(2) {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'My Wallet';
+					}
+				}
+			}
+
+			li {
+				.nav-link {
+					// left: 48%;
+					// right: 50%;
+					// margin-left: -48vw;
+					// margin-right: -50vw;
+
+					@include breakpoint-max(lg) {
+						font-size: rem(24);
+						padding-left: em(16);
+
+						&.active {
+							border-left: border(2px, $clr-primary);
+						}
+					}
+				}
+			}
+		}
+
+		.card {
+			// padding: 0px em(4);
+		}
+
+		.btn {
+			margin-top: 0px;
+
+			&-primary,
+			&-outline {
+				min-width: 102px;
+			}
+		}
+
+		&-light-toggler {
+			border-radius: 0px;
+		}
 	}
 }

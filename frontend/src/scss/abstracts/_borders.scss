@@ -1,4 +1,13 @@
+@use 'colors' as *;
+
 $br-primary: 90px;
+$br-sm: 8px;
 $br-circle: 40px;
 $br-textile: 5%;
 $border-width: 2px;
+$border-color: $clr-neutral-6;
+$box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
+
+@function border($border-width: 1px, $color: $border-color, $border-style: solid) {
+	@return $border-width $border-style $color;
+}

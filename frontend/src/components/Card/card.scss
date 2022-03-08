@@ -1,10 +1,12 @@
 @use './../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/layout' as *;
 
 .card {
 	width: rem(256);
 	.card {
 		&-img-top {
-			height: 303px;
+			height: rem(303);
 			background-color: $clr-neutral-6;
 			border-radius: $br-textile;
 		}
@@ -13,17 +15,36 @@
 			display: flex;
 			flex-direction: column;
 			padding-left: 0px;
+			padding-right: 0px;
+
+			hr {
+				margin: rem(12) 0px;
+				background-color: $clr-neutral-4;
+			}
+		}
+
+		&-text {
+			font-size: $caption;
 		}
 
 		&-title {
 			font-family: $font-body;
 			font-size: $body-2;
 			font-weight: $fw-medium;
+			@extend %text-truncate;
 		}
 
 		&-subtitle {
+			@extend %text-truncate;
 			margin-top: initial;
-			font-size: rem(14);
+			font-size: $small;
 		}
+	}
+	.row + .row {
+		margin-top: $card-title-spacer-y;
+	}
+
+	.caption {
+		@extend %text-truncate;
 	}
 }

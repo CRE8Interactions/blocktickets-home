@@ -8,13 +8,13 @@ import rightArrow from '../../assets/icons/right-arrow.svg';
 import leftArrow from '../../assets/icons/left-arrow.svg';
 import './swiperNavigationButtons.scss';
 
-export default function SwiperNavigationButtons() {
+export default function SwiperNavigationButtons({ styles }) {
 	return (
-		<div className="d-flex justify-content-center">
-			<Button variant="outline-light" className="btn--circle">
+		<div className={`d-flex ${styles}`}>
+			<Button variant="outline-light" className="btn--icon swiper-button-prev">
 				<img src={leftArrow} />
 			</Button>
-			<Button variant="outline-light" className="btn--circle">
+			<Button variant="outline-light" className="btn--icon swiper-button-next">
 				<img src={rightArrow} />
 			</Button>
 		</div>

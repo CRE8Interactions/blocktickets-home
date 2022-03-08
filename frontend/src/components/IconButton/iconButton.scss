@@ -1,7 +1,6 @@
-@use './../../scss/abstracts' as *;
+@use './../../scss/layout' as *;
 
 .icon-button {
-	display: flex;
-	gap: 10px;
-	align-items: center;
+	@extend %icon-text-box;
+	justify-content: center;
 }

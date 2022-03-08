@@ -1,9 +1,12 @@
-@use '../abstracts' as *;
+@use '../abstracts/colors' as *;
 
 $body-color: $clr-neutral-2;
 
 // Theme Colors
 $primary: $clr-primary;
 $secondary: $clr-secondary;
+$green: $clr-success;
 $light: $clr-neutral-6;
+$white: $clr-white;
+$muted: $clr-neutral-4;
 $gray-400: $clr-neutral-6;

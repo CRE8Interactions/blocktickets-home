@@ -1,0 +1,46 @@
+@use '../abstracts' as *;
+
+// Banner Spacers
+$banner-spacer-md-top: em(100);
+$banner-spacer-md-bottom: em(110);
+$banner-spacer: rem(21);
+
+// Page Spacers
+$spacer-sm: em(64);
+$spacer-md: em(80);
+$spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
+$copyright-spacer: rem(17); // change variable name when you get more pages
+
+// Text Spacers
+$heading-spacer: rem(64);
+$title-spacer: rem(30);
+$gap: rem(14);
+$gap-sm: rem(4);
+
+.spacer {
+	padding: $spacer-sm 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-md 0px;
+	}
+}
+
+.spacer-lg {
+	padding: $spacer-sm 0px;
+
+	@include breakpoint-min(lg) {
+		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
+	}
+}
+
+.footer-spacer {
+	padding: $spacer-sm 0px $spacer-footer-sm-bottom;
+
+	@include breakpoint-min(md) {
+		padding-top: $spacer-md;
+	}
+}
+
+.row + .row {
+	margin-top: rem(6);
+}

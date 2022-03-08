@@ -1,5 +1,25 @@
 @use '../abstracts' as *;
+@use '../theme/input' as *;
 
 input::placeholder {
-	color: $clr-neutral-6;
+	color: $clr-neutral-4;
+}
+
+@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
+	display: flex;
+	align-items: center;
+	border-radius: $radius;
+	padding: $padding-y $padding-x;
+	border: $input-border-width solid $color;
+
+	@include breakpoint-min(xl) {
+		padding-left: em(10);
+	}
+
+	.form-control {
+		border: none;
+		padding: 0px;
+		min-height: auto;
+		margin-right: rem(6);
+	}
 }

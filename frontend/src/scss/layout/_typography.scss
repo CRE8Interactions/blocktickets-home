@@ -1,11 +1,12 @@
 @use '../abstracts' as *;
+@use 'spacing' as *;
 
 .bold {
 	font-weight: 600;
 }
 
 .body-lg {
-	@include breakpoint(min-width, medium) {
+	@include breakpoint-min(md) {
 		font-size: $body-1;
 	}
 }
@@ -18,7 +19,7 @@
 		margin: 0;
 	}
 
-	margin-bottom: rem(43);
+	margin-bottom: $heading-spacer;
 }
 
 h1,
@@ -40,15 +41,51 @@ h4,
 
 .section-heading h1 {
 	font-size: $h4-font-size;
-	@include breakpoint(min-width, medium) {
+	@include breakpoint-min(md) {
 		font-size: $h3-font-size;
 	}
 }
 
-.card-title,
-.card-subtitle {
+.caption {
+	font-size: $caption;
+	margin-bottom: em(3);
+}
+.caption--uppercase {
+	@extend .caption !optional;
+	text-transform: uppercase;
+	font-weight: $fw-bold;
+	font-family: $font-body;
+}
+
+%truncate {
 	white-space: nowrap;
-	width: inherit;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+%text-truncate {
+	@extend %truncate !optional;
+}
+
+%multi-line-truncate {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+}
+
+.nav-link {
+	font-family: $font-heading;
+}
+
+%nav-mobile-headings {
+	@include breakpoint-max(lg) {
+		display: block;
+		margin-bottom: 1rem;
+		font-size: 1rem;
+		color: $clr-neutral-4;
+		padding-left: em(28);
+		font-weight: 500;
+	}
 }

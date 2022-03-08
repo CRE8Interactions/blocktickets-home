@@ -1,0 +1,96 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tickets",
+  "info": {
+    "singularName": "ticket",
+    "pluralName": "tickets",
+    "displayName": "ticket",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "cost": {
+      "type": "decimal",
+      "required": true
+    },
+    "fee": {
+      "type": "decimal"
+    },
+    "free": {
+      "type": "boolean",
+      "default": false
+    },
+    "minimum_quantity": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "default": 1
+    },
+    "maximum_quantity": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "default": 1
+    },
+    "on_sale_status": {
+      "type": "string",
+      "required": true,
+      "default": "available"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "capacity": {
+      "type": "integer",
+      "private": true
+    },
+    "quantity_sold": {
+      "type": "integer",
+      "private": true
+    },
+    "hidden": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "sales_start": {
+      "type": "datetime",
+      "private": true
+    },
+    "sales_end": {
+      "type": "datetime",
+      "private": true
+    },
+    "hide_description": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "hide_sale_dates": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event",
+      "inversedBy": "ticket"
+    }
+  }
+}

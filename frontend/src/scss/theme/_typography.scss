@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../layout' as *;
 
 // Fonts
 $font-family-sans-serif: $font-body;
@@ -7,10 +8,7 @@ $small-font-size: $small;
 $display-font-weight: $fw-bold;
 $headings-font-family: $font-heading;
 $headings-font-weight: $fw-semi-bold;
-$headings-margin-bottom: rem(43);
+$headings-margin-bottom: $heading-spacer;
+$line-height-base: 1.4;
 $display-line-height: 1;
-
-$h1-font-size: $h1-font-size;
-$h2-font-size: $h2-font-size;
-$h3-font-size: $h3-font-size;
-$h4-font-size: $h4-font-size;
+$nav-link-font-size: $small;

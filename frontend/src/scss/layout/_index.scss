@@ -1,4 +1,17 @@
-@forward 'container';
+@use 'container';
+@use 'typography';
+@forward 'spacing';
 @use 'buttons';
 @use 'forms';
-@use 'typography';
+
+.nav-link {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.section-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-right: 1em;
+}
