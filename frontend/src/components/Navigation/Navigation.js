@@ -39,7 +39,9 @@ export default function Navigation() {
 
 			const originalStyle = window.getComputedStyle(document.body).overflow;
 
-			if (expanded) document.body.style.overflow = 'hidden';
+			if (expanded) {
+				document.body.style.overflow = 'hidden';
+			}
 
 			return () => {
 				window.removeEventListener('resize', changeWindowSize);
@@ -60,7 +62,7 @@ export default function Navigation() {
 							<img src={logo} alt="blocktickets" />
 						</Navbar.Brand>
 					</LinkContainer>
-					<Stack direction="horizontal" className="desktop-btns gap-3 gap-lg-4">
+					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
 						<div className="cart">
 							<Button variant="default" className="btn--icon">
@@ -70,7 +72,7 @@ export default function Navigation() {
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
-							className="btn-icon"
+							className="btn--icon"
 							onClick={() => setExpanded(!expanded)}
 						/>
 					</Stack>

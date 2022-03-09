@@ -9,13 +9,21 @@
 		z-index: 999;
 	}
 	.desktop-btns {
+		.cart {
+			margin: 0px rem(6);
+		}
 		@include breakpoint-min(lg) {
 			order: 4;
+
+			.cart {
+				margin: 0px rem(20);
+			}
 		}
 	}
 
 	.navbar {
 		background-color: $clr-white;
+
 		border-bottom: border();
 
 		&-nav {
@@ -23,9 +31,6 @@
 
 			@media screen and (min-device-height: 812px) {
 				padding-bottom: em(60);
-			}
-
-			@media screen and (min-device-height: 812px) {
 				padding-top: em(73);
 			}
 			@include breakpoint-max(lg) {
