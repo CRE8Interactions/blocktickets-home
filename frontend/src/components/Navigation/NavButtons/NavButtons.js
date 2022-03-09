@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import authService from '../../../utilities/services/auth.service';
 import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -12,6 +12,16 @@ export default function NavButtons({ styles }) {
 		showMenu,
 		setShowMenu
 	] = useState(false);
+
+	useEffect(() => {
+		const closeDropdown = () => setShowMenu(false);
+
+		window.addEventListener('resize', closeDropdown);
+
+		return () => {
+			window.removeEventListener('resize', closeDropdown);
+		};
+	}, []);
 
 	return (
 		<Fragment>
