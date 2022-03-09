@@ -1,6 +1,7 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout/typography' as *;
 @use '../../scss/layout/container' as *;
+@use '../../scss/theme/custom' as *;
 
 .navigation {
 	&.position-sticky {
@@ -19,55 +20,50 @@
 
 		&-nav {
 			padding-top: em(20);
+			padding-bottom: em(50);
 
 			@media screen and (min-device-height: 812px) {
 				padding-top: em(73);
 			}
-
 			@include breakpoint-max(lg) {
 				height: calc(100vh - 90px);
 			}
 		}
-
 		&-brand {
 			@include breakpoint-min(lg) {
 				margin-right: rem(47);
 			}
 		}
-
 		&-collapse {
 			@include breakpoint-max(lg) {
-				border-top: border();
+				margin-top: $navbar-padding-y;
+				&::before {
+					@include full-width-border();
+				}
 			}
 		}
-
-		@include breakpoint-min(md) {
-			padding-top: em(16);
-			padding-bottom: em(16);
+		@include breakpoint-min(lg) {
+			padding-top: em(19);
+			padding-bottom: em(19);
 		}
 		@include breakpoint-min(lg) {
 			.navbar-nav .nav-link {
 				padding-left: rem(36);
 			}
 		}
-
 		ul {
 			@include breakpoint-min(lg) {
 				border-left: border(2px);
 			}
-
 			& + ul {
 				margin-top: rem(16);
-
 				@media screen and(min-device-height: 812px) {
 					margin-top: rem(48);
 				}
 			}
-
 			&::before {
 				@extend %nav-mobile-headings;
 			}
-
 			&:first-of-type {
 				&::before {
 					@include breakpoint-max(lg) {
@@ -75,7 +71,6 @@
 					}
 				}
 			}
-
 			&:nth-of-type(2) {
 				&::before {
 					@include breakpoint-max(lg) {
@@ -83,7 +78,6 @@
 					}
 				}
 			}
-
 			.nav-link {
 				@include breakpoint-max(lg) {
 					font-size: rem(24);
@@ -95,9 +89,7 @@
 						margin-left: -50vw;
 						right: 50%;
 						margin-right: -50vw;
-
 						padding-left: calc($pad-sm - rem(2));
-
 						@include breakpoint-min(md) {
 							padding-left: calc($pad-md - rem(2));
 						}
@@ -106,14 +98,11 @@
 			}
 		}
 	}
-
 	.card {
 		// padding: 0px em(4);
 	}
-
 	.btn {
 		margin-top: 0px;
-
 		&-primary,
 		&-outline-light {
 			min-width: 102px;
