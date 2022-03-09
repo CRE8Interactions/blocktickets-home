@@ -81,7 +81,7 @@ export default function Navigation() {
 									</Nav.Link>
 								</li>
 							</ul>
-							{!authService.isLoggedIn() && (
+							{authService.isLoggedIn() && (
 								<ul className="mobile-only">
 									<li className="pt-2">
 										<MyWallet />

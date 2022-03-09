@@ -20,7 +20,9 @@
 
 		&-nav {
 			padding-top: em(20);
-			padding-bottom: em(50);
+			@include breakpoint-inBetween(md, lg) {
+				padding-bottom: em(55);
+			}
 
 			@media screen and (min-device-height: 812px) {
 				padding-top: em(73);
