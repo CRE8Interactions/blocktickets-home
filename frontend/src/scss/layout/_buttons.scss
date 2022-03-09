@@ -3,11 +3,15 @@
 @use '../theme/colors' as *;
 
 .btn + .btn {
-	margin-left: em(16);
+	margin-left: rem(16);
 }
 
 .btn {
-	margin-top: em(14);
+	margin-top: rem(14);
+}
+
+.btn--icon {
+	padding: rem(8);
 }
 
 .btn-link {
