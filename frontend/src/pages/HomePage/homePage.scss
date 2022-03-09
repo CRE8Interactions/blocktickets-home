@@ -1,10 +1,5 @@
 @use '../../scss/abstracts' as *;
 
 main::after {
-	content: '';
-	height: 1px;
-	position: absolute;
-	left: 0;
-	right: 0;
-	background-color: $border-color;
+	@include full-width-border();
 }
