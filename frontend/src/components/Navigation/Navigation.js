@@ -58,16 +58,17 @@ export default function Navigation() {
 					<Navbar.Brand as={NavLink} to="/">
 						<img src={logo} alt="blocktickets" />
 					</Navbar.Brand>
-					<Stack direction="horizontal" className="desktop-btns gap-lg-3">
+					<Stack direction="horizontal" className="desktop-btns gap-3 gap-lg-4">
 						<SearchBar />
 						<div className="cart">
-							<Button variant="default">
+							<Button variant="default" className="btn--icon">
 								<img src={shoppingCart} />
 							</Button>
 						</div>
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
+							className="btn-icon"
 							onClick={() => setExpanded(!expanded)}
 						/>
 					</Stack>
