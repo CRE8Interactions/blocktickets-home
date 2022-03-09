@@ -3,8 +3,9 @@
 .navigation .navbar .navbar-nav .mobile-only {
 	&.btn {
 		margin-top: auto;
+
 		@include breakpoint-max(md) {
-			margin-bottom: rem(90);
+			margin-bottom: rem(80);
 		}
 	}
 
