@@ -1,5 +1,5 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import authService from '../../utilities/services/auth.service';
 
 import Container from 'react-bootstrap/Container';
@@ -55,9 +55,11 @@ export default function Navigation() {
 		<div className="navigation position-sticky">
 			<Navbar collapseOnSelect expand="lg">
 				<Container>
-					<Navbar.Brand as={NavLink} to="/">
-						<img src={logo} alt="blocktickets" />
-					</Navbar.Brand>
+					<LinkContainer to="/">
+						<Navbar.Brand>
+							<img src={logo} alt="blocktickets" />
+						</Navbar.Brand>
+					</LinkContainer>
 					<Stack direction="horizontal" className="desktop-btns gap-3 gap-lg-4">
 						<SearchBar />
 						<div className="cart">
@@ -73,13 +75,11 @@ export default function Navigation() {
 						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
-						<Nav className="py-lg-0">
+						<Nav activeKey={window.location.pathname} className="py-lg-0">
 							<ul>
-								<li>
-									<Nav.Link as={NavLink} to="/">
-										Browse
-									</Nav.Link>
-								</li>
+								<LinkContainer to="/">
+									<Nav.Link>Browse</Nav.Link>
+								</LinkContainer>
 							</ul>
 							{authService.isLoggedIn() && (
 								<ul className="mobile-only">

@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import authService from '../../../utilities/services/auth.service';
-import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 import { Dropdown } from '../../Dropdown';
 
 import './navButtons.scss';
@@ -15,9 +16,9 @@ export default function NavButtons({ styles }) {
 	return (
 		<Fragment>
 			{!authService.isLoggedIn() && (
-				<Link to="/login" className={`btn btn-primary ${styles}`}>
-					Login
-				</Link>
+				<LinkContainer to="/login" className={`btn btn-primary text-white ${styles}`}>
+					<Nav.Link>Login</Nav.Link>
+				</LinkContainer>
 			)}
 			{authService.isLoggedIn() && (
 				<Fragment>
