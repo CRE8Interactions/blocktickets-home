@@ -13,15 +13,15 @@ export default function NavButtons({ styles }) {
 		setShowMenu
 	] = useState(false);
 
-	useEffect(() => {
-		const closeDropdown = () => setShowMenu(false);
+	// useEffect(() => {
+	// 	const closeDropdown = () => setShowMenu(false);
 
-		window.addEventListener('resize', closeDropdown);
+	// 	window.addEventListener('resize', closeDropdown);
 
-		return () => {
-			window.removeEventListener('resize', closeDropdown);
-		};
-	}, []);
+	// 	return () => {
+	// 		window.removeEventListener('resize', closeDropdown);
+	// 	};
+	// }, []);
 
 	return (
 		<Fragment>
@@ -41,7 +41,7 @@ export default function NavButtons({ styles }) {
 						id="btn-wallet">
 						My Wallet
 					</Button>
-					<div className={styles}>{showMenu && <Dropdown />}</div>
+					<div className={styles}>{showMenu && <Dropdown toggle={setShowMenu} />}</div>
 				</Fragment>
 			)}
 		</Fragment>

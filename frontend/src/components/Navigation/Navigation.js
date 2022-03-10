@@ -79,9 +79,11 @@ export default function Navigation() {
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0">
 							<ul>
-								<LinkContainer to="/">
-									<Nav.Link>Browse</Nav.Link>
-								</LinkContainer>
+								<li>
+									<LinkContainer to="/">
+										<Nav.Link>Browse</Nav.Link>
+									</LinkContainer>
+								</li>
 							</ul>
 							{authService.isLoggedIn() && (
 								<ul className="mobile-only">
