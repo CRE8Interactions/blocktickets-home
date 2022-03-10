@@ -16,7 +16,7 @@
 		}
 
 		&-item {
-			padding: em(11) 0px;
+			padding: em(16) 0px;
 
 			@include breakpoint-min(lg) {
 				font-size: rem(14);
@@ -47,6 +47,7 @@
 			.nav-link {
 				@extend %icon-text-box;
 				font-size: rem(16);
+				padding: 0px;
 
 				&:hover,
 				&:focus,
