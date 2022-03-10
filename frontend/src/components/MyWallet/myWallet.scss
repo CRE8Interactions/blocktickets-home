@@ -7,51 +7,55 @@
 .wallet {
 	.list-group {
 		font-weight: 700;
-		font-family: $font-heading;
 
 		.name {
+			font-weight: 600;
 			@include breakpoint-max(lg) {
 				font-size: $body-1;
 			}
 		}
 
 		&-item {
-			color: $clr-neutral-3;
-			padding: em(16) 0px;
+			padding: em(11) 0px;
 
 			@include breakpoint-min(lg) {
 				font-size: rem(14);
 			}
 
-			@extend %icon-text-box;
-
-			&:hover,
-			&:focus {
-				color: $link-color;
-				&::before {
-					filter: brightness(0) saturate(100%) invert(78%) sepia(48%) saturate(4629%)
-						hue-rotate(179deg) brightness(102%) contrast(95%);
-				}
-			}
-			&:first-of-type {
+			&:first-of-type .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'calendar'));
 				}
 			}
 
-			&:nth-of-type(2) {
+			&:nth-of-type(2) .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'collectables'));
 				}
 			}
-			&:nth-of-type(3) {
+			&:nth-of-type(3) .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'settings'));
 				}
 			}
-			&:nth-of-type(4) {
+			&:nth-of-type(4) .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'logout'));
+				}
+			}
+
+			.nav-link {
+				@extend %icon-text-box;
+				font-size: rem(16);
+
+				&:hover,
+				&:focus,
+				&.active {
+					color: $link-color;
+					&::before {
+						filter: brightness(0) saturate(100%) invert(78%) sepia(48%) saturate(4629%)
+							hue-rotate(179deg) brightness(102%) contrast(95%);
+					}
 				}
 			}
 		}
