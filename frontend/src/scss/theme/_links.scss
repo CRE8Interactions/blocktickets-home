@@ -5,7 +5,7 @@
 $link-color: $secondary;
 $link-hover-color: $secondary;
 $link-decoration: none;
-$nav-link-color: $clr-neutral-3;
+$nav-link-color: $muted;
 
 @include breakpoint-max(md) {
 	$nav-link-font-size: rem(24);
