@@ -13,9 +13,13 @@ export default function TicketPurchase() {
 		sliderValues,
 		setSliderValues
 	] = useState([
-		0,
-		100
+		20,
+		50
 	]);
+
+	const handleChange = (sliderValues) => {
+		setSliderValues(sliderValues);
+	};
 	return (
 		<Fragment>
 			<div className="seat-selection">
@@ -28,10 +32,11 @@ export default function TicketPurchase() {
 							</option>
 							<option value="3">3 Tickets</option>
 						</Form.Select>
-						<Form.Select className="filter" aria-label="Filter Tickets">
-							<option disabled selected>
-								Filter
-							</option>
+						<Form.Select
+							className="filter"
+							aria-label="Filter Tickets"
+							defaultValue="Filter">
+							<option disabled>Filter</option>
 							<option value="1">One</option>
 							<option value="2">Two</option>
 							<option value="3">Three</option>
@@ -44,9 +49,11 @@ export default function TicketPurchase() {
 							value={`$${sliderValues[0]} `}
 						/>
 						<Slider
+							range
 							min={0}
 							max={100}
-							onAfterChange={() => setSliderValues(sliderValues)}
+							defaultValue={sliderValues}
+							onChange={handleChange}
 						/>
 						<Form.Control
 							type="text"
