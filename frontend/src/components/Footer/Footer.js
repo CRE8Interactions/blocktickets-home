@@ -54,7 +54,13 @@ export default function Footer() {
 						<p className="small">
 							Subscribe to our newsletter to get notified over the latest releases
 						</p>
-						<InputField type="email" placeholder="Enter your email" color="primary" />
+						<InputField
+							type="email"
+							placeholder="Enter your email"
+							color="primary"
+							size="lg"
+							styles="mt-4"
+						/>
 					</Col>
 				</Row>
 			</Container>

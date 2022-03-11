@@ -11,11 +11,11 @@ import './ticket.scss';
 export default function PurchaseTickets() {
 	return (
 		<Fragment>
-			<Row>
-				<Col md={7} className="d-flex justify-content-center align-items-center">
+			<Row className="py-md-3 pb-3">
+				<Col md={8} className="d-flex justify-content-center align-items-center">
 					<SeatingMap />
 				</Col>
-				<Col md={5}>
+				<Col md={4}>
 					<TicketPurchase />
 				</Col>
 			</Row>

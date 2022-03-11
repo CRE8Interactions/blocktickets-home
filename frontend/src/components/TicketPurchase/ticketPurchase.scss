@@ -3,16 +3,29 @@
 @use '../../scss/layout' as *;
 
 .seat-selection {
-	margin: rem(20) 0px;
+	@include breakpoint-max(md) {
+		margin-top: rem(17);
+	}
+
+	.btn--filter {
+		border-radius: $br-input;
+		margin-top: 0px;
+	}
 
 	.amount {
-		margin: rem(16) 0px;
+		margin: rem(12) 0px;
+		padding-bottom: rem(12);
 		border-bottom: border();
 		.form-control {
 			border-radius: 4px;
-			font-size: $small;
 			width: 15%;
+			font-size: $caption;
 			text-align: center;
+			padding: 0px em(15);
+
+			@include breakpoint-min(md) {
+				padding: 0px em(20);
+			}
 		}
 	}
 

@@ -4,7 +4,9 @@
 
 .ticket {
 	header {
-		border-bottom: border();
+		&::after {
+			@include full-width-border();
+		}
 		.details {
 			.subtitle,
 			h1,
@@ -28,9 +30,10 @@
 
 			.artist-name {
 				font-size: rem(16);
-				margin-bottom: 1rem;
+				margin-bottom: rem(5);
 
 				@include breakpoint-min(md) {
+					margin-bottom: 1rem;
 					font-size: $body-1;
 				}
 			}
