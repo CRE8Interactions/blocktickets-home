@@ -3,69 +3,71 @@
 @use '../../scss/layout/container' as *;
 @use '../../scss/layout/typography' as *;
 
-header {
-	.banner-image {
-		@include breakpoint-max(lg) {
-			margin-bottom: em(24);
-		}
-		@include breakpoint-inBetween(md, lg) {
-			margin-bottom: em(57);
-		}
-	}
-
-	.display-1 {
-		font-size: $h4-font-size;
-		margin-bottom: $banner-spacer;
-		@extend %multi-line-truncate;
-		display: block;
-
-		@include breakpoint-min(md) {
-			font-size: $h1-font-size;
-		}
-	}
-
-	.date {
-		span {
-			@include breakpoint-min(xl) {
-				display: block;
+.hero {
+	header {
+		.banner-image {
+			@include breakpoint-max(lg) {
+				margin-bottom: em(24);
+			}
+			@include breakpoint-inBetween(md, lg) {
+				margin-bottom: em(57);
 			}
 		}
-	}
 
-	.time,
-	.venue,
-	.location {
-		margin-bottom: $banner-spacer;
-
-		@include breakpoint-inBetween(md, lg) {
-			margin-bottom: 0px;
-		}
-	}
-
-	.venue {
-		p:not(.venue-caption) {
+		.display-1 {
+			font-size: $h4-font-size;
+			margin-bottom: $banner-spacer;
 			@extend %multi-line-truncate;
-		}
-	}
+			display: block;
 
-	.btn--medium {
-		@include breakpoint-inBetween(md, lg) {
-			width: 50%;
-			margin-top: rem(30);
+			@include breakpoint-min(md) {
+				font-size: $h1-font-size;
+			}
 		}
-		@include breakpoint-inBetween(lg, xl) {
-			margin-top: auto;
-		}
-	}
 
-	.navigation-buttons {
-		margin-top: em(28);
-		@include breakpoint-inBetween(md, lg) {
-			margin-top: em(-49);
-			justify-content: flex-start;
+		.date {
+			span {
+				@include breakpoint-min(xl) {
+					display: block;
+				}
+			}
 		}
-		@include breakpoint-min(xl) {
-			margin-top: em(-39);
+
+		.time,
+		.venue,
+		.location {
+			margin-bottom: $banner-spacer;
+
+			@include breakpoint-inBetween(md, lg) {
+				margin-bottom: 0px;
+			}
+		}
+
+		.venue {
+			p:not(.venue-caption) {
+				@extend %multi-line-truncate;
+			}
+		}
+
+		.btn--medium {
+			@include breakpoint-inBetween(md, lg) {
+				width: 50%;
+				margin-top: rem(30);
+			}
+			@include breakpoint-inBetween(lg, xl) {
+				margin-top: auto;
+			}
+		}
+
+		.navigation-buttons {
+			margin-top: em(28);
+			@include breakpoint-inBetween(md, lg) {
+				margin-top: em(-49);
+				justify-content: flex-start;
+			}
+			@include breakpoint-min(xl) {
+				margin-top: em(-39);
+			}
 		}
 	}
 }

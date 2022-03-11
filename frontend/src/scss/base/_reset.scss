@@ -50,9 +50,10 @@ select:-webkit-autofill:focus {
 }
 
 ul,
-ol {
+ol,
+dl {
 	list-style: none;
-	margin: 0;
+	margin-bottom: 0;
 	padding: 0;
 }
 

@@ -79,10 +79,9 @@
 						@include breakpoint-min(lg) {
 							padding-left: rem(36);
 						}
-						&.active {
-							@include breakpoint-max(lg) {
-								font-size: rem(24);
-
+						@include breakpoint-max(lg) {
+							font-size: rem(24);
+							&.active {
 								border-left: border(2px, $clr-primary);
 								position: relative;
 								width: 100vw;
