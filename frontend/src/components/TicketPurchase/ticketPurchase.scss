@@ -17,7 +17,15 @@
 	}
 
 	.list-group {
-		margin: rem(24) 0px;
+		scrollbar-width: none;
+		max-height: 300px;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		overflow-y: auto;
+		margin-top: rem(24);
 
 		&-item {
 			user-select: none;
