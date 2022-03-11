@@ -3,6 +3,7 @@ import Slider from 'rc-slider';
 
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import 'rc-slider/assets/index.css';
@@ -32,15 +33,10 @@ export default function TicketPurchase() {
 							</option>
 							<option value="3">3 Tickets</option>
 						</Form.Select>
-						<Form.Select
-							className="filter"
-							aria-label="Filter Tickets"
-							defaultValue="Filter">
-							<option disabled>Filter</option>
-							<option value="1">One</option>
-							<option value="2">Two</option>
-							<option value="3">Three</option>
-						</Form.Select>
+
+						<Button className="btn--filter" variant="outline-light">
+							Filter
+						</Button>
 					</Stack>
 					<Stack direction="horizontal" gap={3} className="amount">
 						<Form.Control
@@ -52,6 +48,7 @@ export default function TicketPurchase() {
 							range
 							min={0}
 							max={100}
+							pushable={15}
 							defaultValue={sliderValues}
 							onChange={handleChange}
 						/>
