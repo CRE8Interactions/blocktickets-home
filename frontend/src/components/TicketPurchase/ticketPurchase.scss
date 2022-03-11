@@ -1,0 +1,43 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/custom' as *;
+@use '../../scss/layout' as *;
+
+.seat-selection {
+	margin: rem(20) 0px;
+
+	.amount {
+		margin: rem(16) 0px;
+		border-bottom: border();
+		.form-control {
+			border-radius: 4px;
+			font-size: $small;
+			width: 15%;
+			text-align: center;
+		}
+	}
+
+	.list-group {
+		margin: rem(24) 0px;
+
+		&-item {
+			user-select: none;
+			background-color: $gray-300;
+			padding: em(10) em(12);
+		}
+
+		& input[type="radio"] {
+			display: none;
+		}
+
+		&-item,
+		input[type="radio"],
+		label {
+			cursor: pointer;
+		}
+
+		& input[type="radio"]:checked {
+			background-color: blue;
+			color: #fff;
+		}
+	}
+}

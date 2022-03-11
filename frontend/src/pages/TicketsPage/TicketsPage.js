@@ -1,7 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
-import { Ticket } from '../../components';
+import { Ticket, PurchaseTickets } from '../../components';
 
 export default function TicketsPage() {
-	return <Ticket />;
+	return (
+		<Fragment>
+			<Ticket />
+			<PurchaseTickets />
+		</Fragment>
+	);
 }
