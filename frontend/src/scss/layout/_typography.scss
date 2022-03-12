@@ -42,15 +42,20 @@ h4,
 	}
 }
 
+.text-uppercase {
+	text-transform: uppercase;
+	font-weight: $fw-bold;
+	font-family: $font-body;
+	font-size: rem(16);
+}
+
 .caption {
 	font-size: $caption;
 	margin-bottom: em(3);
 }
 .caption--uppercase {
 	@extend .caption !optional;
-	text-transform: uppercase;
-	font-weight: $fw-bold;
-	font-family: $font-body;
+	@extend .text-uppercase !optional;
 }
 
 .date,
