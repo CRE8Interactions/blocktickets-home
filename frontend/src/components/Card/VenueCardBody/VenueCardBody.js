@@ -24,7 +24,7 @@ export default function EventCardTop() {
 				<span className="col caption">Mar 13 9:30PM</span>
 				<span className="col caption text-end fw-bold">Another Artist</span>
 			</Row>
-			<Button variant="outline-light" className="text-secondary btn--xsmall">
+			<Button variant="outline-light" className="text-secondary" size="sm">
 				View All
 			</Button>
 		</Fragment>

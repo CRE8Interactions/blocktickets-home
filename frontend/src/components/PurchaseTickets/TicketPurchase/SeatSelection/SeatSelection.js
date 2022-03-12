@@ -7,9 +7,9 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import 'rc-slider/assets/index.css';
-import './ticketPurchase.scss';
+import './seatSelection.scss';
 
-export default function TicketPurchase() {
+export default function SeatSelection({ handleClick }) {
 	const [
 		sliderValues,
 		setSliderValues
@@ -21,6 +21,7 @@ export default function TicketPurchase() {
 	const handleChange = (sliderValues) => {
 		setSliderValues(sliderValues);
 	};
+
 	return (
 		<Fragment>
 			<div className="seat-selection">
@@ -61,6 +62,7 @@ export default function TicketPurchase() {
 
 					<ListGroup as="ul" variant="flush">
 						<ListGroup.Item
+							action
 							as="li"
 							className="d-flex justify-content-between align-items-center">
 							<div>
@@ -72,12 +74,14 @@ export default function TicketPurchase() {
 									id="1"
 									className="caption fw-bold p-0"
 								/>
-								<p className="text-muted caption">Resale Ticket</p>
+								<p className="text-muted caption">Presale</p>
 							</div>
 							<div className="fw-bold">$30.00</div>
 						</ListGroup.Item>
 						<ListGroup.Item
+							onClick={() => handleClick('standard')}
 							as="li"
+							action
 							className="d-flex justify-content-between align-items-center">
 							<div>
 								<Form.Check
@@ -88,11 +92,12 @@ export default function TicketPurchase() {
 									id="2"
 									className="caption fw-bold p-0"
 								/>
-								<p className="text-muted caption">Resale Ticket</p>
+								<p className="text-muted caption">Standard Admission</p>
 							</div>
 							<div className="fw-bold">$30.00</div>
 						</ListGroup.Item>
 						<ListGroup.Item
+							action
 							as="li"
 							className="d-flex justify-content-between align-items-center">
 							<div>

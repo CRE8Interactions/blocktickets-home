@@ -1,0 +1,7 @@
+@use '../../../scss/abstracts' as *;
+
+.left-col {
+	@include breakpoint-max(md) {
+		margin-top: rem(17);
+	}
+}

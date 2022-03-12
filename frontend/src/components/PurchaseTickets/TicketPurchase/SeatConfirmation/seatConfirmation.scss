@@ -1,0 +1,25 @@
+@use '../../../../scss/abstracts' as *;
+
+.seat-confirmation {
+	.num-tickets {
+		border-top: border();
+		border-bottom: border();
+		padding: em(23) 0px;
+	}
+
+	.ticket-details {
+		h1 {
+			margin-bottom: rem(23);
+		}
+		height: 170px;
+		border-bottom: border();
+	}
+
+	.disclaimer {
+		padding: em(13) 0px;
+	}
+
+	.footer {
+		padding-top: em(23);
+	}
+}
