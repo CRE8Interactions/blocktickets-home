@@ -1,15 +1,10 @@
-@use '../../scss/abstracts' as *;
-@use '../../scss/theme/custom' as *;
-@use '../../scss/layout' as *;
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/theme/custom' as *;
+@use '../../../../scss/layout' as *;
 
 .seat-selection {
 	@include breakpoint-max(md) {
 		margin-top: rem(17);
-	}
-
-	.btn--filter {
-		border-radius: $br-input;
-		margin-top: 0px;
 	}
 
 	.amount {

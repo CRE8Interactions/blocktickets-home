@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 
-import { Ticket, PurchaseTickets } from '../../components';
+import { PurchaseTickets } from '../../components';
+import Ticket from '../../components/Ticket/Ticket';
 
 export default function TicketsPage() {
 	return (

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import './seatingMap.scss';
-import generalAdmissionsMap from '../../assets/map-general_admissions.svg';
+import generalAdmissionsMap from '../../../assets/map-general_admissions.svg';
 
 export default function SeatingMap() {
 	return (
