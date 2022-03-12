@@ -1,1 +1,14 @@
+@use '../../../scss/abstracts' as *;
 
+.navigation .navbar .navbar-nav .mobile-only {
+	&.btn {
+		margin-top: auto;
+		@include breakpoint-max(md) {
+			margin-bottom: rem(80);
+		}
+	}
+
+	&#btn-wallet {
+		display: none;
+	}
+}

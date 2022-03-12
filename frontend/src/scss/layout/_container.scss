@@ -2,15 +2,18 @@
 @use '../abstracts' as *;
 @use './typography';
 
+$pad-sm: rem(32);
+$pad-md: rem(81);
+
 .container {
 	max-width: 1130px;
 	margin: 0 auto;
 	@include breakpoint-max(md) {
-		padding: 0px em(32);
+		padding: 0px $pad-sm;
 	}
 
 	@include breakpoint-inBetween(md, xl) {
-		padding: 0px em(81);
+		padding: 0px $pad-md;
 	}
 }
 
@@ -63,12 +66,4 @@
 	@include breakpoint-min(lg) {
 		display: block;
 	}
-}
-
-.fixed {
-	overflow-y: hidden;
-}
-
-.scroll {
-	overflow-y: auto;
 }

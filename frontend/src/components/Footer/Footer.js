@@ -6,9 +6,9 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import logo from '../../assets/logo.svg';
-import { copyright } from './../../utilities/helper';
-import './footer.scss';
+import { getCopyrightYear } from './../../utilities/helper';
 import InputField from './../InputField/InputField';
+import './footer.scss';
 
 export default function Footer() {
 	return (
@@ -54,14 +54,20 @@ export default function Footer() {
 						<p className="small">
 							Subscribe to our newsletter to get notified over the latest releases
 						</p>
-						<InputField type="email" placeholder="Enter your email" color="primary" />
+						<InputField
+							type="email"
+							placeholder="Enter your email"
+							color="primary"
+							size="lg"
+							styles="mt-4"
+						/>
 					</Col>
 				</Row>
 			</Container>
 
 			<div className="container d-flex flex-column flex-md-row justify-content-md-between align-items-center pt-4 copyright caption">
 				<p className="text-muted">
-					Copyright &copy; {copyright()} Blocktickets. All rights reserved
+					Copyright &copy; {getCopyrightYear()} Blocktickets. All rights reserved
 				</p>
 				<p>
 					We use cookies for better service. <Button variant="link">Accept</Button>

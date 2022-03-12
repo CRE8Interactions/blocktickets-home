@@ -1,0 +1,22 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/colors' as *;
+
+.map {
+	background-color: $gray-300;
+	padding: em(24) 0px;
+	flex: 1;
+
+	@include breakpoint-max(md) {
+		width: 100vw;
+		left: 50%;
+		margin-left: -50vw;
+		right: 50%;
+		margin-right: -50vw;
+	}
+
+	img {
+		@include breakpoint-max(md) {
+			max-height: 201px;
+		}
+	}
+}

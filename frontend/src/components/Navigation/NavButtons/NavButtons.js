@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import authService from '../../../utilities/services/auth.service';
-
+import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 import { Dropdown } from '../../Dropdown';
 
 import './navButtons.scss';
@@ -12,12 +13,22 @@ export default function NavButtons({ styles }) {
 		setShowMenu
 	] = useState(false);
 
+	// useEffect(() => {
+	// 	const closeDropdown = () => setShowMenu(false);
+
+	// 	window.addEventListener('resize', closeDropdown);
+
+	// 	return () => {
+	// 		window.removeEventListener('resize', closeDropdown);
+	// 	};
+	// }, []);
+
 	return (
 		<Fragment>
 			{!authService.isLoggedIn() && (
-				<Button href="/login" variant="primary" className={styles}>
-					Login
-				</Button>
+				<LinkContainer to="/login" className={`btn btn-primary text-white ${styles}`}>
+					<Nav.Link>Login</Nav.Link>
+				</LinkContainer>
 			)}
 			{authService.isLoggedIn() && (
 				<Fragment>
@@ -26,10 +37,11 @@ export default function NavButtons({ styles }) {
 							setShowMenu(!showMenu);
 						}}
 						variant="outline-light"
-						className={styles}>
+						className={styles}
+						id="btn-wallet">
 						My Wallet
 					</Button>
-					<div className={styles}>{showMenu && <Dropdown />}</div>
+					<div className={styles}>{showMenu && <Dropdown toggle={setShowMenu} />}</div>
 				</Fragment>
 			)}
 		</Fragment>

@@ -1,5 +1,5 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import authService from '../../utilities/services/auth.service';
 
 import Container from 'react-bootstrap/Container';
@@ -29,9 +29,6 @@ export default function Navigation() {
 		setExpanded
 	] = useState(false);
 
-	const collapse = useRef();
-	console.log(collapse.current);
-
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	useEffect(
@@ -42,7 +39,9 @@ export default function Navigation() {
 
 			const originalStyle = window.getComputedStyle(document.body).overflow;
 
-			if (expanded) document.body.style.overflow = 'hidden';
+			if (expanded) {
+				document.body.style.overflow = 'hidden';
+			}
 
 			return () => {
 				window.removeEventListener('resize', changeWindowSize);
@@ -55,43 +54,44 @@ export default function Navigation() {
 	);
 
 	return (
-		<div className="navigation">
-			<Navbar collapseOnSelect expand="lg" sticky="top">
+		<div className="navigation position-sticky">
+			<Navbar collapseOnSelect expand="lg">
 				<Container>
-					<Navbar.Brand as={NavLink} to="/">
-						<img src={logo} alt="blocktickets" />
-					</Navbar.Brand>
-					<Stack direction="horizontal" className="desktop-btns gap-lg-3">
+					<LinkContainer to="/">
+						<Navbar.Brand>
+							<img src={logo} alt="blocktickets" />
+						</Navbar.Brand>
+					</LinkContainer>
+					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
 						<div className="cart">
-							<Button variant="default">
+							<Button variant="default" className="btn--icon">
 								<img src={shoppingCart} />
 							</Button>
 						</div>
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
+							className="btn--icon"
 							onClick={() => setExpanded(!expanded)}
 						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
-						<Nav className="pt-5 pb-3 justify-content-between py-lg-0">
-							<div>
-								<ul>
-									<li>
-										<Nav.Link as={NavLink} to="/">
-											Browse
-										</Nav.Link>
+						<Nav activeKey={window.location.pathname} className="py-lg-0">
+							<ul>
+								<li>
+									<LinkContainer to="/">
+										<Nav.Link>Browse</Nav.Link>
+									</LinkContainer>
+								</li>
+							</ul>
+							{authService.isLoggedIn() && (
+								<ul className="mobile-only">
+									<li className="pt-2">
+										<MyWallet />
 									</li>
 								</ul>
-								{authService.isLoggedIn() && (
-									<ul className="mobile-only">
-										<li>
-											<MyWallet />
-										</li>
-									</ul>
-								)}
-							</div>
+							)}
 							<NavButtons styles="mobile-only" />
 						</Nav>
 					</Navbar.Collapse>

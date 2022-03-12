@@ -5,6 +5,14 @@ input::placeholder {
 	color: $clr-neutral-4;
 }
 
+.form-check {
+	min-height: 0px;
+}
+
+.form-select {
+	background-size: initial;
+}
+
 @mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
 	display: flex;
 	align-items: center;
@@ -20,6 +28,5 @@ input::placeholder {
 		border: none;
 		padding: 0px;
 		min-height: auto;
-		margin-right: rem(6);
 	}
 }
