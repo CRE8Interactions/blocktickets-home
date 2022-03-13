@@ -62,11 +62,11 @@ export default function Hero() {
 											</Col>
 										</Row>
 										<IconButton
+											styles="btn-hero"
 											variant="secondary"
 											size="lg"
-											color="plain"
 											link="/tickets/1"
-											btn="tickets">
+											btn="tickets--plain">
 											Get Tickets
 										</IconButton>
 									</Col>

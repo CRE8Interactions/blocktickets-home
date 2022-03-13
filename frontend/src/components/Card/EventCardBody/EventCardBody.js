@@ -19,9 +19,8 @@ export default function EventCardTop() {
 			<IconButton
 				variant="outline-light"
 				styles="text-secondary"
-				color="secondary"
 				link="tickets/1"
-				btn="tickets">
+				btn="tickets--secondary">
 				Get Tickets
 			</IconButton>
 		</Fragment>

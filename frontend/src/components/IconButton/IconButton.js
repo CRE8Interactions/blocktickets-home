@@ -5,12 +5,14 @@ import Button from 'react-bootstrap/Button';
 
 import './iconButton.scss';
 
-export default function IconButton({ children, styles, variant, btn, size, color, link }) {
+export default function IconButton({ children, styles, variant, btn, size, link }) {
 	return (
-		<Button className={styles} variant={variant} size={size}>
-			<Link to={`${link}`}>
-				<span className={`d-flex btn--${btn} icon-button ${color}`}>{children}</span>
-			</Link>
-		</Button>
+		<Link
+			to={`${link}`}
+			className={`btn btn-${variant} d-flex btn-${btn} icon-button ${styles && styles} ${size
+				? `btn-${size}`
+				: ''} `}>
+			{children}
+		</Link>
 	);
 }

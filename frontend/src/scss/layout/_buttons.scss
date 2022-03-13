@@ -60,20 +60,20 @@
 	}
 }
 
-.btn--tickets {
-	&.plain {
+.btn-tickets {
+	&--plain {
 		&::before {
 			content: url($data-svg-prefix + map-get($icons, 'ticketWhite'));
 		}
 	}
-	&.secondary {
+	&--secondary {
 		&::before {
 			content: url($data-svg-prefix + map-get($icons, 'ticketSecondary'));
 		}
 	}
 }
 
-.btn--back {
+.btn-back {
 	&::before {
 		content: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.60612 0.843553C3.33557 0.593815 2.9138 0.610684 2.66406 0.88123L0.510216 3.21454C0.274484 3.46991 0.274482 3.86353 0.510212 4.11891L2.66406 6.45227C2.91379 6.72282 3.33557 6.73969 3.60611 6.48996C3.87666 6.24022 3.89354 5.81845 3.6438 5.5479L2.52273 4.33339L9.00008 4.33339C9.36827 4.33339 9.66675 4.03492 9.66675 3.66673C9.66675 3.29854 9.36827 3.00006 9.00008 3.00006L2.52275 3.00006L3.6438 1.78561C3.89353 1.51506 3.87666 1.09329 3.60612 0.843553Z' fill='%2323262F'/%3E%3C/svg%3E%0A");
 	}
