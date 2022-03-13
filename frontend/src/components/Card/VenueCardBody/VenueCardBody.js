@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
 
 import './venueCardBody.scss';
 
@@ -24,9 +24,9 @@ export default function EventCardTop() {
 				<span className="col caption">Mar 13 9:30PM</span>
 				<span className="col caption text-end fw-bold">Another Artist</span>
 			</Row>
-			<Button variant="outline-light" className="text-secondary" size="sm">
+			<Link to={''} className="btn btn-outline-light text-secondary btn-sm">
 				View All
-			</Button>
+			</Link>
 		</Fragment>
 	);
 }
