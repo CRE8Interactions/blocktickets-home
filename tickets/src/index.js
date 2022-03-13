@@ -15,7 +15,7 @@ module.exports = {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/*{ strapi }*/) {},
+  register( /*{ strapi }*/ ) {},
 
   /**
    * An asynchronous bootstrap function that runs before
@@ -24,11 +24,11 @@ module.exports = {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/*{ strapi }*/) {
+  bootstrap( /*{ strapi }*/ ) {
 
-    let initCategories = async() => {
+    let initCategories = async () => {
       const count = await strapi.db.query('api::category.category').count()
-      console.log(count)
+
       if (count === 0) {
         const arr = [
           'music',
@@ -48,12 +48,77 @@ module.exports = {
       }
     }
 
+    let initOrganization = async () => {
+      const count = await strapi.db.query('api::organization.organization').count()
+
+      if (count === 0) {
+        await strapi.db.query('api::organization.organization').create({
+          data: {
+            name: 'BlockTickets'
+          }
+        })
+      }
+    }
+
+    initOrganization()
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization'],
       async afterCreate(event) {
-        // afterCreate lifeclcyle
+        // afterCreate lifecycle
+
+        // Changes on Invite Model
+        if (event.model.singularName === 'invite') {
+          let phoneNumber = event.params.data.phoneNumber;
+          let role = event.params.data.role;
+          // Gets organization if one is assigned
+          if (event.params.data.organization) {
+            let organization = await strapi.db.query('api::organization.organization').findOne({
+              id: event.params.data.organization
+            });
+          }
+          // Create message based on role
+          let message;
+          if (role === 'Organizer') {
+            message = `You've been granted ${role} access in BlockTickets.xyz.  You may create or edit Organization information which your a member of.`
+          } else {
+            message = `You've been added to the ${organization.name} organization at BlockTickets.xyz`;
+          }
+
+          await client.messages
+            .create({
+              body: message,
+              messagingServiceSid: messagingServiceSid,
+              to: phoneNumber,
+              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
+            })
+            .then(message => console.log(message.body))
+            .done()
+        }
+
+        // Changes on organization model
+        if (event.model.singularName === 'organization') {
+          let email = event.result.createdBy.email;
+          if (email) {
+            const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+              where: {
+                email: email
+              }
+            })
+
+            if (user) {
+              await strapi.db.query('api::organization.organization').update({
+                where: {
+                  id: event.result.id,
+                },
+                data: {
+                  members: user
+                }
+              })
+            }
+          }
+        }
       },
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
@@ -73,7 +138,7 @@ module.exports = {
         if (event.model.singularName === 'profile') {
           const web3 = await new Web3API(new Web3API.providers.HttpProvider(blockchain));
           const account = await web3.eth.accounts.create(web3.utils.randomHex(32));
-          const wallet = await  web3.eth.accounts.wallet.add(account)
+          const wallet = await web3.eth.accounts.wallet.add(account)
 
           const myWallet = await strapi.db.query('api::wallet.wallet').create({
             data: {
@@ -85,15 +150,20 @@ module.exports = {
 
           event.params.data.wallet = myWallet.id
         }
+
         // Changes on verfiy model
         if (event.model.singularName === 'verify') {
           let phoneNumber = event.params.data.phoneNumber;
           const account = await strapi.db.query('api::verify.verify').findOne({
-            where: { phoneNumber: phoneNumber }
-           })
+            where: {
+              phoneNumber: phoneNumber
+            }
+          })
           if (account) {
             await strapi.db.query('api::verify.verify').delete({
-              where: { id: account.id }
+              where: {
+                id: account.id
+              }
             })
           }
           let code = Math.floor(1000 + Math.random() * 9000)
@@ -101,7 +171,7 @@ module.exports = {
           event.params.data.addedAt = new Date()
           // dont send SMS when running test
           if (process.env.NODE_ENV === 'test') return;
-          
+
           await client.messages
             .create({
               body: `${code} is your temporary verification code to login at BlockTickets.xyz`,
@@ -112,7 +182,6 @@ module.exports = {
             .then(message => console.log(message.body))
             .done()
         }
-
       },
     });
   },

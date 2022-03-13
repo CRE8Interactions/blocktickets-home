@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invites",
+  "info": {
+    "singularName": "invite",
+    "pluralName": "invites",
+    "displayName": "invite",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "phoneNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "role": {
+      "type": "string"
+    },
+    "claimed": {
+      "type": "boolean",
+      "default": false
+    },
+    "organizationId": {
+      "type": "string"
+    }
+  }
+}
