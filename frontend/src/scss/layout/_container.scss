@@ -67,3 +67,11 @@ $pad-md: rem(81);
 		display: block;
 	}
 }
+
+.tablet-desktop-only {
+	display: none;
+
+	@include breakpoint-min(md) {
+		display: block;
+	}
+}

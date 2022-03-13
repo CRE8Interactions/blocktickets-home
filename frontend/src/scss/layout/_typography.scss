@@ -1,6 +1,9 @@
 @use '../abstracts' as *;
 @use 'spacing' as *;
 
+.normal {
+	font-size: rem(16);
+}
 .body-lg {
 	@include breakpoint-min(md) {
 		font-size: $body-1;

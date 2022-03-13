@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React from 'react';
 
 import { IconButton } from './../IconButton';
 
@@ -6,7 +6,12 @@ import './backButton.scss';
 
 export default function BackButton() {
 	return (
-		<IconButton styles="mt-0 mb-3" variant="outline-light" btn="back" size="sm" link="../">
+		<IconButton
+			styles="mt-0 mb-3 align-self-start"
+			variant="outline-light"
+			btn="back"
+			size="sm"
+			link="../">
 			Back
 		</IconButton>
 	);
