@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -25,13 +26,19 @@ export default function Footer() {
 						<h3 className="footer-nav-list-title caption--uppercase">Blocktickets</h3>
 						<ul>
 							<li>
-								<Nav.Link href="">cta 1</Nav.Link>
+								<LinkContainer to="/">
+									<Nav.Link to="">cta 1</Nav.Link>
+								</LinkContainer>
 							</li>
 							<li>
-								<Nav.Link href="">cta 1</Nav.Link>
+								<LinkContainer to="/">
+									<Nav.Link to="">cta 1</Nav.Link>
+								</LinkContainer>
 							</li>
 							<li>
-								<Nav.Link href="">cta 1</Nav.Link>
+								<LinkContainer to="/">
+									<Nav.Link to="">cta 1</Nav.Link>
+								</LinkContainer>
 							</li>
 						</ul>
 					</Col>
@@ -39,18 +46,24 @@ export default function Footer() {
 						<h3 className="footer-nav-list-title caption--uppercase">Info</h3>
 						<ul>
 							<li>
-								<Nav.Link href="">cta 1</Nav.Link>
+								<LinkContainer to="/">
+									<Nav.Link to="">cta 1</Nav.Link>
+								</LinkContainer>
 							</li>
 							<li>
-								<Nav.Link href="">cta 1</Nav.Link>
+								<LinkContainer to="/">
+									<Nav.Link to="">cta 1</Nav.Link>
+								</LinkContainer>
 							</li>
 							<li>
-								<Nav.Link href="">cta 1</Nav.Link>
+								<LinkContainer to="/">
+									<Nav.Link to="">cta 1</Nav.Link>
+								</LinkContainer>
 							</li>
 						</ul>
 					</Col>
 					<Col>
-						<h3 className="footer-title ">Join Newsletter</h3>
+						<h3 className="footer-title">Join Newsletter</h3>
 						<p className="small">
 							Subscribe to our newsletter to get notified over the latest releases
 						</p>
