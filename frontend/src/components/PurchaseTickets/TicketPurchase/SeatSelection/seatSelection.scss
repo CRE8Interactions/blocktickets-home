@@ -3,9 +3,7 @@
 @use '../../../../scss/layout' as *;
 
 .seat-selection {
-	@include breakpoint-max(md) {
-		margin-top: rem(17);
-	}
+	
 
 	.amount {
 		margin: rem(12) 0px;

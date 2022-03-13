@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 
 import plus from '../../../../assets/icons/plus.svg';
@@ -18,12 +18,12 @@ export default function SeatConfirmation() {
 	return (
 		<Fragment>
 			<div className="seat-confirmation">
-				<header>
+				<header className="d-flex flex-column">
 					<BackButton />
-					<div className="ticket-details d-flex flex-column">
-						<h1 className="text-uppercase">Section general admission</h1>
-					</div>
 				</header>
+				<div className="ticket-details d-flex flex-column">
+					<h1 className="text-uppercase">Section general admission</h1>
+				</div>
 				<div className="disclaimer text-muted">
 					<h2 className="caption--uppercase">Event Ticket limit: 8</h2>
 					<p className="caption">
@@ -55,15 +55,15 @@ export default function SeatConfirmation() {
 				</div>
 				<Row className="align-items-center footer">
 					<Col xs={3}>
-						<Button className="btn--icon-lg me-3" variant="outline-light">
+						<Link to={'/'} className=" btn btn--icon-lg btn-outline-light me-3">
 							<img src={shoppingCart} />
-						</Button>
+						</Link>
 						<span className="caption text-muted">or</span>
 					</Col>
 					<Col>
-						<Button className="mt-0 w-100" variant="secondary" size="lg">
+						<Link to={'/checkout'} className="btn mt-0 w-100 btn-secondary btn-lg">
 							Checkout
-						</Button>
+						</Link>
 					</Col>
 				</Row>
 			</div>

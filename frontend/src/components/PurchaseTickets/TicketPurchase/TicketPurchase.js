@@ -1,27 +1,19 @@
-import React, { Fragment, useState } from 'react';
-
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, { useState } from 'react';
 
 import { SeatSelection } from './SeatSelection';
+import { SeatConfirmation } from './SeatConfirmation';
+import { TicketPresale } from './TicketPresale';
 
 import './ticketPurchase.scss';
-import { SeatConfirmation } from './SeatConfirmation';
 
-export default function TicketPurchase() {
-	const [
-		status,
-		setStatus
-	] = useState('selection');
-
-	const handleClick = (type) => {
-		setStatus('confirmation');
-	};
+export default function TicketPurchase({ handleClick, status }) {
 	return (
 		<div className="left-col">
 			{status === 'selection' && <SeatSelection handleClick={handleClick} />}
 
 			{status === 'confirmation' && <SeatConfirmation />}
+
+			{status === 'presale' && <TicketPresale handleClick={handleClick} />}
 		</div>
 	);
 }

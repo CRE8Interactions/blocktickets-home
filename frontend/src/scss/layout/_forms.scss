@@ -1,8 +1,14 @@
 @use '../abstracts' as *;
 @use '../theme/input' as *;
 
+.form-control {
+	color: $clr-neutral-4;
+	font-weight: $fw-medium;
+}
+
 input::placeholder {
 	color: $clr-neutral-4;
+	font-weight: $fw-medium;
 }
 
 .form-check {

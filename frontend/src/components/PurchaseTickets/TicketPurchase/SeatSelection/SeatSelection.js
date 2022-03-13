@@ -62,6 +62,7 @@ export default function SeatSelection({ handleClick }) {
 
 					<ListGroup as="ul" variant="flush">
 						<ListGroup.Item
+							onClick={() => handleClick('presale')}
 							action
 							as="li"
 							className="d-flex justify-content-between align-items-center">
@@ -79,7 +80,7 @@ export default function SeatSelection({ handleClick }) {
 							<div className="fw-bold">$30.00</div>
 						</ListGroup.Item>
 						<ListGroup.Item
-							onClick={() => handleClick('standard')}
+							onClick={() => handleClick('confirmation')}
 							as="li"
 							action
 							className="d-flex justify-content-between align-items-center">
@@ -97,6 +98,7 @@ export default function SeatSelection({ handleClick }) {
 							<div className="fw-bold">$30.00</div>
 						</ListGroup.Item>
 						<ListGroup.Item
+							onClick={() => handleClick('confirmation')}
 							action
 							as="li"
 							className="d-flex justify-content-between align-items-center">
