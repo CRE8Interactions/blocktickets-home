@@ -77,6 +77,14 @@ $pad-md: rem(81);
 	}
 }
 
+.desktop-only--flex {
+	display: none;
+
+	@include breakpoint-min(lg) {
+		display: flex;
+	}
+}
+
 .tablet-desktop-only {
 	display: none;
 

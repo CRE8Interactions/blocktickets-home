@@ -1,17 +1,53 @@
 @use '../../scss/abstracts' as *;
-@use '../../scss/theme/card' as *;
+@use '../../scss/theme/colors' as *;
 @use '../../scss/layout/typography' as *;
+@use '../../scss/layout/container' as *;
 
 .ticket {
+	@include breakpoint-max(lg) {
+		background-color: $gray-300;
+		@include full-width();
+	}
+
 	header {
+		@include breakpoint-max(lg) {
+			padding-left: $pad-sm;
+			padding-right: $pad-sm;
+
+			@include breakpoint-min(md) {
+				padding-left: $pad-md;
+				padding-right: $pad-md;
+			}
+		}
 		&::after {
 			@include full-width-border();
 		}
 		.details {
 			.subtitle,
-			h1,
+			.artist-name,
 			.row > .col > * {
 				@extend %text-truncate;
+			}
+
+			.artist-name {
+				margin-bottom: 0px;
+				font-family: $font-body;
+				font-size: rem(16);
+
+				@include breakpoint-min(md) {
+					margin-bottom: rem(9);
+					font-size: rem(24);
+				}
+			}
+
+			@include breakpoint-max(lg) {
+				.time,
+				.loc {
+					&::before {
+						content: '\2022';
+						margin: 0px rem(2);
+					}
+				}
 			}
 
 			.row {
@@ -23,18 +59,11 @@
 
 			.subtitle {
 				order: -1;
+				margin-bottom: rem(5);
 			}
 			.col:nth-of-type(2) {
-				border-left: border();
-			}
-
-			.artist-name {
-				font-size: rem(16);
-				margin-bottom: rem(5);
-
-				@include breakpoint-min(md) {
-					margin-bottom: 1rem;
-					font-size: $body-1;
+				@include breakpoint-min(lg) {
+					border-left: border($color: $gray-200);
 				}
 			}
 		}

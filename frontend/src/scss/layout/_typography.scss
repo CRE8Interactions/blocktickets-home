@@ -4,7 +4,8 @@
 .normal {
 	font-size: rem(16);
 }
-.body-lg {
+
+.normal-lg {
 	@include breakpoint-min(md) {
 		font-size: $body-1;
 	}

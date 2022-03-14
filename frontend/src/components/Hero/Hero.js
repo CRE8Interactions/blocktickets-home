@@ -40,7 +40,7 @@ export default function Hero() {
 											<Col md={6} lg={12}>
 												<div className="time">
 													<p className="time-caption">Time</p>
-													<p className="date body-lg">
+													<p className="date normal-lg">
 														Mar 13 <span>9:00 PM</span>
 													</p>
 												</div>
@@ -48,7 +48,7 @@ export default function Hero() {
 											<Col md={6} lg={12}>
 												<div className="venue">
 													<p className="venue-caption">Venue</p>
-													<p className="venue body-lg">
+													<p className="venue normal-lg">
 														CODA or venue long name here as another
 														example
 													</p>

@@ -17,6 +17,8 @@ input::placeholder {
 
 .form-select {
 	background-size: initial;
+	padding-right: $input-padding-x;
+	line-height: 1;
 }
 
 @mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
