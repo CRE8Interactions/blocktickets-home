@@ -1,4 +1,5 @@
 @use '../../../scss/abstracts' as *;
+@use '../../../scss/layout/container' as *;
 @use '../../../scss/theme/colors' as *;
 
 .map {
@@ -7,11 +8,9 @@
 	flex: 1;
 
 	@include breakpoint-max(md) {
-		width: 100vw;
-		left: 50%;
-		margin-left: -50vw;
-		right: 50%;
-		margin-right: -50vw;
+		@include full-width();
+		left: initial;
+		right: initial;
 	}
 
 	img {

@@ -31,6 +31,9 @@ export default function Navigation() {
 
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
+	const toggleOverflow = (expanded) => {
+		document.body.style.overflow = expanded ? 'hidden' : 'visible';
+	};
 	useEffect(
 		() => {
 			const changeWindowSize = () => setWindowSize(window.innerWidth);
@@ -39,13 +42,13 @@ export default function Navigation() {
 
 			const originalStyle = window.getComputedStyle(document.body).overflow;
 
-			if (expanded) {
-				document.body.style.overflow = 'hidden';
-			}
+			// document.querySelector('#toggle').addEventListener('show.bs.collapse', toggleOverflow);
 
 			return () => {
 				window.removeEventListener('resize', changeWindowSize);
-				document.body.style.overflow = originalStyle;
+				// document
+				// 	.querySelector('#toggle')
+				// 	.removeEventListener('show.bs.collapse', toggleOverflow);
 			};
 		},
 		[
@@ -55,7 +58,7 @@ export default function Navigation() {
 
 	return (
 		<div className="navigation position-sticky">
-			<Navbar collapseOnSelect expand="lg">
+			<Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
 				<Container>
 					<LinkContainer to="/">
 						<Navbar.Brand>
@@ -72,6 +75,7 @@ export default function Navigation() {
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
+							id="toggle"
 							className="btn--icon"
 							onClick={() => setExpanded(!expanded)}
 						/>
