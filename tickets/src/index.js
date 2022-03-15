@@ -1,12 +1,15 @@
 'use strict';
 const Web3API = require('web3');
+const axios = require('axios');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const smsNumber = process.env.SMS_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const blockchain = process.env.BLOCKCHAIN;
 const messagingServiceSid = process.env.MG80e1372892690914b598b6478a992c1a;
-const myPhone = process.env.TWILIO_PHONE
+const myPhone = process.env.TWILIO_PHONE;
+const geoURI = process.env.GEO_URI;
+const geoApiKey = process.env.GCP_API_KEY;
 
 module.exports = {
   /**
@@ -64,9 +67,50 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue'],
       async afterCreate(event) {
         // afterCreate lifecycle
+        const {
+          result,
+          params
+        } = event;
+
+        // Changes on venue
+        if (event.model.singularName === 'venue') {
+          const address = result.address[0];
+          const address1 = address.address_1;
+          const address2 = address.address_2;
+          const city = address.city;
+          const state = address.state;
+          const query = `${address1},${city},${state}&key=${geoApiKey}`
+          let geometry;
+
+          const config = {
+            method: 'post',
+            url: `${geoURI}${query}`,
+            headers: {}
+          };
+          await axios(config)
+            .then((res) => {
+              let data = res.data;
+              geometry = data.results[0].geometry;
+            })
+            .catch(err => console.log(err))
+
+          await strapi.entityService.update('api::venue.venue', result.id, {
+            data: {
+              address: [{
+                id: result.address[0].id, // will update component with id: 1 (if not specified, would have deleted it and created a new one)
+                address_1: result.address[0].address_1,
+                address_2: result.address[0].address_2,
+                city: result.address[0].city,
+                state: result.address[0].state,
+                latitude: String(geometry.location.lat),
+                longitude: String(geometry.location.lng)
+              }],
+            },
+          });
+        }
 
         // Changes on Invite Model
         if (event.model.singularName === 'invite') {
@@ -122,6 +166,7 @@ module.exports = {
       },
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
+
         // Changes on user model
         if (event.model.singularName === 'user') {
           const profile = await strapi.db.query('api::profile.profile').create({

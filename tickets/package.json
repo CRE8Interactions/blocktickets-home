@@ -19,6 +19,7 @@
     "@strapi/plugin-i18n": "4.0.7",
     "@strapi/plugin-users-permissions": "4.0.7",
     "@strapi/strapi": "4.0.7",
+    "axios": "^0.26.1",
     "pg": "^8.7.3",
     "twilio": "^3.74.0",
     "web3": "^1.7.0"
