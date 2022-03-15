@@ -1,1 +1,7 @@
+@use '../../scss/abstracts' as *;
 
+.flex {
+	@include breakpoint-min(lg) {
+		gap: 21px;
+	}
+}
