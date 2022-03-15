@@ -60,7 +60,7 @@ export default function SeatSelection({ handleClick }) {
 						/>
 					</Stack>
 
-					<ListGroup as="ul" variant="flush">
+					<ListGroup as="ul">
 						<ListGroup.Item
 							onClick={() => handleClick('presale')}
 							action

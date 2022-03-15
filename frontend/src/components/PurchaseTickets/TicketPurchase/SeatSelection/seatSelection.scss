@@ -4,21 +4,16 @@
 
 .seat-selection {
 	.amount {
-		margin: rem(12) 0px;
+		margin-top: rem(12);
 		padding-bottom: rem(12);
-		border-bottom: border();
 		.form-control {
 			border-radius: 4px;
-			width: 15%;
+			width: 17%;
 			font-size: $caption;
 			color: #000;
 			font-weight: $fw-normal;
 			text-align: center;
 			padding: 0px em(14);
-
-			@include breakpoint-min(md) {
-				// padding: 0px em(20);
-			}
 		}
 
 		.rc-slider {
@@ -55,7 +50,7 @@
 		}
 
 		overflow-y: auto;
-		margin-top: rem(24);
+		margin-top: rem(14);
 
 		&-item {
 			user-select: none;

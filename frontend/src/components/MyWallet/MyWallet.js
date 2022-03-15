@@ -31,24 +31,24 @@ export default function MyWallet({ toggle }) {
 
 	return (
 		<div className="wallet">
-			<ListGroup variant="flush">
-				<p className="name pb-2 ">Harrison Cogan</p>
-				<ListGroup.Item>
+			<ListGroup variant="flush" as="ul">
+				<h5 className="name m-0 pb-2 ">Harrison Cogan</h5>
+				<ListGroup.Item as="li">
 					<LinkContainer to={'/events'}>
 						<Nav.Link>Upcoming Events</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				<ListGroup.Item>
+				<ListGroup.Item as="li">
 					<LinkContainer to={'/collectables'}>
 						<Nav.Link>Collectables</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				<ListGroup.Item>
+				<ListGroup.Item as="li">
 					<LinkContainer to={'/settings'}>
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				<ListGroup.Item onClick={logout}>
+				<ListGroup.Item as="li" onClick={logout}>
 					<LinkContainer to={'/logout'}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
