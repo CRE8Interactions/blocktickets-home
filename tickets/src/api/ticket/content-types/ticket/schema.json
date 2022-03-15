@@ -91,6 +91,19 @@
       "relation": "oneToOne",
       "target": "api::event.event",
       "inversedBy": "ticket"
+    },
+    "section": {
+      "type": "string"
+    },
+    "row": {
+      "type": "string"
+    },
+    "seat": {
+      "type": "string"
+    },
+    "generalAdmission": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
