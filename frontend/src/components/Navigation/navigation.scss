@@ -85,7 +85,6 @@
 							&.active {
 								border-left: border(2px, $clr-primary);
 								@include full-width();
-								left: 52%;
 								padding-left: calc($pad-sm - rem(2));
 								@include breakpoint-min(md) {
 									padding-left: calc($pad-md - rem(2));
