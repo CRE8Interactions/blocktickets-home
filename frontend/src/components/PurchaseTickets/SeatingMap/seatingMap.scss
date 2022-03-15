@@ -3,18 +3,15 @@
 @use '../../../scss/theme/colors' as *;
 
 .map {
-	background-color: $gray-300;
-	padding: em(24) 0px;
+	display: flex;
 	flex: 1;
+	background-color: $gray-300;
+	padding: em(24) em(29);
 
-	@include breakpoint-max(md) {
+	@include breakpoint-max(lg) {
 		@include full-width();
-		left: initial;
-		right: initial;
-	}
 
-	img {
-		@include breakpoint-max(md) {
+		img {
 			max-height: 201px;
 		}
 	}
