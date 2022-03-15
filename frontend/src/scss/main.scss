@@ -2,3 +2,7 @@
 @use 'base';
 @use 'abstracts' as *;
 @use 'layout';
+
+.list-group-item {
+	border-width: 1px 0px 1px 0px;
+}

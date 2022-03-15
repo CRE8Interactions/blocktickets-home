@@ -62,7 +62,7 @@
 		.navigation-buttons {
 			margin-top: em(28);
 			position: relative;
-			z-index: 9999;
+			z-index: 2;
 
 			@include breakpoint-inBetween(md, lg) {
 				margin-top: em(-49);

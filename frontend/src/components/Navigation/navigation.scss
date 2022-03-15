@@ -60,54 +60,56 @@
 				@include breakpoint-min(lg) {
 					border-left: border(2px);
 				}
+				&::before {
+					@extend %nav-mobile-headings;
+				}
 				& + ul {
 					margin-top: rem(16);
 					@media screen and(min-device-height: 812px) {
 						margin-top: rem(48);
 					}
-				}
-				&::before {
-					@extend %nav-mobile-headings;
-				}
-				&:first-of-type {
-					&::before {
-						@include breakpoint-max(lg) {
-							content: 'Home';
-						}
-					}
-					.nav-link {
-						@include breakpoint-min(lg) {
-							padding-left: rem(36);
-						}
 
-						@include breakpoint-max(lg) {
-							font-size: rem(24);
-							&.active {
-								border-left: border(2px, $clr-primary);
-								@include full-width();
-								padding-left: calc($pad-sm - rem(2));
-								@include breakpoint-min(md) {
-									padding-left: calc($pad-md - rem(2));
-								}
+					&:nth-of-type(2) {
+						&::before {
+							@include breakpoint-max(lg) {
+								content: 'My Wallet';
 							}
 						}
 					}
 				}
-				&:nth-of-type(2) {
-					&::before {
-						@include breakpoint-max(lg) {
-							content: 'My Wallet';
+			}
+			#main {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'Home';
+					}
+				}
+
+				.nav-link {
+					@include breakpoint-min(lg) {
+						padding-left: rem(36);
+					}
+
+					@include breakpoint-max(lg) {
+						font-size: rem(24);
+						&.active {
+							border-left: border(2px, $clr-primary);
+							@include full-width();
+							padding-left: calc($pad-sm - rem(2));
+							@include breakpoint-min(md) {
+								padding-left: calc($pad-md - rem(2));
+							}
 						}
 					}
 				}
 			}
 		}
-		.btn {
-			margin-top: 0px;
-			&-primary,
-			&-outline-light {
-				min-width: 102px;
-			}
+	}
+	.btn {
+		margin-top: 0px;
+		&-primary,
+		&-outline-light {
+			min-width: 102px;
 		}
 	}
 }
