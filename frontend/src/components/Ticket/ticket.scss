@@ -22,14 +22,17 @@
 		&::after {
 			@include full-width-border();
 		}
-		.details {
-			.subtitle,
-			.artist-name,
-			.row > .col > * {
-				@extend %text-truncate;
+
+		#artist-image-col {
+			width: auto;
+		}
+
+		.artist {
+			&-image {
+				border-radius: $br-textile;
 			}
 
-			.artist-name {
+			&-name {
 				margin-bottom: 0px;
 				font-family: $font-body;
 				font-size: rem(16);
@@ -38,6 +41,15 @@
 					margin-bottom: rem(9);
 					font-size: rem(24);
 				}
+			}
+		}
+
+		.details {
+			font-weight: 500;
+			.subtitle,
+			.artist-name,
+			.row > .col > * {
+				@extend %text-truncate;
 			}
 
 			@include breakpoint-max(lg) {
@@ -63,7 +75,15 @@
 			}
 			.col:nth-of-type(2) {
 				@include breakpoint-min(lg) {
-					border-left: border($color: $gray-200);
+					&::before {
+						content: '';
+						position: absolute;
+						height: 14px;
+						width: 1px;
+						margin-left: -8px;
+						margin-top: 1px;
+						background: $clr-neutral-5;
+					}
 				}
 			}
 		}

@@ -3,7 +3,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import profile from '../../assets/01.png';
+import profile from '../../assets/profile-thumbnail.png';
 
 import './ticket.scss';
 
@@ -11,9 +11,15 @@ export default function Ticket() {
 	return (
 		<div className="ticket">
 			<header>
-				<Row className="py-3">
-					<Col lg={2} className="desktop-only">
-						<img src={profile} alt="image" className="banner-image" />
+				<Row gap={2} className="py-3 align-items-center">
+					<Col lg={2} id="artist-image-col" className="desktop-only">
+						<img
+							src={profile}
+							alt="Nic Fanciulli"
+							width="139"
+							height="139"
+							className="artist-image"
+						/>
 					</Col>
 					<Col lg={6} className="d-flex flex-column details">
 						<h1 className="artist-name">Nic Fanciulli</h1>

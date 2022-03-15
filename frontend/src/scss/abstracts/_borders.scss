@@ -4,7 +4,7 @@ $br-primary: 90px;
 $br-input: 12px;
 $br-input-sm: 8px;
 $br-circle: 40px;
-$br-textile: 5%;
+$br-textile: 10px;
 $border-width: 2px;
 $border-color: $clr-neutral-6;
 $box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
@@ -20,5 +20,5 @@ $box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
 	left: 0;
 	right: 0;
 	background-color: $border-color;
-	z-index: 9999;
+	z-index: 1;
 }

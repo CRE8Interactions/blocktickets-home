@@ -5,6 +5,7 @@
 @use '../../scss/layout' as *;
 
 .wallet {
+	z-index: 2;
 	.list-group {
 		font-weight: 700;
 

@@ -20,7 +20,7 @@ const Router = () => {
 				}
 			/>{' '}
 			<Route path="/tickets/:id" element={<TicketsPage />} />
-			{/* default route */} <Route path="*" element={<Navigate to="/" />} />{' '}
+			{/* Add a NotFound route */}
 		</Routes>
 	);
 };

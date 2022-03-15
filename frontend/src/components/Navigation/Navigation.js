@@ -24,37 +24,20 @@ export default function Navigation() {
 		setWindowSize
 	] = useState(window.innerWidth);
 
-	const [
-		expanded,
-		setExpanded
-	] = useState(false);
-
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	const toggleOverflow = (expanded) => {
 		document.body.style.overflow = expanded ? 'hidden' : 'visible';
 	};
-	useEffect(
-		() => {
-			const changeWindowSize = () => setWindowSize(window.innerWidth);
+	useEffect(() => {
+		const changeWindowSize = () => setWindowSize(window.innerWidth);
 
-			window.addEventListener('resize', changeWindowSize);
+		window.addEventListener('resize', changeWindowSize);
 
-			const originalStyle = window.getComputedStyle(document.body).overflow;
-
-			// document.querySelector('#toggle').addEventListener('show.bs.collapse', toggleOverflow);
-
-			return () => {
-				window.removeEventListener('resize', changeWindowSize);
-				// document
-				// 	.querySelector('#toggle')
-				// 	.removeEventListener('show.bs.collapse', toggleOverflow);
-			};
-		},
-		[
-			expanded
-		]
-	);
+		return () => {
+			window.removeEventListener('resize', changeWindowSize);
+		};
+	});
 
 	return (
 		<div className="navigation position-sticky">
@@ -77,7 +60,6 @@ export default function Navigation() {
 							aria-controls="responsive-navbar-nav"
 							id="toggle"
 							className="btn--icon"
-							onClick={() => setExpanded(!expanded)}
 						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
@@ -89,6 +71,7 @@ export default function Navigation() {
 									</LinkContainer>
 								</li>
 							</ul>
+
 							{authService.isLoggedIn() && (
 								<ul className="mobile-only">
 									<li className="pt-2">
