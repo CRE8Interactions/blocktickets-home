@@ -8,7 +8,7 @@
 	background-color: $gray-300;
 	padding: em(24) em(29);
 
-	@include breakpoint-max(lg) {
+	@include breakpoint-max(md) {
 		@include full-width();
 
 		img {

@@ -4,20 +4,15 @@
 @use '../../scss/layout/container' as *;
 
 .ticket {
-	@include breakpoint-max(lg) {
+	@include breakpoint-max(md) {
 		background-color: $gray-300;
 		@include full-width();
 	}
 
 	header {
-		@include breakpoint-max(lg) {
+		@include breakpoint-max(md) {
 			padding-left: $pad-sm;
 			padding-right: $pad-sm;
-
-			@include breakpoint-min(md) {
-				padding-left: $pad-md;
-				padding-right: $pad-md;
-			}
 		}
 		&::after {
 			@include full-width-border();
@@ -52,7 +47,7 @@
 				@extend %text-truncate;
 			}
 
-			@include breakpoint-max(lg) {
+			@include breakpoint-max(md) {
 				.time,
 				.loc {
 					&::before {
@@ -74,7 +69,7 @@
 				margin-bottom: rem(5);
 			}
 			.col:nth-of-type(2) {
-				@include breakpoint-min(lg) {
+				@include breakpoint-min(md) {
 					&::before {
 						content: '';
 						position: absolute;

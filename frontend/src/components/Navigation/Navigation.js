@@ -64,7 +64,7 @@ export default function Navigation() {
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0">
-							<ul>
+							<ul id="main" role="main-navigation">
 								<li>
 									<LinkContainer to="/">
 										<Nav.Link>Browse</Nav.Link>
@@ -73,13 +73,13 @@ export default function Navigation() {
 							</ul>
 
 							{authService.isLoggedIn() && (
-								<ul className="mobile-only">
+								<ul className="mobile-tablet-only">
 									<li className="pt-2">
 										<MyWallet />
 									</li>
 								</ul>
 							)}
-							<NavButtons styles="mobile-only" />
+							<NavButtons styles="mobile-tablet-only" />
 						</Nav>
 					</Navbar.Collapse>
 				</Container>
