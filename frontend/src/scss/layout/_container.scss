@@ -64,8 +64,29 @@ $pad-md: rem(81);
 }
 
 .mobile-only {
+	@include breakpoint-min(md) {
+		display: none;
+	}
+}
+
+.mobile-tablet-only {
 	@include breakpoint-min(lg) {
 		display: none;
+	}
+}
+.tablet-desktop-only {
+	display: none;
+
+	@include breakpoint-min(md) {
+		display: block;
+	}
+}
+
+.tablet-desktop-only--flex {
+	display: none;
+
+	@include breakpoint-min(md) {
+		display: flex;
 	}
 }
 
@@ -74,13 +95,5 @@ $pad-md: rem(81);
 
 	@include breakpoint-min(lg) {
 		display: block;
-	}
-}
-
-.desktop-only--flex {
-	display: none;
-
-	@include breakpoint-min(lg) {
-		display: flex;
 	}
 }

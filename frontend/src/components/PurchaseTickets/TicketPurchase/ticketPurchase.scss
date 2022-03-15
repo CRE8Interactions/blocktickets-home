@@ -1,11 +1,15 @@
 @use '../../../scss/abstracts' as *;
 
 .left-col {
-	@include breakpoint-min(lg) {
-		flex: 0 0 352px;
+	flex: 0 0;
+	// @include breakpoint-min(md) {
+	// 	flex-basis: 306px;
+	// }
+	@include breakpoint-min(md) {
+		flex-basis: 352px;
 	}
 
-	@include breakpoint-max(lg) {
+	@include breakpoint-max(md) {
 		margin-top: rem(17);
 	}
 }

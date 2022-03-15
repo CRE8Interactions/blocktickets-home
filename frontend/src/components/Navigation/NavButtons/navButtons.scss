@@ -1,6 +1,6 @@
 @use '../../../scss/abstracts' as *;
 
-.navigation .navbar .navbar-nav .mobile-only {
+.navigation .navbar .navbar-nav .mobile-tablet-only {
 	&.btn {
 		margin-top: auto;
 		@include breakpoint-max(md) {

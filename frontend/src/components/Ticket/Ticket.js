@@ -12,7 +12,7 @@ export default function Ticket() {
 		<div className="ticket">
 			<header>
 				<Row gap={2} className="py-3 align-items-center">
-					<Col lg={2} id="artist-image-col" className="desktop-only">
+					<Col md={2} id="artist-image-col" className="tablet-desktop-only">
 						<img
 							src={profile}
 							alt="Nic Fanciulli"
@@ -21,13 +21,13 @@ export default function Ticket() {
 							className="artist-image"
 						/>
 					</Col>
-					<Col lg={6} className="d-flex flex-column details">
+					<Col md={6} className="d-flex flex-column details">
 						<h1 className="artist-name">Nic Fanciulli</h1>
-						<p className="caption--uppercase subtitle text-muted desktop-only">
+						<p className="caption--uppercase subtitle text-muted tablet-desktop-only">
 							Coda, Platform, Floh, &amp; Embrace Presents:
 						</p>
 						<Row>
-							<Col className="desktop-only" lg={3} xl={2}>
+							<Col className="tablet-desktop-only" md={3} xl={2}>
 								<p className="time-caption">Time</p>
 							</Col>
 							<Col>
@@ -37,7 +37,7 @@ export default function Ticket() {
 							</Col>
 						</Row>
 						<Row>
-							<Col className="desktop-only" lg={3} xl={2}>
+							<Col className="tablet-desktop-only" md={3} xl={2}>
 								{' '}
 								<p className="venue-caption">Venue</p>
 							</Col>
@@ -49,8 +49,8 @@ export default function Ticket() {
 								</p>
 							</Col>
 						</Row>
-						<Row className="desktop-only--flex">
-							<Col lg={3} xl={2}>
+						<Row className="tablet-desktop-only--flex">
+							<Col md={3} xl={2}>
 								<p className="location-caption location">Location</p>
 							</Col>
 							<Col>
