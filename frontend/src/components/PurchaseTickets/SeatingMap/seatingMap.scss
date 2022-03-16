@@ -6,7 +6,7 @@
 	display: flex;
 	flex: 1;
 	background-color: $gray-300;
-	padding: em(24) em(29);
+	padding: em(24);
 
 	@include breakpoint-max(md) {
 		@include full-width();
