@@ -28,7 +28,7 @@
 			}
 
 			&-name {
-				margin-bottom: 0px;
+				margin-bottom: rem(7);
 				font-family: $font-body;
 				font-size: rem(16);
 
@@ -41,10 +41,13 @@
 
 		.details {
 			font-weight: 500;
+			flex-grow: 1;
+
 			.subtitle,
 			.artist-name,
 			.row > .col > * {
 				@extend %text-truncate;
+				flex: 0 0;
 			}
 
 			@include breakpoint-max(md) {
@@ -58,6 +61,9 @@
 			}
 
 			.row {
+				.details-heading {
+					flex: 0 0 98px;
+				}
 				.col {
 					min-width: 0;
 					flex: 1;
