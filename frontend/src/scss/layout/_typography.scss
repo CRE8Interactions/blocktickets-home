@@ -2,7 +2,15 @@
 @use 'spacing' as *;
 
 .normal {
-	font-size: rem(16);
+	font-size: $body-2;
+}
+
+.normal-sm {
+	font-size: $small;
+
+	@include breakpoint-min(md) {
+		font-size: $body-2;
+	}
 }
 
 .normal-lg {
@@ -43,6 +51,15 @@ h4,
 	font-size: $h4-font-size;
 	@include breakpoint-min(md) {
 		font-size: $h3-font-size;
+	}
+}
+
+.heading-sm {
+	font-size: $body-1;
+	margin-bottom: rem(16);
+
+	@include breakpoint-min(md) {
+		font-size: $h4-font-size;
 	}
 }
 
