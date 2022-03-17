@@ -22,12 +22,6 @@ p {
 a {
 	font: inherit;
 	text-decoration: none;
-	color: inherit;
-
-	&:hover,
-	&:focus {
-		color: inherit;
-	}
 }
 
 /* Inherit fonts for inputs and buttons */
