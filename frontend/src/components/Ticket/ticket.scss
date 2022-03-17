@@ -47,7 +47,6 @@
 			.artist-name,
 			.row > .col > * {
 				@extend %text-truncate;
-				flex: 0 0;
 			}
 
 			@include breakpoint-max(md) {
