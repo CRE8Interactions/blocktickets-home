@@ -26,7 +26,7 @@ export default function SeatSelection({ handleClick }) {
 		<Fragment>
 			<div className="seat-selection">
 				<Form>
-					<Stack direction="horizontal" gap={3}>
+					<Stack direction="horizontal" gap={2}>
 						<Form.Select aria-label="Number of Tickets">
 							<option value="1">1 Ticket</option>
 							<option value="2" selected>

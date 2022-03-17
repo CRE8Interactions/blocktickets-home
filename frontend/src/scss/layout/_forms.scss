@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use '../theme/input' as *;
+@use '../theme/buttons' as *;
 
 .form-control {
 	color: $clr-neutral-4;
@@ -17,7 +18,7 @@ input::placeholder {
 
 .form-select {
 	background-size: initial;
-	padding-right: $input-padding-x;
+	padding-right: $btn-padding-x-lg;
 	line-height: 1;
 }
 
