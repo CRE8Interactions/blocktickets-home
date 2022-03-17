@@ -30,7 +30,7 @@ export default function Ticket() {
 						/>
 					</Col>
 					<Col md={6} className="d-flex flex-column details">
-						<h1 className="artist-name">Nic Fanciulli</h1>
+						<h1 className="normal-lg artist-name">Nic Fanciulli</h1>
 						<p className="caption--uppercase subtitle text-muted tablet-desktop-only">
 							Coda, Platform, Floh, &amp; Embrace Presents:
 						</p>
@@ -46,7 +46,6 @@ export default function Ticket() {
 						</Row>
 						<Row>
 							<Col className="details-heading tablet-desktop-only" md={2}>
-								{' '}
 								<p className="venue-caption">Venue</p>
 							</Col>
 							<Col>

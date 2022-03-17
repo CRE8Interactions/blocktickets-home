@@ -30,11 +30,9 @@
 			&-name {
 				margin-bottom: rem(5);
 				font-family: $font-body;
-				font-size: rem(16);
 
 				@include breakpoint-min(md) {
 					margin-bottom: rem(9);
-					font-size: rem(24);
 				}
 			}
 		}
@@ -54,8 +52,16 @@
 				.loc {
 					&::before {
 						content: '\2022';
+						position: relative;
 						margin: 0px rem(2);
 					}
+				}
+
+				.time::before {
+					left: -0.1em;
+				}
+				.loc::before {
+					margin: 0px rem(3);
 				}
 			}
 

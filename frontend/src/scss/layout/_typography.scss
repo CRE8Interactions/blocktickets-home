@@ -14,6 +14,8 @@
 }
 
 .normal-lg {
+	font-size: $body-2;
+
 	@include breakpoint-min(md) {
 		font-size: $body-1;
 	}
