@@ -5,8 +5,4 @@
 		gap: 21px;
 		height: 66vh;
 	}
-
-	@include breakpoint-min(xl) {
-		height: 71vh;
-	}
 }

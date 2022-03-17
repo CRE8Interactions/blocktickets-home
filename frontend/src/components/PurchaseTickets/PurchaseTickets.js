@@ -19,7 +19,10 @@ export default function PurchaseTickets() {
 	return (
 		<div className="pt-md-3 flex d-flex flex-column flex-md-row">
 			<SeatingMap
-				styles={(status === 'confirmation' || status === 'presale') && 'desktop-only--flex'}
+				styles={
+					(status === 'confirmation' || status === 'presale') &&
+					'tablet-desktop-only--flex'
+				}
 			/>
 
 			<TicketPurchase handleClick={handleClick} status={status} />
