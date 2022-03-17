@@ -19,7 +19,7 @@ export default function Ticket() {
 	return (
 		<div className="ticket">
 			<header>
-				<Row gap={2} className="py-3 align-items-center">
+				<Row gap={2} className="py-2 py-md-3 align-items-center">
 					<Col md={2} id="artist-image-col" className="tablet-desktop-only">
 						<img
 							src={profile}

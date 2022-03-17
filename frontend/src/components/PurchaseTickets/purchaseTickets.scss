@@ -3,6 +3,6 @@
 .flex {
 	@include breakpoint-min(md) {
 		gap: 21px;
-		height: 66vh;
+		flex: 1;
 	}
 }

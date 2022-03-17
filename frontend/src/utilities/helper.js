@@ -8,6 +8,21 @@ export const checkUrl = (url) => {
 	return regex.test(url);
 };
 
+export const fullHeightContainer = (url, el) => {
+	if (checkUrl(url)) {
+		el.classList.add('container--full-width');
+	}
+
+	document.getElementById('root').style.height = '100vh';
+};
+
+export const removeFullHeightContainer = (el) => {
+	console.log('remove');
+	el.classList.remove('container--full-width');
+
+	document.getElementById('root').style.height = '';
+};
+
 export const hideFooter = (url) => {
 	const footer = document.querySelector('footer');
 	if (checkUrl(url)) {
