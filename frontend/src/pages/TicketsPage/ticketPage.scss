@@ -1,0 +1,12 @@
+@use '../../scss/abstracts' as *;
+
+#wrapper {
+	padding-bottom: rem(16);
+
+	@include breakpoint-min(md) {
+		padding-bottom: 0px;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+}
