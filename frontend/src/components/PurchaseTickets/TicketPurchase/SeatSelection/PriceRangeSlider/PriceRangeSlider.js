@@ -21,7 +21,7 @@ export default function PriceRangeSlider() {
 	};
 
 	return (
-		<Stack direction="horizontal" gap={1} className="amount">
+		<Stack direction="horizontal" gap={3} className="amount">
 			<Form.Control type="text" className="amount" value={`$${sliderValues[0]} `} />
 			<Slider
 				range
