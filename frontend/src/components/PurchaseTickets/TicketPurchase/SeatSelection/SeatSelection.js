@@ -51,7 +51,7 @@ export default function SeatSelection({ handleClick }) {
 						</div>
 					</ListGroup.Item>
 					<ListGroup.Item
-						onClick={() => handleClick('confirmation')}
+						onClick={() => handleClick('quantity')}
 						as="li"
 						action
 						className="d-flex justify-content-between align-items-center">
@@ -73,7 +73,7 @@ export default function SeatSelection({ handleClick }) {
 						</div>
 					</ListGroup.Item>
 					<ListGroup.Item
-						onClick={() => handleClick('confirmation')}
+						onClick={() => handleClick('quantity')}
 						action
 						as="li"
 						className="d-flex justify-content-between align-items-center">

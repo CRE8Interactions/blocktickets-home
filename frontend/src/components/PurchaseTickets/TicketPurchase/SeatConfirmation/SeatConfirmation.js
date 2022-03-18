@@ -14,12 +14,12 @@ import './seatConfirmation.scss';
 
 import { BackButton } from './../../../BackButton';
 
-export default function SeatConfirmation() {
+export default function SeatConfirmation({ handleGoBack }) {
 	return (
 		<Fragment>
 			<div className="seat-confirmation">
 				<header className="d-flex flex-column">
-					<BackButton />
+					<BackButton handleGoBack={handleGoBack} />
 				</header>
 				<div className="ticket-details d-flex flex-column">
 					<h1 className="text-uppercase">Section general admission</h1>
