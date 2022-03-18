@@ -18,12 +18,8 @@
 		}
 	}
 	.list-group {
-		scrollbar-width: none;
-		max-height: 300px;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
+		@extend %remove-scrollbar;
+		max-height: 240px;
 
 		overflow-y: auto;
 		margin-top: rem(14);
@@ -35,19 +31,19 @@
 			line-height: 1.2;
 		}
 
-		& input[type="radio"] {
-			display: none;
-		}
+		// & input[type="radio"] {
+		// 	display: none;
+		// }
 
-		&-item,
-		input[type="radio"],
-		label {
-			cursor: pointer;
-		}
+		// &-item,
+		// input[type="radio"],
+		// label {
+		// 	cursor: pointer;
+		// }
 
-		& input[type="radio"]:checked {
-			background-color: blue;
-			color: #fff;
-		}
+		// & input[type="radio"]:checked {
+		// 	background-color: blue;
+		// 	color: #fff;
+		// }
 	}
 }
