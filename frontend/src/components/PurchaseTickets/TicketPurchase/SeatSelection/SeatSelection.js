@@ -46,7 +46,7 @@ export default function SeatSelection({ handleClick }) {
 								<span className="fw-bold text-end">$30.00</span>
 							</div>
 							<div>
-								<span className="text-muted caption">$ 24.78 + Fees</span>
+								<span className="text-muted caption">$24.78 + Fees</span>
 							</div>
 						</div>
 					</ListGroup.Item>
@@ -68,7 +68,7 @@ export default function SeatSelection({ handleClick }) {
 								<span className="fw-bold text-end">$30.00</span>
 							</div>
 							<div>
-								<span className="text-muted caption">$ 24.78 + Fees</span>
+								<span className="text-muted caption">$24.78 + Fees</span>
 							</div>
 						</div>
 					</ListGroup.Item>
@@ -90,7 +90,7 @@ export default function SeatSelection({ handleClick }) {
 								<span className="fw-bold text-end">$30.00</span>
 							</div>
 							<div>
-								<span className="text-muted caption">$ 24.78 + Fees</span>
+								<span className="text-muted caption">$24.78 + Fees</span>
 							</div>
 						</div>
 					</ListGroup.Item>
