@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { PriceRangeSlider } from './PriceRangeSlider';
 
 import Stack from 'react-bootstrap/Stack';
@@ -8,7 +8,11 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import './seatSelection.scss';
 
-export default function SeatSelection({ handleClick }) {
+export default function SeatSelection({ handleClick, setType }) {
+	useEffect(() => {
+		setType('');
+	}, []);
+
 	return (
 		<Fragment>
 			<div className="seat-selection">

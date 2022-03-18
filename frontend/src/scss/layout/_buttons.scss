@@ -5,6 +5,7 @@
 
 %btn-background {
 	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .btn + .btn {
@@ -54,7 +55,6 @@
 
 .btn--input {
 	@extend %btn-background !optional;
-	background-position: center;
 	padding: em(16);
 
 	&-default {

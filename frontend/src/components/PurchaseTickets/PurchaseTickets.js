@@ -23,13 +23,21 @@ export default function PurchaseTickets() {
 		setStep
 	] = useState('selection');
 
-	const handleClick = (step) => {
+	const [
+		type,
+		setType
+	] = useState('');
+
+	const handleClick = (step, type = '') => {
 		// find key
 		setStep(Object.keys(steps).find((key) => key === step));
+
+		if (type) setType(type);
 	};
 
 	const handleGoBack = () => {
-		let prevStep = --steps[step];
+		let curStep = steps[step];
+		const prevStep = --curStep;
 
 		// find key based on value
 		setStep(Object.keys(steps).find((key) => steps[key] === prevStep));
@@ -41,7 +49,13 @@ export default function PurchaseTickets() {
 				styles={(step === 'quantity' || step === 'presale') && 'tablet-desktop-only--flex'}
 			/>
 
-			<TicketPurchase handleClick={handleClick} handleGoBack={handleGoBack} step={step} />
+			<TicketPurchase
+				handleClick={handleClick}
+				handleGoBack={handleGoBack}
+				step={step}
+				typeOfTicket={type}
+				setTypeOfTicket={setType}
+			/>
 		</div>
 	);
 }
