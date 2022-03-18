@@ -51,15 +51,23 @@ export default function Navigation() {
 					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
 						<div className="cart">
-							<Button variant="default" className="btn--icon">
-								<img src={shoppingCart} />
+							<Button
+								variant="default"
+								className="btn--icon"
+								aria-label="shopping Cart">
+								<img
+									src={shoppingCart}
+									alt="shopping cart"
+									width="24"
+									height="24"
+								/>
 							</Button>
 						</div>
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
 							id="toggle"
-							className="btn--icon"
+							className="btn--icon pe-0"
 						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
