@@ -45,7 +45,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 				</div>
 				<div className="disclaimer text-muted">
 					<h2 className="caption fw-bold">Event Ticket limit: 8</h2>
-					<p className="caption">
+					<p className="m-0 caption">
 						*As official local health guidelines evolve regarding COVID-19 safety
 						protocols, select venues may shift seating configurations and/or increase
 						capacity.
@@ -58,7 +58,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 						<div>
 							<p className="caption">General Admissions</p>
 							<p className="fw-bold">
-								$30{' '}
+								$30.00{' '}
 								<span className="caption fw-normal text-muted">
 									$24.75 ea + Fees
 								</span>
