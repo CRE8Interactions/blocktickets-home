@@ -53,15 +53,15 @@
 					&::before {
 						content: '\2022';
 						position: relative;
-						margin: 0px rem(2);
+						margin: 0px rem(3);
 					}
 				}
 
 				.time::before {
-					left: -0.1em;
+					left: em(-2);
 				}
 				.loc::before {
-					margin: 0px rem(3);
+					margin: 0px rem(7);
 				}
 			}
 
