@@ -107,3 +107,10 @@ $pad-md: rem(81);
 		display: block;
 	}
 }
+
+%remove-scrollbar {
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

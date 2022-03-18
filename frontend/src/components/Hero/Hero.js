@@ -32,7 +32,11 @@ export default function Hero() {
 							<SwiperSlide>
 								<Row className="justify-content-lg-between">
 									<Col lg={7} xl={8}>
-										<img src={profile} alt="image" className="banner-image" />
+										<img
+											src={profile}
+											alt="image"
+											className="artist-image banner-image"
+										/>
 									</Col>
 									<Col lg={4} className=" d-flex flex-column">
 										<h1 className="display-1">Nic Fanciulli</h1>

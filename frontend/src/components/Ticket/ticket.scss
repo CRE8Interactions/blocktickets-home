@@ -23,10 +23,6 @@
 		}
 
 		.artist {
-			&-image {
-				border-radius: $br-textile;
-			}
-
 			&-name {
 				margin-bottom: rem(5);
 				font-family: $font-body;
