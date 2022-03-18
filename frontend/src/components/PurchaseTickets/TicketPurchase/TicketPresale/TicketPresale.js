@@ -18,7 +18,7 @@ export default function TicketPresale({ handleClick }) {
 				</h1>
 				<Form.Control placeholder="Enter passcode here" type="text" />
 				<Button
-					onClick={() => handleClick('confirmation')}
+					onClick={() => handleClick('quantity')}
 					variant="secondary"
 					size="lg"
 					className="w-100">
