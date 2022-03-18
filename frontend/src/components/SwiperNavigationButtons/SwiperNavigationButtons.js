@@ -1,7 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 import rightArrow from '../../assets/icons/right-arrow.svg';
@@ -11,11 +8,17 @@ import './swiperNavigationButtons.scss';
 export default function SwiperNavigationButtons({ styles }) {
 	return (
 		<div className={`d-flex ${styles}`}>
-			<Button variant="outline-light" className="btn--icon swiper-button-prev">
-				<img src={leftArrow} />
+			<Button
+				variant="outline-light"
+				className="btn--icon swiper-button-prev"
+				aria-label="left arrow">
+				<img src={leftArrow} alt="left arrow" />
 			</Button>
-			<Button variant="outline-light" className="btn--icon swiper-button-next">
-				<img src={rightArrow} />
+			<Button
+				variant="outline-light"
+				className="btn--icon swiper-button-next"
+				aria-label="right arrow">
+				<img src={rightArrow} alt="right arrow" />
 			</Button>
 		</div>
 	);
