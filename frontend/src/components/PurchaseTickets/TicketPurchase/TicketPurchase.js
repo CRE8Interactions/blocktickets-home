@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { SeatSelection } from './SeatSelection';
 import { SeatConfirmation } from './SeatConfirmation';
@@ -6,14 +6,24 @@ import { TicketPresale } from './TicketPresale';
 
 import './ticketPurchase.scss';
 
-export default function TicketPurchase({ handleClick, status }) {
+export default function TicketPurchase({
+	handleClick,
+	handleGoBack,
+	step,
+	setTypeOfTicket,
+	typeOfTicket
+}) {
 	return (
 		<div className="left-col">
-			{status === 'selection' && <SeatSelection handleClick={handleClick} />}
+			{step === 'selection' && (
+				<SeatSelection handleClick={handleClick} setType={setTypeOfTicket} />
+			)}
 
-			{status === 'confirmation' && <SeatConfirmation />}
+			{step === 'quantity' && (
+				<SeatConfirmation handleGoBack={handleGoBack} type={typeOfTicket} />
+			)}
 
-			{status === 'presale' && <TicketPresale handleClick={handleClick} />}
+			{step === 'presale' && <TicketPresale handleClick={handleClick} />}
 		</div>
 	);
 }

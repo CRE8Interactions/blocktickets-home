@@ -42,5 +42,9 @@ $gap-sm: rem(4);
 }
 
 .row + .row {
-	margin-top: rem(6);
+	margin-top: rem(2);
+
+	@include breakpoint-min(md) {
+		margin-top: rem(3);
+	}
 }

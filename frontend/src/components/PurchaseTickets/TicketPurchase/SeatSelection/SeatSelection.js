@@ -1,122 +1,104 @@
-import React, { Fragment, useState } from 'react';
-import Slider from 'rc-slider';
+import React, { Fragment, useEffect } from 'react';
+import { PriceRangeSlider } from './PriceRangeSlider';
 
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import 'rc-slider/assets/index.css';
 import './seatSelection.scss';
 
-export default function SeatSelection({ handleClick }) {
-	const [
-		sliderValues,
-		setSliderValues
-	] = useState([
-		20,
-		50
-	]);
-
-	const handleChange = (sliderValues) => {
-		setSliderValues(sliderValues);
-	};
+export default function SeatSelection({ handleClick, setType }) {
+	useEffect(() => {
+		setType('');
+	}, []);
 
 	return (
 		<Fragment>
 			<div className="seat-selection">
-				<Form>
-					<Stack direction="horizontal" gap={2}>
-						<Form.Select aria-label="Number of Tickets">
-							<option value="1">1 Ticket</option>
-							<option value="2" selected>
-								2 Tickets
-							</option>
-							<option value="3">3 Tickets</option>
-						</Form.Select>
+				<Stack direction="horizontal" gap={2} className="option-btns">
+					<Form.Select aria-label="Number of Tickets">
+						<option value="1">1 Ticket</option>
+						<option value="2" selected>
+							2 Tickets
+						</option>
+						<option value="3">3 Tickets</option>
+					</Form.Select>
 
-						<Button className="btn--filter" variant="outline-light">
-							Filter
-						</Button>
-					</Stack>
-					<Stack direction="horizontal" gap={3} className="amount">
-						<Form.Control
-							type="text"
-							className="amount"
-							value={`$${sliderValues[0]} `}
-						/>
-						<Slider
-							range
-							min={0}
-							max={100}
-							pushable={15}
-							defaultValue={sliderValues}
-							onChange={handleChange}
-						/>
-						<Form.Control
-							type="text"
-							className="amount"
-							value={`$${sliderValues[1]} `}
-						/>
-					</Stack>
+					<Button className="btn--filter" variant="outline-light">
+						Filter
+					</Button>
+				</Stack>
+				<PriceRangeSlider />
 
-					<ListGroup as="ul">
-						<ListGroup.Item
-							onClick={() => handleClick('presale')}
-							action
-							as="li"
-							className="d-flex justify-content-between align-items-center">
+				<ListGroup as="ul">
+					<ListGroup.Item
+						onClick={() => handleClick('presale')}
+						action
+						as="li"
+						className="d-flex justify-content-between align-items-center">
+						<div>
 							<div>
-								<Form.Check
-									type="radio"
-									label="Standard Admission"
-									aria-label="Standard Admission"
-									name="standard"
-									id="1"
-									className="caption fw-bold p-0"
-								/>
-								<p className="text-muted caption">Presale</p>
+								<span className="caption fw-bold p-0">Standard Admission</span>
 							</div>
-							<div className="fw-bold">$30.00</div>
-						</ListGroup.Item>
-						<ListGroup.Item
-							onClick={() => handleClick('confirmation')}
-							as="li"
-							action
-							className="d-flex justify-content-between align-items-center">
 							<div>
-								<Form.Check
-									type="radio"
-									label="Sec Row"
-									aria-label="Sec Row"
-									name="standard"
-									id="2"
-									className="caption fw-bold p-0"
-								/>
-								<p className="text-muted caption">Standard Admission</p>
+								<span className="text-muted caption">Presale</span>
 							</div>
-							<div className="fw-bold">$30.00</div>
-						</ListGroup.Item>
-						<ListGroup.Item
-							onClick={() => handleClick('confirmation')}
-							action
-							as="li"
-							className="d-flex justify-content-between align-items-center">
+						</div>
+						<div className="text-end">
 							<div>
-								<Form.Check
-									type="radio"
-									label="Section B &bull; Row 2"
-									aria-label="Section B Row 2"
-									name="standard"
-									id="1"
-									className="caption fw-bold p-0"
-								/>
-								<p className="text-muted caption">Resale Ticket</p>
+								<span className="fw-bold text-end">$30.00</span>
 							</div>
-							<div className="fw-bold">$30.00</div>
-						</ListGroup.Item>
-					</ListGroup>
-				</Form>
+							<div>
+								<span className="text-muted caption">$24.78 + Fees</span>
+							</div>
+						</div>
+					</ListGroup.Item>
+					<ListGroup.Item
+						onClick={() => handleClick('quantity')}
+						as="li"
+						action
+						className="d-flex justify-content-between align-items-center">
+						<div>
+							<div>
+								<span className="caption fw-bold p-0">Sec Row</span>
+							</div>
+							<div>
+								<span className="text-muted caption">Standard Admission</span>
+							</div>
+						</div>
+						<div className="text-end">
+							<div>
+								<span className="fw-bold text-end">$30.00</span>
+							</div>
+							<div>
+								<span className="text-muted caption">$24.78 + Fees</span>
+							</div>
+						</div>
+					</ListGroup.Item>
+					<ListGroup.Item
+						onClick={() => handleClick('quantity')}
+						action
+						as="li"
+						className="d-flex justify-content-between align-items-center">
+						<div>
+							<div>
+								<span className="caption fw-bold p-0">Section B &bull; Row 2</span>
+							</div>
+							<div>
+								<span className="text-muted caption">Resale Ticket</span>
+							</div>
+						</div>
+						<div className="text-end">
+							<div>
+								<span className="fw-bold text-end">$30.00</span>
+							</div>
+							<div>
+								<span className="text-muted caption">$24.78 + Fees</span>
+							</div>
+						</div>
+					</ListGroup.Item>
+				</ListGroup>
 			</div>
 		</Fragment>
 	);

@@ -3,53 +3,23 @@
 @use '../../../../scss/layout' as *;
 
 .seat-selection {
-	.amount {
-		margin-top: rem(26);
-		padding-bottom: rem(12);
+	.option-btns {
+		margin-bottom: rem(24);
 
-		.form-control {
-			border-radius: 4px;
-			width: 17%;
-			font-size: $caption;
-			color: #000;
-			font-weight: $fw-normal;
-			text-align: center;
-			padding: 0px em(14);
-			margin-top: 0px;
-		}
-
-		.rc-slider {
-			&-handle {
-				background-color: $clr-secondary;
-				border: 4px solid $clr-white;
-				opacity: 1;
-				margin-top: rem(-10);
-				width: 24px;
-				height: 24px;
-
-				&:focus {
-					box-shadow: none;
-				}
-			}
-
-			&-rail {
-				background-color: $clr-neutral-6;
-				border-radius: 10px;
-			}
-
-			&-track {
-				background-color: $clr-secondary;
-			}
+		@include breakpoint-min(md) {
+			margin-bottom: rem(26);
 		}
 	}
+	.amount {
+		display: none;
 
-	.list-group {
-		scrollbar-width: none;
-		max-height: 300px;
-
-		&::-webkit-scrollbar {
-			display: none;
+		@include breakpoint-min(md) {
+			display: flex;
 		}
+	}
+	.list-group {
+		@extend %remove-scrollbar;
+		max-height: 240px;
 
 		overflow-y: auto;
 		margin-top: rem(14);
@@ -58,21 +28,23 @@
 			user-select: none;
 			background-color: $gray-300;
 			padding: em(10) em(12);
-		}
-
-		& input[type="radio"] {
-			display: none;
-		}
-
-		&-item,
-		input[type="radio"],
-		label {
+			line-height: 1.2;
 			cursor: pointer;
 		}
 
-		& input[type="radio"]:checked {
-			background-color: blue;
-			color: #fff;
-		}
+		// & input[type="radio"] {
+		// 	display: none;
+		// }
+
+		// &-item,
+		// input[type="radio"],
+		// label {
+		// 	cursor: pointer;
+		// }
+
+		// & input[type="radio"]:checked {
+		// 	background-color: blue;
+		// 	color: #fff;
+		// }
 	}
 }

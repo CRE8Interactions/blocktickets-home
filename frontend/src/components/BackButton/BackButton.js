@@ -1,18 +1,17 @@
 import React from 'react';
 
-import { IconButton } from './../IconButton';
+import Button from 'react-bootstrap/Button';
 
 import './backButton.scss';
 
-export default function BackButton() {
+export default function BackButton({ handleGoBack }) {
 	return (
-		<IconButton
-			styles="mt-0 mb-3 align-self-start"
+		<Button
+			onClick={handleGoBack}
+			className="d-flex icon-button mt-0 mb-3 align-self-start btn-back"
 			variant="outline-light"
-			btn="back"
-			size="sm"
-			link="../">
+			size="sm">
 			Back
-		</IconButton>
+		</Button>
 	);
 }
