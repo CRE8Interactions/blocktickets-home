@@ -2,8 +2,8 @@
 @use 'colors' as *;
 @use 'buttons' as *;
 
-$link-color: $secondary;
-$link-hover-color: $secondary;
+$link-color: $primary;
+$link-hover-color: $primary;
 $link-decoration: none;
 $nav-link-color: $muted;
 
@@ -13,5 +13,5 @@ $nav-link-color: $muted;
 
 $nav-link-font-weight: $btn-font-weight;
 $navbar-light-color: $clr-neutral-2;
-$navbar-light-hover-color: $secondary;
-$navbar-light-active-color: $secondary;
+$navbar-light-hover-color: $primary;
+$navbar-light-active-color: $primary;

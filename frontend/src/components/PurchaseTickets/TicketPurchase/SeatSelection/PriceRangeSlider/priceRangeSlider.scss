@@ -16,7 +16,7 @@
 
 	.rc-slider {
 		&-handle {
-			background-color: $clr-secondary;
+			background-color: $clr-primary;
 			border: 4px solid $clr-white;
 			opacity: 1;
 			margin-top: rem(-10);
@@ -34,7 +34,7 @@
 		}
 
 		&-track {
-			background-color: $clr-secondary;
+			background-color: $clr-primary;
 		}
 	}
 }
