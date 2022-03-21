@@ -49,3 +49,9 @@ $gap-xs: rem(4);
 		margin-top: rem(3);
 	}
 }
+
+.heading--flex {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}

@@ -43,6 +43,10 @@ select:-webkit-autofill:focus {
 	transition: background-color 5000s ease-in-out 0s;
 }
 
+legend {
+	font-size: 1rem;
+}
+
 ul,
 ol,
 dl {
