@@ -22,7 +22,12 @@ export default function PriceRangeSlider() {
 
 	return (
 		<Stack direction="horizontal" gap={3} className="amount">
-			<Form.Control type="text" className="amount" value={`$${sliderValues[0]} `} />
+			<Form.Control
+				type="text"
+				className="amount"
+				onChange={handleChange}
+				value={`$${sliderValues[0]} `}
+			/>
 			<Slider
 				range
 				min={0}
@@ -31,7 +36,12 @@ export default function PriceRangeSlider() {
 				defaultValue={sliderValues}
 				onChange={handleChange}
 			/>
-			<Form.Control type="text" className="amount" value={`$${sliderValues[1]} `} />
+			<Form.Control
+				type="text"
+				className="amount"
+				onChange={handleChange}
+				value={`$${sliderValues[1]} `}
+			/>
 		</Stack>
 	);
 }

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { PriceRangeSlider } from './PriceRangeSlider';
 
 import Stack from 'react-bootstrap/Stack';
@@ -13,15 +13,21 @@ export default function SeatSelection({ handleClick, setType }) {
 		setType('');
 	}, []);
 
+	const [
+		selected,
+		setSelected
+	] = useState('2');
+
 	return (
 		<Fragment>
 			<div className="seat-selection">
 				<Stack direction="horizontal" gap={2} className="option-btns">
-					<Form.Select aria-label="Number of Tickets">
+					<Form.Select
+						aria-label="Number of Tickets"
+						value={selected}
+						onChange={(e) => setSelected(e.target.value)}>
 						<option value="1">1 Ticket</option>
-						<option value="2" selected>
-							2 Tickets
-						</option>
+						<option value="2">2 Tickets</option>
 						<option value="3">3 Tickets</option>
 					</Form.Select>
 
