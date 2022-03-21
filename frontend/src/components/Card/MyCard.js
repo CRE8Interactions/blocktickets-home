@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React from 'react';
 
 import Card from 'react-bootstrap/Card';
 
@@ -7,11 +7,13 @@ import { VenueCardBody } from './VenueCardBody';
 
 import './card.scss';
 
-export default function MyCard({ prefix }) {
+export default function MyCard({ prefix, type }) {
 	return (
 		<Card>
 			<Card.Img variant="top" src="holder.js/100px180" />
-			<Card.Body>{prefix === 'events' ? <EventCardBody /> : <VenueCardBody />}</Card.Body>
+			<Card.Body>
+				{prefix === 'events' ? <EventCardBody type={type} /> : <VenueCardBody />}
+			</Card.Body>
 		</Card>
 	);
 }

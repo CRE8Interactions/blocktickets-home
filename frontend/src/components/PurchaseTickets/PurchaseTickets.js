@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { SeatingMap } from './SeatingMap';
 import { TicketPurchase } from './TicketPurchase';
@@ -18,15 +19,20 @@ export default function PurchaseTickets() {
 		presale: 4
 	};
 
+	const { search } = useLocation();
+
+	let query = new URLSearchParams(search, [
+		search
+	]);
+
+	const [
+		param
+	] = useState(query.get('type'));
+
 	const [
 		step,
 		setStep
 	] = useState('selection');
-
-	const [
-		type,
-		setType
-	] = useState('');
 
 	const handleClick = (step, type = '') => {
 		// find key
@@ -47,14 +53,14 @@ export default function PurchaseTickets() {
 		<div className="pt-md-3 flex d-flex flex-column flex-md-row">
 			<SeatingMap
 				styles={(step === 'quantity' || step === 'presale') && 'tablet-desktop-only--flex'}
+				type={param}
 			/>
 
 			<TicketPurchase
 				handleClick={handleClick}
 				handleGoBack={handleGoBack}
 				step={step}
-				typeOfTicket={type}
-				setTypeOfTicket={setType}
+				type={param}
 			/>
 		</div>
 	);

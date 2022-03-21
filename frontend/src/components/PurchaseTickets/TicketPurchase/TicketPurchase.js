@@ -6,22 +6,12 @@ import { TicketPresale } from './TicketPresale';
 
 import './ticketPurchase.scss';
 
-export default function TicketPurchase({
-	handleClick,
-	handleGoBack,
-	step,
-	setTypeOfTicket,
-	typeOfTicket
-}) {
+export default function TicketPurchase({ handleClick, handleGoBack, step, type }) {
 	return (
 		<div className="left-col">
-			{step === 'selection' && (
-				<SeatSelection handleClick={handleClick} setType={setTypeOfTicket} />
-			)}
+			{step === 'selection' && <SeatSelection handleClick={handleClick} type={type} />}
 
-			{step === 'quantity' && (
-				<SeatConfirmation handleGoBack={handleGoBack} type={typeOfTicket} />
-			)}
+			{step === 'quantity' && <SeatConfirmation handleGoBack={handleGoBack} type={type} />}
 
 			{step === 'presale' && <TicketPresale handleClick={handleClick} />}
 		</div>

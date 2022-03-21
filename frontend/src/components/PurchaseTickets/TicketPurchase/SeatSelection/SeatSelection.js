@@ -7,16 +7,74 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import './seatSelection.scss';
+import { FilterModal } from './FilterModal';
 
-export default function SeatSelection({ handleClick, setType }) {
-	useEffect(() => {
-		setType('');
-	}, []);
-
+export default function SeatSelection({ handleClick, type }) {
 	const [
 		selected,
 		setSelected
 	] = useState('2');
+
+	const [
+		showFilter,
+		setShowFilter
+	] = useState(false);
+
+	// for demo purposes, this will come from the database
+	const genAdmissionTickets = [
+		{
+			seat: 'General Admissions',
+			type: 'Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		},
+		{
+			seat: 'General Admissions',
+			type: 'Resale Ticket'
+		}
+	];
+
+	const seatedTickets = [
+		{
+			seat: 'Sec Row',
+			type: 'Presale'
+		},
+		{
+			seat: 'Section B &bull; Row 2',
+			type: 'Standard Ticket'
+		}
+	];
+
+	let tickets;
+	{
+		tickets = type == 'genAdmissions' ? genAdmissionTickets : seatedTickets;
+	}
 
 	return (
 		<Fragment>
@@ -31,79 +89,41 @@ export default function SeatSelection({ handleClick, setType }) {
 						<option value="3">3 Tickets</option>
 					</Form.Select>
 
-					<Button className="btn--filter" variant="outline-light">
+					<Button
+						className="btn--filter"
+						variant="outline-light"
+						onClick={() => setShowFilter(!showFilter)}>
 						Filter
 					</Button>
 				</Stack>
+				{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
 				<PriceRangeSlider />
 
 				<ListGroup as="ul">
-					<ListGroup.Item
-						onClick={() => handleClick('presale')}
-						action
-						as="li"
-						className="d-flex justify-content-between align-items-center">
-						<div>
+					{tickets.map((ticket) => (
+						<ListGroup.Item
+							onClick={() => handleClick('quantity')}
+							action
+							as="li"
+							className="d-flex justify-content-between align-items-center">
 							<div>
-								<span className="caption fw-bold p-0">Standard Admission</span>
+								<div>
+									<span className="fw-bold p-0">{ticket.seat}</span>
+								</div>
+								<div>
+									<span className="text-muted caption">{ticket.type}</span>
+								</div>
 							</div>
-							<div>
-								<span className="text-muted caption">Presale</span>
+							<div className="text-end">
+								<div>
+									<span className="fw-bold text-end">$30.00</span>
+								</div>
+								<div>
+									<span className="text-muted caption">$24.78 + Fees</span>
+								</div>
 							</div>
-						</div>
-						<div className="text-end">
-							<div>
-								<span className="fw-bold text-end">$30.00</span>
-							</div>
-							<div>
-								<span className="text-muted caption">$24.78 + Fees</span>
-							</div>
-						</div>
-					</ListGroup.Item>
-					<ListGroup.Item
-						onClick={() => handleClick('quantity')}
-						as="li"
-						action
-						className="d-flex justify-content-between align-items-center">
-						<div>
-							<div>
-								<span className="caption fw-bold p-0">Sec Row</span>
-							</div>
-							<div>
-								<span className="text-muted caption">Standard Admission</span>
-							</div>
-						</div>
-						<div className="text-end">
-							<div>
-								<span className="fw-bold text-end">$30.00</span>
-							</div>
-							<div>
-								<span className="text-muted caption">$24.78 + Fees</span>
-							</div>
-						</div>
-					</ListGroup.Item>
-					<ListGroup.Item
-						onClick={() => handleClick('quantity')}
-						action
-						as="li"
-						className="d-flex justify-content-between align-items-center">
-						<div>
-							<div>
-								<span className="caption fw-bold p-0">Section B &bull; Row 2</span>
-							</div>
-							<div>
-								<span className="text-muted caption">Resale Ticket</span>
-							</div>
-						</div>
-						<div className="text-end">
-							<div>
-								<span className="fw-bold text-end">$30.00</span>
-							</div>
-							<div>
-								<span className="text-muted caption">$24.78 + Fees</span>
-							</div>
-						</div>
-					</ListGroup.Item>
+						</ListGroup.Item>
+					))}
 				</ListGroup>
 			</div>
 		</Fragment>
