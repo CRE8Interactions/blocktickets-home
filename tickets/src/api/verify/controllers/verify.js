@@ -29,7 +29,8 @@ module.exports = createCoreController('api::verify.verify', ({
       const user = await strapi.db.query('plugin::users-permissions.user').findOne({
         where: {
           phoneNumber: verify.phoneNumber
-        }
+        },
+        populate: ["role"],
       })
       if (user) {
         // Checks if invite present for user
@@ -117,17 +118,37 @@ module.exports = createCoreController('api::verify.verify', ({
       dob
     } = ctx.request.body.data;
 
+    const invite = await strapi.db.query('api::invite.invite').findOne({
+      where: {
+        phoneNumber: phoneNumber,
+        claimed: false
+      }
+    })
+
+    const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: {
+        name: invite.role ? invite.role : 'Authenticated'
+      }
+    })
+
     const userObj = {
       data: {
         username,
         email,
         phoneNumber,
         dob,
+        role,
+        confirmed: true,
         password: process.env.DEFAULT_PW
       }
     }
 
-    const user = await strapi.service('api::verify.verify').createUser(userObj)
+    let user = await strapi.service('api::verify.verify').createUser(userObj)
+
+    user = await strapi.db.query("plugin::users-permissions.user").findOne({
+      where: { id: user.id },
+      populate: ["role"],
+    });
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 

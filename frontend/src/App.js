@@ -17,6 +17,12 @@ function App() {
 	useEffect(
 		() => {
 			console.log('app', location);
+			// Remove container class for Dashboard view
+			if (location.pathname === '/dashboard') {
+				document.getElementById('main-container').classList.remove('container')
+			} else {
+				document.getElementById('main-container').classList.add('container')
+			}
 			hideFooter(location.pathname);
 		},
 		[
@@ -28,7 +34,7 @@ function App() {
 		<Fragment>
 			<UserContext.Provider value={{ authenticated, setAuthenticated, user }}>
 				<Navigation />
-				<div className="container">
+				<div className="container" id="main-container">
 					<Router />
 				</div>
 				<Footer />

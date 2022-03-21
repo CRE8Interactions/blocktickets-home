@@ -119,7 +119,9 @@ module.exports = {
           // Gets organization if one is assigned
           if (event.params.data.organization) {
             let organization = await strapi.db.query('api::organization.organization').findOne({
+             where: {
               id: event.params.data.organization
+             }
             });
           }
           // Create message based on role
