@@ -5,8 +5,6 @@ services:
     build:
       context: ./contract_issuer
       dockerfile: Dockerfile
-    depends_on:
-      - ganache
     volumes:
       - ./contract_issuer:/usr/src/app/contract_issuer
       - /usr/src/app/contract_issuer/node_modules
