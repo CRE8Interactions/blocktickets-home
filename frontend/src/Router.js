@@ -18,37 +18,18 @@ import {
  */
 
 const Router = () => {
-  return (<
-		Routes >
-    <
-      Route path="/"
-      element={
-        < HomePage />
-      }
-    />{' '} <
-      Route path="/login"
-      element={
-        < LoginPage />
-      }
-    />{' '} <
-      Route path="/dashboard"
-      element={
-        <
-			RequireAuth >
-          <
-            DashboardPage />
-          <
-			/RequireAuth>
-		}
-		/>{' '} <
-            Route path="/tickets/:id"
-            element={
-              < TicketsPage />
-            }
-          /> {
-			/* Add a NotFound route */} <
-		/Routes>
-          );
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />}/>{' '}
+      <Route path="/login" element={<LoginPage />}/>{' '}
+      <Route path="/dashboard" element={
+        <RequireAuth>
+          <DashboardPage />
+        </RequireAuth>}
+      />{' '} 
+      <Route path="/tickets/:id" element={<TicketsPage /> } /> {/* Add a NotFound route */}
+    </Routes>
+  );
 };
 
-          export default Router;
+export default Router;
