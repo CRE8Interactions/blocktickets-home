@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import profile from '../../assets/profile-thumbnail.png';
+import info from '../../assets/icons/info.svg';
 
 import './ticket.scss';
 
@@ -31,7 +32,7 @@ export default function Ticket() {
 							className="artist-image"
 						/>
 					</Col>
-					<Col xs={6} md={5} lg={6} className="d-flex flex-column details">
+					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
 						<h1 className="normal-lg artist-name">Nic Fanciulli</h1>
 						<p className="caption--uppercase subtitle text-muted tablet-desktop-only">
 							Coda, Platform, Floh, &amp; Embrace Presents:
@@ -69,9 +70,14 @@ export default function Ticket() {
 							</Col>
 						</Row>
 					</Col>
-					<Col className="d-flex justify-content-md-start">
-						<Button variant="default" className="btn--info mt-0 " onClick={handleShow}>
-							<span className="tablet-desktop-only ms-3">Event description</span>
+					<Col className="align-self-md-end ">
+						<Button
+							variant="default"
+							size="sm"
+							className="btn--info"
+							onClick={handleShow}>
+							<img src={info} alt="" />
+							<span className="tablet-desktop-only">Event description</span>
 						</Button>
 
 						<EventModal show={show} handleClose={handleClose} />
