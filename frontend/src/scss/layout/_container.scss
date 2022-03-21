@@ -49,7 +49,7 @@ $pad-md: rem(81);
 .location-caption {
 	@extend .caption !optional;
 	@extend %icon-text-box !optional;
-	gap: $gap-sm;
+	gap: $gap-xs;
 	color: $clr-neutral-4;
 	font-weight: $fw-semi-bold;
 	line-height: 0;
