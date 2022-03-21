@@ -9,9 +9,7 @@ import {
   DashboardPage,
   TicketsPage
 } from './pages';
-import {
-  RequireAuth
-} from './context/auth/useAuth';
+import { RequireAuth } from './context/auth/useAuth';
 
 /**
  * @description Handle all the routes
