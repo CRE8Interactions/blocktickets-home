@@ -14,6 +14,10 @@ input::placeholder {
 
 .form-check {
 	min-height: 0px;
+
+	&-label {
+		font-size: rem(14);
+	}
 }
 
 .form-select {
@@ -38,4 +42,8 @@ input::placeholder {
 		padding: 0px;
 		min-height: auto;
 	}
+}
+
+#custom-switch {
+	height: 26px;
 }

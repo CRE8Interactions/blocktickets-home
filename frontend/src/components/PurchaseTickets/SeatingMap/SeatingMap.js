@@ -2,11 +2,15 @@ import React, { Fragment } from 'react';
 
 import './seatingMap.scss';
 import generalAdmissionsMap from '../../../assets/map-general_admissions.svg';
+import seatingMap from '../../../assets/map-seating.svg';
 
-export default function SeatingMap({ styles }) {
+export default function SeatingMap({ styles, type }) {
 	return (
 		<div className={`map align-items-center justify-content-around ${styles && styles}`}>
-			<img src={generalAdmissionsMap} alt="Seating Map" />
+			<img
+				src={type === 'genAdmissions' ? generalAdmissionsMap : seatingMap}
+				alt="Seating Map"
+			/>
 		</div>
 	);
 }

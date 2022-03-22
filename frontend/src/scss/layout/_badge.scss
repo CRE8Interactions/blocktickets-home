@@ -6,8 +6,8 @@
 	border-width: $border-width;
 	background-color: $clr-white !important;
 
-	&--secondary {
-		color: $clr-secondary;
-		border-color: $clr-secondary;
+	&--primary {
+		color: $clr-primary;
+		border-color: $clr-primary;
 	}
 }

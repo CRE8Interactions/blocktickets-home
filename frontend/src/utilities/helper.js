@@ -13,14 +13,18 @@ export const fullHeightContainer = (url, el) => {
 		el.classList.add('container--full-width');
 	}
 
-	document.getElementById('root').style.height = '100vh';
+	const root = document.getElementById('root');
+
+	root.style.height = '100vh';
 };
 
 export const removeFullHeightContainer = (el) => {
 	console.log('remove');
 	el.classList.remove('container--full-width');
 
-	document.getElementById('root').style.height = '';
+	const root = document.getElementById('root');
+
+	root.style.height = '';
 };
 
 export const hideFooter = (url) => {

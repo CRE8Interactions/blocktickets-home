@@ -13,6 +13,12 @@
 	margin-left: rem(16);
 }
 
+.btn-group-flex {
+	.btn {
+		margin: 0px;
+	}
+}
+
 .btn {
 	margin-top: rem(14);
 
@@ -71,9 +77,10 @@
 .btn--input {
 	@extend %btn-background !optional;
 	padding: em(16);
+	border: none;
 
 	&-default {
-		background-color: $primary;
+		background-color: $secondary;
 		background-image: url('../../assets/icons/right-arrow-white.svg');
 	}
 
@@ -93,7 +100,7 @@
 			content: url($data-svg-prefix + map-get($icons, 'ticketWhite'));
 		}
 	}
-	&--secondary {
+	&--primary {
 		&::before {
 			content: url($data-svg-prefix + map-get($icons, 'ticketSecondary'));
 		}

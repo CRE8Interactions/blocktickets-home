@@ -9,8 +9,8 @@ import './venueCardBody.scss';
 export default function EventCardTop() {
 	return (
 		<Fragment>
-			<Card.Title>Celebrities nightclub Venue</Card.Title>
-			<Card.Text>Toronto, ON</Card.Text>
+			<Card.Title as="h5">Celebrities nightclub Venue</Card.Title>
+			<Card.Text as="p">Toronto, ON</Card.Text>
 			<hr />
 			<Row>
 				<span className="col caption">Mar 13 9:30PM</span>
@@ -24,7 +24,7 @@ export default function EventCardTop() {
 				<span className="col caption">Mar 13 9:30PM</span>
 				<span className="col caption text-end fw-bold">Another Artist</span>
 			</Row>
-			<Link to={''} className="btn btn-outline-light text-secondary btn-sm">
+			<Link to={''} className="btn btn-outline-light text-primary btn-sm">
 				View All
 			</Link>
 		</Fragment>

@@ -84,27 +84,24 @@ $pad-md: rem(81);
 		display: none;
 	}
 }
+
 .tablet-desktop-only {
-	display: none;
-
-	@include breakpoint-min(md) {
-		display: block;
+	@include breakpoint-max(md) {
+		display: none;
 	}
-}
 
-.tablet-desktop-only--flex {
-	display: none;
+	&--flex {
+		display: none;
 
-	@include breakpoint-min(md) {
-		display: flex;
+		@include breakpoint-min(md) {
+			display: flex;
+		}
 	}
 }
 
 .desktop-only {
-	display: none;
-
-	@include breakpoint-min(lg) {
-		display: block;
+	@include breakpoint-max(lg) {
+		display: none;
 	}
 }
 

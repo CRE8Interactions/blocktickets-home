@@ -67,7 +67,7 @@ export default function Hero() {
 										</Row>
 										<IconButton
 											styles="btn-hero"
-											variant="secondary"
+											variant="primary"
 											size="lg"
 											link="/tickets/1"
 											btn="tickets--plain">

@@ -21,7 +21,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 				</header>
 				<div className="ticket-details d-flex flex-column">
 					<h1 className="text-uppercase">Section general admission</h1>
-					{type !== 'genAdmission' && (
+					{type !== 'genAdmissions' && (
 						<div className="seat caption text-muted fw-bold d-flex justify-content-between align-items-center">
 							<div>
 								<img
@@ -74,7 +74,10 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 						</div>
 					</Stack>
 				</div>
-				<Stack direction="horizontal" gap={3} className="align-items-center footer">
+				<Stack
+					direction="horizontal"
+					gap={3}
+					className="align-items-center footer btn-group-flex">
 					<Link
 						to={'/'}
 						className="btn btn--icon-lg btn-outline-light"
@@ -83,7 +86,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 					</Link>
 					<span className="caption text-muted">or</span>
 
-					<Link to={'/checkout'} className="btn mt-0 w-100 btn-secondary btn-lg">
+					<Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
 						Checkout
 					</Link>
 				</Stack>

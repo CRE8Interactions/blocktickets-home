@@ -26,7 +26,7 @@ export default function NavButtons({ styles }) {
 	return (
 		<Fragment>
 			{!authService.isLoggedIn() && (
-				<LinkContainer to="/login" className={`btn btn-primary text-white ${styles}`}>
+				<LinkContainer to="/login" className={`btn btn-secondary text-white ${styles}`}>
 					<Nav.Link>Login</Nav.Link>
 				</LinkContainer>
 			)}
