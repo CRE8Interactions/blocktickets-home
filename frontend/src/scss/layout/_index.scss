@@ -16,3 +16,10 @@
 	align-items: center;
 	margin-right: 1em;
 }
+
+// on the root element
+.full-width-flex {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}

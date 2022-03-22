@@ -15,7 +15,7 @@ export const fullHeightContainer = (url, el) => {
 
 	const root = document.getElementById('root');
 
-	root.style.height = '100vh';
+	root.classList.add('full-width-flex');
 };
 
 export const removeFullHeightContainer = (el) => {
@@ -24,7 +24,7 @@ export const removeFullHeightContainer = (el) => {
 
 	const root = document.getElementById('root');
 
-	root.style.height = '';
+	root.classList.remove('full-width-flex');
 };
 
 export const hideFooter = (url) => {
