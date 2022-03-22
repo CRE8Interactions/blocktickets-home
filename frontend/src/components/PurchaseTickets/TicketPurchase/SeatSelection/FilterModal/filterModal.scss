@@ -1,23 +1,34 @@
 @use '../../../../../scss/abstracts' as *;
 @use '../../../../../scss/layout' as *;
 
-.filter {
+.filter-panel {
+	display: flex;
+	flex-direction: column;
 	position: absolute;
 	left: 0;
 	right: 0;
+	bottom: 0;
+	top: 0;
 	z-index: 999;
 	background: $clr-white;
+	transform: translateX(300%);
+	transition: transform 600ms ease-in-out;
+
+	&--open {
+		transform: translateX(0%);
+	}
 
 	legend,
 	header {
-		border-bottom: border();
+		border-top: border();
 	}
 
 	header {
-		padding-bottom: em(18);
+		padding-top: em(24);
+		padding-bottom: em(6);
 	}
 	legend {
-		padding: em(18) 0px;
+		padding: em(6) 0px;
 
 		.legend-heading {
 			margin-bottom: rem(10);
@@ -33,7 +44,9 @@
 	}
 
 	.footer {
-		padding-top: em(5);
+		border-top: border();
+		margin-top: auto;
+		padding-top: em(23);
 		.btn {
 			flex: 1;
 		}

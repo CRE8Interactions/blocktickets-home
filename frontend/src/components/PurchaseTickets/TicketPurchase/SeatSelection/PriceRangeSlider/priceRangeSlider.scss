@@ -1,7 +1,10 @@
 @use '../../../../../scss/abstracts' as *;
 
 .amount {
-	padding-bottom: rem(12);
+	padding-bottom: rem(18);
+	@include breakpoint-min(md) {
+		padding-bottom: em(24);
+	}
 
 	.form-control {
 		border-radius: 4px;
@@ -10,7 +13,7 @@
 		color: #000;
 		font-weight: $fw-normal;
 		text-align: center;
-		padding: 0px em(14);
+		padding: em(5) em(14);
 		margin-top: 0px;
 	}
 

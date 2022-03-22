@@ -3,7 +3,7 @@
 @use '../../../../scss/layout' as *;
 
 .seat-selection {
-	position: relative;
+	height: 100%;
 	.option-btns {
 		margin-bottom: rem(24);
 
@@ -11,19 +11,15 @@
 			margin-bottom: rem(26);
 		}
 	}
-	.amount {
-		display: none;
 
-		@include breakpoint-min(md) {
-			display: flex;
-		}
+	.seats {
+		position: relative;
 	}
 	.list-group {
 		@extend %remove-scrollbar;
 		max-height: 240px;
 
 		overflow-y: auto;
-		margin-top: rem(14);
 
 		&-item {
 			user-select: none;

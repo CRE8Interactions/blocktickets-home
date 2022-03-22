@@ -7,19 +7,30 @@ import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 import './filterModal.scss';
+import { useState } from 'react';
 
 export default function FilterModal({ setShow, show }) {
+	const [
+		on,
+		setOn
+	] = useState(false);
+
 	return (
-		<div className="filter">
+		<div className={`filter-panel ${show && 'filter-panel--open'}`}>
 			<div id="collapsible-panel-example-1">
 				<Form>
-					<PriceRangeSlider className="mobile-only" />
 					<header>
 						<Stack direction="horizontal" className=" heading--flex">
 							<h3 className="m-0 normal text-uppercase">Filters</h3>
 							<BackButton handleGoBack={() => setShow(!show)} />
 						</Stack>
-						<Form.Check type="checkbox" label="Show prices with fees" />
+						<PriceRangeSlider styles="mobile-only" />
+						<Form.Check
+							type="checkbox"
+							label="Show prices with fees"
+							id="fees"
+							className="fw-bold"
+						/>
 					</header>
 					<legend>
 						<p className="caption--uppercase text-muted legend-heading">Ticket Type</p>
@@ -43,28 +54,32 @@ export default function FilterModal({ setShow, show }) {
 					<legend>
 						<Stack direction="horizontal" className="heading--flex">
 							<p className="small legend-heading accessibility">Accessibility</p>
-							<Form.Check
+							<Form.Switch
 								type="switch"
+								onChange={() => setOn(!on)}
+								value={on}
 								id="custom-switch"
 								aria-label="Toggle Accessibility"
 							/>
 						</Stack>
-						<ul>
-							<li>
-								<Form.Check
-									type="checkbox"
-									id="impairment"
-									label="Vision and/or hearing impairment"
-								/>
-							</li>
-							<li>
-								<Form.Check
-									type="checkbox"
-									id="wheelchair"
-									label="Wheelchair Accessible"
-								/>
-							</li>
-						</ul>
+						{on && (
+							<ul>
+								<li>
+									<Form.Check
+										type="checkbox"
+										id="impairment"
+										label="Vision and/or hearing impairment"
+									/>
+								</li>
+								<li>
+									<Form.Check
+										type="checkbox"
+										id="wheelchair"
+										label="Wheelchair Accessible"
+									/>
+								</li>
+							</ul>
+						)}
 					</legend>
 					<Stack direction="horizontal" className="footer btn-group-flex" gap={3}>
 						<Button variant="outline-light" size="lg" className="mt-0">

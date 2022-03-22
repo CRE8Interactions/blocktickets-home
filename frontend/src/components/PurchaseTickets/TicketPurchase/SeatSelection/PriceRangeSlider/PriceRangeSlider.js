@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import 'rc-slider/assets/index.css';
 import './priceRangeSlider.scss';
 
-export default function PriceRangeSlider() {
+export default function PriceRangeSlider({ styles }) {
 	const [
 		sliderValues,
 		setSliderValues
@@ -21,7 +21,7 @@ export default function PriceRangeSlider() {
 	};
 
 	return (
-		<Stack direction="horizontal" gap={3} className="amount">
+		<Stack direction="horizontal" gap={3} className={`amount ${styles}`}>
 			<Form.Control
 				type="text"
 				className="amount"

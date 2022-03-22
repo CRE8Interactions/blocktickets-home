@@ -28,7 +28,8 @@ a {
 input,
 button,
 textarea,
-select {
+select,
+legend {
 	font: inherit;
 }
 
@@ -41,10 +42,6 @@ select:-webkit-autofill:focus {
 	color: white;
 	-webkit-text-fill-color: white;
 	transition: background-color 5000s ease-in-out 0s;
-}
-
-legend {
-	font-size: 1rem;
 }
 
 ul,

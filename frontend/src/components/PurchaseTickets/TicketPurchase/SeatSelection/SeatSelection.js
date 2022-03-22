@@ -96,35 +96,38 @@ export default function SeatSelection({ handleClick, type }) {
 						Filter
 					</Button>
 				</Stack>
-				{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
-				<PriceRangeSlider />
 
-				<ListGroup as="ul">
-					{tickets.map((ticket) => (
-						<ListGroup.Item
-							onClick={() => handleClick('quantity')}
-							action
-							as="li"
-							className="d-flex justify-content-between align-items-center">
-							<div>
+				<PriceRangeSlider styles="tablet-desktop-only" />
+
+				<div className="seats">
+					{<FilterModal show={showFilter} setShow={setShowFilter} />}
+					<ListGroup as="ul">
+						{tickets.map((ticket) => (
+							<ListGroup.Item
+								onClick={() => handleClick('quantity')}
+								action
+								as="li"
+								className="d-flex justify-content-between align-items-center">
 								<div>
-									<span className="fw-bold p-0">{ticket.seat}</span>
+									<div>
+										<span className="fw-bold p-0">{ticket.seat}</span>
+									</div>
+									<div>
+										<span className="text-muted caption">{ticket.type}</span>
+									</div>
 								</div>
-								<div>
-									<span className="text-muted caption">{ticket.type}</span>
+								<div className="text-end">
+									<div>
+										<span className="fw-bold text-end">$30.00</span>
+									</div>
+									<div>
+										<span className="text-muted caption">$24.78 + Fees</span>
+									</div>
 								</div>
-							</div>
-							<div className="text-end">
-								<div>
-									<span className="fw-bold text-end">$30.00</span>
-								</div>
-								<div>
-									<span className="text-muted caption">$24.78 + Fees</span>
-								</div>
-							</div>
-						</ListGroup.Item>
-					))}
-				</ListGroup>
+							</ListGroup.Item>
+						))}
+					</ListGroup>
+				</div>
 			</div>
 		</Fragment>
 	);
