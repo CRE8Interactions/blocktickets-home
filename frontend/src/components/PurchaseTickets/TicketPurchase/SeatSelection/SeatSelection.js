@@ -66,8 +66,16 @@ export default function SeatSelection({ handleClick, type }) {
 			type: 'Presale'
 		},
 		{
-			seat: 'Section B &bull; Row 2',
-			type: 'Standard Ticket'
+			seat: 'Sec Row',
+			type: 'Presale'
+		},
+		{
+			seat: 'Sec Row',
+			type: 'Presale'
+		},
+		{
+			seat: 'Sec Row',
+			type: 'Presale'
 		}
 	];
 
@@ -78,29 +86,29 @@ export default function SeatSelection({ handleClick, type }) {
 
 	return (
 		<Fragment>
-			<div className="seat-selection">
-				<Stack direction="horizontal" gap={2} className="option-btns">
-					<Form.Select
-						aria-label="Number of Tickets"
-						value={selected}
-						onChange={(e) => setSelected(e.target.value)}>
-						<option value="1">1 Ticket</option>
-						<option value="2">2 Tickets</option>
-						<option value="3">3 Tickets</option>
-					</Form.Select>
+			<Stack direction="horizontal" gap={2} className="option-btns">
+				<Form.Select
+					aria-label="Number of Tickets"
+					value={selected}
+					onChange={(e) => setSelected(e.target.value)}>
+					<option value="1">1 Ticket</option>
+					<option value="2">2 Tickets</option>
+					<option value="3">3 Tickets</option>
+				</Form.Select>
 
-					<Button
-						className="btn--filter"
-						variant="outline-light"
-						onClick={() => setShowFilter(!showFilter)}>
-						Filter
-					</Button>
-				</Stack>
+				<Button
+					className="btn--filter"
+					variant="outline-light"
+					onClick={() => setShowFilter(!showFilter)}>
+					Filter
+				</Button>
+			</Stack>
 
-				<PriceRangeSlider styles="tablet-desktop-only" />
+			<PriceRangeSlider styles="tablet-desktop-only" />
 
+			<div className="seats-container">
 				<div className="seats">
-					{<FilterModal show={showFilter} setShow={setShowFilter} />}
+					{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
 					<ListGroup as="ul">
 						{tickets.map((ticket) => (
 							<ListGroup.Item

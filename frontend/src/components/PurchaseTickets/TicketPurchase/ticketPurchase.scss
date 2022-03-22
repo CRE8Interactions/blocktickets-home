@@ -2,9 +2,9 @@
 
 .left-col {
 	flex: 0 0;
-	// @include breakpoint-min(md) {
-	// 	flex-basis: 306px;
-	// }
+	display: flex;
+	flex-direction: column;
+
 	@include breakpoint-min(md) {
 		flex-basis: 352px;
 	}

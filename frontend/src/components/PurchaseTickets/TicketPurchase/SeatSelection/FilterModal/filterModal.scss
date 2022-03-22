@@ -2,8 +2,6 @@
 @use '../../../../../scss/layout' as *;
 
 .filter-panel {
-	display: flex;
-	flex-direction: column;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -11,12 +9,7 @@
 	top: 0;
 	z-index: 999;
 	background: $clr-white;
-	transform: translateX(300%);
-	transition: transform 600ms ease-in-out;
-
-	&--open {
-		transform: translateX(0%);
-	}
+	transition: all 600ms ease-in;
 
 	legend,
 	header {
@@ -47,6 +40,7 @@
 		border-top: border();
 		margin-top: auto;
 		padding-top: em(23);
+		padding-bottom: em(10);
 		.btn {
 			flex: 1;
 		}

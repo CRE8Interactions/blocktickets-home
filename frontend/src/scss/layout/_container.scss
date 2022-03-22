@@ -17,12 +17,7 @@ $pad-md: rem(81);
 	}
 
 	&--full-width {
-		@include breakpoint-min(md) {
-			height: 91.03%;
-		}
-		@include breakpoint-min(lg) {
-			height: 89.81%;
-		}
+		flex: 1;
 	}
 }
 
