@@ -30,7 +30,7 @@ export default function NavButtons({ styles }) {
 					<Nav.Link>Login</Nav.Link>
 				</LinkContainer>
 			)}
-			{!authService.isLoggedIn() && (
+			{authService.isLoggedIn() && (
 				<Fragment>
 					<Button
 						onClick={() => {

@@ -22,7 +22,7 @@ export default function EventModal({ show, handleClose }) {
 							<h1 className="m-0 heading-sm">Nic Fancuilli</h1>
 						</Col>
 						<Col className="d-flex align-self-center">
-							<Badge className="ms-auto badge-outline badge-outline--secondary">
+							<Badge className="ms-auto badge-outline badge-outline--primary">
 								Concert
 							</Badge>
 						</Col>

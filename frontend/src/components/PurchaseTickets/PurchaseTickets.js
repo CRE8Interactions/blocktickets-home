@@ -52,7 +52,7 @@ export default function PurchaseTickets() {
 	return (
 		<div className="pt-md-3 flex d-flex flex-column flex-md-row">
 			<SeatingMap
-				styles={(step === 'quantity' || step === 'presale') && 'tablet-desktop-only--flex'}
+				styles={(step === 'quantity' || step === 'presale') && 'tablet-desktop-only'}
 				type={param}
 			/>
 
