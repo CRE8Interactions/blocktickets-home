@@ -11,14 +11,21 @@ import './slider.scss';
 export default function Slider({ prefix }) {
 	return (
 		<Swiper
-			spaceBetween={20}
-			slidesPerView={2}
+			spaceBetween={30}
+			slidesPerView={1}
 			pagination={{ clickable: true }}
 			onSwiper={(swiper) => console.log(swiper)}
 			onSlideChange={() => console.log('slide change')}
 			navigation={true}
 			// Responsive breakpoints
 			breakpoints={{
+				// when window width is >= 600
+				600: {
+					slidesPerView: 2,
+					slidesPerGroup: 2
+				},
+
+				// when window width is >= 920
 				920: {
 					slidesPerView: 3,
 					slidesPerGroup: 3
@@ -27,11 +34,6 @@ export default function Slider({ prefix }) {
 				1200: {
 					slidesPerView: 4,
 					slidesPerGroup: 4
-				},
-				// when window width is >= 1440
-				1440: {
-					slidesPerView: 5,
-					slidesPerGroup: 5
 				}
 			}}>
 			<SwiperSlide>
