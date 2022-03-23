@@ -1,21 +1,18 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import { MyCard } from './../Card';
-import { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React from 'react';
+// import { Navigation } from 'swiper';
+import { Swiper } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 
 import './slider.scss';
 
-export default function Slider({ prefix }) {
+export default function Slider({ layout, children }) {
 	return (
 		<Swiper
 			spaceBetween={30}
 			slidesPerView={1}
 			pagination={{ clickable: true }}
-			onSwiper={(swiper) => console.log(swiper)}
-			onSlideChange={() => console.log('slide change')}
 			navigation={true}
 			// Responsive breakpoints
 			breakpoints={{
@@ -36,24 +33,7 @@ export default function Slider({ prefix }) {
 					slidesPerGroup: 4
 				}
 			}}>
-			<SwiperSlide>
-				<MyCard prefix={prefix} type="genAdmissions" />
-			</SwiperSlide>
-			<SwiperSlide>
-				<MyCard prefix={prefix} type="
-				" />
-			</SwiperSlide>
-			<SwiperSlide>
-				<MyCard prefix={prefix} type="
-				" />
-			</SwiperSlide>
-			<SwiperSlide>
-				<MyCard prefix={prefix} type="
-				" />
-			</SwiperSlide>
-			<SwiperSlide>
-				<MyCard prefix={prefix} type="" />
-			</SwiperSlide>
+			{children}
 		</Swiper>
 	);
 }

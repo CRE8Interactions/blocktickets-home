@@ -1,7 +1,7 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React from 'react';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { Slider } from '../Slider';
+import { VenuesSlider } from './../Slider/VenuesSlider';
 
 import './venues.scss';
 
@@ -13,7 +13,7 @@ export default function Venues() {
 				<SwiperNavigationButtons />
 			</div>
 			<div>
-				<Slider prefix="venues" />
+				<VenuesSlider />
 			</div>
 		</section>
 	);

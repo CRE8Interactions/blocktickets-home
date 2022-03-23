@@ -1,9 +1,9 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React from 'react';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
+import { EventsSlider } from './../Slider/EventsSlider';
 
 import './events.scss';
-import { Slider } from '../Slider';
 
 export default function Events() {
 	return (
@@ -13,7 +13,7 @@ export default function Events() {
 				<SwiperNavigationButtons />
 			</div>
 			<div>
-				<Slider prefix="events" />
+				<EventsSlider />
 			</div>
 		</section>
 	);

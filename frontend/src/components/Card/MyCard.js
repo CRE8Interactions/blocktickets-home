@@ -12,7 +12,7 @@ export default function MyCard({ prefix, type }) {
 		<Card>
 			<Card.Img variant="top" src="holder.js/100px180" />
 			<Card.Body>
-				{prefix === 'events' ? <EventCardBody type={type} /> : <VenueCardBody />}
+				{prefix === 'event' ? <EventCardBody type={type} /> : <VenueCardBody />}
 			</Card.Body>
 		</Card>
 	);

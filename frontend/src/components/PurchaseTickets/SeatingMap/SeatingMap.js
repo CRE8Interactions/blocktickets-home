@@ -8,7 +8,7 @@ export default function SeatingMap({ styles, type }) {
 	return (
 		<div className={`map align-items-center justify-content-around ${styles && styles}`}>
 			<img
-				src={type === 'genAdmissions' ? generalAdmissionsMap : seatingMap}
+				src={type === 'genAdmission' ? generalAdmissionsMap : seatingMap}
 				alt="Seating Map"
 			/>
 		</div>
