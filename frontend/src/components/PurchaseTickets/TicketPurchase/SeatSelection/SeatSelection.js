@@ -81,7 +81,7 @@ export default function SeatSelection({ handleClick, type }) {
 
 	let tickets;
 	{
-		tickets = type == 'genAdmissions' ? genAdmissionTickets : seatedTickets;
+		tickets = type == 'genAdmission' ? genAdmissionTickets : seatedTickets;
 	}
 
 	return (
