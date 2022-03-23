@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 
 import './backButton.scss';
 
-export default function BackButton({ handleGoBack }) {
+export default function BackButton({ handleGoBack, marginBottom = 3 }) {
 	return (
 		<Button
 			onClick={handleGoBack}
-			className="d-flex icon-button mt-0 mb-3 align-self-start btn-back"
+			className={`d-flex icon-button mt-0 mb-${marginBottom} align-self-start btn-back`}
 			variant="outline-light"
 			size="sm">
 			Back
