@@ -21,7 +21,7 @@ export default function FilterModal({ setShow, show }) {
 				<header>
 					<Stack direction="horizontal" className=" heading--flex">
 						<h3 className="m-0 normal text-uppercase">Filters</h3>
-						<BackButton handleGoBack={() => setShow(!show)} />
+						<BackButton handleGoBack={() => setShow(!show)} marginBottom={0} />
 					</Stack>
 					<PriceRangeSlider styles="mobile-only" />
 					<Form.Check
