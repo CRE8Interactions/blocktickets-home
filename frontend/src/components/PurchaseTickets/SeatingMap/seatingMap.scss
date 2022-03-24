@@ -10,6 +10,7 @@
 
 	@include breakpoint-max(md) {
 		@include full-width();
+		max-height: 250px;
 	}
 	img {
 		max-height: 201px;
