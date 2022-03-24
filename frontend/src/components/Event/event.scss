@@ -3,7 +3,7 @@
 @use '../../scss/layout/typography' as *;
 @use '../../scss/layout/container' as *;
 
-.ticket {
+.event {
 	@include breakpoint-max(md) {
 		background-color: $gray-300;
 		@include full-width();

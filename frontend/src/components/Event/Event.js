@@ -8,9 +8,9 @@ import Button from 'react-bootstrap/Button';
 import profile from '../../assets/profile-thumbnail.png';
 import info from '../../assets/icons/info.svg';
 
-import './ticket.scss';
+import './event.scss';
 
-export default function Ticket() {
+export default function Event() {
 	const [
 		show,
 		setShow
@@ -20,7 +20,7 @@ export default function Ticket() {
 	const handleShow = () => setShow(true);
 
 	return (
-		<div className="ticket">
+		<div className="event">
 			<header>
 				<Row gap={2} className="py-2 py-md-3 align-items-center">
 					<Col md={2} id="artist-image-col" className="tablet-desktop-only">
