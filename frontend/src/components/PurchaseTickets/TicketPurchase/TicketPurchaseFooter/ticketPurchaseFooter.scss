@@ -1,0 +1,19 @@
+@use '../../../../scss/abstracts' as *;
+
+.left-col {
+	.footer {
+		display: flex;
+		border-top: border();
+		padding-top: em(23);
+		padding-bottom: em(22);
+		margin-top: auto;
+
+		.btn {
+			flex: 1;
+		}
+
+		& > * {
+			margin-top: 0px;
+		}
+	}
+}
