@@ -5,21 +5,17 @@
 .left-col {
 	.option-btns {
 		margin-bottom: rem(24);
-
-		@include breakpoint-min(md) {
-			margin-bottom: rem(26);
-		}
 	}
 
 	.seats-container {
-		position: relative;
 		flex: 1;
 	}
-	.seats {
+	.seats--scrollable {
 		@extend %remove-scrollbar;
 		overflow-y: auto;
 		height: 100%;
 	}
+
 	.list-group {
 		max-height: 240px;
 
@@ -30,20 +26,5 @@
 			line-height: 1.2;
 			cursor: pointer;
 		}
-
-		// & input[type="radio"] {
-		// 	display: none;
-		// }
-
-		// &-item,
-		// input[type="radio"],
-		// label {
-		// 	cursor: pointer;
-		// }
-
-		// & input[type="radio"]:checked {
-		// 	background-color: blue;
-		// 	color: #fff;
-		// }
 	}
 }

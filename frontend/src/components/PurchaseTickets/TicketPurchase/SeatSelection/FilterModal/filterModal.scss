@@ -11,17 +11,20 @@
 	background: $clr-white;
 	transition: all 600ms ease-in;
 
-	legend,
-	header {
+	legend {
 		border-top: border();
 	}
 
 	header {
-		padding-top: em(24);
 		padding-bottom: em(6);
+
+		.heading--flex {
+			margin-bottom: rem(16);
+		}
 	}
+
 	legend {
-		padding: em(6) 0px;
+		padding-top: em(18);
 
 		.legend-heading {
 			margin-bottom: rem(10);
@@ -34,15 +37,9 @@
 				}
 			}
 		}
-	}
 
-	.footer {
-		border-top: border();
-		margin-top: auto;
-		padding-top: em(23);
-		padding-bottom: em(10);
-		.btn {
-			flex: 1;
+		.accessibility-body {
+			min-height: 65px;
 		}
 	}
 }

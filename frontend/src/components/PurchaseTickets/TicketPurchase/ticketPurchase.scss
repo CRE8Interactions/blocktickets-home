@@ -11,5 +11,6 @@
 
 	@include breakpoint-max(md) {
 		margin-top: rem(17);
+		flex: 1;
 	}
 }

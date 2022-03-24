@@ -34,6 +34,12 @@ export default function PurchaseTickets() {
 		setStep
 	] = useState('selection');
 
+	// better way?
+	const [
+		isZoomed,
+		setIsZoomed
+	] = useState(false);
+
 	const handleClick = (step, type = '') => {
 		// find key
 		setStep(Object.keys(steps).find((key) => key === step));
@@ -54,6 +60,7 @@ export default function PurchaseTickets() {
 			<SeatingMap
 				styles={(step === 'quantity' || step === 'presale') && 'tablet-desktop-only'}
 				type={param}
+				setIsZoomed={setIsZoomed}
 			/>
 
 			<TicketPurchase
@@ -61,6 +68,7 @@ export default function PurchaseTickets() {
 				handleGoBack={handleGoBack}
 				step={step}
 				type={param}
+				isZoomed={isZoomed}
 			/>
 		</div>
 	);

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BackButton } from '../../../../BackButton';
 import { PriceRangeSlider } from '../PriceRangeSlider';
+import { TicketPurchaseFooter } from '../../TicketPurchaseFooter';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 import './filterModal.scss';
-import { useState } from 'react';
 
 export default function FilterModal({ setShow, show }) {
 	const [
@@ -20,8 +20,8 @@ export default function FilterModal({ setShow, show }) {
 			<Stack direction="vertical">
 				<header>
 					<Stack direction="horizontal" className=" heading--flex">
-						<h3 className="m-0 normal text-uppercase">Filters</h3>
-						<BackButton handleGoBack={() => setShow(!show)} marginBottom={0} />
+						<h3 className="normal text-uppercase">Filters</h3>
+						<BackButton handleGoBack={() => setShow(!show)} marginBottom="0" />
 					</Stack>
 					<PriceRangeSlider styles="mobile-only" />
 					<Form.Check
@@ -57,33 +57,35 @@ export default function FilterModal({ setShow, show }) {
 							aria-label="Toggle Accessibility"
 						/>
 					</Stack>
-					{on && (
-						<ul>
-							<li>
-								<Form.Check
-									type="checkbox"
-									id="impairment"
-									label="Vision and/or hearing impairment"
-								/>
-							</li>
-							<li>
-								<Form.Check
-									type="checkbox"
-									id="wheelchair"
-									label="Wheelchair Accessible"
-								/>
-							</li>
-						</ul>
-					)}
+					<div className="accessibility-body">
+						{on && (
+							<ul>
+								<li>
+									<Form.Check
+										type="checkbox"
+										id="impairment"
+										label="Vision and/or hearing impairment"
+									/>
+								</li>
+								<li>
+									<Form.Check
+										type="checkbox"
+										id="wheelchair"
+										label="Wheelchair Accessible"
+									/>
+								</li>
+							</ul>
+						)}
+					</div>
 				</legend>
-				<Stack direction="horizontal" className="footer btn-group-flex" gap={3}>
-					<Button variant="outline-light" size="lg" className="mt-0">
-						Cancel
+				<TicketPurchaseFooter>
+					<Button variant="outline-light" size="lg">
+						Clear all
 					</Button>
-					<Button variant="primary" size="lg" type="submit" className="mt-0">
+					<Button variant="primary" size="lg">
 						Apply Filters
 					</Button>
-				</Stack>
+				</TicketPurchaseFooter>
 			</Stack>
 		</Stack>
 	);

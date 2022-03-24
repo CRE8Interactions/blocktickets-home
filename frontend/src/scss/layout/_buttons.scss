@@ -35,11 +35,11 @@
 .btn--icon {
 	padding: em(7);
 	margin-top: 0px;
-}
 
-.btn--icon-lg {
-	padding: em(16);
-	margin-top: 0px;
+	&-lg {
+		padding: em(16);
+		margin-top: 0px;
+	}
 }
 
 .btn--info {

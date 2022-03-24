@@ -19,7 +19,6 @@ export const fullHeightContainer = (url, el) => {
 };
 
 export const removeFullHeightContainer = (el) => {
-	console.log('remove');
 	el.classList.remove('container--full-width');
 
 	const root = document.getElementById('root');

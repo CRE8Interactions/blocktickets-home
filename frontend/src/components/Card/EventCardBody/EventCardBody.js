@@ -6,7 +6,7 @@ import { IconButton } from '../../IconButton';
 
 import './eventCardBody.scss';
 
-export default function EventCardBody({ type }) {
+export default function EventCardBody({ type = '' }) {
 	return (
 		<Fragment>
 			<Card.Title as="h5">Dua Lipa: The future Nostalgic Tour</Card.Title>
