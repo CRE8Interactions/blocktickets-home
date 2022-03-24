@@ -34,7 +34,7 @@ export default function PurchaseTickets() {
 		setStep
 	] = useState('selection');
 
-	// better way?
+	// better way? - only on seated map?
 	const [
 		isZoomed,
 		setIsZoomed
