@@ -1,0 +1,16 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/theme/colors' as *;
+
+.left-col {
+	#notAvailable {
+		& > * {
+			font-family: $font-body;
+			text-align: center;
+		}
+
+		p {
+			font-size: $small;
+			color: $muted;
+		}
+	}
+}
