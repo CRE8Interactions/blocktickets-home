@@ -13,10 +13,7 @@ import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 
 import './seatSelection.scss';
 
-export default function SeatSelection({ handleClick, type }) {
-	// for demo purposes, will be a prop that comes from map
-	const clicked = false;
-
+export default function SeatSelection({ handleClick, type, isZoomed }) {
 	const [
 		selected,
 		setSelected
@@ -114,7 +111,7 @@ export default function SeatSelection({ handleClick, type }) {
 			</header>
 			<Stack direction="vertical" className="position-relative">
 				{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
-				{clicked && (
+				{isZoomed && (
 					<Stack direction="horizontal" className="heading--flex mb-3">
 						<h3 className="text-uppercase">Your Tickets (7)</h3>
 						<Button variant="default" className="p-0">
@@ -124,7 +121,7 @@ export default function SeatSelection({ handleClick, type }) {
 				)}
 				<div className="seats-container">
 					<div className="seats--scrollable">
-						{!clicked && (
+						{!isZoomed && (
 							<ListGroup as="ul">
 								{tickets.map((ticket) => (
 									<ListGroup.Item
@@ -156,10 +153,10 @@ export default function SeatSelection({ handleClick, type }) {
 								))}
 							</ListGroup>
 						)}
-						{clicked && <MySeats />}
+						{isZoomed && <MySeats />}
 					</div>
 				</div>
-				{clicked &&
+				{isZoomed &&
 				!showFilter && (
 					<TicketPurchaseFooter>
 						<Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
