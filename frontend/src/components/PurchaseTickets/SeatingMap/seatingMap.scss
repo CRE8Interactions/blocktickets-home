@@ -10,9 +10,12 @@
 
 	@include breakpoint-max(md) {
 		@include full-width();
+	}
+	img {
+		max-height: 201px;
 
-		img {
-			max-height: 201px;
+		@include breakpoint-min(md) {
+			max-height: 446px;
 		}
 	}
 }

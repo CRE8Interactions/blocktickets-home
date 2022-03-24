@@ -1,15 +1,22 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { PriceRangeSlider } from './PriceRangeSlider';
+import { Link } from 'react-router-dom';
 
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import './seatSelection.scss';
+import { PriceRangeSlider } from './PriceRangeSlider';
 import { FilterModal } from './FilterModal';
+import { MySeats } from './MySeats';
+import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
+
+import './seatSelection.scss';
 
 export default function SeatSelection({ handleClick, type }) {
+	// for demo purposes, will be a prop that comes from map
+	const clicked = false;
+
 	const [
 		selected,
 		setSelected
@@ -86,57 +93,81 @@ export default function SeatSelection({ handleClick, type }) {
 
 	return (
 		<Fragment>
-			<Stack direction="horizontal" gap={2} className="option-btns">
-				<Form.Select
-					aria-label="Number of Tickets"
-					value={selected}
-					onChange={(e) => setSelected(e.target.value)}>
-					<option value="1">1 Ticket</option>
-					<option value="2">2 Tickets</option>
-					<option value="3">3 Tickets</option>
-				</Form.Select>
-
-				<Button
-					className="btn--filter"
-					variant="outline-light"
-					onClick={() => setShowFilter(!showFilter)}>
-					Filter
-				</Button>
-			</Stack>
-
-			<PriceRangeSlider styles="tablet-desktop-only" />
-
-			<div className="seats-container">
-				<div className="seats">
-					{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
-					<ListGroup as="ul">
-						{tickets.map((ticket) => (
-							<ListGroup.Item
-								onClick={() => handleClick('quantity')}
-								action
-								as="li"
-								className="d-flex justify-content-between align-items-center">
-								<div>
-									<div>
-										<span className="fw-bold p-0">{ticket.seat}</span>
-									</div>
-									<div>
-										<span className="text-muted caption">{ticket.type}</span>
-									</div>
-								</div>
-								<div className="text-end">
-									<div>
-										<span className="fw-bold text-end">$30.00</span>
-									</div>
-									<div>
-										<span className="text-muted caption">$24.78 + Fees</span>
-									</div>
-								</div>
-							</ListGroup.Item>
-						))}
-					</ListGroup>
+			<header>
+				<Stack direction="horizontal" gap={2} className="option-btns">
+					<Form.Select
+						aria-label="Number of Tickets"
+						value={selected}
+						onChange={(e) => setSelected(e.target.value)}>
+						<option value="1">1 Ticket</option>
+						<option value="2">2 Tickets</option>
+						<option value="3">3 Tickets</option>
+					</Form.Select>
+					<Button
+						className="btn--filter"
+						variant="outline-light"
+						onClick={() => setShowFilter(!showFilter)}>
+						Filter
+					</Button>
+				</Stack>
+				<PriceRangeSlider styles="tablet-desktop-only" />
+			</header>
+			<Stack direction="vertical" className="position-relative">
+				{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
+				{clicked && (
+					<Stack direction="horizontal" className="heading--flex mb-3">
+						<h3 className="text-uppercase">Your Tickets (7)</h3>
+						<Button variant="default" className="p-0">
+							<span className=" text-danger">Remove all</span>
+						</Button>
+					</Stack>
+				)}
+				<div className="seats-container">
+					<div className="seats--scrollable">
+						{!clicked && (
+							<ListGroup as="ul">
+								{tickets.map((ticket) => (
+									<ListGroup.Item
+										onClick={() => handleClick('quantity')}
+										action
+										as="li"
+										className="d-flex justify-content-between align-items-center">
+										<div>
+											<div>
+												<span className="fw-bold p-0">{ticket.seat}</span>
+											</div>
+											<div>
+												<span className="text-muted caption">
+													{ticket.type}
+												</span>
+											</div>
+										</div>
+										<div className="text-end">
+											<div>
+												<span className="fw-bold text-end">$30.00</span>
+											</div>
+											<div>
+												<span className="text-muted caption">
+													$24.78 + Fees
+												</span>
+											</div>
+										</div>
+									</ListGroup.Item>
+								))}
+							</ListGroup>
+						)}
+						{clicked && <MySeats />}
+					</div>
 				</div>
-			</div>
+				{clicked &&
+				!showFilter && (
+					<TicketPurchaseFooter>
+						<Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
+							Checkout
+						</Link>
+					</TicketPurchaseFooter>
+				)}
+			</Stack>
 		</Fragment>
 	);
 }

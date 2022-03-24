@@ -6,11 +6,11 @@ import Stack from 'react-bootstrap/Stack';
 
 import plus from '../../../../assets/icons/plus.svg';
 import minus from '../../../../assets/icons/minus.svg';
-import shoppingCart from '../../../../assets/icons/shopping-cart-black.svg';
+
+import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
+import { BackButton } from './../../../BackButton';
 
 import './seatConfirmation.scss';
-
-import { BackButton } from './../../../BackButton';
 
 export default function SeatConfirmation({ handleGoBack, type }) {
 	return (
@@ -70,22 +70,11 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 					</div>
 				</Stack>
 			</div>
-			<Stack
-				direction="horizontal"
-				gap={3}
-				className="align-items-center footer btn-group-flex">
-				<Link
-					to={'/'}
-					className="btn btn--icon-lg btn-outline-light"
-					aria-label="shopping Cart">
-					<img src={shoppingCart} alt="shopping cart" width="21" height="21" />
-				</Link>
-				<span className="caption text-muted">or</span>
-
+			<TicketPurchaseFooter>
 				<Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
 					Checkout
 				</Link>
-			</Stack>
+			</TicketPurchaseFooter>
 		</Fragment>
 	);
 }
