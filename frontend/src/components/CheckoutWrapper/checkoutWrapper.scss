@@ -1,7 +1,31 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
 
-.checkout-wrapper {
-	padding: em(32) 0px;
+#checkout-wrapper {
+	padding-top: em(32);
+	position: relative;
+
+	@include breakpoint-min(md) {
+		padding-bottom: em(32);
+	}
+
+	.row {
+		flex: 1;
+	}
+
+	.scroll-container {
+		flex: 1;
+
+		.scrollable-content {
+			height: 100%;
+			overflow-y: auto;
+			@extend %remove-scrollbar;
+
+			.content {
+				max-height: 640px;
+			}
+		}
+	}
 
 	section {
 		padding: em(23) 0px;
