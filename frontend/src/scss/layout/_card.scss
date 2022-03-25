@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../layout/typography' as *;
 
 %plain-card {
 	background: transparent;
@@ -7,9 +8,32 @@
 
 	.card-body {
 		padding: em(21);
+
+		& > * {
+			@extend %text-truncate !optional;
+		}
 	}
 
 	.card-title {
 		margin-bottom: em(10);
+	}
+}
+
+.card {
+	& * {
+		font-family: $font-body;
+	}
+
+	.btn {
+		font-family: $font-heading;
+	}
+
+	&-title {
+		font-weight: $fw-medium;
+	}
+
+	&-subtitle {
+		font-family: $font-heading;
+		font-size: $small;
 	}
 }

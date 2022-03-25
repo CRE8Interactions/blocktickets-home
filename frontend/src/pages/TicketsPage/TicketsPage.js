@@ -11,7 +11,7 @@ export default function TicketsPage() {
 	let location = useLocation();
 
 	useEffect(() => {
-		const el = document.querySelector('#wrapper').parentElement;
+		const el = document.querySelector('.full-height-wrapper').parentElement;
 
 		fullHeightContainer(location.pathname, el);
 
@@ -21,7 +21,7 @@ export default function TicketsPage() {
 	}, []);
 
 	return (
-		<div id="wrapper">
+		<div className="full-height-wrapper">
 			<Event />
 			<PurchaseTickets />
 		</div>

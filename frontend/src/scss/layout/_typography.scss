@@ -96,14 +96,10 @@ h4,
 	font-weight: $fw-semi-bold;
 }
 
-%truncate {
+%text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-}
-
-%text-truncate {
-	@extend %truncate !optional;
 }
 
 %multi-line-truncate {

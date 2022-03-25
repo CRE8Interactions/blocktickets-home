@@ -1,6 +1,6 @@
 @use '../../scss/abstracts' as *;
 
-#wrapper {
+.full-height-wrapper {
 	display: flex;
 	flex-direction: column;
 	height: 100%;

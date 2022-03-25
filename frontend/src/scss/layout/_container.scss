@@ -21,6 +21,12 @@ $pad-md: rem(81);
 	}
 }
 
+.full-height-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 @mixin full-width() {
 	position: relative;
 	width: 100vw;
@@ -34,9 +40,7 @@ $pad-md: rem(81);
 	display: flex;
 	gap: $gap;
 	align-items: center;
-	&::before {
-		line-height: 0;
-	}
+	line-height: 0;
 }
 
 .time-caption,
