@@ -6,30 +6,34 @@
 	.card {
 		flex-basis: 248px;
 	}
-}
-.price {
-	@extend %icon-text-box;
-	gap: $gap-xs;
-	font-weight: 500;
 
-	.btn {
-		padding: 0px;
-	}
-}
+	.price {
+		@extend %icon-text-box;
+		gap: $gap-xs;
+		font-weight: 500;
 
-.card-text {
-	&.title,
-	.sponsor {
-		color: $body-color;
-		font-weight: $fw-semi-bold;
+		.btn {
+			padding: 0px;
+		}
 	}
-	&.title {
-		font-size: $small;
-	}
-	font-size: $caption;
-	color: $muted;
-}
 
-.selected {
-	border-color: $primary;
+	.card-text {
+		white-space: normal;
+		&.title,
+		.sponsor {
+			color: $body-color;
+			font-weight: $fw-semi-bold;
+		}
+		&.title {
+			font-size: $small;
+			white-space: normal;
+			@extend %multi-line-truncate;
+		}
+		font-size: $caption;
+		color: $muted;
+	}
+
+	.selected {
+		border-color: $primary;
+	}
 }

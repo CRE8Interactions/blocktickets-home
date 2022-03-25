@@ -31,20 +31,20 @@ const typeOfCard = (type) => {
 export default function AddOnCard({ data }) {
 	return (
 		<Card body>
-			<div className="heading--flex heading--flex--card">
+			<Stack direction="horizontal" className="heading--flex heading--flex--card">
 				<Stack direction="horizontal" className="card-title-flex">
 					<Card.Title as="h5" className="normal">
 						{data.addOn}
 					</Card.Title>
 					<Form.Switch id="custom-switch" aria-label="Meet and Greet" />
 				</Stack>
-				<div className="price">
+				<Stack direction="horizontal" className="price">
 					<span>$45.00</span>
 					<Button variant="default" size="sm" className="btn--info">
 						<img src={info} alt="" />
 					</Button>
-				</div>
-			</div>
+				</Stack>
+			</Stack>
 			{typeOfCard(data.type)}
 		</Card>
 	);

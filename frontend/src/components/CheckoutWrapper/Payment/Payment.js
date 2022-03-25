@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Stack from 'react-bootstrap/Stack';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import info from '../../../assets/icons/info.svg';
+
+import './payment.scss';
 
 export default function Payment() {
 	// const appearance = {
@@ -57,6 +54,7 @@ export default function Payment() {
 		<Fragment>
 			<h1 className="fs-md ">Payment</h1>
 			<small className="text-muted fw-medium">Please select a payment method</small>
+			<p>Payment element goes here from Stripe</p>
 		</Fragment>
 	);
 }

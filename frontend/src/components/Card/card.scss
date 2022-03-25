@@ -29,23 +29,16 @@
 		}
 
 		&-title {
-			font-family: $font-body;
 			font-size: $body-2;
-			font-weight: $fw-medium;
-			@extend %text-truncate;
 		}
 
 		&-subtitle {
-			@extend %text-truncate;
 			margin-top: initial;
 			font-size: $small;
 		}
 	}
-	.row + .row {
+	.row + .row,
+	li + li {
 		margin-top: rem(10);
-	}
-
-	.caption {
-		@extend %text-truncate;
 	}
 }
