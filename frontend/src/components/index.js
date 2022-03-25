@@ -5,3 +5,4 @@ export { Venues } from './Venues';
 export { Footer } from './Footer';
 export { Event } from './Event';
 export { PurchaseTickets } from './PurchaseTickets';
+export { CheckoutWrapper } from './CheckoutWrapper';

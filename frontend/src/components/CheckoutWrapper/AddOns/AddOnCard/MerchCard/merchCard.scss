@@ -1,0 +1,16 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/layout' as *;
+
+.price {
+	@extend %icon-text-box;
+	gap: $gap-xs;
+	font-weight: 500;
+
+	.btn {
+		padding: 0px;
+	}
+}
+
+.powered-by {
+	margin-top: auto;
+}

@@ -1,0 +1,13 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/layout' as *;
+
+.parking-directions {
+	order: -1;
+	span {
+		display: block;
+	}
+}
+
+.powered-by {
+	margin-top: auto;
+}
