@@ -3,7 +3,10 @@
 @use 'buttons';
 @use 'badge';
 @forward 'container';
+@use 'modal';
 @use 'forms';
+@forward 'card';
+@use 'list-group';
 
 .nav-link {
 	padding-left: 0px;
@@ -16,7 +19,7 @@
 	align-items: center;
 }
 
-// on the root element
+// on the root element - only for tickets page
 .full-width-flex {
 	height: 100vh;
 	display: flex;

@@ -50,7 +50,6 @@ export default function FilterModal({ setShow, show }) {
 					<Stack direction="horizontal" className="heading--flex">
 						<p className="small legend-heading accessibility">Accessibility</p>
 						<Form.Switch
-							type="switch"
 							onChange={() => setOn(!on)}
 							value={on}
 							id="custom-switch"

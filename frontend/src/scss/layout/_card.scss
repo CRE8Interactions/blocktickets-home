@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+%plain-card {
+	background: transparent;
+	border-color: transparent;
+	border-radius: 0px;
+
+	.card-body {
+		padding: em(21);
+	}
+
+	.card-title {
+		margin-bottom: em(10);
+	}
+}

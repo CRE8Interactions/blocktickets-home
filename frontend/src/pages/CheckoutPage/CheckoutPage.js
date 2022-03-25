@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 import { CheckoutWrapper } from '../../components';
 
-import './ticketPage.scss';
+import './checkoutPage.scss';
 
 export default function CheckoutPage() {
 	return <CheckoutWrapper />;

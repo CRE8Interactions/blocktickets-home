@@ -1,0 +1,14 @@
+@use '../abstracts' as *;
+@use '../layout/container' as *;
+
+.modal {
+	&-title {
+		font-size: $small;
+	}
+
+	&-body {
+		padding-top: 0px;
+		@extend %remove-scrollbar !optional;
+		line-height: 1.5;
+	}
+}
