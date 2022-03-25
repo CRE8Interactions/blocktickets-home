@@ -59,4 +59,17 @@ $gap-xs: rem(4);
 	.btn {
 		margin: 0px;
 	}
+
+	.card-title {
+		margin: 0;
+
+		&-flex {
+			.card-title {
+				order: 2;
+			}
+		}
+	}
+}
+.card-content {
+	margin-top: rem(24);
 }

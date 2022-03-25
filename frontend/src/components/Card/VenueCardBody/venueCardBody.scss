@@ -1,6 +1,6 @@
 @use '../../../scss/layout' as *;
 
-.card {
+.card.myCard {
 	.card {
 		&-text {
 			@extend %icon-text-box;

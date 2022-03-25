@@ -71,7 +71,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 				</Stack>
 			</div>
 			<TicketPurchaseFooter>
-				<Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
+				<Link to={'/checkout/1'} className="btn w-100 btn-primary btn-lg">
 					Checkout
 				</Link>
 			</TicketPurchaseFooter>

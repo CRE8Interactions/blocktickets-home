@@ -1,0 +1,13 @@
+@use '../../scss/abstracts' as *;
+
+.checkout-wrapper {
+	padding: em(32) 0px;
+
+	section {
+		padding: em(23) 0px;
+	}
+
+	#addOns {
+		border-bottom: border();
+	}
+}

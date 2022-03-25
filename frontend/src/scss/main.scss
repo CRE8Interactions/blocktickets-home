@@ -3,22 +3,6 @@
 @use 'abstracts' as *;
 @use 'layout';
 
-.list-group-item {
-	border-width: 1px 0px 1px 0px;
-}
-
-.modal {
-	&-title {
-		font-size: $small;
-	}
-
-	&-body {
-		padding-top: 0px;
-		@extend %remove-scrollbar;
-		line-height: 1.5;
-	}
-}
-
 .artist-image {
 	border-radius: $br-textile;
 }

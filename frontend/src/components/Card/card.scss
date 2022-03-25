@@ -1,9 +1,10 @@
 @use './../../scss/abstracts' as *;
-@use '../../scss/theme/card' as *;
 @use '../../scss/layout' as *;
 
-.card {
+.card.myCard {
 	width: rem(256);
+	@extend %plain-card;
+
 	.card {
 		&-img-top {
 			height: rem(303);
@@ -41,7 +42,7 @@
 		}
 	}
 	.row + .row {
-		margin-top: $card-title-spacer-y;
+		margin-top: rem(10);
 	}
 
 	.caption {
