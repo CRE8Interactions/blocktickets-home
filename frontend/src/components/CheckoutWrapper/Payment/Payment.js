@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import info from '../../../assets/icons/info.svg';
+
 import './payment.scss';
 
 export default function Payment() {
