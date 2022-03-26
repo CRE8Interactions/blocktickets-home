@@ -15,15 +15,22 @@
 
 	.scroll-container {
 		flex: 1;
-		padding-top: em(16);
+
+		@include breakpoint-max(md) {
+			padding-top: em(16);
+		}
 
 		.scrollable-content {
-			height: 100%;
-			overflow-y: auto;
+			@include breakpoint-max(md) {
+				height: 100%;
+				overflow-y: auto;
+			}
 			@extend %remove-scrollbar;
 
-			.content {
-				max-height: 617px;
+			@include breakpoint-max(md) {
+				.content {
+					max-height: 481px;
+				}
 			}
 		}
 	}
@@ -34,6 +41,9 @@
 
 	#addOns {
 		border-bottom: border();
-		padding-top: em(10);
+
+		@include breakpoint-max(md) {
+			padding-top: em(10);
+		}
 	}
 }
