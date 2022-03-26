@@ -17,7 +17,7 @@ export default function TotalCard() {
 	] = useState(false);
 
 	return (
-		<Card className={`card--popup ${expanded && 'card--popup-expanded'}`}>
+		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
 				<Card.Title as="h5" className="normal">
 					Total

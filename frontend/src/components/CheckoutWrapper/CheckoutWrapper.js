@@ -55,7 +55,6 @@ export default function CheckoutWrapper() {
 						</div>
 					</div>
 				</Col>
-
 				<Col md={5}>
 					<TotalCard />
 				</Col>
