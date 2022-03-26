@@ -41,22 +41,21 @@ export default function CheckoutWrapper() {
 		<div className="full-height-wrapper" id="checkout-wrapper">
 			<BackButton />
 			<Row className="justify-content-between">
-				<Col md={5}>
+				<Col md={6} className="d-flex-column">
 					<div className="scroll-container">
 						<div className="scrollable-content">
 							<div className="content">
 								<section id="addOns">
 									<AddOns />
 								</section>
-								<section id="">
+								<section>
 									<Payment />
 								</section>
 							</div>
 						</div>
 					</div>
 				</Col>
-
-				<Col md={5}>
+				<Col md={6} lg={5} id="total-card">
 					<TotalCard />
 				</Col>
 			</Row>

@@ -28,6 +28,7 @@ export default function Navigation() {
 
 	const toggleOverflow = (expanded) => {
 		document.body.style.overflow = expanded ? 'hidden' : 'visible';
+		document.querySelector('.navbar').style.borderWidth = expanded ? '0px' : '1px';
 	};
 	useEffect(() => {
 		const changeWindowSize = () => setWindowSize(window.innerWidth);

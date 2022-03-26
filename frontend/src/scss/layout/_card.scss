@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use '../layout/typography' as *;
+@use '../theme/card' as *;
 
 %plain-card {
 	background: transparent;
@@ -35,5 +36,17 @@
 	&-subtitle {
 		font-family: $font-heading;
 		font-size: $small;
+	}
+}
+
+.card-lg {
+	.card-footer {
+		padding-top: em(24);
+		padding-bottom: em(24);
+	}
+
+	.card-body {
+		padding-left: $card-cap-padding-x;
+		padding-right: $card-cap-padding-x;
 	}
 }
