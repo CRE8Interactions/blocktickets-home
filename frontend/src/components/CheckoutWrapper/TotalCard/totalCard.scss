@@ -61,8 +61,7 @@
 	}
 
 	.card-footer {
-		display: flex;
-		flex-direction: column;
+		border-width: 0px;
 
 		@include breakpoint-max(md) {
 			.btn {
@@ -71,6 +70,10 @@
 		}
 		> * {
 			flex: 1;
+		}
+
+		&.with-border {
+			border-width: 1px;
 		}
 	}
 }

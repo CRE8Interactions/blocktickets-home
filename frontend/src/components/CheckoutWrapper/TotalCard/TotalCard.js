@@ -143,7 +143,7 @@ export default function TotalCard() {
 					</ul>
 				</Card.Body>
 			)}
-			<Card.Footer>
+			<Card.Footer className={`d-flex-column ${expanded && 'with-border'}`}>
 				<small className="tablet-desktop-only caption">
 					By clicking "Complete Purchase", you agree that you have read, understand and
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
