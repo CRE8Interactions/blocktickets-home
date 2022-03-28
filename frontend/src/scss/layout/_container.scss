@@ -36,6 +36,11 @@ $pad-md: rem(81);
 	margin-right: -50vw;
 }
 
+.d-flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
 %icon-text-box {
 	display: flex;
 	gap: $gap;

@@ -16,7 +16,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 	return (
 		<Fragment>
 			<header className="d-flex flex-column">
-				<BackButton handleGoBack={handleGoBack} />
+				<BackButton handleGoBack={handleGoBack} marginBottom="3" />
 			</header>
 			<div className="ticket-details d-flex flex-column">
 				<h1 className="text-uppercase">Section general admission</h1>

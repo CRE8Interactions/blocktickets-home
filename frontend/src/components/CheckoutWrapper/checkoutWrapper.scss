@@ -2,11 +2,11 @@
 @use '../../scss/layout' as *;
 
 #checkout-wrapper {
-	padding-top: em(32);
+	padding-top: em(9);
 	position: relative;
 
 	@include breakpoint-min(md) {
-		padding-bottom: em(32);
+		padding: em(32) 0px;
 	}
 
 	.row {
@@ -16,22 +16,34 @@
 	.scroll-container {
 		flex: 1;
 
+		@include breakpoint-max(md) {
+			padding-top: em(16);
+		}
+
 		.scrollable-content {
-			height: 100%;
-			overflow-y: auto;
+			@include breakpoint-max(md) {
+				height: 100%;
+				overflow-y: auto;
+			}
 			@extend %remove-scrollbar;
 
-			.content {
-				max-height: 640px;
+			@include breakpoint-max(md) {
+				.content {
+					max-height: 481px;
+				}
 			}
 		}
 	}
 
 	section {
-		padding: em(23) 0px;
+		padding: em(24) 0px;
 	}
 
 	#addOns {
 		border-bottom: border();
+
+		@include breakpoint-max(md) {
+			padding-top: em(10);
+		}
 	}
 }

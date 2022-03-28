@@ -17,7 +17,7 @@ export default function TotalCard() {
 	] = useState(false);
 
 	return (
-		<Card className={`card--popup ${expanded && 'card--popup-expanded'}`}>
+		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
 				<Card.Title as="h5" className="normal">
 					Total
@@ -34,38 +34,116 @@ export default function TotalCard() {
 			{expanded && (
 				<Card.Body>
 					<ul>
-						<li>
-							<Row>
-								<Col>
-									<span className="fw-bold mb-2">Tickets</span>
-									<ul>
-										<li>Tickes: $35.00 x 2</li>
-									</ul>
-								</Col>
+						<li className="list">
+							<p className="heading">Tickets</p>
+							<ul>
+								<li>
+									<Row>
+										<Col>
+											<span>Tickets: $35.00 x 2</span>
+										</Col>
 
-								<Col className="text-end align-self-end">
-									<span>$70.00</span>
-								</Col>
-							</Row>
+										<Col className="text-end align-self-end">
+											<span>$70.00</span>
+										</Col>
+									</Row>
+								</li>
+							</ul>
 						</li>
-						<li>
-							<Row>
-								<Col>
-									<span className="fw-bold">Tickets</span>
-									<ul>
-										<li>Tickes: $35.00 x 2</li>
-									</ul>
-								</Col>
-
-								<Col className="text-end align-self-end">
-									<span>$70.00</span>
-								</Col>
-							</Row>
+						<li className="list">
+							<p className="heading">Fees</p>
+							<ul>
+								<li>
+									<Row>
+										<Col>
+											<span>Service Fee: $15.00 x 2</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$30.00</span>
+										</Col>
+									</Row>
+								</li>
+								<li className="list">
+									<Row>
+										<Col>
+											<span>Facility Charge: $12.00 x 2</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$24.00</span>
+										</Col>
+									</Row>
+								</li>
+								<li>
+									<Row>
+										<Col>
+											<span>Order Processing Fee</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$4.35</span>
+										</Col>
+									</Row>
+								</li>
+							</ul>
+						</li>
+						<li className="list">
+							<p className="heading">Add on</p>
+							<ul>
+								<li>
+									<Row>
+										<Col>
+											<span>Meet &amp; Greet</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$45.00</span>
+										</Col>
+									</Row>
+								</li>
+								<li>
+									<Row>
+										<Col>
+											<span>Parking Pass</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$12.00</span>
+										</Col>
+									</Row>
+								</li>
+							</ul>
+						</li>
+						<li className="list">
+							<p className="heading">Delivery</p>
+							<ul>
+								<li>
+									<Row>
+										<Col>
+											<span>Standard Shipping</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$15.00</span>
+										</Col>
+									</Row>
+								</li>
+							</ul>
+						</li>
+						<li className="list">
+							<p className="heading">Tax</p>
+							<ul>
+								<li>
+									<Row>
+										<Col>
+											<span>$2.50</span>
+										</Col>
+										<Col className="text-end align-self-end">
+											<span>$15.00</span>
+										</Col>
+									</Row>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</Card.Body>
 			)}
-			<Card.Footer>
+			<Card.Footer className={`d-flex-column ${expanded && 'with-border'}`}>
 				<small className="tablet-desktop-only caption">
 					By clicking "Complete Purchase", you agree that you have read, understand and
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
