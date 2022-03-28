@@ -26,7 +26,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -51,7 +51,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -76,7 +76,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -101,7 +101,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -126,7 +126,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -151,7 +151,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -176,7 +176,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -201,7 +201,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -226,7 +226,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -251,7 +251,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -276,7 +276,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -301,7 +301,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -326,7 +326,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>
@@ -351,7 +351,7 @@ export default function MySeats() {
 				</Stack>
 				<Stack direction="horizontal" className="justify-content-between pt-2">
 					<div>
-						<span className="caption">General Addmissions</span>
+						<span className="caption">General admissions</span>
 					</div>
 					<div>
 						<span className="fw-bold text-end">$30.00</span>

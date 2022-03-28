@@ -89,5 +89,16 @@
 				}
 			}
 		}
+
+		#event-info {
+			@include breakpoint-min(md) {
+				border-color: $light;
+				color: $muted;
+
+				img {
+					width: 16px;
+				}
+			}
+		}
 	}
 }

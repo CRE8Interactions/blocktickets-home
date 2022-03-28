@@ -73,3 +73,7 @@ $gap-xs: rem(4);
 .card-content {
 	margin-top: rem(24);
 }
+
+@mixin scrollable-padding {
+	padding: em(16) 0px;
+}
