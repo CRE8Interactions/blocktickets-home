@@ -37,20 +37,27 @@ export default function CheckoutWrapper() {
 		};
 	}, []);
 
+	const addOns = [];
+
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
-			<BackButton />
 			<Row className="justify-content-between">
-				<Col md={6} className="d-flex-column">
-					<div className="scroll-container">
-						<div className="scrollable-content">
-							<div className="content">
-								<section id="addOns">
-									<AddOns />
-								</section>
-								<section>
-									<Payment />
-								</section>
+				<Col md={6}>
+					<BackButton />
+					<div className="d-flex-column">
+						<div className="scroll-container">
+							<div className="scrollable-content">
+								<div className="content">
+									{addOns.length > 0 && (
+										<section id="addOns">
+											<AddOns />
+										</section>
+									)}
+
+									<section>
+										<Payment />
+									</section>
+								</div>
 							</div>
 						</div>
 					</div>

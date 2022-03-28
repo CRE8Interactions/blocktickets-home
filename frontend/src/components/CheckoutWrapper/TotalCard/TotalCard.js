@@ -1,8 +1,6 @@
-import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -43,7 +41,7 @@ export default function TotalCard() {
 											<span>Tickets: $35.00 x 2</span>
 										</Col>
 
-										<Col className="text-end align-self-end">
+										<Col className="text-end ">
 											<span>$70.00</span>
 										</Col>
 									</Row>
@@ -58,7 +56,7 @@ export default function TotalCard() {
 										<Col>
 											<span>Service Fee: $15.00 x 2</span>
 										</Col>
-										<Col className="text-end align-self-end">
+										<Col className="text-end ">
 											<span>$30.00</span>
 										</Col>
 									</Row>
@@ -68,7 +66,7 @@ export default function TotalCard() {
 										<Col>
 											<span>Facility Charge: $12.00 x 2</span>
 										</Col>
-										<Col className="text-end align-self-end">
+										<Col className="text-end ">
 											<span>$24.00</span>
 										</Col>
 									</Row>
@@ -78,7 +76,8 @@ export default function TotalCard() {
 										<Col>
 											<span>Order Processing Fee</span>
 										</Col>
-										<Col className="text-end align-self-end">
+										<Col className="text-end 
+										">
 											<span>$4.35</span>
 										</Col>
 									</Row>
@@ -93,7 +92,7 @@ export default function TotalCard() {
 										<Col>
 											<span>Meet &amp; Greet</span>
 										</Col>
-										<Col className="text-end align-self-end">
+										<Col className="text-end">
 											<span>$45.00</span>
 										</Col>
 									</Row>
@@ -103,7 +102,7 @@ export default function TotalCard() {
 										<Col>
 											<span>Parking Pass</span>
 										</Col>
-										<Col className="text-end align-self-end">
+										<Col className="text-end ">
 											<span>$12.00</span>
 										</Col>
 									</Row>
@@ -118,7 +117,7 @@ export default function TotalCard() {
 										<Col>
 											<span>Standard Shipping</span>
 										</Col>
-										<Col className="text-end align-self-end">
+										<Col className="text-end ">
 											<span>$15.00</span>
 										</Col>
 									</Row>
@@ -126,15 +125,14 @@ export default function TotalCard() {
 							</ul>
 						</li>
 						<li className="list">
-							<p className="heading">Tax</p>
 							<ul>
 								<li>
 									<Row>
 										<Col>
-											<span>$2.50</span>
+											<p className="heading m-0">Tax</p>
 										</Col>
-										<Col className="text-end align-self-end">
-											<span>$15.00</span>
+										<Col className="text-end ">
+											<span>$2.50</span>
 										</Col>
 									</Row>
 								</li>
