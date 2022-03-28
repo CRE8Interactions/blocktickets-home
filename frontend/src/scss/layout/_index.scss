@@ -19,9 +19,9 @@
 	align-items: center;
 }
 
-// on the root element - only for tickets page
+// on the root element
 .full-width-flex {
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
