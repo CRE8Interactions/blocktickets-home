@@ -20,7 +20,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 			</header>
 			<div className="ticket-details d-flex flex-column">
 				<h1 className="text-uppercase">Section general admission</h1>
-				{type !== 'genAdmissions' && (
+				{type !== 'genAdmission' && (
 					<div className="seat caption text-muted fw-bold d-flex justify-content-between align-items-center">
 						<div>
 							<img
