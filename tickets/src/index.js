@@ -142,32 +142,22 @@ module.exports = {
             .then(message => console.log(message.body))
             .done()
         }
-
-        // Changes on organization model
-        if (event.model.singularName === 'organization') {
-          let email = event.result.createdBy.email;
-          if (email) {
-            const user = await strapi.db.query('plugin::users-permissions.user').findOne({
-              where: {
-                email: email
-              }
-            })
-
-            if (user) {
-              await strapi.db.query('api::organization.organization').update({
-                where: {
-                  id: event.result.id,
-                },
-                data: {
-                  members: user
-                }
-              })
-            }
-          }
-        }
       },
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
+
+        // Changes on Organization model
+        if (event.model.singularName === 'organization') {
+          let email = event.params.data.creatorId;
+          const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+            where: {
+              email: email
+            }
+          })
+          event.params.data.uuid = Math.floor(Math.random() * 900000000) + 100000000;
+          event.params.data.creatorId = user.id
+          event.params.data.members = [user];
+        }
 
         // Changes on user model
         if (event.model.singularName === 'user') {

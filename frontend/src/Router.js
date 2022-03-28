@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { HomePage, LoginPage, DashboardPage, TicketsPage, CheckoutPage, OrganizationsPage, SalesPage } from './pages';
+import { HomePage, LoginPage, DashboardPage, TicketsPage, CheckoutPage, OrganizationsPage, SalesPage, EventsPage } from './pages';
 import { RequireAuth } from './context/Authorization/useAuth';
 
 /**
@@ -20,6 +20,7 @@ const Router = () => {
 					}>
 						<Route path="organizations" element={<OrganizationsPage />} />
 						<Route path="sales" element={<SalesPage />} />
+						<Route path="events" element={<EventsPage />} />
 				</Route>
 				<Route path="tickets/:id" element={<TicketsPage />} />
 				<Route path="checkout/:id" element={<CheckoutPage />} /> {/* Add a NotFound route */}

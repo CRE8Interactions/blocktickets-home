@@ -8,3 +8,4 @@ export { PurchaseTickets } from './PurchaseTickets';
 export { CheckoutWrapper } from './CheckoutWrapper';
 export { Sidenav } from './Sidenav';
 export { CreateOrg } from './Forms/CreateOrg';
+export { EventsTable } from './Tables/EventsTable';

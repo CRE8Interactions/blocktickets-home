@@ -19,7 +19,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
               $eq: user.id
             }
           }
-        }
+        },
+        events: true
       }
     })
     // Returns organizations which user is a member of
