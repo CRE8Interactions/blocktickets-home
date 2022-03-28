@@ -45,7 +45,7 @@ export default function CheckoutWrapper() {
 				<Col md={6}>
 					<BackButton />
 					<div className="d-flex-column">
-						<div className="scroll-container">
+						<div className="scrollable-container">
 							<div className="scrollable-content">
 								<div className="content">
 									{addOns.length > 0 && (
