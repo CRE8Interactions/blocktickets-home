@@ -13,6 +13,15 @@ const getUser = () => {
   }
 }
 
+const token = () => {
+  const user = getUser()
+  if (user) {
+    return user.jwt
+  } else {
+    return undefined
+  }
+}
+
 const isLoggedIn = () => {
   const user = getUser()
   if (!user) return false
@@ -27,5 +36,6 @@ export default {
   setUser,
   getUser,
   isLoggedIn,
-  logoutUser
+  logoutUser,
+  token
 };

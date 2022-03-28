@@ -3,7 +3,7 @@ export const getCopyrightYear = () => {
 };
 
 export const checkUrl = (url) => {
-	var expression = /\w*tickets|\w*\/checkout/g;
+	var expression = /\w*tickets|\w*\/checkout|\w*\/dashboard/g;
 
 	var regex = new RegExp(expression);
 	return regex.test(url);
