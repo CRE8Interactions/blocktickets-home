@@ -3,13 +3,14 @@ import { Outlet } from 'react-router-dom';
 import { Sidenav } from '../../components';
 import UserContext from '../../context/User/user';
 import './DashboardPage.scss';
-import { getMyOrganizations } from '../../utilities/api';
+import { getMyOrganizations, createOrganization } from '../../utilities/api';
 import OrganizationContext from '../../context/Organization/Organization';
 import { CreateOrg } from '../../components';
 
 export default function DashboardPage() {
 	const token = useContext(UserContext)
 	const [orgs, setOrgData] = useState([])
+	const [sideNavEnabled, setSideNavEnabled] = useState(false)
 	const headers = new Headers();
 
 	useEffect(async () => {
@@ -18,7 +19,13 @@ export default function DashboardPage() {
 
 	const getOrg = async () => {
 		const orgs = await getMyOrganizations()
-			.then(res => setOrgData(res.data))
+			.then(res => { setOrgData(res.data); res.data.length > 0 ? setSideNavEnabled(true) : setSideNavEnabled(false) })
+			.catch(err => console.error(err))
+	}
+
+	const createOrg = async (data) => {
+		await createOrganization(data)
+			.then(res => getOrg())
 			.catch(err => console.error(err))
 	}
 
@@ -26,15 +33,15 @@ export default function DashboardPage() {
 		if (orgs.length >= 1) {
 			return <Outlet />
 		} else {
-			return <CreateOrg />
+			return <CreateOrg submission={createOrg} />
 		}
 	}
 
 	return (
 		<div className="row">
-			<Sidenav />
+			<Sidenav enabled={sideNavEnabled} />
 			<main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<div className="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3 pb-2 mb-3">
+				<div className="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3 pb-2 mb-3 db-container">
 					<OrganizationContext.Provider value={{ orgs }}>
 						{showOrgForm(orgs)}
 					</OrganizationContext.Provider>

@@ -38,3 +38,7 @@ export const createNewUser = (data) => {
 export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }
+
+export const createOrganization = async (data) => {
+  return instance.post('/organizations', data)
+}

@@ -5,3 +5,4 @@ export { TicketsPage } from './TicketsPage';
 export { CheckoutPage } from './CheckoutPage';
 export { OrganizationsPage } from './DashboardPage/OrganizationsPage';
 export { SalesPage } from './DashboardPage/SalesPage';
+export { EventsPage } from './DashboardPage/EventsPage';
