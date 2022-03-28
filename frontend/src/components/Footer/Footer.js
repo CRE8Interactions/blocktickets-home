@@ -13,7 +13,7 @@ import './footer.scss';
 
 export default function Footer() {
 	return (
-		<footer className="footer-spacer">
+		<footer className="footer-spacer" id="footer">
 			<Container>
 				<Row className="main-content d-flex flex-column gap-md-3 flex-md-row">
 					<Col>
