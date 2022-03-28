@@ -2,11 +2,11 @@
 @use '../../scss/layout' as *;
 
 #checkout-wrapper {
-	padding-top: em(9);
+	padding-top: em(29);
 	position: relative;
 
 	@include breakpoint-min(md) {
-		padding: em(32) 0px;
+		padding: em(40) 0px;
 	}
 
 	.row {
@@ -37,13 +37,15 @@
 
 	section {
 		padding: em(24) 0px;
+
+		&:first-of-type {
+			@include breakpoint-max(md) {
+				padding-top: em(10);
+			}
+		}
 	}
 
 	#addOns {
 		border-bottom: border();
-
-		@include breakpoint-max(md) {
-			padding-top: em(10);
-		}
 	}
 }

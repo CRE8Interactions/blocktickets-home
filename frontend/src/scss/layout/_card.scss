@@ -46,7 +46,6 @@
 	}
 
 	.card-body {
-		padding-left: $card-cap-padding-x;
-		padding-right: $card-cap-padding-x;
+		padding: em(30) $card-cap-padding-x;
 	}
 }
