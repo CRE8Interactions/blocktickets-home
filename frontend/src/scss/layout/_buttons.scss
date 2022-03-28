@@ -48,17 +48,6 @@
 	margin-top: 0px;
 	white-space: nowrap;
 	margin-left: auto;
-
-	@include breakpoint-min(md) {
-		border-color: $light;
-		color: $muted;
-
-		img {
-			width: 16px;
-		}
-	}
-	@include breakpoint-max(md) {
-	}
 }
 
 .btn--filter {

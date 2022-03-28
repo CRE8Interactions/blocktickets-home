@@ -121,8 +121,8 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 						{isZoomed && (
 							<Stack direction="horizontal" className="heading--flex mb-3">
 								<h3 className="text-uppercase">Your Tickets (7)</h3>
-								<Button variant="default" className="p-0">
-									<span className=" text-danger">Remove all</span>
+								<Button variant="link" className="text-danger">
+									Remove all
 								</Button>
 							</Stack>
 						)}
@@ -170,7 +170,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 						{isZoomed &&
 						!showFilter && (
 							<TicketPurchaseFooter>
-								<Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
+								<Link to={'/checkout/1'} className="btn w-100 btn-primary btn-lg">
 									Checkout
 								</Link>
 							</TicketPurchaseFooter>
