@@ -23,3 +23,10 @@ $box-shadow-card: 0px -10px 30px -8px rgba(15, 15, 15, 0.12);
 	background-color: $border-color;
 	z-index: 1;
 }
+
+.rounded-corners {
+	border-radius: $br-textile;
+}
+.artist-image {
+	@extend .rounded-corners;
+}

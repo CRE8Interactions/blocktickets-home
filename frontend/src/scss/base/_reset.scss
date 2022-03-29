@@ -11,6 +11,10 @@ body {
 	height: 100%; // for sticky navbar to work when scrolling
 }
 
+body {
+	overflow-x: hidden;
+}
+
 html:focus-within {
 	scroll-behavior: smooth;
 }

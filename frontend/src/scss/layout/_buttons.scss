@@ -21,6 +21,11 @@
 
 .btn {
 	margin-top: rem(14);
+	white-space: nowrap;
+
+	&.d-flex {
+		flex-wrap: nowrap;
+	}
 
 	a {
 		color: inherit;
