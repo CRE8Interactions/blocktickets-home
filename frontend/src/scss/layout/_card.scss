@@ -21,6 +21,13 @@
 }
 
 .card {
+	&--light {
+		background-color: $clr-white;
+
+		.card-footer {
+			background-color: $clr-white;
+		}
+	}
 	& * {
 		font-family: $font-body;
 	}

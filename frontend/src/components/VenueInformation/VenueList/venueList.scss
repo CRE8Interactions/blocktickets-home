@@ -1,0 +1,9 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
+
+.event-title {
+	@extend %text-truncate;
+	width: 86%;
+	font-size: rem(16);
+	font-weight: $fw-medium;
+}
