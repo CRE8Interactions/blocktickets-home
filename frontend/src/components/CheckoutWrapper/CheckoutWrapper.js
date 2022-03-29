@@ -15,6 +15,7 @@ import { AddOns } from './AddOns';
 import { Payment } from './Payment';
 import { TotalCard } from './TotalCard';
 import { BackButton } from '../BackButton';
+import { Timer } from './Timer';
 
 import './checkoutWrapper.scss';
 
@@ -66,6 +67,7 @@ export default function CheckoutWrapper() {
 					<TotalCard />
 				</Col>
 			</Row>
+			<Timer />
 		</div>
 	);
 }
