@@ -3,4 +3,5 @@
 .icon-button {
 	@extend %icon-text-box;
 	justify-content: center;
+	@extend %btn-background;
 }
