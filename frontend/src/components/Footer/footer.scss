@@ -1,8 +1,10 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/theme/card' as *;
-@use '../../scss/layout/spacing' as *;
+@use '../../scss/layout' as *;
 
 footer {
+	border-top: border();
+
 	.copyright {
 		border-top: border();
 		margin-top: $copyright-spacer;
