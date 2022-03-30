@@ -1,43 +1,43 @@
 @use '../../../scss/abstracts' as *;
 @use '../../../scss/layout' as *;
 
-.event-title {
-	@extend %text-truncate;
-	font-size: rem(16);
-	margin-bottom: rem(6);
-	font-weight: $fw-medium;
+#venue {
+	.event-title {
+		@extend %text-truncate;
+		font-size: rem(16);
+		margin-bottom: rem(6);
+		font-weight: $fw-medium;
 
-	@include breakpoint-max(md) {
-		width: 98%;
-	}
-}
-
-.rounded-corners {
-	background-color: yellow;
-}
-
-.scrollable {
-	&-container {
-		display: flex;
-		flex-direction: column;
-		min-height: 0;
-
-		@include breakpoint-min(md) {
-			height: 75%;
+		@include breakpoint-max(md) {
+			width: 98%;
 		}
 	}
-	&-list {
-		@include scrollable();
 
-		ul {
-			li {
-				@include breakpoint-max(lg) {
-					flex-wrap: wrap;
-				}
+	.rounded-corners {
+		background-color: yellow;
+	}
 
-				& + li {
-					margin-top: rem(32);
-				}
+	// .scrollable {
+	// 	&-container {
+	// 		display: flex;
+	// 		flex-direction: column;
+	// 		min-height: 0;
+
+	// 		@include breakpoint-min(md) {
+	// 			height: 75%;
+	// 		}
+	// 	}
+	// 	&-list {
+	// 		@include scrollable();
+
+	ul {
+		li {
+			@include breakpoint-max(lg) {
+				flex-wrap: wrap;
+			}
+
+			& + li {
+				margin-top: rem(32);
 			}
 		}
 	}

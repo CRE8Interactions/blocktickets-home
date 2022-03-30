@@ -3,13 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
-import searchIcon from '../../assets/icons/search-icon-mobile.svg';
 import './searchBar.scss';
 
 export default function SearchBar() {
 	return (
 		<Fragment>
-			<Button variant="default" className="btn--icon mobile-tablet-only" aria-label="search">
+			<Button
+				variant="default"
+				className="btn--icon mobile-tablet-only search-mobile"
+				aria-label="search">
 				<svg
 					width="20"
 					height="20"
