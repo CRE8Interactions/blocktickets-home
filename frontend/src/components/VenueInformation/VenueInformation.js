@@ -11,6 +11,10 @@ import { VenueList } from './VenueList';
 import './venueInformation.scss';
 
 export default function VenueInformation() {
+	const [
+		key,
+		setKey
+	] = useState('upcoming');
 	return (
 		<div id="venue">
 			<Row className="gap-3">
@@ -18,10 +22,17 @@ export default function VenueInformation() {
 					<VenueCard />
 				</Col>
 				<Col md={6} xxl={6} className="flex-grow-1">
-					<h1 className="fs-md scrollable-heading">Upcoming Events</h1>
-					<div className="scrollable-container">
-						<VenueList />
-					</div>
+					<Tabs
+						id="controlled-tab"
+						defaultActiveKey="upcoming"
+						variant="pills"
+						activeKey={key}
+						onSelect={(k) => setKey(k)}
+						className="mb-4">
+						<Tab eventKey="upcoming" title="Upcoming Events">
+							<VenueList />
+						</Tab>
+					</Tabs>
 				</Col>
 				<ul />
 			</Row>
