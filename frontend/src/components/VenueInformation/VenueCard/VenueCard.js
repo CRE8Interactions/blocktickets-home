@@ -23,20 +23,20 @@ export default function VenueCard() {
 				A short / long description of the venue goes there. This can be extended to a 5-10
 				rows of text
 			</Card.Text>
-			<Stack direction="horizontal" className="justify-content-center my-4">
+			<Stack direction="horizontal" className="justify-content-center gap-2 mt-3">
 				<IconButton link="" variant="primary" btn="location" styles="mt-0">
 					Location
 				</IconButton>
 				<IconButton variant="outline-light" styles="btn--icon-lg" background="save" />
 				<IconButton variant="outline-light" styles="btn--icon-lg" background="website" />
 			</Stack>
-			<Stack direction="horizontal" className="my-4 justify-content-center" gap={3}>
-				<img src={twitter} alt="" />
-				<img src={instagram} alt="" />
-				<img src={facebook} alt="" />
+			<Stack direction="horizontal" className="my-5 justify-content-center" gap={3}>
+				<img src={twitter} alt="twitter" />
+				<img src={instagram} alt="instagram" />
+				<img src={facebook} alt="facebook" />
 			</Stack>
 			<Stack />
-			<Card.Footer>
+			<Card.Footer className="pt-5">
 				<span className="caption text-muted">179 Streamed shows</span>
 			</Card.Footer>
 		</Card>

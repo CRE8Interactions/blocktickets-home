@@ -32,7 +32,10 @@ export default function EventCardTop() {
 					</Row>
 				</li>
 			</ul>
-			<Card.Link as={Link} to={'/'} className="btn btn-outline-light text-primary btn-sm">
+			<Card.Link
+				as={Link}
+				to={'/venue/1'}
+				className="btn btn-outline-light text-primary btn-sm">
 				View All
 			</Card.Link>
 		</Fragment>
