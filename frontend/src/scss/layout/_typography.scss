@@ -110,6 +110,11 @@ h4,
 	text-overflow: ellipsis;
 }
 
+@mixin multi-line-truncate($lines: 2) {
+	@extend %multi-line-truncate;
+	-webkit-line-clamp: $lines;
+}
+
 .nav-link {
 	font-family: $font-heading;
 }

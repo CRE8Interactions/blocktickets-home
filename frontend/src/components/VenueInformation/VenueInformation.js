@@ -14,7 +14,7 @@ export default function VenueInformation() {
 	const [
 		key,
 		setKey
-	] = useState('All');
+	] = useState('all');
 	return (
 		<div id="venue">
 			<Row>
@@ -25,10 +25,11 @@ export default function VenueInformation() {
 					<Tabs
 						variant="pills"
 						id="controlled-tab-example"
+						defaultActiveKey={key}
 						activeKey={key}
 						onSelect={(k) => setKey(k)}
-						className="mb-3">
-						<Tab defaultActiveKey="/all" eventKey="all" title="All">
+						className="mb-4">
+						<Tab eventKey="all" title="All">
 							<VenueList />
 						</Tab>
 						<Tab eventKey="upcoming" title="Upcoming" />
