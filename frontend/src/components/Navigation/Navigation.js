@@ -40,19 +40,6 @@ export default function Navigation() {
 					</LinkContainer>
 					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
-						<div className="cart">
-							<Button
-								variant="default"
-								className="btn--icon"
-								aria-label="shopping Cart">
-								<img
-									src={shoppingCart}
-									alt="shopping cart"
-									width="24"
-									height="24"
-								/>
-							</Button>
-						</div>
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"

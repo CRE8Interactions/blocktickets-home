@@ -10,15 +10,8 @@
 	}
 
 	.desktop-btns {
-		.cart {
-			margin: 0px rem(6);
-		}
 		@include breakpoint-min(lg) {
 			order: 4;
-
-			.cart {
-				margin: 0px rem(20);
-			}
 		}
 	}
 
