@@ -10,7 +10,7 @@ export default function VenuePage() {
 			<header class="jumbotron text-center">
 				<h1>BG</h1>
 			</header>
-			<section className="spacer">
+			<section className="spacer-xs">
 				<VenueInformation />
 			</section>
 		</Fragment>

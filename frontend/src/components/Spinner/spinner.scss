@@ -1,0 +1,19 @@
+@use '../../scss/abstracts' as *;
+
+#spinner {
+	display: flex;
+	justify-content: center;
+	padding: em(16) 0px;
+	svg {
+		animation: spin 2s linear infinite;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
