@@ -93,14 +93,6 @@ $pad-md: rem(81);
 	@include breakpoint-max(md) {
 		display: none;
 	}
-
-	&--flex {
-		display: none;
-
-		@include breakpoint-min(md) {
-			display: flex;
-		}
-	}
 }
 
 .desktop-only {
