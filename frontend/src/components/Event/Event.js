@@ -59,7 +59,7 @@ export default function Event() {
 								</p>
 							</Col>
 						</Row>
-						<Row className="tablet-desktop-only--flex">
+						<Row className="tablet-desktop-only">
 							<Col className="details-heading" md={2}>
 								<p className="location-caption location">Location</p>
 							</Col>
