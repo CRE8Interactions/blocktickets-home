@@ -7,11 +7,10 @@ const instance = axios.create({
   withCredentials: false
 })
 
-const isLoggedIn = authService?.isLoggedIn();
-
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
   // Do something before request is sent
+  const isLoggedIn = authService?.isLoggedIn();
   if (isLoggedIn) {
     config.headers.common['Authorization'] = `Bearer ${authService.token()}`;
   }
@@ -41,4 +40,8 @@ export const getMyOrganizations = async () => {
 
 export const createOrganization = async (data) => {
   return instance.post('/organizations', data)
+}
+
+export const getPaymentIntent = async () => {
+  return instance.get('/payment/intent')
 }

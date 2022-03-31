@@ -1,11 +1,27 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
+import { getPaymentIntent } from '../../../utilities/api';
 
 import info from '../../../assets/icons/info.svg';
 
 import './payment.scss';
 
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+
 export default function Payment() {
+	const [clientSecret, setClientSecret] = useState('')
+
+	useEffect(() => {
+		getPaymentIntent()
+			.then(res => setClientSecret(res.data.client_secret))
+			.catch(err => console.error(err))
+	}, [])
+	
 	// const appearance = {
 	// 	theme: 'flat',
 	// 	variables: {
@@ -50,11 +66,27 @@ export default function Payment() {
 	// // Pass the appearance object to the Elements instance
 	// const elements = stripe.elements({ clientSecret, appearance });
 
+	const options = {
+    // passing the client secret obtained from the server
+    clientSecret
+  };
+
+	const CheckoutForm = () => {
+		return (
+			<form>
+				<PaymentElement />
+			</form>
+		);
+	};
+
 	return (
 		<Fragment>
 			<h1 className="fs-md ">Payment</h1>
-			<small className="text-muted fw-medium">Please select a payment method</small>
-			<p>Payment element goes here from Stripe</p>
+			{ clientSecret &&
+				<Elements stripe={stripePromise} options={options}>
+					<CheckoutForm />
+				</Elements>
+			}
 		</Fragment>
 	);
 }
