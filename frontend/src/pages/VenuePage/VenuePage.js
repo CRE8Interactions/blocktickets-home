@@ -7,7 +7,7 @@ import './venues.scss';
 export default function VenuePage() {
 	return (
 		<Fragment>
-			<header class="jumbotron text-center">
+			<header className="jumbotron text-center">
 				<h1>BG</h1>
 			</header>
 			<section className="spacer-xs">

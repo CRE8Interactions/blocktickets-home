@@ -31,10 +31,6 @@
 				order: -2;
 			}
 
-			.btn {
-				margin: 0px;
-			}
-
 			.card-text {
 				order: -1;
 				@include multi-line-truncate(5);

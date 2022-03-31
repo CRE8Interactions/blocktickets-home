@@ -31,12 +31,12 @@
 	// 		@include scrollable();
 
 	ul {
-		li {
+		.item {
 			@include breakpoint-max(lg) {
 				flex-wrap: wrap;
 			}
 
-			& + li {
+			& + .item {
 				margin-top: rem(32);
 			}
 		}
