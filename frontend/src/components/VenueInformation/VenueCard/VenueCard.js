@@ -31,8 +31,10 @@ export default function VenueCard() {
 				<IconButton link="" variant="primary" btn="location" styles="mt-0">
 					Location
 				</IconButton>
-				<Button variant="outline-light" className="btn--icon">
+				<Button variant="outline-light" className="btn--icon" aria-label="Save Venue">
 					<svg
+						role="img"
+						tile="save"
 						width="21"
 						height="20"
 						viewBox="0 0 21 20"
@@ -53,8 +55,10 @@ export default function VenueCard() {
 					</svg>
 				</Button>
 
-				<Button variant="outline-light" className="btn--icon">
+				<Button variant="outline-light" className="btn--icon" aria-label="Visit Website">
 					<svg
+						role="img"
+						title="Visit Website"
 						width="21"
 						height="20"
 						viewBox="0 0 21 20"
