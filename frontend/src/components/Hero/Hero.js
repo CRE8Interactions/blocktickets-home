@@ -34,6 +34,8 @@ export default function Hero() {
 									<Col lg={7} xl={8}>
 										<img
 											src={profile}
+											width="640"
+											height="556"
 											alt="image"
 											className="artist-image banner-image"
 										/>

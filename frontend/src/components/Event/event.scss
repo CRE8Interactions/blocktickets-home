@@ -89,5 +89,21 @@
 				}
 			}
 		}
+
+		#event-info {
+			margin-left: auto;
+			@include breakpoint-min(md) {
+				border-color: $light;
+				color: $muted;
+
+				img {
+					width: 16px;
+				}
+			}
+
+			@include breakpoint-max(md) {
+				padding-right: 0px;
+			}
+		}
 	}
 }

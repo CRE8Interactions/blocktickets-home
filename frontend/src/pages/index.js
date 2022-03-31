@@ -3,6 +3,7 @@ export { LoginPage } from './LoginPage';
 export { DashboardPage } from './DashboardPage';
 export { TicketsPage } from './TicketsPage';
 export { CheckoutPage } from './CheckoutPage';
+export { VenuePage } from './VenuePage';
 export { OrganizationsPage } from './DashboardPage/OrganizationsPage';
 export { SalesPage } from './DashboardPage/SalesPage';
 export { EventsPage } from './DashboardPage/EventsPage';

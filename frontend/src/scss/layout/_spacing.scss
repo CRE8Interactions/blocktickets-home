@@ -6,6 +6,7 @@ $banner-spacer-md-bottom: em(110);
 $banner-spacer: rem(21);
 
 // Page Spacers
+$spacer-xs: rem(38);
 $spacer-sm: em(64);
 $spacer-md: em(80);
 $spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
@@ -18,6 +19,9 @@ $gap: rem(14);
 $gap-sm: rem(9);
 $gap-xs: rem(4);
 
+.spacer-xs {
+	padding: $spacer-xs 0px;
+}
 .spacer {
 	padding: $spacer-sm 0px;
 
@@ -72,4 +76,12 @@ $gap-xs: rem(4);
 }
 .card-content {
 	margin-top: rem(24);
+}
+
+@mixin scrollable-padding {
+	padding-bottom: rem(12);
+}
+
+.scrollable-heading {
+	@include scrollable-padding();
 }

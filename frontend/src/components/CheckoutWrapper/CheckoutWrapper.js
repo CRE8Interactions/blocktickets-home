@@ -15,6 +15,7 @@ import { AddOns } from './AddOns';
 import { Payment } from './Payment';
 import { TotalCard } from './TotalCard';
 import { BackButton } from '../BackButton';
+import { Timer } from './Timer';
 
 import './checkoutWrapper.scss';
 
@@ -45,7 +46,7 @@ export default function CheckoutWrapper() {
 				<Col md={6}>
 					<BackButton />
 					<div className="d-flex-column">
-						<div className="scroll-container">
+						<div className="scrollable-container">
 							<div className="scrollable-content">
 								<div className="content">
 									{addOns.length > 0 && (
@@ -66,6 +67,7 @@ export default function CheckoutWrapper() {
 					<TotalCard />
 				</Col>
 			</Row>
+			<Timer />
 		</div>
 	);
 }

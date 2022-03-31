@@ -1,8 +1,4 @@
 @use 'theme/custom';
 @use 'base';
-@use 'abstracts' as *;
+@use 'abstracts';
 @use 'layout';
-
-.artist-image {
-	border-radius: $br-textile;
-}

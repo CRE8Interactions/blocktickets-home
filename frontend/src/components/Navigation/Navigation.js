@@ -1,6 +1,7 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import authService from '../../utilities/services/auth.service';
+import { useWindowSize } from '../../utilities/hooks';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -19,26 +20,14 @@ import { NavButtons } from './NavButtons';
 import './navigation.scss';
 
 export default function Navigation() {
-	const [
-		windowSize,
-		setWindowSize
-	] = useState(window.innerWidth);
+	const windowSize = useWindowSize();
 
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	const toggleOverflow = (expanded) => {
-		document.body.style.overflow = expanded ? 'hidden' : 'visible';
+		document.body.style.overflowY = expanded ? 'hidden' : 'visible';
 		document.querySelector('.navbar').style.borderWidth = expanded ? '0px' : '1px';
 	};
-	useEffect(() => {
-		const changeWindowSize = () => setWindowSize(window.innerWidth);
-
-		window.addEventListener('resize', changeWindowSize);
-
-		return () => {
-			window.removeEventListener('resize', changeWindowSize);
-		};
-	});
 
 	return (
 		<div className="navigation position-sticky">
@@ -51,19 +40,6 @@ export default function Navigation() {
 					</LinkContainer>
 					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
-						<div className="cart">
-							<Button
-								variant="default"
-								className="btn--icon"
-								aria-label="shopping Cart">
-								<img
-									src={shoppingCart}
-									alt="shopping cart"
-									width="24"
-									height="24"
-								/>
-							</Button>
-						</div>
 						<NavButtons styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"

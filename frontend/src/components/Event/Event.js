@@ -74,6 +74,7 @@ export default function Event() {
 						<Button
 							variant="default"
 							size="sm"
+							id="event-info"
 							className="btn--info"
 							onClick={handleShow}>
 							<img src={info} alt="" />

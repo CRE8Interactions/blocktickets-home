@@ -93,14 +93,6 @@ $pad-md: rem(81);
 	@include breakpoint-max(md) {
 		display: none;
 	}
-
-	&--flex {
-		display: none;
-
-		@include breakpoint-min(md) {
-			display: flex;
-		}
-	}
 }
 
 .desktop-only {
@@ -109,9 +101,15 @@ $pad-md: rem(81);
 	}
 }
 
-%remove-scrollbar {
+@mixin remove-scrollbar() {
 	scrollbar-width: none;
 	&::-webkit-scrollbar {
 		display: none;
 	}
+}
+
+@mixin scrollable() {
+	overflow-y: auto;
+	height: 100%;
+	@include remove-scrollbar();
 }

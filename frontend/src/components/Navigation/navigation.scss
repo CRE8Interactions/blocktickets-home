@@ -8,16 +8,10 @@
 		top: 0;
 		z-index: 999;
 	}
+
 	.desktop-btns {
-		.cart {
-			margin: 0px rem(6);
-		}
 		@include breakpoint-min(lg) {
 			order: 4;
-
-			.cart {
-				margin: 0px rem(20);
-			}
 		}
 	}
 
@@ -28,7 +22,10 @@
 
 		&-brand {
 			@include breakpoint-min(lg) {
-				margin-right: rem(47);
+				// margin-right: rem(47);
+
+				border-right: border(2px);
+				padding-right: rem(47);
 			}
 		}
 
@@ -57,9 +54,6 @@
 			}
 
 			ul {
-				@include breakpoint-min(lg) {
-					border-left: border(2px);
-				}
 				&::before {
 					@extend %nav-mobile-headings;
 				}
@@ -87,7 +81,7 @@
 
 				.nav-link {
 					@include breakpoint-min(lg) {
-						padding-left: rem(36);
+						padding-left: rem(15);
 					}
 
 					@include breakpoint-max(lg) {

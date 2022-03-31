@@ -21,6 +21,13 @@
 }
 
 .card {
+	&--light {
+		background-color: $clr-white;
+
+		.card-footer {
+			background-color: $clr-white;
+		}
+	}
 	& * {
 		font-family: $font-body;
 	}
@@ -46,6 +53,6 @@
 	}
 
 	.card-body {
-		padding: em(30) $card-cap-padding-x;
+		padding: em(20) $card-cap-padding-x;
 	}
 }

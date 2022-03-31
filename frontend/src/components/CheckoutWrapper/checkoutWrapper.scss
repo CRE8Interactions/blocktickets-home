@@ -13,19 +13,17 @@
 		flex: 1;
 	}
 
-	.scroll-container {
+	.scrollable-container {
 		flex: 1;
 
 		@include breakpoint-max(md) {
-			padding-top: em(16);
+			@include scrollable-padding();
 		}
 
 		.scrollable-content {
 			@include breakpoint-max(md) {
-				height: 100%;
-				overflow-y: auto;
+				@include scrollable();
 			}
-			@extend %remove-scrollbar;
 
 			@include breakpoint-max(md) {
 				.content {
