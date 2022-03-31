@@ -71,7 +71,7 @@ export default function Hero() {
 											styles="btn-hero"
 											variant="primary"
 											size="lg"
-											link="/tickets/1"
+											link="/tickets/1?type=genAdmission"
 											btn="tickets--plain">
 											Get Tickets
 										</IconButton>
