@@ -10,6 +10,7 @@ import {
 	SalesPage,
 	EventsPage
 } from './pages';
+import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
 
 /**
@@ -18,24 +19,27 @@ import { RequireAuth } from './context/Authorization/useAuth';
 
 const Router = () => {
 	return (
-		<Routes>
-			<Route path="/" element={<HomePage />} /> <Route path="login" element={<LoginPage />} />{' '}
-			<Route
-				path="dashboard"
-				element={
-					<RequireAuth>
-						<DashboardPage />
-					</RequireAuth>
-				}>
-				<Route path="organizations" element={<OrganizationsPage />} />
-				<Route path="sales" element={<SalesPage />} />
-				<Route path="events" element={<EventsPage />} />
-			</Route>
-			<Route path="tickets/:id" element={<TicketsPage />} />
-			<Route path="checkout/:id" element={<CheckoutPage />} />
-			<Route path="venue/:id" element={<VenuePage />} />
-			{/* Add a NotFound route */}
-		</Routes>
+		<ScrollToTop>
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="login" element={<LoginPage />} />
+				<Route
+					path="dashboard"
+					element={
+						<RequireAuth>
+							<DashboardPage />
+						</RequireAuth>
+					}>
+					<Route path="organizations" element={<OrganizationsPage />} />
+					<Route path="sales" element={<SalesPage />} />
+					<Route path="events" element={<EventsPage />} />
+				</Route>
+				<Route path="tickets/:id" element={<TicketsPage />} />
+				<Route path="checkout/:id" element={<CheckoutPage />} />
+				<Route path="venue/:id" element={<VenuePage />} />
+				{/* Add a NotFound route */}
+			</Routes>
+		</ScrollToTop>
 	);
 };
 
