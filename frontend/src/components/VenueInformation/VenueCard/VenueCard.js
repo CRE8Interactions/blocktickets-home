@@ -34,11 +34,8 @@ export default function VenueCard() {
 				<Button variant="outline-light" className="btn--icon" aria-label="Save Venue">
 					<svg
 						role="img"
-						tile="save"
-						width="21"
-						height="20"
+						title="save"
 						viewBox="0 0 21 20"
-						fill="none"
 						xmlns="http://www.w3.org/2000/svg">
 						<path
 							fillRule="evenodd"
