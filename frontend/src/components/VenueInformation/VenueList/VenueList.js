@@ -9,7 +9,7 @@ import './venueList.scss';
 export default function VenueList() {
 	return (
 		<Stack as="ul">
-			<Stack as="li" direction="horizontal" gap={4}>
+			<Stack as="li" className="item" direction="horizontal" gap={4}>
 				<img
 					src=""
 					alt="The future Nostalgia Tour"
@@ -30,7 +30,7 @@ export default function VenueList() {
 					Get Tickets
 				</IconButton>
 			</Stack>
-			<Stack as="li" direction="horizontal" gap={4}>
+			<Stack as="li" className="item" direction="horizontal" gap={4}>
 				<img
 					src=""
 					alt="The future Nostalgia Tour"
@@ -51,7 +51,7 @@ export default function VenueList() {
 					Get Tickets
 				</IconButton>
 			</Stack>
-			<Stack as="li" direction="horizontal" gap={4}>
+			<Stack as="li" className="item" direction="horizontal" gap={4}>
 				<img
 					src=""
 					alt="The future Nostalgia Tour"
@@ -72,7 +72,7 @@ export default function VenueList() {
 					Get Tickets
 				</IconButton>
 			</Stack>
-			<Stack as="li" direction="horizontal" gap={4}>
+			<Stack as="li" className="item" direction="horizontal" gap={4}>
 				<img
 					src=""
 					alt="The future Nostalgia Tour"
@@ -94,7 +94,7 @@ export default function VenueList() {
 				</IconButton>
 			</Stack>
 
-			<Stack as="li" direction="horizontal" gap={4}>
+			<Stack as="li" className="item" direction="horizontal" gap={4}>
 				<img
 					src=""
 					alt="The future Nostalgia Tour"

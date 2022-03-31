@@ -132,7 +132,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 									<ListGroup as="ul">
 										{tickets.map((ticket) => (
 											<ListGroup.Item
-												onClick={() => handleClick('quantity')}
+												onClick={() => handleClick('confirmation')}
 												action
 												as="li"
 												className="d-flex justify-content-between align-items-center">

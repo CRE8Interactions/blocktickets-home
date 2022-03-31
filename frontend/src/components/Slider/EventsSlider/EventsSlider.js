@@ -19,13 +19,13 @@ export default function EventsSlider({ layout }) {
 					<MyCard prefix={prefix} type="genAdmission" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<MyCard prefix={prefix} />
+					<MyCard prefix={prefix} type="genAdmission" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<MyCard prefix={prefix} />
+					<MyCard prefix={prefix} type="genAdmission" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<MyCard prefix={prefix} />
+					<MyCard prefix={prefix} type="genAdmission" />
 				</SwiperSlide>
 			</Slider>
 		</Fragment>
