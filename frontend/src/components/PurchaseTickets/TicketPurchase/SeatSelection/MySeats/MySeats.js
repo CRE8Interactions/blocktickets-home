@@ -32,7 +32,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -57,7 +57,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -82,7 +82,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -107,7 +107,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -132,7 +132,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -157,7 +157,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -182,7 +182,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -207,7 +207,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -232,7 +232,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -257,7 +257,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -282,7 +282,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -307,7 +307,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -332,7 +332,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
@@ -357,7 +357,7 @@ export default function MySeats() {
 						<span className="fw-bold text-end">$30.00</span>
 					</div>
 				</Stack>
-				<Button variant="outline-light" className="btn--icon-lg" />
+				<Button variant="outline-light" className="btn--icon-xs" />
 			</ListGroup.Item>
 		</ListGroup>
 	);

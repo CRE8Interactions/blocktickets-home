@@ -8,15 +8,13 @@ import './purchaseTickets.scss';
 
 export default function PurchaseTickets() {
 	// 1 - seat selection
-	// 2 - ticket quantity
-	// 3 - seat confirmation (not for general admissions)
-	// 4 - presale
+	// 2 - ticket confirmation
+	// 3 - presale
 
 	const steps = {
 		selection: 1,
-		quantity: 2,
-		confirmation: 3,
-		presale: 4
+		confirmation: 2,
+		presale: 3
 	};
 
 	const { search } = useLocation();
@@ -34,7 +32,7 @@ export default function PurchaseTickets() {
 		setStep
 	] = useState('selection');
 
-	// better way? - only on seated map?
+	// better way? - only on seated map
 	const [
 		isZoomed,
 		setIsZoomed

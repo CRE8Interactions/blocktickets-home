@@ -13,7 +13,9 @@ export default function TicketPurchase({ handleClick, handleGoBack, step, type, 
 				<SeatSelection handleClick={handleClick} type={type} isZoomed={isZoomed} />
 			)}
 
-			{step === 'quantity' && <SeatConfirmation handleGoBack={handleGoBack} type={type} />}
+			{step === 'confirmation' && (
+				<SeatConfirmation handleGoBack={handleGoBack} type={type} />
+			)}
 
 			{step === 'presale' && <TicketPresale handleClick={handleClick} />}
 		</div>
