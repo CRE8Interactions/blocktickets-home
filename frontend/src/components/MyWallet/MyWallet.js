@@ -10,7 +10,7 @@ import UserContext from '../../context/User/user';
 import './myWallet.scss';
 
 export default function MyWallet({ toggle }) {
-	const { setAuthenticated } = useContext(UserContext);
+	const { setAuthenticated, user } = useContext(UserContext);
 
 	const logout = () => {
 		authService.logoutUser();
@@ -19,7 +19,6 @@ export default function MyWallet({ toggle }) {
 
 	useEffect(() => {
 		const closeMenu = () => {
-			console.log('close');
 			if (toggle) toggle(false);
 		};
 
@@ -48,6 +47,14 @@ export default function MyWallet({ toggle }) {
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
+				{
+					user && authService.isOrganizer() &&
+					<ListGroup.Item as="li">
+						<LinkContainer to={'/dashboard'}>
+							<Nav.Link>Dashboard</Nav.Link>
+						</LinkContainer>
+					</ListGroup.Item>
+				}
 				<ListGroup.Item as="li" onClick={logout}>
 					<LinkContainer to={'/logout'}>
 						<Nav.Link>Log out</Nav.Link>

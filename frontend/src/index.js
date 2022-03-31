@@ -10,6 +10,7 @@ import {
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 
+
 import './scss/main.scss';
 
 // Sentry.init({

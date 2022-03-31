@@ -32,10 +32,17 @@ const logoutUser = () => {
   sessionStorage.removeItem('user')
 }
 
+const isOrganizer = () => {
+  const jwt = getUser()
+  if (!jwt) return false
+  return jwt.user.role.name === 'Organizer';
+}
+
 export default {
   setUser,
   getUser,
   isLoggedIn,
   logoutUser,
-  token
+  token,
+  isOrganizer
 };
