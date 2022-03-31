@@ -10,3 +10,4 @@ export { VenueInformation } from './VenueInformation';
 export { Sidenav } from './Sidenav';
 export { CreateOrg } from './Forms/CreateOrg';
 export { EventsTable } from './Tables/EventsTable';
+export { CreateEvent } from './Modals/CreateEvent';
