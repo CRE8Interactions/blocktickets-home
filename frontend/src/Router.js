@@ -35,7 +35,10 @@ const Router = () => {
 					<Route path="events" element={<EventsPage />} />
 				</Route>
 				<Route path="tickets/:id" element={<TicketsPage />} />
-				<Route path="checkout/:id" element={<CheckoutPage />} />
+				<Route path="checkout/:id" element={
+				<RequireAuth>
+					<CheckoutPage />
+				</RequireAuth>} />
 				<Route path="venue/:id" element={<VenuePage />} />
 				{/* Add a NotFound route */}
 			</Routes>
