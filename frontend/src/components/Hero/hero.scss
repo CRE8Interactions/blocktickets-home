@@ -15,6 +15,7 @@
 
 		.display-1 {
 			font-size: $h4-font-size;
+			font-family: $font-heading;
 			margin-bottom: $banner-spacer;
 			@extend %multi-line-truncate;
 			display: block;
