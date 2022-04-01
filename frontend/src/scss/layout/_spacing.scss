@@ -54,10 +54,21 @@ $gap-xs: rem(4);
 	}
 }
 
-.heading--flex {
+%flex-between {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.split-row {
+	@extend %flex-between !optional;
+	* {
+		font-size: $small;
+	}
+}
+
+.heading--flex {
+	@extend %flex-between !optional;
 
 	& > *,
 	.btn {
@@ -79,7 +90,7 @@ $gap-xs: rem(4);
 }
 
 @mixin scrollable-padding {
-	padding-bottom: rem(12);
+	padding: rem(8) 0px;
 }
 
 .scrollable-heading {

@@ -7,7 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { AddOnCard } from './AddOnCard';
-import info from '../../../assets/icons/info.svg';
+
 import './addOns.scss';
 
 export default function AddOns() {
@@ -37,7 +37,7 @@ export default function AddOns() {
 		<Fragment>
 			<h1 className="section-title">Add Ons</h1>
 
-			<Stack gap={4} as="ul">
+			<Stack gap={5} as="ul">
 				{cards.map((data) => (
 					<li>
 						<AddOnCard data={data} />

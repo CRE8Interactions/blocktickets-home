@@ -14,14 +14,17 @@ import './payment.scss';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 export default function Payment() {
-	const [clientSecret, setClientSecret] = useState('')
+	const [
+		clientSecret,
+		setClientSecret
+	] = useState('');
 
 	useEffect(() => {
 		getPaymentIntent()
-			.then(res => setClientSecret(res.data.client_secret))
-			.catch(err => console.error(err))
-	}, [])
-	
+			.then((res) => setClientSecret(res.data.client_secret))
+			.catch((err) => console.error(err));
+	}, []);
+
 	// const appearance = {
 	// 	theme: 'flat',
 	// 	variables: {
@@ -67,9 +70,9 @@ export default function Payment() {
 	// const elements = stripe.elements({ clientSecret, appearance });
 
 	const options = {
-    // passing the client secret obtained from the server
-    clientSecret
-  };
+		// passing the client secret obtained from the server
+		clientSecret
+	};
 
 	const CheckoutForm = () => {
 		return (
@@ -81,12 +84,12 @@ export default function Payment() {
 
 	return (
 		<Fragment>
-			<h1 className="fs-md ">Payment</h1>
-			{ clientSecret &&
+			<h1 className="section-title ">Payment</h1>
+			{clientSecret && (
 				<Elements stripe={stripePromise} options={options}>
 					<CheckoutForm />
 				</Elements>
-			}
+			)}
 		</Fragment>
 	);
 }

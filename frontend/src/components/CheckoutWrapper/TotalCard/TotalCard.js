@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 
 import './totalCard.scss';
 
-export default function TotalCard() {
+export default function TotalCard({ setStatus }) {
 	const [
 		expanded,
 		setExpanded
@@ -146,7 +146,7 @@ export default function TotalCard() {
 					By clicking "Complete Purchase", you agree that you have read, understand and
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
 				</small>
-				<Button variant="primary" size="lg">
+				<Button variant="primary" size="lg" onClick={() => setStatus('successful')}>
 					Complete Purchase
 				</Button>
 			</Card.Footer>
