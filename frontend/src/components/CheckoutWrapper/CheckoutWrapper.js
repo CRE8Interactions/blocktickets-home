@@ -78,7 +78,7 @@ export default function CheckoutWrapper() {
 							</div>
 						</Col>
 						<Col md={6} lg={5} id="total-card">
-							<TotalCard setStatus={setStatus} />
+							<TotalCard setStatus={setStatus} addOns={addOns} />
 						</Col>
 					</Fragment>
 				)}
