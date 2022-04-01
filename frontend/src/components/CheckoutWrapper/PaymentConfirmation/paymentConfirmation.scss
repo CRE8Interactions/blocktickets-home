@@ -1,0 +1,9 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/theme/colors' as *;
+
+#checkout-wrapper {
+	section .section-title {
+		font-size: $body-2;
+		color: $muted;
+	}
+}

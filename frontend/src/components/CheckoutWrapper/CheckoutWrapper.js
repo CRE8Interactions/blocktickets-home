@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import {
@@ -18,14 +18,22 @@ import { BackButton } from '../BackButton';
 import { Timer } from './Timer';
 
 import './checkoutWrapper.scss';
+import { PaymentConfirmation } from './PaymentConfirmation';
 
 export default function CheckoutWrapper() {
 	let location = useLocation();
 
+	const [
+		status,
+		setStatus
+	] = useState('checkout');
+
+	const btns = document.querySelector('.desktop-btns');
+	const nav = document.querySelector('.navbar-nav');
+
 	useEffect(() => {
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
-
 		removeNavContent(location.pathname, btns, nav);
 
 		const el = document.querySelector('.full-height-wrapper').parentElement;
@@ -40,34 +48,44 @@ export default function CheckoutWrapper() {
 
 	const addOns = [];
 
+	if (status === 'successful') {
+		addNavContent(btns, nav);
+	}
+
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
 			<Row className="justify-content-between">
-				<Col md={6}>
-					<BackButton />
-					<div className="d-flex-column">
-						<div className="scrollable-container">
-							<div className="scrollable-content">
-								<div className="content">
-									{addOns.length > 0 && (
-										<section id="addOns">
-											<AddOns />
-										</section>
-									)}
+				{status === 'checkout' && (
+					<Fragment>
+						<Col md={6}>
+							<BackButton />
+							<div className="d-flex-column">
+								<div className="scrollable-container">
+									<div className="scrollable-content">
+										<div className="content">
+											{addOns.length > 0 && (
+												<section id="addOns">
+													<AddOns />
+												</section>
+											)}
 
-									<section>
-										<Payment />
-									</section>
+											<section>
+												<Payment />
+											</section>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</Col>
-				<Col md={6} lg={5} id="total-card">
-					<TotalCard />
-				</Col>
+						</Col>
+						<Col md={6} lg={5} id="total-card">
+							<TotalCard setStatus={setStatus} />
+						</Col>
+					</Fragment>
+				)}
+				{status === 'successful' && <PaymentConfirmation addOns={addOns} />}
 			</Row>
-			<Timer />
+
+			{status === 'checkout' && <Timer />}
 		</div>
 	);
 }

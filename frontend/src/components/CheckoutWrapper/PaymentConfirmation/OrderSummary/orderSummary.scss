@@ -1,0 +1,16 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/theme/colors' as *;
+
+#order {
+	.list-group-item {
+		padding-bottom: em(20);
+	}
+	.list + .list,
+	li + li {
+		margin-top: rem(28);
+
+		.row > * {
+			font-size: $small;
+		}
+	}
+}

@@ -28,6 +28,10 @@
 			background-color: $clr-white;
 		}
 	}
+
+	&--borderless {
+		border: none;
+	}
 	& * {
 		font-family: $font-body;
 	}
@@ -41,8 +45,8 @@
 	}
 
 	&-subtitle {
-		font-family: $font-heading;
-		font-size: $small;
+		font-weight: $fw-bold;
+		font-size: $caption;
 	}
 }
 

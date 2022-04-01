@@ -36,14 +36,20 @@
 	section {
 		padding: em(24) 0px;
 
+		& + section {
+			border-top: border();
+		}
+
+		.section-title {
+			font-size: $body-1;
+			font-weight: $fw-medium;
+			margin-bottom: rem(16);
+		}
+
 		&:first-of-type {
 			@include breakpoint-max(md) {
-				padding-top: em(10);
+				padding-top: 0px;
 			}
 		}
-	}
-
-	#addOns {
-		border-bottom: border();
 	}
 }
