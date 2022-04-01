@@ -5,6 +5,10 @@
 footer {
 	border-top: border();
 
+	.nav-link {
+		padding-left: 0px;
+	}
+
 	.copyright {
 		border-top: border();
 		margin-top: $copyright-spacer;
@@ -25,7 +29,6 @@ footer {
 			}
 		}
 
-		.brand-logo,
 		.footer-title {
 			margin-bottom: $title-spacer;
 		}
@@ -49,6 +52,7 @@ footer {
 
 .tag-line {
 	width: 21ch;
+	margin-top: $title-spacer;
 
 	@include breakpoint-min(xl) {
 		font-size: rem(24);

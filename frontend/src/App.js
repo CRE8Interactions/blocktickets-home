@@ -3,8 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Router from './Router';
 import UserContext from './context/User/user';
 import AuthService from './utilities/services/auth.service';
-import { Navigation, Footer } from './components';
-import { hideFooter } from './utilities/helper';
+import { Navigation } from './components';
 
 function App() {
 	const user = AuthService.getUser();
@@ -19,11 +18,11 @@ function App() {
 			console.log('app', location);
 			// Remove container class for Dashboard view
 			if (location.pathname === '/dashboard') {
-				document.getElementById('main-container').classList.remove('container')
-			} else {
-				document.getElementById('main-container').classList.add('container')
+				document.getElementById('main-container').classList.remove('container');
 			}
-			hideFooter(location.pathname);
+			else {
+				document.getElementById('main-container').classList.add('container');
+			}
 		},
 		[
 			location
@@ -37,7 +36,6 @@ function App() {
 				<div className="container" id="main-container">
 					<Router />
 				</div>
-				<Footer />
 			</UserContext.Provider>
 		</Fragment>
 	);
