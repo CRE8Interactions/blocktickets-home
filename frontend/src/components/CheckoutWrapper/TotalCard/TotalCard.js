@@ -25,7 +25,7 @@ export default function TotalCard() {
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
-						className=" btn--icon-lg"
+						className=" btn--icon-sm"
 					/>
 				</Stack>
 			</Card.Header>

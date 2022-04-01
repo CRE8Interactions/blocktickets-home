@@ -15,10 +15,12 @@
 				margin-top: rem(12);
 			}
 
-			.btn--icon-xs {
+			.btn--icon {
 				position: absolute;
 				right: 0px;
 				top: -11.9px;
+				width: 29px;
+				height: 29px;
 				background-image: url('../../../../../assets/icons/close.svg');
 				@extend %btn-background;
 				background-color: #fff;
