@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 
 import './totalCard.scss';
 
-export default function TotalCard({ setStatus }) {
+export default function TotalCard({ setStatus, addOns }) {
 	const [
 		expanded,
 		setExpanded
@@ -25,8 +25,21 @@ export default function TotalCard({ setStatus }) {
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
-						className=" btn--icon-sm"
-					/>
+						className=" btn--icon-sm">
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								fillRule="evenodd"
+								clipRule="evenodd"
+								d="M16.2071 9.79289C15.8166 9.40237 15.1834 9.40237 14.7929 9.79289L12 12.5858L9.20711 9.79289C8.81658 9.40237 8.18342 9.40237 7.79289 9.79289C7.40237 10.1834 7.40237 10.8166 7.79289 11.2071L11.2929 14.7071C11.6834 15.0976 12.3166 15.0976 12.7071 14.7071L16.2071 11.2071C16.5976 10.8166 16.5976 10.1834 16.2071 9.79289Z"
+								fill="#777E91"
+							/>
+						</svg>
+					</Button>
 				</Stack>
 			</Card.Header>
 			{expanded && (
@@ -36,7 +49,7 @@ export default function TotalCard({ setStatus }) {
 							<p className="heading">Tickets</p>
 							<ul>
 								<li>
-									<Row>
+									<Row className="split-row"> 
 										<Col>
 											<span>Tickets: $35.00 x 2</span>
 										</Col>
@@ -52,7 +65,7 @@ export default function TotalCard({ setStatus }) {
 							<p className="heading">Fees</p>
 							<ul>
 								<li>
-									<Row>
+									<Row className="split-row"> 
 										<Col>
 											<span>Service Fee: $15.00 x 2</span>
 										</Col>
@@ -62,7 +75,7 @@ export default function TotalCard({ setStatus }) {
 									</Row>
 								</li>
 								<li className="list">
-									<Row>
+									<Row className="split-row"> 
 										<Col>
 											<span>Facility Charge: $12.00 x 2</span>
 										</Col>
@@ -72,7 +85,7 @@ export default function TotalCard({ setStatus }) {
 									</Row>
 								</li>
 								<li>
-									<Row>
+									<Row className="split-row"> 
 										<Col>
 											<span>Order Processing Fee</span>
 										</Col>
@@ -84,11 +97,12 @@ export default function TotalCard({ setStatus }) {
 								</li>
 							</ul>
 						</li>
-						<li className="list">
+
+						{ addOns?.length > 0 && ( <li className="list">
 							<p className="heading">Add on</p>
 							<ul>
 								<li>
-									<Row>
+									<Row className="split-row"> 
 										<Col>
 											<span>Meet &amp; Greet</span>
 										</Col>
@@ -98,7 +112,17 @@ export default function TotalCard({ setStatus }) {
 									</Row>
 								</li>
 								<li>
-									<Row>
+									<Row className="split-row"> 
+										<Col>
+											<span>Merch</span>
+										</Col>
+										<Col className="text-end">
+											<span>$45.00</span>
+										</Col>
+									</Row>
+								</li>
+								<li>
+									<Row className="split-row"> 
 										<Col>
 											<span>Parking Pass</span>
 										</Col>
@@ -108,26 +132,12 @@ export default function TotalCard({ setStatus }) {
 									</Row>
 								</li>
 							</ul>
-						</li>
-						<li className="list">
-							<p className="heading">Delivery</p>
-							<ul>
-								<li>
-									<Row>
-										<Col>
-											<span>Standard Shipping</span>
-										</Col>
-										<Col className="text-end ">
-											<span>$15.00</span>
-										</Col>
-									</Row>
-								</li>
-							</ul>
-						</li>
+						</li> )}
+
 						<li className="list">
 							<ul>
 								<li>
-									<Row>
+									<Row className="split-row"> 
 										<Col>
 											<p className="heading m-0">Tax</p>
 										</Col>
@@ -142,7 +152,7 @@ export default function TotalCard({ setStatus }) {
 				</Card.Body>
 			)}
 			<Card.Footer className={`d-flex-column ${expanded && 'with-border'}`}>
-				<small className="tablet-desktop-only caption">
+				<small className="caption">
 					By clicking "Complete Purchase", you agree that you have read, understand and
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
 				</small>
