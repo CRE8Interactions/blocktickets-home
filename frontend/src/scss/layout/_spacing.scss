@@ -1,20 +1,21 @@
 @use '../abstracts' as *;
 
 // Banner Spacers
-$banner-spacer-md-top: em(100);
-$banner-spacer-md-bottom: em(110);
+$banner-spacer-md-top: rem(100);
+$banner-spacer-md-bottom: rem(110);
 $banner-spacer: rem(21);
 
 // Page Spacers
 $spacer-xs: rem(38);
-$spacer-sm: em(64);
-$spacer-md: em(80);
-$spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
+$spacer-sm: rem(64);
+$spacer-md: rem(80);
+$spacer-footer-sm-bottom: rem(24); // change variable name when you get more pages
 $copyright-spacer: rem(17); // change variable name when you get more pages
 
 // Text Spacers
-$heading-spacer: rem(64);
-$title-spacer: rem(30);
+$heading-spacer: rem(64); // headings on home page
+$heading-spacer-sm: rem(29); // page headings
+$title-spacer: rem(32); // footer text
 $gap: rem(14);
 $gap-sm: rem(9);
 $gap-xs: rem(4);

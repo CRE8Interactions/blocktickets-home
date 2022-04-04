@@ -7,11 +7,15 @@
 	position: relative;
 
 	@include breakpoint-min(md) {
-		padding: em(40) 0px;
+		padding-top: $spacer-sm;
 	}
 
 	&.padding-bottom {
 		padding-bottom: $spacer-xs;
+
+		@include breakpoint-min(md) {
+			padding-bottom: $spacer-sm;
+		}
 	}
 
 	section {

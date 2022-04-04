@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 import { AddOnCard } from './AddOnCard';
 
 import './addOns.scss';

@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
-import { getPaymentIntent } from '../../../utilities/api';
-
-import info from '../../../assets/icons/info.svg';
+import { getPaymentIntent } from './../../../../utilities/api';
 
 import './payment.scss';
 

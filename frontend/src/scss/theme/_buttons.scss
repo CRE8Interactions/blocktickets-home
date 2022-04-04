@@ -5,11 +5,17 @@
 $btn-font-family: $font-heading;
 $btn-font-weight: $fw-bold;
 $btn-font-size: rem(14);
+
+// medium button
 $btn-font-size-lg: rem(16);
 $btn-padding-y-lg: em(16);
 $btn-padding-x-lg: em(24);
-$btn-padding-x: em(16);
-$btn-padding-y: em(12);
+
+// small button
+$btn-padding-x: em(20);
+$btn-padding-y: em(13);
+
+// xsmall button
 $btn-padding-y-sm: em(8);
 $btn-padding-x-sm: em(14);
 $btn-border-radius: $br-primary;
