@@ -27,6 +27,7 @@ export default function CheckoutWrapper() {
 	const nav = document.querySelector('.navbar-nav');
 
 	useEffect(() => {
+		removeNavContent(location.pathname, btns, nav);
 		fullHeightContainer(location.pathname, el);
 
 		return () => {
