@@ -1,0 +1,35 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/layout' as *;
+@use '../../../../../scss/theme/colors' as *;
+
+#addOns {
+	.price {
+		@extend %icon-text-box;
+		gap: $gap-xs;
+		font-weight: 500;
+
+		.btn {
+			padding: 0px;
+		}
+	}
+
+	.card-text {
+		white-space: normal;
+		&.title,
+		.sponsor {
+			color: $body-color;
+			font-weight: $fw-semi-bold;
+		}
+		&.title {
+			font-size: $small;
+			white-space: normal;
+			@extend %multi-line-truncate;
+		}
+		font-size: $caption;
+		color: $muted;
+	}
+
+	.selected {
+		border-color: $primary;
+	}
+}

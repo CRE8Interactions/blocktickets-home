@@ -1,0 +1,28 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
+
+#checkout-wrapper {
+	.row {
+		flex: 1;
+	}
+
+	.scrollable-container {
+		flex: 1;
+
+		@include breakpoint-max(md) {
+			@include scrollable-padding();
+		}
+
+		.scrollable-content {
+			@include breakpoint-max(md) {
+				@include scrollable();
+			}
+
+			@include breakpoint-max(md) {
+				.content {
+					max-height: 481px;
+				}
+			}
+		}
+	}
+}
