@@ -49,7 +49,7 @@ export default function TotalCard({ setStatus, addOns }) {
 							<p className="heading">Tickets</p>
 							<ul>
 								<li>
-									<Row className="split-row"> 
+									<Row className="split-row">
 										<Col>
 											<span>Tickets: $35.00 x 2</span>
 										</Col>
@@ -65,7 +65,7 @@ export default function TotalCard({ setStatus, addOns }) {
 							<p className="heading">Fees</p>
 							<ul>
 								<li>
-									<Row className="split-row"> 
+									<Row className="split-row">
 										<Col>
 											<span>Service Fee: $15.00 x 2</span>
 										</Col>
@@ -75,7 +75,7 @@ export default function TotalCard({ setStatus, addOns }) {
 									</Row>
 								</li>
 								<li className="list">
-									<Row className="split-row"> 
+									<Row className="split-row">
 										<Col>
 											<span>Facility Charge: $12.00 x 2</span>
 										</Col>
@@ -85,7 +85,7 @@ export default function TotalCard({ setStatus, addOns }) {
 									</Row>
 								</li>
 								<li>
-									<Row className="split-row"> 
+									<Row className="split-row">
 										<Col>
 											<span>Order Processing Fee</span>
 										</Col>
@@ -98,46 +98,48 @@ export default function TotalCard({ setStatus, addOns }) {
 							</ul>
 						</li>
 
-						{ addOns?.length > 0 && ( <li className="list">
-							<p className="heading">Add on</p>
-							<ul>
-								<li>
-									<Row className="split-row"> 
-										<Col>
-											<span>Meet &amp; Greet</span>
-										</Col>
-										<Col className="text-end">
-											<span>$45.00</span>
-										</Col>
-									</Row>
-								</li>
-								<li>
-									<Row className="split-row"> 
-										<Col>
-											<span>Merch</span>
-										</Col>
-										<Col className="text-end">
-											<span>$45.00</span>
-										</Col>
-									</Row>
-								</li>
-								<li>
-									<Row className="split-row"> 
-										<Col>
-											<span>Parking Pass</span>
-										</Col>
-										<Col className="text-end ">
-											<span>$12.00</span>
-										</Col>
-									</Row>
-								</li>
-							</ul>
-						</li> )}
+						{addOns.length > 0 && (
+							<li className="list">
+								<p className="heading">Add on</p>
+								<ul>
+									<li>
+										<Row className="split-row">
+											<Col>
+												<span>Meet &amp; Greet</span>
+											</Col>
+											<Col className="text-end">
+												<span>$45.00</span>
+											</Col>
+										</Row>
+									</li>
+									<li>
+										<Row className="split-row">
+											<Col>
+												<span>Merch</span>
+											</Col>
+											<Col className="text-end">
+												<span>$45.00</span>
+											</Col>
+										</Row>
+									</li>
+									<li>
+										<Row className="split-row">
+											<Col>
+												<span>Parking Pass</span>
+											</Col>
+											<Col className="text-end ">
+												<span>$12.00</span>
+											</Col>
+										</Row>
+									</li>
+								</ul>
+							</li>
+						)}
 
 						<li className="list">
 							<ul>
 								<li>
-									<Row className="split-row"> 
+									<Row className="split-row">
 										<Col>
 											<p className="heading m-0">Tax</p>
 										</Col>

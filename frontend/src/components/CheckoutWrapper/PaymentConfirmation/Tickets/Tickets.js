@@ -4,21 +4,30 @@ import { Ticket } from './Ticket';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
+import './tickets.scss';
+
 export default function Tickets() {
 	return (
 		<Fragment>
-			<Stack direction="horizontal" className="heading--flex mb-3">
-				<h1 className="section-title m-0">Tickets</h1>
-				<Button variant="primary" className="ml-auto">
-					Go to My Wallet
-				</Button>
-			</Stack>
+			<h1 className="section-title section-title--muted">Tickets</h1>
 
-			<Stack gap={4} as="ul">
+			<Stack gap={4} as="ul" className="mt-md-3">
+				<li className="ticket">
+					<Ticket />
+				</li>
+				<li className="ticket">
+					<Ticket />
+				</li>
+				<li className="ticket">
+					<Ticket />
+				</li>
 				<li className="ticket">
 					<Ticket />
 				</li>
 			</Stack>
+			<Button variant="primary" id="myWalletBtn">
+				Go to My Wallet
+			</Button>
 		</Fragment>
 	);
 }

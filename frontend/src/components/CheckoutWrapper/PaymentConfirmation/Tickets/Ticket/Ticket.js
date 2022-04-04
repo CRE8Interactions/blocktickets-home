@@ -11,7 +11,7 @@ import './ticket.scss';
 
 export default function Ticket() {
 	return (
-		<Row gap={2}>
+		<Row>
 			<Col md={2} id="artist-image-col">
 				<img
 					src={profile}
@@ -23,7 +23,7 @@ export default function Ticket() {
 			</Col>
 			<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
 				<Stack>
-					<h1 className="normal-lg artist-name fw-bold">Nic Fanciulli</h1>
+					<h1 className="normal artist-name fw-bold">Nic Fanciulli</h1>
 					<p className="small mb-1">
 						Mar 13 <span className="time">9:00 PM</span>
 					</p>
@@ -32,14 +32,9 @@ export default function Ticket() {
 							Toronto, ON or Full address of Venue goes here
 						</span>
 					</p>
-					<p className="mt-auto text-primary">General Admission</p>
+					<p className="mt-auto text-primary small">General Admission</p>
 				</Stack>
 			</Col>
-			{/* <Col>
-					<Stack className="btn-group-flex">
-						<Button variant="primary">Go to My Wallet</Button>
-					</Stack>
-				</Col> */}
 		</Row>
 	);
 }

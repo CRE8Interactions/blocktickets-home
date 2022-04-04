@@ -12,7 +12,7 @@ import Stack from 'react-bootstrap/Stack';
 import { ParkingCard } from './ParkingCard';
 import { MerchCard } from './MerchCard';
 
-import info from '../../../../assets/icons/info.svg';
+import info from '../../../../../assets/icons/info.svg';
 
 import './addOnCard.scss';
 

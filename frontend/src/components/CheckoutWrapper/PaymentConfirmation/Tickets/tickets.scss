@@ -1,0 +1,15 @@
+@use './../../../../scss/abstracts' as *;
+
+#checkout-wrapper {
+	#myWalletBtn {
+		min-width: 160px;
+		margin-top: rem(24);
+
+		@include breakpoint-min(md) {
+			position: absolute;
+			top: -12px;
+			right: 0;
+			margin-top: 0px;
+		}
+	}
+}
