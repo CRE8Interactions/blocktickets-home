@@ -3,7 +3,7 @@
 
 #venue {
 	.event-title {
-		@extend %text-truncate;
+		@extend %multi-line-truncate;
 		font-size: rem(16);
 		margin-bottom: rem(6);
 		font-weight: $fw-medium;
@@ -13,7 +13,9 @@
 		}
 	}
 
-	.rounded-corners {
+	.venue-image {
+		width: 120px;
+		height: 120px;
 		background-color: yellow;
 	}
 
@@ -32,12 +34,14 @@
 
 	ul {
 		.item {
-			@include breakpoint-max(lg) {
-				flex-wrap: wrap;
-			}
-
 			& + .item {
 				margin-top: rem(32);
+			}
+
+			.icon-button {
+				@include breakpoint-min(lg) {
+					margin-left: auto;
+				}
 			}
 		}
 	}
