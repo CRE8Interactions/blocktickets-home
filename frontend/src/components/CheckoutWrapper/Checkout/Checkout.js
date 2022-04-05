@@ -13,7 +13,7 @@ export default function Checkout({ addOns, setStatus }) {
 	return (
 		<Fragment>
 			<Col md={6}>
-				<BackButton />
+				<BackButton marginBottom="md-3" />
 				<div className="d-flex-column">
 					<div className="scrollable-container">
 						<div className="scrollable-content">

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
@@ -23,66 +23,89 @@ export default function Payment() {
 			.catch((err) => console.error(err));
 	}, []);
 
-	// const appearance = {
-	// 	theme: 'flat',
-	// 	variables: {
-	// 		fontFamily: ' "Gill Sans", sans-serif',
-	// 		fontLineHeight: '1.5',
-	// 		borderRadius: '10px',
-	// 		colorBackground: '#F6F8FA',
-	// 		colorPrimaryText: '#262626'
-	// 	},
-	// 	rules: {
-	// 		'.Block': {
-	// 			backgroundColor: 'var(--colorBackground)',
-	// 			boxShadow: 'none',
-	// 			padding: '12px'
-	// 		},
-	// 		'.Input': {
-	// 			padding: '12px'
-	// 		},
-	// 		'.Input:disabled, .Input--invalid:disabled': {
-	// 			color: 'lightgray'
-	// 		},
-	// 		'.Tab': {
-	// 			padding: '10px 12px 8px 12px',
-	// 			border: 'none'
-	// 		},
-	// 		'.Tab:hover': {
-	// 			border: 'none',
-	// 			boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)'
-	// 		},
-	// 		'.Tab--selected, .Tab--selected:focus, .Tab--selected:hover': {
-	// 			border: 'none',
-	// 			backgroundColor: '#fff',
-	// 			boxShadow:
-	// 				'0 0 0 1.5px var(--colorPrimaryText), 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)'
-	// 		},
-	// 		'.Label': {
-	// 			fontWeight: '500'
-	// 		}
-	// 	}
-	// };
+	const appearance = {
+		theme: 'flat',
+		variables: {
+			fontFamily: ' "Poppins", sans-serif',
+			fontLineHeight: '1.4',
+			fontSizeBase: '14px',
+			fontSizeSm: '12px',
+			fontWeightNormal: '500',
+			borderRadius: '12px',
+			colorPrimary: '#5ab6f8',
+			colorBackground: '#fcfcfd',
+			colorText: '#23262F',
+			colorWarning: '#EF466F',
+			colorDanger: '#EF466F',
+			colorTextSecondary: '#B1B5C3',
+			spacingUnit: '12px',
+			spacingGridRow: '24px'
+		},
+		rules: {
+			'.Input': {
+				boxShadow: '0px 0px 0px 2px #E6E8EC',
+				padding: '12.250px 14.875px',
+				lineHeight: 'var(--fontLineHeight)'
+			},
 
-	// // Pass the appearance object to the Elements instance
-	// const elements = stripe.elements({ clientSecret, appearance });
+			'.Input:focus': {
+				outline: '0',
+				boxShadow: '0px 0px 0px 2px var(--colorPrimary)'
+			},
+			'.Input:disabled, .Input--invalid:disabled': {
+				color: 'lightgray'
+			},
+			'.Tab': {
+				boxShadow: '0px 0px 0px 2px #E6E8EC',
+				padding: '12.250px 14.875px',
+				border: 'none'
+			},
+			'.Tab--selected, .Tab--selected:focus, .Tab--selected:hover': {
+				border: 'none',
+				boxShadow: '0px 0px 0px 2px var(--colorPrimary)',
+				backgroundColor: 'var(--colorPrimary)',
+				opacity: '5%'
+			},
+			'.Label': {
+				fontWeight: '700',
+				textTransform: 'uppercase',
+				color: 'var(--colorTextSecondary)',
+				marginBottom: 'var(--spacingUnit)',
+				lineHeight: 'var(--fontLineHeight)'
+			},
+
+			'.Input--invalid': {
+				boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 2px var(--colorDanger)'
+			},
+
+			'.Error': {
+				marginTop: 'var(--spacingUnit)'
+			}
+		}
+	};
 
 	const options = {
 		// passing the client secret obtained from the server
-		clientSecret
+		clientSecret,
+		appearance
 	};
 
 	const CheckoutForm = () => {
 		return (
-			<form>
+			<Form id="checkout-form">
+				<Form.Group className="form-group" controlId="card-holder">
+					<Form.Label>Name on Card</Form.Label>
+					<Form.Control type="text" name="card-holder" id="" />
+				</Form.Group>
 				<PaymentElement />
-			</form>
+			</Form>
 		);
 	};
 
 	return (
 		<Fragment>
-			<h1 className="section-title ">Payment</h1>
+			<h1 className="section-title mb-2">Payment</h1>
+			<h2 className="text-muted small fw-medium">Please select a payment method</h2>
 			{clientSecret && (
 				<Elements stripe={stripePromise} options={options}>
 					<CheckoutForm />
