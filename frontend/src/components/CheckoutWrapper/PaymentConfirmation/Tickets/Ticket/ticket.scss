@@ -13,14 +13,15 @@
 			}
 		}
 		#artist-image-col {
-			@include breakpoint-min(md) {
-				width: auto;
-			}
+			width: auto;
+
 			.artist-image {
-				width: 152px;
+				width: 92px;
+				height: 92px;
 
 				@include breakpoint-min(md) {
 					width: 120px;
+					height: 120px;
 				}
 			}
 		}
@@ -35,7 +36,6 @@
 		.details {
 			font-weight: 500;
 			flex-grow: 1;
-			height: 120px;
 
 			p,
 			.artist-name {

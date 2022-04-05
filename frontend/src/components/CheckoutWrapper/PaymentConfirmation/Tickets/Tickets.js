@@ -11,7 +11,7 @@ export default function Tickets() {
 		<Fragment>
 			<h1 className="section-title section-title--muted">Tickets</h1>
 
-			<Stack gap={4} as="ul" className="mt-md-3">
+			<Stack gap={4} as="ul" className="mt-md-3 ">
 				<li className="ticket">
 					<Ticket />
 				</li>
