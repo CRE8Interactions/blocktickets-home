@@ -1,1 +1,12 @@
+@use './../../../../scss/abstracts' as *;
+@use './../../../../scss/layout/spacing' as *;
 
+#checkout-form {
+	border-top: border();
+	margin-top: $text-spacer-sm;
+	padding-top: $text-spacer-sm;
+
+	.form-group {
+		margin-bottom: $text-spacer-sm;
+	}
+}

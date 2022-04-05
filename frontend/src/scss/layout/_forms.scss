@@ -1,10 +1,23 @@
 @use '../abstracts' as *;
+@use './spacing' as *;
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
+.form-group {
+	margin-bottom: $text-spacer;
+}
 .form-control {
 	color: $clr-neutral-4;
 	font-weight: $fw-medium;
+}
+
+.form-label {
+	text-transform: uppercase;
+	font-size: $caption;
+	font-weight: $fw-bold;
+	color: $gray-200;
+	margin-bottom: rem(12);
 }
 
 input::placeholder {

@@ -10,15 +10,19 @@ $spacer-xs: rem(38);
 $spacer-sm: rem(64);
 $spacer-md: rem(80);
 $spacer-footer-sm-bottom: rem(24); // change variable name when you get more pages
-$copyright-spacer: rem(17); // change variable name when you get more pages
+$copyright-spacer: rem(17);
 
 // Text Spacers
-$heading-spacer: rem(64); // headings on home page
+$heading-spacer: rem(64); // page headings
 $heading-spacer-sm: rem(29); // page headings
-$title-spacer: rem(32); // footer text
+$title-spacer: rem(32); // footer titles
 $gap: rem(14);
 $gap-sm: rem(9);
 $gap-xs: rem(4);
+
+// form groups
+$text-spacer: rem(32);
+$text-spacer-sm: rem(24);
 
 .spacer-xs {
 	padding: $spacer-xs 0px;

@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use './buttons' as *;
+@use './colors' as *;
 
 $input-font-size: rem(14);
 $input-font-size-sm: rem(12);
@@ -17,6 +18,7 @@ $border-radius-sm: $br-input-sm;
 $border-width: $border-width;
 $input-border-width: $border-width;
 $input-focus-box-shadow: none;
+$input-focus-border-color: $primary;
 
 $form-select-border-radius: $br-input;
 $form-select-padding-y: $btn-padding-y-lg;
