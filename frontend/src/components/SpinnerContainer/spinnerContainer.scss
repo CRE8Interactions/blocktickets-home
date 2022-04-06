@@ -1,0 +1,7 @@
+@use '../../scss/abstracts' as *;
+
+#spinner {
+	display: flex;
+	justify-content: center;
+	padding: em(32) 0px;
+}

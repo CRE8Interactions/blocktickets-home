@@ -29,14 +29,12 @@
 		}
 	}
 
-	&--borderless {
-		border: none;
-	}
 	& * {
 		font-family: $font-body;
 	}
 
-	.btn {
+	.btn,
+	.btn * {
 		font-family: $font-heading;
 	}
 
