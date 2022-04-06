@@ -3,7 +3,7 @@ export const getCopyrightYear = () => {
 };
 
 export const checkUrl = (url) => {
-	var expression = /\w*tickets|\w*\/venue|\w*\/checkout|\w*\/dashboard/g;
+	var expression = /\w*\/checkout|\w*\/dashboard/g;
 
 	var regex = new RegExp(expression);
 	return regex.test(url);
@@ -35,13 +35,4 @@ export const removeNavContent = (url, ...rest) => {
 
 export const addNavContent = (...rest) => {
 	rest.forEach((el) => (el.style.display = 'flex'));
-};
-export const hideFooter = (url) => {
-	const footer = document.querySelector('footer');
-	if (checkUrl(url)) {
-		footer.style.display = 'none';
-	}
-	else {
-		footer.style.display = 'block';
-	}
 };
