@@ -46,7 +46,7 @@ export default function CheckoutWrapper() {
 
 		addNavContent(btns, nav);
 		removeFullHeightContainer(el);
-		document.getElementById('checkout-wrapper').classList.add('padding-bottom');
+		document.getElementById('checkout-wrapper').classList.add('confirmation-padding');
 	}
 
 	return (

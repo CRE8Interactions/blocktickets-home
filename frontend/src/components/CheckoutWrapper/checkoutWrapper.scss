@@ -7,13 +7,14 @@
 	position: relative;
 
 	@include breakpoint-min(md) {
-		padding-top: $spacer-sm;
+		padding: rem(40) 0px;
 	}
 
-	&.padding-bottom {
+	&.confirmation-padding {
 		padding-bottom: $spacer-xs;
 
 		@include breakpoint-min(md) {
+			padding-top: $spacer-sm;
 			padding-bottom: $spacer-sm;
 		}
 	}
