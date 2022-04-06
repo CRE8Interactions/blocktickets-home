@@ -45,7 +45,11 @@ $pad-md: rem(81);
 	display: flex;
 	gap: $gap;
 	align-items: center;
-	line-height: 0;
+}
+
+.icon-button {
+	@extend %icon-text-box !optional;
+	justify-content: center;
 }
 
 .time-caption,

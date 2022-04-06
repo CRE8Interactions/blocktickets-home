@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -6,12 +6,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
+import { Spinner } from '../../../SpinnerContainer/Spinner';
+
 import './totalCard.scss';
 
 export default function TotalCard({ setStatus, addOns }) {
 	const [
 		expanded,
 		setExpanded
+	] = useState(false);
+
+	const [
+		purchasing,
+		setPurchasing
 	] = useState(false);
 
 	return (
@@ -158,9 +165,22 @@ export default function TotalCard({ setStatus, addOns }) {
 					By clicking "Complete Purchase", you agree that you have read, understand and
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
 				</small>
-				<Button variant="primary" size="lg" onClick={() => setStatus('successful')}>
-					Complete Purchase
-				</Button>
+				<div id="payment-request-button">
+					<Button
+						variant="primary"
+						size="lg"
+						className="icon-button w-100"
+						onClick={() => setStatus('successful')}>
+						{purchasing ? (
+							<Fragment>
+								<Spinner color={'#fcfcfd'} size="sm" />
+								<span>Purchasing...</span>
+							</Fragment>
+						) : (
+							<span>Complete Purchase</span>
+						)}
+					</Button>
+				</div>
 			</Card.Footer>
 		</Card>
 	);

@@ -3,7 +3,7 @@ import React from 'react';
 import Stack from 'react-bootstrap/Stack';
 
 import { IconButton } from '../../IconButton';
-import { Spinner } from './../../Spinner';
+import { SpinnerContainer } from '../../SpinnerContainer';
 
 import './venueList.scss';
 
@@ -124,6 +124,7 @@ export default function VenueList() {
 						</div>
 					</div>
 					<IconButton
+						link={'tickets/1'}
 						variant="outline-light"
 						btn="tickets--primary"
 						styles="ms-lg-auto text-primary mt-0">
@@ -131,7 +132,7 @@ export default function VenueList() {
 					</IconButton>
 				</div>
 			</Stack>
-			<Spinner />
+			<SpinnerContainer />
 		</Stack>
 	);
 }
