@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import Row from 'react-bootstrap/Row';
 
 import {
 	removeNavContent,
@@ -7,7 +9,6 @@ import {
 	fullHeightContainer,
 	removeFullHeightContainer
 } from '../../utilities/helper';
-import Row from 'react-bootstrap/Row';
 import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
 import { Timer } from './Timer';
@@ -22,11 +23,11 @@ export default function CheckoutWrapper() {
 		setStatus
 	] = useState('checkout');
 
-	const el = document.querySelector('.full-height-wrapper').parentElement;
-	const btns = document.querySelector('.desktop-btns');
-	const nav = document.querySelector('.navbar-nav');
+	useLayoutEffect(() => {
+		const el = document.querySelector('.full-height-wrapper').parentElement;
+		const btns = document.querySelector('.desktop-btns');
+		const nav = document.querySelector('.navbar-nav');
 
-	useEffect(() => {
 		removeNavContent(location.pathname, btns, nav);
 		fullHeightContainer(location.pathname, el);
 
@@ -39,6 +40,10 @@ export default function CheckoutWrapper() {
 	const addOns = [];
 
 	if (status === 'successful') {
+		const el = document.querySelector('.full-height-wrapper').parentElement;
+		const btns = document.querySelector('.desktop-btns');
+		const nav = document.querySelector('.navbar-nav');
+
 		addNavContent(btns, nav);
 		removeFullHeightContainer(el);
 		document.getElementById('checkout-wrapper').classList.add('padding-bottom');
