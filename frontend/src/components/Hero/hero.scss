@@ -25,7 +25,7 @@
 			}
 		}
 
-		.date {
+		.time-wrapper {
 			span {
 				@include breakpoint-min(xl) {
 					display: block;
@@ -33,9 +33,9 @@
 			}
 		}
 
-		.time,
-		.venue,
-		.location {
+		.time-wrapper,
+		.venue-wrapper,
+		.location-wrapper {
 			margin-bottom: $banner-spacer;
 
 			@include breakpoint-inBetween(md, lg) {
@@ -43,7 +43,7 @@
 			}
 		}
 
-		.venue {
+		.venue-wrapper {
 			p:not(.venue-caption) {
 				@extend %multi-line-truncate;
 			}

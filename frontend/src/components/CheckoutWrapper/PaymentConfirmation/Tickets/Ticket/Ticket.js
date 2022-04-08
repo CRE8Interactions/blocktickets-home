@@ -23,7 +23,7 @@ export default function Ticket() {
 			</Col>
 			<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
 				<Stack>
-					<h1 className="normal artist-name fw-bold">Nic Fanciulli</h1>
+					<h1 className="artist-name fw-bold">Nic Fanciulli</h1>
 					<p className="small mb-md-1">
 						Mar 13 <span className="time">9:00 PM</span>
 					</p>

@@ -4,6 +4,7 @@
 .modal {
 	.event-details {
 		padding: $modal-inner-padding;
+		padding-top: em(15);
 		border-bottom: border();
 	}
 

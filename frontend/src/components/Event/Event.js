@@ -33,8 +33,8 @@ export default function Event() {
 						/>
 					</Col>
 					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
-						<h1 className="normal-lg artist-name">Nic Fanciulli</h1>
-						<p className="caption--uppercase subtitle text-muted tablet-desktop-only">
+						<h1 className="artist-name">Nic Fanciulli</h1>
+						<p className="subtitle tablet-desktop-only">
 							Coda, Platform, Floh, &amp; Embrace Presents:
 						</p>
 						<Row>

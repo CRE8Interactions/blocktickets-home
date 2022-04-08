@@ -37,7 +37,7 @@ export default function Payment() {
 			colorText: '#23262F',
 			colorWarning: '#EF466F',
 			colorDanger: '#EF466F',
-			colorTextSecondary: '#B1B5C3',
+			colorTextSecondary: '#777e90',
 			spacingUnit: '12px',
 			spacingGridRow: '24px'
 		},
@@ -87,7 +87,9 @@ export default function Payment() {
 	const options = {
 		// passing the client secret obtained from the server
 		clientSecret,
-		appearance
+		appearance,
+
+		cssSrc: 'https://fonts.googleapis.com/css?family=Poppins:wght@400;500;600;700&display=swap'
 	};
 
 	const CheckoutForm = () => {
