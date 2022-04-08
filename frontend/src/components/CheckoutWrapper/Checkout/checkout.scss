@@ -6,23 +6,22 @@
 		flex: 1;
 	}
 
-	.scrollable-container {
-		flex: 1;
+	// .scrollable-container {
+	// 	flex: 1;
 
-		@include breakpoint-max(md) {
-			@include scrollable-padding();
-		}
+	// 	@include breakpoint-max(md) {
+	// 		@include scrollable-padding();
+	// 	}
 
-		.scrollable-content {
-			@include breakpoint-max(md) {
-				@include scrollable();
-			}
+	// 	.scrollable-content {
+	// 		@include breakpoint-max(md) {
+	// 			@include scrollable();
+	// 		}
 
-			@include breakpoint-max(md) {
-				.content {
-					max-height: 481px;
-				}
-			}
-		}
-	}
+	// 		@include breakpoint-max(md) {
+	// 			.content {
+	// 				max-height: 481px;
+	// 			}
+	// 		}
+	// 	}
 }

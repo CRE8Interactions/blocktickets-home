@@ -13,23 +13,15 @@ export default function Checkout({ addOns, setStatus }) {
 	return (
 		<Fragment>
 			<Col md={6}>
-				<BackButton marginBottom="md-3" />
-				<div className="d-flex-column">
-					<div className="scrollable-container">
-						<div className="scrollable-content">
-							<div className="content">
-								{addOns.length > 0 && (
-									<section id="addOns">
-										<AddOns />
-									</section>
-								)}
-								<section>
-									<Payment />
-								</section>
-							</div>
-						</div>
-					</div>
-				</div>
+				<BackButton marginBottom="4" />
+				{addOns.length > 0 && (
+					<section id="addOns">
+						<AddOns />
+					</section>
+				)}
+				<section>
+					<Payment />
+				</section>
 			</Col>
 			<Col md={6} lg={5} id="total-card">
 				<TotalCard setStatus={setStatus} addOns={addOns} />
