@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Row from 'react-bootstrap/Row';
@@ -24,18 +24,25 @@ export default function CheckoutWrapper() {
 	] = useState('checkout');
 
 	useLayoutEffect(() => {
-		const el = document.querySelector('.full-height-wrapper').parentElement;
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
 
 		removeNavContent(location.pathname, btns, nav);
-		fullHeightContainer(location.pathname, el);
 
 		return () => {
 			addNavContent(btns, nav);
-			removeFullHeightContainer(el);
 		};
 	}, []);
+
+	useEffect(() => {
+		const el = document.querySelector('.full-height-wrapper').parentElement;
+
+		fullHeightContainer(location.pathname, el);
+
+		return () => {
+			removeFullHeightContainer(el);
+		};
+	});
 
 	const addOns = [];
 

@@ -104,7 +104,7 @@ export default function Payment() {
 
 	return (
 		<Fragment>
-			<h1 className="section-title mb-2">Payment</h1>
+			<h1 className="section-title mb-3">Payment</h1>
 			<h2 className="text-muted small fw-medium">Please select a payment method</h2>
 			{clientSecret && (
 				<Elements stripe={stripePromise} options={options}>
