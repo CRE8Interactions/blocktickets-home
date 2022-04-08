@@ -4,8 +4,6 @@ import Stack from 'react-bootstrap/Stack';
 
 import { AddOnCard } from './AddOnCard';
 
-import './addOns.scss';
-
 export default function AddOns() {
 	const types = [
 		'meet',
