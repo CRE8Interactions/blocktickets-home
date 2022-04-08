@@ -4,8 +4,8 @@
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
 
-.form-group {
-	margin-bottom: $text-spacer;
+.form-group + .form-group {
+	margin-top: $text-spacer;
 }
 .form-control {
 	color: $clr-neutral-4;
@@ -16,13 +16,8 @@
 	text-transform: uppercase;
 	font-size: $caption;
 	font-weight: $fw-bold;
-	color: $gray-200;
-	margin-bottom: rem(12);
-}
-
-input::placeholder {
-	color: $clr-neutral-4;
-	font-weight: $fw-medium;
+	color: $muted;
+	margin-bottom: em(12);
 }
 
 .form-check {

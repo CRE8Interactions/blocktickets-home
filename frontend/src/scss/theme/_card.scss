@@ -8,7 +8,7 @@ $card-title-spacer-y: em(15);
 // card body
 $card-spacer-y: em(21);
 $card-spacer-x: em(16);
-// card header
+// card header - lg
 $card-cap-bg: $card-bg;
-$card-cap-padding-x: em(31);
-$card-cap-padding-y: em(22);
+$card-cap-padding-x: $card-spacer-x;
+$card-cap-padding-y: $card-spacer-y;

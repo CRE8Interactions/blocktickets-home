@@ -15,14 +15,13 @@ $copyright-spacer: rem(17);
 // Text Spacers
 $heading-spacer: rem(64); // page headings
 $heading-spacer-sm: rem(29); // page headings
-$title-spacer: rem(32); // footer titles
 $gap: rem(14);
 $gap-sm: rem(9);
 $gap-xs: rem(4);
 
-// form groups
-$text-spacer: rem(32);
-$text-spacer-sm: rem(24);
+$text-spacer: em(32);
+$text-spacer-sm: em(24);
+$text-spacer-xs: em(16);
 
 .spacer-xs {
 	padding: $spacer-xs 0px;
@@ -55,7 +54,7 @@ $text-spacer-sm: rem(24);
 	margin-top: rem(2);
 
 	@include breakpoint-min(md) {
-		margin-top: rem(3);
+		margin-top: rem(4);
 	}
 }
 
@@ -67,9 +66,8 @@ $text-spacer-sm: rem(24);
 
 .split-row {
 	@extend %flex-between !optional;
-	* {
-		font-size: $small;
-	}
+
+	font-size: $small;
 }
 
 .heading--flex {

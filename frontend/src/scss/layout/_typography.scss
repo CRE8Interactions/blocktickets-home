@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use 'spacing' as *;
+@use './../theme/colors' as *;
 
 .normal {
 	font-size: $body-2;
@@ -57,6 +58,10 @@ h4,
 	font-weight: $fw-medium;
 }
 
+.fw-semi-bold {
+	font-weight: $fw-semi-bold;
+}
+
 .section-heading h1 {
 	font-size: $h4-font-size;
 	@include breakpoint-min(md) {
@@ -90,12 +95,6 @@ h4,
 	@extend .text-uppercase !optional;
 }
 
-.date,
-.venue,
-.location {
-	font-weight: $fw-semi-bold;
-}
-
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -127,5 +126,23 @@ h4,
 		color: $clr-neutral-4;
 		font-weight: 500;
 		font-family: $font-body;
+	}
+}
+
+.details {
+	.card-title,
+	.artist-name {
+		@extend .normal !optional;
+		margin-bottom: rem(13);
+		font-weight: $fw-semi-bold;
+	}
+
+	.card-subtitle,
+	.subtitle {
+		order: -1;
+		margin-bottom: rem(8);
+		@extend .caption !optional;
+		@extend .text-uppercase !optional;
+		color: $muted;
 	}
 }

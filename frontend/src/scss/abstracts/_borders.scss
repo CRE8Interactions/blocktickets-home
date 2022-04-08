@@ -5,6 +5,7 @@ $br-input: 12px;
 $br-input-sm: 8px;
 $br-circle: 40px;
 $br-textile: 10px;
+$br-textile-lg: 12px;
 $border-width: 2px;
 $border-color: $clr-neutral-6;
 $box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
@@ -24,9 +25,13 @@ $box-shadow-card: 0px -10px 30px -8px rgba(15, 15, 15, 0.12);
 	z-index: 1;
 }
 
-.rounded-corners {
+.rounded {
 	border-radius: $br-textile;
 }
+
+.rounded-lg {
+	border-radius: $br-textile-lg;
+}
 .artist-image {
-	@extend .rounded-corners;
+	@extend .rounded;
 }
