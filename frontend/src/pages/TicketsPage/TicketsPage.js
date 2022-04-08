@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { PurchaseTickets } from '../../components';
-import { useLocation } from 'react-router-dom';
 import { fullHeightContainer, removeFullHeightContainer } from './../../utilities/helper';
+
 import { Event } from '../../components';
+import { PurchaseTickets } from '../../components';
 
 import './ticketPage.scss';
 

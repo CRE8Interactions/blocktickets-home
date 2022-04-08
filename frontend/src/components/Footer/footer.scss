@@ -21,7 +21,7 @@ footer {
 	}
 
 	.col {
-		padding-bottom: $spacer-footer-sm-bottom;
+		padding-bottom: $text-spacer-sm;
 
 		&:not(:first-of-type) {
 			@include breakpoint-max(md) {
@@ -30,7 +30,7 @@ footer {
 		}
 
 		.footer-title {
-			margin-bottom: $title-spacer;
+			margin-bottom: $text-spacer;
 		}
 
 		.footer-title {
@@ -44,7 +44,7 @@ footer {
 			}
 
 			@include breakpoint-min(md) {
-				margin-bottom: $title-spacer;
+				margin-bottom: $text-spacer;
 			}
 		}
 	}
@@ -52,7 +52,7 @@ footer {
 
 .tag-line {
 	width: 21ch;
-	margin-top: $title-spacer;
+	margin-top: $text-spacer;
 
 	@include breakpoint-min(xl) {
 		font-size: rem(24);

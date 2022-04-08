@@ -19,7 +19,6 @@ export const removeFullHeightContainer = (el) => {
 };
 
 export const toggleNavContent = (show, ...rest) => {
-	console.log(show);
 	rest.forEach((el) => (el.style.display = show ? 'flex' : 'none'));
 };
 

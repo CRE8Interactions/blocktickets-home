@@ -1,14 +1,41 @@
 @use '../abstracts' as *;
 @use '../layout/container' as *;
+@use '../layout/spacing' as *;
 
 .modal {
 	&-title {
 		font-size: $small;
 	}
 
+	.modal-heading {
+		margin-bottom: $text-spacer-xs;
+
+		&-title {
+			font-size: $body-1;
+		}
+	}
+
+	&-dialog-scrollable {
+		.modal-body {
+			padding-top: 0px;
+			@include remove-scrollbar();
+		}
+	}
+
 	&-body {
-		padding-top: 0px;
-		@extend %remove-scrollbar !optional;
 		line-height: 1.5;
+
+		.btn {
+			margin-top: $text-spacer-sm;
+			width: 100%;
+		}
+
+		.split-row {
+			font-size: $body-2;
+
+			& + .split-row {
+				margin-top: rem(20);
+			}
+		}
 	}
 }

@@ -16,7 +16,7 @@ export default function VenueList() {
 					alt="The future Nostalgia Tour"
 					width="100"
 					height="100"
-					className="rounded-corners venue-image"
+					className="rounded venue-image"
 				/>
 
 				<div className="d-flex flex-wrap gap-2 align-items-center flex-grow-1">
@@ -40,7 +40,7 @@ export default function VenueList() {
 					alt="The future Nostalgia Tour"
 					width="100"
 					height="100"
-					className="rounded-corners venue-image"
+					className="rounded venue-image"
 				/>
 
 				<div className="d-flex flex-wrap gap-2 align-items-center flex-grow-1">
@@ -64,7 +64,7 @@ export default function VenueList() {
 					alt="The future Nostalgia Tour"
 					width="100"
 					height="100"
-					className="rounded-corners venue-image"
+					className="rounded venue-image"
 				/>
 
 				<div className="d-flex flex-wrap gap-2 align-items-center flex-grow-1">
@@ -88,7 +88,7 @@ export default function VenueList() {
 					alt="The future Nostalgia Tour"
 					width="100"
 					height="100"
-					className="rounded-corners venue-image"
+					className="rounded venue-image"
 				/>
 
 				<div className="d-flex flex-wrap gap-2 align-items-center flex-grow-1">
@@ -113,7 +113,7 @@ export default function VenueList() {
 					alt="The future Nostalgia Tour"
 					width="100"
 					height="100"
-					className="rounded-corners venue-image"
+					className="rounded venue-image"
 				/>
 
 				<div className="d-flex flex-wrap gap-2 align-items-center flex-grow-1">

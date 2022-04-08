@@ -1,0 +1,17 @@
+@use '../../scss/abstracts' as *;
+
+.ticket-card {
+	box-shadow: $box-shadow;
+
+	.card-img-top {
+		@include breakpoint-max(md) {
+			height: 252px;
+		}
+	}
+
+	.details {
+		.card-title {
+			font-size: $body-1;
+		}
+	}
+}

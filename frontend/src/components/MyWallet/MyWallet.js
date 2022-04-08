@@ -9,7 +9,7 @@ import UserContext from '../../context/User/user';
 
 import './myWallet.scss';
 
-export default function MyWallet({ toggle }) {
+export default function MyWallet({ showMenu }) {
 	const { setAuthenticated, user } = useContext(UserContext);
 
 	const logout = () => {
@@ -17,46 +17,42 @@ export default function MyWallet({ toggle }) {
 		setAuthenticated({});
 	};
 
-	useEffect(() => {
-		const closeMenu = () => {
-			if (toggle) toggle(false);
-		};
-
-		document.querySelector('.nav-link').addEventListener('click', closeMenu);
-		return () => {
-			document.querySelector('.nav-link').removeEventListener('click', closeMenu);
-		};
-	}, []);
+	const handleClick = () => {
+		if (showMenu) {
+			showMenu(false);
+		}
+		else return;
+	};
 
 	return (
 		<div className="wallet">
-			<ListGroup variant="flush" as="ul">
+			<ListGroup variant="flush" as="ul" role="my wallet menu">
 				<h5 className="name m-0 pb-2 ">Harrison Cogan</h5>
-				<ListGroup.Item as="li">
-					<LinkContainer to={'/events'}>
+				<ListGroup.Item as="li" onClick={handleClick}>
+					<LinkContainer to={'/upcoming-events'}>
 						<Nav.Link>Upcoming Events</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				<ListGroup.Item as="li">
+				<ListGroup.Item as="li" onClick={handleClick}>
 					<LinkContainer to={'/collectables'}>
 						<Nav.Link>Collectables</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li">
-					<LinkContainer to={'/settings'}>
+					<LinkContainer to={'/settings'} onClick={handleClick}>
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				{
-					user && authService.isOrganizer() &&
+				{user &&
+				authService.isOrganizer() && (
 					<ListGroup.Item as="li">
-						<LinkContainer to={'/dashboard'}>
+						<LinkContainer to={'/dashboard'} onClick={handleClick}>
 							<Nav.Link>Dashboard</Nav.Link>
 						</LinkContainer>
 					</ListGroup.Item>
-				}
+				)}
 				<ListGroup.Item as="li" onClick={logout}>
-					<LinkContainer to={'/logout'}>
+					<LinkContainer to={'/logout'} onClick={handleClick}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
