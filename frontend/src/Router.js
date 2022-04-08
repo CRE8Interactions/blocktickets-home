@@ -3,6 +3,7 @@ import {
 	HomePage,
 	LoginPage,
 	DashboardPage,
+	UpcomingEventsPage,
 	TicketsPage,
 	CheckoutPage,
 	VenuePage,
@@ -23,6 +24,7 @@ const Router = () => {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="login" element={<LoginPage />} />
+				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
 				<Route
 					path="dashboard"
 					element={
@@ -35,10 +37,14 @@ const Router = () => {
 					<Route path="events" element={<EventsPage />} />
 				</Route>
 				<Route path="tickets/:id" element={<TicketsPage />} />
-				<Route path="checkout/:id" element={
-				<RequireAuth>
-					<CheckoutPage />
-				</RequireAuth>} />
+				<Route
+					path="checkout/:id"
+					element={
+						<RequireAuth>
+							<CheckoutPage />
+						</RequireAuth>
+					}
+				/>
 				<Route path="venue/:id" element={<VenuePage />} />
 				{/* Add a NotFound route */}
 			</Routes>
