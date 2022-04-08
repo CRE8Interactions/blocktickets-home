@@ -8,12 +8,10 @@ import { Event } from '../../components';
 import './ticketPage.scss';
 
 export default function TicketsPage() {
-	let location = useLocation();
-
 	useEffect(() => {
 		const el = document.querySelector('.full-height-wrapper').parentElement;
 
-		fullHeightContainer(location.pathname, el);
+		fullHeightContainer(el);
 
 		return () => {
 			removeFullHeightContainer(el);
