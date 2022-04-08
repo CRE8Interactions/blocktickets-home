@@ -2,17 +2,11 @@
 @use '../../../scss/layout' as *;
 
 #timer-container {
-	display: flex;
-	justify-content: flex-end;
-	position: absolute;
-	top: -48px;
-	right: 0;
-	z-index: 999;
+	display: none;
 
 	#timer {
 		font-weight: $fw-medium;
 		font-size: $small;
-		position: fixed;
 		@extend %icon-text-box;
 		line-height: 0;
 		gap: $gap-sm;
