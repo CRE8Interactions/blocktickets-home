@@ -58,12 +58,11 @@ export default function CheckoutWrapper() {
 
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
+			{status === 'checkout' && <Timer />}
 			<Row className="justify-content-between">
 				{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} />}
 				{status === 'successful' && <PaymentConfirmation addOns={addOns} />}
 			</Row>
-
-			{status === 'checkout' && <Timer />}
 		</div>
 	);
 }
