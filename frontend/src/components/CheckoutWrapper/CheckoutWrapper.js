@@ -4,19 +4,19 @@ import { useLocation } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 
 import {
-	removeNavContent,
+	toggleNavContent,
 	addNavContent,
 	fullHeightContainer,
-	removeFullHeightContainer
+	removeFullHeightContainer,
+	toggleTimer
 } from '../../utilities/helper';
 import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
-import { Timer } from './Timer';
 
 import './checkoutWrapper.scss';
 
 export default function CheckoutWrapper() {
-	let location = useLocation();
+	let show = true;
 
 	const [
 		status,
@@ -26,18 +26,21 @@ export default function CheckoutWrapper() {
 	useLayoutEffect(() => {
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
+		const timer = document.getElementById('timer-container');
 
-		removeNavContent(location.pathname, btns, nav);
+		toggleTimer(timer, show);
+		toggleNavContent(!show, btns, nav);
 
 		return () => {
-			addNavContent(btns, nav);
+			toggleTimer(timer, !show);
+			toggleNavContent(show, btns, nav);
 		};
 	}, []);
 
 	useEffect(() => {
 		const el = document.querySelector('.full-height-wrapper').parentElement;
 
-		fullHeightContainer(location.pathname, el);
+		fullHeightContainer(el);
 
 		return () => {
 			removeFullHeightContainer(el);
@@ -47,18 +50,18 @@ export default function CheckoutWrapper() {
 	const addOns = [];
 
 	if (status === 'successful') {
-		const el = document.querySelector('.full-height-wrapper').parentElement;
+		const timer = document.getElementById('timer-container');
+
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
 
-		addNavContent(btns, nav);
-		removeFullHeightContainer(el);
+		toggleNavContent(show, btns, nav);
+		toggleTimer(timer, !show);
 		document.getElementById('checkout-wrapper').classList.add('confirmation-padding');
 	}
 
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
-			{status === 'checkout' && <Timer />}
 			<Row className="justify-content-between">
 				{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} />}
 				{status === 'successful' && <PaymentConfirmation addOns={addOns} />}
