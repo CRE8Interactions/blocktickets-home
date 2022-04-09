@@ -11,7 +11,7 @@ footer {
 
 	.copyright {
 		border-top: border();
-		margin-top: $copyright-spacer;
+		margin-top: rem(17);
 	}
 
 	.col:not(:last-child) {
