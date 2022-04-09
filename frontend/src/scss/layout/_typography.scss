@@ -26,12 +26,17 @@
 	}
 }
 
+.heading-font {
+	font-family: $font-heading;
+}
+
 .section-heading {
 	h1,
 	h2,
 	h3,
 	h4 {
 		margin: 0;
+		@extend .heading-font !optional;
 	}
 
 	margin-bottom: $heading-spacer;
