@@ -8,16 +8,4 @@
 @use 'forms';
 @forward 'card';
 @use 'list-group';
-
-.section-heading {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-// on the root element
-.full-width-flex {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-}
+@use 'alert';

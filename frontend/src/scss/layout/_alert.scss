@@ -1,0 +1,7 @@
+@use '../theme/colors' as *;
+
+.alert {
+	color: $danger;
+	background: rgba(239, 70, 111, 0.08);
+	border: none;
+}

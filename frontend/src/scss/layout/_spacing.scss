@@ -30,6 +30,10 @@ $text-spacer-xs: rem(16);
 	}
 }
 
+.spacer-xs {
+	padding: $spacer-xs 0px;
+}
+
 .spacer-lg {
 	padding: $spacer-sm 0px;
 
@@ -64,6 +68,10 @@ $text-spacer-xs: rem(16);
 	@extend %flex-between !optional;
 
 	font-size: $small;
+}
+
+.section-heading {
+	@extend %flex-between !optional;
 }
 
 .heading--flex {

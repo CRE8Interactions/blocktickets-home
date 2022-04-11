@@ -8,7 +8,7 @@
 	}
 
 	.modal-heading {
-		margin-bottom: $text-spacer-xs;
+		margin-bottom: $text-spacer-sm;
 
 		&-title {
 			font-size: $body-1;
@@ -17,6 +17,8 @@
 
 	&-dialog-scrollable {
 		.modal-body {
+			display: flex;
+			flex-direction: column;
 			padding-top: 0px;
 			@include remove-scrollbar();
 		}
