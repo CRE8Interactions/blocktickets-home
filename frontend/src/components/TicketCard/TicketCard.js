@@ -34,8 +34,8 @@ export default function TicketCard() {
 	return (
 		<Fragment>
 			<Card className="ticket-card card-md">
-				<Card.Header className="heading--flex">
-					<h1 className="normal m-0" id="options">
+				<Card.Header className="heading--flex pb-2">
+					<h1 className="caption text-muted fw-normal m-0" id="options">
 						Ticket options
 					</h1>
 					<DropdownButton
@@ -59,7 +59,7 @@ export default function TicketCard() {
 					src={profile}
 					width="281"
 					height="281"
-					className="rounded-lg px-3 pt-3"
+					className="rounded-lg px-4"
 				/>
 				<Card.Body className="details d-flex-column">
 					<Card.Title as="h5">Nic Fanciulli</Card.Title>
@@ -78,7 +78,7 @@ export default function TicketCard() {
 						</ListGroup.Item>
 					</ListGroup>
 					<Stack gap={2}>
-						<Badge bg="info" className="text-dark fw-medium normal p-3 rounded-lg">
+						<Badge bg="info" className="text-dark badge-lg">
 							General Admission
 						</Badge>
 						<Button variant="dark" size="lg">

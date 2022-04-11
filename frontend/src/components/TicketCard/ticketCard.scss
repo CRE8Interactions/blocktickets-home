@@ -3,6 +3,9 @@
 .ticket-card {
 	box-shadow: $box-shadow;
 
+	.card-header {
+		border-bottom: none;
+	}
 	.card-img-top {
 		@include breakpoint-max(md) {
 			height: 252px;
