@@ -9,9 +9,7 @@ export default function UpcomingEventsPage() {
 				<h1>Upcoming Events</h1>
 				<SwiperNavigationButtons />
 			</div>
-			<div>
-				<UpcomingEventsSlider />
-			</div>
+			<UpcomingEventsSlider />
 		</section>
 	);
 }
