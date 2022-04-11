@@ -3,6 +3,10 @@
 @use '../../../scss/theme/modal' as *;
 
 #ticket-modal {
+	.modal-content {
+		width: 420px;
+		margin: auto;
+	}
 	.modal-header {
 		align-items: flex-start;
 		padding-top: $modal-inner-padding;
