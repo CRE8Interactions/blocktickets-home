@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { DetailsModal } from './DetailsModal';
 import { TransferModal } from './TransferModal';
 import { SellModal } from './SellModal';
-import { NFTMediaModal } from './NFTMediaModal';
+import { NFTModal } from './NFTModal';
 
 import './ticketModal.scss';
 
@@ -18,7 +18,7 @@ const typeOfModal = (modalType, handleClose) => {
 			return <TransferModal />;
 
 		case 'nft':
-			return <NFTMediaModal handleClose={handleClose} />;
+			return <NFTModal handleClose={handleClose} />;
 
 		case 'sell':
 			return <SellModal />;

@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button';
 
 import nft from '../../../../assets/nft_art.jpg';
 
-import './nftMediaModal.scss';
+import './nftModal.scss';
 
-export default function NFTMediaModal({ handleClose }) {
+export default function NFTModal({ handleClose }) {
 	useLayoutEffect(() => {
 		document.querySelector('.modal-content').classList.add('popup');
 

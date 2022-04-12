@@ -48,7 +48,7 @@ export default function TicketCard() {
 							Details
 						</Dropdown.Item>
 						<Dropdown.Item as="button" onClick={() => handleClick('nft')}>
-							View NFT media
+							View NFT
 						</Dropdown.Item>
 						<Dropdown.Item as="button" onClick={() => handleClick('transfer')}>
 							Transfer ticket
