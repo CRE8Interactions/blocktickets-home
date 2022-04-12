@@ -27,7 +27,7 @@ export default function TicketCard() {
 
 	const handleShow = () => setShow(true);
 
-	const handleOnClick = (type) => {
+	const handleClick = (type) => {
 		setModalType(type);
 		handleShow();
 	};
@@ -44,14 +44,16 @@ export default function TicketCard() {
 						aria-labelledby="#options"
 						variant="default"
 						align="end">
-						<Dropdown.Item as="button" onClick={() => handleOnClick('details')}>
+						<Dropdown.Item as="button" onClick={() => handleClick('details')}>
 							Details
 						</Dropdown.Item>
 						<Dropdown.Item as="button">View NFT media</Dropdown.Item>
-						<Dropdown.Item as="button" onClick={() => handleOnClick('transfer')}>
+						<Dropdown.Item as="button" onClick={() => handleClick('transfer')}>
 							Transfer ticket
 						</Dropdown.Item>
-						<Dropdown.Item as="button">Sell ticket</Dropdown.Item>
+						<Dropdown.Item as="button" onClick={() => handleClick('sell')}>
+							Sell ticket
+						</Dropdown.Item>
 					</DropdownButton>
 				</Card.Header>
 				<Card.Img
