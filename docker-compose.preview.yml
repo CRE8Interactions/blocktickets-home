@@ -33,17 +33,17 @@ services:
       - '3000:3000'
     networks:
       - block-network
-  admin:
-    build:
-      context: ./admin
-      dockerfile: Dockerfile.preview
-    volumes:
-      - ./admin:/usr/src/app/admin
-      - /usr/src/app/admin/node_modules
-    ports:
-      - '3001:3001'
-    networks:
-      - block-network
+  # admin:
+  #   build:
+  #     context: ./admin
+  #     dockerfile: Dockerfile.preview
+  #   volumes:
+  #     - ./admin:/usr/src/app/admin
+  #     - /usr/src/app/admin/node_modules
+  #   ports:
+  #     - '3001:3001'
+  #   networks:
+  #     - block-network
 networks:
   block-network:
     driver: bridge
