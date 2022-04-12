@@ -2,6 +2,10 @@ export const getCopyrightYear = () => {
 	return new Date().getFullYear();
 };
 
+export const formatNumber = (number, digits = 2) => {
+	return Number(number).toFixed(digits);
+};
+
 export const fullHeightContainer = (el) => {
 	el.classList.add('container--full-width');
 

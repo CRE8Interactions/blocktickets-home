@@ -37,17 +37,6 @@ legend {
 	font: inherit;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-	color: white;
-	-webkit-text-fill-color: white;
-	transition: background-color 5000s ease-in-out 0s;
-}
-
 ul,
 ol,
 dl {
