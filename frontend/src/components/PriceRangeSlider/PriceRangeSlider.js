@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 
 import 'rc-slider/assets/index.css';
+
 import './priceRangeSlider.scss';
 
 export default function PriceRangeSlider({ styles, sliderValues, setSliderValues }) {
@@ -16,7 +17,7 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 		<Stack direction="horizontal" gap={3} className={`amount ${styles}`}>
 			<Form.Control
 				type="text"
-				className="amount"
+				className="form-control-xs"
 				onChange={handleChange}
 				value={`$${sliderValues[0]} `}
 			/>
@@ -30,7 +31,7 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 			/>
 			<Form.Control
 				type="text"
-				className="amount"
+				className="form-control-xs"
 				onChange={handleChange}
 				value={`$${sliderValues[1]} `}
 			/>
