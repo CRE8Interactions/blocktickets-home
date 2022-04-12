@@ -1,16 +1,27 @@
 @use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout/spacing' as *;
 @use '../../../../scss/theme/colors' as *;
 
 #order {
-	.list-group-item {
-		padding-bottom: em(20);
+	@include breakpoint-max(md) {
+		border-top: border();
 	}
-	.list + .list,
-	li + li {
-		margin-top: rem(28);
 
-		.row > * {
-			font-size: $small;
+	@include breakpoint-min(md) {
+		margin-top: $text-spacer-sm;
+	}
+
+	.list-group-item:first-of-type {
+		@include breakpoint-min(md) {
+			padding-top: 0px;
+		}
+	}
+
+	.list-group-item {
+		padding: em(20) 0px;
+
+		li + li {
+			padding-top: rem(20);
 		}
 	}
 }

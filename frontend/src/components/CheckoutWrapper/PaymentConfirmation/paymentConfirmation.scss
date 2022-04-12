@@ -1,9 +1,9 @@
 @use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
 @use '../../../scss/theme/colors' as *;
 
 #checkout-wrapper {
-	section .section-title {
-		font-size: $body-2;
-		color: $muted;
+	.page-heading {
+		margin-bottom: $heading-spacer-sm;
 	}
 }

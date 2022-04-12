@@ -1,15 +1,23 @@
 @use '../abstracts' as *;
+@use './spacing' as *;
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
+.form-group + .form-group {
+	margin-top: $text-spacer;
+}
 .form-control {
 	color: $clr-neutral-4;
 	font-weight: $fw-medium;
 }
 
-input::placeholder {
-	color: $clr-neutral-4;
-	font-weight: $fw-medium;
+.form-label {
+	text-transform: uppercase;
+	font-size: $caption;
+	font-weight: $fw-bold;
+	color: $muted;
+	margin-bottom: em(12);
 }
 
 .form-check {
@@ -34,7 +42,7 @@ input::placeholder {
 	border: $input-border-width solid $color;
 
 	@include breakpoint-min(xl) {
-		padding-left: em(10);
+		padding-right: rem(8);
 	}
 
 	.form-control {

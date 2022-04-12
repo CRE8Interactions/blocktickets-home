@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import { PriceRangeSlider } from './PriceRangeSlider';
+import { PriceRangeSlider } from '../../../PriceRangeSlider';
 import { FilterModal } from './FilterModal';
 import { MySeats } from './MySeats';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
@@ -23,6 +23,14 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 		ticketFilters,
 		setTicketFilters
 	] = useState([]);
+
+	const [
+		sliderValues,
+		setSliderValues
+	] = useState([
+		20,
+		50
+	]);
 
 	const [
 		showFilter,
@@ -114,7 +122,11 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 								Filter
 							</Button>
 						</Stack>
-						<PriceRangeSlider styles="tablet-desktop-only" />
+						<PriceRangeSlider
+							styles="tablet-desktop-only"
+							sliderValues={sliderValues}
+							setSliderValues={setSliderValues}
+						/>
 					</header>
 					<Stack direction="vertical" className="position-relative">
 						{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}

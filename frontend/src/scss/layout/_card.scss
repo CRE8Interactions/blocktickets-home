@@ -21,6 +21,9 @@
 }
 
 .card {
+	.card-subtitle {
+		margin-top: 0px;
+	}
 	&--light {
 		background-color: $clr-white;
 
@@ -29,14 +32,22 @@
 		}
 	}
 
-	&--borderless {
-		border: none;
+	.list-group {
+		padding-bottom: rem(16);
+		&-item {
+			padding: 0px;
+			padding-bottom: rem(10);
+			border: none;
+			background-color: transparent;
+		}
 	}
+
 	& * {
 		font-family: $font-body;
 	}
 
-	.btn {
+	.btn,
+	.btn * {
 		font-family: $font-heading;
 	}
 
@@ -48,15 +59,31 @@
 		font-weight: $fw-bold;
 		font-size: $caption;
 	}
-}
 
-.card-lg {
-	.card-footer {
-		padding-top: em(24);
-		padding-bottom: em(24);
+	&-md {
+		$padding: em(20) em(24);
+
+		.card-header {
+			padding: $padding;
+		}
+		.card-body {
+			padding: $padding;
+		}
 	}
 
-	.card-body {
-		padding: em(20) $card-cap-padding-x;
+	&-lg {
+		$pad-x: em(31);
+		$pad-y: em(20);
+
+		.card-header {
+			padding: $pad-y $pad-x;
+		}
+
+		.card-body {
+			padding: $pad-y $pad-x;
+		}
+		.card-footer {
+			padding: em(24) $pad-x;
+		}
 	}
 }

@@ -21,6 +21,13 @@ $pad-md: rem(81);
 	}
 }
 
+// on the root element
+.full-width-flex {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
 .full-height-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -45,7 +52,11 @@ $pad-md: rem(81);
 	display: flex;
 	gap: $gap;
 	align-items: center;
-	line-height: 0;
+}
+
+.icon-button {
+	@extend %icon-text-box !optional;
+	justify-content: center;
 }
 
 .time-caption,
@@ -59,19 +70,30 @@ $pad-md: rem(81);
 	line-height: 0;
 }
 
-.time-caption {
+.date,
+.venue,
+.location {
+	@extend %icon-text-box !optional;
+	gap: $gap-xs;
+	line-height: 0;
+}
+
+.time-caption,
+.date {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'calendar'));
 	}
 }
 
-.venue-caption {
+.venue-caption,
+.venue {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'venue'));
 	}
 }
 
-.location-caption {
+.location-caption,
+.location {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'location'));
 	}

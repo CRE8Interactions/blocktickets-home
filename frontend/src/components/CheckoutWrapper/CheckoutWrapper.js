@@ -1,91 +1,71 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import Row from 'react-bootstrap/Row';
+
 import {
-	removeNavContent,
+	toggleNavContent,
 	addNavContent,
 	fullHeightContainer,
-	removeFullHeightContainer
+	removeFullHeightContainer,
+	toggleTimer
 } from '../../utilities/helper';
-import Row from 'react-bootstrap/Row';
-import Stack from 'react-bootstrap/Stack';
-import Col from 'react-bootstrap/Col';
-
-import { AddOns } from './AddOns';
-import { Payment } from './Payment';
-import { TotalCard } from './TotalCard';
-import { BackButton } from '../BackButton';
-import { Timer } from './Timer';
-
-import './checkoutWrapper.scss';
+import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
 
+import './checkoutWrapper.scss';
+
 export default function CheckoutWrapper() {
-	let location = useLocation();
+	let show = true;
 
 	const [
 		status,
 		setStatus
 	] = useState('checkout');
 
-	const btns = document.querySelector('.desktop-btns');
-	const nav = document.querySelector('.navbar-nav');
-
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
-		removeNavContent(location.pathname, btns, nav);
+		const timer = document.getElementById('timer-container');
 
-		const el = document.querySelector('.full-height-wrapper').parentElement;
-
-		fullHeightContainer(location.pathname, el);
+		toggleTimer(timer, show);
+		toggleNavContent(!show, btns, nav);
 
 		return () => {
-			addNavContent(btns, nav);
-			removeFullHeightContainer(el);
+			toggleTimer(timer, !show);
+			toggleNavContent(show, btns, nav);
 		};
 	}, []);
+
+	useEffect(() => {
+		const el = document.querySelector('.full-height-wrapper').parentElement;
+
+		fullHeightContainer(el);
+
+		return () => {
+			removeFullHeightContainer(el);
+		};
+	});
 
 	const addOns = [];
 
 	if (status === 'successful') {
-		addNavContent(btns, nav);
+		const timer = document.getElementById('timer-container');
+
+		const btns = document.querySelector('.desktop-btns');
+		const nav = document.querySelector('.navbar-nav');
+
+		toggleNavContent(show, btns, nav);
+		toggleTimer(timer, !show);
+		document.getElementById('checkout-wrapper').classList.add('confirmation-padding');
 	}
 
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
 			<Row className="justify-content-between">
-				{status === 'checkout' && (
-					<Fragment>
-						<Col md={6}>
-							<BackButton />
-							<div className="d-flex-column">
-								<div className="scrollable-container">
-									<div className="scrollable-content">
-										<div className="content">
-											{addOns.length > 0 && (
-												<section id="addOns">
-													<AddOns />
-												</section>
-											)}
-
-											<section>
-												<Payment />
-											</section>
-										</div>
-									</div>
-								</div>
-							</div>
-						</Col>
-						<Col md={6} lg={5} id="total-card">
-							<TotalCard setStatus={setStatus} addOns={addOns} />
-						</Col>
-					</Fragment>
-				)}
+				{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} />}
 				{status === 'successful' && <PaymentConfirmation addOns={addOns} />}
 			</Row>
-
-			{status === 'checkout' && <Timer />}
 		</div>
 	);
 }

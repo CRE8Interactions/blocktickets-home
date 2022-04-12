@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use 'spacing' as *;
+@use './../theme/colors' as *;
 
 .normal {
 	font-size: $body-2;
@@ -25,12 +26,17 @@
 	}
 }
 
+.heading-font {
+	font-family: $font-heading;
+}
+
 .section-heading {
 	h1,
 	h2,
 	h3,
 	h4 {
 		margin: 0;
+		@extend .heading-font !optional;
 	}
 
 	margin-bottom: $heading-spacer;
@@ -55,6 +61,10 @@ h4,
 
 .fw-medium {
 	font-weight: $fw-medium;
+}
+
+.fw-semi-bold {
+	font-weight: $fw-semi-bold;
 }
 
 .section-heading h1 {
@@ -90,12 +100,6 @@ h4,
 	@extend .text-uppercase !optional;
 }
 
-.date,
-.venue,
-.location {
-	font-weight: $fw-semi-bold;
-}
-
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -127,5 +131,23 @@ h4,
 		color: $clr-neutral-4;
 		font-weight: 500;
 		font-family: $font-body;
+	}
+}
+
+.details {
+	.card-title,
+	.artist-name {
+		@extend .normal !optional;
+		margin-bottom: rem(13);
+		font-weight: $fw-semi-bold;
+	}
+
+	.card-subtitle,
+	.subtitle {
+		order: -1;
+		margin-bottom: rem(8);
+		@extend .caption !optional;
+		@extend .text-uppercase !optional;
+		color: $muted;
 	}
 }

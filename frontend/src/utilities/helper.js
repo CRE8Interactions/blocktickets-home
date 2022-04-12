@@ -2,17 +2,8 @@ export const getCopyrightYear = () => {
 	return new Date().getFullYear();
 };
 
-export const checkUrl = (url) => {
-	var expression = /\w*tickets|\w*\/venue|\w*\/checkout|\w*\/dashboard/g;
-
-	var regex = new RegExp(expression);
-	return regex.test(url);
-};
-
-export const fullHeightContainer = (url, el) => {
-	if (checkUrl(url)) {
-		el.classList.add('container--full-width');
-	}
+export const fullHeightContainer = (el) => {
+	el.classList.add('container--full-width');
 
 	const root = document.getElementById('root');
 
@@ -27,21 +18,10 @@ export const removeFullHeightContainer = (el) => {
 	root.classList.remove('full-width-flex');
 };
 
-export const removeNavContent = (url, ...rest) => {
-	if (checkUrl(url)) {
-		rest.forEach((el) => (el.style.display = 'none'));
-	}
+export const toggleNavContent = (show, ...rest) => {
+	rest.forEach((el) => (el.style.display = show ? 'flex' : 'none'));
 };
 
-export const addNavContent = (...rest) => {
-	rest.forEach((el) => (el.style.display = 'flex'));
-};
-export const hideFooter = (url) => {
-	const footer = document.querySelector('footer');
-	if (checkUrl(url)) {
-		footer.style.display = 'none';
-	}
-	else {
-		footer.style.display = 'block';
-	}
+export const toggleTimer = (el, show) => {
+	el.style.display = show ? 'block' : 'none';
 };

@@ -1,8 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import './iconButton.scss';
-
 export default function IconButton({ children, styles, variant, btn, size, link }) {
 	return (
 		<Link

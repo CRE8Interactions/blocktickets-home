@@ -6,23 +6,30 @@
 #checkout-wrapper {
 	.ticket {
 		.row {
-			row-gap: rem(16);
+			row-gap: rem(26);
+
+			@include breakpoint-min(md) {
+				row-gap: rem(16);
+			}
 		}
 		#artist-image-col {
 			width: auto;
+
 			.artist-image {
-				width: 120px;
+				width: 92px;
+				height: 92px;
+
+				@include breakpoint-min(md) {
+					width: 120px;
+					height: 120px;
+				}
 			}
 		}
 
 		.artist {
 			&-name {
-				margin-bottom: rem(5);
+				margin-bottom: rem(4);
 				font-family: $font-body;
-
-				@include breakpoint-min(md) {
-					margin-bottom: rem(9);
-				}
 			}
 		}
 

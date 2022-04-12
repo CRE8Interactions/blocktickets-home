@@ -1,0 +1,26 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
+@use '../../../scss/theme/colors' as *;
+@use '../../../scss/theme/modal' as *;
+
+#ticket-modal {
+	.modal-content {
+		width: 420px;
+		margin: auto;
+	}
+	.modal-header {
+		align-items: flex-start;
+		padding-top: $modal-inner-padding;
+		padding-bottom: $modal-inner-padding;
+		margin-bottom: $text-spacer-sm;
+	}
+
+	.modal-title {
+		font-size: $body-1;
+	}
+
+	.ticket-code {
+		display: block;
+		color: $muted;
+	}
+}

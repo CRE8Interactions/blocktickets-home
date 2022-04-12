@@ -17,7 +17,7 @@ export default function VenueInformation() {
 	] = useState('upcoming');
 	return (
 		<div id="venue">
-			<Row className="gap-3">
+			<Row className="gap-5 gap-md-3">
 				<Col md={5} lg={4} xxl={3}>
 					<VenueCard />
 				</Col>
@@ -34,7 +34,6 @@ export default function VenueInformation() {
 						</Tab>
 					</Tabs>
 				</Col>
-				<ul />
 			</Row>
 		</div>
 	);

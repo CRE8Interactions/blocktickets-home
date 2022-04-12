@@ -11,3 +11,10 @@
 		border-color: $clr-primary;
 	}
 }
+
+.badge-lg {
+	font-size: $small;
+	border-radius: 12px;
+	font-weight: $fw-medium;
+	padding: em(19);
+}

@@ -18,7 +18,7 @@ export default function VenueCard() {
 			<Card.Title as="h5" className="fs-md">
 				CODA venue with a long long name
 			</Card.Title>
-			<Card.Subtitle as="p" className="fs-md">
+			<Card.Subtitle as="h4" className="fs-md">
 				12345 Fifth Ave, New York NY United States
 			</Card.Subtitle>
 			<Card.Text className="caption text-muted">
@@ -85,7 +85,11 @@ export default function VenueCard() {
 					</svg>
 				</Button>
 			</Stack>
-			<Stack as="ul" direction="horizontal" className="my-5 justify-content-center" gap={3}>
+			<Stack
+				as="ul"
+				direction="horizontal"
+				className="my-4 my-md-5 justify-content-center"
+				gap={3}>
 				<li>
 					<img src={twitter} alt="twitter" />
 				</li>
@@ -96,7 +100,7 @@ export default function VenueCard() {
 					<img src={facebook} alt="facebook" />
 				</li>
 			</Stack>
-			<Card.Footer className="pt-5">
+			<Card.Footer className="pt-4 pt-md-5">
 				<span className="caption text-muted">179 Streamed shows</span>
 			</Card.Footer>
 		</Card>

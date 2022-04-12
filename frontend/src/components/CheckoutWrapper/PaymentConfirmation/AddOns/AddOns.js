@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 import { AddOnCard } from './AddOnCard';
 
 import './addOns.scss';
@@ -35,7 +31,7 @@ export default function AddOns() {
 
 	return (
 		<Fragment>
-			<h1 className="section-title">Add Ons</h1>
+			<h1 className="section-title section-title--muted">Add Ons</h1>
 
 			<Stack gap={5} as="ul">
 				{cards.map((data) => (

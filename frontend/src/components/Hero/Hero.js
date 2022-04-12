@@ -1,16 +1,14 @@
-import React, { Fragment, useContext, useEffect, useRef } from 'react';
-
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-
-import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Container from 'react-bootstrap/Container';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { IconButton } from '../IconButton';
 
 import profile from '../../assets/01.png';
+
 import './hero.scss';
 
 export default function Hero() {
@@ -44,26 +42,26 @@ export default function Hero() {
 										<h1 className="display-1">Nic Fanciulli</h1>
 										<Row>
 											<Col md={6} lg={12}>
-												<div className="time">
+												<div className="time-wrapper">
 													<p className="time-caption">Time</p>
-													<p className="date normal-lg">
+													<p className="fw-semi-bold normal-lg">
 														Mar 13 <span>9:00 PM</span>
 													</p>
 												</div>
 											</Col>
 											<Col md={6} lg={12}>
-												<div className="venue">
+												<div className="venue-wrapper">
 													<p className="venue-caption">Venue</p>
-													<p className="venue normal-lg">
+													<p className="fw-semi-bold normal-lg">
 														CODA or venue long name here as another
 														example
 													</p>
 												</div>
 											</Col>
 											<Col>
-												<div className="location">
+												<div className="location-wrapper">
 													<p className="location-caption">Location</p>
-													<p className="location">Toronto, ON</p>
+													<p>Toronto, ON</p>
 												</div>
 											</Col>
 										</Row>

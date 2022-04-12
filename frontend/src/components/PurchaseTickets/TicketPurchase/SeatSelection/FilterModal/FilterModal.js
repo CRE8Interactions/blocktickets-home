@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+
 import { BackButton } from '../../../../BackButton';
-import { PriceRangeSlider } from '../PriceRangeSlider';
+import { PriceRangeSlider } from '../../../../PriceRangeSlider';
 import { TicketPurchaseFooter } from '../../TicketPurchaseFooter';
 
 import Form from 'react-bootstrap/Form';
@@ -15,6 +16,14 @@ export default function FilterModal({ setShow, show }) {
 		setOn
 	] = useState(false);
 
+	const [
+		sliderValues,
+		setSliderValues
+	] = useState([
+		20,
+		50
+	]);
+
 	return (
 		<Stack direction="vertical" className={`filter-panel ${show && 'filter-panel--open'}`}>
 			<Stack direction="vertical">
@@ -23,7 +32,11 @@ export default function FilterModal({ setShow, show }) {
 						<h3 className="normal text-uppercase">Filters</h3>
 						<BackButton handleGoBack={() => setShow(!show)} />
 					</Stack>
-					<PriceRangeSlider styles="mobile-only" />
+					<PriceRangeSlider
+						styles="mobile-only"
+						sliderValues={sliderValues}
+						setSliderValues={setSliderValues}
+					/>
 					<Form.Check
 						type="checkbox"
 						label="Show prices with fees"

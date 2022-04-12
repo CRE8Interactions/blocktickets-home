@@ -19,27 +19,20 @@ import './paymentConfirmation.scss';
 export default function PaymentConfirmation({ addOns }) {
 	return (
 		<Fragment>
-			<Col md={6}>
-				<h1 className="fs-md m-0">Payment Successful</h1>
-				<div className="d-flex-column">
-					<div className="scrollable-container">
-						<div className="scrollable-content">
-							<div className="content">
-								<section id="tickets">
-									<Tickets />
-								</section>
+			<Col md={7} lg={6}>
+				<h1 className="fs-md page-heading">Payment Successful</h1>
 
-								{addOns.length > 0 && (
-									<section id="addOns">
-										<AddOns />
-									</section>
-								)}
-							</div>
-						</div>
-					</div>
-				</div>
+				<section id="tickets" className="d-flex-column position-relative">
+					<Tickets />
+				</section>
+
+				{addOns.length > 0 && (
+					<section id="addOns">
+						<AddOns />
+					</section>
+				)}
 			</Col>
-			<Col md={6} lg={5} id="total-card">
+			<Col md={5} id="order-card">
 				<OrderSummary />
 			</Col>
 		</Fragment>

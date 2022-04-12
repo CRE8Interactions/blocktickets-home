@@ -7,15 +7,14 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Stack from 'react-bootstrap/Stack';
-import Button from 'react-bootstrap/Button';
 
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
-import shoppingCart from '../../assets/icons/shopping-cart.svg';
 
 import { SearchBar } from './../SearchBar';
 import { MyWallet } from './../MyWallet';
 import { NavButtons } from './NavButtons';
+import { Timer } from './Timer';
 
 import './navigation.scss';
 
@@ -67,6 +66,7 @@ export default function Navigation() {
 							<NavButtons styles="mobile-tablet-only" />
 						</Nav>
 					</Navbar.Collapse>
+					<Timer />
 				</Container>
 			</Navbar>
 		</div>

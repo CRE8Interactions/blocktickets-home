@@ -4,10 +4,10 @@ import { MyWallet } from './../MyWallet';
 
 import './dropdown.scss';
 
-export default function Dropdown({ toggle }) {
+export default function Dropdown({ showMenu }) {
 	return (
 		<div className="myDropdown">
-			<MyWallet setShowMenu={toggle} />
+			<MyWallet showMenu={showMenu} />
 		</div>
 	);
 }

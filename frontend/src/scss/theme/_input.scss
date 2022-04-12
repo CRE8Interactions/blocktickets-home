@@ -1,15 +1,22 @@
 @use '../abstracts' as *;
 @use './buttons' as *;
+@use './colors' as *;
 
 $input-font-size: rem(14);
 $input-font-size-sm: rem(12);
 $input-font-size-lg: $input-font-size;
-$input-padding-y: em(14);
-$input-padding-x: em(17);
-$input-padding-x-lg: em(8);
-$input-padding-y-lg: em(7);
-$input-padding-x-sm: em(10);
-$input-padding-y-sm: em(10);
+
+// input
+$input-padding-y: rem(12);
+$input-padding-x: rem(16);
+
+// single input
+$input-padding-x-lg: rem(16);
+$input-padding-y-lg: rem(8);
+
+// search input
+$input-padding-x-sm: rem(8);
+$input-padding-y-sm: rem(10);
 
 $border-radius: $br-input;
 $border-radius-lg: $br-primary;
@@ -17,7 +24,10 @@ $border-radius-sm: $br-input-sm;
 $border-width: $border-width;
 $input-border-width: $border-width;
 $input-focus-box-shadow: none;
+$input-focus-border-color: $primary;
+$input-placeholder-color: $clr-neutral-5;
 
+$form-select-focus-box-shadow: none;
 $form-select-border-radius: $br-input;
 $form-select-padding-y: $btn-padding-y-lg;
 $form-select-padding-x: $btn-padding-x-lg;
