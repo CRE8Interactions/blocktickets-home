@@ -148,7 +148,7 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<p className="heading m-0">Tax</p>
+											<span className="heading m-0">Tax</span>
 										</Col>
 										<Col className="text-end ">
 											<span>$2.50</span>

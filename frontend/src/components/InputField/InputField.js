@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 import './inputField.scss';
 
+// single inputs
 export default function InputField({ size, state, type, placeholder, children, styles }) {
 	return (
 		<Form className={`input-wrapper ${size} ${styles}`}>
@@ -17,7 +18,7 @@ export default function InputField({ size, state, type, placeholder, children, s
 				size={size}
 			/>
 
-			<Button className="btn--icon btn--input btn--input-default" type="submit" />
+			<Button className="m-0 btn--input btn--input-default" type="submit" />
 			{children}
 		</Form>
 	);

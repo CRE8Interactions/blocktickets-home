@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from 'rc-slider';
 
 import Stack from 'react-bootstrap/Stack';
@@ -7,15 +7,7 @@ import Form from 'react-bootstrap/Form';
 import 'rc-slider/assets/index.css';
 import './priceRangeSlider.scss';
 
-export default function PriceRangeSlider({ styles }) {
-	const [
-		sliderValues,
-		setSliderValues
-	] = useState([
-		20,
-		50
-	]);
-
+export default function PriceRangeSlider({ styles, sliderValues, setSliderValues }) {
 	const handleChange = (sliderValues) => {
 		setSliderValues(sliderValues);
 	};

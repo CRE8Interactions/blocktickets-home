@@ -19,7 +19,7 @@ export default function TransferModal() {
 			<Modal.Header closeButton>
 				<div>
 					<Modal.Title as="h4">Transfer ticket</Modal.Title>
-					<p className="ticket-code">nicfanciulli#9358</p>
+					<p className="ticket-code">nicfanciulli #9358</p>
 				</div>
 			</Modal.Header>
 			<Modal.Body>
@@ -28,9 +28,9 @@ export default function TransferModal() {
 						<div
 							id="success"
 							className="modal-heading d-flex-column justify-content-center align-items-center gap-4">
-							<h4 className="modal-heading-title">Transfer completed!</h4>
+							<h4 className="m-0 modal-heading-title">Transfer completed!</h4>
 						</div>
-						<p className="small text-muted">
+						<p className="small">
 							We have transferred your ticket to the recipient. If they have not
 							received it please reach out to us.
 						</p>
@@ -41,7 +41,7 @@ export default function TransferModal() {
 							<h4 className="modal-heading-title">
 								Enter the recepient phone number{' '}
 							</h4>
-							<p className="small text-muted">
+							<p className="small">
 								The recipient will get notified via text that you have transferred
 								your ticket to them.
 							</p>

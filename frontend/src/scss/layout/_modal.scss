@@ -12,6 +12,7 @@
 
 		&-title {
 			font-size: $body-1;
+			margin-bottom: $text-spacer-sm;
 		}
 	}
 
@@ -28,6 +29,7 @@
 		line-height: 1.5;
 
 		.btn {
+			margin-left: 0px;
 			margin-top: $text-spacer-sm;
 			width: 100%;
 		}
