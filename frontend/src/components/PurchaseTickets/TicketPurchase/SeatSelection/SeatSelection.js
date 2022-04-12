@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import { PriceRangeSlider } from '../../../PriceRangeSlider';
+import { PriceRangeSlider } from './PriceRangeSlider';
 import { FilterModal } from './FilterModal';
 import { MySeats } from './MySeats';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { BackButton } from '../../../../BackButton';
-import { PriceRangeSlider } from '../../../../PriceRangeSlider';
+import { PriceRangeSlider } from '../PriceRangeSlider';
 import { TicketPurchaseFooter } from '../../TicketPurchaseFooter';
 
 import Form from 'react-bootstrap/Form';
