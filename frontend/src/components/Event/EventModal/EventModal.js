@@ -17,7 +17,7 @@ export default function EventModal({ show, handleClose }) {
 					<Modal.Title as="h4">Event information</Modal.Title>
 				</Modal.Header>
 				<div className="event-details mb-3">
-					<Row className="align-items-center mb-3">
+					<Row className="align-items-center mb-2">
 						<Col>
 							<h1 className="m-0 heading-sm">Nic Fancuilli</h1>
 						</Col>
@@ -27,11 +27,11 @@ export default function EventModal({ show, handleClose }) {
 							</Badge>
 						</Col>
 					</Row>
-					<div className="mb-3">
+					<div className="mb-2">
 						<p className="time-caption">Time</p>
 						<p className="normal-sm">Mar 13 9:00 PM - 11:00 EST</p>
 					</div>
-					<div className="mb-3">
+					<div className="mb-2">
 						<p className="venue-caption">Venue</p>
 						<p className="normal-sm">CODA or Full address of Venue goes here</p>
 					</div>
@@ -53,7 +53,7 @@ export default function EventModal({ show, handleClose }) {
 						/>
 						<h4 className="normal mb-2">Additional Info</h4>
 						<p>
-							Important Message Regarding COVID-19 Due to the uncertainty related to
+							Important Message Regarding COVID-19 - Due to the uncertainty related to
 							COVID-19, the holder of this ticket, on behalf of the holder and any
 							accompanying minor, including a minor holding a separate ticket,
 							acknowledges and agrees that admission to the Arena is subject to all
