@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { PriceRangeSlider } from './../../../PurchaseTickets/TicketPurchase/SeatSelection/PriceRangeSlider';
+import { PriceRangeSlider } from '../../../PriceRangeSlider';
 import { AddTicket } from './AddTicket';
 
 import './sellModal.scss';
