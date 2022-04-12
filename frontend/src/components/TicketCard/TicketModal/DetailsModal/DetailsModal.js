@@ -18,38 +18,48 @@ export default function DetailsModal() {
 					<h4 className="normal mb-2">Description</h4>
 					<p className="small text-muted">Grants you access to the event</p>
 				</div>
-				<Row className="split-row">
-					<Col>
-						<span>Contact Address</span>
-					</Col>
-					<Col className="text-end">
-						<span className="text-secondary">Oxa7d8…..d270</span>
-					</Col>
-				</Row>
-				<Row className="split-row">
-					<Col>
-						<span>Token ID</span>
-					</Col>
-					<Col className="text-end">
-						<span className="text-secondary">23000121</span>
-					</Col>
-				</Row>
-				<Row className="split-row">
-					<Col>
-						<span>Token Standard</span>
-					</Col>
-					<Col className="text-end">
-						<span>ERC - 721</span>
-					</Col>
-				</Row>
-				<Row className="split-row">
-					<Col>
-						<span>Blockchain</span>
-					</Col>
-					<Col className="text-end">
-						<span>Ethereum</span>
-					</Col>
-				</Row>
+				<ul>
+					<li>
+						<Row className="split-row">
+							<Col>
+								<span>Contact Address</span>
+							</Col>
+							<Col className="text-end">
+								<span className="text-secondary">Oxa7d8…..d270</span>
+							</Col>
+						</Row>
+					</li>
+					<li>
+						<Row className="split-row">
+							<Col>
+								<span>Token ID</span>
+							</Col>
+							<Col className="text-end">
+								<span className="text-secondary">23000121</span>
+							</Col>
+						</Row>
+					</li>
+					<li>
+						<Row className="split-row">
+							<Col>
+								<span>Token Standard</span>
+							</Col>
+							<Col className="text-end">
+								<span>ERC - 721</span>
+							</Col>
+						</Row>
+					</li>
+					<li>
+						<Row className="split-row">
+							<Col>
+								<span>Blockchain</span>
+							</Col>
+							<Col className="text-end">
+								<span>Ethereum</span>
+							</Col>
+						</Row>
+					</li>
+				</ul>
 			</Modal.Body>
 		</Fragment>
 	);

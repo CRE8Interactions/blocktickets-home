@@ -9,6 +9,10 @@
 		margin: auto;
 	}
 	.modal-header {
+		padding-right: 0px;
+		padding-left: 0px;
+		margin-left: $modal-inner-padding;
+		margin-right: $modal-inner-padding;
 		align-items: flex-start;
 		padding-top: $modal-inner-padding;
 		padding-bottom: $modal-inner-padding;
