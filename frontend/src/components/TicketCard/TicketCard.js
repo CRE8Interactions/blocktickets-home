@@ -33,8 +33,8 @@ export default function TicketCard() {
 	};
 	return (
 		<Fragment>
-			<Card className="ticket-card card-md">
-				<Card.Header className="heading--flex pb-2">
+			<Card body className="ticket-card card-md">
+				<div className="heading--flex pb-2">
 					<h1 className="caption text-muted fw-normal m-0" id="options">
 						Ticket options
 					</h1>
@@ -55,15 +55,15 @@ export default function TicketCard() {
 							Sell ticket
 						</Dropdown.Item>
 					</DropdownButton>
-				</Card.Header>
+				</div>
 				<Card.Img
 					variant="top"
 					src={profile}
 					width="281"
 					height="281"
-					className="rounded-lg px-4"
+					className="rounded-lg mb-4"
 				/>
-				<Card.Body className="details d-flex-column">
+				<div className="details d-flex-column">
 					<Card.Title as="h5">Nic Fanciulli</Card.Title>
 					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
 						FLOH &amp; Embrace Presents:
@@ -87,7 +87,7 @@ export default function TicketCard() {
 							Check in
 						</Button>
 					</Stack>
-				</Card.Body>
+				</div>
 			</Card>
 
 			<TicketModal modalType={modalType} show={show} setShow={setShow} />
