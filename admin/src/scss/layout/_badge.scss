@@ -1,0 +1,13 @@
+@use '../abstracts' as *;
+
+.badge-outline {
+	text-transform: uppercase;
+	border-style: solid;
+	border-width: $border-width;
+	background-color: $clr-white !important;
+
+	&--primary {
+		color: $clr-primary;
+		border-color: $clr-primary;
+	}
+}

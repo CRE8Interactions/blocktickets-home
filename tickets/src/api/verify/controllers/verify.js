@@ -127,7 +127,7 @@ module.exports = createCoreController('api::verify.verify', ({
 
     const role = await strapi.db.query('plugin::users-permissions.role').findOne({
       where: {
-        name: invite.role ? invite.role : 'Authenticated'
+        name: invite && invite.role ? invite.role : 'Authenticated'
       }
     })
 

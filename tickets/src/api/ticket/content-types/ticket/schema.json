@@ -47,14 +47,6 @@
       "required": true,
       "default": "available"
     },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "capacity": {
       "type": "integer",
       "private": true
@@ -86,12 +78,6 @@
       "default": false,
       "private": true
     },
-    "event": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::event.event",
-      "inversedBy": "ticket"
-    },
     "section": {
       "type": "string"
     },
@@ -102,6 +88,25 @@
       "type": "string"
     },
     "generalAdmission": {
+      "type": "boolean",
+      "default": false
+    },
+    "checkInCode": {
+      "type": "string",
+      "unique": true
+    },
+    "royalty": {
+      "type": "integer",
+      "default": 5,
+      "required": true
+    },
+    "uuid": {
+      "type": "uid"
+    },
+    "eventId": {
+      "type": "string"
+    },
+    "resale": {
       "type": "boolean",
       "default": false
     }

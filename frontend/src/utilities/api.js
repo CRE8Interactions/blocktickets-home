@@ -45,3 +45,11 @@ export const createOrganization = async (data) => {
 export const getPaymentIntent = async () => {
   return instance.get('/payment/intent')
 }
+
+export const getCategories = async () => {
+  return instance.get('/categories')
+}
+
+export const getVenues = async () => {
+  return instance.get('/venues')
+}

@@ -29,7 +29,8 @@
     },
     "status": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "unpublished"
     },
     "currency": {
       "type": "string",
@@ -77,12 +78,6 @@
       "type": "integer",
       "private": true
     },
-    "venues": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::venue.venue",
-      "mappedBy": "event"
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -101,11 +96,16 @@
       "relation": "oneToMany",
       "target": "api::category.category"
     },
-    "ticket": {
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket"
+    },
+    "venue": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::ticket.ticket",
-      "mappedBy": "event"
+      "target": "api::venue.venue",
+      "inversedBy": "event"
     }
   }
 }

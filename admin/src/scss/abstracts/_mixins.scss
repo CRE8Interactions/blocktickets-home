@@ -1,0 +1,41 @@
+@use 'breakpoints' as *;
+
+@mixin breakpoint-min($key) {
+	// get breakpoint from array of breakpoints
+
+	$breakpoint: map-get($breakpoints, $key);
+	@media screen and (min-width: $breakpoint) {
+		// content within breakpoint
+		@content;
+	}
+}
+@mixin breakpoint-inBetween($min, $max) {
+	// get breakpoint from array of breakpoints
+
+	$minBreakpoint: map-get($breakpoints, $min);
+	$maxBreakpoint: map-get($breakpoints, $max);
+	@media screen and (min-width: $minBreakpoint) and (max-width: ($maxBreakpoint - 0.01em)) {
+		// content within breakpoint
+		@content;
+	}
+}
+
+@mixin breakpoint-max($key) {
+	// get breakpoint from array of breakpoints
+
+	$breakpoint: map-get($breakpoints, $key);
+	@media screen and (max-width: ($breakpoint - 0.01em)) {
+		// content within breakpoint
+		@content;
+	}
+}
+
+/* Convert pixels to rem */
+@function rem($pixels, $base: 16) {
+	@return ($pixels/$base) * 1rem;
+}
+
+/* Convert pixels to em */
+@function em($pixels, $base: 16) {
+	@return ($pixels/$base) * 1em;
+}
