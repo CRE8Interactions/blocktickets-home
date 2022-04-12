@@ -29,19 +29,24 @@
     "age_restriction": {
       "type": "string"
     },
-    "event": {
+    "events": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::event.event",
-      "inversedBy": "venues"
+      "relation": "oneToMany",
+      "target": "api::event.event"
     },
     "image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": true,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event",
+      "mappedBy": "venue"
     }
   }
 }

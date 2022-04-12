@@ -1,0 +1,98 @@
+@use '../abstracts' as *;
+
+// Banner Spacers
+$banner-spacer-md-top: em(100);
+$banner-spacer-md-bottom: em(110);
+$banner-spacer: rem(21);
+
+// Page Spacers
+$spacer-xs: rem(38);
+$spacer-sm: em(64);
+$spacer-md: em(80);
+$spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
+$copyright-spacer: rem(17); // change variable name when you get more pages
+
+// Text Spacers
+$heading-spacer: rem(64);
+$title-spacer: rem(30);
+$gap: rem(14);
+$gap-sm: rem(9);
+$gap-xs: rem(4);
+
+.spacer-xs {
+	padding: $spacer-xs 0px;
+}
+.spacer {
+	padding: $spacer-sm 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-md 0px;
+	}
+}
+
+.spacer-lg {
+	padding: $spacer-sm 0px;
+
+	@include breakpoint-min(lg) {
+		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
+	}
+}
+
+.footer-spacer {
+	padding: $spacer-sm 0px $spacer-footer-sm-bottom;
+
+	@include breakpoint-min(md) {
+		padding-top: $spacer-md;
+	}
+}
+
+.row + .row {
+	margin-top: rem(2);
+
+	@include breakpoint-min(md) {
+		margin-top: rem(3);
+	}
+}
+
+%flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.split-row {
+	@extend %flex-between !optional;
+	* {
+		font-size: $small;
+	}
+}
+
+.heading--flex {
+	@extend %flex-between !optional;
+
+	& > *,
+	.btn {
+		margin: 0px;
+	}
+
+	.card-title {
+		margin: 0;
+
+		&-flex {
+			.card-title {
+				order: 2;
+			}
+		}
+	}
+}
+.card-content {
+	margin-top: rem(24);
+}
+
+@mixin scrollable-padding {
+	padding: rem(8) 0px;
+}
+
+.scrollable-heading {
+	@include scrollable-padding();
+}

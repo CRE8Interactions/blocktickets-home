@@ -1,0 +1,131 @@
+@use '../abstracts' as *;
+@use 'spacing' as *;
+
+.normal {
+	font-size: $body-2;
+}
+
+.fs-md {
+	font-size: $body-1;
+}
+
+.normal-sm {
+	font-size: $small;
+
+	@include breakpoint-min(md) {
+		font-size: $body-2;
+	}
+}
+
+.normal-lg {
+	font-size: $body-2;
+
+	@include breakpoint-min(md) {
+		font-size: $body-1;
+	}
+}
+
+.section-heading {
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+	}
+
+	margin-bottom: $heading-spacer;
+}
+
+h1,
+.h1 {
+	font-size: $h1-font-size;
+}
+h2,
+.h2 {
+	font-size: $h2-font-size;
+}
+h3,
+.h3 {
+	font-size: $h3-font-size;
+}
+h4,
+.h4 {
+	font-size: $h4-font-size;
+}
+
+.fw-medium {
+	font-weight: $fw-medium;
+}
+
+.section-heading h1 {
+	font-size: $h4-font-size;
+	@include breakpoint-min(md) {
+		font-size: $h3-font-size;
+	}
+}
+
+.heading-sm {
+	font-size: $body-1;
+	margin-bottom: rem(16);
+
+	@include breakpoint-min(md) {
+		font-size: $h4-font-size;
+	}
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+	font-weight: $fw-bold;
+	font-family: $font-body;
+	font-size: rem(16);
+}
+
+.caption {
+	font-size: $caption;
+	margin-bottom: em(3);
+}
+
+.caption--uppercase {
+	@extend .caption !optional;
+	@extend .text-uppercase !optional;
+}
+
+.date,
+.venue,
+.location {
+	font-weight: $fw-semi-bold;
+}
+
+%text-truncate {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+%multi-line-truncate {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+}
+
+@mixin multi-line-truncate($lines: 2) {
+	@extend %multi-line-truncate;
+	-webkit-line-clamp: $lines;
+}
+
+.nav-link {
+	font-family: $font-heading;
+}
+
+%nav-mobile-headings {
+	@include breakpoint-max(lg) {
+		display: block;
+		margin-bottom: rem(12);
+		font-size: 1rem;
+		color: $clr-neutral-4;
+		font-weight: 500;
+		font-family: $font-body;
+	}
+}

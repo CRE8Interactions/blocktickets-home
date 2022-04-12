@@ -67,7 +67,7 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
@@ -157,6 +157,24 @@ module.exports = {
           event.params.data.uuid = Math.floor(Math.random() * 900000000) + 100000000;
           event.params.data.creatorId = user.id
           event.params.data.members = [user];
+        }
+
+        // Changes on event model
+        if (event.model.singularName === 'event') {
+          const categories = await strapi.db.query('api::category.category').findOne({
+            where: {
+              id: event.params.data.categories
+            }
+          })
+
+          const venue = await strapi.db.query('api::venue.venue').findOne({
+            where: {
+              id: event.params.data.venue
+            }
+          })
+
+          event.params.data.venue = venue.id
+          event.params.data.categories = [categories]
         }
 
         // Changes on user model

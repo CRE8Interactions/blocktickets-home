@@ -1,0 +1,14 @@
+@use '../abstracts' as *;
+
+$card-bg: $clr-neutral-7;
+$card-border-color: $border-color;
+$card-border-radius: $br-input;
+$card-title-spacer-y: em(15);
+
+// card body
+$card-spacer-y: em(21);
+$card-spacer-x: em(16);
+// card header
+$card-cap-bg: $card-bg;
+$card-cap-padding-x: em(31);
+$card-cap-padding-y: em(22);
