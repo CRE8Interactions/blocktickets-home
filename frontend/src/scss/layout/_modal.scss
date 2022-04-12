@@ -7,6 +7,13 @@
 		font-size: $small;
 	}
 
+	&-content.popup {
+		background-color: transparent;
+		padding-top: rem(9);
+		padding-right: rem(4);
+		border: none;
+	}
+
 	.modal-heading {
 		margin-bottom: $text-spacer-sm;
 
