@@ -42,7 +42,7 @@
 	border: $input-border-width solid $color;
 
 	@include breakpoint-min(xl) {
-		padding-left: em(10);
+		padding-right: rem(8);
 	}
 
 	.form-control {

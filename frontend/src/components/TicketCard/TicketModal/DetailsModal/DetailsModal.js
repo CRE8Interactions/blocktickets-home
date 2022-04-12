@@ -10,12 +10,12 @@ export default function DetailsModal() {
 			<Modal.Header closeButton>
 				<div>
 					<Modal.Title as="h4">NFT Details</Modal.Title>
-					<p className="ticket-code">nicfanciulli#9358</p>
+					<p className="ticket-code">nicfanciulli #9358</p>
 				</div>
 			</Modal.Header>
 			<Modal.Body>
 				<div className="modal-heading">
-					<h4 className="modal-heading-title">Description</h4>
+					<h4 className="normal mb-2">Description</h4>
 					<p className="small text-muted">Grants you access to the event</p>
 				</div>
 				<Row className="split-row">
