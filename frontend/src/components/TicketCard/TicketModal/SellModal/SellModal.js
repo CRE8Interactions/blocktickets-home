@@ -86,7 +86,7 @@ export default function SellModal() {
 							<Form.Group controlId="ticket" className="form-group">
 								<Row className="split-row">
 									<Col>
-										<Form.Label className="caption small fw-medium text-capitalize">
+										<Form.Label className="selected-label">
 											Selected ticket
 										</Form.Label>
 									</Col>

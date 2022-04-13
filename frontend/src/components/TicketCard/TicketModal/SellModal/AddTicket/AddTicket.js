@@ -9,7 +9,7 @@ export default function AddTicket() {
 		<Form.Group controlId="ticket" className="form-group">
 			<Row className="split-row">
 				<Col>
-					<Form.Label>Selected ticket</Form.Label>
+					<Form.Label className="selected-label">Selected ticket</Form.Label>
 				</Col>
 				<Col>
 					<Form.Select>
