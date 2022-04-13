@@ -4,6 +4,7 @@ import {
 	LoginPage,
 	DashboardPage,
 	UpcomingEventsPage,
+	CollectablesPage,
 	TicketsPage,
 	CheckoutPage,
 	VenuePage,
@@ -25,6 +26,7 @@ const Router = () => {
 				<Route path="/" element={<HomePage />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
+				<Route path="collectables" element={<CollectablesPage />} />
 				<Route
 					path="dashboard"
 					element={
