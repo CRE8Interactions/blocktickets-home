@@ -10,6 +10,7 @@ coverage
 
 # production
 ./frontend/build
+./nginx/certs
 
 # misc
 .DS_Store

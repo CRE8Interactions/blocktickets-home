@@ -11,6 +11,9 @@ services:
       - 443:443
     networks:
       - block-network
+    volumes:
+      - $PWD/nginx/certs/preview:/etc/nginx/certs
+      - $PWD/nginx/configs/preview/upstream.conf:/etc/nginx/conf.d/upstream.conf
   tickets:
     build:
       context: ./tickets
@@ -33,17 +36,6 @@ services:
       - '3000:3000'
     networks:
       - block-network
-  # admin:
-  #   build:
-  #     context: ./admin
-  #     dockerfile: Dockerfile.preview
-  #   volumes:
-  #     - ./admin:/usr/src/app/admin
-  #     - /usr/src/app/admin/node_modules
-  #   ports:
-  #     - '3001:3001'
-  #   networks:
-  #     - block-network
 networks:
   block-network:
     driver: bridge
