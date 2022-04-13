@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.admin
+    restart: always # because it is routing traffic to our entire app
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - block-network
+    volumes:
+      - $PWD/nginx/certs/admin:/etc/nginx/certs
+      - $PWD/nginx/configs/admin/upstream.conf:/etc/nginx/conf.d/upstream.conf
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile.admin
+    volumes:
+      - ./admin:/usr/src/app/admin
+      - /usr/src/app/admin/node_modules
+    ports:
+      - '3001:3001'
+    networks:
+      - block-network
+networks:
+  block-network:
+    driver: bridge
