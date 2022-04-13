@@ -7,16 +7,14 @@ import { TicketCard } from '../../TicketCard';
 // Import Swiper styles
 import 'swiper/css';
 
-import './upcomingEventsSlider.scss';
-
 export default function UpcomingEventsSlider() {
 	return (
-		<div id="upcoming">
+		<div className="swiper-page">
 			<Slider slidesPerView={'auto'} breakpoints={false}>
-				<SwiperSlide>
+				<SwiperSlide className="w-auto">
 					<TicketCard />
 				</SwiperSlide>
-				<SwiperSlide>
+				<SwiperSlide className="w-auto">
 					<TicketCard />
 				</SwiperSlide>
 			</Slider>

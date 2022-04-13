@@ -32,6 +32,31 @@
 	}
 }
 
+button,
+.btn {
+	&:focus {
+		box-shadow: none !important;
+	}
+}
+
+.btn-primary,
+.btn-secondary {
+	color: $white;
+
+	&:hover,
+	&:focus {
+		color: $white;
+	}
+}
+
+.btn-outline-light {
+	color: $body-color;
+}
+
+.btn:disabled {
+	color: $white;
+}
+
 .btn-link {
 	margin-top: 0px;
 	padding: 0px;
