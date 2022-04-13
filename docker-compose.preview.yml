@@ -12,7 +12,7 @@ services:
     networks:
       - block-network
     volumes:
-      - $PWD/nginx/certs/preview:/etc/nginx/certs
+      - $PWD/nginx/certs:/etc/nginx/certs
       - $PWD/nginx/configs/preview/upstream.conf:/etc/nginx/conf.d/upstream.conf
   tickets:
     build:
