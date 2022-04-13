@@ -10,6 +10,7 @@ export { PurchaseTickets } from './PurchaseTickets';
 export { CheckoutWrapper } from './CheckoutWrapper';
 export { VenueInformation } from './VenueInformation';
 export { UpcomingEventsSlider } from './Slider/UpcomingEventsSlider';
+export { CollectablesSlider } from './Slider/CollectablesSlider';
 export { Sidenav } from './Sidenav';
 export { CreateOrg } from './Forms/CreateOrg';
 export { EventsTable } from './Tables/EventsTable';

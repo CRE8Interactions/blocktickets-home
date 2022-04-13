@@ -9,7 +9,7 @@ import { NFTModal } from './NFTModal';
 
 import './ticketModal.scss';
 
-const typeOfModal = (modalType, handleClose) => {
+const typeOfModal = (modalType, handleClose, setTicketStatus) => {
 	switch (modalType) {
 		case 'details':
 			return <DetailsModal />;
@@ -21,17 +21,17 @@ const typeOfModal = (modalType, handleClose) => {
 			return <NFTModal handleClose={handleClose} />;
 
 		case 'sell':
-			return <SellModal />;
+			return <SellModal setTicketStatus={setTicketStatus} />;
 		default:
 			return;
 	}
 };
-export default function TicketModal({ modalType, show, setShow }) {
+export default function TicketModal({ modalType, show, setShow, setTicketStatus }) {
 	const handleClose = () => setShow(false);
 
 	return (
 		<Modal id="ticket-modal" scrollable centered show={show} onHide={handleClose}>
-			{typeOfModal(modalType, handleClose)}
+			{typeOfModal(modalType, handleClose, setTicketStatus)}
 		</Modal>
 	);
 }

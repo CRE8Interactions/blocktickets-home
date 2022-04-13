@@ -9,8 +9,8 @@ import { SuccessContainer } from './../SuccessContainer';
 
 export default function TransferModal() {
 	const [
-		status,
-		setStatus
+		step,
+		setStep
 	] = useState('transfer');
 
 	return (
@@ -22,7 +22,7 @@ export default function TransferModal() {
 				</div>
 			</Modal.Header>
 			<Modal.Body>
-				{status === 'successful' ? (
+				{step === 'successful' ? (
 					<Fragment>
 						<SuccessContainer>
 							<h4 className="m-0 modal-heading-title">Transfer completed!</h4>
@@ -52,7 +52,7 @@ export default function TransferModal() {
 								<Error />
 							</Form.Control.Feedback>
 							<Button
-								onClick={() => setStatus('successful')}
+								onClick={() => setStep('successful')}
 								variant="primary"
 								size="lg">
 								Transfer

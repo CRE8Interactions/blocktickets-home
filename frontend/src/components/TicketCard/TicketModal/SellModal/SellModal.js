@@ -14,46 +14,44 @@ import { formatNumber } from '../../../../utilities/helper';
 
 import './sellModal.scss';
 
-export default function SellModal() {
+export default function SellModal({ setTicketStatus }) {
 	const [
-		status,
-		setStatus
+		step,
+		setStep
 	] = useState('sell');
 
+	// for price range
 	const [
 		sliderValue,
 		setSliderValue
 	] = useState(formatNumber(20));
 
+	// counter to conditionally add ticket
 	const [
-		tickets,
-		setTickets
-	] = useState(1);
-
-	const [
-		addTicket,
-		setAddTicket
-	] = useState(false);
-
-	const [
-		numTickets,
-		setNumTickets
+		addTickets,
+		setAddTickets
 	] = useState(0);
 
+	// object to collect the tickets selected - used to send to database
 	const [
 		selectedTickets,
 		setSelectedTickets
-	] = useState('Nicfanciulli#93...');
+	] = useState({ 1: 'Nicfanciulli#9358' });
 
 	const handleClick = () => {
-		setNumTickets(numTickets + 1);
+		setAddTickets(addTickets + 1);
+	};
+
+	const handleSell = () => {
+		setStep('successful');
+		setTicketStatus('sale');
 	};
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
 				<Modal.Title as="h4">Sell ticket</Modal.Title>
 			</Modal.Header>
-			{status === 'sell' && (
+			{step === 'sell' && (
 				<Fragment>
 					<div className="fixed-heading modal-heading">
 						<h4 className="modal-heading-title">List your ticket on our marketplace</h4>
@@ -91,13 +89,19 @@ export default function SellModal() {
 										</Form.Label>
 									</Col>
 									<Col>
-										<Form.Control disabled defaultValue={selectedTickets} />
+										<Form.Control disabled value="Nicfanciulli#9358" />
 									</Col>
 								</Row>
 							</Form.Group>
 							{[
-								...Array(numTickets)
-							].map(() => <AddTicket />)}
+								...Array(addTickets)
+							].map((_, index) => (
+								<AddTicket
+									key={index}
+									selectedTickets={selectedTickets}
+									setSelectedTickets={setSelectedTickets}
+								/>
+							))}
 							<Button
 								onClick={handleClick}
 								variant="outline-light"
@@ -106,7 +110,7 @@ export default function SellModal() {
 								Add ticket
 							</Button>
 							<Button
-								onClick={() => setStatus('summary')}
+								onClick={() => setStep('summary')}
 								variant="primary"
 								size="lg"
 								className="icon-button btn-next">
@@ -117,7 +121,7 @@ export default function SellModal() {
 				</Fragment>
 			)}
 
-			{status === 'summary' && (
+			{step === 'summary' && (
 				<Fragment>
 					<div className="fixed-heading modal-heading">
 						<h4 className="modal-heading-title">Summary</h4>
@@ -155,7 +159,7 @@ export default function SellModal() {
 												<span>Royalities: 10%</span>
 											</Col>
 											<Col className="text-end ">
-												<span>$7.00</span>
+												<span>($7.00)</span>
 											</Col>
 										</Row>
 									</li>
@@ -172,13 +176,13 @@ export default function SellModal() {
 								</Row>
 							</li>
 						</ul>
-						<Button variant="primary" size="lg" onClick={() => setStatus('successful')}>
+						<Button variant="primary" size="lg" onClick={handleSell}>
 							Agree and sell
 						</Button>
 					</Modal.Body>
 				</Fragment>
 			)}
-			{status === 'successful' && (
+			{step === 'successful' && (
 				<Modal.Body>
 					<SuccessContainer>
 						<h4 className="m-0 modal-heading-title">Your tickets are listed!</h4>

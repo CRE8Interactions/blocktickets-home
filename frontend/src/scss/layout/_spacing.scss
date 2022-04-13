@@ -103,3 +103,7 @@ $text-spacer-xs: rem(16);
 .scrollable-heading {
 	@include scrollable-padding();
 }
+
+.swiper-page .swiper {
+	padding-bottom: $spacer-md;
+}
