@@ -23,4 +23,10 @@
 		font-size: $body-1;
 		font-weight: $fw-normal;
 	}
+
+	.selected-label {
+		font-size: $small;
+		font-weight: $fw-medium;
+		text-transform: capitalize;
+	}
 }
