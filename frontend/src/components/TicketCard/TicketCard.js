@@ -70,7 +70,7 @@ export default function TicketCard({ ticketType = '' }) {
 
 						{ticketType !== 'collectable' &&
 						ticketStatus === 'sale' && (
-							<Dropdown.Item as="button" onClick={() => setTicketStatus('sell')}>
+							<Dropdown.Item as="button" onClick={() => handleClick('delist')}>
 								Delist Ticket
 							</Dropdown.Item>
 						)}
