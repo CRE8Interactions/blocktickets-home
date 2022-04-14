@@ -108,6 +108,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 					<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
 							<Form.Select
+								id="form-select--numTickets"
 								aria-label="Number of Tickets"
 								value={numTickets}
 								onChange={(e) => setNumTickets(e.target.value)}>
