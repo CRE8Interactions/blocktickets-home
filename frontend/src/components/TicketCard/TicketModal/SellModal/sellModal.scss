@@ -1,9 +1,13 @@
 @use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout' as *;
 @use '../../../../scss/theme/colors' as *;
 
 #ticket-modal {
-	.scrollable-body {
+	.fixed-heading {
 		border-bottom: border();
+		margin-left: $text-spacer-sm;
+		margin-right: $text-spacer-sm;
+		padding-bottom: $text-spacer-sm;
 	}
 	.list {
 		.heading {
@@ -14,17 +18,15 @@
 			margin-top: rem(20);
 		}
 	}
-	#success {
-		&::before {
-			content: '';
-			background-image: url('../../../../assets/icons/success.svg');
-			width: 106px;
-			height: 106px;
-		}
-	}
 
 	#price {
 		font-size: $body-1;
-		color: $body-color;
+		font-weight: $fw-normal;
+	}
+
+	.selected-label {
+		font-size: $small;
+		font-weight: $fw-medium;
+		text-transform: capitalize;
 	}
 }

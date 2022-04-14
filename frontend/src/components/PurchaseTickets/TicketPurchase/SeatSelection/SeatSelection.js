@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import { PriceRangeSlider } from '../../../PriceRangeSlider';
+import { PriceRangeSlider } from './PriceRangeSlider';
 import { FilterModal } from './FilterModal';
 import { MySeats } from './MySeats';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
@@ -108,6 +108,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 					<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
 							<Form.Select
+								id="form-select--numTickets"
 								aria-label="Number of Tickets"
 								value={numTickets}
 								onChange={(e) => setNumTickets(e.target.value)}>

@@ -3,6 +3,8 @@
 @use '../layout/spacing' as *;
 
 .modal {
+	line-height: 1.5;
+
 	&-title {
 		font-size: $small;
 	}
@@ -21,6 +23,10 @@
 			font-size: $body-1;
 			margin-bottom: $text-spacer-sm;
 		}
+
+		p {
+			font-size: $small;
+		}
 	}
 
 	&-dialog-scrollable {
@@ -33,20 +39,22 @@
 	}
 
 	&-body {
-		line-height: 1.5;
-
 		.btn {
 			margin-left: 0px;
 			margin-top: $text-spacer-sm;
 			width: 100%;
 		}
 
+		li + li {
+			margin-top: rem(20);
+		}
+
 		.split-row {
 			font-size: $body-2;
+		}
 
-			& + .split-row {
-				margin-top: rem(20);
-			}
+		.form-group + .form-group {
+			margin-top: rem(19);
 		}
 	}
 }

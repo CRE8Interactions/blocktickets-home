@@ -4,12 +4,37 @@
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	color: $body-color;
+	-webkit-text-fill-color: $body-color;
+	transition: background-color 5000s ease-in-out 0s;
+}
+
 .form-group + .form-group {
 	margin-top: $text-spacer;
 }
+
 .form-control {
-	color: $clr-neutral-4;
 	font-weight: $fw-medium;
+
+	&-xs {
+		border-radius: 4px;
+		width: 40%;
+		font-size: $caption;
+		font-weight: $fw-normal;
+		text-align: center;
+		padding: rem(2) rem(8);
+		margin-top: 0px;
+	}
+
+	&:disabled {
+		opacity: .5;
+	}
 }
 
 .form-label {
@@ -29,7 +54,6 @@
 }
 
 .form-select {
-	background-size: initial;
 	padding-right: $btn-padding-x-lg;
 	line-height: 1;
 }

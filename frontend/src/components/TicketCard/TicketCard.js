@@ -14,11 +14,16 @@ import { TicketModal } from './TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard() {
+export default function TicketCard({ ticketType = '' }) {
 	const [
 		modalType,
 		setModalType
 	] = useState('');
+
+	const [
+		ticketStatus,
+		setTicketStatus
+	] = useState('sell');
 
 	const [
 		show,
@@ -31,6 +36,7 @@ export default function TicketCard() {
 		setModalType(type);
 		handleShow();
 	};
+
 	return (
 		<Fragment>
 			<Card body className="ticket-card card-md">
@@ -50,12 +56,24 @@ export default function TicketCard() {
 						<Dropdown.Item as="button" onClick={() => handleClick('nft')}>
 							View NFT
 						</Dropdown.Item>
-						<Dropdown.Item as="button" onClick={() => handleClick('transfer')}>
-							Transfer ticket
-						</Dropdown.Item>
-						<Dropdown.Item as="button" onClick={() => handleClick('sell')}>
-							Sell ticket
-						</Dropdown.Item>
+						{ticketType !== 'collectable' &&
+						ticketStatus === 'sell' && (
+							<Fragment>
+								<Dropdown.Item as="button" onClick={() => handleClick('transfer')}>
+									Transfer ticket
+								</Dropdown.Item>
+								<Dropdown.Item as="button" onClick={() => handleClick('sell')}>
+									Sell ticket
+								</Dropdown.Item>
+							</Fragment>
+						)}
+
+						{ticketType !== 'collectable' &&
+						ticketStatus === 'sale' && (
+							<Dropdown.Item as="button" onClick={() => setTicketStatus('sell')}>
+								Delist Ticket
+							</Dropdown.Item>
+						)}
 					</DropdownButton>
 				</div>
 				<Card.Img
@@ -81,18 +99,29 @@ export default function TicketCard() {
 							Toronto, ON
 						</ListGroup.Item>
 					</ListGroup>
-					<Stack gap={2}>
-						<Badge bg="info" className="text-dark badge-lg">
-							General Admission
-						</Badge>
-						<Button variant="dark" size="lg">
-							Check in
-						</Button>
-					</Stack>
+					{ticketType !== 'collectable' && (
+						<Stack gap={2}>
+							<Badge bg="info" className="text-dark badge-lg">
+								General Admission
+							</Badge>
+							<Button
+								variant="secondary"
+								size="lg"
+								disabled={ticketStatus === 'sale'}>
+								Check in
+							</Button>
+						</Stack>
+					)}
 				</div>
 			</Card>
 
-			<TicketModal modalType={modalType} show={show} setShow={setShow} />
+			<TicketModal
+				modalType={modalType}
+				show={show}
+				setShow={setShow}
+				ticketStatus={ticketStatus}
+				setTicketStatus={setTicketStatus}
+			/>
 		</Fragment>
 	);
 }

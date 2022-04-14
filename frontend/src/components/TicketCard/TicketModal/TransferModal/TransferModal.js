@@ -5,13 +5,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import { Error } from './../../../Error';
-
-import './transferModal.scss';
+import { SuccessContainer } from './../SuccessContainer';
 
 export default function TransferModal() {
 	const [
-		status,
-		setStatus
+		step,
+		setStep
 	] = useState('transfer');
 
 	return (
@@ -23,13 +22,11 @@ export default function TransferModal() {
 				</div>
 			</Modal.Header>
 			<Modal.Body>
-				{status === 'successful' ? (
+				{step === 'successful' ? (
 					<Fragment>
-						<div
-							id="success"
-							className="modal-heading d-flex-column justify-content-center align-items-center gap-4">
+						<SuccessContainer>
 							<h4 className="m-0 modal-heading-title">Transfer completed!</h4>
-						</div>
+						</SuccessContainer>
 						<p className="small">
 							We have transferred your ticket to the recipient. If they have not
 							received it please reach out to us.
@@ -55,7 +52,7 @@ export default function TransferModal() {
 								<Error />
 							</Form.Control.Feedback>
 							<Button
-								onClick={() => setStatus('successful')}
+								onClick={() => setStep('successful')}
 								variant="primary"
 								size="lg">
 								Transfer

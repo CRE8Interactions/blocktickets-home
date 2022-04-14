@@ -1,0 +1,8 @@
+@use '../../../../../scss/abstracts' as *;
+
+.amount {
+	padding-bottom: rem(18);
+	@include breakpoint-min(md) {
+		padding-bottom: em(24);
+	}
+}
