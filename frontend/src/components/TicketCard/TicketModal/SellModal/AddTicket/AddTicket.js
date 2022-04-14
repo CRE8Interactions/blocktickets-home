@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
+import CloseButton from 'react-bootstrap/CloseButton';
 
 export default function AddTicket({ tickets, selectedTickets, setSelectedTickets }) {
 	const [
@@ -42,20 +42,19 @@ export default function AddTicket({ tickets, selectedTickets, setSelectedTickets
 	};
 	return (
 		<Form.Group controlId="ticket" className="form-group">
-			<Row className="split-row">
-				<Col>
-					<Form.Label className="selected-label">Selected ticket</Form.Label>
-				</Col>
-				<Col>
-					<Form.Select
-						onChange={(e) => {
-							handleChange(e);
-						}}>
-						<option>Select</option>
-						{filteredOptions.map((option) => <option key={option}>{option} </option>)}
-					</Form.Select>
-				</Col>
-			</Row>
+			<Stack direction="horizontal" gap={3} className="align-items-center">
+				<Form.Label className="selected-label">Selected ticket</Form.Label>
+
+				<Form.Select
+					onChange={(e) => {
+						handleChange(e);
+					}}>
+					<option>Select</option>
+					{filteredOptions.map((option) => <option key={option}>{option} </option>)}
+				</Form.Select>
+
+				<CloseButton />
+			</Stack>
 		</Form.Group>
 	);
 }
