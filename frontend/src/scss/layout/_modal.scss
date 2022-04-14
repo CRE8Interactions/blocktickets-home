@@ -52,5 +52,9 @@
 		.split-row {
 			font-size: $body-2;
 		}
+
+		.form-group + .form-group {
+			margin-top: rem(19);
+		}
 	}
 }

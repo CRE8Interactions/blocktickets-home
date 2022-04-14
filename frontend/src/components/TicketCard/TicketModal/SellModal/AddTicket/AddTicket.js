@@ -4,15 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-export default function AddTicket({ selectedTickets, setSelectedTickets }) {
-	// for demo purposes, will come from database
-	const tickets = [
-		'Nicfanciulli#9358',
-		'Another#1234',
-		'Nicfanciulli#9358',
-		'third#9358'
-	];
-
+export default function AddTicket({ tickets, selectedTickets, setSelectedTickets }) {
 	const [
 		filteredOptions,
 		setFilteredOptions

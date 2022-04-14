@@ -44,17 +44,18 @@ button,
 	color: $white;
 
 	&:hover,
-	&:focus {
+	&:focus,
+	&:disabled {
 		color: $white;
 	}
 }
 
 .btn-outline-light {
 	color: $body-color;
-}
 
-.btn:disabled {
-	color: $white;
+	&:disabled {
+		color: inherit;
+	}
 }
 
 .btn-link {

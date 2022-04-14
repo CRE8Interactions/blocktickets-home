@@ -16,7 +16,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-group + .form-group {
-	margin-top: rem(19);
+	margin-top: $text-spacer;
 }
 
 .form-control {
@@ -54,7 +54,6 @@ select:-webkit-autofill:focus {
 }
 
 .form-select {
-	background-size: initial;
 	padding-right: $btn-padding-x-lg;
 	line-height: 1;
 }
