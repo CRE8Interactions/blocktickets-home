@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
@@ -14,7 +14,7 @@ import { formatNumber } from '../../../../utilities/helper';
 
 import './sellModal.scss';
 
-export default function SellModal({ setTicketStatus }) {
+export default function SellModal({ ticketStatus, setTicketStatus }) {
 	const [
 		step,
 		setStep
@@ -31,6 +31,14 @@ export default function SellModal({ setTicketStatus }) {
 		addTickets,
 		setAddTickets
 	] = useState(0);
+
+	// all tickets - for demo purposes, will come from database
+	const tickets = [
+		'Nicfanciulli#9358',
+		'Another#1234',
+		'Nicfanciulli#9358',
+		'Another#4321'
+	];
 
 	// object to collect the tickets selected - used to send to database
 	const [
@@ -63,7 +71,7 @@ export default function SellModal({ setTicketStatus }) {
 					<Modal.Body>
 						<Form>
 							<Form.Group controlId="range" className="form-group">
-								<Form.Label>Range</Form.Label>
+								<Form.Label>Sellable Range</Form.Label>
 								<PriceSlider
 									sliderValue={sliderValue}
 									setSliderValue={setSliderValue}
@@ -71,7 +79,7 @@ export default function SellModal({ setTicketStatus }) {
 							</Form.Group>
 
 							<Form.Group controlId="price" className="form-group">
-								<Form.Label>Price</Form.Label>
+								<Form.Label>Price Per Ticket</Form.Label>
 								<Form.Control
 									id="price"
 									min={sliderValue}
@@ -98,6 +106,7 @@ export default function SellModal({ setTicketStatus }) {
 							].map((_, index) => (
 								<AddTicket
 									key={index}
+									tickets={tickets}
 									selectedTickets={selectedTickets}
 									setSelectedTickets={setSelectedTickets}
 								/>
@@ -106,6 +115,11 @@ export default function SellModal({ setTicketStatus }) {
 								onClick={handleClick}
 								variant="outline-light"
 								size="lg"
+								disabled={
+									[
+										...new Set(tickets)
+									].length === Object.keys(selectedTickets).length
+								}
 								className="icon-button btn-add">
 								Add ticket
 							</Button>

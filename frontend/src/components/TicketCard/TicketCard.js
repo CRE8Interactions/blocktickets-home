@@ -119,6 +119,7 @@ export default function TicketCard({ ticketType = '' }) {
 				modalType={modalType}
 				show={show}
 				setShow={setShow}
+				ticketStatus={ticketStatus}
 				setTicketStatus={setTicketStatus}
 			/>
 		</Fragment>
