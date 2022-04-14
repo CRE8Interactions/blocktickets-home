@@ -55,7 +55,8 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 	};
 
 	useEffect(() => {
-		// ticket status needs to happen in the database and not on UI until after component unmounts
+		// ticket status needs to happen when it is successful in the database and not on UI until after component unmounts or will update component
+		// fix when closing modal to exit out, component still sets status
 
 		return () => {
 			const status = ticketStatus === 'sell' ? 'sale' : 'sell';
@@ -141,7 +142,7 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 								<Fragment>
 									<Form.Group controlId="selected" className="form-group">
 										<Form.Label className="selected-label">
-											Selected Ticket/s
+											Selected Tickets
 										</Form.Label>
 										<ul>
 											{Object.values(selectedTickets).map((ticket, index) => {
