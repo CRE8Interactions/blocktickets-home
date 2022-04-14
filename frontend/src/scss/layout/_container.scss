@@ -1,14 +1,137 @@
+@use './spacing' as *;
 @use '../abstracts' as *;
+@use './typography';
 
-$spacer: rem(58);
-$mb: rem(26);
+$pad-sm: rem(32);
+$pad-md: rem(81);
 
-/* container */
 .container {
-	max-width: 1120px;
+	max-width: 1130px;
 	margin: 0 auto;
+	@include breakpoint-max(md) {
+		padding: 0px $pad-sm;
+	}
+
+	@include breakpoint-inBetween(md, xl) {
+		padding: 0px $pad-md;
+	}
+
+	&--full-width {
+		flex: 1;
+	}
 }
 
-.spacer {
-	margin-bottom: $spacer;
+// on the root element
+.full-width-flex {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.full-height-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+@mixin full-width() {
+	position: relative;
+	width: 100vw;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+
+.d-flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+%icon-text-box {
+	display: flex;
+	gap: $gap;
+	align-items: center;
+}
+
+.icon-button {
+	@extend %icon-text-box !optional;
+	justify-content: center;
+}
+
+.time-caption,
+.venue-caption,
+.location-caption {
+	@extend .caption !optional;
+	@extend %icon-text-box !optional;
+	gap: $gap-xs;
+	color: $clr-neutral-4;
+	font-weight: $fw-semi-bold;
+	line-height: 0;
+}
+
+.date,
+.venue,
+.location {
+	@extend %icon-text-box !optional;
+	gap: $gap-xs;
+	line-height: 0;
+}
+
+.time-caption,
+.date {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'calendar'));
+	}
+}
+
+.venue-caption,
+.venue {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'venue'));
+	}
+}
+
+.location-caption,
+.location {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'location'));
+	}
+}
+
+.mobile-only {
+	@include breakpoint-min(md) {
+		display: none;
+	}
+}
+
+.mobile-tablet-only {
+	@include breakpoint-min(lg) {
+		display: none;
+	}
+}
+
+.tablet-desktop-only {
+	@include breakpoint-max(md) {
+		display: none;
+	}
+}
+
+.desktop-only {
+	@include breakpoint-max(lg) {
+		display: none;
+	}
+}
+
+@mixin remove-scrollbar() {
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@mixin scrollable() {
+	overflow-y: auto;
+	height: 100%;
+	@include remove-scrollbar();
 }

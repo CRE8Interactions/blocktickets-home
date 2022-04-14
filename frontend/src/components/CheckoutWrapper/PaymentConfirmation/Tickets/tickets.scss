@@ -1,0 +1,29 @@
+@use './../../../../scss/abstracts' as *;
+
+#checkout-wrapper {
+	#tickets {
+		@include breakpoint-max(md) {
+			li + li {
+				border-top: border();
+				padding-top: rem(24);
+			}
+
+			li:last-of-type {
+				padding-bottom: rem(24);
+				border-bottom: border();
+			}
+		}
+
+		#myWalletBtn {
+			min-width: 160px;
+			margin-top: rem(24);
+
+			@include breakpoint-min(md) {
+				position: absolute;
+				top: -12px;
+				right: 0;
+				margin-top: 0px;
+			}
+		}
+	}
+}

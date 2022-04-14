@@ -1,0 +1,44 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+@use '../../scss/theme/colors' as *;
+
+#checkout-wrapper {
+	padding-top: $spacer-xs;
+	position: relative;
+
+	@include breakpoint-min(md) {
+		padding: rem(40) 0px;
+	}
+
+	&.confirmation-padding {
+		padding-bottom: $spacer-xs;
+
+		@include breakpoint-min(md) {
+			padding-top: $spacer-sm;
+			padding-bottom: $spacer-sm;
+		}
+	}
+
+	section {
+		padding: em(24) 0px;
+		& + section {
+			border-top: border();
+		}
+
+		.section-title {
+			font-size: $body-1;
+			font-weight: $fw-semi-bold;
+			margin-bottom: rem(20);
+
+			&.section-title--muted {
+				font-size: $body-2;
+				color: $muted;
+				font-weight: $fw-medium;
+			}
+		}
+
+		&:first-of-type {
+			padding-top: 0px;
+		}
+	}
+}

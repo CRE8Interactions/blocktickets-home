@@ -1,0 +1,15 @@
+@use '../../../scss/theme/modal' as *;
+@use '../../../scss/abstracts' as *;
+
+.modal {
+	.event-details {
+		padding: $modal-inner-padding;
+		padding-top: em(15);
+		border-bottom: border();
+	}
+
+	.artist-image {
+		width: 195px;
+		height: 195px;
+	}
+}

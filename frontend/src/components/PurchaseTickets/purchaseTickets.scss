@@ -1,0 +1,8 @@
+@use '../../scss/abstracts' as *;
+
+.flex {
+	flex: 1;
+	@include breakpoint-min(md) {
+		gap: 21px;
+	}
+}

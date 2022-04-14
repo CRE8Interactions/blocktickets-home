@@ -1,0 +1,20 @@
+# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
+FROM node:16 as build-stage
+
+# set working directory
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm config set legacy-peer-deps true
+RUN npm install
+
+# add app
+COPY . .
+
+RUN npm run build
+
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+FROM nginx:1.19.6-alpine
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build-stage /app/build/ /usr/share/nginx/app2/build

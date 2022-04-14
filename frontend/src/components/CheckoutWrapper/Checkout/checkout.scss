@@ -1,0 +1,8 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
+
+#checkout-wrapper {
+	.row {
+		flex: 1;
+	}
+}

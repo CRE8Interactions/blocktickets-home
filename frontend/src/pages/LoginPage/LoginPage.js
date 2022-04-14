@@ -3,7 +3,7 @@ import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
-import 'react-phone-number-input/styles.css';
+// import 'react-phone-number-input/styles.css';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
 import UserContext from '../../context/User/user';
@@ -140,7 +140,7 @@ function LoginPage() {
 
 	if (step === 0) {
 		cardTitle = 'Verify your mobile number';
-		cardText = `Enter your mobile number including your country code. You'll receive an access code via text message.`;
+		cardText = `Select your country and enter your mobile number. You'll receive an access code via text message.`;
 	}
 	else if (step === 1) {
 		cardTitle = 'Check your mobile phone';
@@ -165,7 +165,6 @@ function LoginPage() {
 									value={phoneNumber}
 									onChange={setValue}
 								/>
-								<p>Must include your country-code, for example +1</p>
 								<Button variant="primary" onClick={(e) => submit()}>
 									Validate
 								</Button>

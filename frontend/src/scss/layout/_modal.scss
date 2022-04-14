@@ -1,0 +1,52 @@
+@use '../abstracts' as *;
+@use '../layout/container' as *;
+@use '../layout/spacing' as *;
+
+.modal {
+	&-title {
+		font-size: $small;
+	}
+
+	&-content.popup {
+		background-color: transparent;
+		padding-top: rem(9);
+		padding-right: rem(4);
+		border: none;
+	}
+
+	.modal-heading {
+		margin-bottom: $text-spacer-sm;
+
+		&-title {
+			font-size: $body-1;
+			margin-bottom: $text-spacer-sm;
+		}
+	}
+
+	&-dialog-scrollable {
+		.modal-body {
+			display: flex;
+			flex-direction: column;
+			padding-top: 0px;
+			@include remove-scrollbar();
+		}
+	}
+
+	&-body {
+		line-height: 1.5;
+
+		.btn {
+			margin-left: 0px;
+			margin-top: $text-spacer-sm;
+			width: 100%;
+		}
+
+		.split-row {
+			font-size: $body-2;
+
+			& + .split-row {
+				margin-top: rem(20);
+			}
+		}
+	}
+}

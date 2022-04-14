@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "venues",
+  "info": {
+    "singularName": "venue",
+    "pluralName": "venues",
+    "displayName": "Venue",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "capacity": {
+      "type": "integer",
+      "required": true
+    },
+    "address": {
+      "type": "component",
+      "repeatable": true,
+      "component": "address.address"
+    },
+    "age_restriction": {
+      "type": "string"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event.event"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event",
+      "mappedBy": "venue"
+    }
+  }
+}

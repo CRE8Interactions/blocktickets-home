@@ -1,0 +1,11 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout/container' as *;
+@use '../../../../scss/theme/colors' as *;
+
+.ticket-presale {
+	background: $gray-300;
+
+	@include breakpoint-max(md) {
+		@include full-width();
+	}
+}

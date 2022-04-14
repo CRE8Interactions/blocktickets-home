@@ -1,0 +1,70 @@
+@use './../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/links' as *;
+@use '../../scss/layout' as *;
+
+.wallet {
+	z-index: 2;
+	.list-group {
+		font-weight: 700;
+
+		.name {
+			font-weight: 600;
+			@include breakpoint-max(lg) {
+				font-size: $body-1;
+			}
+		}
+
+		&-item {
+			padding: em(16) 0px;
+
+			@include breakpoint-min(lg) {
+				font-size: rem(14);
+			}
+
+			&:first-of-type .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'calendar'));
+				}
+			}
+
+			&:nth-of-type(2) .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'collectables'));
+				}
+			}
+			&:nth-of-type(3) .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'settings'));
+				}
+			}
+			&:nth-of-type(4) .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'settings'));
+				}
+			}
+			&:nth-of-type(5) .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'logout'));
+				}
+			}
+
+			.nav-link {
+				@extend %icon-text-box;
+				font-size: rem(16);
+				padding: 0px;
+
+				&:hover,
+				&:focus,
+				&.active {
+					color: $link-color;
+					&::before {
+						filter: brightness(0) saturate(100%) invert(78%) sepia(48%) saturate(4629%)
+							hue-rotate(179deg) brightness(102%) contrast(95%);
+					}
+				}
+			}
+		}
+	}
+}

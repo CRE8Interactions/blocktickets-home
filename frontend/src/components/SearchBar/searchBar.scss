@@ -1,0 +1,17 @@
+@use '../../scss/theme/input' as *;
+@use '../../scss/layout/forms' as *;
+@use '../../scss/abstracts' as *;
+
+.search {
+	width: 256px;
+	@include input-icon-box($border-radius-sm, $input-padding-y-sm, $input-padding-x-sm);
+}
+
+.search,
+.search-mobile {
+	margin-right: rem(6);
+
+	@include breakpoint-min(lg) {
+		margin-right: rem(20);
+	}
+}

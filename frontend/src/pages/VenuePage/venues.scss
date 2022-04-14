@@ -1,0 +1,13 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+
+.jumbotron {
+	padding: em(62) 0px;
+	@include full-width();
+	background-color: $clr-neutral-6;
+
+	@include breakpoint-min(md) {
+		padding-top: em(117);
+		padding-bottom: em(117);
+	}
+}

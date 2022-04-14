@@ -1,0 +1,62 @@
+@use '../abstracts' as *;
+@use '../layout/typography' as *;
+@use '../theme/card' as *;
+
+%plain-card {
+	background: transparent;
+	border-color: transparent;
+	border-radius: 0px;
+
+	.card-body {
+		padding: em(21);
+
+		& * {
+			@extend %text-truncate !optional;
+		}
+	}
+
+	.card-title {
+		margin-bottom: em(10);
+	}
+}
+
+.card {
+	&--light {
+		background-color: $clr-white;
+
+		.card-footer {
+			background-color: $clr-white;
+		}
+	}
+
+	&--borderless {
+		border: none;
+	}
+	& * {
+		font-family: $font-body;
+	}
+
+	.btn {
+		font-family: $font-heading;
+	}
+
+	&-title {
+		font-weight: $fw-medium;
+	}
+
+	&-subtitle {
+		font-weight: $fw-bold;
+		font-size: $caption;
+	}
+}
+
+.card-lg {
+	.card-footer {
+		padding-top: em(24);
+		padding-bottom: em(24);
+	}
+
+	.card-body {
+		padding: em(20) $card-cap-padding-x;
+	}
+}

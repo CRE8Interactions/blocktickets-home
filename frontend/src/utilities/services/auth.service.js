@@ -13,6 +13,15 @@ const getUser = () => {
   }
 }
 
+const token = () => {
+  const user = getUser()
+  if (user) {
+    return user.jwt
+  } else {
+    return undefined
+  }
+}
+
 const isLoggedIn = () => {
   const user = getUser()
   if (!user) return false
@@ -23,9 +32,17 @@ const logoutUser = () => {
   sessionStorage.removeItem('user')
 }
 
+const isOrganizer = () => {
+  const jwt = getUser()
+  if (!jwt) return false
+  return jwt.user.role.name === 'Organizer';
+}
+
 export default {
   setUser,
   getUser,
   isLoggedIn,
-  logoutUser
+  logoutUser,
+  token,
+  isOrganizer
 };

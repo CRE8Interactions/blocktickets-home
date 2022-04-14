@@ -1,0 +1,28 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/theme/custom' as *;
+@use '../../../../scss/layout' as *;
+
+.left-col {
+	.option-btns {
+		margin-bottom: $text-spacer-sm;
+	}
+
+	.seats-container {
+		flex: 1;
+	}
+	.seats--scrollable {
+		@include scrollable();
+	}
+
+	.list-group {
+		max-height: 20vh;
+
+		&-item {
+			user-select: none;
+			background-color: $gray-300;
+			padding: em(10) em(12);
+			line-height: 1.2;
+			cursor: pointer;
+		}
+	}
+}

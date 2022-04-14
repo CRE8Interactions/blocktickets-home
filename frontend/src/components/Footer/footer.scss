@@ -1,0 +1,61 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/layout' as *;
+
+footer {
+	border-top: border();
+
+	.nav-link {
+		padding-left: 0px;
+	}
+
+	.copyright {
+		border-top: border();
+		margin-top: rem(17);
+	}
+
+	.col:not(:last-child) {
+		@include breakpoint-max(md) {
+			border-bottom: border();
+		}
+	}
+
+	.col {
+		padding-bottom: $text-spacer-sm;
+
+		&:not(:first-of-type) {
+			@include breakpoint-max(md) {
+				padding-top: em(28);
+			}
+		}
+
+		.footer-title {
+			margin-bottom: $text-spacer;
+		}
+
+		.footer-title {
+			font-size: initial;
+			font-family: $font-body;
+			font-weight: $fw-medium;
+		}
+		.footer-nav-list-title {
+			@include breakpoint-max(md) {
+				margin-bottom: rem(17);
+			}
+
+			@include breakpoint-min(md) {
+				margin-bottom: $text-spacer;
+			}
+		}
+	}
+}
+
+.tag-line {
+	width: 21ch;
+	margin-top: $text-spacer;
+
+	@include breakpoint-min(xl) {
+		font-size: rem(24);
+		width: 18ch;
+	}
+}

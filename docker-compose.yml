@@ -5,8 +5,6 @@ services:
     build:
       context: ./contract_issuer
       dockerfile: Dockerfile
-    depends_on:
-      - ganache
     volumes:
       - ./contract_issuer:/usr/src/app/contract_issuer
       - /usr/src/app/contract_issuer/node_modules
@@ -34,6 +32,17 @@ services:
       - /usr/src/app/frontend/node_modules
     ports:
       - '3000:3000'
+    networks:
+      - block-network
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./admin:/usr/src/app/admin
+      - /usr/src/app/admin/node_modules
+    ports:
+      - '3001:3001'
     networks:
       - block-network
 networks:

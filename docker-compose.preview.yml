@@ -11,6 +11,9 @@ services:
       - 443:443
     networks:
       - block-network
+    volumes:
+      - $PWD/nginx/certs:/etc/nginx/certs
+      - $PWD/nginx/configs/preview/upstream.conf:/etc/nginx/conf.d/upstream.conf
   tickets:
     build:
       context: ./tickets

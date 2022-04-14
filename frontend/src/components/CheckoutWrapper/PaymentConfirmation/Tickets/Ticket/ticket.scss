@@ -1,0 +1,99 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/theme/colors' as *;
+@use '../../../../../scss/layout/typography' as *;
+@use '../../../../../scss/layout/container' as *;
+
+#checkout-wrapper {
+	.ticket {
+		.row {
+			row-gap: rem(26);
+
+			@include breakpoint-min(md) {
+				row-gap: rem(16);
+			}
+		}
+		#artist-image-col {
+			width: auto;
+
+			.artist-image {
+				width: 92px;
+				height: 92px;
+
+				@include breakpoint-min(md) {
+					width: 120px;
+					height: 120px;
+				}
+			}
+		}
+
+		.artist {
+			&-name {
+				margin-bottom: rem(4);
+				font-family: $font-body;
+			}
+		}
+
+		.details {
+			font-weight: 500;
+			flex-grow: 1;
+
+			p,
+			.artist-name {
+				@extend %text-truncate;
+			}
+
+			.time,
+			.loc {
+				&::before {
+					content: '\2022';
+					position: relative;
+					margin: 0px rem(3);
+				}
+			}
+
+			.time::before {
+				left: em(-2);
+			}
+			.loc::before {
+				margin: 0px rem(7);
+			}
+
+			.row {
+				.col {
+					min-width: 0;
+					flex: 1;
+				}
+			}
+
+			.col:nth-of-type(2) {
+				@include breakpoint-min(md) {
+					&::before {
+						content: '';
+						position: absolute;
+						height: 14px;
+						width: 1px;
+						margin-left: -13px;
+						margin-top: 1px;
+						background: $clr-neutral-5;
+					}
+				}
+			}
+		}
+
+		#event-info {
+			margin-left: auto;
+			@include breakpoint-min(md) {
+				border-color: $light;
+				color: $muted;
+
+				img {
+					width: 16px;
+				}
+			}
+
+			@include breakpoint-max(md) {
+				padding-right: 0px;
+			}
+		}
+	}
+}

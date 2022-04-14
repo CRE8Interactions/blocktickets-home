@@ -1,0 +1,43 @@
+@use '../../scss/abstracts' as *;
+
+.amount {
+	padding-bottom: rem(18);
+	@include breakpoint-min(md) {
+		padding-bottom: em(24);
+	}
+
+	.form-control {
+		border-radius: 4px;
+		width: 17%;
+		font-size: $caption;
+		color: #000;
+		font-weight: $fw-normal;
+		text-align: center;
+		padding: em(5) em(14);
+		margin-top: 0px;
+	}
+
+	.rc-slider {
+		&-handle {
+			background-color: $clr-primary;
+			border: 4px solid $clr-white;
+			opacity: 1;
+			margin-top: rem(-10);
+			width: 24px;
+			height: 24px;
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+
+		&-rail {
+			background-color: $clr-neutral-6;
+			border-radius: 10px;
+		}
+
+		&-track {
+			background-color: $clr-primary;
+		}
+	}
+}

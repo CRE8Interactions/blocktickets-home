@@ -1,0 +1,30 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/theme/colors' as *;
+
+#ticket-modal {
+	.scrollable-body {
+		border-bottom: border();
+	}
+	.list {
+		.heading {
+			font-weight: $fw-medium;
+			margin-bottom: rem(8);
+		}
+		& + .list {
+			margin-top: rem(20);
+		}
+	}
+	#success {
+		&::before {
+			content: '';
+			background-image: url('../../../../assets/icons/success.svg');
+			width: 106px;
+			height: 106px;
+		}
+	}
+
+	#price {
+		font-size: $body-1;
+		color: $body-color;
+	}
+}

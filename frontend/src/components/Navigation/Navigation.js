@@ -1,65 +1,74 @@
-import React, { Component, useContext } from 'react';
+import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+import authService from '../../utilities/services/auth.service';
+import { useWindowSize } from '../../utilities/hooks';
+
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import authService from '../../utilities/services/auth.service';
-import UserContext from '../../context/User/user';
+import Stack from 'react-bootstrap/Stack';
 
-import logo from '../../assets/logo.svg';
-import shoppingCart from '../../assets/icons/shopping-cart.svg';
+import mobileLogo from '../../assets/logo-mobile.svg';
+import desktopLogo from '../../assets/logo.svg';
+
+import { SearchBar } from './../SearchBar';
+import { MyWallet } from './../MyWallet';
+import { NavButtons } from './NavButtons';
+import { Timer } from './Timer';
 
 import './navigation.scss';
 
 export default function Navigation() {
-	const { setAuthenticated } = useContext(UserContext);
+	const windowSize = useWindowSize();
 
-	const logout = () => {
-		authService.logoutUser();
-		setAuthenticated({});
+	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
+
+	const toggleOverflow = (expanded) => {
+		document.body.style.overflowY = expanded ? 'hidden' : 'visible';
+		document.querySelector('.navbar').style.borderWidth = expanded ? '0px' : '1px';
 	};
 
 	return (
-		<Navbar collapseOnSelect expand="lg">
-			<Container>
-				<Navbar.Brand href="/" className="app-name">
-					<img src={logo} alt="blocktickets" />
-				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-				<Navbar.Collapse id="responsive-navbar-nav">
-					<Nav
-						className="me-auto my-2 my-lg-0"
-						style={{ maxHeight: '100px' }}
-						navbarScroll>
-						<Nav.Link href="#action1">Browse</Nav.Link>
-					</Nav>
-					<Nav className="gap-4">
-						<Form className="d-flex">
-							<FormControl
-								type="search"
-								placeholder="Search for events"
-								className="me-2"
-								aria-label="Search"
-							/>
-						</Form>
-						<div className="notificatins align-self-center">
-							<img src={shoppingCart} />
-						</div>
-						{!authService.isLoggedIn() && (
-							<Button variant="primary" href="/login">
-								Login
-							</Button>
-						)}
+		<div className="navigation position-sticky">
+			<Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
+				<Container>
+					<LinkContainer to="/">
+						<Navbar.Brand>
+							<img src={logo} alt="blocktickets" />
+						</Navbar.Brand>
+					</LinkContainer>
+					<Stack direction="horizontal" className="desktop-btns">
+						<SearchBar />
+						<NavButtons styles="desktop-only" />
+						<Navbar.Toggle
+							aria-controls="responsive-navbar-nav"
+							id="toggle"
+							className="btn--icon pe-0"
+						/>
+					</Stack>
+					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
+						<Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
+							<ul id="main" role="main-navigation">
+								<li>
+									<LinkContainer to="/">
+										<Nav.Link>Browse</Nav.Link>
+									</LinkContainer>
+								</li>
+							</ul>
 
-						{authService.isLoggedIn() && (
-							<Button variant="outline-light">My Wallet</Button>
-						)}
-					</Nav>
-				</Navbar.Collapse>
-			</Container>
-		</Navbar>
+							{authService.isLoggedIn() && (
+								<ul className="mobile-tablet-only" role="wallet-navigation">
+									<li className="pt-2">
+										<MyWallet />
+									</li>
+								</ul>
+							)}
+							<NavButtons styles="mobile-tablet-only" />
+						</Nav>
+					</Navbar.Collapse>
+					<Timer />
+				</Container>
+			</Navbar>
+		</div>
 	);
 }

@@ -1,0 +1,89 @@
+@use '../abstracts' as *;
+@use '../layout/typography' as *;
+@use '../theme/card' as *;
+
+%plain-card {
+	background: transparent;
+	border-color: transparent;
+	border-radius: 0px;
+
+	.card-body {
+		padding: em(21);
+
+		& * {
+			@extend %text-truncate !optional;
+		}
+	}
+
+	.card-title {
+		margin-bottom: em(10);
+	}
+}
+
+.card {
+	.card-subtitle {
+		margin-top: 0px;
+	}
+	&--light {
+		background-color: $clr-white;
+
+		.card-footer {
+			background-color: $clr-white;
+		}
+	}
+
+	.list-group {
+		padding-bottom: rem(16);
+		&-item {
+			padding: 0px;
+			padding-bottom: rem(10);
+			border: none;
+			background-color: transparent;
+		}
+	}
+
+	& * {
+		font-family: $font-body;
+	}
+
+	.btn,
+	.btn * {
+		font-family: $font-heading;
+	}
+
+	&-title {
+		font-weight: $fw-medium;
+	}
+
+	&-subtitle {
+		font-weight: $fw-bold;
+		font-size: $caption;
+	}
+
+	&-md {
+		$padding: em(20) em(24);
+
+		.card-header {
+			padding: $padding;
+		}
+		.card-body {
+			padding: $padding;
+		}
+	}
+
+	&-lg {
+		$pad-x: em(31);
+		$pad-y: em(20);
+
+		.card-header {
+			padding: $pad-y $pad-x;
+		}
+
+		.card-body {
+			padding: $pad-y $pad-x;
+		}
+		.card-footer {
+			padding: em(24) $pad-x;
+		}
+	}
+}

@@ -1,0 +1,27 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout/spacing' as *;
+@use '../../../../scss/theme/colors' as *;
+
+#order {
+	@include breakpoint-max(md) {
+		border-top: border();
+	}
+
+	@include breakpoint-min(md) {
+		margin-top: $text-spacer-sm;
+	}
+
+	.list-group-item:first-of-type {
+		@include breakpoint-min(md) {
+			padding-top: 0px;
+		}
+	}
+
+	.list-group-item {
+		padding: em(20) 0px;
+
+		li + li {
+			padding-top: rem(20);
+		}
+	}
+}

@@ -1,13 +1,106 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/typography' as *;
+@use '../../scss/layout/container' as *;
+@use '../../scss/theme/custom' as *;
 
-.navbar {
-	padding: rem(24);
-	border: 1px solid $clr-neutral-6;
-}
+.navigation {
+	&.position-sticky {
+		top: 0;
+		z-index: 999;
+	}
 
-.navbar-light .navbar-nav .nav-link {
-	&:hover,
-	&:focus {
-		color: $clr-primary;
+	.container {
+		position: relative;
+	}
+
+	.desktop-btns {
+		@include breakpoint-min(lg) {
+			order: 4;
+		}
+	}
+
+	.navbar {
+		background-color: $clr-white;
+
+		border-bottom: border();
+
+		&-brand {
+			@include breakpoint-min(lg) {
+				// margin-right: rem(47);
+
+				border-right: border(2px);
+				padding-right: rem(47);
+			}
+		}
+
+		&-collapse {
+			@include breakpoint-max(lg) {
+				margin-top: $navbar-padding-y;
+				&::before {
+					@include full-width-border();
+				}
+			}
+		}
+		&-nav {
+			padding-top: em(20);
+
+			@media screen and (min-device-height: 812px) {
+				padding-bottom: em(60);
+				padding-top: em(73);
+			}
+			@include breakpoint-max(lg) {
+				height: calc(100vh - 90px);
+			}
+
+			@include breakpoint-min(lg) {
+				padding-top: em(19);
+				padding-bottom: em(19);
+			}
+
+			ul {
+				&::before {
+					@extend %nav-mobile-headings;
+				}
+				& + ul {
+					margin-top: rem(16);
+					@media screen and(min-device-height: 812px) {
+						margin-top: rem(48);
+					}
+
+					&:nth-of-type(2) {
+						&::before {
+							@include breakpoint-max(lg) {
+								content: 'My Wallet';
+							}
+						}
+					}
+				}
+			}
+			#main {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'Home';
+					}
+				}
+
+				.nav-link {
+					@include breakpoint-min(lg) {
+						padding-left: rem(15);
+					}
+
+					@include breakpoint-max(lg) {
+						font-size: rem(24);
+						&.active {
+							border-left: border(2px, $clr-primary);
+							@include full-width();
+							padding-left: calc($pad-sm - rem(2));
+							@include breakpoint-min(md) {
+								padding-left: calc($pad-md - rem(2));
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

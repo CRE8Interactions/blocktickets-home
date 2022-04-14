@@ -1,0 +1,32 @@
+@use 'colors' as *;
+
+$br-primary: 90px;
+$br-input: 12px;
+$br-input-sm: 8px;
+$br-circle: 40px;
+$br-textile: 10px;
+$border-width: 2px;
+$border-color: $clr-neutral-6;
+$box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
+$box-shadow-card: 0px -10px 30px -8px rgba(15, 15, 15, 0.12);
+
+@function border($border-width: 1px, $color: $border-color, $border-style: solid) {
+	@return $border-width $border-style $color;
+}
+
+@mixin full-width-border($border-width: 1px, $color: $border-color) {
+	content: '';
+	height: $border-width;
+	position: absolute;
+	left: 0;
+	right: 0;
+	background-color: $border-color;
+	z-index: 1;
+}
+
+.rounded-corners {
+	border-radius: $br-textile;
+}
+.artist-image {
+	@extend .rounded-corners;
+}

@@ -1,0 +1,20 @@
+@use '../abstracts' as *;
+
+.badge-outline {
+	text-transform: uppercase;
+	border-style: solid;
+	border-width: $border-width;
+	background-color: $clr-white !important;
+
+	&--primary {
+		color: $clr-primary;
+		border-color: $clr-primary;
+	}
+}
+
+.badge-lg {
+	font-size: $small;
+	border-radius: 12px;
+	font-weight: $fw-medium;
+	padding: em(19);
+}

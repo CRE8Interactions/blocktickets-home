@@ -1,0 +1,111 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "text"
+    },
+    "start": {
+      "type": "datetime",
+      "required": true
+    },
+    "end": {
+      "type": "datetime",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "unpublished"
+    },
+    "currency": {
+      "type": "string",
+      "required": true,
+      "default": "usd"
+    },
+    "online_event": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "hide_start_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "hide_end_date": {
+      "type": "boolean",
+      "default": false
+    },
+    "shareable": {
+      "type": "boolean",
+      "default": true,
+      "private": true
+    },
+    "invite_only": {
+      "type": "boolean",
+      "default": false
+    },
+    "show_remaining": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "password": {
+      "type": "string",
+      "private": true,
+      "minLength": 3
+    },
+    "capacity": {
+      "type": "integer",
+      "private": true,
+      "min": 1
+    },
+    "age_restriction": {
+      "type": "integer",
+      "private": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "views": {
+      "type": "biginteger",
+      "private": true,
+      "default": "0"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket"
+    },
+    "venue": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::venue.venue",
+      "inversedBy": "event"
+    }
+  }
+}

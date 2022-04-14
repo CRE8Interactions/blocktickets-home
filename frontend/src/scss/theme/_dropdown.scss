@@ -1,0 +1,12 @@
+@use './../abstracts' as *;
+@use 'colors' as theme;
+
+$enable-caret: false;
+$dropdown-link-color: theme.$body-color;
+$dropdown-link-hover-bg: theme.$gray-300;
+$dropdown-item-padding-y: rem(8);
+$dropdown-border-color: $border-color;
+$dropdown-border-width: $border-width;
+$dropdown-item-padding-x: rem(8);
+$dropdown-item-padding-y: rem(10);
+$dropdown-padding-x: rem(8);

@@ -1,6 +1,18 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { HomePage, LoginPage, DashboardPage } from './pages';
-import { RequireAuth } from './context/Auth/useAuth';
+import {
+	HomePage,
+	LoginPage,
+	DashboardPage,
+	UpcomingEventsPage,
+	TicketsPage,
+	CheckoutPage,
+	VenuePage,
+	OrganizationsPage,
+	SalesPage,
+	EventsPage
+} from './pages';
+import { ScrollToTop } from './components';
+import { RequireAuth } from './context/Authorization/useAuth';
 
 /**
  * @description Handle all the routes
@@ -8,19 +20,35 @@ import { RequireAuth } from './context/Auth/useAuth';
 
 const Router = () => {
 	return (
-		<Routes>
-			<Route path="/" element={<HomePage />} />
-			<Route path="/login" element={<LoginPage />} />
-			<Route
-				path="/dashboard"
-				element={
-					<RequireAuth>
-						<DashboardPage />
-					</RequireAuth>
-				}
-			/>
-			<Route path="*" element={<Navigate to="/" />} />
-		</Routes>
+		<ScrollToTop>
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="login" element={<LoginPage />} />
+				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
+				<Route
+					path="dashboard"
+					element={
+						<RequireAuth>
+							<DashboardPage />
+						</RequireAuth>
+					}>
+					<Route path="organizations" element={<OrganizationsPage />} />
+					<Route path="sales" element={<SalesPage />} />
+					<Route path="events" element={<EventsPage />} />
+				</Route>
+				<Route path="tickets/:id" element={<TicketsPage />} />
+				<Route
+					path="checkout/:id"
+					element={
+						<RequireAuth>
+							<CheckoutPage />
+						</RequireAuth>
+					}
+				/>
+				<Route path="venue/:id" element={<VenuePage />} />
+				{/* Add a NotFound route */}
+			</Routes>
+		</ScrollToTop>
 	);
 };
 

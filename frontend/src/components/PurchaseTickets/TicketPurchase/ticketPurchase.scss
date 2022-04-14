@@ -1,0 +1,16 @@
+@use '../../../scss/abstracts' as *;
+
+.left-col {
+	flex: 0 0;
+	display: flex;
+	flex-direction: column;
+
+	@include breakpoint-min(md) {
+		flex-basis: 352px;
+	}
+
+	@include breakpoint-max(md) {
+		margin-top: rem(17);
+		flex: 1;
+	}
+}

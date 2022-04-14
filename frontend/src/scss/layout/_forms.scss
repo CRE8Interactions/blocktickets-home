@@ -1,5 +1,57 @@
 @use '../abstracts' as *;
+@use './spacing' as *;
+@use '../theme/input' as *;
+@use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
-input::placeholder {
+.form-group + .form-group {
+	margin-top: $text-spacer;
+}
+.form-control {
 	color: $clr-neutral-4;
+	font-weight: $fw-medium;
+}
+
+.form-label {
+	text-transform: uppercase;
+	font-size: $caption;
+	font-weight: $fw-bold;
+	color: $muted;
+	margin-bottom: em(12);
+}
+
+.form-check {
+	min-height: 0px;
+
+	&-label {
+		font-size: rem(14);
+	}
+}
+
+.form-select {
+	background-size: initial;
+	padding-right: $btn-padding-x-lg;
+	line-height: 1;
+}
+
+@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
+	display: flex;
+	align-items: center;
+	border-radius: $radius;
+	padding: $padding-y $padding-x;
+	border: $input-border-width solid $color;
+
+	@include breakpoint-min(xl) {
+		padding-right: rem(8);
+	}
+
+	.form-control {
+		border: none;
+		padding: 0px;
+		min-height: auto;
+	}
+}
+
+#custom-switch {
+	height: 26px;
 }

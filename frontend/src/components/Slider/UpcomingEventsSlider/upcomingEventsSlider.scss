@@ -1,0 +1,10 @@
+@use '../../../scss/layout' as *;
+
+#upcoming {
+	.swiper {
+		padding-bottom: $spacer-md;
+	}
+	.swiper-slide {
+		width: auto;
+	}
+}
