@@ -42,7 +42,7 @@ export default function TicketCard({ ticketType = '' }) {
 			<Card body className="ticket-card card-md">
 				<div className="heading--flex pb-2">
 					<h1 className="caption text-muted fw-normal m-0" id="options">
-						Ticket options
+						{ticketType !== 'collectable' ? 'Ticket' : 'NFT'} options
 					</h1>
 					<DropdownButton
 						id="dropdown-basic-button"
@@ -54,7 +54,7 @@ export default function TicketCard({ ticketType = '' }) {
 							Details
 						</Dropdown.Item>
 						<Dropdown.Item as="button" onClick={() => handleClick('nft')}>
-							View NFT
+							View NFT Media
 						</Dropdown.Item>
 						{ticketType !== 'collectable' &&
 						ticketStatus === 'sell' && (
@@ -71,7 +71,7 @@ export default function TicketCard({ ticketType = '' }) {
 						{ticketType !== 'collectable' &&
 						ticketStatus === 'sale' && (
 							<Dropdown.Item as="button" onClick={() => handleClick('delist')}>
-								Delist Ticket
+								Edit / Delist Ticket
 							</Dropdown.Item>
 						)}
 					</DropdownButton>
@@ -104,10 +104,7 @@ export default function TicketCard({ ticketType = '' }) {
 							<Badge bg="info" className="text-dark badge-lg">
 								General Admission
 							</Badge>
-							<Button
-								variant="secondary"
-								size="lg"
-								disabled={ticketStatus === 'sale'}>
+							<Button variant="dark" size="lg" disabled={ticketStatus === 'sale'}>
 								Check in
 							</Button>
 						</Stack>
