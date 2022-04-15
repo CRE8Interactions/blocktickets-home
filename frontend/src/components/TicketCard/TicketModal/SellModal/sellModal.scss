@@ -1,6 +1,7 @@
 @use '../../../../scss/abstracts' as *;
 @use '../../../../scss/layout' as *;
 @use '../../../../scss/theme/colors' as *;
+@use '../../../../scss/theme/input' as *;
 
 #ticket-modal {
 	.fixed-heading {
@@ -28,5 +29,7 @@
 		font-size: $small;
 		font-weight: $fw-medium;
 		text-transform: capitalize;
+		margin: 0;
+		white-space: nowrap;
 	}
 }

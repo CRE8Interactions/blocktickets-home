@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 import Modal from 'react-bootstrap/Modal';
+import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -15,10 +16,18 @@ import { formatNumber } from '../../../../utilities/helper';
 import './sellModal.scss';
 
 export default function SellModal({ ticketStatus, setTicketStatus }) {
+	// text
+	const type = ticketStatus === 'sell' ? 'sell' : 'delist';
+
 	const [
 		step,
 		setStep
 	] = useState('sell');
+
+	const [
+		updateSuccessful,
+		setUpdateSuccessful
+	] = useState(false);
 
 	// for price range
 	const [
@@ -50,14 +59,27 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 		setAddTickets(addTickets + 1);
 	};
 
-	const handleSell = () => {
-		setStep('successful');
-		setTicketStatus('sale');
+	const handleUpdatePrice = () => {
+		setStep('summary');
+		setUpdateSuccessful(true);
 	};
+
+	useEffect(() => {
+		// ticket status needs to happen when it is successful in the database and not on UI until after component unmounts or will update component
+		// fix when closing modal to exit out, component still sets status
+
+		return () => {
+			const status = ticketStatus === 'sell' ? 'sale' : 'sell';
+			setTicketStatus(status);
+		};
+	}, []);
+
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
-				<Modal.Title as="h4">Sell ticket</Modal.Title>
+				<Modal.Title as="h4">
+					{ticketStatus === 'sell' ? 'Sell' : 'Edit / Delist'} ticket
+				</Modal.Title>
 			</Modal.Header>
 			{step === 'sell' && (
 				<Fragment>
@@ -89,47 +111,76 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 									onChange={(e) => setSliderValue(e.target.value.slice(1))}
 								/>
 							</Form.Group>
-							<Form.Group controlId="ticket" className="form-group">
-								<Row className="split-row">
-									<Col>
+							{ticketStatus === 'sell' ? (
+								<Fragment>
+									<Form.Group controlId="selected-ticket" className="form-group">
+										<Stack
+											gap="3"
+											direction="horizontal"
+											className="align-items-center">
+											<Form.Label className="selected-label">
+												Selected ticket
+											</Form.Label>
+
+											<Form.Control disabled value="Nicfanciulli#9358" />
+										</Stack>
+									</Form.Group>
+									{[
+										...Array(addTickets)
+									].map((_, index) => (
+										<AddTicket
+											key={index}
+											tickets={tickets}
+											selectedTickets={selectedTickets}
+											setSelectedTickets={setSelectedTickets}
+										/>
+									))}
+									<Button
+										onClick={handleClick}
+										variant="outline-light"
+										size="lg"
+										disabled={
+											[
+												...new Set(tickets)
+											].length === Object.keys(selectedTickets).length
+										}
+										className="icon-button btn-add">
+										Add ticket
+									</Button>
+									<Button
+										size="lg"
+										className="icon-button btn-next"
+										onClick={() => setStep('summary')}>
+										Next
+									</Button>
+								</Fragment>
+							) : (
+								<Fragment>
+									<Form.Group controlId="selected" className="form-group">
 										<Form.Label className="selected-label">
-											Selected ticket
+											Selected Tickets
 										</Form.Label>
-									</Col>
-									<Col>
-										<Form.Control disabled value="Nicfanciulli#9358" />
-									</Col>
-								</Row>
-							</Form.Group>
-							{[
-								...Array(addTickets)
-							].map((_, index) => (
-								<AddTicket
-									key={index}
-									tickets={tickets}
-									selectedTickets={selectedTickets}
-									setSelectedTickets={setSelectedTickets}
-								/>
-							))}
-							<Button
-								onClick={handleClick}
-								variant="outline-light"
-								size="lg"
-								disabled={
-									[
-										...new Set(tickets)
-									].length === Object.keys(selectedTickets).length
-								}
-								className="icon-button btn-add">
-								Add ticket
-							</Button>
-							<Button
-								onClick={() => setStep('summary')}
-								variant="primary"
-								size="lg"
-								className="icon-button btn-next">
-								Next
-							</Button>
+										<ul>
+											{Object.values(selectedTickets).map((ticket, index) => {
+												<li key={index}>
+													<Form.Control disabled defaultValue={ticket}>
+														{ticket}
+													</Form.Control>
+												</li>;
+											})}
+										</ul>
+									</Form.Group>
+									<Button
+										variant="outline-light"
+										size="lg"
+										onClick={() => setStep('successful')}>
+										Delist Ticket/s
+									</Button>
+									<Button size="lg" onClick={handleUpdatePrice}>
+										Update Price
+									</Button>
+								</Fragment>
+							)}
 						</Form>
 					</Modal.Body>
 				</Fragment>
@@ -141,7 +192,7 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 						<h4 className="modal-heading-title">Summary</h4>
 						<p>
 							You are agreeing to Blocktickets seller terms and conditions by clicking
-							'Agree and sell'. If you have any question please reach out to{' '}
+							'Agree and {type}'. If you have any question please reach out to{' '}
 							<a href="">help@blocktickets.xyz</a>
 						</p>
 					</div>
@@ -190,21 +241,38 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 								</Row>
 							</li>
 						</ul>
-						<Button variant="primary" size="lg" onClick={handleSell}>
-							Agree and sell
+						<Button size="lg" onClick={() => setStep('successful')}>
+							Agree and {type}
 						</Button>
 					</Modal.Body>
 				</Fragment>
 			)}
-			{step === 'successful' && (
+			{step === 'successful' &&
+			!updateSuccessful && (
 				<Modal.Body>
 					<SuccessContainer>
-						<h4 className="m-0 modal-heading-title">Your tickets are listed!</h4>
+						<h4 className="m-0 modal-heading-title">
+							Your tickets are {ticketStatus === 'sell' ? 'listed' : 'delisted'}!
+						</h4>
 					</SuccessContainer>
 					<p className="small">
-						We will notify you via sms if a purchase is made. During the auction time,
-						you can change the status of your order by delisting it from the
-						marketplace.
+						{ticketStatus === 'sell' ? (
+							'We will notify you via text message if your tickets sold. You can edit / delist your tickets from the marketplace at anytime.'
+						) : (
+							'Your tickets are no longer listed for sale on the marketplace.'
+						)}
+					</p>
+				</Modal.Body>
+			)}
+			{step === 'successful' &&
+			updateSuccessful && (
+				<Modal.Body>
+					<SuccessContainer>
+						<h4 className="m-0 modal-heading-title">Your ticket price is updated!</h4>
+					</SuccessContainer>
+					<p className="small">
+						We will notify you via text message if your tickets sold. You can edit /
+						delist your tickets from the marketplace at anytime.
 					</p>
 				</Modal.Body>
 			)}
