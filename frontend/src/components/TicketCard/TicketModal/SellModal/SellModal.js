@@ -33,7 +33,7 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 	const [
 		sliderValue,
 		setSliderValue
-	] = useState(20);
+	] = useState(formatNumber(20));
 
 	// counter to conditionally add ticket
 	const [
@@ -107,7 +107,8 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 									min={sliderValue}
 									max={'999'}
 									type="text"
-									value={`${formatNumber(sliderValue)}`}
+									value={`$${sliderValue}`}
+									onChange={(e) => setSliderValue(e.target.value.slice(1))}
 								/>
 							</Form.Group>
 							{ticketStatus === 'sell' ? (
