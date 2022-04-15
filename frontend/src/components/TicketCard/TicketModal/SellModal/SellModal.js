@@ -24,11 +24,16 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 		setStep
 	] = useState('sell');
 
+	const [
+		updateSuccessful,
+		setUpdateSuccessful
+	] = useState(false);
+
 	// for price range
 	const [
 		sliderValue,
 		setSliderValue
-	] = useState(formatNumber(20));
+	] = useState(20);
 
 	// counter to conditionally add ticket
 	const [
@@ -52,6 +57,11 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 
 	const handleClick = () => {
 		setAddTickets(addTickets + 1);
+	};
+
+	const handleUpdatePrice = () => {
+		setStep('summary');
+		setUpdateSuccessful(true);
 	};
 
 	useEffect(() => {
@@ -97,8 +107,7 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 									min={sliderValue}
 									max={'999'}
 									type="text"
-									value={`$${sliderValue}`}
-									onChange={(e) => setSliderValue(e.target.value.slice(1))}
+									value={`${formatNumber(sliderValue)}`}
 								/>
 							</Form.Group>
 							{ticketStatus === 'sell' ? (
@@ -137,6 +146,12 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 										className="icon-button btn-add">
 										Add ticket
 									</Button>
+									<Button
+										size="lg"
+										className="icon-button btn-next"
+										onClick={() => setStep('summary')}>
+										Next
+									</Button>
 								</Fragment>
 							) : (
 								<Fragment>
@@ -160,15 +175,11 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 										onClick={() => setStep('successful')}>
 										Delist Ticket/s
 									</Button>
+									<Button size="lg" onClick={handleUpdatePrice}>
+										Update Price
+									</Button>
 								</Fragment>
 							)}
-							<Button
-								onClick={() => setStep('summary')}
-								variant="primary"
-								size="lg"
-								className="icon-button btn-next">
-								{ticketStatus === 'sell' ? 'Next' : 'Update price'}
-							</Button>
 						</Form>
 					</Modal.Body>
 				</Fragment>
@@ -229,13 +240,14 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 								</Row>
 							</li>
 						</ul>
-						<Button variant="primary" size="lg" onClick={() => setStep('successful')}>
+						<Button size="lg" onClick={() => setStep('successful')}>
 							Agree and {type}
 						</Button>
 					</Modal.Body>
 				</Fragment>
 			)}
-			{step === 'successful' && (
+			{step === 'successful' &&
+			!updateSuccessful && (
 				<Modal.Body>
 					<SuccessContainer>
 						<h4 className="m-0 modal-heading-title">
@@ -244,10 +256,22 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 					</SuccessContainer>
 					<p className="small">
 						{ticketStatus === 'sell' ? (
-							'We will notify you via sms if a purchase is made. During the auction time, you can change the status of your order by delisting it from the marketplace.'
+							'We will notify you via text message if your tickets sold. You can edit / delist your tickets from the marketplace at anytime.'
 						) : (
-							'Your tickets are no longer listed on the marketplace.'
+							'Your tickets are no longer listed for sale on the marketplace.'
 						)}
+					</p>
+				</Modal.Body>
+			)}
+			{step === 'successful' &&
+			updateSuccessful && (
+				<Modal.Body>
+					<SuccessContainer>
+						<h4 className="m-0 modal-heading-title">Your ticket price is updated!</h4>
+					</SuccessContainer>
+					<p className="small">
+						We will notify you via text message if your tickets sold. You can edit /
+						delist your tickets from the marketplace at anytime.
 					</p>
 				</Modal.Body>
 			)}
