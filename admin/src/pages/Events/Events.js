@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import OrganizationContext from "../../context/Organization/Organization";
 import { CreateEvent } from "../../components";
+import ShowTable from "../../components/Tables/Events/ShowTable";
 
 export default function Events() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const fullscreen = useState(true);
-
+  const orgs = useContext(OrganizationContext)
+ 
   return (
     <Container>
       <Row>
@@ -23,7 +25,8 @@ export default function Events() {
           </div>
         </Col>
       </Row>
-      <CreateEvent show={show} handleClose={handleClose} fullscreen={fullscreen} />
+      <ShowTable />
+      <CreateEvent show={show} handleClose={handleClose} fullscreen={fullscreen} orgs={orgs} />
     </Container>
   )
 }

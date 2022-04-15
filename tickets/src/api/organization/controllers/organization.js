@@ -20,7 +20,14 @@ module.exports = createCoreController('api::organization.organization', ({ strap
             }
           }
         },
-        events: true
+        events: {
+          fields: ['*'],
+          populate: {
+            tickets: true,
+            venue: true,
+            artists: true
+          }
+        }
       }
     })
     // Returns organizations which user is a member of
