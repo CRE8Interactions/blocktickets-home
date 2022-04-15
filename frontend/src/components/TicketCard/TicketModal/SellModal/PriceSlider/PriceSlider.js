@@ -10,17 +10,12 @@ import 'rc-slider/assets/index.css';
 
 export default function PriceSlider({ sliderValue, setSliderValue }) {
 	const handleChange = (sliderValue) => {
-		setSliderValue(formatNumber(sliderValue));
+		setSliderValue(sliderValue);
 	};
 
 	return (
 		<Stack direction="horizontal" gap={3}>
-			<Form.Control
-				type="text"
-				className="form-control-xs"
-				onChange={handleChange}
-				value={`$${formatNumber(sliderValue)} `}
-			/>
+			<Form.Control type="text" className="form-control-xs" defaultValue={'$20.00'} />
 			<Slider
 				step={0.01}
 				min={10}
