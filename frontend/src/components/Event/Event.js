@@ -27,7 +27,7 @@ export default function Event(props) {
 				<Row gap={2} className="py-2 py-md-3 align-items-center">
 					<Col md={2} id="artist-image-col" className="tablet-desktop-only">
 						<img
-							src={process.env.REACT_APP_API.replace('/api', '') + event?.image?.formats?.small?.url}
+							src={event?.image?.formats?.small?.url}
 							alt={event?.name}
 							width="139"
 							height="139"
