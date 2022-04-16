@@ -37,7 +37,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
     // Waits for the ticketArr to be populated before continuing
     let arr = await Promise.all(ticketArr)
     // Creates All tickets in bulk
-    await strapi.db.query('api::ticket.ticket').createMany({
+    let newTickets = await strapi.db.query('api::ticket.ticket').createMany({
       data: arr
     })
     // Queries for newly created tickets as bulk creation doesn't allow for relation creation
@@ -52,7 +52,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
       }
     })
 
-    return 200
+    return ticketArr
   },
   async find(ctx) {
     // some logic here
