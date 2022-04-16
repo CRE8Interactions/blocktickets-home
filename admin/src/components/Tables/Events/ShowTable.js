@@ -5,8 +5,9 @@ import { FaEllipsisV } from 'react-icons/fa';
 import { PublishEvent } from "../../Modals/PublishEvent";
 import { publishEvent } from "../../../utilities/api";
 
-export default function ShowTable() {
+export default function ShowTable(props) {
   const org = useContext(OrganizationContext)
+  const { handleTicketShow } = props;
   const [events, setEvents] = useState()
   const [event, setEvent] = useState()
   const [gross, setGross] = useState()
@@ -68,7 +69,7 @@ export default function ShowTable() {
                 <td>
                   <Row>
                     <Col md="4">
-                      <Image src={event?.image?.formats?.small?.url} rounded="true" width="120" height="80" />
+                      <Image src={event?.image?.url} rounded="true" width="120" height="80" />
                     </Col>
                     <Col>
                       <p className="mb-0">{event?.name}</p>
@@ -93,7 +94,7 @@ export default function ShowTable() {
                       <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event)  } }>Publish</Dropdown.Item>
                     }
                     <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Add Tickets</Dropdown.Item>
+                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event) }>Add Tickets</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 </td>

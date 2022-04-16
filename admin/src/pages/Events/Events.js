@@ -6,10 +6,21 @@ import ShowTable from "../../components/Tables/Events/ShowTable";
 
 export default function Events() {
   const [show, setShow] = useState(false);
+  const [step, setStep] = useState()
+  const [event, setEvent] = useState();
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setStep(1)
+    setShow(true)
+  };
   const fullscreen = useState(true);
-  const orgs = useContext(OrganizationContext)
+  const orgs = useContext(OrganizationContext);
+
+  const addTickets = (event) => {
+    setStep(3)
+    setShow(true)
+    setEvent(event)
+  }
  
   return (
     <Container>
@@ -25,8 +36,8 @@ export default function Events() {
           </div>
         </Col>
       </Row>
-      <ShowTable />
-      <CreateEvent show={show} handleClose={handleClose} fullscreen={fullscreen} orgs={orgs} />
+      <ShowTable handleTicketShow={addTickets} />
+      <CreateEvent show={show} handleClose={handleClose} fullscreen={fullscreen} orgs={orgs} step={step} myEvent={event} />
     </Container>
   )
 }

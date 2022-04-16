@@ -16,10 +16,10 @@ export default function EventCardTop(props) {
 			<Card.Text as="p">{ venue?.address[0].city }, { venue?.address[0].state }</Card.Text>
 			<hr />
 			<ul>
-				{ venue && venue.events &&
-						venue.events.map((event, index) => {
+				{ venue && venue.allEvents &&
+						venue.allEvents.map((event, index) => {
 							return (
-								<li>
+								<li key={index}>
 									<Row>
 										<span className="col caption">{moment(event?.start).format('MMM DD h:mmA')}</span>
 										<span className="col caption text-end fw-bold">{ event?.name }</span>

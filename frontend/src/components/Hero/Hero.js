@@ -37,7 +37,7 @@ export default function Hero(props) {
 												<Row className="justify-content-lg-between" key={index}>
 													<Col lg={7} xl={8}>
 														<img
-															src={event?.image?.formats?.small?.url}
+															src={event?.image?.url}
 															width="640"
 															height="556"
 															alt="image"

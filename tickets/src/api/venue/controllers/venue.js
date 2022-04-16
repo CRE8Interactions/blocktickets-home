@@ -12,7 +12,7 @@ module.exports = createCoreController('api::venue.venue', ({ strapi }) => ({
       populate: { 
         image: true,
         address: true,
-        events: true
+        allEvents: true
       },
     });
     return venues

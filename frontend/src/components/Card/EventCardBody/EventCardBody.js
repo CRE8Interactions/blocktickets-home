@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
+import * as moment from 'moment';
 
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -6,15 +7,16 @@ import { IconButton } from '../../IconButton';
 
 import './eventCardBody.scss';
 
-export default function EventCardBody({ type = '' }) {
+export default function EventCardBody({ type = '', event }) {
+
 	return (
 		<Fragment>
-			<Card.Title as="h5">Dua Lipa: The future Nostalgic Tour</Card.Title>
-			<Card.Subtitle as="h6">Coda venue with a long long name</Card.Subtitle>
+			<Card.Title as="h5">{ event?.name }</Card.Title>
+			<Card.Subtitle as="h6">{ event?.venue?.name }</Card.Subtitle>
 			<hr />
 			<Row>
-				<span className="col caption">Mar 13 9:30PM</span>
-				<span className="col caption text-end">Toronto, CA</span>
+				<span className="col caption">{moment(event?.start).format('MMM DD h:mmA')}</span>
+				<span className="col caption text-end">{ event?.venue?.address[0]?.city }, { event?.venue?.address[0]?.state }</span>
 			</Row>
 			<IconButton
 				variant="outline-light"

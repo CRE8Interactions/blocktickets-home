@@ -9,24 +9,20 @@ import 'swiper/css';
 
 import './eventsSlider.scss';
 
-export default function EventsSlider({ layout }) {
+export default function EventsSlider({ layout, events }) {
 	const prefix = 'event';
 
 	return (
 		<Fragment>
 			<Slider>
-				<SwiperSlide>
-					<MyCard prefix={prefix} type="genAdmission" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<MyCard prefix={prefix} type="genAdmission" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<MyCard prefix={prefix} type="genAdmission" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<MyCard prefix={prefix} type="genAdmission" />
-				</SwiperSlide>
+				{ events && events.map((event, index) => {
+					return(
+						<SwiperSlide key={index}>
+							<MyCard prefix={prefix} type="genAdmission" event={event} />
+						</SwiperSlide>
+					)
+				})
+				}
 			</Slider>
 		</Fragment>
 	);
