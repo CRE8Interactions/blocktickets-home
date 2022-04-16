@@ -27,17 +27,6 @@ const Router = () => {
 				<Route path="login" element={<LoginPage />} />
 				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
 				<Route path="collectables" element={<CollectablesPage />} />
-				<Route
-					path="dashboard"
-					element={
-						<RequireAuth>
-							<DashboardPage />
-						</RequireAuth>
-					}>
-					<Route path="organizations" element={<OrganizationsPage />} />
-					<Route path="sales" element={<SalesPage />} />
-					<Route path="events" element={<EventsPage />} />
-				</Route>
 				<Route path="tickets/:id" element={<TicketsPage />} />
 				<Route
 					path="checkout/:id"

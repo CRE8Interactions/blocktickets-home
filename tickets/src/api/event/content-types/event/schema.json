@@ -101,16 +101,16 @@
       "relation": "oneToMany",
       "target": "api::ticket.ticket"
     },
-    "venue": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::venue.venue",
-      "inversedBy": "event"
-    },
     "artists": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::artist.artist"
+    },
+    "venue": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::venue.venue",
+      "inversedBy": "allEvents"
     }
   }
 }

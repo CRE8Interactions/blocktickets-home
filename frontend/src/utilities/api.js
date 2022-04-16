@@ -53,3 +53,15 @@ export const getCategories = async () => {
 export const getVenues = async () => {
   return instance.get('/venues')
 }
+
+export const getEvents = async () => {
+  return instance.get('/events')
+}
+
+export const getEvent = async (id) => {
+  return instance.get(`/events/${id}`)
+}
+
+export const getEventTickets = async (id) => {
+  return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available`)
+}

@@ -53,5 +53,14 @@ module.exports = createCoreController('api::ticket.ticket', ({
     })
 
     return 200
+  },
+  async find(ctx) {
+    // some logic here
+    let response = await super.find(ctx);
+    response.data.map(r => {
+      delete r.attributes.checkInCode
+      delete r.attributes.uuid
+    })
+    return response;
   }
 }));
