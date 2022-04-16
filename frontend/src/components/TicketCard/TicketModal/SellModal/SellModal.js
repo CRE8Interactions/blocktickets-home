@@ -64,15 +64,22 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 		setUpdateSuccessful(true);
 	};
 
-	useEffect(() => {
-		// ticket status needs to happen when it is successful in the database and not on UI until after component unmounts or will update component
-		// fix when closing modal to exit out, component still sets status
+	useEffect(
+		() => {
+			// ticket status needs to happen when it is successful in the database and not on UI until after component unmounts or will update component
+			// fix when closing modal to exit out, component still sets status
 
-		return () => {
-			const status = ticketStatus === 'sell' ? 'sale' : 'sell';
-			setTicketStatus(status);
-		};
-	}, []);
+			return () => {
+				if (step === 'successful') {
+					const status = ticketStatus === 'sell' ? 'sale' : 'sell';
+					setTicketStatus(status);
+				}
+			};
+		},
+		[
+			step
+		]
+	);
 
 	return (
 		<Fragment>
@@ -157,18 +164,18 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 							) : (
 								<Fragment>
 									<Form.Group controlId="selected" className="form-group">
-										<Form.Label className="selected-label">
+										<Form.Label className="selected-label mb-3">
 											Selected Tickets
 										</Form.Label>
-										<ul>
-											{Object.values(selectedTickets).map((ticket, index) => {
-												<li key={index}>
-													<Form.Control disabled defaultValue={ticket}>
-														{ticket}
-													</Form.Control>
-												</li>;
-											})}
-										</ul>
+										{/* will have to come from  database*/}{' '}
+										{Object.values(selectedTickets).map((ticket, index) => (
+											<Stack as="ul" gap={3}>
+												{' '}
+												<li className="m-0" key={index}>
+													<Form.Control readOnly defaultValue={ticket} />
+												</li>
+											</Stack>
+										))}
 									</Form.Group>
 									<Button
 										variant="outline-light"
