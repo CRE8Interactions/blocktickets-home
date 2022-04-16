@@ -16,7 +16,7 @@ export default function Hero(props) {
 	const navigationNextRef = useRef(null);
 	const navigationPrevRef = useRef(null);
 	const { events } = props;
-	console.log(process.env.REACT_APP_API)
+	console.log(events)
 	return (
 		<div className="hero">
 			<header className="spacer-lg">
@@ -37,7 +37,7 @@ export default function Hero(props) {
 												<Row className="justify-content-lg-between" key={index}>
 													<Col lg={7} xl={8}>
 														<img
-															src={process.env.REACT_APP_API.replace('/api', '') + event?.image?.formats?.small?.url}
+															src={event?.image?.formats?.small?.url}
 															width="640"
 															height="556"
 															alt="image"

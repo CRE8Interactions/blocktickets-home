@@ -46,7 +46,7 @@ export default function EventModal({ show, handleClose, event }) {
 				<Modal.Body className="show-grid">
 					<div>
 						<img
-							src={process.env.REACT_APP_API.replace('/api', '') + event?.image?.formats?.small?.url}
+							src={event?.image?.formats?.small?.url}
 							alt={ event?.name }
 							width="225"
 							height="225"
