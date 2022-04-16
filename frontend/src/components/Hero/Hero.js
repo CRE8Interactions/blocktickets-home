@@ -16,7 +16,7 @@ export default function Hero(props) {
 	const navigationNextRef = useRef(null);
 	const navigationPrevRef = useRef(null);
 	const { events } = props;
-	console.log(events)
+
 	return (
 		<div className="hero">
 			<header className="spacer-lg">

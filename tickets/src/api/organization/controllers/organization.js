@@ -23,6 +23,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         events: {
           fields: ['*'],
           populate: {
+            image: true,
             tickets: true,
             venue: true,
             artists: true

@@ -18,10 +18,11 @@ export default function ShowTable() {
 
   useEffect(() => {
     setEvents(org.orgs[0]['events'])
+    console.log(org.orgs[0]['events'])
   }, [org.orgs])
 
   const calculateSold = (tickets) => {
-    let availableTickets = tickets.filter((ticket) => ticket.on_sale_status === 'available')
+    let availableTickets = tickets
     let soldTickets = tickets.filter((ticket) => ticket.on_sale_status === 'sold')
     let availableCount = availableTickets.length
     let soldCount = soldTickets.length
@@ -67,7 +68,7 @@ export default function ShowTable() {
                 <td>
                   <Row>
                     <Col md="4">
-                      <Image src="http://placehold.jp/120x80.png" rounded="true" />
+                      <Image src={event?.image?.formats?.small?.url} rounded="true" width="120" height="80" />
                     </Col>
                     <Col>
                       <p className="mb-0">{event?.name}</p>
