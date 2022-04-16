@@ -1,40 +1,37 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import * as moment from 'moment';
 
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 
 import './venueCardBody.scss';
 
-export default function EventCardTop() {
+export default function EventCardTop(props) {
+	const venue = props.venue;
+
 	return (
 		<Fragment>
-			<Card.Title as="h5">Celebrities nightclub Venue</Card.Title>
-			<Card.Text as="p">Toronto, ON</Card.Text>
+			<Card.Title as="h5">{ venue?.name }</Card.Title>
+			<Card.Text as="p">{ venue?.address[0].city }, { venue?.address[0].state }</Card.Text>
 			<hr />
 			<ul>
-				<li>
-					<Row>
-						<span className="col caption">Mar 13 9:30PM</span>
-						<span className="col caption text-end fw-bold">Nic Fanciulli</span>
-					</Row>
-				</li>
-				<li>
-					<Row>
-						<span className="col caption">Mar 13 9:30PM</span>
-						<span className="col caption text-end fw-bold">Artist with long name</span>
-					</Row>
-				</li>
-				<li>
-					<Row>
-						<span className="col caption">Mar 13 9:30PM</span>
-						<span className="col caption text-end fw-bold">Another Artist</span>
-					</Row>
-				</li>
+				{ venue && venue.events &&
+						venue.events.map((event, index) => {
+							return (
+								<li>
+									<Row>
+										<span className="col caption">{moment(event?.start).format('MMM DD h:mmA')}</span>
+										<span className="col caption text-end fw-bold">{ event?.name }</span>
+									</Row>
+								</li>
+							)
+						})
+				}
 			</ul>
 			<Card.Link
 				as={Link}
-				to={'/venue/1'}
+				to={`/venue/${venue?.id}`}
 				className="btn btn-outline-light text-primary btn-sm">
 				View All
 			</Card.Link>

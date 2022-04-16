@@ -9,24 +9,21 @@ import 'swiper/css';
 
 import './venuesSlider.scss';
 
-export default function VenuesSlider({ layout }) {
+export default function VenuesSlider({ layout, venues }) {
 	const prefix = 'venue';
 
 	return (
 		<Fragment>
 			<Slider>
-				<SwiperSlide>
-					<MyCard prefix={prefix} />
-				</SwiperSlide>
-				<SwiperSlide>
-					<MyCard prefix={prefix} />
-				</SwiperSlide>
-				<SwiperSlide>
-					<MyCard prefix={prefix} />
-				</SwiperSlide>
-				<SwiperSlide>
-					<MyCard prefix={prefix} />
-				</SwiperSlide>
+				{ venues &&
+					venues.map((venue, index) => {
+						return (
+							<SwiperSlide key={index}>
+								<MyCard prefix={prefix} venue={venue} />
+							</SwiperSlide>
+						)
+					})
+				}
 			</Slider>
 		</Fragment>
 	);

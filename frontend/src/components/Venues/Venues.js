@@ -5,7 +5,9 @@ import { VenuesSlider } from './../Slider/VenuesSlider';
 
 import './venues.scss';
 
-export default function Venues() {
+export default function Venues(props) {
+	const { venues } = props;
+
 	return (
 		<section className="spacer">
 			<div className="section-heading">
@@ -13,7 +15,7 @@ export default function Venues() {
 				<SwiperNavigationButtons />
 			</div>
 			<div>
-				<VenuesSlider />
+				<VenuesSlider venues={venues} />
 			</div>
 		</section>
 	);
