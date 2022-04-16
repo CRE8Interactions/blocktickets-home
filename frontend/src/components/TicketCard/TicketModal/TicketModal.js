@@ -22,6 +22,9 @@ const typeOfModal = (modalType, handleClose, ticketStatus, setTicketStatus) => {
 
 		case 'sell':
 			return <SellModal ticketStatus={ticketStatus} setTicketStatus={setTicketStatus} />;
+
+		case 'delist':
+			return <SellModal ticketStatus={ticketStatus} setTicketStatus={setTicketStatus} />;
 		default:
 			return;
 	}
@@ -30,7 +33,14 @@ export default function TicketModal({ modalType, show, setShow, ticketStatus, se
 	const handleClose = () => setShow(false);
 
 	return (
-		<Modal id="ticket-modal" scrollable centered show={show} onHide={handleClose}>
+		<Modal
+			id="ticket-modal"
+			scrollable
+			centered
+			show={show}
+			onHide={handleClose}
+			keyboard={false}
+			backdrop="static">
 			{typeOfModal(modalType, handleClose, ticketStatus, setTicketStatus)}
 		</Modal>
 	);

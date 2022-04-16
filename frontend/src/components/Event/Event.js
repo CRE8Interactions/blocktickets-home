@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { EventModal } from './EventModal';
+import * as moment from 'moment';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,7 +11,8 @@ import info from '../../assets/icons/info.svg';
 
 import './event.scss';
 
-export default function Event() {
+export default function Event(props) {
+	const { event } = props;
 	const [
 		show,
 		setShow
@@ -25,17 +27,17 @@ export default function Event() {
 				<Row gap={2} className="py-2 py-md-3 align-items-center">
 					<Col md={2} id="artist-image-col" className="tablet-desktop-only">
 						<img
-							src={profile}
-							alt="Nic Fanciulli"
+							src={event?.image?.url}
+							alt={event?.name}
 							width="139"
 							height="139"
 							className="artist-image"
 						/>
 					</Col>
 					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
-						<h1 className="artist-name">Nic Fanciulli</h1>
+						<h1 className="artist-name">{event?.name}</h1>
 						<p className="subtitle tablet-desktop-only">
-							Coda, Platform, Floh, &amp; Embrace Presents:
+							{/* Coda, Platform, Floh, &amp; Embrace Presents: */}
 						</p>
 						<Row>
 							<Col className="details-heading tablet-desktop-only" md={2}>
@@ -43,7 +45,7 @@ export default function Event() {
 							</Col>
 							<Col>
 								<p className="small">
-									Mar 13 <span className="time">9:00 PM</span>
+									{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')} <span className="time">{moment(event?.start).format('h:mm A')}</span>
 								</p>
 							</Col>
 						</Row>
@@ -53,8 +55,8 @@ export default function Event() {
 							</Col>
 							<Col>
 								<p className="small">
-									CODA<span className="loc mobile-only">
-										Toronto, ON or Full address of Venue goes here
+									{ event?.venue?.name }<span className="loc mobile-only">
+										{ event?.venue?.address[0]?.city}, { event?.venue?.address[0]?.state}
 									</span>
 								</p>
 							</Col>
@@ -65,7 +67,7 @@ export default function Event() {
 							</Col>
 							<Col>
 								<p className="small">
-									Toronto, ON or Full address of Venue goes here
+									{ event?.venue?.address[0]?.city}, { event?.venue?.address[0]?.state}
 								</p>
 							</Col>
 						</Row>
@@ -81,7 +83,7 @@ export default function Event() {
 							<span className="tablet-desktop-only">Event description</span>
 						</Button>
 
-						<EventModal show={show} handleClose={handleClose} />
+						<EventModal show={show} handleClose={handleClose} event={event} />
 					</Col>
 				</Row>
 			</header>

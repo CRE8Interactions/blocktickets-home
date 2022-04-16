@@ -9,7 +9,11 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::venue.venue', ({ strapi }) => ({
   async find(ctx) {
     const venues = await strapi.db.query('api::venue.venue').findMany({
-      populate: { address: true },
+      populate: { 
+        image: true,
+        address: true,
+        allEvents: true
+      },
     });
     return venues
   }

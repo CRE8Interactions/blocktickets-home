@@ -5,7 +5,9 @@ import { EventsSlider } from './../Slider/EventsSlider';
 
 import './events.scss';
 
-export default function Events() {
+export default function Events(props) {
+	const { events } = props;
+
 	return (
 		<section className="spacer">
 			<div className="section-heading">
@@ -13,7 +15,7 @@ export default function Events() {
 				<SwiperNavigationButtons />
 			</div>
 			<div>
-				<EventsSlider />
+				<EventsSlider events={events} />
 			</div>
 		</section>
 	);

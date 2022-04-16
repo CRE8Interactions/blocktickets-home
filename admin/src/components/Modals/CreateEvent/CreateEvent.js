@@ -7,9 +7,10 @@ import { createEvent as newEvent } from '../../../utilities/api';
 import { creatTickets as newTickets } from '../../../utilities/api';
 
 export default function CreateEvent(props) {
-  const { show, handleClose, fullscreen } = props;
+  const { show, handleClose, fullscreen, orgs, myEvent } = props;
+  const organizationId = orgs.orgs ? orgs.orgs[0]['id'] : 'n/a';
   const ticketTypes = ['General Admission', 'Seated'];
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState()
   const [presentedBy, setPresentedBy] = useState()
   const [title, setTitle] = useState()
   const [startDate, setStartDate] = useState()
@@ -48,11 +49,21 @@ export default function CreateEvent(props) {
     getVenues()
       .then((res) => setVenues(res.data))
       .catch((err) => console.error(err))
+    
+      console.log(step)
   }, [])
 
   useEffect(() => {
     validateSteps()
   }, [title, startDate, endDate, startTime, endTime, venue, type, image, description, maxQty, minQty, resaleRange, royalty, facilityFee, ticketPrice, ticketName, ticketQty, salesStartDate, salesStartTime, salesEndDate, salesEndTime])
+
+  useEffect(() => {
+    setStep(props.step)
+    if (myEvent) {
+      setVenue(myEvent.venue)
+      setEvent(myEvent)
+    }
+  }, [props.step])
 
   const handleChange = (e) => {
     if (e.target.id === "presentedBy") setPresentedBy(e.target.value)
@@ -142,6 +153,7 @@ export default function CreateEvent(props) {
     data['status'] = 'unpublished'
     data['currency'] = 'usd'
     data['event'] = event
+    data['organizationId'] = organizationId;
     // formats start and end dates/time
     let sD = startDate.split('-')
     let sT = startTime.split(':')
@@ -178,7 +190,11 @@ export default function CreateEvent(props) {
      data['sales_end'] = new Date(eD[0], eD[1], eD[2], eT[0], eT[1])
  
      await newTickets({data: data})
-      .then((res) => handleClose)
+      .then((res) => {
+        handleClose()
+        let updateEventTickets = orgs.orgs[0].events.find(e => e.id === event.id)
+        updateEventTickets.tickets = res.data
+      })
       .catch((err) => console.error(err))
   }
 
