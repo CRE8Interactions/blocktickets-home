@@ -17,7 +17,7 @@ services:
   admin:
     build:
       context: ./admin
-      dockerfile: Dockerfile.admin
+      dockerfile: Dockerfile.production
     volumes:
       - ./admin:/usr/src/app/admin
       - /usr/src/app/admin/node_modules

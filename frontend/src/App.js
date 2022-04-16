@@ -17,13 +17,6 @@ function App() {
 	useEffect(
 		() => {
 			console.log('app', location);
-			// Remove container class for Dashboard view
-			if (location.pathname === '/dashboard') {
-				document.getElementById('main-container').classList.remove('container');
-			}
-			else {
-				document.getElementById('main-container').classList.add('container');
-			}
 		},
 		[
 			location

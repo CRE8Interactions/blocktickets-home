@@ -7,7 +7,8 @@ import { createEvent as newEvent } from '../../../utilities/api';
 import { creatTickets as newTickets } from '../../../utilities/api';
 
 export default function CreateEvent(props) {
-  const { show, handleClose, fullscreen } = props;
+  const { show, handleClose, fullscreen, orgs } = props;
+  const organizationId = orgs.orgs ? orgs.orgs[0]['id'] : 'n/a';
   const ticketTypes = ['General Admission', 'Seated'];
   const [step, setStep] = useState(1)
   const [presentedBy, setPresentedBy] = useState()
@@ -142,6 +143,7 @@ export default function CreateEvent(props) {
     data['status'] = 'unpublished'
     data['currency'] = 'usd'
     data['event'] = event
+    data['organizationId'] = organizationId;
     // formats start and end dates/time
     let sD = startDate.split('-')
     let sT = startTime.split(':')

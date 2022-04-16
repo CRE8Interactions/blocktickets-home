@@ -112,6 +112,18 @@ module.exports = {
           });
         }
 
+        // Changes on Event Model
+        if (event.model.singularName === 'event') {
+          let org = await strapi.entityService.findOne('api::organization.organization', params.data.organizationId, {
+            populate: { events: true}
+          });
+          let organization = await strapi.entityService.update('api::organization.organization', params.data.organizationId, {
+            data: {
+              events: [...org.events, result]
+            }
+          })
+        }
+
         // Changes on Invite Model
         if (event.model.singularName === 'invite') {
           let phoneNumber = event.params.data.phoneNumber;
