@@ -11,18 +11,17 @@ import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 import { BackButton } from './../../../BackButton';
 
 import './seatConfirmation.scss';
+import { cartTotal } from '../../../../utilities/helper';
 
 export default function SeatConfirmation({ handleGoBack, type, ticket }) {
 	let [ticketCount, setTicketCount] = useState(1)
 	let [prices, setPrices] = useState({
-		total: parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2),
-		sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2) * ticketCount).toFixed(2),
+		sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
 	})
 	
 	useEffect(() => {
 		setPrices({
-			total: parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2),
-			sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2) * ticketCount).toFixed(2),
+			sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
 		})
 
 		let data = {

@@ -16,6 +16,8 @@ export default function TicketsPage() {
 	let { id } = useParams();
 	const [event, setEvent] = useState()
 	const [tickets, setTickets] = useState()
+	const [generalAdmissionCount, setGaCount] = useState()
+	const [generalAdmissionTicket, setGaTicket] = useState()
 
 	
 	useEffect(() => {
@@ -30,7 +32,13 @@ export default function TicketsPage() {
 
 	useEffect(() => {
 		getEventTickets(id)
-			.then((res) => setTickets(res.data.data) )
+			.then((res) => {
+				setTickets(res.data.data)
+				let generalAdminssionCount = res.data.data.map((ticket) => ticket.attributes.generalAdmission === true && ticket.attributes.on_sale_status === 'available').length
+				let generalAdmissionTicket = res.data.data.find((ticket, index) => ticket.attributes.generalAdmission === true && ticket.attributes.on_sale_status === 'available')
+				setGaCount(generalAdminssionCount)
+				setGaTicket(generalAdmissionTicket)
+			})
 			.catch((err) => console.error(err))
 		
 		getEvent(id)
@@ -40,7 +48,7 @@ export default function TicketsPage() {
 
 	return (
 		<div className="full-height-wrapper">
-			<TicketContext.Provider value={tickets}>
+			<TicketContext.Provider value={{tickets, generalAdmissionCount, generalAdmissionTicket}} >
 				<Event event={event} />
 				<PurchaseTickets />
 			</TicketContext.Provider>

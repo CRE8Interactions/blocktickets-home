@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import { Spinner } from '../../../SpinnerContainer/Spinner';
+import { cartTotal } from '../../../../utilities/helper';
 
 import './totalCard.scss';
 
@@ -24,6 +25,12 @@ export default function TotalCard({ setStatus, addOns }) {
 	let tickets = sessionStorage.getItem('cart')
 	if (tickets) tickets = JSON.parse(tickets)
 
+	const completePurchase = () => {
+		setPurchasing(true)
+		console.log('Completing Purchase')
+		// setStatus('successful')
+	}
+
 	return (
 		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
@@ -31,7 +38,7 @@ export default function TotalCard({ setStatus, addOns }) {
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" className="card-header-price">
-					<span className="fw-bold fs-md">${(parseFloat(tickets.ticket.attributes.cost + tickets.ticket.attributes.fee + tickets.ticket.attributes.facilityFee).toFixed(2) * tickets.ticketCount + 2.50 + 4.35).toFixed(2)}</span>
+					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.50)}</span>
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
@@ -173,7 +180,7 @@ export default function TotalCard({ setStatus, addOns }) {
 						variant="primary"
 						size="lg"
 						className="icon-button w-100"
-						onClick={() => setStatus('successful')}>
+						onClick={() => completePurchase() }>
 						{purchasing ? (
 							<Fragment>
 								<Spinner color={'#fcfcfd'} size="sm" />

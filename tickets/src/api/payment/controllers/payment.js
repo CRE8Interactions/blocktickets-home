@@ -11,8 +11,10 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
   async getClientId(ctx) {
+    const total = ctx.params.total
+
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099,
+      amount: total,
       currency: 'usd',
       payment_method_types: ['card'],
     });
