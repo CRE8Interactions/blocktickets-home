@@ -47,6 +47,9 @@
       "relation": "oneToMany",
       "target": "api::event.event",
       "mappedBy": "venue"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
