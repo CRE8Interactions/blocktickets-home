@@ -43,14 +43,6 @@ export default function MyWallet({ showMenu }) {
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				{user &&
-				authService.isOrganizer() && (
-					<ListGroup.Item as="li">
-						<LinkContainer to={'/dashboard'} onClick={handleClick}>
-							<Nav.Link>Dashboard</Nav.Link>
-						</LinkContainer>
-					</ListGroup.Item>
-				)}
 				<ListGroup.Item as="li" onClick={logout}>
 					<LinkContainer to={'/logout'} onClick={handleClick}>
 						<Nav.Link>Log out</Nav.Link>

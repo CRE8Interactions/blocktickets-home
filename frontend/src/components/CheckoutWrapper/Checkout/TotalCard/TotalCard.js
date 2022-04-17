@@ -21,6 +21,9 @@ export default function TotalCard({ setStatus, addOns }) {
 		setPurchasing
 	] = useState(false);
 
+	let tickets = sessionStorage.getItem('cart')
+	if (tickets) tickets = JSON.parse(tickets)
+
 	return (
 		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
@@ -28,7 +31,7 @@ export default function TotalCard({ setStatus, addOns }) {
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" className="card-header-price">
-					<span className="fw-bold fs-md">$279.00</span>
+					<span className="fw-bold fs-md">${(parseFloat(tickets.ticket.attributes.cost + tickets.ticket.attributes.fee + tickets.ticket.attributes.facilityFee).toFixed(2) * tickets.ticketCount + 2.50 + 4.35).toFixed(2)}</span>
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
@@ -58,11 +61,11 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<span>Tickets: $35.00 x 2</span>
+											<span>Tickets: ${parseFloat(tickets.ticket.attributes.cost).toFixed(2)} x {tickets.ticketCount}</span>
 										</Col>
 
 										<Col className="text-end ">
-											<span>$70.00</span>
+											<span>${parseFloat(tickets.ticket.attributes.cost).toFixed(2) * tickets.ticketCount}</span>
 										</Col>
 									</Row>
 								</li>
@@ -74,20 +77,20 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<span>Service Fee: $15.00 x 2</span>
+											<span>Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)} x {tickets.ticketCount}</span>
 										</Col>
 										<Col className="text-end ">
-											<span>$30.00</span>
+											<span>${(parseFloat(tickets.ticket.attributes.fee).toFixed(2) * tickets.ticketCount).toFixed(2)}</span>
 										</Col>
 									</Row>
 								</li>
 								<li className="list">
 									<Row className="split-row">
 										<Col>
-											<span>Facility Charge: $12.00 x 2</span>
+											<span>Facility Charge: ${parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2)} x {tickets.ticketCount}</span>
 										</Col>
 										<Col className="text-end ">
-											<span>$24.00</span>
+											<span>${(parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2) * tickets.ticketCount).toFixed(2)}</span>
 										</Col>
 									</Row>
 								</li>

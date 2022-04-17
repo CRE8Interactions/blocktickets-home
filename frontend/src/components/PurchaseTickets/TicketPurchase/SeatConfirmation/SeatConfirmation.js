@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
@@ -12,7 +12,26 @@ import { BackButton } from './../../../BackButton';
 
 import './seatConfirmation.scss';
 
-export default function SeatConfirmation({ handleGoBack, type }) {
+export default function SeatConfirmation({ handleGoBack, type, ticket }) {
+	let [ticketCount, setTicketCount] = useState(1)
+	let [prices, setPrices] = useState({
+		total: parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2),
+		sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2) * ticketCount).toFixed(2),
+	})
+	
+	useEffect(() => {
+		setPrices({
+			total: parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2),
+			sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee + 2.50 + 4.35).toFixed(2) * ticketCount).toFixed(2),
+		})
+
+		let data = {
+			ticket,
+			ticketCount
+		}
+
+		sessionStorage.setItem('cart', JSON.stringify(data))
+	}, [ticketCount])
 	return (
 		<Fragment>
 			<header className="d-flex flex-column">
@@ -43,7 +62,7 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 				)}
 			</div>
 			<div className="disclaimer text-muted">
-				<h2 className="caption fw-bold">Event Ticket limit: 8</h2>
+				<h2 className="caption fw-bold">Event Ticket limit: { ticket.attributes.maximum_quantity }</h2>
 				<p className="m-0 caption">
 					*As official local health guidelines evolve regarding COVID-19 safety protocols,
 					select venues may shift seating configurations and/or increase capacity.
@@ -56,15 +75,15 @@ export default function SeatConfirmation({ handleGoBack, type }) {
 					<div>
 						<p className="caption">General Admissions</p>
 						<p className="fw-bold">
-							$30.00{' '}
-							<span className="caption fw-normal text-muted">$24.75 ea + Fees</span>
+							${ prices?.sum } {' '}
+							<span className="caption fw-normal text-muted">${ticket.attributes.cost} ea + Fees</span>
 						</p>
 					</div>
 					<div className=" fw-bolder">
-						<Button className="btn--icon me-3" variant="outline-light">
+						<Button className="btn--icon me-3" variant="outline-light" onClick={(e) => setTicketCount(ticketCount - 1)} disabled={ticketCount === ticket.attributes.minimum_quantity} >
 							<img src={minus} />
-						</Button>2
-						<Button className="btn--icon" variant="outline-light">
+						</Button> { ticketCount }
+						<Button className="btn--icon" variant="outline-light" onClick={(e) => setTicketCount(ticketCount + 1)} disabled={ticketCount >= ticket.attributes.maximum_quantity} >
 							<img src={plus} />
 						</Button>
 					</div>
