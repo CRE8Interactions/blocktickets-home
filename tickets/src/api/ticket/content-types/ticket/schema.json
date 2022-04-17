@@ -109,6 +109,11 @@
     "resale": {
       "type": "boolean",
       "default": false
+    },
+    "facilityFee": {
+      "type": "decimal",
+      "default": 3,
+      "required": true
     }
   }
 }

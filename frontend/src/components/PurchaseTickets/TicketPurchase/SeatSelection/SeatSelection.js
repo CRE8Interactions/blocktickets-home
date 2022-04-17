@@ -18,7 +18,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 	const [
 		numTickets,
 		setNumTickets
-	] = useState('2');
+	] = useState(1);
 
 	const [
 		ticketFilters,
@@ -41,63 +41,35 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 	const tickets = useContext(TicketContext)
 
 	// for demo purposes, this will come from the database
-	const genAdmissionTickets = [
-		{
-			seat: 'General Admissions',
-			type: 'Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		},
-		{
-			seat: 'General Admissions',
-			type: 'Resale Ticket'
-		}
-	];
+	// const genAdmissionTickets = [
+	// 	{
+	// 		seat: 'General Admissions',
+	// 		type: 'Ticket'
+	// 	},
+	// 	{
+	// 		seat: 'General Admissions',
+	// 		type: 'Resale Ticket'
+	// 	}
+	// ];
 
-	const seatedTickets = [
-		{
-			seat: 'Sec Row',
-			type: 'Presale'
-		},
-		{
-			seat: 'Sec Row',
-			type: 'Presale'
-		},
-		{
-			seat: 'Sec Row',
-			type: 'Presale'
-		},
-		{
-			seat: 'Sec Row',
-			type: 'Presale'
-		}
-	];
+	// const seatedTickets = [
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	},
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	},
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	},
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	}
+	// ];
 
 	const ticketTypes = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === "available") return "Ticket"
@@ -119,6 +91,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 								<option value="1">1 Ticket</option>
 								<option value="2">2 Tickets</option>
 								<option value="3">3 Tickets</option>
+								<option value="4">4 Tickets</option>
 							</Form.Select>
 							<Button
 								className="btn--filter"
@@ -150,7 +123,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 										{ tickets &&
 											tickets.map((ticket, index) => (
 											<ListGroup.Item
-												onClick={() => handleClick('confirmation')}
+												onClick={() => handleClick('confirmation', ticket)}
 												action
 												as="li"
 												className="d-flex justify-content-between align-items-center"
@@ -170,7 +143,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 												<div className="text-end">
 													<div>
 														<span className="fw-bold text-end">
-															${parseFloat((ticket.attributes.royalty / 100) + ticket?.attributes?.cost + ticket?.attributes?.fee).toFixed(2)}
+															${parseFloat(ticket?.attributes?.cost + ticket?.attributes?.fee + ticket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)}
 														</span>
 													</div>
 													<div>

@@ -49,7 +49,7 @@ module.exports = {
           }
         }))
       }
-    }
+    }  
 
     let initOrganization = async () => {
       const count = await strapi.db.query('api::organization.organization').count()
