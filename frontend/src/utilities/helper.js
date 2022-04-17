@@ -29,3 +29,10 @@ export const toggleNavContent = (show, ...rest) => {
 export const toggleTimer = (el, show) => {
 	el.style.display = show ? 'block' : 'none';
 };
+
+export const cartTotal = (cart, processingFee, tax) => {
+	let totalTicketPrices = Number(parseFloat(cart.ticket.attributes.cost * cart.ticketCount).toFixed(2))
+	let fees = Number(parseFloat((cart.ticket.attributes.fee * cart.ticketCount) + (cart.ticket.attributes.facilityFee * cart.ticketCount) + processingFee + tax).toFixed(2))
+	let total = (totalTicketPrices + fees)
+	return total
+}

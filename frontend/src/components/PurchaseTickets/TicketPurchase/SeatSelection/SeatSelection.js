@@ -79,7 +79,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 
 	return (
 		<Fragment>
-			{tickets && tickets.length > 0 ? (
+			{tickets && tickets.generalAdmissionCount > 0 && tickets.generalAdmissionTicket ? (
 				<Fragment>
 					<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
@@ -120,40 +120,36 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 							<div className="seats--scrollable">
 								{!isZoomed && (
 									<ListGroup as="ul">
-										{ tickets &&
-											tickets.map((ticket, index) => (
-											<ListGroup.Item
-												onClick={() => handleClick('confirmation', ticket)}
-												action
-												as="li"
-												className="d-flex justify-content-between align-items-center"
-												key={index}>
+										<ListGroup.Item
+											onClick={() => handleClick('confirmation', tickets.generalAdmissionTicket)}
+											action
+											as="li"
+											className="d-flex justify-content-between align-items-center">
+											<div>
 												<div>
-													<div>
-														<span className="fw-bold p-0">
-															{ticket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
-														</span>
-													</div>
-													<div>
-														<span className="text-muted caption">
-															{ticketTypes(ticket.attributes)}
-														</span>
-													</div>
+													<span className="fw-bold p-0">
+														{tickets.generalAdmissionTicket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
+													</span>
 												</div>
-												<div className="text-end">
-													<div>
-														<span className="fw-bold text-end">
-															${parseFloat(ticket?.attributes?.cost + ticket?.attributes?.fee + ticket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)}
-														</span>
-													</div>
-													<div>
-														<span className="text-muted caption">
-															${parseFloat(ticket?.attributes?.cost).toFixed(2)} + Fees
-														</span>
-													</div>
+												<div>
+													<span className="text-muted caption">
+														{ticketTypes(tickets.generalAdmissionTicket.attributes)}
+													</span>
 												</div>
-											</ListGroup.Item>
-										))}
+											</div>
+											<div className="text-end">
+												<div>
+													<span className="fw-bold text-end">
+														${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)}
+													</span>
+												</div>
+												<div>
+													<span className="text-muted caption">
+														${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost).toFixed(2)} + Fees
+													</span>
+												</div>
+											</div>
+										</ListGroup.Item>
 									</ListGroup>
 								)}
 								{isZoomed && <MySeats />}

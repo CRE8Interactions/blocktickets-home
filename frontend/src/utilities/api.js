@@ -42,8 +42,8 @@ export const createOrganization = async (data) => {
   return instance.post('/organizations', data)
 }
 
-export const getPaymentIntent = async () => {
-  return instance.get('/payment/intent')
+export const getPaymentIntent = async (total) => {
+  return instance.get(`/payment/intent/${total}`)
 }
 
 export const getCategories = async () => {

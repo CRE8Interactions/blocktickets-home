@@ -4,6 +4,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { getPaymentIntent } from './../../../../utilities/api';
+import { cartTotal } from '../../../../utilities/helper';
 
 import './payment.scss';
 
@@ -18,7 +19,13 @@ export default function Payment() {
 	] = useState('');
 
 	useEffect(() => {
-		getPaymentIntent()
+		let cart = sessionStorage.getItem('cart')
+		if (cart) cart = JSON.parse(cart)
+		
+		let total = cartTotal(cart, 4.35, 2.50)
+		total = (parseFloat(total) * 100).toFixed()
+
+		getPaymentIntent(total)
 			.then((res) => setClientSecret(res.data.client_secret))
 			.catch((err) => console.error(err));
 	}, []);
