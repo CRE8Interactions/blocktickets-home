@@ -14,7 +14,11 @@ export default function Timer() {
 	useEffect(() => {
 		let time = setInterval(() => {
 			duration = moment.duration(duration - interval, 'milliseconds');
-			setRemaining(`${duration.minutes()}:${duration.seconds()}`)
+			let seconds = duration.seconds()
+			if (seconds < 10) {
+				seconds = `0${seconds}`
+			}
+			setRemaining(`${duration.minutes()}:${seconds}`)
 		}, interval);
 	}, [])
 	
