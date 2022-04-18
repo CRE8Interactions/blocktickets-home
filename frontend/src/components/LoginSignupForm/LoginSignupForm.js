@@ -372,7 +372,7 @@ export default function LoginSignupForm() {
 									</Form.Group>
 								</Col>
 							</Row>
-							{hasError && <Error type="invalid" />}
+							{hasError && <Error />}
 							<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
 								Sign up
 							</Button>
