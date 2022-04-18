@@ -154,10 +154,6 @@ export default function LoginSignupForm() {
 		if (ev && uv && dv && gv && nv) {
 			setFormValid(true);
 			setFormData(myData);
-			hasError(false);
-		}
-		else {
-			hasError(true);
 		}
 	};
 
@@ -181,8 +177,12 @@ export default function LoginSignupForm() {
 		};
 		createNewUser(data).then((res) => {
 			if (res.status === 200) {
+				setHasError(false);
 				AuthService.setUser(res.data);
 				navigate('/');
+			}
+			else {
+				setHasError(true);
 			}
 		});
 	};

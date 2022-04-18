@@ -13,8 +13,11 @@ export default function Error({ type }) {
 			case 'code':
 				return 'Code entered is incorrect';
 
+			case 'invalid':
+				return 'Form is invalid. Please try again';
+
 			default:
-				return;
+				return 'Something went wrong. Please try again';
 		}
 	};
 	return (
