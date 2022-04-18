@@ -37,6 +37,10 @@ select:-webkit-autofill:focus {
 	}
 }
 
+.error-border {
+	border-color: $danger;
+}
+
 .form-label {
 	text-transform: uppercase;
 	font-size: $caption;
