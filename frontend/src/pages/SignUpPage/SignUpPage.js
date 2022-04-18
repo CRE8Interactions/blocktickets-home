@@ -2,8 +2,8 @@ import React from 'react';
 
 import { LoginSignupForm } from '../../components';
 
-function LoginPage() {
+function SignUpPage() {
 	return <LoginSignupForm />;
 }
 
-export default LoginPage;
+export default SignUpPage;

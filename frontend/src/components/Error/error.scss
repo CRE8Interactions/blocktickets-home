@@ -1,9 +1,9 @@
+@use '../../scss/abstracts' as *;
+
 .alert {
 	display: flex;
 	align-items: center;
 	.icon {
-		flex-grow: 1;
-
 		svg {
 			max-width: initial;
 		}
