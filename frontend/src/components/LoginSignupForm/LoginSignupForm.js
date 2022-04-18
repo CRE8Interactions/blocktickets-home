@@ -1,20 +1,28 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
-import { useNavigate } from 'react-router-dom';
-import { Button, Col, Form, Row, Stack } from 'react-bootstrap';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
 import UserContext from '../../context/User/user';
+
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack';
 
 import { Error } from '../Error';
 import { BackButton } from './../BackButton';
 
 import 'react-phone-number-input/style.css';
-
 import './loginSignupForm.scss';
 
 export default function LoginSignupForm() {
+	const location = useLocation();
+
+	const comingFrom = location.pathname.slice(1);
+
 	const [
 		step,
 		setStep
@@ -49,10 +57,12 @@ export default function LoginSignupForm() {
 		formValid,
 		setFormValid
 	] = useState(false);
+
 	const [
 		formData,
 		setFormData
 	] = useState({});
+
 	const { setAuthenticated } = useContext(UserContext);
 
 	const navigate = useNavigate();
@@ -61,6 +71,7 @@ export default function LoginSignupForm() {
 		let curStep = step;
 		setStep(--curStep);
 	};
+
 	useEffect(() => {
 		axios
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
@@ -112,9 +123,7 @@ export default function LoginSignupForm() {
 					setAuthenticated(res.data);
 					setValidated(true);
 
-					setTimeout(() => {
-						navigate('/');
-					}, 2000);
+					navigate('/');
 				}
 				else if (res.status === 203) {
 					setStep(2);
@@ -137,14 +146,18 @@ export default function LoginSignupForm() {
 	};
 
 	const isValid = () => {
-		let nv = myData['email'] !== '';
+		let ev = myData['email'] !== '';
 		let uv = myData['username'] !== '';
-		let fv = myData['name'] !== '';
+		let nv = myData['name'] !== '';
 		let dv = myData['dob'] !== '';
 		let gv = myData['gender'] !== '';
-		if (nv && uv && dv && gv && fv) {
+		if (ev && uv && dv && gv && nv) {
 			setFormValid(true);
 			setFormData(myData);
+			hasError(false);
+		}
+		else {
+			hasError(true);
 		}
 	};
 
@@ -160,6 +173,7 @@ export default function LoginSignupForm() {
 			data: {
 				dob: formData.dob,
 				email: formData.email,
+				name: formData.name,
 				username: formData.username,
 				gender: formData.gender,
 				phoneNumber: formData.phoneNumber
@@ -180,13 +194,17 @@ export default function LoginSignupForm() {
 				{step === 0 && (
 					<Fragment>
 						<div className="heading">
-							<h1 className="fs-md">Log in</h1>
+							<h1 className="fs-md">
+								{comingFrom === 'login' ? 'Log in' : 'Sign Up'}
+							</h1>
 							<h2 className="normal text-muted fw-normal m-0">
 								The future of ticketing is here
 							</h2>
 						</div>
 						<div className="step-desc">
-							<h3 className="title">Verify your mobile number</h3>
+							<h3 className="title">
+								{comingFrom === 'login' ? 'Verify' : 'Register'} your mobile number
+							</h3>
 							<p className="subtitle">
 								Select your country and enter your mobile number. You'll receive an
 								access code via text message.
@@ -197,9 +215,9 @@ export default function LoginSignupForm() {
 							<PhoneInput
 								defaultCountry={countryCode}
 								value={phoneNumber}
-								onChange={setValue}
-								className={hasError && 'error-border'}
 								required
+								onChange={setValue}
+								className={hasError ? 'error-border' : ''}
 							/>
 						</Form.Group>
 						{hasError && <Error type="phone" />}
@@ -212,7 +230,16 @@ export default function LoginSignupForm() {
 							Validate
 						</Button>
 						<small>
-							Dont't have an account yet? <a href="">Sign up</a>
+							{comingFrom === 'login' ? (
+								'Don\t have an account yet?'
+							) : (
+								'Aready have an account?'
+							)}{' '}
+							{comingFrom === 'login' ? (
+								<Link to={'/signup'}>Sign up</Link>
+							) : (
+								<Link to={'/login'}>Login</Link>
+							)}
 						</small>
 					</Fragment>
 				)}
@@ -273,10 +300,7 @@ export default function LoginSignupForm() {
 							</Stack>
 						</Form.Group>
 						{hasError && <Error type="code" />}
-						<Button
-							size="lg"
-							className={`icon-button btn- ${validated ? 'success' : 'next'}`}
-							disabled={hasError}>
+						<Button size="lg" className="icon-button btn-next" disabled={hasError}>
 							Validate
 						</Button>
 						<small>
@@ -289,7 +313,7 @@ export default function LoginSignupForm() {
 						<div className="heading">
 							<h1 className="text-uppercase">Let's Set Up your Profile</h1>
 						</div>
-						<Form>
+						<Form className="d-flex-column">
 							<Form.Group className="form-group" controlId="email">
 								<Form.Label>Email</Form.Label>
 								<Form.Control
@@ -340,7 +364,7 @@ export default function LoginSignupForm() {
 											name="gender"
 											required
 											onChange={(e) => handleChange(e)}>
-											<option>Select your gender</option>
+											<option>Select Gender</option>
 											<option value="male">Male</option>
 											<option value="female">Female</option>
 											<option value="other">Other</option>
@@ -348,6 +372,7 @@ export default function LoginSignupForm() {
 									</Form.Group>
 								</Col>
 							</Row>
+							{hasError && <Error type="invalid" />}
 							<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
 								Sign up
 							</Button>

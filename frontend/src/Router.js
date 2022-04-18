@@ -1,16 +1,13 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {
 	HomePage,
 	LoginPage,
-	DashboardPage,
+	SignUpPage,
 	UpcomingEventsPage,
 	CollectablesPage,
 	TicketsPage,
 	CheckoutPage,
-	VenuePage,
-	OrganizationsPage,
-	SalesPage,
-	EventsPage
+	VenuePage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
@@ -25,6 +22,7 @@ const Router = () => {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="login" element={<LoginPage />} />
+				<Route path="signup" element={<SignUpPage />} />
 				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
 				<Route path="collectables" element={<CollectablesPage />} />
 				<Route path="tickets/:id" element={<TicketsPage />} />
