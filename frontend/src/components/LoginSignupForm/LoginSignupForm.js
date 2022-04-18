@@ -33,7 +33,7 @@ export default function LoginSignupForm() {
 	const [
 		validated,
 		setValidated
-	] = useState(true);
+	] = useState(false);
 
 	const [
 		countryCode,
