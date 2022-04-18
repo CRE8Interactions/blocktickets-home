@@ -57,6 +57,11 @@ $pad-md: rem(81);
 .icon-button {
 	@extend %icon-text-box !optional;
 	justify-content: center;
+
+	&::before,
+	&::after {
+		line-height: 0;
+	}
 }
 
 .time-caption,
