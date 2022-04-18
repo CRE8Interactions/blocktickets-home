@@ -25,7 +25,7 @@ export default function Event(props) {
 		<div className="event">
 			<header>
 				<Row gap={2} className="py-2 py-md-3 align-items-center">
-					<Col md={2} id="artist-image-col" className="tablet-desktop-only">
+					<Col md={2} id="artist-image-col" className="image-wrapper tablet-desktop-only">
 						<img
 							src={event?.image?.url}
 							alt={event?.name}
