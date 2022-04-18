@@ -9,7 +9,6 @@ import { SpinnerContainer } from '../../SpinnerContainer';
 import './venueList.scss';
 
 export default function VenueList({ venue }) {
-	let type = 'genAdmission'
 	return (
 		<Stack as="ul">
 			{venue[0] && venue[0].allEvents.map((event, index) => {
@@ -18,8 +17,8 @@ export default function VenueList({ venue }) {
 						<img
 							src={ event?.image?.url }
 							alt={ event?.name }
-							width="100"
-							height="100"
+							width="120"
+							height="120"
 							className="rounded venue-image"
 						/>
 
