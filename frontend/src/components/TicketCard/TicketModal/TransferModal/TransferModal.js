@@ -49,7 +49,7 @@ export default function TransferModal() {
 								<Form.Control type="tel" placeholder="(416) 232 3423" />
 							</Form.Group>
 							<Form.Control.Feedback type="invalid">
-								<Error />
+								<Error type="phone" />
 							</Form.Control.Feedback>
 							<Button
 								onClick={() => setStep('successful')}
