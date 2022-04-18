@@ -34,7 +34,7 @@ export default function VenueCard({ venue }) {
 							<IconButton link="" variant="primary" btn="location" styles="mt-0">
 								Location
 							</IconButton>
-							<Link to={''}>
+							
 								<Button variant="outline-light" className="btn--icon" aria-label="Save Venue">
 									<svg
 										role="img"
@@ -58,10 +58,10 @@ export default function VenueCard({ venue }) {
 										/>
 									</svg>
 								</Button>
-							</Link>
+							
 
-							<Link to={''}>
-								<Button variant="outline-light" className="btn--icon" aria-label="Visit Website">
+							<Link to={''}
+								className="btn btn-outline-light btn--icon" aria-label="Visit Website">
 									<svg
 										role="img"
 										title="Visit Website"
@@ -89,7 +89,7 @@ export default function VenueCard({ venue }) {
 											fill="#777E91"
 										/>
 									</svg>
-								</Button>
+							
 							</Link>
 						</Stack>
 						<Stack
