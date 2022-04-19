@@ -10,8 +10,7 @@ import { FilterModal } from './FilterModal';
 import { MySeats } from './MySeats';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 import { NotAvailableMessage } from './NotAvailableMessage';
-import TicketContext
- from '../../../../context/Ticket/Ticket';
+import TicketContext from '../../../../context/Ticket/Ticket';
 import './seatSelection.scss';
 
 export default function SeatSelection({ handleClick, type, isZoomed }) {
@@ -38,7 +37,28 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 		setShowFilter
 	] = useState(false);
 
-	const tickets = useContext(TicketContext)
+	const tickets = useContext(TicketContext);
+
+	const [
+		filteredTicketCount,
+		setFilteredTicketCount
+	] = useState(1);
+
+	useEffect(
+		() => {
+			// demo purposes - tickets with filters applied
+			if (sliderValues[1] < 20) {
+				setFilteredTicketCount(0);
+			}
+
+			return () => {
+				setFilteredTicketCount(1);
+			};
+		},
+		[
+			sliderValues
+		]
+	);
 
 	// for demo purposes, this will come from the database
 	// const genAdmissionTickets = [
@@ -72,56 +92,71 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 	// ];
 
 	const ticketTypes = (ticket) => {
-		if (!ticket.resale && ticket.on_sale_status === "available") return "Ticket"
-		if (!ticket.resale && ticket.on_sale_status === "presale") return "Presale"
-		if (ticket.resale && ticket.on_sale_status === "available") return "Resale Ticket"
-	}
+		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Ticket';
+		if (!ticket.resale && ticket.on_sale_status === 'presale') return 'Presale';
+		if (ticket.resale && ticket.on_sale_status === 'available') return 'Resale Ticket';
+	};
 
 	return (
 		<Fragment>
-			{tickets && tickets.generalAdmissionCount > 0 && tickets.generalAdmissionTicket ? (
-				<Fragment>
-					<header>
-						<Stack direction="horizontal" gap={2} className="option-btns">
-							<Form.Select
-								id="form-select--numTickets"
-								aria-label="Number of Tickets"
-								value={numTickets}
-								onChange={(e) => setNumTickets(e.target.value)}>
-								<option value="1">1 Ticket</option>
-								<option value="2">2 Tickets</option>
-								<option value="3">3 Tickets</option>
-								<option value="4">4 Tickets</option>
-							</Form.Select>
-							<Button
-								className="btn--filter"
-								variant="outline-light"
-								onClick={() => setShowFilter(!showFilter)}>
-								Filter
-							</Button>
+			{tickets.generalAdmissionCount === 0 && (
+				<NotAvailableMessage>
+					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
+					<p>Please check back anytime later to see if new tickets appear</p>
+				</NotAvailableMessage>
+			)}
+			<Fragment>
+				<header>
+					<Stack direction="horizontal" gap={2} className="option-btns">
+						<Form.Select
+							id="form-select--numTickets"
+							aria-label="Number of Tickets"
+							value={numTickets}
+							onChange={(e) => setNumTickets(e.target.value)}>
+							<option value="1">1 Ticket</option>
+							<option value="2">2 Tickets</option>
+							<option value="3">3 Tickets</option>
+							<option value="4">4 Tickets</option>
+						</Form.Select>
+						<Button
+							className="btn--filter"
+							variant="outline-light"
+							onClick={() => setShowFilter(!showFilter)}>
+							Filter
+						</Button>
+					</Stack>
+					<PriceRangeSlider
+						styles="tablet-desktop-only"
+						sliderValues={sliderValues}
+						setSliderValues={setSliderValues}
+					/>
+				</header>
+				{tickets.generalAdmissionCount > 0
+ && filteredTicketCount > 0 && tickets.generalAdmissionTicket ? (
+					<Fragment>
+						<Stack direction="vertical" className="position-relative">
+							{showFilter && (
+								<FilterModal show={showFilter} setShow={setShowFilter} />
+							)}
+							{isZoomed && (
+								<Stack direction="horizontal" className="heading--flex mb-3">
+									<h3 className="text-uppercase">Your Tickets (7)</h3>
+									<Button variant="link" className="text-danger">
+										Remove all
+									</Button>
+								</Stack>
+							)}
 						</Stack>
-						<PriceRangeSlider
-							styles="tablet-desktop-only"
-							sliderValues={sliderValues}
-							setSliderValues={setSliderValues}
-						/>
-					</header>
-					<Stack direction="vertical" className="position-relative">
-						{showFilter && <FilterModal show={showFilter} setShow={setShowFilter} />}
-						{isZoomed && (
-							<Stack direction="horizontal" className="heading--flex mb-3">
-								<h3 className="text-uppercase">Your Tickets (7)</h3>
-								<Button variant="link" className="text-danger">
-									Remove all
-								</Button>
-							</Stack>
-						)}
 						<div className="seats-container">
 							<div className="seats--scrollable">
-								{!isZoomed && (
+								{!isZoomed ? (
 									<ListGroup as="ul">
 										<ListGroup.Item
-											onClick={() => handleClick('confirmation', tickets.generalAdmissionTicket)}
+											onClick={() =>
+												handleClick(
+													'confirmation',
+													tickets.generalAdmissionTicket
+												)}
 											action
 											as="li"
 											className="d-flex justify-content-between align-items-center">
@@ -151,8 +186,9 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 											</div>
 										</ListGroup.Item>
 									</ListGroup>
+								) : (
+									<MySeats />
 								)}
-								{isZoomed && <MySeats />}
 							</div>
 						</div>
 						{isZoomed &&
@@ -163,14 +199,18 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 								</Link>
 							</TicketPurchaseFooter>
 						)}
-					</Stack>
-				</Fragment>
-			) : (
-				<NotAvailableMessage>
-					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
-					<p>Please check back anytime later to see if new tickets appear</p>
-				</NotAvailableMessage>
-			)}
+					</Fragment>
+				) : (
+					<NotAvailableMessage>
+						<h1 className="fs-md">Please adjust your search</h1>
+						<p>
+							The seating options you selected aren't available due to the ticket
+							quantity or filter you applied. Please try adjusting the number of
+							tickets selected or use the seat map to search for available seats.
+						</p>
+					</NotAvailableMessage>
+				)}
+			</Fragment>
 		</Fragment>
 	);
 }
