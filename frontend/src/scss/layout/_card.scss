@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 @use '../layout/typography' as *;
 @use '../theme/card' as *;
+@use '../theme/colors' as *;
 
 %plain-card {
 	background: transparent;
@@ -32,13 +33,10 @@
 		}
 	}
 
-	.list-group {
-		padding-bottom: rem(16);
-		&-item {
-			padding: 0px;
-			padding-bottom: rem(10);
-			border: none;
-			background-color: transparent;
+	.event-details {
+		margin-bottom: rem(16);
+		.event-detail {
+			margin-bottom: rem(10);
 		}
 	}
 
@@ -53,6 +51,7 @@
 
 	&-title {
 		font-weight: $fw-medium;
+		color: $body-color;
 	}
 
 	&-subtitle {

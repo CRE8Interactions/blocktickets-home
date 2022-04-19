@@ -4,7 +4,7 @@ import { toggleNavContent } from '../../utilities/helpers';
 
 import { LoginSignupForm } from '../../components';
 
-function LoginPage() {
+export default function LoginPage() {
 	let show = true;
 
 	useLayoutEffect(() => {
@@ -20,5 +20,3 @@ function LoginPage() {
 
 	return <LoginSignupForm />;
 }
-
-export default LoginPage;

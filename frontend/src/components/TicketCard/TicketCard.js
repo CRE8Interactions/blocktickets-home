@@ -4,7 +4,6 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
 
@@ -88,17 +87,11 @@ export default function TicketCard({ ticketType = '' }) {
 					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
 						FLOH &amp; Embrace Presents:
 					</Card.Subtitle>
-					<ListGroup as="ul" className="">
-						<ListGroup.Item as="li" className="date small">
-							Mar 13 9:00 PM EST
-						</ListGroup.Item>
-						<ListGroup.Item as="li" className="venue small">
-							CODA
-						</ListGroup.Item>
-						<ListGroup.Item as="li" className="location small">
-							Toronto, ON
-						</ListGroup.Item>
-					</ListGroup>
+					<Stack className="event-details">
+						<p className="event-detail date small">Mar 13 9:00 PM EST</p>
+						<p className="event-detail venue small">CODA</p>
+						<p className="event-detail location small">Toronto, ON</p>
+					</Stack>
 					{ticketType !== 'collectable' && (
 						<Stack gap={2}>
 							<Badge bg="info" className="text-dark badge-lg">
