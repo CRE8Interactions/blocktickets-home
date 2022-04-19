@@ -136,7 +136,14 @@ h4,
 
 .details {
 	.card-title,
-	.artist-name {
+	.event-name,
+	.card-subtitle,
+	.subtitle,
+	.row > .col > * {
+		@extend %text-truncate !optional;
+	}
+	.card-title,
+	.event-name {
 		@extend .normal !optional;
 		margin-bottom: rem(13);
 		font-weight: $fw-semi-bold;

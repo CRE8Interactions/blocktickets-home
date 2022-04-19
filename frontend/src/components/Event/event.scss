@@ -34,12 +34,6 @@
 				}
 			}
 
-			.subtitle,
-			.artist-name,
-			.row > .col > * {
-				@extend %text-truncate;
-			}
-
 			@include breakpoint-max(md) {
 				.time,
 				.loc {

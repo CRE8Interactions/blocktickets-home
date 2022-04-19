@@ -9,7 +9,7 @@
 		border-bottom: border();
 
 		.event-name {
-			@extend %text-truncate;
+			@extend %text-truncate !optional;
 			width: 350px;
 		}
 	}
