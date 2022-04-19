@@ -11,7 +11,6 @@ import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 import { BackButton } from './../../../BackButton';
 
 import './seatConfirmation.scss';
-import { cartTotal } from '../../../../utilities/helper';
 
 export default function SeatConfirmation({ handleGoBack, type, ticket }) {
 	let [ticketCount, setTicketCount] = useState(1)
