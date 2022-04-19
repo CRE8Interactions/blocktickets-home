@@ -47,7 +47,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < 20) {
+			if (sliderValues[1] < tickets.generalAdmissionTicket?.attributes?.cost) {
 				setFilteredTicketCount(0);
 			}
 
@@ -99,7 +99,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 
 	return (
 		<Fragment>
-			{tickets.generalAdmissionCount === 0 && !tickets.generalAdmissionTicket && (
+			{!tickets && tickets.generalAdmissionCount === 0 && (
 				<NotAvailableMessage>
 					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
 					<p>Please check back anytime later to see if new tickets appear</p>
@@ -131,8 +131,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 						setSliderValues={setSliderValues}
 					/>
 				</header>
-				{tickets.generalAdmissionCount > 0
- && filteredTicketCount > 0 && tickets.generalAdmissionTicket ? (
+				{ filteredTicketCount > 0 && tickets.generalAdmissionTicket ? (
 					<Fragment>
 						<Stack direction="vertical" className="position-relative">
 							{showFilter && (
