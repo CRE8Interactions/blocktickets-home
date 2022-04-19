@@ -6,7 +6,7 @@ import './notAvailableMessage.scss';
 
 export default function NotAvailableMessage({ children }) {
 	return (
-		<Stack direction="vertical" id="notAvailable" className="align-items-center">
+		<Stack direction="vertical" id="notAvailable">
 			{children}
 		</Stack>
 	);
