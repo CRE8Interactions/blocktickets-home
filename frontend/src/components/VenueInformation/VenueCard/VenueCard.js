@@ -61,7 +61,7 @@ export default function VenueCard({ venue }) {
 							
 
 							
-								<IconButton link="" variant="outline-light" className="btn--icon" aria-label="Visit Website">
+								<IconButton link="" variant="outline-light" styles="btn--icon" aria-label="Visit Website">
 									<svg
 										role="img"
 										title="Visit Website"
