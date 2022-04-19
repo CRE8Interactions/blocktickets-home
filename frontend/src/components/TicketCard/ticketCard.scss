@@ -1,6 +1,7 @@
 @use '../../scss/abstracts' as *;
 
 .ticket-card {
+	width: 300px;
 	box-shadow: $box-shadow;
 
 	.card-img-top {

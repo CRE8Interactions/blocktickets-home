@@ -35,7 +35,7 @@ export default function Event(props) {
 						/>
 					</Col>
 					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
-						<h1 className="artist-name">{event?.name}</h1>
+						<h1 className="event-name">{event?.name}</h1>
 						<p className="subtitle tablet-desktop-only">
 							{/* Coda, Platform, Floh, &amp; Embrace Presents: */}
 						</p>
