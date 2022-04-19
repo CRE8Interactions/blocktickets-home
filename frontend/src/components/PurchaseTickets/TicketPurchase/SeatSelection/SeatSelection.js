@@ -99,7 +99,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 
 	return (
 		<Fragment>
-			{tickets.generalAdmissionCount === 0 && (
+			{tickets.generalAdmissionCount === 0 && !tickets.generalAdmissionTicket && (
 				<NotAvailableMessage>
 					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
 					<p>Please check back anytime later to see if new tickets appear</p>
@@ -146,7 +146,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 									</Button>
 								</Stack>
 							)}
-						</Stack>
+						
 						<div className="seats-container">
 							<div className="seats--scrollable">
 								{!isZoomed ? (
@@ -199,6 +199,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 								</Link>
 							</TicketPurchaseFooter>
 						)}
+						</Stack>
 					</Fragment>
 				) : (
 					<NotAvailableMessage>
