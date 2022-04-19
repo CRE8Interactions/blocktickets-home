@@ -22,7 +22,7 @@ export default function EventModal({ show, handleClose, event }) {
 						<Col>
 							<h1 className="m-0 heading-sm">{event?.name}</h1>
 						</Col>
-						<Col className="d-flex align-self-center">
+						<Col xs='auto' className="d-flex align-self-center">
 							<Badge className="ms-auto badge-outline badge-outline--primary">
 								{event?.categories[0]?.name}
 							</Badge>
