@@ -8,8 +8,6 @@ import { useParams } from 'react-router-dom';
 import { getEvent, getEventTickets } from '../../utilities/api';
 import TicketContext from '../../context/Ticket/Ticket';
 
-import './ticketPage.scss';
-
 export default function TicketsPage() {
 	let { id } = useParams();
 	const [
