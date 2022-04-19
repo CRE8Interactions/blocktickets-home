@@ -7,7 +7,7 @@ import 'swiper/css';
 
 import './slider.scss';
 
-export default function Slider({ layout, children, slidesPerView = 1, breakpoints = true }) {
+export default function Slider({ children, slidesPerView = 1, breakpoints = true }) {
 	let breakpointsObj;
 
 	if (breakpoints) {

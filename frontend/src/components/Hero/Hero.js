@@ -8,8 +8,6 @@ import Col from 'react-bootstrap/Col';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { IconButton } from '../IconButton';
 
-import profile from '../../assets/01.png';
-
 import './hero.scss';
 
 export default function Hero(props) {
