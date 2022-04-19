@@ -5,6 +5,9 @@
 .hero {
 	header {
 		.banner-image {
+			@include breakpoint-min(md) {
+				height: 556px;
+			}
 			@include breakpoint-max(lg) {
 				margin-bottom: em(24);
 			}
