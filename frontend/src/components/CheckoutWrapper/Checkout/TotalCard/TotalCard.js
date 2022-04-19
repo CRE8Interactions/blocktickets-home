@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import { Spinner } from '../../../SpinnerContainer/Spinner';
-import { cartTotal } from '../../../../utilities/helper';
+import { cartTotal } from '../../../../utilities/helpers';
 
 import './totalCard.scss';
 
@@ -22,14 +22,14 @@ export default function TotalCard({ setStatus, addOns }) {
 		setPurchasing
 	] = useState(false);
 
-	let tickets = sessionStorage.getItem('cart')
-	if (tickets) tickets = JSON.parse(tickets)
+	let tickets = sessionStorage.getItem('cart');
+	if (tickets) tickets = JSON.parse(tickets);
 
 	const completePurchase = () => {
-		setPurchasing(true)
-		console.log('Completing Purchase')
-		// setStatus('successful')
-	}
+		setPurchasing(true);
+		console.log('Completing Purchase');
+		// setStatus('successful');
+	};
 
 	return (
 		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
@@ -38,7 +38,7 @@ export default function TotalCard({ setStatus, addOns }) {
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" className="card-header-price">
-					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.50)}</span>
+					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.5)}</span>
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
@@ -68,11 +68,18 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<span>Tickets: ${parseFloat(tickets.ticket.attributes.cost).toFixed(2)} x {tickets.ticketCount}</span>
+											<span>
+												Tickets: ${parseFloat(tickets.ticket.attributes.cost).toFixed(2)}{' '}
+												x {tickets.ticketCount}
+											</span>
 										</Col>
 
 										<Col className="text-end ">
-											<span>${parseFloat(tickets.ticket.attributes.cost).toFixed(2) * tickets.ticketCount}</span>
+											<span>
+												${parseFloat(
+													tickets.ticket.attributes.cost
+												).toFixed(2) * tickets.ticketCount}
+											</span>
 										</Col>
 									</Row>
 								</li>
@@ -84,20 +91,34 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<span>Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)} x {tickets.ticketCount}</span>
+											<span>
+												Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)}{' '}
+												x {tickets.ticketCount}
+											</span>
 										</Col>
 										<Col className="text-end ">
-											<span>${(parseFloat(tickets.ticket.attributes.fee).toFixed(2) * tickets.ticketCount).toFixed(2)}</span>
+											<span>
+												${(parseFloat(
+													tickets.ticket.attributes.fee
+												).toFixed(2) * tickets.ticketCount).toFixed(2)}
+											</span>
 										</Col>
 									</Row>
 								</li>
 								<li className="list">
 									<Row className="split-row">
 										<Col>
-											<span>Facility Charge: ${parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2)} x {tickets.ticketCount}</span>
+											<span>
+												Facility Charge: ${parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2)}{' '}
+												x {tickets.ticketCount}
+											</span>
 										</Col>
 										<Col className="text-end ">
-											<span>${(parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2) * tickets.ticketCount).toFixed(2)}</span>
+											<span>
+												${(parseFloat(
+													tickets.ticket.attributes.facilityFee
+												).toFixed(2) * tickets.ticketCount).toFixed(2)}
+											</span>
 										</Col>
 									</Row>
 								</li>
@@ -180,7 +201,7 @@ export default function TotalCard({ setStatus, addOns }) {
 						variant="primary"
 						size="lg"
 						className="icon-button w-100"
-						onClick={() => completePurchase() }>
+						onClick={() => completePurchase()}>
 						{purchasing ? (
 							<Fragment>
 								<Spinner color={'#fcfcfd'} size="sm" />

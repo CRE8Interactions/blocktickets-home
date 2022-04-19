@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
 import logo from '../../assets/logo.svg';
-import { getCopyrightYear } from './../../utilities/helper';
+import { getCopyrightYear } from '../../utilities/helpers';
 import InputField from './../InputField/InputField';
 import './footer.scss';
 

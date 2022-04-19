@@ -126,6 +126,7 @@ export default function LoginSignupForm() {
 					navigate('/');
 				}
 				else if (res.status === 203) {
+					if (comingFrom === 'login') return <Error type="invalid" />;
 					setStep(2);
 				}
 			})
