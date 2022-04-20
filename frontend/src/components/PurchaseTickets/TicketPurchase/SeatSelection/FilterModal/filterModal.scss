@@ -23,6 +23,17 @@
 		}
 	}
 
+	@include breakpoint-min(md) {
+		.filter-container {
+			flex: 1;
+		}
+
+		.scrollable-content {
+			@include scrollable;
+			max-height: 26vh;
+		}
+	}
+
 	legend {
 		padding-top: em(18);
 
@@ -39,7 +50,9 @@
 		}
 
 		.accessibility-body {
-			min-height: 65px;
+			@include breakpoint-max(md) {
+				min-height: 70px;
+			}
 		}
 	}
 }
