@@ -112,6 +112,10 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 								<option value="2">2 Tickets</option>
 								<option value="3">3 Tickets</option>
 								<option value="4">4 Tickets</option>
+								<option value="5">5 Tickets</option>
+								<option value="6">6 Tickets</option>
+								<option value="7">7 Tickets</option>
+								<option value="8">8 Tickets</option>
 							</Form.Select>
 							<Button
 								className="btn--filter"
