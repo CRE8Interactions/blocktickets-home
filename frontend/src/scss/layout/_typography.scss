@@ -145,7 +145,7 @@ h4,
 	}
 	.card-title,
 	.event-name {
-		@extend .normal !optional;
+		font-size: $body-1;
 		margin-bottom: rem(13);
 		font-weight: $fw-semi-bold;
 	}

@@ -22,7 +22,6 @@
 			@include breakpoint-min(lg) {
 				font-size: rem(14);
 			}
-
 			&:first-of-type .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'calendar'));
@@ -54,6 +53,11 @@
 				@extend %icon-text-box;
 				font-size: rem(16);
 				padding: 0px;
+				color: $body-color;
+
+				&::before {
+					line-height: 0;
+				}
 
 				&:hover,
 				&:focus,
@@ -63,6 +67,10 @@
 						filter: brightness(0) saturate(100%) invert(78%) sepia(48%) saturate(4629%)
 							hue-rotate(179deg) brightness(102%) contrast(95%);
 					}
+				}
+
+				@include breakpoint-min(lg) {
+					font-size: inherit;
 				}
 			}
 		}
