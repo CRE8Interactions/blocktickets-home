@@ -26,11 +26,10 @@
 			font-weight: 500;
 			flex-grow: 1;
 
-			.artist-name {
-				@extend .normal-lg;
-
+			.event-name {
 				@include breakpoint-max(md) {
 					margin-bottom: rem(5);
+					font-size: $body-2;
 				}
 			}
 
