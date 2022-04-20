@@ -47,7 +47,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < tickets.generalAdmissionTicket?.attributes?.cost) {
+			if (sliderValues[1] < tickets.generalAdmissionTicket?.attributes?.cost || numTickets > tickets.generalAdmissionTicket?.attributes?.maximum_quantity) {
 				setFilteredTicketCount(0);
 			}
 
@@ -56,7 +56,7 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 			};
 		},
 		[
-			sliderValues
+			sliderValues, numTickets 
 		]
 	);
 
@@ -99,40 +99,35 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 
 	return (
 		<Fragment>
-			{!tickets && tickets.generalAdmissionCount === 0 && (
-				<NotAvailableMessage>
-					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
-					<p>Please check back anytime later to see if new tickets appear</p>
-				</NotAvailableMessage>
-			)}
-			<Fragment>
-				<header>
-					<Stack direction="horizontal" gap={2} className="option-btns">
-						<Form.Select
-							id="form-select--numTickets"
-							aria-label="Number of Tickets"
-							value={numTickets}
-							onChange={(e) => setNumTickets(e.target.value)}>
-							<option value="1">1 Ticket</option>
-							<option value="2">2 Tickets</option>
-							<option value="3">3 Tickets</option>
-							<option value="4">4 Tickets</option>
-						</Form.Select>
-						<Button
-							className="btn--filter"
-							variant="outline-light"
-							onClick={() => setShowFilter(!showFilter)}>
-							Filter
-						</Button>
-					</Stack>
-					<PriceRangeSlider
-						styles="tablet-desktop-only"
-						sliderValues={sliderValues}
-						setSliderValues={setSliderValues}
-					/>
-				</header>
-				{ filteredTicketCount > 0 && tickets.generalAdmissionTicket ? (
-					<Fragment>
+			{tickets && tickets.generalAdmissionTicket && tickets.generalAdmissionCount > 0 ? (
+				<Fragment>
+					<header>
+						<Stack direction="horizontal" gap={2} className="option-btns">
+							<Form.Select
+								id="form-select--numTickets"
+								aria-label="Number of Tickets"
+								value={numTickets}
+								onChange={(e) => setNumTickets(e.target.value)}>
+								<option value="1">1 Ticket</option>
+								<option value="2">2 Tickets</option>
+								<option value="3">3 Tickets</option>
+								<option value="4">4 Tickets</option>
+							</Form.Select>
+							<Button
+								className="btn--filter"
+								variant="outline-light"
+								onClick={() => setShowFilter(!showFilter)}>
+								Filter
+							</Button>
+						</Stack>
+						<PriceRangeSlider
+							styles="tablet-desktop-only"
+							sliderValues={sliderValues}
+							setSliderValues={setSliderValues}
+						/>
+					</header>
+
+					{filteredTicketCount > 0 ? (
 						<Stack direction="vertical" className="position-relative">
 							{showFilter && (
 								<FilterModal show={showFilter} setShow={setShowFilter} />
@@ -145,12 +140,12 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 									</Button>
 								</Stack>
 							)}
-						
-						<div className="seats-container">
-							<div className="seats--scrollable">
-								{!isZoomed ? (
-									<ListGroup as="ul">
-										<ListGroup.Item
+
+							<div className="seats-container">
+								<div className="seats--scrollable">
+									{!isZoomed ? (
+										<ListGroup as="ul">
+											<ListGroup.Item
 											onClick={() =>
 												handleClick(
 													'confirmation',
@@ -184,33 +179,40 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 												</div>
 											</div>
 										</ListGroup.Item>
-									</ListGroup>
-								) : (
-									<MySeats />
-								)}
+										</ListGroup>
+									) : (
+										<MySeats />
+									)}
+								</div>
 							</div>
-						</div>
-						{isZoomed &&
-						!showFilter && (
-							<TicketPurchaseFooter>
-								<Link to={'/checkout/1'} className="btn w-100 btn-primary btn-lg">
-									Checkout
-								</Link>
-							</TicketPurchaseFooter>
-						)}
+							{isZoomed &&
+							!showFilter && (
+								<TicketPurchaseFooter>
+									<Link
+										to={'/checkout/1'}
+										className="btn w-100 btn-primary btn-lg">
+										Checkout
+									</Link>
+								</TicketPurchaseFooter>
+							)}
 						</Stack>
-					</Fragment>
-				) : (
-					<NotAvailableMessage>
-						<h1 className="fs-md">Please adjust your search</h1>
-						<p>
-							The seating options you selected aren't available due to the ticket
-							quantity or filter you applied. Please try adjusting the number of
-							tickets selected or use the seat map to search for available seats.
-						</p>
-					</NotAvailableMessage>
-				)}
-			</Fragment>
+					) : (
+						<NotAvailableMessage>
+							<h1 className="normal">Please adjust your search</h1>
+							<p>
+								The seating options you selected aren't available due to the ticket
+								quantity or filter you applied. Please try adjusting the number of
+								tickets selected or use the seat map to search for available seats.
+							</p>
+						</NotAvailableMessage>
+					)}
+				</Fragment>
+			) : (
+				<NotAvailableMessage>
+					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
+					<p>Please check back anytime later to see if new tickets appear</p>
+				</NotAvailableMessage>
+			)}
 		</Fragment>
 	);
 }
