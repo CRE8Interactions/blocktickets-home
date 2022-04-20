@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -27,7 +27,7 @@ export default function MyWallet({ showMenu }) {
 	return (
 		<div className="wallet">
 			<ListGroup variant="flush" as="ul" role="my wallet menu">
-				<h5 className="name m-0 pb-2 ">Harrison Cogan</h5>
+				<h5 className="name m-0 pb-2 ">{user}</h5>
 				<ListGroup.Item as="li" onClick={handleClick}>
 					<LinkContainer to={'/upcoming-events'}>
 						<Nav.Link>Upcoming Events</Nav.Link>
