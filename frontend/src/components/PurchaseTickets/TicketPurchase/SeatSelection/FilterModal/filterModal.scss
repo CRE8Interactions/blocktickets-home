@@ -11,34 +11,39 @@
 	background: $clr-white;
 	transition: all 600ms ease-in;
 
-	legend {
+	legend:not(:first-of-type) {
 		border-top: border();
 	}
 
 	header {
 		padding-bottom: em(6);
+		border-bottom: border();
 
 		.heading--flex {
-			margin-bottom: rem(16);
+			margin-bottom: rem(18);
 		}
 	}
 
 	@include breakpoint-min(md) {
 		.filter-container {
 			flex: 1;
+
+			@media (max-height: 900px) {
+				max-height: 26vh;
+			}
 		}
 
 		.scrollable-content {
 			@include scrollable;
-			max-height: 26vh;
 		}
 	}
 
 	legend {
-		padding-top: em(18);
+		padding-top: rem(18);
+		margin-bottom: rem(6);
 
 		.legend-heading {
-			margin-bottom: rem(10);
+			margin-bottom: rem(15);
 
 			&.accessibility {
 				@extend %icon-text-box;
