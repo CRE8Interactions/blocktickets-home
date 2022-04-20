@@ -11,7 +11,11 @@
 
 	&::after {
 		@include full-width-border();
-		top: 84px;
+		top: 78px;
+
+		@include breakpoint-min(lg) {
+			top: 84px;
+		}
 	}
 
 	.container {
