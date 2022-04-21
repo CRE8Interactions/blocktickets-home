@@ -39,7 +39,10 @@
 		.venue-wrapper,
 		.location-wrapper {
 			margin-bottom: $banner-spacer;
+		}
 
+		.venue-wrapper,
+		.location-wrapper {
 			@include breakpoint-inBetween(md, lg) {
 				margin-bottom: 0px;
 			}
