@@ -21,7 +21,6 @@
 			font-family: $font-heading;
 			margin-bottom: $banner-spacer;
 			@extend %multi-line-truncate;
-			display: block;
 
 			@include breakpoint-min(md) {
 				font-size: $h1-font-size;
