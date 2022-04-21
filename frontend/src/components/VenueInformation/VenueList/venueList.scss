@@ -3,7 +3,7 @@
 
 #venue {
 	.event-title {
-		@extend %multi-line-truncate;
+		@extend %text-truncate;
 		font-size: rem(16);
 		margin-bottom: rem(6);
 		font-weight: $fw-medium;
