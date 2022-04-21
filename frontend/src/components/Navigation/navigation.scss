@@ -11,10 +11,10 @@
 
 	&::after {
 		@include full-width-border();
-		top: 78px;
+		top: $navbar-height-sm;
 
 		@include breakpoint-min(lg) {
-			top: 84px;
+			top: $navbar-height;
 		}
 	}
 
@@ -30,6 +30,11 @@
 
 	.navbar {
 		background-color: $clr-white;
+
+		@include breakpoint-min(lg) {
+			padding-top: rem(20);
+			padding-bottom: rem(20);
+		}
 
 		&-brand {
 			@include breakpoint-min(lg) {

@@ -1,4 +1,5 @@
 @use '../../../scss/abstracts' as *;
+@use '../../../scss/theme/buttons' as *;
 
 .navigation {
 	.navbar .navbar-nav {
@@ -20,6 +21,7 @@
 		&-secondary,
 		&-outline-light {
 			min-width: 102px;
+			padding: $btn-padding-y $btn-padding-x;
 		}
 	}
 }
