@@ -40,6 +40,22 @@
 	}
 
 	margin-bottom: $heading-spacer;
+
+	h1 {
+		font-size: $h4-font-size;
+		@include breakpoint-min(md) {
+			font-size: $h3-font-size;
+		}
+	}
+}
+
+.heading-sm {
+	font-size: $body-1;
+	margin-bottom: rem(16);
+
+	@include breakpoint-min(md) {
+		font-size: $h4-font-size;
+	}
 }
 
 h1,
@@ -65,22 +81,6 @@ h4,
 
 .fw-semi-bold {
 	font-weight: $fw-semi-bold;
-}
-
-.section-heading h1 {
-	font-size: $h4-font-size;
-	@include breakpoint-min(md) {
-		font-size: $h3-font-size;
-	}
-}
-
-.heading-sm {
-	font-size: $body-1;
-	margin-bottom: rem(16);
-
-	@include breakpoint-min(md) {
-		font-size: $h4-font-size;
-	}
 }
 
 .text-uppercase {
@@ -136,8 +136,16 @@ h4,
 
 .details {
 	.card-title,
-	.artist-name {
-		@extend .normal !optional;
+	.event-name,
+	.card-subtitle,
+	.subtitle,
+	.event-detail,
+	.row > .col > * {
+		@extend %text-truncate !optional;
+	}
+	.card-title,
+	.event-name {
+		font-size: $body-1;
 		margin-bottom: rem(13);
 		font-weight: $fw-semi-bold;
 	}

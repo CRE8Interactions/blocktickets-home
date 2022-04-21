@@ -5,6 +5,9 @@
 .hero {
 	header {
 		.banner-image {
+			@include breakpoint-min(md) {
+				height: 556px;
+			}
 			@include breakpoint-max(lg) {
 				margin-bottom: em(24);
 			}
@@ -18,7 +21,6 @@
 			font-family: $font-heading;
 			margin-bottom: $banner-spacer;
 			@extend %multi-line-truncate;
-			display: block;
 
 			@include breakpoint-min(md) {
 				font-size: $h1-font-size;

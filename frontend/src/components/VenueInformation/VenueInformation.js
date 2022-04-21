@@ -5,6 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { VenueBanner } from './VenueBanner';
 import { VenueCard } from './VenueCard';
 import { VenueList } from './VenueList';
 
@@ -18,7 +19,12 @@ export default function VenueInformation({ venue }) {
 
 	return (
 		<div id="venue">
-			{venue &&
+			{venue && (
+			<>
+			<header>
+				<VenueBanner />
+			</header>
+			<section className='spacer-xs'>
 				<Row className="gap-5 gap-md-3">
 					<Col md={5} lg={4} xxl={3}>
 						<VenueCard venue={venue} />
@@ -37,7 +43,10 @@ export default function VenueInformation({ venue }) {
 						</Tabs>
 					</Col>
 				</Row>
-			}
+				</section>
+				</>
+			)}
+			
 		</div>
 	);
 }

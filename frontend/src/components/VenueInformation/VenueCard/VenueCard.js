@@ -60,8 +60,8 @@ export default function VenueCard({ venue }) {
 								</Button>
 							
 
-							<Link to={''}>
-								<Button variant="outline-light" className="btn--icon" aria-label="Visit Website">
+							
+								<IconButton link="" variant="outline-light" styles="btn--icon" aria-label="Visit Website">
 									<svg
 										role="img"
 										title="Visit Website"
@@ -89,8 +89,8 @@ export default function VenueCard({ venue }) {
 											fill="#777E91"
 										/>
 									</svg>
-								</Button>
-							</Link>
+								</IconButton>
+							
 						</Stack>
 						<Stack
 							as="ul"

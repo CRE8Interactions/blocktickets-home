@@ -1,13 +1,5 @@
 import React, { Fragment } from 'react';
 
-import {
-	removeNavContent,
-	addNavContent,
-	fullHeightContainer,
-	removeFullHeightContainer
-} from '../../../utilities/helper';
-import Row from 'react-bootstrap/Row';
-import Stack from 'react-bootstrap/Stack';
 import Col from 'react-bootstrap/Col';
 
 import { OrderSummary } from './OrderSummary';

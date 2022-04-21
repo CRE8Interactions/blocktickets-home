@@ -11,7 +11,7 @@ import { PriceSlider } from './PriceSlider';
 import { AddTicket } from './AddTicket';
 import { SuccessContainer } from './../SuccessContainer';
 
-import { formatNumber } from '../../../../utilities/helper';
+import { formatNumber } from '../../../../utilities/helpers';
 
 import './sellModal.scss';
 

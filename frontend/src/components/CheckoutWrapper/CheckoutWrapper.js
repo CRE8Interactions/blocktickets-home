@@ -8,11 +8,10 @@ import Row from 'react-bootstrap/Row';
 
 import {
 	toggleNavContent,
-	addNavContent,
 	fullHeightContainer,
 	removeFullHeightContainer,
 	toggleTimer
-} from '../../utilities/helper';
+} from '../../utilities/helpers';
 import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
 

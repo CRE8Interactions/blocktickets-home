@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import {
 	HomePage,
 	LoginPage,
-	SignUpPage,
 	UpcomingEventsPage,
 	CollectablesPage,
 	TicketsPage,
@@ -22,7 +21,6 @@ const Router = () => {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="login" element={<LoginPage />} />
-				<Route path="signup" element={<SignUpPage />} />
 				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
 				<Route path="collectables" element={<CollectablesPage />} />
 				<Route path="tickets/:id" element={<TicketsPage />} />

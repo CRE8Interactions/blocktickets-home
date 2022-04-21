@@ -55,6 +55,10 @@ select:-webkit-autofill:focus {
 	&-label {
 		font-size: rem(14);
 	}
+
+	&-input:focus {
+		box-shadow: none;
+	}
 }
 
 .form-select {

@@ -9,6 +9,15 @@
 		z-index: 999;
 	}
 
+	&::after {
+		@include full-width-border();
+		top: 78px;
+
+		@include breakpoint-min(lg) {
+			top: 84px;
+		}
+	}
+
 	.container {
 		position: relative;
 	}
@@ -22,12 +31,8 @@
 	.navbar {
 		background-color: $clr-white;
 
-		border-bottom: border();
-
 		&-brand {
 			@include breakpoint-min(lg) {
-				// margin-right: rem(47);
-
 				border-right: border(2px);
 				padding-right: rem(47);
 			}
@@ -36,9 +41,6 @@
 		&-collapse {
 			@include breakpoint-max(lg) {
 				margin-top: $navbar-padding-y;
-				&::before {
-					@include full-width-border();
-				}
 			}
 		}
 		&-nav {

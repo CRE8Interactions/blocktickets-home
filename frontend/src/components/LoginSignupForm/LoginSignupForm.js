@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import PhoneInput from 'react-phone-number-input';
@@ -19,10 +19,6 @@ import 'react-phone-number-input/style.css';
 import './loginSignupForm.scss';
 
 export default function LoginSignupForm() {
-	const location = useLocation();
-
-	const comingFrom = location.pathname.slice(1);
-
 	const [
 		step,
 		setStep
@@ -36,11 +32,6 @@ export default function LoginSignupForm() {
 	const [
 		hasError,
 		setHasError
-	] = useState(false);
-
-	const [
-		validated,
-		setValidated
 	] = useState(false);
 
 	const [
@@ -67,6 +58,18 @@ export default function LoginSignupForm() {
 
 	const navigate = useNavigate();
 
+	// reset error when inputs are changed
+	useEffect(
+		() => {
+			setHasError(false);
+		},
+		[
+			phoneNumber,
+			formValid,
+			code
+		]
+	);
+
 	const handleGoBack = () => {
 		let curStep = step;
 		setStep(--curStep);
@@ -89,6 +92,7 @@ export default function LoginSignupForm() {
 		if (num1.value && num2.value && num3.value) num4.focus();
 		if (num1.value && num2.value && num3.value && num4.value) {
 			const code = Number(`${num1.value}${num2.value}${num3.value}${num4.value}`);
+			setCode(code);
 			verifyUserCode(code);
 		}
 	}
@@ -101,7 +105,6 @@ export default function LoginSignupForm() {
 		};
 		verifyUser(data)
 			.then((res) => {
-				setHasError(false);
 				setStep(1);
 			})
 			.catch((err) => {
@@ -121,7 +124,6 @@ export default function LoginSignupForm() {
 				if (res.status === 200) {
 					AuthService.setUser(res.data);
 					setAuthenticated(res.data);
-					setValidated(true);
 
 					navigate('/');
 				}
@@ -131,7 +133,6 @@ export default function LoginSignupForm() {
 			})
 			.catch((err) => {
 				setHasError(true);
-				setValidated(false);
 				console.error(err);
 			});
 	}
@@ -177,7 +178,6 @@ export default function LoginSignupForm() {
 		};
 		createNewUser(data).then((res) => {
 			if (res.status === 200) {
-				setHasError(false);
 				AuthService.setUser(res.data);
 				navigate('/');
 			}
@@ -194,20 +194,17 @@ export default function LoginSignupForm() {
 				{step === 0 && (
 					<Fragment>
 						<div className="heading">
-							<h1 className="fs-md">
-								{comingFrom === 'login' ? 'Log in' : 'Sign Up'}
-							</h1>
+							<h1 className="fs-md">Log in</h1>
 							<h2 className="normal text-muted fw-normal m-0">
 								The future of ticketing is here
 							</h2>
 						</div>
 						<div className="step-desc">
-							<h3 className="title">
-								{comingFrom === 'login' ? 'Verify' : 'Register'} your mobile number
-							</h3>
+							<h3 className="title">Verify your mobile number</h3>
 							<p className="subtitle">
 								Select your country and enter your mobile number. You'll receive an
-								access code via text message.
+								access code via text message. If you don’t have an account, we will
+								automatically create one for you.
 							</p>
 						</div>
 						<Form.Group controlId="phone-number">
@@ -229,18 +226,6 @@ export default function LoginSignupForm() {
 							onClick={(e) => submit()}>
 							Validate
 						</Button>
-						<small>
-							{comingFrom === 'login' ? (
-								'Don\t have an account yet?'
-							) : (
-								'Aready have an account?'
-							)}{' '}
-							{comingFrom === 'login' ? (
-								<Link to={'/signup'}>Sign up</Link>
-							) : (
-								<Link to={'/login'}>Login</Link>
-							)}
-						</small>
 					</Fragment>
 				)}
 				{step === 1 && (
@@ -300,9 +285,6 @@ export default function LoginSignupForm() {
 							</Stack>
 						</Form.Group>
 						{hasError && <Error type="code" />}
-						<Button size="lg" className="icon-button btn-next" disabled={hasError}>
-							Validate
-						</Button>
 						<small>
 							Did not recieve code? <Button variant="link">Resend Code</Button>
 						</small>

@@ -8,20 +8,11 @@ import { Navigation } from './components';
 
 function App() {
 	const user = AuthService.getUser();
-	let location = useLocation();
+
 	const [
 		authenticated,
 		setAuthenticated
 	] = useState(false);
-
-	useEffect(
-		() => {
-			console.log('app', location);
-		},
-		[
-			location
-		]
-	);
 
 	return (
 		<Fragment>
