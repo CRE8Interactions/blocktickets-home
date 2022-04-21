@@ -14,10 +14,14 @@ export default function EventCardBody({ type = '', event }) {
 			<Card.Title as="h5">{ event?.name }</Card.Title>
 			<Card.Subtitle as="h6">{ event?.venue?.name }</Card.Subtitle>
 			<hr />
-			<Row>
-				<span className="col caption">{moment(event?.start).format('MMM DD h:mmA')}</span>
-				<span className="col caption text-end">{ event?.venue?.address[0]?.city }, { event?.venue?.address[0]?.state }</span>
-			</Row>
+			<ul>
+				<li>
+					<Row>
+						<span className="col caption">{moment(event?.start).format('MMM DD h:mmA')}</span>
+						<span className="col caption text-end">{ event?.venue?.address[0]?.city }, { event?.venue?.address[0]?.state }</span>
+					</Row>
+				</li>
+			</ul>
 			<IconButton
 				variant="outline-light"
 				styles="text-primary"
