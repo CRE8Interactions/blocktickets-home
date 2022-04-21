@@ -46,6 +46,7 @@
 
 			.nav-link {
 				@extend %icon-text-box;
+				gap: $gap-sm;
 				font-size: rem(16);
 				padding: 0px;
 				color: $body-color;
