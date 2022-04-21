@@ -30,6 +30,7 @@ export default function VenueList({ venue }) {
 								</div>
 							</div>
 							<IconButton
+							link={`tickets/${event?.id}?type=genAdmission `}
 								variant="outline-light"
 								btn="tickets--primary"
 								styles="ms-lg-auto text-primary mt-0">

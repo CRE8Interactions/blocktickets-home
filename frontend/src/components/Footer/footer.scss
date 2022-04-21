@@ -3,7 +3,9 @@
 @use '../../scss/layout' as *;
 
 footer {
-	border-top: border();
+	&::before {
+		@include full-width-border();
+	}
 
 	.nav-link {
 		padding-left: 0px;
