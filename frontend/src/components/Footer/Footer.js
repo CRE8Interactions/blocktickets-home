@@ -13,8 +13,8 @@ import './footer.scss';
 
 export default function Footer() {
 	return (
-		<footer className="footer-spacer" id="footer">
-			<Row className="main-content d-flex flex-column gap-lg-3 flex-md-row">
+		<footer id="footer">
+			<Row className="footer-spacer main-content d-flex flex-column gap-lg-3 flex-md-row">
 				<Col>
 					<Link to={'/'} className="brand-logo">
 						<img src={logo} alt="blocktickets" />
