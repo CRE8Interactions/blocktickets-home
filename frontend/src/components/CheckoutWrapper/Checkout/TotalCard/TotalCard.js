@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-
+import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
@@ -8,10 +8,11 @@ import Card from 'react-bootstrap/Card';
 
 import { Spinner } from '../../../SpinnerContainer/Spinner';
 import { cartTotal } from '../../../../utilities/helper';
+import { createOrder } from '../../../../utilities/api';
 
 import './totalCard.scss';
 
-export default function TotalCard({ setStatus, addOns }) {
+export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 	const [
 		expanded,
 		setExpanded
@@ -25,10 +26,51 @@ export default function TotalCard({ setStatus, addOns }) {
 	let tickets = sessionStorage.getItem('cart')
 	if (tickets) tickets = JSON.parse(tickets)
 
+	const stripe = useStripe();
+  const elements = useElements();
 	const completePurchase = () => {
 		setPurchasing(true)
-		console.log('Completing Purchase')
-		// setStatus('successful')
+		let data = {
+			cart: tickets,
+			paymentIntentId: intentId
+		}
+
+		createOrder(data)
+			.then((res) => {
+				// Need better way to store order data
+				sessionStorage.setItem('order', JSON.stringify(res.data))
+				sendPayment()
+			})
+			.catch((err) => console.error(err))
+	}
+
+	const sendPayment = async() => {
+		if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    const {error} = await stripe.confirmPayment({
+      //`Elements` instance that was used to create the Payment Element
+      elements,
+      confirmParams: {
+        return_url: ''
+      },
+			redirect: 'if_required'
+    });
+
+    if (error) {
+      // This point will only be reached if there is an immediate error when
+      // confirming the payment. Show error to your customer (for example, payment
+      // details incomplete)
+      console.error(error.message);
+    } else {
+      // Your customer will be redirected to your `return_url`. For some payment
+      // methods like iDEAL, your customer will be redirected to an intermediate
+      // site first to authorize the payment, then redirected to the `return_url`.
+			setStatus('successful')
+    }
 	}
 
 	return (

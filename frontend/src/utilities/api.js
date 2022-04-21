@@ -34,6 +34,10 @@ export const createNewUser = (data) => {
   return instance.post('/verifies/newUser', data)
 }
 
+export const createOrder = (data) => {
+  return instance.post('/orders', data)
+}
+
 export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }
@@ -42,8 +46,8 @@ export const createOrganization = async (data) => {
   return instance.post('/organizations', data)
 }
 
-export const getPaymentIntent = async (total) => {
-  return instance.get(`/payment/intent/${total}`)
+export const getPaymentIntent = async (data) => {
+  return instance.post(`/payment/intent`, data)
 }
 
 export const getCategories = async () => {

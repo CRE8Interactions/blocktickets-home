@@ -6,7 +6,8 @@ import Col from 'react-bootstrap/Col';
 
 import './orderSummary.scss';
 
-export default function OrderSummary() {
+
+export default function OrderSummary(order) {
 	return (
 		<ListGroup as="ul" variant="flush" id="order">
 			<ListGroup.Item as="li" className="list">
@@ -28,7 +29,7 @@ export default function OrderSummary() {
 								<span>Subtotal</span>
 							</Col>
 							<Col className="text-end">
-								<span>$260.00</span>
+								<span>${order.total}</span>
 							</Col>
 						</Row>
 					</li>
