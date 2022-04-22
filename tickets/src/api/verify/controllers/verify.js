@@ -115,7 +115,8 @@ module.exports = createCoreController('api::verify.verify', ({
       email,
       phoneNumber,
       gender,
-      dob
+      // dob,
+      name
     } = ctx.request.body.data;
 
     const invite = await strapi.db.query('api::invite.invite').findOne({
@@ -136,7 +137,9 @@ module.exports = createCoreController('api::verify.verify', ({
         username,
         email,
         phoneNumber,
-        dob,
+        name,
+        gender,
+        // dob: new Date(dob),
         role,
         confirmed: true,
         password: process.env.DEFAULT_PW

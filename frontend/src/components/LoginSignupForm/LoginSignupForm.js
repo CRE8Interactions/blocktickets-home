@@ -54,6 +54,12 @@ export default function LoginSignupForm() {
 		setFormData
 	] = useState({});
 
+	const [name, setName] = useState('')
+	const [username, setUsername] = useState('')
+	const [email, setEmail] = useState('')
+	const [dob, setDob] = useState('')
+	const [gender, setGender] = useState('')
+
 	const { setAuthenticated } = useContext(UserContext);
 
 	const navigate = useNavigate();
@@ -80,6 +86,12 @@ export default function LoginSignupForm() {
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
 			.then((res) => setCountrycode(res.data.country_code));
 	}, []);
+
+	useEffect(() => {
+		if (name && email && gender && dob && username) {
+			setFormValid(true);
+		}
+	}, [name, username, email, dob, gender])
 
 	function setVal(e) {
 		const num1 = document.getElementById('num1');
@@ -137,43 +149,15 @@ export default function LoginSignupForm() {
 			});
 	}
 
-	let myData = {
-		email: '',
-		name: '',
-		username: '',
-		dob: '',
-		gender: '',
-		phoneNumber
-	};
-
-	const isValid = () => {
-		let ev = myData['email'] !== '';
-		let uv = myData['username'] !== '';
-		let nv = myData['name'] !== '';
-		let dv = myData['dob'] !== '';
-		let gv = myData['gender'] !== '';
-		if (ev && uv && dv && gv && nv) {
-			setFormValid(true);
-			setFormData(myData);
-		}
-	};
-
-	const handleChange = (event) => {
-		let name = event.target.name;
-		let value = event.target.value;
-		myData[name] = value;
-		isValid();
-	};
-
 	const submitForm = () => {
 		let data = {
 			data: {
-				dob: formData.dob,
-				email: formData.email,
-				name: formData.name,
-				username: formData.username,
-				gender: formData.gender,
-				phoneNumber: formData.phoneNumber
+				dob,
+				email,
+				name,
+				username,
+				gender,
+				phoneNumber
 			}
 		};
 		createNewUser(data).then((res) => {
@@ -236,7 +220,7 @@ export default function LoginSignupForm() {
 								Code is set to <span className="text-primary">{phoneNumber}</span>
 							</p>
 						</div>
-						<Form.Group controlId="code">
+						<Form.Group>
 							<Form.Label>Enter Code</Form.Label>
 							<Stack direction="horizontal" gap={3}>
 								<Form.Control
@@ -303,7 +287,7 @@ export default function LoginSignupForm() {
 									placeholder="Enter your email"
 									required
 									name="email"
-									onChange={(e) => handleChange(e)}
+									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</Form.Group>
 
@@ -314,7 +298,7 @@ export default function LoginSignupForm() {
 									placeholder="Enter your full name"
 									required
 									name="name"
-									onChange={(e) => handleChange(e)}
+									onChange={(e) => setName(e.target.value)}
 								/>
 							</Form.Group>
 							<Form.Group className="form-group" controlId="username">
@@ -324,7 +308,7 @@ export default function LoginSignupForm() {
 									placeholder="Enter your username"
 									required
 									name="username"
-									onChange={(e) => handleChange(e)}
+									onChange={(e) => setUsername(e.target.value)}
 								/>
 							</Form.Group>
 							<Row className="form-group">
@@ -335,7 +319,7 @@ export default function LoginSignupForm() {
 											type="date"
 											name="dob"
 											required
-											onChange={(e) => handleChange(e)}
+											onChange={(e) => setDob(e.target.value)}
 										/>
 									</Form.Group>
 								</Col>
@@ -345,7 +329,7 @@ export default function LoginSignupForm() {
 										<Form.Select
 											name="gender"
 											required
-											onChange={(e) => handleChange(e)}>
+											onChange={(e) => setGender(e.target.value)}>
 											<option>Select Gender</option>
 											<option value="male">Male</option>
 											<option value="female">Female</option>
