@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import { Spinner } from '../../../SpinnerContainer/Spinner';
-import { cartTotal } from '../../../../utilities/helper';
+import { cartTotal } from '../../../../utilities/helpers';
 import { createOrder } from '../../../../utilities/api';
 
 import './totalCard.scss';

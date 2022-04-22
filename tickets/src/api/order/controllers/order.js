@@ -49,6 +49,23 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       },
     });
 
+    order = await strapi.db.query('api::order.order').findOne({
+      where: { id: order.id },
+      populate: { 
+        tickets: true,
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      },
+    });
+
     return order
   },
   async finalize(ctx) {

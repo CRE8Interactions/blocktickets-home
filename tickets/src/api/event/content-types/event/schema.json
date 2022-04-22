@@ -111,6 +111,9 @@
       "relation": "manyToOne",
       "target": "api::venue.venue",
       "inversedBy": "allEvents"
+    },
+    "presentedBy": {
+      "type": "string"
     }
   }
 }

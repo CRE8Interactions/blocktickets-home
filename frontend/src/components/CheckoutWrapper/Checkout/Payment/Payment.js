@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import { PaymentElement } from '@stripe/react-stripe-js';
-import { cartTotal } from '../../../../utilities/helper';
 
 import './payment.scss';
 

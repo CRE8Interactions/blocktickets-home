@@ -66,6 +66,10 @@ export const getEvents = async () => {
   return instance.get('/events?filters[status][$eq]=on_sale')
 }
 
+export const getMyEvents = async () => {
+  return instance.get('/events/myUpcomingEvents')
+}
+
 export const getEvent = async (id) => {
   return instance.get(`/events/${id}?filters[status][$eq]=on_sale`)
 }

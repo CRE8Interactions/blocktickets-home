@@ -8,7 +8,10 @@ import { Tickets } from './Tickets';
 
 import './paymentConfirmation.scss';
 
-export default function PaymentConfirmation({ addOns, order }) {
+export default function PaymentConfirmation({ addOns }) {
+	let order = sessionStorage.getItem('order')
+	if (order) order = JSON.parse(order)
+
 	return (
 		<Fragment>
 			<Col md={7} lg={6}>

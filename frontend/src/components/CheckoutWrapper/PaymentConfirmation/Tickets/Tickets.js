@@ -6,24 +6,20 @@ import Button from 'react-bootstrap/Button';
 
 import './tickets.scss';
 
-export default function Tickets() {
+export default function Tickets({order}) {
+
 	return (
 		<Fragment>
 			<h1 className="section-title section-title--muted">Tickets</h1>
 
 			<Stack gap={4} as="ul" className="mt-md-3 ">
-				<li className="ticket">
-					<Ticket />
-				</li>
-				<li className="ticket">
-					<Ticket />
-				</li>
-				<li className="ticket">
-					<Ticket />
-				</li>
-				<li className="ticket">
-					<Ticket />
-				</li>
+				{ order && order.tickets.map((ticket, index) => {
+					return (
+						<li className="ticket" key={index}>
+							<Ticket ticket={ticket} order={order}/>
+						</li>
+					)
+				})}
 			</Stack>
 			<Button variant="primary" id="myWalletBtn">
 				Go to My Wallet
