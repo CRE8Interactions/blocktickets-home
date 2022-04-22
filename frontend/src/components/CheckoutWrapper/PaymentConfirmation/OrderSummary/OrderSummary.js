@@ -6,7 +6,14 @@ import Col from 'react-bootstrap/Col';
 
 import './orderSummary.scss';
 
-export default function OrderSummary() {
+
+export default function OrderSummary({order}) {
+
+	let sum = order.tickets.map(ticket => ticket.cost)
+	sum = sum.reduce((a,v) => a + v ,0)
+	let fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee)
+	fees = fees.reduce((a,v) => a + v ,0)
+
 	return (
 		<ListGroup as="ul" variant="flush" id="order">
 			<ListGroup.Item as="li" className="list">
@@ -28,11 +35,21 @@ export default function OrderSummary() {
 								<span>Subtotal</span>
 							</Col>
 							<Col className="text-end">
-								<span>$260.00</span>
+								<span>${sum}</span>
 							</Col>
 						</Row>
 					</li>
-
+					<li>
+						{' '}
+						<Row className="split-row">
+							<Col>
+								<span>Fees</span>
+							</Col>
+							<Col className="text-end ">
+								<span>${fees}</span>
+							</Col>
+						</Row>
+					</li>
 					<li>
 						{' '}
 						<Row className="split-row">
@@ -40,18 +57,7 @@ export default function OrderSummary() {
 								<span>Tax</span>
 							</Col>
 							<Col className="text-end ">
-								<span>$24.00</span>
-							</Col>
-						</Row>
-					</li>
-					<li>
-						<Row className="split-row">
-							<Col>
-								<span>Shipment</span>
-							</Col>
-							<Col className="text-end
-											">
-								<span>$4.35</span>
+								<span>${(4.35 + 2.50).toFixed(2)}</span>
 							</Col>
 						</Row>
 					</li>
@@ -62,7 +68,7 @@ export default function OrderSummary() {
 							</Col>
 							<Col className="text-end
 											">
-								<span>$4.35</span>
+								<span>${order?.total}</span>
 							</Col>
 						</Row>
 					</li>

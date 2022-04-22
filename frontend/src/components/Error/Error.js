@@ -4,7 +4,19 @@ import Alert from 'react-bootstrap/Alert';
 
 import './error.scss';
 
-export default function Error() {
+export default function Error({ type }) {
+	const getErrorType = (type) => {
+		switch (type) {
+			case 'phone':
+				return 'Phone number is not valid';
+
+			case 'code':
+				return 'Code entered is incorrect';
+
+			default:
+				return 'Something went wrong. Please try again';
+		}
+	};
 	return (
 		<Alert variant={'danger'} className="gap-4 mt-3">
 			<div className="icon">
@@ -29,8 +41,7 @@ export default function Error() {
 				</svg>
 			</div>
 			<div className="body">
-				<h1 className="normal mb-1 fw-medium">Phone Number is not valid</h1>
-				<p>Please enter a number associated with blocktickets account</p>
+				<h1 className="normal mb-0 fw-medium">{getErrorType(type)}</h1>
 			</div>
 		</Alert>
 	);

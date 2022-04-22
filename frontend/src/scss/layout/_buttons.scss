@@ -40,7 +40,8 @@ button,
 }
 
 .btn-primary,
-.btn-secondary {
+.btn-secondary,
+.btn-success {
 	color: $white;
 
 	&:hover,
@@ -61,6 +62,8 @@ button,
 .btn-link {
 	margin-top: 0px;
 	padding: 0px;
+	border: 0;
+	vertical-align: baseline;
 }
 
 %btn-icon {
@@ -144,6 +147,7 @@ button,
 		content: url($data-svg-prefix + map-get($icons, 'rightArrow'));
 	}
 }
+
 .btn-location {
 	&::before {
 		content: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.6685 0.651997C13.0422 0.0796096 14.4203 1.45776 13.848 2.83148L9.89895 12.3091C9.12665 14.1626 6.41012 13.8493 6.08001 11.8687L5.58733 8.91263L2.63128 8.41995C0.650618 8.08984 0.337325 5.37331 2.19084 4.60101L11.6685 0.651997ZM12.6172 2.31866C12.7317 2.04392 12.456 1.76829 12.1813 1.88277L2.70366 5.83178C2.08582 6.08921 2.19026 6.99472 2.85047 7.10476L5.80653 7.59743C6.36849 7.6911 6.80886 8.13146 6.90252 8.69343L7.3952 11.6495C7.50523 12.3097 8.41074 12.4141 8.66818 11.7963L12.6172 2.31866Z' fill='%23FCFCFD'/%3E%3C/svg%3E%0A");

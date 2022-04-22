@@ -10,6 +10,7 @@ const messagingServiceSid = process.env.MG80e1372892690914b598b6478a992c1a;
 const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 module.exports = {
   /**
@@ -49,7 +50,7 @@ module.exports = {
           }
         }))
       }
-    }
+    }  
 
     let initOrganization = async () => {
       const count = await strapi.db.query('api::organization.organization').count()
@@ -67,13 +68,21 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
           result,
           params
         } = event;
+
+        // Changes on Order model
+        if (event.model.singularName === 'order') {
+          const paymentIntent = await stripe.paymentIntents.update(
+            event.params.data.paymentIntentId,
+            { metadata: {order_id: result.id }}
+          );
+        }
 
         // Changes on venue
         if (event.model.singularName === 'venue') {
@@ -191,14 +200,20 @@ module.exports = {
 
         // Changes on user model
         if (event.model.singularName === 'user') {
+          console.log(event.params)
           const profile = await strapi.db.query('api::profile.profile').create({
             data: {
-              username: event.params.data.username.toLowerCase()
+              username: event.params.data.username.toLowerCase(),
+              gender: event.params.data.gender.toLowerCase(),
+              name: event.params.data.name.toLowerCase(),
+              // dob: event.params.data.dob
             }
           })
           event.params.data.profile = profile
           event.params.data.email = event.params.data.email.toLowerCase()
           event.params.data.username = event.params.data.username.toLowerCase()
+          event.params.data.name = event.params.data.name.toLowerCase()
+          event.params.data.gender = event.params.data.gender.toLowerCase()
         }
 
         // Changes on profile model

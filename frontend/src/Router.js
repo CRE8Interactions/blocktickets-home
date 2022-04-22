@@ -1,16 +1,12 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {
 	HomePage,
 	LoginPage,
-	DashboardPage,
 	UpcomingEventsPage,
 	CollectablesPage,
 	TicketsPage,
 	CheckoutPage,
-	VenuePage,
-	OrganizationsPage,
-	SalesPage,
-	EventsPage
+	VenuePage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';

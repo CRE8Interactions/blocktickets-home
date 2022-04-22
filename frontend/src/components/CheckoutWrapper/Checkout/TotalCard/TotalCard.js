@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-
+import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
@@ -7,10 +7,12 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import { Spinner } from '../../../SpinnerContainer/Spinner';
+import { cartTotal } from '../../../../utilities/helpers';
+import { createOrder } from '../../../../utilities/api';
 
 import './totalCard.scss';
 
-export default function TotalCard({ setStatus, addOns }) {
+export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 	const [
 		expanded,
 		setExpanded
@@ -21,6 +23,56 @@ export default function TotalCard({ setStatus, addOns }) {
 		setPurchasing
 	] = useState(false);
 
+	let tickets = sessionStorage.getItem('cart');
+	if (tickets) tickets = JSON.parse(tickets);
+
+	const stripe = useStripe();
+  const elements = useElements();
+	const completePurchase = () => {
+		setPurchasing(true)
+		let data = {
+			cart: tickets,
+			paymentIntentId: intentId
+		}
+
+		createOrder(data)
+			.then((res) => {
+				// Need better way to store order data
+				sessionStorage.setItem('order', JSON.stringify(res.data))
+				sendPayment()
+			})
+			.catch((err) => console.error(err))
+	}
+
+	const sendPayment = async() => {
+		if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+
+    const {error} = await stripe.confirmPayment({
+      //`Elements` instance that was used to create the Payment Element
+      elements,
+      confirmParams: {
+        return_url: ''
+      },
+			redirect: 'if_required'
+    });
+
+    if (error) {
+      // This point will only be reached if there is an immediate error when
+      // confirming the payment. Show error to your customer (for example, payment
+      // details incomplete)
+      console.error(error.message);
+    } else {
+      // Your customer will be redirected to your `return_url`. For some payment
+      // methods like iDEAL, your customer will be redirected to an intermediate
+      // site first to authorize the payment, then redirected to the `return_url`.
+			setStatus('successful')
+    }
+	}
+
 	return (
 		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
@@ -28,7 +80,7 @@ export default function TotalCard({ setStatus, addOns }) {
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" className="card-header-price">
-					<span className="fw-bold fs-md">$279.00</span>
+					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.5)}</span>
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
@@ -58,11 +110,18 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<span>Tickets: $35.00 x 2</span>
+											<span>
+												Tickets: ${parseFloat(tickets.ticket.attributes.cost).toFixed(2)}{' '}
+												x {tickets.ticketCount}
+											</span>
 										</Col>
 
 										<Col className="text-end ">
-											<span>$70.00</span>
+											<span>
+												${parseFloat(
+													tickets.ticket.attributes.cost
+												).toFixed(2) * tickets.ticketCount}
+											</span>
 										</Col>
 									</Row>
 								</li>
@@ -74,20 +133,34 @@ export default function TotalCard({ setStatus, addOns }) {
 								<li>
 									<Row className="split-row">
 										<Col>
-											<span>Service Fee: $15.00 x 2</span>
+											<span>
+												Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)}{' '}
+												x {tickets.ticketCount}
+											</span>
 										</Col>
 										<Col className="text-end ">
-											<span>$30.00</span>
+											<span>
+												${(parseFloat(
+													tickets.ticket.attributes.fee
+												).toFixed(2) * tickets.ticketCount).toFixed(2)}
+											</span>
 										</Col>
 									</Row>
 								</li>
 								<li className="list">
 									<Row className="split-row">
 										<Col>
-											<span>Facility Charge: $12.00 x 2</span>
+											<span>
+												Facility Charge: ${parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2)}{' '}
+												x {tickets.ticketCount}
+											</span>
 										</Col>
 										<Col className="text-end ">
-											<span>$24.00</span>
+											<span>
+												${(parseFloat(
+													tickets.ticket.attributes.facilityFee
+												).toFixed(2) * tickets.ticketCount).toFixed(2)}
+											</span>
 										</Col>
 									</Row>
 								</li>
@@ -170,7 +243,7 @@ export default function TotalCard({ setStatus, addOns }) {
 						variant="primary"
 						size="lg"
 						className="icon-button w-100"
-						onClick={() => setStatus('successful')}>
+						onClick={() => completePurchase()}>
 						{purchasing ? (
 							<Fragment>
 								<Spinner color={'#fcfcfd'} size="sm" />

@@ -8,8 +8,6 @@ import Col from 'react-bootstrap/Col';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { IconButton } from '../IconButton';
 
-import profile from '../../assets/01.png';
-
 import './hero.scss';
 
 export default function Hero(props) {
@@ -36,13 +34,15 @@ export default function Hero(props) {
 											<SwiperSlide key={index}>
 												<Row className="justify-content-lg-between" key={index}>
 													<Col lg={7} xl={8}>
-														<img
-															src={event?.image?.url}
-															width="640"
-															height="556"
-															alt="image"
-															className="artist-image banner-image"
-														/>
+														<div className="image-wrapper">
+															<img
+																src={event?.image?.url}
+																width="640"
+																height="556"
+																alt="image"
+																className="artist-image banner-image"
+															/>
+														</div>
 													</Col>
 													<Col lg={4} className=" d-flex flex-column">
 														<h1 className="display-1">{ event?.name }</h1>

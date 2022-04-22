@@ -15,7 +15,7 @@ $spacer-xs: rem(24);
 $heading-spacer: rem(64); // page headings
 $heading-spacer-sm: rem(29); // page headings
 $gap: rem(14);
-$gap-sm: rem(9);
+$gap-sm: rem(10);
 $gap-xs: rem(4);
 
 $text-spacer: rem(32);
@@ -32,6 +32,14 @@ $text-spacer-xs: rem(16);
 
 .spacer-xs {
 	padding: $spacer-xs 0px;
+}
+
+.spacer-md {
+	padding: $spacer-md 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-sm 0px;
+	}
 }
 
 .spacer-lg {

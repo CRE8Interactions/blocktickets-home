@@ -26,6 +26,17 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::wallet.wallet"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "dob": {
+      "type": "date"
+    },
+    "gender": {
+      "type": "string",
+      "required": true
     }
   }
 }

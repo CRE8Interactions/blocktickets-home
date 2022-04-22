@@ -4,7 +4,7 @@ import Slider from 'rc-slider';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 
-import { formatNumber } from './../../../../../utilities/helper';
+import { formatNumber } from '../../../../../utilities/helpers';
 
 import 'rc-slider/assets/index.css';
 

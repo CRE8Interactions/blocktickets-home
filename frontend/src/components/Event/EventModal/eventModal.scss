@@ -1,11 +1,17 @@
 @use '../../../scss/theme/modal' as *;
 @use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
 
 .modal {
 	.event-details {
 		padding: $modal-inner-padding;
 		padding-top: em(15);
 		border-bottom: border();
+
+		.event-name {
+			@extend %text-truncate !optional;
+			width: 350px;
+		}
 	}
 
 	.artist-image {

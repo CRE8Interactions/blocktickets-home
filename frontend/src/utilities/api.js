@@ -34,6 +34,10 @@ export const createNewUser = (data) => {
   return instance.post('/verifies/newUser', data)
 }
 
+export const createOrder = (data) => {
+  return instance.post('/orders', data)
+}
+
 export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }
@@ -42,8 +46,8 @@ export const createOrganization = async (data) => {
   return instance.post('/organizations', data)
 }
 
-export const getPaymentIntent = async () => {
-  return instance.get('/payment/intent')
+export const getPaymentIntent = async (data) => {
+  return instance.post(`/payment/intent`, data)
 }
 
 export const getCategories = async () => {
@@ -54,8 +58,16 @@ export const getVenues = async () => {
   return instance.get('/venues')
 }
 
+export const getVenue = async (id) => {
+  return instance.get(`/venues?filters[id][$eq]=${id}`)
+}
+
 export const getEvents = async () => {
   return instance.get('/events?filters[status][$eq]=on_sale')
+}
+
+export const getMyEvents = async () => {
+  return instance.get('/events/myUpcomingEvents')
 }
 
 export const getEvent = async (id) => {

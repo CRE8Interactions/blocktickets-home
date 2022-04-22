@@ -38,11 +38,12 @@ export default function PurchaseTickets() {
 		setIsZoomed
 	] = useState(false);
 
-	const handleClick = (step, type = '') => {
+	const [ticket, setTicket] = useState()
+
+	const handleClick = (step, ticket) => {
 		// find key
 		setStep(Object.keys(steps).find((key) => key === step));
-
-		if (type) setType(type);
+		setTicket(ticket)
 	};
 
 	const handleGoBack = () => {
@@ -67,6 +68,7 @@ export default function PurchaseTickets() {
 				step={step}
 				type={param}
 				isZoomed={isZoomed}
+				ticket={ticket}
 			/>
 		</div>
 	);

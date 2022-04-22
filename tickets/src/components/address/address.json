@@ -31,6 +31,10 @@
     },
     "longitude": {
       "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "required": true
     }
   }
 }

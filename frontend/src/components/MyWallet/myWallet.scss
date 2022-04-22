@@ -22,7 +22,6 @@
 			@include breakpoint-min(lg) {
 				font-size: rem(14);
 			}
-
 			&:first-of-type .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'calendar'));
@@ -41,19 +40,17 @@
 			}
 			&:nth-of-type(4) .nav-link {
 				&::before {
-					content: url($data-svg-prefix + map-get($icons, 'settings'));
-				}
-			}
-			&:nth-of-type(5) .nav-link {
-				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'logout'));
 				}
 			}
 
 			.nav-link {
 				@extend %icon-text-box;
+				gap: $gap-sm;
 				font-size: rem(16);
 				padding: 0px;
+				color: $body-color;
+				font-size: inherit;
 
 				&:hover,
 				&:focus,

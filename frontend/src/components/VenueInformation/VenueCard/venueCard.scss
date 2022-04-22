@@ -25,12 +25,9 @@
 			.card-img {
 				background-color: $clr-neutral-2;
 				order: -3;
-				width: 36%;
+				width: 160px;
+				height: 160px;
 				margin-bottom: rem(25);
-
-				@include breakpoint-min(md) {
-					width: 70%;
-				}
 			}
 
 			.card-title {
