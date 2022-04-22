@@ -1,3 +1,6 @@
+export const COUNTDOWN_NUM = 9;
+export const COUNTDOWN_DURATION = 1000;
+
 export const getCopyrightYear = () => {
 	return new Date().getFullYear();
 };
