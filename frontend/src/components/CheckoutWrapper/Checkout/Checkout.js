@@ -9,7 +9,8 @@ import { BackButton } from '../../BackButton';
 
 import './checkout.scss';
 
-export default function Checkout({ addOns, setStatus }) {
+export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
+
 	return (
 		<Fragment>
 			<Col md={6}>
@@ -24,7 +25,7 @@ export default function Checkout({ addOns, setStatus }) {
 				</section>
 			</Col>
 			<Col md={6} lg={5} id="total-card">
-				<TotalCard setStatus={setStatus} addOns={addOns} />
+				<TotalCard setStatus={setStatus} addOns={addOns} setOrder={setOrder} intentId={intentId} />
 			</Col>
 		</Fragment>
 	);
