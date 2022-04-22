@@ -4,11 +4,11 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import './mySeats.scss';
+import './myTickets.scss';
 
-export default function MySeats() {
+export default function MyTickets() {
 	return (
-		<ListGroup as="ul" id="seats">
+		<ListGroup as="ul" id="my-tickets">
 			<ListGroup.Item as="li" className="seat-card">
 				<Stack direction="horizontal" className="seat-info">
 					<div className="seat-info-block">

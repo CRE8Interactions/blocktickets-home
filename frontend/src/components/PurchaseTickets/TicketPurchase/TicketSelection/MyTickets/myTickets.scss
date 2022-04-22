@@ -1,0 +1,55 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/theme/custom' as *;
+@use '../../../../../scss/layout' as *;
+
+.left-col {
+	#my-tickets {
+		padding-top: em(17);
+		.seat-card {
+			position: relative;
+			cursor: default;
+			border-radius: $br-textile;
+			border: none;
+
+			& + .seat-card {
+				margin-top: rem(12);
+			}
+
+			.btn--icon {
+				position: absolute;
+				right: 0px;
+				top: -11.9px;
+				width: 29px;
+				height: 29px;
+				background-image: url('../../../../../assets/icons/close.svg');
+				@extend %btn-background;
+				background-color: #fff;
+			}
+			.seat-info {
+				border-bottom: border();
+				padding-bottom: em(5);
+
+				&-block {
+					margin-right: rem(14);
+
+					&-label,
+					&-value {
+						display: block;
+					}
+
+					&-label {
+						font-size: $caption;
+						color: $gray-500;
+						font-weight: $font-weight-bolder;
+						margin-bottom: rem(4);
+					}
+
+					&-value {
+						font-size: $small;
+						font-weight: $fw-medium;
+					}
+				}
+			}
+		}
+	}
+}

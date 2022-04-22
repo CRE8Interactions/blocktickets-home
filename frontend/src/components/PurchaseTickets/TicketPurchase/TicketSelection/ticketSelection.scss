@@ -7,10 +7,10 @@
 		margin-bottom: $text-spacer-sm;
 	}
 
-	.seats-container {
+	.tickets-container {
 		flex: 1;
 	}
-	.seats--scrollable {
+	.tickets--scrollable {
 		@include scrollable();
 	}
 
