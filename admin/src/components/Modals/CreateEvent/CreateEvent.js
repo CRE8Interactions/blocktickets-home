@@ -55,7 +55,7 @@ export default function CreateEvent(props) {
 
   useEffect(() => {
     validateSteps()
-  }, [title, startDate, endDate, startTime, endTime, venue, type, image, description, maxQty, minQty, resaleRange, royalty, facilityFee, ticketPrice, ticketName, ticketQty, salesStartDate, salesStartTime, salesEndDate, salesEndTime])
+  }, [title, startDate, endDate, startTime, endTime, venue, type, presentedBy, image, description, maxQty, minQty, resaleRange, royalty, facilityFee, ticketPrice, ticketName, ticketQty, salesStartDate, salesStartTime, salesEndDate, salesEndTime])
 
   useEffect(() => {
     setStep(props.step)
@@ -146,6 +146,7 @@ export default function CreateEvent(props) {
 
     let data = {}
     data['name'] = title
+    data['presentedBy'] = presentedBy
     data['summary'] = description
     data['capacity'] = venue.capacity
     data['categories'] = type
@@ -261,6 +262,11 @@ export default function CreateEvent(props) {
         <Form>
           { step === 1 && 
             <>
+            <Form.Group className="mb-3" controlId="presentedBy">
+              <Form.Label>Presented By</Form.Label>
+              <Form.Control type="text" placeholder="Presented By" onChange={(e) => handleChange(e)} required />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="title">
               <Form.Label>Event Title</Form.Label>
               <Form.Control type="text" placeholder="Enter your event title" onChange={(e) => handleChange(e)} required />
