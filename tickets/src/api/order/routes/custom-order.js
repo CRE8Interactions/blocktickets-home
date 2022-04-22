@@ -2,8 +2,8 @@ module.exports = {
   routes: [
     {
       method: 'POST',
-      path: '/payment/intent',
-      handler: 'payment.getClientId'
+      path: '/orders/finalize',
+      handler: 'order.finalize'
     },
   ]
 }

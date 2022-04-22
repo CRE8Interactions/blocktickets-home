@@ -76,6 +76,14 @@
     "dob": {
       "required": true,
       "type": "date"
+    },
+    "gender": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
     }
   }
 }

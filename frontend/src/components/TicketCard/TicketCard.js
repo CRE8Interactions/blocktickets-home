@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
+import * as moment from 'moment';
 
 import profile from '../../assets/profile.svg';
 
@@ -13,7 +14,7 @@ import { TicketModal } from './TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ ticketType = '' }) {
+export default function TicketCard({ ticketType = '', order }) {
 	const [
 		modalType,
 		setModalType
@@ -77,25 +78,25 @@ export default function TicketCard({ ticketType = '' }) {
 				</div>
 				<Card.Img
 					variant="top"
-					src={profile}
+					src={order?.event?.image?.url}
 					width="281"
 					height="281"
 					className="rounded-lg mb-4"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5">Nic Fanciulli</Card.Title>
+					<Card.Title as="h5"></Card.Title>
 					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
-						FLOH &amp; Embrace Presents:
+						{order?.event?.presentedBy}
 					</Card.Subtitle>
 					<Stack className="event-details">
-						<p className="event-detail date small">Mar 13 9:00 PM EST</p>
-						<p className="event-detail venue small">CODA</p>
-						<p className="event-detail location small">Toronto, ON</p>
+						<p className="event-detail date small">{moment(order?.event?.start).format('MMM DD h:mm A')} EST</p>
+						<p className="event-detail venue small">{order?.event?.venue?.name}</p>
+						<p className="event-detail location small">{order?.event?.venue?.address[0]?.city}, {order?.event?.venue?.address[0]?.state}</p>
 					</Stack>
 					{ticketType !== 'collectable' && (
 						<Stack gap={2}>
 							<Badge bg="info" className="text-dark badge-lg">
-								General Admission
+								{order.tickets[0]?.generalAdmission === true ? 'General Admission' : 'Seated'}
 							</Badge>
 							<Button variant="dark" size="lg" disabled={ticketStatus === 'sale'}>
 								Check in

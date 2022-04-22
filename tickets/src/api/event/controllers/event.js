@@ -41,7 +41,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     let path = ctx.request.path
     let id = path.split('/')[3];
     const event = await strapi.entityService.findOne('api::event.event', id, {
-      fields: ['id', 'name', 'start', 'summary', 'end'],
+      fields: ['id', 'name', 'start', 'summary', 'end', 'presentedBy'],
       populate: {
         image: true,
         categories: true,
@@ -53,5 +53,33 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       }
     });
     return event
+  },
+  async myUpcomingEvents(ctx) {
+    let user = ctx.state.user
+    let order = await strapi.db.query('api::order.order').findMany({
+      populate: { 
+        event: {
+          where: {
+            start: { $gte: new Date() }
+          },
+          populate: {
+            venue: {
+              populate: {
+                address: true
+              }
+            },
+            image: true,
+          }
+        },
+        tickets: true,
+        user_permissions_user: {
+          where: {
+            id: user.id
+          }
+        }
+      },
+    });
+
+    return order
   }
 }));

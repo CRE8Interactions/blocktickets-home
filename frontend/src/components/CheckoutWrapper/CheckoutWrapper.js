@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import { getPaymentIntent } from '../../utilities/api';
 
 import Row from 'react-bootstrap/Row';
 
@@ -16,16 +20,45 @@ import './checkoutWrapper.scss';
 
 export default function CheckoutWrapper() {
 	let show = true;
+	let cart = sessionStorage.getItem('cart')
+
+	// Make sure to call `loadStripe` outside of a component’s render to avoid
+	// recreating the `Stripe` object on every render.
+	const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+
+	const [
+		clientSecret,
+		setClientSecret
+	] = useState('');
 
 	const [
 		status,
 		setStatus
 	] = useState('checkout');
 
+	const [ intentId, setIntentId] = useState('')
+
+	const [order, setOrder] = useState()
+
 	useLayoutEffect(() => {
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
 		const timer = document.getElementById('timer-container');
+
+		let cart = sessionStorage.getItem('cart')
+		if (cart) cart = JSON.parse(cart)
+		
+		// let total = cartTotal(cart, 4.35, 2.50)
+		// total = (parseFloat(total) * 100).toFixed()
+
+		let data = {
+			ticket: cart.ticket,
+			ticketCount: cart.ticketCount
+		}
+
+		getPaymentIntent(data)
+			.then((res) => {setClientSecret(res.data.client_secret); setIntentId(res.data.id)})
+			.catch((err) => console.error(err));
 
 		toggleTimer(timer, show);
 		toggleNavContent(!show, btns, nav);
@@ -48,6 +81,72 @@ export default function CheckoutWrapper() {
 
 	const addOns = [];
 
+	const appearance = {
+		theme: 'flat',
+		variables: {
+			fontFamily: ' "Poppins", sans-serif',
+			fontLineHeight: '1.4',
+			fontSizeBase: '14px',
+			fontSizeSm: '12px',
+			fontWeightNormal: '500',
+			borderRadius: '12px',
+			colorPrimary: '#5ab6f8',
+			colorBackground: '#fcfcfd',
+			colorText: '#23262F',
+			colorWarning: '#EF466F',
+			colorDanger: '#EF466F',
+			colorTextSecondary: '#777e90',
+			spacingUnit: '12px',
+			spacingGridRow: '24px'
+		},
+		rules: {
+			'.Input': {
+				boxShadow: '0px 0px 0px 2px #E6E8EC',
+				padding: '12.250px 14.875px',
+				lineHeight: 'var(--fontLineHeight)'
+			},
+
+			'.Input:focus': {
+				outline: '0',
+				boxShadow: '0px 0px 0px 2px var(--colorPrimary)'
+			},
+			'.Input:disabled, .Input--invalid:disabled': {
+				color: 'lightgray'
+			},
+			'.Tab': {
+				boxShadow: '0px 0px 0px 2px #E6E8EC',
+				padding: '12.250px 14.875px',
+				border: 'none'
+			},
+			'.Tab--selected, .Tab--selected:focus, .Tab--selected:hover': {
+				border: 'none',
+				boxShadow: '0px 0px 0px 2px var(--colorPrimary)',
+				backgroundColor: 'var(--colorPrimary)'
+			},
+			'.Label': {
+				fontWeight: '700',
+				textTransform: 'uppercase',
+				color: 'var(--colorTextSecondary)',
+				marginBottom: 'var(--spacingUnit)',
+				lineHeight: 'var(--fontLineHeight)'
+			},
+
+			'.Input--invalid': {
+				boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 2px var(--colorDanger)'
+			},
+
+			'.Error': {
+				marginTop: 'var(--spacingUnit)'
+			}
+		}
+	};
+
+	const options = {
+		// passing the client secret obtained from the server
+		clientSecret,
+		appearance
+	};
+
 	if (status === 'successful') {
 		const timer = document.getElementById('timer-container');
 
@@ -62,8 +161,10 @@ export default function CheckoutWrapper() {
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
 			<Row className="justify-content-between">
-				{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} />}
-				{status === 'successful' && <PaymentConfirmation addOns={addOns} />}
+				{clientSecret && ( <Elements stripe={stripePromise} options={options}>
+					{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} setOrder={setOrder} intentId={intentId} />}
+					{status === 'successful' && <PaymentConfirmation addOns={addOns} order={order} />}
+				</Elements> )}
 			</Row>
 		</div>
 	);

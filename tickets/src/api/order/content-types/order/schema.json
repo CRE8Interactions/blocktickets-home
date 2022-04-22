@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "processedAt": {
+      "type": "datetime"
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "details": {
+      "type": "json"
+    },
+    "paymentProcessor": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "open",
+      "required": false
+    },
+    "total": {
+      "type": "decimal",
+      "default": 0
+    },
+    "paymentIntentId": {
+      "type": "string"
+    }
+  }
+}

@@ -37,7 +37,7 @@ export default function Event(props) {
 					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
 						<h1 className="event-name">{event?.name}</h1>
 						<p className="subtitle tablet-desktop-only">
-							Embrace Presents:
+							{event?.presentedBy}
 						</p>
 						<Row>
 							<Col className="details-heading tablet-desktop-only" md={2}>

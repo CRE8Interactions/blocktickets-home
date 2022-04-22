@@ -12,7 +12,7 @@ import { COUNTDOWN_NUM, COUNTDOWN_DURATION } from '../../../utilities/helpers';
 
 import './checkout.scss';
 
-export default function Checkout({ addOns, setStatus }) {
+export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 
 	// Timer State
 	const [
@@ -93,7 +93,7 @@ export default function Checkout({ addOns, setStatus }) {
 				<section><Payment /></section>
 			</Col>
 			<Col md={6} lg={5} id="total-card">
-				<TotalCard setStatus={setStatus} addOns={addOns} />
+				<TotalCard setStatus={setStatus} addOns={addOns} setOrder={setOrder} intentId={intentId} />
 			</Col>
 			<CheckoutModal modalType={modalType} setModalType={setModalType} show={show} setShow={setShow} />
 		</Fragment>

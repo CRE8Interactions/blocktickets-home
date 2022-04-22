@@ -9,13 +9,16 @@ import { Tickets } from './Tickets';
 import './paymentConfirmation.scss';
 
 export default function PaymentConfirmation({ addOns }) {
+	let order = sessionStorage.getItem('order')
+	if (order) order = JSON.parse(order)
+
 	return (
 		<Fragment>
 			<Col md={7} lg={6}>
 				<h1 className="fs-md page-heading">Payment Successful</h1>
 
 				<section id="tickets" className="d-flex-column position-relative">
-					<Tickets />
+					<Tickets order={order} />
 				</section>
 
 				{addOns.length > 0 && (
@@ -25,7 +28,7 @@ export default function PaymentConfirmation({ addOns }) {
 				)}
 			</Col>
 			<Col md={5} id="order-card">
-				<OrderSummary />
+				<OrderSummary order={order} />
 			</Col>
 		</Fragment>
 	);
