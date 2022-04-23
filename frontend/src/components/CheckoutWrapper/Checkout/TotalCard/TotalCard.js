@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -28,6 +28,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 
 	const stripe = useStripe();
   const elements = useElements();
+	
 	const completePurchase = () => {
 		setPurchasing(true)
 		let data = {
@@ -240,6 +241,8 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 				</small>
 				<div id="payment-request-button">
 					<Button
+						id="payment-btn"
+						disabled={true}
 						variant="primary"
 						size="lg"
 						className="icon-button w-100"
