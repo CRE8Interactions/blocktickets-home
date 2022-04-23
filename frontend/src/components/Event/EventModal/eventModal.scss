@@ -2,7 +2,10 @@
 @use '../../../scss/abstracts' as *;
 @use '../../../scss/layout' as *;
 
-.modal {
+#event-modal {
+	.modal-content {
+		width: 569px;
+	}
 	.event-details {
 		padding: $modal-inner-padding;
 		padding-top: em(15);
