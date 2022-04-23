@@ -1,0 +1,54 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+@use '../../scss/theme/colors' as *;
+
+#settings-options-container {
+	row-gap: rem(16);
+}
+
+.setting-card {
+	box-shadow: $box-shadow;
+	height: 100%;
+
+	&:focus,
+	&:hover {
+		background-color: $clr-neutral-3;
+
+		*,
+		.card-text {
+			color: $clr-white;
+		}
+
+		svg {
+			filter: brightness(0) saturate(100%) invert(89%) sepia(11%) saturate(7%)
+				hue-rotate(222deg) brightness(104%) contrast(100%);
+		}
+	}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.card-heading {
+		flex-basis: 100px;
+		@include breakpoint-min(md) {
+			flex-basis: 120px;
+		}
+	}
+
+	.card-title,
+	.card-text {
+		margin-bottom: rem(15);
+	}
+
+	.card-text {
+		font-size: $caption;
+		color: $muted;
+
+		@include breakpoint-min(md) {
+			font-size: $body-2;
+			margin-bottom: rem(20);
+		}
+	}
+}
