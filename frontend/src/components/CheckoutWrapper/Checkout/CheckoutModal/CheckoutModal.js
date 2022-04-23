@@ -14,7 +14,7 @@ const typeOfModal = (modalType, handleClose) => {
 			return <ReminderModal handleClose={handleClose} />;
 
 		case 'timeout':
-			return <TimeoutModal handleClose={handleClose} />;
+			return <TimeoutModal />;
 
 		case 'leave':
 			return <LeaveModal handleClose={handleClose} />;
