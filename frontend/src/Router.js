@@ -9,7 +9,8 @@ import {
 	CollectablesPage,
 	SettingsPage,
 	SettingsOptionsPage,
-	PersonalDetailsPage
+	PersonalDetailsPage,
+	LoginSecurityPage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
@@ -42,6 +43,7 @@ const Router = () => {
 				<Route path="settings" element={<SettingsPage />}>
 					<Route index element={<SettingsOptionsPage />} />
 					<Route path="personal-details" element={<PersonalDetailsPage />} />
+					<Route path="login-security" element={<LoginSecurityPage />} />
 				</Route>
 				{/* Add a NotFound route */}
 			</Routes>
