@@ -51,10 +51,7 @@ export default function TransferModal() {
 							<Form.Control.Feedback type="invalid">
 								<Error type="phone" />
 							</Form.Control.Feedback>
-							<Button
-								onClick={() => setStep('successful')}
-								variant="primary"
-								size="lg">
+							<Button onClick={() => setStep('successful')} variant="primary">
 								Transfer
 							</Button>
 						</Form>
