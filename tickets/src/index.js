@@ -200,7 +200,6 @@ module.exports = {
 
         // Changes on user model
         if (event.model.singularName === 'user') {
-          console.log(event.params)
           const profile = await strapi.db.query('api::profile.profile').create({
             data: {
               username: event.params.data.username.toLowerCase(),

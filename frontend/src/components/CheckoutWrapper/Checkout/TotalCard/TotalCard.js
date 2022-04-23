@@ -240,13 +240,13 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
 				</small>
 				<div id="payment-request-button">
+					{/* Need to rethink how payment element and totalCard manage state */}
 					<Button
 						id="payment-btn"
-						disabled={true}
 						variant="primary"
 						size="lg"
-						className="icon-button w-100"
-						onClick={() => completePurchase()}>
+						className="icon-button w-100 d-none"
+						onClick={(e) => completePurchase()}>
 						{purchasing ? (
 							<Fragment>
 								<Spinner color={'#fcfcfd'} size="sm" />
@@ -255,6 +255,18 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 						) : (
 							<span>Complete Purchase</span>
 						)}
+					</Button>
+				</div>
+
+				<div id="payment-request-button">
+					{/* Need to rethink how payment element and totalCard manage state */}
+					<Button
+						id="payment-btn-disabled"
+						disabled
+						variant="primary"
+						size="lg"
+						className="icon-button w-100">
+							<span>Complete Purchase</span>
 					</Button>
 				</div>
 			</Card.Footer>
