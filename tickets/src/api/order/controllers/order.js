@@ -19,8 +19,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       },
       limit: cart.ticketCount
     })
-    // Not enough tickets available
-    if (tickets.length !== cart.limit) return 400
 
     let ids = tickets.map(ticket => ticket.id)
     // Updates statuses
@@ -52,6 +50,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       },
     });
 
+    console.log('Order ', order)
+
     order = await strapi.db.query('api::order.order').findOne({
       where: { id: order.id },
       populate: { 
@@ -75,17 +75,17 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let data = ctx.request.body;
     let type = data.type;
     if (!type) return
-    let orderId;
+    let paymentIntentId;
     let order;
     let ticketIds;
     // Handle the event
     switch (type) {
       case 'payment_intent.succeeded':
         console.log('succeeded')
-        orderId = data.data.object.metadata.order_id;
+        paymentIntentId = data.data.object.id;
 
         order = await strapi.db.query('api::order.order').findOne({
-          where: { id: orderId },
+          where: { paymentIntentId },
           populate: { tickets: true },
         });
 
@@ -100,7 +100,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         });
 
         await strapi.db.query('api::order.order').update({
-          where: { id: orderId },
+          where: { paymentIntentId },
           data: {
             status: 'complete'
           }
@@ -108,10 +108,10 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       break;
       case 'payment_intent.payment_failed':
         console.log('failed')
-        orderId = data.data.object.metadata.order_id;
+        paymentIntentId = data.data.object.id;
 
         order = await strapi.db.query('api::order.order').findOne({
-          where: { id: orderId },
+          where: { paymentIntentId },
           populate: { tickets: true },
         });
 
@@ -126,7 +126,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         });
 
         await strapi.db.query('api::order.order').update({
-          where: { id: orderId },
+          where: { paymentIntentId },
           data: {
             status: 'failed'
           }

@@ -11,7 +11,7 @@ export default function Payment({checkValid}) {
 			<Form id="checkout-form">
 				<Form.Group className="form-group" controlId="card-holder">
 					<Form.Label>Name on Card</Form.Label>
-					<Form.Control type="text" name="card-holder" onChange={ (e) => name = e.target.value } />
+					<Form.Control type="text" name="card-holder" onChange={ (e) => name = e.target.value } autoComplete={'off'} />
 				</Form.Group>
 				<PaymentElement onChange={(e) => checkValid(e, name)} />
 			</Form>
