@@ -1,8 +1,8 @@
 @use './../../scss/abstracts' as *;
 @use './../../scss/layout' as *;
-@use './../../scss/theme/colors' as *;
+@use './../../scss/theme/custom' as *;
 
-.login-signup {
+#login-signup-container {
 	@include breakpoint-max(md) {
 		gap: rem(16);
 	}
@@ -27,6 +27,8 @@
 	.subtitle {
 		font-size: $caption;
 		color: $muted;
+		line-height: $line-height-base;
+		font-weight: $fw-normal;
 	}
 
 	small {
