@@ -54,11 +54,26 @@ export default function LoginSignupForm() {
 		setFormData
 	] = useState({});
 
-	const [name, setName] = useState('')
-	const [username, setUsername] = useState('')
-	const [email, setEmail] = useState('')
-	const [dob, setDob] = useState('')
-	const [gender, setGender] = useState('')
+	const [
+		name,
+		setName
+	] = useState('');
+	const [
+		username,
+		setUsername
+	] = useState('');
+	const [
+		email,
+		setEmail
+	] = useState('');
+	const [
+		dob,
+		setDob
+	] = useState('');
+	const [
+		gender,
+		setGender
+	] = useState('');
 
 	const { setAuthenticated } = useContext(UserContext);
 
@@ -87,11 +102,20 @@ export default function LoginSignupForm() {
 			.then((res) => setCountrycode(res.data.country_code));
 	}, []);
 
-	useEffect(() => {
-		if (name && email && gender && dob && username) {
-			setFormValid(true);
-		}
-	}, [name, username, email, dob, gender])
+	useEffect(
+		() => {
+			if (name && email && gender && dob && username) {
+				setFormValid(true);
+			}
+		},
+		[
+			name,
+			username,
+			email,
+			dob,
+			gender
+		]
+	);
 
 	function setVal(e) {
 		const num1 = document.getElementById('num1');
@@ -220,7 +244,7 @@ export default function LoginSignupForm() {
 								Code is set to <span className="text-primary">{phoneNumber}</span>
 							</p>
 						</div>
-						<Form.Group>
+						<Form.Group controlId="code">
 							<Form.Label>Enter Code</Form.Label>
 							<Stack direction="horizontal" gap={3}>
 								<Form.Control
