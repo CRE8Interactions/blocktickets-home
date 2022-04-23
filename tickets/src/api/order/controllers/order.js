@@ -19,6 +19,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       },
       limit: cart.ticketCount
     })
+    // Not enough tickets available
+    if (tickets.length !== cart.limit) return 400
 
     let ids = tickets.map(ticket => ticket.id)
     // Updates statuses
@@ -39,6 +41,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       data: {
         event: cart.ticket.attributes.eventId,
         users_permissions_user: user,
+        userId: user.id,
         tickets,
         paymentProcessor: 'stripe',
         status: 'open',
