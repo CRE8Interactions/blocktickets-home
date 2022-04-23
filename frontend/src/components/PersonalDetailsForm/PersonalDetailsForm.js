@@ -104,12 +104,6 @@ export default function PersonalDetailsForm() {
 
 	return (
 		<Fragment>
-			<div className="heading">
-				<h1 className="fs-md">Personal Details</h1>
-				<h2 className="normal text-muted fw-normal m-0">
-					Access and change your personal details
-				</h2>
-			</div>
 			<Form className="d-flex-column">
 				<Form.Group className="form-group" controlId="email">
 					<Form.Label>Email</Form.Label>
