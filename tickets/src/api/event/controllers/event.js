@@ -56,8 +56,18 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
   },
   async myUpcomingEvents(ctx) {
     let user = ctx.state.user
-    let order = await strapi.db.query('api::order.order').findMany({
-      populate: { 
+
+    const order = await strapi.entityService.findMany('api::order.order', {
+      filters: {
+        $and:[
+          { status: 'complete'},
+          { userId: user.id }
+        ]
+      },
+      populate: {
+        users_permissions_user: {
+          fields: ['name', 'username', 'email', 'phoneNumber']
+        },
         event: {
           where: {
             start: { $gte: new Date() }
@@ -72,13 +82,9 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
           }
         },
         tickets: true,
-        user_permissions_user: {
-          where: {
-            id: user.id
-          }
-        }
-      },
-    });
+
+      }
+    })
 
     return order
   }

@@ -47,6 +47,10 @@
     },
     "paymentIntentId": {
       "type": "string"
+    },
+    "userId": {
+      "type": "string",
+      "required": true
     }
   }
 }
