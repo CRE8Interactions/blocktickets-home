@@ -12,8 +12,7 @@ import './eventModal.scss';
 
 export default function EventModal({ show, handleClose, event }) {
 	return (
-		<div className="modal">
-			<Modal scrollable centered fullscreen="md-down" show={show} onHide={handleClose}>
+			<Modal id="event-modal" scrollable centered fullscreen="md-down" show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title as="h4">Event information</Modal.Title>
 				</Modal.Header>
@@ -59,6 +58,5 @@ export default function EventModal({ show, handleClose, event }) {
 					</div>
 				</Modal.Body>
 			</Modal>
-		</div>
 	);
 }
