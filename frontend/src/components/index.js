@@ -15,6 +15,7 @@ export { CollectablesSlider } from './Slider/CollectablesSlider';
 export { SettingsWrapper } from './SettingsWrapper';
 export { SettingsOptions } from './SettingsOptions';
 export { PersonalDetailsForm } from './PersonalDetailsForm';
+export { LoginSecurityForm } from './LoginSecurityForm';
 export { Sidenav } from './Sidenav';
 export { CreateOrg } from './Forms/CreateOrg';
 export { EventsTable } from './Tables/EventsTable';
