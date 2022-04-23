@@ -1,6 +1,6 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout' as *;
-@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/custom' as *;
 
 #settings-container {
 	.form-container {
@@ -10,22 +10,12 @@
 	.heading {
 		margin-bottom: $text-spacer;
 	}
-	.title {
-		text-transform: uppercase;
-		font-size: $body-2;
-		font-weight: bold;
-		margin-bottom: rem(14);
-	}
 
 	.subtitle {
-		font-size: $caption;
+		font-size: $small;
 		color: $muted;
-	}
-
-	small {
-		font-size: $caption;
-		color: $muted;
-		margin-top: $text-spacer;
-		text-align: center;
+		line-height: $line-height-base;
+		font-weight: $fw-normal;
+		margin: 0px;
 	}
 }
