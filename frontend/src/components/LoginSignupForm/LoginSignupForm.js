@@ -196,7 +196,7 @@ export default function LoginSignupForm() {
 	};
 
 	return (
-		<Row className="spacer-md  login-signup">
+		<Row className="spacer-md" id="login-signup-container">
 			<Col md={4}>{step > 0 && <BackButton handleGoBack={handleGoBack} />}</Col>
 			<Col md={6} className="form-container d-flex-column">
 				{step === 0 && (
@@ -209,11 +209,11 @@ export default function LoginSignupForm() {
 						</div>
 						<div className="step-desc">
 							<h3 className="title">Verify your mobile number</h3>
-							<p className="subtitle">
+							<h4 className="subtitle">
 								Select your country and enter your mobile number. You'll receive an
 								access code via text message. If you don’t have an account, we will
 								automatically create one for you.
-							</p>
+							</h4>
 						</div>
 						<Form.Group controlId="phone-number">
 							<Form.Label>Mobile Number</Form.Label>
