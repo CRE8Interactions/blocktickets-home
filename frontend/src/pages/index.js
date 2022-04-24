@@ -9,3 +9,4 @@ export { SettingsPage } from './SettingsPage';
 export { SettingsOptionsPage } from './SettingsPage/SettingsOptionsPage';
 export { PersonalDetailsPage } from './SettingsPage/PersonalDetailsPage';
 export { LoginSecurityPage } from './SettingsPage/LoginSecurityPage';
+export { OrderPage } from './OrderPage';

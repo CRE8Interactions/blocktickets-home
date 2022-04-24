@@ -38,6 +38,10 @@ export const createOrder = (data) => {
   return instance.post('/orders', data)
 }
 
+export const getOrder = (id) => {
+  return instance.get(`/orders?filters[orderId][$eq]=${id}`)
+}
+
 export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }

@@ -11,6 +11,7 @@ const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+const orderId = require('order-id')('blocktickets')
 
 module.exports = {
   /**
@@ -68,13 +69,18 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
           result,
           params
         } = event;
+
+        // Changes on ticket transer
+        if (event.model.singularName === 'ticket-transfer') {
+          strapi.service('api::notification.notification').transferNotification()
+        }
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
@@ -166,6 +172,11 @@ module.exports = {
       },
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
+
+        // Changes on Order model
+        if (event.model.singularName === 'order') {
+          event.params.data.orderId = orderid.generate();
+        }
 
         // Changes on Organization model
         if (event.model.singularName === 'organization') {

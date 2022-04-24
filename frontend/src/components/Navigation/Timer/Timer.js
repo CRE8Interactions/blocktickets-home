@@ -35,25 +35,26 @@ export default function Timer() {
 		setModalType
 	] = useState();
 
-const currentTime = moment().unix();
+	const currentTime = moment().unix();
 	const endTime = moment().add(COUNTDOWN_NUM, 'minutes').unix();
 	const diffTime = endTime - currentTime;
 	let duration = moment.duration(diffTime * COUNTDOWN_DURATION, 'milliseconds');
 	const interval = COUNTDOWN_DURATION;
 
-	let time; 
-	useEffect(() => {
-		time = setInterval(() => {
-			duration = moment.duration(duration - interval, 'milliseconds');
-			let seconds = duration.seconds();
-			if (seconds < 10) {
-				seconds = `0${seconds}`;
-			}
+	let time;
 
-			setRemaining(`${duration.minutes()}:${seconds}`);
-			setRemainingMinutes(duration.minutes())
-			setRemainingSeconds(seconds)
-		}, interval);
+	useEffect(() => {
+		// time = setInterval(() => {
+		// 	duration = moment.duration(duration - interval, 'milliseconds');
+		// 	let seconds = duration.seconds();
+		// 	if (seconds < 10) {
+		// 		seconds = `0${seconds}`;
+		// 	}
+
+		// 	setRemaining(`${duration.minutes()}:${seconds}`);
+		// 	setRemainingMinutes(duration.minutes())
+		// 	setRemainingSeconds(seconds)
+		// }, interval);
 	}, []);
 
 	const handleShow = () => setShow(true);

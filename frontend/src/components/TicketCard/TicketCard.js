@@ -84,7 +84,7 @@ export default function TicketCard({ ticketType = '', order }) {
 					className="rounded-lg mb-4"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5"></Card.Title>
+					<Card.Title as="h5">{order?.event?.name}</Card.Title>
 					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
 						{order?.event?.presentedBy}
 					</Card.Subtitle>

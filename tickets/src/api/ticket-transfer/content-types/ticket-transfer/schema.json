@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ticket_transfers",
+  "info": {
+    "singularName": "ticket-transfer",
+    "pluralName": "ticket-transfers",
+    "displayName": "ticketTransfer"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fromUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "toUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "fromUserId": {
+      "type": "string",
+      "required": true
+    },
+    "toUserId": {
+      "type": "string",
+      "required": true
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket"
+    },
+    "complete": {
+      "type": "boolean",
+      "default": false
+    },
+    "transferedOn": {
+      "type": "datetime"
+    },
+    "emailAddressToUser": {
+      "type": "string"
+    },
+    "phoneNumberToUser": {
+      "type": "string"
+    }
+  }
+}

@@ -1,8 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import PhoneInput from 'react-phone-number-input';
+import axios from 'axios';
 
 import { Error } from './../../../Error';
 import { SuccessContainer } from './../SuccessContainer';
@@ -12,6 +14,33 @@ export default function TransferModal() {
 		step,
 		setStep
 	] = useState('transfer');
+
+	const [
+		phoneNumber,
+		setPhoneNumber
+	] = useState('');
+
+	const [
+		countryCode,
+		setCountrycode
+	] = useState('');
+
+	const [
+		hasError,
+		setHasError
+	] = useState(false);
+
+	const submit = () => {
+		data = {
+			phoneNumber
+		}
+	}
+
+	useEffect(() => {
+		axios
+			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
+			.then((res) => setCountrycode(res.data.country_code));
+	}, []);
 
 	return (
 		<Fragment>
@@ -46,7 +75,13 @@ export default function TransferModal() {
 						<Form>
 							<Form.Group controlId="phone-number">
 								<Form.Label>Phone Number</Form.Label>
-								<Form.Control type="tel" placeholder="(416) 232 3423" />
+									<PhoneInput
+									defaultCountry={countryCode}
+									value={phoneNumber}
+									required
+									onChange={(e) => setphoneNumber}
+									className={hasError ? 'error-border' : ''}
+								/>
 							</Form.Group>
 							<Form.Control.Feedback type="invalid">
 								<Error type="phone" />

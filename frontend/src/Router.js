@@ -10,7 +10,8 @@ import {
 	SettingsPage,
 	SettingsOptionsPage,
 	PersonalDetailsPage,
-	LoginSecurityPage
+	LoginSecurityPage,
+	OrderPage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
@@ -39,6 +40,7 @@ const Router = () => {
 
 				<Route path="venue/:id" element={<VenuePage />} />
 				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
+				<Route path="order/:id" element={<OrderPage />} />
 				<Route path="collectables" element={<CollectablesPage />} />
 				<Route path="settings" element={<SettingsPage />}>
 					<Route index element={<SettingsOptionsPage />} />
