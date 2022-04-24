@@ -4,12 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PhoneInput from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 import axios from 'axios';
+import { createTicketTransfer } from '../../../../utilities/api';
 
 import { Error } from './../../../Error';
 import { SuccessContainer } from './../SuccessContainer';
 
-export default function TransferModal() {
+export default function TransferModal({ticket, order}) {
 	const [
 		step,
 		setStep
@@ -36,18 +38,34 @@ export default function TransferModal() {
 		}
 	}
 
+	const oId = ticket.uuid.split('-')[4]
+
 	useEffect(() => {
 		axios
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
 			.then((res) => setCountrycode(res.data.country_code));
 	}, []);
 
+	const submitTransfer = () => {
+		let data = {
+			phoneNumber: phoneNumber,
+			orderId: order.id,
+			ticketId: ticket.id
+		}
+
+		createTicketTransfer(data)
+			.then((res) => {
+				setStep('successful')
+			})
+			.catch((err) => console.error(err))
+	}
+
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
 				<div>
 					<Modal.Title as="h4">Transfer ticket</Modal.Title>
-					<p className="ticket-code">nicfanciulli #9358</p>
+					<p className="ticket-code">{ticket?.name} #{oId}</p>
 				</div>
 			</Modal.Header>
 			<Modal.Body>
@@ -79,14 +97,14 @@ export default function TransferModal() {
 									defaultCountry={countryCode}
 									value={phoneNumber}
 									required
-									onChange={(e) => setphoneNumber}
+									onChange={(e) => setPhoneNumber(e)}
 									className={hasError ? 'error-border' : ''}
 								/>
 							</Form.Group>
 							<Form.Control.Feedback type="invalid">
 								<Error type="phone" />
 							</Form.Control.Feedback>
-							<Button onClick={() => setStep('successful')} variant="primary">
+							<Button onClick={(e) => submitTransfer() } variant="primary" disabled={!isValidPhoneNumber(phoneNumber)}>
 								Transfer
 							</Button>
 						</Form>

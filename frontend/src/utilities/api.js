@@ -81,3 +81,7 @@ export const getEvent = async (id) => {
 export const getEventTickets = async (id) => {
   return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available`)
 }
+
+export const createTicketTransfer = (data) => {
+  return instance.post('/ticket-transfers', data)
+}

@@ -18,7 +18,6 @@ export default function UpcomingEventsPage() {
 				let upcoming = []
 				let past = []
 				
-				console.log(res.data)
 				res.data.map(o => {
 					if (moment(o.event.start) >= moment()) upcoming.push(o)
 					if (moment(o.event.start) < moment()) past.push(o)

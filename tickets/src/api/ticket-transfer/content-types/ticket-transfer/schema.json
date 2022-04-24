@@ -4,7 +4,8 @@
   "info": {
     "singularName": "ticket-transfer",
     "pluralName": "ticket-transfers",
-    "displayName": "ticketTransfer"
+    "displayName": "ticketTransfer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -21,13 +22,9 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "fromUserId": {
-      "type": "string",
-      "required": true
-    },
     "toUserId": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "tickets": {
       "type": "relation",
@@ -46,6 +43,31 @@
     },
     "phoneNumberToUser": {
       "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "pending",
+      "required": true
+    },
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order"
+    },
+    "ticketIds": {
+      "type": "json",
+      "required": true
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "fromUserId": {
+      "type": "biginteger"
+    },
+    "orderId": {
+      "type": "biginteger"
     }
   }
 }
