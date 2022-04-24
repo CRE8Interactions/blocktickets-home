@@ -7,14 +7,14 @@ import { TicketCard } from '../../TicketCard';
 // Import Swiper styles
 import 'swiper/css';
 
-export default function UpcomingEventsSlider({order}) {
+export default function UpcomingEventsSlider({order, tickets}) {
 	return (
 		<div className="swiper-page">
 			<Slider slidesPerView={'auto'} breakpoints={false}>
-				{ order && order.map((o, index) => {
+				{ order && tickets && tickets.map((ticket, index) => {
 					return(
 						<SwiperSlide className="w-auto" key={index}>
-							<TicketCard order={o} />
+							<TicketCard order={order} ticket={ticket} />
 						</SwiperSlide>
 					)
 				})}

@@ -6,7 +6,8 @@ import {
 	CollectablesPage,
 	TicketsPage,
 	CheckoutPage,
-	VenuePage
+	VenuePage,
+	OrderPage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
@@ -33,6 +34,7 @@ const Router = () => {
 					}
 				/>
 				<Route path="venue/:id" element={<VenuePage />} />
+				<Route path="order/:id" element={<OrderPage />} />
 				{/* Add a NotFound route */}
 			</Routes>
 		</ScrollToTop>

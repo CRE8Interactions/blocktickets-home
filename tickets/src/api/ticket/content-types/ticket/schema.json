@@ -114,6 +114,13 @@
       "type": "decimal",
       "default": 3,
       "required": true
+    },
+    "transfered": {
+      "type": "boolean",
+      "default": false
+    },
+    "transferedOn": {
+      "type": "datetime"
     }
   }
 }
