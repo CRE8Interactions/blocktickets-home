@@ -14,7 +14,7 @@ import { TicketModal } from './TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ ticketType = '', order }) {
+export default function TicketCard({ ticketType = '', order, ticket }) {
 	const [
 		modalType,
 		setModalType
@@ -112,6 +112,8 @@ export default function TicketCard({ ticketType = '', order }) {
 				setShow={setShow}
 				ticketStatus={ticketStatus}
 				setTicketStatus={setTicketStatus}
+				ticket={ticket}
+				order={order}
 			/>
 		</Fragment>
 	);

@@ -79,7 +79,18 @@ module.exports = {
 
         // Changes on ticket transer
         if (event.model.singularName === 'ticket-transfer') {
-          strapi.service('api::notification.notification').transferNotification()
+          // dont send SMS when running test
+          if (process.env.NODE_ENV === 'test') return;
+
+          await client.messages
+            .create({
+              body: `${params.data.fromUser.name} has transfer a ticket to ${params.data.event.name}, access BlockTicket.xyz and go to your wallet to claim your ticket`,
+              messagingServiceSid: messagingServiceSid,
+              to: params.data.phoneNumberToUser,
+              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
+            })
+            .then(message => console.log(message.body))
+            .done()
         }
 
         // Changes on Order model
@@ -175,7 +186,7 @@ module.exports = {
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
-          event.params.data.orderId = orderid.generate();
+          event.params.data.orderId = orderId.generate();
         }
 
         // Changes on Organization model
