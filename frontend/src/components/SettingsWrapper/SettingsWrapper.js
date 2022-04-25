@@ -13,7 +13,9 @@ export default function SettingsWrapper({ children }) {
 			<Col md={4}>
 				<BackButton marginBottom="4" />
 			</Col>
-			<Col md={5}>{children}</Col>
+			<Col md={5} className="d-flex-column">
+				{children}
+			</Col>
 		</Row>
 	);
 }
