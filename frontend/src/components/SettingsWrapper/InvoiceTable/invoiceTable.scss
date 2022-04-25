@@ -3,9 +3,8 @@
 @use './../../../scss/theme/colors' as *;
 
 #invoices {
-	&::before {
-		@include full-width-border();
-	}
+	border-top: border();
+
 	.withdraw-card {
 		&.card--dark {
 			.card-body {
