@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import PhoneInput from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 import axios from 'axios';
 import UserContext from '../../context/User/user';
 
@@ -95,6 +96,10 @@ export default function LoginSignupForm() {
 		let curStep = step;
 		setStep(--curStep);
 	};
+
+	const validNumber = () => {
+		return phoneNumber && isValidPhoneNumber(phoneNumber)
+	}
 
 	useEffect(() => {
 		axios
@@ -231,7 +236,7 @@ export default function LoginSignupForm() {
 						<Button
 							size="lg"
 							className="icon-button btn-next"
-							disabled={hasError}
+							disabled={!validNumber()}
 							onClick={(e) => submit()}>
 							Validate
 						</Button>
