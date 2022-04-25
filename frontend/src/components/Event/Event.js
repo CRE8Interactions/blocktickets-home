@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import profile from '../../assets/profile-thumbnail.png';
+import { InfoIcon } from '../InfoIcon';
 import info from '../../assets/icons/info.svg';
 
 import './event.scss';
@@ -79,7 +79,7 @@ export default function Event(props) {
 							id="event-info"
 							className="btn--info"
 							onClick={handleShow}>
-							<img src={info} alt="" />
+							<InfoIcon />
 							<span className="tablet-desktop-only">Event description</span>
 						</Button>
 
