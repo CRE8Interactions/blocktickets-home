@@ -55,7 +55,7 @@ export default function SettingsOptionsPage() {
 				</Link>
 			</Col>
 			<Col xs={12} md={5}>
-				<Link to="">
+				<Link to="payment-information">
 					<Card body className="card-lg card--light setting-card">
 						<div className="card-heading">
 							<Card.Title as="h5">Payment information</Card.Title>

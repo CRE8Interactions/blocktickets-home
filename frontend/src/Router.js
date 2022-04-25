@@ -6,12 +6,13 @@ import {
 	CheckoutPage,
 	VenuePage,
 	UpcomingEventsPage,
+	OrderPage,
 	CollectablesPage,
 	SettingsPage,
 	SettingsOptionsPage,
 	PersonalDetailsPage,
 	LoginSecurityPage,
-	OrderPage
+	PaymentInformationPage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
@@ -46,6 +47,7 @@ const Router = () => {
 					<Route index element={<SettingsOptionsPage />} />
 					<Route path="personal-details" element={<PersonalDetailsPage />} />
 					<Route path="login-security" element={<LoginSecurityPage />} />
+					<Route path="payment-information" element={<PaymentInformationPage />} />
 				</Route>
 				{/* Add a NotFound route */}
 			</Routes>
