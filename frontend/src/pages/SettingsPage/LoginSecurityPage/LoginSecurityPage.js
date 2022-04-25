@@ -6,7 +6,7 @@ export default function LoginSecurityPage() {
 	return (
 		<SettingsWrapper>
 			<div className="heading">
-				<h1 className="fs-md">Login Security</h1>
+				<h1 className="page-title">Login Security</h1>
 				<h2 className="subtitle">
 					Update the phone number associated with this account, please fill in the
 					following fields. Your phone number is requested for security reasons.
