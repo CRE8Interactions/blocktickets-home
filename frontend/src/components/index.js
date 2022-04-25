@@ -17,6 +17,8 @@ export { SettingsOptions } from './SettingsOptions';
 export { PersonalDetailsForm } from './SettingsWrapper/PersonalDetailsForm';
 export { LoginSecurityForm } from './SettingsWrapper/LoginSecurityForm';
 export { BankAccount } from './SettingsWrapper/BankAccount';
+export { Withdraw } from './SettingsWrapper/Withdraw';
+export { InvoiceTable } from './SettingsWrapper/InvoiceTable';
 export { Sidenav } from './Sidenav';
 export { CreateOrg } from './Forms/CreateOrg';
 export { EventsTable } from './Tables/EventsTable';

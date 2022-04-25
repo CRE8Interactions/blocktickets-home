@@ -4,15 +4,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
-import { BankAccountDetailsModal } from './BankAccountDetailsModal';
+import { LinkBankAccountBtn } from './../LinkBankAccountBtn';
+import { BankAccountDetailsModal } from '../BankAccountDetailsModal';
 
 import './bankAccount.scss';
 
 export default function BankAccount() {
-	const [
-		bankAccount,
-		setBankAccount
-	] = useState();
+	// demo purposes, will come from database
+	const hasBankAccount = false;
 
 	const [
 		show,
@@ -25,8 +24,8 @@ export default function BankAccount() {
 
 	return (
 		<Fragment>
-			{bankAccount ? (
-				<Card body id="bankAccountCard" className="card-md card--light">
+			{hasBankAccount ? (
+				<Card body id="bank-account-card" className="card-md card--light">
 					<Card.Title as="h5" className="mb-3">
 						Bank Information
 					</Card.Title>
@@ -51,9 +50,7 @@ export default function BankAccount() {
 					</Stack>
 				</Card>
 			) : (
-				<Button onClick={handleShow} className="icon-button btn-add--white">
-					Link bank account
-				</Button>
+				<LinkBankAccountBtn marginTop="0" />
 			)}
 
 			<BankAccountDetailsModal show={show} handleClose={handleClose} />

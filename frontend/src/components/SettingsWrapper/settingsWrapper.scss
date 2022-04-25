@@ -3,12 +3,12 @@
 @use '../../scss/theme/custom' as *;
 
 #settings-container {
-	.form-container {
+	.inner-container {
 		max-width: 424px;
 	}
 
 	.heading {
-		margin-bottom: $text-spacer;
+		margin-bottom: $text-spacer-sm;
 	}
 
 	.page-title {

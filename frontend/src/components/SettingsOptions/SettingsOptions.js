@@ -42,11 +42,13 @@ export default function SettingsOptionsPage() {
 			</Col>
 
 			<Col xs={12} md={5}>
-				<Link to="">
+				<Link to="withdraw-invoices">
 					<Card body className="card-lg card--light setting-card">
 						<div className="card-heading">
 							<Card.Title as="h5">Withdraw & Invoices</Card.Title>
-							<Card.Text>View / Download your previous invoices and with</Card.Text>
+							<Card.Text>
+								Widthdraw funds and view / download your previous invoices
+							</Card.Text>
 						</div>
 						<div className="mt-auto">
 							<SettingsOptionsIcon />
@@ -60,7 +62,7 @@ export default function SettingsOptionsPage() {
 						<div className="card-heading">
 							<Card.Title as="h5">Payment information</Card.Title>
 							<Card.Text>
-								Add your payment information to withdrawn funds after you sell a
+								Add your payment information to withdraw funds after you sell a
 								ticket
 							</Card.Text>
 						</div>

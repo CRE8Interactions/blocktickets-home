@@ -1,7 +1,7 @@
 @use './../../../scss/abstracts' as *;
 @use './../../../scss/theme/colors' as *;
 
-#bankAccountCard {
+#bank-account-card {
 	box-shadow: $box-shadow;
 	.card-text {
 		color: $muted;

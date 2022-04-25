@@ -12,6 +12,7 @@ import {
 	SettingsOptionsPage,
 	PersonalDetailsPage,
 	LoginSecurityPage,
+	WithdrawInvoicesPage,
 	PaymentInformationPage
 } from './pages';
 import { ScrollToTop } from './components';
@@ -47,6 +48,7 @@ const Router = () => {
 					<Route index element={<SettingsOptionsPage />} />
 					<Route path="personal-details" element={<PersonalDetailsPage />} />
 					<Route path="login-security" element={<LoginSecurityPage />} />
+					<Route path="withdraw-invoices" element={<WithdrawInvoicesPage />} />
 					<Route path="payment-information" element={<PaymentInformationPage />} />
 				</Route>
 				{/* Add a NotFound route */}
