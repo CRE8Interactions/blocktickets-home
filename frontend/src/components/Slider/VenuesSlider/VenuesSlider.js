@@ -15,15 +15,14 @@ export default function VenuesSlider({ layout, venues }) {
 	return (
 		<Fragment>
 			<Slider>
-				{ venues &&
+				{venues &&
 					venues.map((venue, index) => {
 						return (
 							<SwiperSlide key={index}>
 								<MyCard prefix={prefix} venue={venue} />
 							</SwiperSlide>
-						)
-					})
-				}
+						);
+					})}
 			</Slider>
 		</Fragment>
 	);

@@ -14,7 +14,7 @@ import { TicketModal } from './TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ ticketType = '', order }) {
+export default function TicketCard({ ticketType = '', order, ticket }) {
 	const [
 		modalType,
 		setModalType
@@ -84,7 +84,7 @@ export default function TicketCard({ ticketType = '', order }) {
 					className="rounded-lg mb-4"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5"></Card.Title>
+					<Card.Title as="h5">{order?.event?.name}</Card.Title>
 					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
 						{order?.event?.presentedBy}
 					</Card.Subtitle>
@@ -112,6 +112,8 @@ export default function TicketCard({ ticketType = '', order }) {
 				setShow={setShow}
 				ticketStatus={ticketStatus}
 				setTicketStatus={setTicketStatus}
+				ticket={ticket}
+				order={order}
 			/>
 		</Fragment>
 	);

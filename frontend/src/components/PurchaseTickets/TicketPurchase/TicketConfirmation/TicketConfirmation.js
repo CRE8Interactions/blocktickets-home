@@ -8,12 +8,14 @@ import plus from '../../../../assets/icons/plus.svg';
 import minus from '../../../../assets/icons/minus.svg';
 
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
-import { BackButton } from './../../../BackButton';
+import { BackButton } from '../../../BackButton';
 
-import './seatConfirmation.scss';
+import './ticketConfirmation.scss';
 
-export default function SeatConfirmation({ handleGoBack, type, ticket }) {
-	let [ticketCount, setTicketCount] = useState(1)
+export default function TicketConfirmation({ handleGoBack, type, ticket }) {
+
+	let [ticketCount, setTicketCount] = useState(1);
+	
 	let [prices, setPrices] = useState({
 		sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
 	})

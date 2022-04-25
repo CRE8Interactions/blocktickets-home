@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -28,6 +28,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 
 	const stripe = useStripe();
   const elements = useElements();
+	
 	const completePurchase = () => {
 		setPurchasing(true)
 		let data = {
@@ -239,11 +240,13 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
 				</small>
 				<div id="payment-request-button">
+					{/* Need to rethink how payment element and totalCard manage state */}
 					<Button
+						id="payment-btn"
 						variant="primary"
 						size="lg"
-						className="icon-button w-100"
-						onClick={() => completePurchase()}>
+						className="icon-button w-100 d-none"
+						onClick={(e) => completePurchase()}>
 						{purchasing ? (
 							<Fragment>
 								<Spinner color={'#fcfcfd'} size="sm" />
@@ -252,6 +255,18 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 						) : (
 							<span>Complete Purchase</span>
 						)}
+					</Button>
+				</div>
+
+				<div id="payment-request-button">
+					{/* Need to rethink how payment element and totalCard manage state */}
+					<Button
+						id="payment-btn-disabled"
+						disabled
+						variant="primary"
+						size="lg"
+						className="icon-button w-100">
+							<span>Complete Purchase</span>
 					</Button>
 				</div>
 			</Card.Footer>

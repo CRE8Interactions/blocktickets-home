@@ -38,6 +38,10 @@ export const createOrder = (data) => {
   return instance.post('/orders', data)
 }
 
+export const getOrder = (id) => {
+  return instance.get(`/orders?filters[orderId][$eq]=${id}`)
+}
+
 export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }
@@ -76,4 +80,8 @@ export const getEvent = async (id) => {
 
 export const getEventTickets = async (id) => {
   return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available`)
+}
+
+export const createTicketTransfer = (data) => {
+  return instance.post('/ticket-transfers', data)
 }

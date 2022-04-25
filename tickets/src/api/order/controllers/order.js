@@ -39,6 +39,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       data: {
         event: cart.ticket.attributes.eventId,
         users_permissions_user: user,
+        userId: user.id,
         tickets,
         paymentProcessor: 'stripe',
         status: 'open',
@@ -48,6 +49,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         paymentIntentId
       },
     });
+
+    console.log('Order ', order)
 
     order = await strapi.db.query('api::order.order').findOne({
       where: { id: order.id },
@@ -72,17 +75,17 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let data = ctx.request.body;
     let type = data.type;
     if (!type) return
-    let orderId;
+    let paymentIntentId;
     let order;
     let ticketIds;
     // Handle the event
     switch (type) {
       case 'payment_intent.succeeded':
         console.log('succeeded')
-        orderId = data.data.object.metadata.order_id;
+        paymentIntentId = data.data.object.id;
 
         order = await strapi.db.query('api::order.order').findOne({
-          where: { id: orderId },
+          where: { paymentIntentId },
           populate: { tickets: true },
         });
 
@@ -97,7 +100,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         });
 
         await strapi.db.query('api::order.order').update({
-          where: { id: orderId },
+          where: { paymentIntentId },
           data: {
             status: 'complete'
           }
@@ -105,10 +108,10 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       break;
       case 'payment_intent.payment_failed':
         console.log('failed')
-        orderId = data.data.object.metadata.order_id;
+        paymentIntentId = data.data.object.id;
 
         order = await strapi.db.query('api::order.order').findOne({
-          where: { id: orderId },
+          where: { paymentIntentId },
           populate: { tickets: true },
         });
 
@@ -123,7 +126,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         });
 
         await strapi.db.query('api::order.order').update({
-          where: { id: orderId },
+          where: { paymentIntentId },
           data: {
             status: 'failed'
           }
@@ -131,5 +134,26 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       break;
     }
     return 200
+  },
+  async find(ctx) {
+    const { data, meta } = await super.find(ctx);
+    const order = await strapi.entityService.findOne('api::order.order', data[0].id, {
+      populate: { 
+        tickets: true,
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                image: true,
+                address: true
+              }
+            }
+          },
+        },
+      },
+    }); 
+
+    return order
   }
 }));

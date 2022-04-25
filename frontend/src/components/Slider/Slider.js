@@ -35,6 +35,9 @@ export default function Slider({ children, slidesPerView = 1, breakpoints = true
 	}
 	return (
 		<Swiper
+			preventClicks={false}
+			preventClicksPropagation={false}
+			noSwipingSelector={'button'}
 			spaceBetween={30}
 			slidesPerView={slidesPerView}
 			pagination={{ clickable: true }}

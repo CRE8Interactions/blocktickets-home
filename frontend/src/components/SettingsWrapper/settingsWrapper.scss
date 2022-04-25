@@ -1,0 +1,21 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+@use '../../scss/theme/custom' as *;
+
+#settings-container {
+	.form-container {
+		max-width: 424px;
+	}
+
+	.heading {
+		margin-bottom: $text-spacer;
+	}
+
+	.subtitle {
+		font-size: $small;
+		color: $muted;
+		line-height: $line-height-base;
+		font-weight: $fw-normal;
+		margin: 0px;
+	}
+}

@@ -12,6 +12,7 @@ import {
 	removeFullHeightContainer,
 	toggleTimer
 } from '../../utilities/helpers';
+
 import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
 

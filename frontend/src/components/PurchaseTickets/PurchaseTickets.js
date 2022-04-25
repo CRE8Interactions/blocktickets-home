@@ -7,7 +7,7 @@ import { TicketPurchase } from './TicketPurchase';
 import './purchaseTickets.scss';
 
 export default function PurchaseTickets() {
-	// 1 - seat selection
+	// 1 - ticket selection
 	// 2 - ticket confirmation
 	// 3 - presale
 
@@ -38,12 +38,15 @@ export default function PurchaseTickets() {
 		setIsZoomed
 	] = useState(false);
 
-	const [ticket, setTicket] = useState()
+	const [
+		ticket,
+		setTicket
+	] = useState();
 
 	const handleClick = (step, ticket) => {
 		// find key
 		setStep(Object.keys(steps).find((key) => key === step));
-		setTicket(ticket)
+		setTicket(ticket);
 	};
 
 	const handleGoBack = () => {

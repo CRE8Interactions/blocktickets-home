@@ -30,7 +30,7 @@ export default function MyWallet({ showMenu }) {
 				<h5 className="name m-0 pb-3 pb-lg-2">{user?.user?.name}</h5>
 				<ListGroup.Item as="li" onClick={handleClick}>
 					<LinkContainer to={'/upcoming-events'}>
-						<Nav.Link>Upcoming Events</Nav.Link>
+						<Nav.Link>My Events</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li" onClick={handleClick}>
@@ -44,7 +44,7 @@ export default function MyWallet({ showMenu }) {
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li" onClick={logout}>
-					<LinkContainer to={'/logout'} onClick={handleClick}>
+					<LinkContainer to={'/'} onClick={handleClick}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>

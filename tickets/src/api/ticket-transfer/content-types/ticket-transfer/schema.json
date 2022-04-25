@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ticket_transfers",
+  "info": {
+    "singularName": "ticket-transfer",
+    "pluralName": "ticket-transfers",
+    "displayName": "ticketTransfer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fromUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "toUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "toUserId": {
+      "type": "string",
+      "required": false
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket"
+    },
+    "complete": {
+      "type": "boolean",
+      "default": false
+    },
+    "transferedOn": {
+      "type": "datetime"
+    },
+    "emailAddressToUser": {
+      "type": "string"
+    },
+    "phoneNumberToUser": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "pending",
+      "required": true
+    },
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order"
+    },
+    "ticketIds": {
+      "type": "json",
+      "required": true
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "fromUserId": {
+      "type": "biginteger"
+    },
+    "orderId": {
+      "type": "biginteger"
+    }
+  }
+}

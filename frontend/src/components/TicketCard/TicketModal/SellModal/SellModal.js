@@ -145,7 +145,6 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 									<Button
 										onClick={handleClick}
 										variant="outline-light"
-										size="lg"
 										disabled={
 											[
 												...new Set(tickets)
@@ -155,7 +154,6 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 										Add ticket
 									</Button>
 									<Button
-										size="lg"
 										className="icon-button btn-next"
 										onClick={() => setStep('summary')}>
 										Next
@@ -179,13 +177,10 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 									</Form.Group>
 									<Button
 										variant="outline-light"
-										size="lg"
 										onClick={() => setStep('successful')}>
 										Delist Ticket/s
 									</Button>
-									<Button size="lg" onClick={handleUpdatePrice}>
-										Update Price
-									</Button>
+									<Button onClick={handleUpdatePrice}>Update Price</Button>
 								</Fragment>
 							)}
 						</Form>
@@ -248,9 +243,7 @@ export default function SellModal({ ticketStatus, setTicketStatus }) {
 								</Row>
 							</li>
 						</ul>
-						<Button size="lg" onClick={() => setStep('successful')}>
-							Agree and {type}
-						</Button>
+						<Button onClick={() => setStep('successful')}>Agree and {type}</Button>
 					</Modal.Body>
 				</Fragment>
 			)}

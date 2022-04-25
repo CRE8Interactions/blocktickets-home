@@ -47,6 +47,15 @@
     },
     "paymentIntentId": {
       "type": "string"
+    },
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "orderId": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

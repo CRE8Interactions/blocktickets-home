@@ -11,6 +11,7 @@ const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+const orderId = require('order-id')('blocktickets')
 
 module.exports = {
   /**
@@ -68,13 +69,29 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
           result,
           params
         } = event;
+
+        // Changes on ticket transer
+        if (event.model.singularName === 'ticket-transfer') {
+          // dont send SMS when running test
+          if (process.env.NODE_ENV === 'test') return;
+
+          await client.messages
+            .create({
+              body: `${params.data.fromUser.name} has transfer a ticket to ${params.data.event.name}, access BlockTicket.xyz and go to your wallet to claim your ticket`,
+              messagingServiceSid: messagingServiceSid,
+              to: params.data.phoneNumberToUser,
+              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
+            })
+            .then(message => console.log(message.body))
+            .done()
+        }
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
@@ -167,6 +184,11 @@ module.exports = {
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
 
+        // Changes on Order model
+        if (event.model.singularName === 'order') {
+          event.params.data.orderId = orderId.generate();
+        }
+
         // Changes on Organization model
         if (event.model.singularName === 'organization') {
           let email = event.params.data.creatorId;
@@ -200,7 +222,6 @@ module.exports = {
 
         // Changes on user model
         if (event.model.singularName === 'user') {
-          console.log(event.params)
           const profile = await strapi.db.query('api::profile.profile').create({
             data: {
               username: event.params.data.username.toLowerCase(),

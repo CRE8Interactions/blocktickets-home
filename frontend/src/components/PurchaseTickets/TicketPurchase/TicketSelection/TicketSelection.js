@@ -1,5 +1,8 @@
 import React, { Fragment, useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import TicketContext from '../../../../context/Ticket/Ticket';
+
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,13 +10,14 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import { PriceRangeSlider } from './PriceRangeSlider';
 import { FilterModal } from './FilterModal';
-import { MySeats } from './MySeats';
+import { Ticket } from './Ticket';
+import { MyTickets } from './MyTickets';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 import { NotAvailableMessage } from './NotAvailableMessage';
-import TicketContext from '../../../../context/Ticket/Ticket';
-import './seatSelection.scss';
 
-export default function SeatSelection({ handleClick, type, isZoomed }) {
+import './ticketSelection.scss';
+
+export default function TicketSelection({ handleClick, type, isZoomed }) {
 	const [
 		numTickets,
 		setNumTickets
@@ -97,6 +101,8 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 		if (ticket.resale && ticket.on_sale_status === 'available') return 'Resale Ticket';
 	};
 
+	const handleNext = (ticketType) => {}
+
 	return (
 		<Fragment>
 			{tickets && tickets.generalAdmissionTicket && tickets.generalAdmissionCount > 0 ? (
@@ -145,11 +151,12 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 								</Stack>
 							)}
 
-							<div className="seats-container">
-								<div className="seats--scrollable">
+							<div className="tickets-container">
+								<div className="tickets--scrollable">
 									{!isZoomed ? (
+									
 										<ListGroup as="ul">
-											<ListGroup.Item
+										<ListGroup.Item
 											onClick={() =>
 												handleClick(
 													'confirmation',
@@ -183,9 +190,13 @@ export default function SeatSelection({ handleClick, type, isZoomed }) {
 												</div>
 											</div>
 										</ListGroup.Item>
+										
+											
 										</ListGroup>
+										
 									) : (
-										<MySeats />
+										<MyTickets />
+									
 									)}
 								</div>
 							</div>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import PhoneInput from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 import axios from 'axios';
 import UserContext from '../../context/User/user';
 
@@ -54,11 +55,26 @@ export default function LoginSignupForm() {
 		setFormData
 	] = useState({});
 
-	const [name, setName] = useState('')
-	const [username, setUsername] = useState('')
-	const [email, setEmail] = useState('')
-	const [dob, setDob] = useState('')
-	const [gender, setGender] = useState('')
+	const [
+		name,
+		setName
+	] = useState('');
+	const [
+		username,
+		setUsername
+	] = useState('');
+	const [
+		email,
+		setEmail
+	] = useState('');
+	const [
+		dob,
+		setDob
+	] = useState('');
+	const [
+		gender,
+		setGender
+	] = useState('');
 
 	const { setAuthenticated } = useContext(UserContext);
 
@@ -81,17 +97,30 @@ export default function LoginSignupForm() {
 		setStep(--curStep);
 	};
 
+	const validNumber = () => {
+		return phoneNumber && isValidPhoneNumber(phoneNumber)
+	}
+
 	useEffect(() => {
 		axios
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
 			.then((res) => setCountrycode(res.data.country_code));
 	}, []);
 
-	useEffect(() => {
-		if (name && email && gender && dob && username) {
-			setFormValid(true);
-		}
-	}, [name, username, email, dob, gender])
+	useEffect(
+		() => {
+			if (name && email && gender && dob && username) {
+				setFormValid(true);
+			}
+		},
+		[
+			name,
+			username,
+			email,
+			dob,
+			gender
+		]
+	);
 
 	function setVal(e) {
 		const num1 = document.getElementById('num1');
@@ -172,7 +201,7 @@ export default function LoginSignupForm() {
 	};
 
 	return (
-		<Row className="spacer-md  login-signup">
+		<Row className="spacer-md" id="login-signup-container">
 			<Col md={4}>{step > 0 && <BackButton handleGoBack={handleGoBack} />}</Col>
 			<Col md={6} className="form-container d-flex-column">
 				{step === 0 && (
@@ -185,15 +214,16 @@ export default function LoginSignupForm() {
 						</div>
 						<div className="step-desc">
 							<h3 className="title">Verify your mobile number</h3>
-							<p className="subtitle">
+							<h4 className="subtitle">
 								Select your country and enter your mobile number. You'll receive an
 								access code via text message. If you don’t have an account, we will
 								automatically create one for you.
-							</p>
+							</h4>
 						</div>
 						<Form.Group controlId="phone-number">
 							<Form.Label>Mobile Number</Form.Label>
 							<PhoneInput
+								autoComplete={'off'}
 								defaultCountry={countryCode}
 								value={phoneNumber}
 								required
@@ -206,7 +236,7 @@ export default function LoginSignupForm() {
 						<Button
 							size="lg"
 							className="icon-button btn-next"
-							disabled={hasError}
+							disabled={!validNumber()}
 							onClick={(e) => submit()}>
 							Validate
 						</Button>

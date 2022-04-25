@@ -1,0 +1,12 @@
+@use './../../../../scss/abstracts' as *;
+@use './../../../../scss/layout/modal' as *;
+
+#checkout-modal {
+	.modal-body {
+		@extend .modal-lg;
+
+		.modal-heading {
+			margin-bottom: 0px;
+		}
+	}
+}
