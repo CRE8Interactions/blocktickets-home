@@ -13,9 +13,7 @@ export default function SettingsWrapper({ children }) {
 			<Col md={4}>
 				<BackButton marginBottom="4" />
 			</Col>
-			<Col md={6} className="form-container d-flex-column">
-				{children}
-			</Col>
+			<Col md={5}>{children}</Col>
 		</Row>
 	);
 }

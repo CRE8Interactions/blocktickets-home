@@ -1,0 +1,42 @@
+@use './../../../scss/abstracts' as *;
+@use './../../../scss/layout' as *;
+@use './../../../scss/theme/colors' as *;
+
+#withdraw {
+	margin-bottom: $spacer-sm;
+
+	.withdraw-card {
+		&.card--dark {
+			.card-body {
+				.card-title {
+					color: $gray-200;
+				}
+			}
+		}
+
+		.card-body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			> * {
+				text-align: center;
+			}
+
+			.card-title {
+				color: $muted;
+				font-size: $caption;
+				font-weight: $fw-bold;
+				text-transform: uppercase;
+			}
+			.total {
+				font-size: $body-1;
+				font-weight: $fw-semi-bold;
+			}
+		}
+
+		.card-text {
+			color: $muted;
+			font-size: $small;
+		}
+	}
+}
