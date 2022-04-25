@@ -21,6 +21,8 @@ export default function Hero(props) {
 				<Row>
 					<Col>
 						<Swiper
+							preventClicks={false}
+							preventClicksPropagation={false}
 							spaceBetween={20}
 							slidesPerView={1}
 							navigation={{

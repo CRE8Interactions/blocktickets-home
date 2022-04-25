@@ -60,6 +60,10 @@ export default function TransferModal({ticket, order}) {
 			.catch((err) => console.error(err))
 	}
 
+	const validNumber = () => {
+		return phoneNumber && isValidPhoneNumber(phoneNumber)
+	}
+
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
@@ -94,17 +98,18 @@ export default function TransferModal({ticket, order}) {
 							<Form.Group controlId="phone-number">
 								<Form.Label>Phone Number</Form.Label>
 									<PhoneInput
-									defaultCountry={countryCode}
-									value={phoneNumber}
-									required
-									onChange={(e) => setPhoneNumber(e)}
-									className={hasError ? 'error-border' : ''}
+										autoComplete={'off'}
+										defaultCountry={countryCode}
+										value={phoneNumber}
+										required
+										onChange={(e) => setPhoneNumber(e)}
+										className={hasError ? 'error-border' : ''}
 								/>
 							</Form.Group>
 							<Form.Control.Feedback type="invalid">
 								<Error type="phone" />
 							</Form.Control.Feedback>
-							<Button onClick={(e) => submitTransfer() } variant="primary" disabled={!isValidPhoneNumber(phoneNumber)}>
+							<Button onClick={(e) => submitTransfer() } variant="primary" disabled={ !validNumber() }>
 								Transfer
 							</Button>
 						</Form>
