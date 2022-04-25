@@ -218,6 +218,7 @@ export default function LoginSignupForm() {
 						<Form.Group controlId="phone-number">
 							<Form.Label>Mobile Number</Form.Label>
 							<PhoneInput
+								autoComplete={'off'}
 								defaultCountry={countryCode}
 								value={phoneNumber}
 								required
@@ -244,7 +245,7 @@ export default function LoginSignupForm() {
 								Code is set to <span className="text-primary">{phoneNumber}</span>
 							</p>
 						</div>
-						<Form.Group controlId="code">
+						<Form.Group>
 							<Form.Label>Enter Code</Form.Label>
 							<Stack direction="horizontal" gap={3}>
 								<Form.Control

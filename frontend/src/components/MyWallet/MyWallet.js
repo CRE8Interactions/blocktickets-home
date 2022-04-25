@@ -44,7 +44,7 @@ export default function MyWallet({ showMenu }) {
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li" onClick={logout}>
-					<LinkContainer to={'/logout'} onClick={handleClick}>
+					<LinkContainer to={'/'} onClick={handleClick}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
