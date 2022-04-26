@@ -149,24 +149,24 @@ $navbar-height: rem(82);
 	@include remove-scrollbar();
 }
 
-.artist-image {
+.event-image {
 	aspect-ratio: 1/1;
+}
 
-	// browsers that do not support aspect-ratio like Explorer and Safari
-	@supports not (aspect-ratio: 1/1) {
-		/* defined that the height of the depends on its width */
-		.image-wrapper {
-			position: relative;
-			padding-top: 100%; // aspect-ratio 1 / 1
-			/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
-			.artist-image {
-				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
+// browsers that do not support aspect-ratio like Explorer and Safari
+@supports not (aspect-ratio: 1/1) {
+	/* defined that the height of the depends on its width */
+	.image-wrapper {
+		position: relative;
+		padding-top: 100%; // aspect-ratio 1 / 1
+		/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
+		.event-image {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	}
 }

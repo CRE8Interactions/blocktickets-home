@@ -8,8 +8,6 @@ import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
 import * as moment from 'moment';
 
-import profile from '../../assets/profile.svg';
-
 import { TicketModal } from './TicketModal';
 
 import './ticketCard.scss';
@@ -81,7 +79,7 @@ export default function TicketCard({ ticketType = '', order, ticket }) {
 					src={order?.event?.image?.url}
 					width="281"
 					height="281"
-					className="rounded-lg mb-4"
+					className="event-image-lg mb-4"
 				/>
 				<div className="details d-flex-column">
 					<Card.Title as="h5">{order?.event?.name}</Card.Title>
