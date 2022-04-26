@@ -10,10 +10,10 @@ import './settingsWrapper.scss';
 export default function SettingsWrapper({ children }) {
 	return (
 		<Row id="settings-container">
-			<Col md={4}>
+			<Col md={3}>
 				<BackButton marginBottom="4" />
 			</Col>
-			<Col md={5} className="d-flex-column">
+			<Col md={7} lg={5} className="d-flex-column">
 				{children}
 			</Col>
 		</Row>

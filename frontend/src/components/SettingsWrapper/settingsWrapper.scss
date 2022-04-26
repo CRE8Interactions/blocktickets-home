@@ -3,23 +3,26 @@
 @use '../../scss/theme/custom' as *;
 
 #settings-container {
-	.inner-container {
-		max-width: 424px;
+	@include breakpoint-min(md) {
+		gap: 65px;
 	}
+	// .inner-container {
+	// 	max-width: 424px;
+	// }
+}
 
-	.heading {
-		margin-bottom: $text-spacer-sm;
-	}
+.settings-heading {
+	margin-bottom: $text-spacer-sm;
+}
 
-	.page-title {
-		font-size: $body-1;
-	}
+.settings-title {
+	font-size: $body-1;
+}
 
-	.subtitle {
-		font-size: $small;
-		color: $muted;
-		line-height: $line-height-base;
-		font-weight: $fw-normal;
-		margin: 0px;
-	}
+.settings-subtitle {
+	font-size: $small;
+	color: $muted;
+	line-height: $line-height-base;
+	font-weight: $fw-normal;
+	margin: 0px;
 }
