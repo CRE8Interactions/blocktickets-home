@@ -13,24 +13,10 @@
 		}
 	}
 
-	.venue-image {
+	.event-image {
 		width: 120px;
 		height: 120px;
-		background-color: yellow;
 	}
-
-	// .scrollable {
-	// 	&-container {
-	// 		display: flex;
-	// 		flex-direction: column;
-	// 		min-height: 0;
-
-	// 		@include breakpoint-min(md) {
-	// 			height: 75%;
-	// 		}
-	// 	}
-	// 	&-list {
-	// 		@include scrollable();
 
 	ul {
 		.item {

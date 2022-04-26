@@ -4,7 +4,7 @@
 
 .hero {
 	header {
-		.banner-image {
+		.event-image {
 			@include breakpoint-min(md) {
 				height: 556px;
 			}

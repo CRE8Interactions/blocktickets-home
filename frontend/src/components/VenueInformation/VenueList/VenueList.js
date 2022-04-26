@@ -19,7 +19,7 @@ export default function VenueList({ venue }) {
 							alt={ event?.name }
 							width="120"
 							height="120"
-							className="rounded venue-image"
+							className="event-image"
 						/>
 
 						<div className="d-flex flex-wrap gap-2 align-items-center flex-grow-1">

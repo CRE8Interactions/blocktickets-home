@@ -42,7 +42,7 @@ export default function Hero(props) {
 																width="640"
 																height="556"
 																alt="image"
-																className="artist-image banner-image"
+																className="event-image"
 															/>
 														</div>
 													</Col>
