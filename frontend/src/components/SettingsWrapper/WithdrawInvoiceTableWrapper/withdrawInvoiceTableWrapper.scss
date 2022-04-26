@@ -1,0 +1,28 @@
+@use './../../../scss/abstracts' as *;
+@use './../../../scss/layout' as *;
+
+#invoices {
+	border-top: border();
+	padding-top: $spacer-xs;
+
+	&-heading-container {
+		@include breakpoint-min(md) {
+			display: flex;
+			justify-content: center;
+		}
+	}
+
+	.settings-heading {
+		@include breakpoint-min(md) {
+			width: 412px;
+		}
+	}
+
+	.settings-subtitle {
+		text-align: left;
+	}
+}
+
+#withdraw {
+	padding-bottom: $spacer-xs;
+}
