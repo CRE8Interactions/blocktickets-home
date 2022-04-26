@@ -19,9 +19,9 @@ $input-padding-y-lg: rem(8);
 $input-padding-x-sm: rem(8);
 $input-padding-y-sm: rem(8);
 
-$border-radius: $br-input;
-$border-radius-lg: $br-primary;
-$border-radius-sm: $br-input-sm;
+$border-radius: $br-primary;
+$border-radius-lg: $br-secondary;
+$border-radius-sm: $br-sm;
 $border-width: $border-width;
 $input-border-width: $border-width;
 $input-focus-box-shadow: none;
@@ -29,7 +29,7 @@ $input-focus-border-color: $primary;
 $input-placeholder-color: $clr-neutral-5;
 
 $form-select-focus-box-shadow: none;
-$form-select-border-radius: $br-input;
+$form-select-border-radius: $br-primary;
 $form-select-padding-y: $btn-padding-y-lg;
 $form-select-padding-x: $btn-padding-x-lg;
 $form-select-font-weight: 500;
