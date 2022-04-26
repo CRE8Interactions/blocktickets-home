@@ -12,7 +12,7 @@
 .card.card--popup {
 	@include breakpoint-max(md) {
 		@include full-width();
-		box-shadow: $box-shadow-card;
+		box-shadow: $box-shadow-popupCard;
 
 		.card-body {
 			display: none;
