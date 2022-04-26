@@ -71,16 +71,22 @@
 	&-md {
 		$padding: em(20) em(24);
 
-		.card-header {
+		.card-body {
 			padding: $padding;
 		}
+	}
+
+	// used in settings options
+	&-lg {
+		$padding: em(30) em(20);
+
 		.card-body {
 			padding: $padding;
 		}
 	}
 
 	// used in total card
-	&-lg {
+	&-xl {
 		$pad-x: em(39);
 		$pad-y: em(24);
 

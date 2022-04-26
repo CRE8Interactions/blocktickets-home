@@ -16,13 +16,8 @@
 			width: auto;
 
 			.event-image {
-				width: 92px;
-				height: 92px;
-
-				@include breakpoint-min(md) {
-					width: 120px;
-					height: 120px;
-				}
+				width: 120px;
+				height: 120px;
 			}
 		}
 
@@ -36,11 +31,6 @@
 		.details {
 			font-weight: 500;
 			flex-grow: 1;
-
-			p,
-			.event-name {
-				@extend %text-truncate;
-			}
 
 			.time,
 			.loc {
