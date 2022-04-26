@@ -12,7 +12,7 @@ export default function ParkingCard() {
 		<div className="card-content">
 			<Row>
 				<Col xs={3}>
-					<img src="" alt="" className="rounded-corners" />
+					<img src="" alt="" className="br-sm" />
 				</Col>
 				<Col>
 					<Stack direction="vertical">

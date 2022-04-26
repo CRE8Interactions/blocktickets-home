@@ -9,7 +9,7 @@ export default function MerchCard() {
 	return (
 		<Row>
 			<Col xs={3}>
-				<img className="rounded-corners" src="" alt="" />
+				<img className="br-sm" src="" alt="" />
 			</Col>
 			<Col>
 				<Stack>

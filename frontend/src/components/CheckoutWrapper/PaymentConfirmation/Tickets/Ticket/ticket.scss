@@ -12,10 +12,10 @@
 				row-gap: rem(16);
 			}
 		}
-		#artist-image-col {
+		#event-image-col {
 			width: auto;
 
-			.artist-image {
+			.event-image {
 				width: 92px;
 				height: 92px;
 
@@ -26,7 +26,7 @@
 			}
 		}
 
-		.artist {
+		.event {
 			&-name {
 				margin-bottom: rem(4);
 				font-family: $font-body;
@@ -38,7 +38,7 @@
 			flex-grow: 1;
 
 			p,
-			.artist-name {
+			.event-name {
 				@extend %text-truncate;
 			}
 

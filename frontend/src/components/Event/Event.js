@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import { InfoIcon } from '../InfoIcon';
-import info from '../../assets/icons/info.svg';
 
 import './event.scss';
 
@@ -25,13 +24,13 @@ export default function Event(props) {
 		<div className="event">
 			<header>
 				<Row gap={2} className="py-2 py-md-3 align-items-center">
-					<Col md={2} id="artist-image-col" className="image-wrapper tablet-desktop-only">
+					<Col md={2} id="event-image-col" className="image-wrapper tablet-desktop-only">
 						<img
 							src={event?.image?.url}
 							alt={event?.name}
 							width="139"
 							height="139"
-							className="artist-image"
+							className="event-image"
 						/>
 					</Col>
 					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">

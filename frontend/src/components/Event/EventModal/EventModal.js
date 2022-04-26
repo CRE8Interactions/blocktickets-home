@@ -6,8 +6,6 @@ import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import Badge from 'react-bootstrap/Badge';
 
-import profile from '../../../assets/profile-thumbnail.png';
-
 import './eventModal.scss';
 
 export default function EventModal({ show, handleClose, event }) {
@@ -49,7 +47,7 @@ export default function EventModal({ show, handleClose, event }) {
 							alt={ event?.name }
 							width="225"
 							height="225"
-							className="artist-image mb-3"
+							className="event-image mb-3"
 						/>
 						<h4 className="normal mb-2">Additional Info</h4>
 						<p>
