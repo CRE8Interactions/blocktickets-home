@@ -67,6 +67,7 @@
 		font-size: $caption;
 	}
 
+	// used in ticketCard, settings
 	&-md {
 		$padding: em(20) em(24);
 
@@ -78,9 +79,10 @@
 		}
 	}
 
+	// used in total card
 	&-lg {
-		$pad-x: em(31);
-		$pad-y: em(20);
+		$pad-x: em(39);
+		$pad-y: em(24);
 
 		.card-header {
 			padding: $pad-y $pad-x;
