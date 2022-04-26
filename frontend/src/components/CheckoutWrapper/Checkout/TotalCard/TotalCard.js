@@ -27,55 +27,56 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 	if (tickets) tickets = JSON.parse(tickets);
 
 	const stripe = useStripe();
-  const elements = useElements();
-	
+	const elements = useElements();
+
 	const completePurchase = () => {
-		setPurchasing(true)
+		setPurchasing(true);
 		let data = {
 			cart: tickets,
 			paymentIntentId: intentId
-		}
+		};
 
 		createOrder(data)
 			.then((res) => {
 				// Need better way to store order data
-				sessionStorage.setItem('order', JSON.stringify(res.data))
-				sendPayment()
+				sessionStorage.setItem('order', JSON.stringify(res.data));
+				sendPayment();
 			})
-			.catch((err) => console.error(err))
-	}
+			.catch((err) => console.error(err));
+	};
 
-	const sendPayment = async() => {
+	const sendPayment = async () => {
 		if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return;
-    }
+			// Stripe.js has not yet loaded.
+			// Make sure to disable form submission until Stripe.js has loaded.
+			return;
+		}
 
-    const {error} = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
-      elements,
-      confirmParams: {
-        return_url: ''
-      },
+		const { error } = await stripe.confirmPayment({
+			//`Elements` instance that was used to create the Payment Element
+			elements,
+			confirmParams: {
+				return_url: ''
+			},
 			redirect: 'if_required'
-    });
+		});
 
-    if (error) {
-      // This point will only be reached if there is an immediate error when
-      // confirming the payment. Show error to your customer (for example, payment
-      // details incomplete)
-      console.error(error.message);
-    } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
-			setStatus('successful')
-    }
-	}
+		if (error) {
+			// This point will only be reached if there is an immediate error when
+			// confirming the payment. Show error to your customer (for example, payment
+			// details incomplete)
+			console.error(error.message);
+		}
+		else {
+			// Your customer will be redirected to your `return_url`. For some payment
+			// methods like iDEAL, your customer will be redirected to an intermediate
+			// site first to authorize the payment, then redirected to the `return_url`.
+			setStatus('successful');
+		}
+	};
 
 	return (
-		<Card className={`card-lg card--popup ${expanded && 'card--popup-expanded'}`}>
+		<Card className={`card-xl card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
 				<Card.Title as="h5" className="normal">
 					Total
@@ -266,7 +267,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 						variant="primary"
 						size="lg"
 						className="icon-button w-100">
-							<span>Complete Purchase</span>
+						<span>Complete Purchase</span>
 					</Button>
 				</div>
 			</Card.Footer>
