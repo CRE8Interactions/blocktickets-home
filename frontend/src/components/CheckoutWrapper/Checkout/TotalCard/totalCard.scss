@@ -81,5 +81,9 @@
 		&.with-border {
 			border-width: 1px;
 		}
+
+		#payment-request-button {
+			@extend %icon-text-box;
+		}
 	}
 }
