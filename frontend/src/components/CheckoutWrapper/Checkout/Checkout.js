@@ -18,6 +18,11 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 	] = useState();
 
 	const [
+		modalError,
+		setModalError
+	] = useState();
+
+	const [
 		show,
 		setShow
 	] = useState(false);
@@ -29,8 +34,9 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 		handleShow();
 	};
 
-	const paymentDeclined = () => {
+	const paymentDeclined = (err) => {
 		setModalType('declined')
+		setModalError(err)
 		handleShow()
 	}
 
@@ -76,6 +82,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 				setModalType={setModalType}
 				show={show}
 				setShow={setShow}
+				modalError={modalError}
 			/>
 		</Fragment>
 	);
