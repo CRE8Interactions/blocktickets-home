@@ -87,7 +87,6 @@ h4,
 	text-transform: uppercase;
 	font-weight: $fw-bold;
 	font-family: $font-body;
-	font-size: rem(16);
 }
 
 .caption {
@@ -95,9 +94,21 @@ h4,
 	margin-bottom: em(3);
 }
 
+.normal--uppercase {
+	@extend .text-uppercase !optional;
+	font-size: $body-2;
+}
+
 .caption--uppercase {
 	@extend .caption !optional;
 	@extend .text-uppercase !optional;
+}
+
+.caption--uppercase-label {
+	font-size: $caption;
+	@extend .text-uppercase !optional;
+	color: $muted;
+	margin-bottom: em(12);
 }
 
 %text-truncate {

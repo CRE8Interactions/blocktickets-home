@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use './spacing' as *;
+@use './typography' as *;
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
@@ -32,6 +33,10 @@ select:-webkit-autofill:focus {
 		margin-top: 0px;
 	}
 
+	&--borderless {
+		border: none;
+	}
+
 	&:disabled {
 		opacity: .5;
 	}
@@ -42,11 +47,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-label {
-	text-transform: uppercase;
-	font-size: $caption;
-	font-weight: $fw-bold;
-	color: $muted;
-	margin-bottom: em(12);
+	@extend .caption--uppercase-label !optional;
 }
 
 .form-check {

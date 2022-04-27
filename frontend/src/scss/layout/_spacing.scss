@@ -91,7 +91,7 @@ $text-spacer-xs: rem(16);
 
 	& > *,
 	.btn {
-		margin: 0px;
+		margin: 0px !important;
 	}
 
 	.card-title {

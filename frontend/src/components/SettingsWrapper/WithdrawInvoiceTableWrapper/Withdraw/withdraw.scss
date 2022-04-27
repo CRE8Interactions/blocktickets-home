@@ -20,11 +20,9 @@
 		}
 
 		.card-title {
-			color: $muted;
-			font-size: $caption;
-			font-weight: $fw-bold;
-			text-transform: uppercase;
+			@extend .caption--uppercase-label;
 		}
+
 		.total {
 			font-size: $body-1;
 			font-weight: $fw-semi-bold;
