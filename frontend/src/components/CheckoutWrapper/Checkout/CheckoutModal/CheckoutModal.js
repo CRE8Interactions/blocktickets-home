@@ -9,7 +9,7 @@ import CardDeclinedModal from './CardDeclinedModal/CardDeclinedModel';
 
 import './checkoutModal.scss';
 
-const typeOfModal = (modalType, handleClose) => {
+const typeOfModal = (modalType, handleClose, modalError) => {
 	switch (modalType) {
 		case 'reminder':
 			return <ReminderModal handleClose={handleClose} />;
@@ -21,14 +21,14 @@ const typeOfModal = (modalType, handleClose) => {
 			return <LeaveModal handleClose={handleClose} />;
 		
 		case 'declined':
-			return <CardDeclinedModal handleClose={handleClose} />;
+			return <CardDeclinedModal handleClose={handleClose} modalError={modalError} />;
 
 		default:
 			return;
 	}
 };
 
-export default function CheckoutModal({ modalType, setModalType, show, setShow }) {
+export default function CheckoutModal({ modalType, setModalType, show, setShow, modalError }) {
 	const handleClose = () => {
 		setShow(false);
 		setModalType('');
@@ -36,7 +36,7 @@ export default function CheckoutModal({ modalType, setModalType, show, setShow }
 
 	return (
 		<Modal id="checkout-modal" centered keyboard={false} backdrop="static" show={show}>
-			{typeOfModal(modalType, handleClose)}
+			{typeOfModal(modalType, handleClose, modalError)}
 		</Modal>
 	);
 }

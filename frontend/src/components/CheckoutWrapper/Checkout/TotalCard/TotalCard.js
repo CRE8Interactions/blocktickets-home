@@ -67,7 +67,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 			// confirming the payment. Show error to your customer (for example, payment
 			// details incomplete)
 			setPurchasing(false)
-			paymentDeclined()
+			paymentDeclined(error.message)
 			console.warn(error.message);
 		}
 		else {
