@@ -17,10 +17,9 @@
 	.step-desc {
 		margin-bottom: $text-spacer;
 	}
+
 	.title {
-		text-transform: uppercase;
-		font-size: $body-2;
-		font-weight: bold;
+		@extend .normal--uppercase;
 		margin-bottom: rem(14);
 	}
 
