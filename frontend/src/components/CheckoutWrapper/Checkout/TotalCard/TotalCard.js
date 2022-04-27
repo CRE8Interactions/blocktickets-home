@@ -9,10 +9,11 @@ import Card from 'react-bootstrap/Card';
 import { Spinner } from '../../../SpinnerContainer/Spinner';
 import { cartTotal } from '../../../../utilities/helpers';
 import { createOrder } from '../../../../utilities/api';
+import CardDeclinedModal from '../CheckoutModal/CardDeclinedModal/CardDeclinedModel';
 
 import './totalCard.scss';
 
-export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
+export default function TotalCard({ setStatus, addOns, setOrder, intentId, paymentDeclined }) {
 	const [
 		expanded,
 		setExpanded
@@ -65,7 +66,9 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId }) {
 			// This point will only be reached if there is an immediate error when
 			// confirming the payment. Show error to your customer (for example, payment
 			// details incomplete)
-			console.error(error.message);
+			setPurchasing(false)
+			paymentDeclined()
+			console.warn(error.message);
 		}
 		else {
 			// Your customer will be redirected to your `return_url`. For some payment

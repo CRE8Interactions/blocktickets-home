@@ -29,6 +29,11 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 		handleShow();
 	};
 
+	const paymentDeclined = () => {
+		setModalType('declined')
+		handleShow()
+	}
+
 	const checkValid = (e, name) => {
 		let paymentButton = document.getElementById('payment-btn')
 		let paymentButtonDisabled = document.getElementById('payment-btn-disabled')
@@ -63,6 +68,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 					addOns={addOns}
 					setOrder={setOrder}
 					intentId={intentId}
+					paymentDeclined={paymentDeclined}
 				/>
 			</Col>
 			<CheckoutModal

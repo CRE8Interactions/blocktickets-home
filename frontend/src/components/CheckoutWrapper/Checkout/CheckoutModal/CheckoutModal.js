@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { LeaveModal } from './LeaveModal';
 import { ReminderModal } from './ReminderModal';
 import { TimeoutModal } from './TimeoutModal';
+import CardDeclinedModal from './CardDeclinedModal/CardDeclinedModel';
 
 import './checkoutModal.scss';
 
@@ -18,6 +19,9 @@ const typeOfModal = (modalType, handleClose) => {
 
 		case 'leave':
 			return <LeaveModal handleClose={handleClose} />;
+		
+		case 'declined':
+			return <CardDeclinedModal handleClose={handleClose} />;
 
 		default:
 			return;
