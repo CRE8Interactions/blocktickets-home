@@ -44,8 +44,28 @@ export default function SearchModal({ show, setShow }) {
 			location
 		]
 	);
+
+	// if query is blanked out, don't show search results until user submits form
+	useEffect(
+		() => {
+			if (query == '') {
+				setIsSearching(false);
+			}
+		},
+		[
+			query
+		]
+	);
+
 	return (
-		<Modal id="search-modal" scrollable centered fullscreen show={show} onHide={handleClose}>
+		<Modal
+			id="search-modal"
+			scrollable
+			animation={false}
+			centered
+			fullscreen
+			show={show}
+			onHide={handleClose}>
 			<Modal.Header closeButton className="mb-5">
 				<Stack direction="horizontal" gap={2}>
 					<Button onClick={handleClose} variant="default" className="m-0 p-0">
@@ -75,7 +95,9 @@ export default function SearchModal({ show, setShow }) {
 					</Form>
 				</Stack>
 			</Modal.Header>
-			<Modal.Body>{isSearching && <SearchResultsContainer query={query} />}</Modal.Body>
+			<Modal.Body>
+				{isSearching && query && <SearchResultsContainer query={query} />}
+			</Modal.Body>
 		</Modal>
 	);
 }
