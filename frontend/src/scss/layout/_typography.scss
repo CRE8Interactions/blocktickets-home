@@ -91,7 +91,7 @@ h4,
 
 .caption {
 	font-size: $caption;
-	margin-bottom: em(3);
+	margin-bottom: rem(3);
 }
 
 .normal--uppercase {
@@ -108,7 +108,7 @@ h4,
 	font-size: $caption;
 	@extend .text-uppercase !optional;
 	color: $muted;
-	margin-bottom: em(12);
+	margin-bottom: rem(12);
 }
 
 %text-truncate {
