@@ -1,12 +1,12 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React from 'react';
 
 import { MyWallet } from './../MyWallet';
 
 import './dropdown.scss';
 
-export default function Dropdown({ showMenu }) {
+export default function Dropdown({ showMenu, reference }) {
 	return (
-		<div className="myDropdown">
+		<div ref={reference} className="myDropdown">
 			<MyWallet showMenu={showMenu} />
 		</div>
 	);
