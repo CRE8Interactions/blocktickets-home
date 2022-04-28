@@ -7,6 +7,7 @@ export { Events } from './Events';
 export { Venues } from './Venues';
 export { Footer } from './Footer';
 export { Event } from './Event';
+export { SearchWrapper } from './SearchWrapper';
 export { PurchaseTickets } from './PurchaseTickets';
 export { CheckoutWrapper } from './CheckoutWrapper';
 export { VenueInformation } from './VenueInformation';

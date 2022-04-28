@@ -2,13 +2,14 @@
 @use '../../scss/layout/forms' as *;
 @use '../../scss/abstracts' as *;
 
-.search {
+#search {
 	width: 256px;
+	position: relative;
 	@include input-icon-box($border-radius-sm, $input-padding-y-sm, $input-padding-x-sm);
 }
 
-.search,
-.search-mobile {
+#search,
+#search-mobile {
 	margin-right: rem(6);
 
 	@include breakpoint-min(lg) {
