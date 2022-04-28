@@ -1,16 +1,64 @@
-import React, { Component, Fragment, useContext } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
+import { SearchModal } from './SearchModal';
+import { SearchDropdown } from './SearchDropdown';
+
 import './searchBar.scss';
 
 export default function SearchBar() {
+	const location = useLocation();
+
+	// search modal
+	const [
+		show,
+		setShow
+	] = useState(false);
+
+	const handleShow = () => {
+		setShow(true);
+	};
+
+	// search query
+	const [
+		query,
+		setQuery
+	] = useState('');
+
+	// state to display search dropdown
+	const [
+		isSearching,
+		setIsSearching
+	] = useState(false);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setIsSearching(true);
+	};
+
+	// when location changes, close the dropdown and modal and reset query
+	useEffect(
+		() => {
+			setIsSearching(false);
+			setShow(false);
+			setQuery('');
+		},
+		[
+			location
+		]
+	);
+
 	return (
 		<Fragment>
 			<Button
+				onClick={handleShow}
 				variant="default"
-				className="btn--icon mobile-tablet-only search-mobile"
+				className="btn--icon mobile-tablet-only"
+				id="search-mobile"
 				aria-label="search">
 				<svg
 					width="20"
@@ -26,12 +74,15 @@ export default function SearchBar() {
 					/>
 				</svg>
 			</Button>
-			<Form className="search d-none d-lg-flex">
+			<SearchModal show={show} setShow={setShow} />
+			<Form onSubmit={handleSubmit} id="search" className=" d-none d-lg-flex">
 				<FormControl
 					type="search"
 					placeholder="Search for events"
 					className="me-2"
 					size="sm"
+					value={query}
+					onChange={(e) => setQuery(e.target.value)}
 					aria-label="Search for events"
 				/>
 				<div className="search-icon">
@@ -50,6 +101,7 @@ export default function SearchBar() {
 					</svg>
 				</div>
 			</Form>
+			{isSearching && <SearchDropdown query={query} />}
 		</Fragment>
 	);
 }

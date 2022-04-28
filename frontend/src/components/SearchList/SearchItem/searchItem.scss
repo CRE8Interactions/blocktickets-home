@@ -1,0 +1,18 @@
+@use './../../../scss/abstracts' as *;
+@use './../../../scss/layout' as *;
+@use './../../../scss/theme/colors' as *;
+
+.search-item {
+	.details-info {
+		flex: 1;
+		min-width: 0;
+
+		&-event-name {
+			color: $body-color;
+			font-weight: $fw-medium;
+		}
+		p {
+			@extend %text-truncate;
+		}
+	}
+}

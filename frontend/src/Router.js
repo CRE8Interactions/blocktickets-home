@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import {
 	HomePage,
+	SearchPage,
 	LoginPage,
 	TicketsPage,
 	CheckoutPage,
@@ -27,6 +28,7 @@ const Router = () => {
 		<ScrollToTop>
 			<Routes>
 				<Route path="/" element={<HomePage />} />
+				<Route path="search" element={<SearchPage />} />
 				<Route path="login" element={<LoginPage />} />
 
 				<Route path="tickets/:id" element={<TicketsPage />} />
