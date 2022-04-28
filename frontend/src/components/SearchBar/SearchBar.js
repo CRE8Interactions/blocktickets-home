@@ -52,6 +52,17 @@ export default function SearchBar() {
 		]
 	);
 
+	useEffect(
+		() => {
+			if (query == '') {
+				setIsSearching(false);
+			}
+		},
+		[
+			query
+		]
+	);
+
 	return (
 		<Fragment>
 			<Button
@@ -101,7 +112,7 @@ export default function SearchBar() {
 					</svg>
 				</div>
 			</Form>
-			{isSearching && <SearchDropdown query={query} />}
+			{isSearching && query && <SearchDropdown query={query} />}
 		</Fragment>
 	);
 }
