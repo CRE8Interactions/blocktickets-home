@@ -15,8 +15,8 @@ export default function EventModal({ show, handleClose, event }) {
 					<Modal.Title as="h4">Event information</Modal.Title>
 				</Modal.Header>
 				<div className="event-details mb-3">
-					<Row className="align-items-center mb-2">
-						<Col>
+					<Row className="justify-content-between align-items-center mb-2">
+						<Col xs={8} className="flex-grow-1">
 							<h1 className="event-name m-0 heading-sm">{event?.name}</h1>
 						</Col>
 						<Col xs='auto' className="d-flex align-self-center">
