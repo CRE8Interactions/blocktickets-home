@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export default function CardDeclinedModal({ handleClose, modalError }) {
+export default function CardDeclineModal({ handleClose, modalError }) {
 	const navigate = useNavigate();
 
 	return (
