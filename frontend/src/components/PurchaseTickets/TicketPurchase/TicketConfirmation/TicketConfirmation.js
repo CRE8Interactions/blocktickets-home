@@ -72,21 +72,24 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 			<div className="num-tickets">
 				<h2 className="caption--uppercase text-muted mb-3">Number of Tickets</h2>
 				<Stack direction="horizontal" className="justify-content-between">
-					<div>
+					<div className="flex-grow-1">
 						<p className="caption">General Admissions</p>
 						<p className="fw-bold">
 							${ prices?.sum } {' '}
-							<span className="caption fw-normal text-muted">${ticket.attributes.cost} ea + Fees</span>
+							<span className="caption fw-normal text-muted">${ticket.attributes.cost.toFixed(2)} ea + Fees</span>
 						</p>
 					</div>
-					<div className=" fw-bolder">
-						<Button className="btn--icon me-3" variant="outline-light" onClick={(e) => setTicketCount(ticketCount - 1)} disabled={ticketCount === ticket.attributes.minimum_quantity} >
-							<img src={minus} />
-						</Button> { ticketCount }
-						<Button className="btn--icon" variant="outline-light" onClick={(e) => setTicketCount(ticketCount + 1)} disabled={ticketCount >= ticket.attributes.maximum_quantity} >
-							<img src={plus} />
+					<Stack direction="horizontal" gap={3} className="counter fw-bolder">
+						<Button title="decrease quantity of tickets" className="btn--icon" variant="outline-light" onClick={() => setTicketCount(ticketCount - 1)} disabled={ticketCount === ticket.attributes.minimum_quantity}
+						aria-disabled={ticketCount === ticket.attributes.minimum_quantity} >
+							<img src={minus} alt="" />
+						</Button> 
+						<span>{ ticketCount }</span>
+						<Button title="increase quantity of tickets" className="btn--icon ms-0" variant="outline-light" onClick={() => setTicketCount(ticketCount + 1)} disabled={ticketCount >= ticket.attributes.maximum_quantity}
+						aria-disabled={ticketCount >= ticket.attributes.maximum_quantity} >
+							<img src={plus} alt="" />
 						</Button>
-					</div>
+					</Stack>
 				</Stack>
 			</div>
 			<TicketPurchaseFooter>

@@ -42,7 +42,8 @@
 		padding-top: rem(18);
 		margin-bottom: rem(6);
 
-		.legend-heading {
+		.legend-heading,
+		.heading--flex {
 			margin-bottom: rem(15);
 
 			&.accessibility {

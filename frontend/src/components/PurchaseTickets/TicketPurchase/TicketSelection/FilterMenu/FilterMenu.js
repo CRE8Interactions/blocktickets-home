@@ -8,21 +8,17 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
-import './filterModal.scss';
+import './filterMenu.scss';
 
-export default function FilterModal({ setShow, show }) {
+export default function FilterMenu({ setShow, show, sliderValues, setSliderValues }) {
 	const [
 		on,
 		setOn
 	] = useState(false);
 
-	const [
-		sliderValues,
-		setSliderValues
-	] = useState([
-		20,
-		50
-	]);
+	const handleFilter = (action) => {
+		setShow(false);
+	};
 
 	return (
 		<Stack direction="vertical" className={`filter-panel ${show && 'filter-panel--open'}`}>
@@ -101,10 +97,10 @@ export default function FilterModal({ setShow, show }) {
 					</div>
 				</div>
 				<TicketPurchaseFooter>
-					<Button variant="outline-light" size="lg">
+					<Button variant="outline-light" onClick={() => handleFilter('clear')} size="lg">
 						Clear all
 					</Button>
-					<Button variant="primary" size="lg">
+					<Button variant="primary" size="lg" onClick={() => handleFilter('apply')}>
 						Apply Filters
 					</Button>
 				</TicketPurchaseFooter>

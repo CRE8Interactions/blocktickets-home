@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { PriceRangeSlider } from './PriceRangeSlider';
-import { FilterModal } from './FilterModal';
+import { FilterMenu } from './FilterMenu';
 import { Ticket } from './Ticket';
 import { MyTickets } from './MyTickets';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
@@ -18,6 +18,9 @@ import { NotAvailableMessage } from './NotAvailableMessage';
 import './ticketSelection.scss';
 
 export default function TicketSelection({ handleClick, type, isZoomed }) {
+
+	const tickets = useContext(TicketContext);
+
 	const [
 		numTickets,
 		setNumTickets
@@ -31,22 +34,21 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 	const [
 		sliderValues,
 		setSliderValues
-	] = useState([
-		20,
-		50
-	]);
+	] = useState([20, tickets.generalAdmissionTicket?.attributes?.cost]);
 
 	const [
 		showFilter,
 		setShowFilter
 	] = useState(false);
 
-	const tickets = useContext(TicketContext);
-
 	const [
 		filteredTicketCount,
 		setFilteredTicketCount
 	] = useState(1);
+
+	useEffect(() => {
+		setSliderValues([20, tickets.generalAdmissionTicket?.attributes?.cost])
+	}, [tickets]); 
 
 	useEffect(
 		() => {
@@ -137,11 +139,12 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 						/>
 					</header>
 
-					{filteredTicketCount > 0 ? (
 						<Stack direction="vertical" className="position-relative">
 							{showFilter && (
-								<FilterModal show={showFilter} setShow={setShowFilter} />
-							)}
+								<FilterMenu show={showFilter}setShow={setShowFilter} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
+								)}
+								{filteredTicketCount > 0 ? (
+									<>
 							{isZoomed && (
 								<Stack direction="horizontal" className="heading--flex mb-3">
 									<h3 className="text-uppercase">Your Tickets (7)</h3>
@@ -210,7 +213,9 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 									</Link>
 								</TicketPurchaseFooter>
 							)}
-						</Stack>
+						</>
+						
+						
 					) : (
 						<NotAvailableMessage>
 							<h1 className="normal">Please adjust your search</h1>
@@ -221,6 +226,7 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 							</p>
 						</NotAvailableMessage>
 					)}
+					</Stack>
 				</Fragment>
 			) : (
 				<NotAvailableMessage>
