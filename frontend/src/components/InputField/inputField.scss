@@ -8,11 +8,3 @@
 		@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
 	}
 }
-
-.input-wrapper,
-.input-wrapper-lg {
-	&:focus,
-	&:hover {
-		border-color: $input-focus-border-color;
-	}
-}
