@@ -84,7 +84,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 						aria-disabled={ticketCount === ticket.attributes.minimum_quantity} >
 							<img src={minus} alt="" />
 						</Button> 
-						<span>{ ticketCount }</span>
+						<span className='flex-grow-1'>{ ticketCount }</span>
 						<Button title="increase quantity of tickets" className="btn--icon ms-0" variant="outline-light" onClick={() => setTicketCount(ticketCount + 1)} disabled={ticketCount >= ticket.attributes.maximum_quantity}
 						aria-disabled={ticketCount >= ticket.attributes.maximum_quantity} >
 							<img src={plus} alt="" />
