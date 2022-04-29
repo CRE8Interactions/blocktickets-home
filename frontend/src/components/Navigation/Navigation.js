@@ -24,8 +24,8 @@ export default function Navigation() {
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	const toggleOverflow = (expanded) => {
-		document.body.style.overflowY = expanded ? 'hidden' : 'visible';
-		document.querySelector('.navbar').style.borderWidth = expanded ? '0px' : '1px';
+		const el = document.querySelector('#root');
+		el.style.overflowY = expanded ? 'hidden' : '';
 	};
 
 	return (
