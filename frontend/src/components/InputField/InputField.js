@@ -9,7 +9,7 @@ import './inputField.scss';
 // single inputs
 export default function InputField({ size, state, type, placeholder, children, styles }) {
 	return (
-		<Form className={`input-wrapper ${size} ${styles}`}>
+		<Form className={`input-wrapper input-wrapper-${size} ${styles}`}>
 			<FormControl
 				className="me-2"
 				type={type}

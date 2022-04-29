@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import * as moment from 'moment';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { IconButton } from '../IconButton';
@@ -13,6 +14,7 @@ import './hero.scss';
 export default function Hero(props) {
 	const navigationNextRef = useRef(null);
 	const navigationPrevRef = useRef(null);
+
 	const { events } = props;
 
 	return (
