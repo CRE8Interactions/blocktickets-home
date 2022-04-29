@@ -2,9 +2,20 @@ import React from 'react';
 
 import './spinner.scss';
 
-export default function Spinner({ color = '#777E91', size }) {
+export default function Spinner({ variant = 'default', size }) {
+	let color;
 	let width;
 	let height;
+
+	switch (variant) {
+		case 'light':
+			color = 'fcfcfd';
+			break;
+
+		default:
+			color = '#777e90';
+			break;
+	}
 
 	if (size == 'sm') {
 		width = '13';
