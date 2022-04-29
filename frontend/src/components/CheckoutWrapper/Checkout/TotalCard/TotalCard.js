@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card';
 import { Spinner } from '../../../SpinnerContainer/Spinner';
 import { cartTotal } from '../../../../utilities/helpers';
 import { createOrder } from '../../../../utilities/api';
-import CardDeclinedModal from '../CheckoutModal/CardDeclinedModal/CardDeclinedModel';
+import { CardDeclineModal } from '../CheckoutModal/CardDeclineModal';
 
 import './totalCard.scss';
 
@@ -66,8 +66,8 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 			// This point will only be reached if there is an immediate error when
 			// confirming the payment. Show error to your customer (for example, payment
 			// details incomplete)
-			setPurchasing(false)
-			paymentDeclined(error.message)
+			setPurchasing(false);
+			paymentDeclined(error.message);
 			console.warn(error.message);
 		}
 		else {
