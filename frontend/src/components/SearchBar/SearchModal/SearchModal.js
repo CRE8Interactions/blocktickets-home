@@ -88,6 +88,7 @@ export default function SearchModal({ show, setShow }) {
 						<Form.Control
 							type="text"
 							placeholder="Search for events"
+							aria-label="Search for events"
 							className="form-control--borderless pb-2"
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
