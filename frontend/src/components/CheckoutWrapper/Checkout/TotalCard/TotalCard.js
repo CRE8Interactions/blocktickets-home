@@ -1,14 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
+
+import { createOrder } from '../../../../utilities/api';
+import { cartTotal } from '../../../../utilities/helpers';
+
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
+import { Disclaimer } from './Disclaimer';
 import { Spinner } from '../../../SpinnerContainer/Spinner';
-import { cartTotal } from '../../../../utilities/helpers';
-import { createOrder } from '../../../../utilities/api';
 import { CardDeclineModal } from '../CheckoutModal/CardDeclineModal';
 
 import './totalCard.scss';
@@ -236,13 +239,15 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							</ul>
 						</li>
 					</ul>
+					<div className="mobile-only">
+						<Disclaimer />
+					</div>
 				</Card.Body>
 			)}
 			<Card.Footer className={`d-flex-column ${expanded && 'with-border'}`}>
-				<small className="caption">
-					By clicking "Complete Purchase", you agree that you have read, understand and
-					agree to be bound by Blocktickets' <a href="">Terms of Use</a>
-				</small>
+				<div className="tablet-desktop-only">
+					<Disclaimer />
+				</div>
 				<div id="payment-request-button">
 					{/* Need to rethink how payment element and totalCard manage state */}
 					<Button
@@ -253,7 +258,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 						onClick={(e) => completePurchase()}>
 						{purchasing ? (
 							<Fragment>
-								<Spinner color={'#fcfcfd'} size="sm" />
+								<Spinner variant="light" size="sm" />
 								<span>Purchasing...</span>
 							</Fragment>
 						) : (
