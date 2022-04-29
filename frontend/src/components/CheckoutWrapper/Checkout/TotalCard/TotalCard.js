@@ -239,7 +239,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							</ul>
 						</li>
 					</ul>
-					<div className="mobile-only">
+					<div className="mobile-only mt-4">
 						<Disclaimer />
 					</div>
 				</Card.Body>
