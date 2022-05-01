@@ -5,7 +5,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { updatePersonalDetails } from '../../../utilities/api';
+import authService from '../../../utilities/services/auth.service';
+
 export default function PersonalDetailsForm() {
+	let user = sessionStorage.getItem('user')
+	user = JSON.parse(user).user
+
 	const [
 		formValid,
 		setFormValid
@@ -24,23 +30,23 @@ export default function PersonalDetailsForm() {
 	const [
 		name,
 		setName
-	] = useState('');
+	] = useState(user.name);
 	const [
 		username,
 		setUsername
-	] = useState('');
+	] = useState(user.username);
 	const [
 		email,
 		setEmail
-	] = useState('');
+	] = useState(user.email);
 	const [
 		dob,
 		setDob
-	] = useState('');
+	] = useState(user.dob);
 	const [
 		gender,
 		setGender
-	] = useState('');
+	] = useState(user.gender);
 
 	// reset error when inputs are changed
 	useEffect(
@@ -56,6 +62,8 @@ export default function PersonalDetailsForm() {
 		() => {
 			if (name && email && gender && dob && username) {
 				setFormValid(true);
+			} else {
+				setFormValid(false);
 			}
 		},
 		[
@@ -66,6 +74,19 @@ export default function PersonalDetailsForm() {
 			gender
 		]
 	);
+
+	useEffect(() => {
+		// set default value for gender dropdown
+		let select = document.getElementById('gender')
+		for (let i = 0; i < select.options.length; i ++) {
+			if (select.options[i].value === user.gender) select.options[i].setAttribute('selected', true)
+		}
+		if (name && email && gender && dob && username) {
+			setFormValid(true);
+		} else {
+			setFormValid(false);
+		}
+	}, [])
 
 	function setVal(e) {
 		const num1 = document.getElementById('num1');
@@ -81,14 +102,6 @@ export default function PersonalDetailsForm() {
 		}
 	}
 
-	function submit() {
-		let data = {
-			data: {
-				phoneNumber
-			}
-		};
-	}
-
 	const submitForm = () => {
 		let data = {
 			data: {
@@ -96,10 +109,13 @@ export default function PersonalDetailsForm() {
 				email,
 				name,
 				username,
-				gender,
-				phoneNumber
+				gender
 			}
 		};
+
+		updatePersonalDetails(data)
+			.then((res) => authService.setUser(res.data))
+			.catch((err) => console.error(err))
 	};
 
 	return (
@@ -112,6 +128,7 @@ export default function PersonalDetailsForm() {
 						placeholder="Enter your email"
 						required
 						name="email"
+						defaultValue={user.email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</Form.Group>
@@ -123,6 +140,7 @@ export default function PersonalDetailsForm() {
 						placeholder="Enter your full name"
 						required
 						name="name"
+						defaultValue={user.name}
 						onChange={(e) => setName(e.target.value)}
 					/>
 				</Form.Group>
@@ -133,6 +151,7 @@ export default function PersonalDetailsForm() {
 						placeholder="Enter your username"
 						required
 						name="username"
+						defaultValue={user.username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
 				</Form.Group>
@@ -143,6 +162,7 @@ export default function PersonalDetailsForm() {
 							<Form.Control
 								type="date"
 								name="dob"
+								defaultValue={user.dob}
 								required
 								onChange={(e) => setDob(e.target.value)}
 							/>
@@ -154,6 +174,7 @@ export default function PersonalDetailsForm() {
 							<Form.Select
 								name="gender"
 								required
+								defaultValue={user.gender}
 								onChange={(e) => setGender(e.target.value)}>
 								<option>Select Gender</option>
 								<option value="male">Male</option>

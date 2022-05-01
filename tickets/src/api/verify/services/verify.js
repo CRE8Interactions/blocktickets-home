@@ -20,8 +20,6 @@ module.exports = createCoreService('api::verify.verify', ({ strapi }) => ({
     delete user.confirmed
     delete user.blocked
     delete user.id
-    delete user.dob
-    delete user.phoneNumber
     delete user.createdAt
     delete user.updatedAt
 

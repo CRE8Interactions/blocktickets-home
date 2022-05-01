@@ -37,6 +37,11 @@
     "gender": {
       "type": "string",
       "required": true
+    },
+    "payment_information": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::payment-information.payment-information"
     }
   }
 }
