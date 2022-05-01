@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payment_informations",
+  "info": {
+    "singularName": "payment-information",
+    "pluralName": "payment-informations",
+    "displayName": "paymentInformation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "accountNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "routingNumber": {
+      "type": "string",
+      "required": true
+    },
+    "bankName": {
+      "type": "string",
+      "required": true
+    },
+    "currency": {
+      "type": "string",
+      "default": "usd"
+    },
+    "accountName": {
+      "type": "string",
+      "required": true
+    },
+    "accountType": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

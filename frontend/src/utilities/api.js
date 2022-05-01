@@ -85,3 +85,15 @@ export const getEventTickets = async (id) => {
 export const createTicketTransfer = (data) => {
   return instance.post('/ticket-transfers', data)
 }
+
+export const updatePersonalDetails = (data) => {
+  return instance.post('/verifies/personalDetails', data)
+}
+
+export const createBankAccount = (data) => {
+  return instance.post('/payment-information/generate', data)
+}
+
+export const getBankAccount = () => {
+  return instance.get('/payment-informations/0')
+}

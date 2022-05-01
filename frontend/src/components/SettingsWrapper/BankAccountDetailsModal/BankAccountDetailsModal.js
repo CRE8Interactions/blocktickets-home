@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
+import { createBankAccount, getBankAccount } from '../../../utilities/api';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -48,7 +49,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 	const [
 		account,
 		setAccount
-	] = useState();
+	] = useState('checking');
 
 	const [
 		bankName,
@@ -61,6 +62,11 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 	] = useState();
 
 	const [
+		routingNumber,
+		setRoutingNumber
+	] = useState();
+
+	const [
 		accountNickname,
 		setAccountNickname
 	] = useState();
@@ -68,29 +74,44 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 	// reset error when inputs are changed
 	useEffect(
 		() => {
-			setHasError(false);
+			validInputs()
 		},
 		[
-			formValid
+			account, bankName, accountNumber, routingNumber, accountNickname
 		]
 	);
 
 	useEffect(() => {
-		if ((currency && country && holder, company, address, account, bankName, accountNumber)) {
-			setFormValid(true);
-		}
+		validInputs()
+
+		getBankAccount()
+			.then((res) => console.log(res))
+			.catch((err) => console.error(err))
 	}, []);
 
-	function submit() {
-		let data = {
-			data: {}
-		};
+	const validInputs = () => {
+		if (account && bankName && accountNumber && routingNumber && accountNickname) {
+			setFormValid(true);
+		} else {
+			setFormValid(false);
+		}
 	}
 
 	const submitForm = () => {
 		let data = {
-			data: {}
+			data: {
+				accountType: account,
+				accountNumber,
+				routingNumber,
+				accountName: accountNickname,
+				currency: 'usd',
+				bankName
+			}
 		};
+
+		createBankAccount(data)
+			.then((res) => console.log(res))
+			.catch((err) => console.error(err))
 	};
 
 	return (
@@ -101,7 +122,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 				</Modal.Header>
 				<Modal.Body>
 					<Form className="d-flex-column">
-						<Form.Group className="form-group" controlId="currency">
+						{/* <Form.Group className="form-group" controlId="currency">
 							<Form.Label>Currency</Form.Label>
 							<Form.Select
 								name="currency"
@@ -141,15 +162,16 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								name="companyName"
 								onChange={(e) => setCompany(e.target.value)}
 							/>
-						</Form.Group>
+						</Form.Group> */}
 						<Form.Group className="form-group" controlId="account">
 							<Form.Label>Bank Account Information</Form.Label>
 							<Form.Select
 								name="account"
 								value={account}
-								onChange={() => setAccount(e.target.value)}
+								onChange={(e) => setAccount(e.target.value)}
 								required>
-								<option>Checking or Savings</option>
+								<option value='checking'>Checking</option>
+								<option value='savings'>Savings</option>
 							</Form.Select>
 						</Form.Group>
 						<Form.Group className="form-group" controlId="bankName">
@@ -165,11 +187,21 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 						<Form.Group className="form-group" controlId="accountNumber">
 							<Form.Label>Account Number</Form.Label>
 							<Form.Control
-								type="text"
+								type="number"
 								placeholder="Enter account number"
 								required
 								name="accountNumber"
 								onChange={(e) => setAccountNumber(e.target.value)}
+							/>
+						</Form.Group>
+						<Form.Group className="form-group" controlId="routingNumber">
+							<Form.Label>Routing Number</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder="Enter routing number"
+								required
+								name="routingNumber"
+								onChange={(e) => setRoutingNumber(e.target.value)}
 							/>
 						</Form.Group>
 						<Form.Group className="form-group" controlId="accountNickname">

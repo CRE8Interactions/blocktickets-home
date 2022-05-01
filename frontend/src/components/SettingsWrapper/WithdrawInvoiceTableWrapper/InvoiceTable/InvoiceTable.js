@@ -1,10 +1,11 @@
 import React from 'react';
+import moment from 'moment';
 
 import Table from 'react-bootstrap/Table';
 
 import './invoiceTable.scss';
 
-export default function InvoiceTable() {
+export default function InvoiceTable({ details }) {
 	return (
 		<Table bordered id="invoice-table">
 			<thead>
@@ -17,36 +18,19 @@ export default function InvoiceTable() {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">2.25.22</th>
-					<td>Olivia Rodrigo Concert - Resale x 2 Tickets</td>
-					<td>2 Tickets</td>
-					<td>2 Tickets</td>
-					<td>
-						<a href="">Download</a>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">2.25.22</th>
-					<td>
-						Olivia Rodrigo Concert - Resale x 2 TicketsOlivia Rodrigo Concert - Resale x
-						2 Tickets
-					</td>
-					<td>2 Tickets</td>
-					<td>2 Tickets</td>
-					<td>
-						<a href="">Download</a>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">2.25.22</th>
-					<td>Olivia Rodrigo Concert - Resale x 2 Tickets</td>
-					<td>2 Tickets</td>
-					<td>2 Tickets</td>
-					<td>
-						<a href="">Download</a>
-					</td>
-				</tr>
+				{ details && details.map((detail, index) => {
+					return (
+						<tr key={index}>
+							<th scope="row">{ moment(detail.createdAt).format('M.DD.YYYY') }</th>
+							<td>{detail.event.name} - {detail.details.ticket.attributes.name}</td>
+							<td>{detail.tickets.length} Tickets</td>
+							<td>{detail.total}</td>
+							<td>
+								<a href="">Download</a>
+							</td>
+						</tr>
+					)
+				})}
 			</tbody>
 		</Table>
 	);
