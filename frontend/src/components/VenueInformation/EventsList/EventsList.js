@@ -23,10 +23,10 @@ export default function EventsList({ venue }) {
 						/>
 
 						<div className="event-info d-flex-column flex-lg-row gap-2 align-items-lg-center ">
-							<div className="w-100">
-								<p className="event-title">{ event?.name }</p>
+							<div className="event-name-date-wrapper">
+								<p className="event-name">{ event?.name }</p>
 								<div>
-									<span className="fw-bolder text-muted  small">{moment(event?.start).format('MMM DD h:mmA')}</span>
+									<span className="fw-bold text-muted small">{moment(event?.start).format('MMM DD h:mmA')}</span>
 								</div>
 							</div>
 							<IconButton

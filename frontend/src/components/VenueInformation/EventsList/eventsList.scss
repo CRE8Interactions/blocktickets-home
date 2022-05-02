@@ -2,11 +2,17 @@
 @use '../../../scss/layout' as *;
 
 #venue {
-	.event-title {
-		@extend %text-truncate;
-		font-size: rem(16);
-		margin-bottom: rem(6);
-		font-weight: $fw-medium;
+	.event-name-date-wrapper {
+		@include breakpoint-min(lg) {
+			width: 50%;
+		}
+
+		.event-name {
+			@extend %text-truncate;
+			font-size: rem(16);
+			margin-bottom: rem(6);
+			font-weight: $fw-medium;
+		}
 	}
 
 	.event-image {
