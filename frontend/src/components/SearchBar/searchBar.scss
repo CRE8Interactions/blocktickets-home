@@ -3,7 +3,7 @@
 @use '../../scss/abstracts' as *;
 
 #search {
-	width: 256px;
+	width: 452px;
 	position: relative;
 	@include input-icon-box($border-radius-sm, $input-padding-y-sm, $input-padding-x-sm);
 }

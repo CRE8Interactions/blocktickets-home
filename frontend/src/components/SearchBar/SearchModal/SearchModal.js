@@ -66,8 +66,8 @@ export default function SearchModal({ show, setShow }) {
 			fullscreen
 			show={show}
 			onHide={handleClose}>
-			<Modal.Header closeButton className="mb-5">
-				<Stack direction="horizontal" gap={2}>
+			<Modal.Header closeButton className="mb-4">
+				<Stack direction="horizontal" gap={2} className="flex-grow-1">
 					<Button onClick={handleClose} variant="default" className="m-0 p-0">
 						<svg
 							title="go back"
@@ -84,7 +84,7 @@ export default function SearchModal({ show, setShow }) {
 							/>
 						</svg>
 					</Button>
-					<Form onSubmit={(e) => handleSubmit(e)}>
+					<Form onSubmit={(e) => handleSubmit(e)} className="flex-grow-1">
 						<Form.Control
 							type="text"
 							placeholder="Search for events"
