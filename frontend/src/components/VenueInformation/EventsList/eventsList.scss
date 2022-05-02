@@ -7,10 +7,6 @@
 		font-size: rem(16);
 		margin-bottom: rem(6);
 		font-weight: $fw-medium;
-
-		@include breakpoint-max(md) {
-			width: 98%;
-		}
 	}
 
 	.event-image {
@@ -24,9 +20,14 @@
 				margin-top: rem(32);
 			}
 
+			.event-info {
+				min-width: 0;
+				flex: 1;
+			}
+
 			.icon-button {
-				@include breakpoint-min(lg) {
-					margin-left: auto;
+				@include breakpoint-max(lg) {
+					align-self: flex-start;
 				}
 			}
 		}
