@@ -24,8 +24,12 @@ export default function Navigation() {
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	const toggleOverflow = (expanded) => {
-		const el = document.querySelector('#root');
-		el.style.overflowY = expanded ? 'hidden' : '';
+		if (expanded) {
+			document.body.classList.add('nav-is-open');
+		}
+		else {
+			document.body.classList.remove('nav-is-open');
+		}
 	};
 
 	return (

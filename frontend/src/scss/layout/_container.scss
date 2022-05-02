@@ -37,6 +37,11 @@ $navbar-height: rem(82);
 	height: 100%;
 }
 
+.nav-is-open {
+	height: 100vh;
+	overflow-y: hidden;
+}
+
 @mixin full-width() {
 	position: relative;
 	width: 100vw;
