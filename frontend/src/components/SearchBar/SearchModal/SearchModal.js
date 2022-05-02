@@ -66,7 +66,7 @@ export default function SearchModal({ show, setShow }) {
 			fullscreen
 			show={show}
 			onHide={handleClose}>
-			<Modal.Header closeButton className="mb-5">
+			<Modal.Header closeButton className="mb-4">
 				<Stack direction="horizontal" gap={2}>
 					<Button onClick={handleClose} variant="default" className="m-0 p-0">
 						<svg
