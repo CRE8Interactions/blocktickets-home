@@ -20,7 +20,7 @@ import './checkoutWrapper.scss';
 
 export default function CheckoutWrapper() {
 	let show = true;
-	let cart = sessionStorage.getItem('cart')
+	let cart = sessionStorage.getItem('cart');
 
 	// Make sure to call `loadStripe` outside of a component’s render to avoid
 	// recreating the `Stripe` object on every render.
@@ -36,29 +36,20 @@ export default function CheckoutWrapper() {
 		setStatus
 	] = useState('checkout');
 
-	const [ intentId, setIntentId] = useState('')
+	const [
+		intentId,
+		setIntentId
+	] = useState('');
 
-	const [order, setOrder] = useState()
+	const [
+		order,
+		setOrder
+	] = useState();
 
 	useLayoutEffect(() => {
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
 		const timer = document.getElementById('timer-container');
-
-		let cart = sessionStorage.getItem('cart')
-		if (cart) cart = JSON.parse(cart)
-		
-		// let total = cartTotal(cart, 4.35, 2.50)
-		// total = (parseFloat(total) * 100).toFixed()
-
-		let data = {
-			ticket: cart.ticket,
-			ticketCount: cart.ticketCount
-		}
-
-		getPaymentIntent(data)
-			.then((res) => {setClientSecret(res.data.client_secret); setIntentId(res.data.id)})
-			.catch((err) => console.error(err));
 
 		toggleTimer(timer, show);
 		toggleNavContent(!show, btns, nav);
@@ -73,6 +64,24 @@ export default function CheckoutWrapper() {
 		const el = document.querySelector('.full-height-wrapper').parentElement;
 
 		fullHeightContainer(el);
+
+		let cart = sessionStorage.getItem('cart');
+		if (cart) cart = JSON.parse(cart);
+
+		// let total = cartTotal(cart, 4.35, 2.50)
+		// total = (parseFloat(total) * 100).toFixed()
+
+		let data = {
+			ticket: cart.ticket,
+			ticketCount: cart.ticketCount
+		};
+
+		getPaymentIntent(data)
+			.then((res) => {
+				setClientSecret(res.data.client_secret);
+				setIntentId(res.data.id);
+			})
+			.catch((err) => console.error(err));
 
 		return () => {
 			removeFullHeightContainer(el);
@@ -161,10 +170,21 @@ export default function CheckoutWrapper() {
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
 			<Row className="justify-content-between">
-				{clientSecret && ( <Elements stripe={stripePromise} options={options}>
-					{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} setOrder={setOrder} intentId={intentId} />}
-					{status === 'successful' && <PaymentConfirmation addOns={addOns} order={order} />}
-				</Elements> )}
+				{clientSecret && (
+					<Elements stripe={stripePromise} options={options}>
+						{status === 'checkout' && (
+							<Checkout
+								addOns={addOns}
+								setStatus={setStatus}
+								setOrder={setOrder}
+								intentId={intentId}
+							/>
+						)}
+						{status === 'successful' && (
+							<PaymentConfirmation addOns={addOns} order={order} />
+						)}
+					</Elements>
+				)}
 			</Row>
 		</div>
 	);
