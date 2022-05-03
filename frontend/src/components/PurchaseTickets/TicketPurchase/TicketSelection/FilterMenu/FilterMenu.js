@@ -10,14 +10,14 @@ import Stack from 'react-bootstrap/Stack';
 
 import './filterMenu.scss';
 
-export default function FilterMenu({ setShow, show, sliderValues, setSliderValues }) {
+export default function FilterMenu({ handleShow, show, sliderValues, setSliderValues }) {
 	const [
 		on,
 		setOn
 	] = useState(false);
 
 	const handleFilter = (action) => {
-		setShow(false);
+		handleShow(!show);
 	};
 
 	return (
@@ -26,7 +26,7 @@ export default function FilterMenu({ setShow, show, sliderValues, setSliderValue
 				<header>
 					<Stack direction="horizontal" className=" heading--flex">
 						<h3 className="normal text-uppercase">Filters</h3>
-						<BackButton handleGoBack={() => setShow(!show)} />
+						<BackButton handleGoBack={handleShow} />
 					</Stack>
 					<PriceRangeSlider
 						styles="mobile-only"

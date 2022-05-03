@@ -39,29 +39,20 @@
 		&-brand {
 			@include breakpoint-min(lg) {
 				border-right: border(2px);
+				padding-right: rem(13);
+			}
+
+			@include breakpoint-min(xl) {
 				padding-right: rem(47);
 			}
 		}
 
-		&-collapse {
-			@include breakpoint-max(lg) {
-				margin-top: $navbar-padding-y;
-			}
-		}
 		&-nav {
-			padding-top: em(20);
+			padding-top: em(73);
+			padding-bottom: em(60);
 
-			@media screen and (min-device-height: 812px) {
-				padding-bottom: em(60);
-				padding-top: em(73);
-			}
 			@include breakpoint-max(lg) {
-				height: calc(100vh - 90px);
-			}
-
-			@include breakpoint-min(lg) {
-				padding-top: em(19);
-				padding-bottom: em(19);
+				height: calc(100vh - 88px);
 			}
 
 			ul {

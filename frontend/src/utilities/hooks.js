@@ -44,3 +44,28 @@ export const useOnOutsideClick = () => {
 
 	return { ref, isComponentVisible, setIsComponentVisible };
 };
+
+// JS Media Query hook
+export const useMedia = (query) => {
+	const [
+		isMatching,
+		setIsMatching
+	] = useState(window.matchMedia(query).matches);
+
+	useEffect(
+		() => {
+			let media = window.matchMedia(query);
+			if (media.matches !== isMatching) {
+				setIsMatching(media.matches);
+			}
+			let listener = () => setIsMatching(media.matches);
+			media.addEventListener('change', listener);
+			return () => media.removeEventListener('change', listener);
+		},
+		[
+			query
+		]
+	);
+
+	return isMatching;
+};
