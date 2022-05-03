@@ -47,6 +47,10 @@
 			}
 		}
 
+		&-collapse {
+			z-index: 999;
+		}
+
 		&-nav {
 			padding-top: em(73);
 			padding-bottom: em(60);
