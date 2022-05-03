@@ -2,14 +2,14 @@
 @use '../../../../../scss/layout' as *;
 
 .filter-panel {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	z-index: 999;
-	background: $clr-white;
-	transition: all 600ms ease-in;
+	// position: absolute;
+	// left: 0;
+	// right: 0;
+	// bottom: 0;
+	// top: 0;
+	// z-index: 999;
+	// background: $clr-white;
+	// transition: all 600ms ease-in;
 
 	legend:not(:first-of-type) {
 		border-top: border();

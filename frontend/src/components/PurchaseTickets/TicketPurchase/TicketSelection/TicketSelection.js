@@ -113,7 +113,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	return (
 		<Fragment>
-			{tickets && tickets.generalAdmissionTicket && tickets.generalAdmissionCount > 0 ? (
+			{tickets && tickets.generalAdmissionTicket && tickets.generalAdmissionCount > 0 ? ( 
 				<Fragment>
 			<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
@@ -144,15 +144,17 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 							setSliderValues={setSliderValues}
 						/>
 					</header>
-					<Stack direction="vertical" className="position-relative">
+					<Stack direction="vertical">
 					{showFilter && (
 								<FilterMenu show={showFilter} handleShow={handleShow} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
 					)}
 					{filteredTicketCount > 0 ? (
-									<>
+						<>
+						{!isFilterOpen && (
+							<>
 							{isZoomed && (
 								<Stack direction="horizontal" className="heading--flex mb-3">
-									<h3 className="text-uppercase">Your Tickets (7)</h3>
+									<h3 className="normal--uppercase">Your Tickets (7)</h3>
 									<Button variant="link" className="text-danger">
 										Remove all
 									</Button>
@@ -164,10 +166,10 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 							<ListGroup as="ul">
 							<ListGroup.Item
 							onClick={() =>
-												handleClick(
-											 		'confirmation',
-											 		tickets.generalAdmissionTicket
-											 	)}
+							 					handleClick(
+							 				 		'confirmation',
+							 				 		tickets.generalAdmissionTicket
+							 				 	)}
 											action
 											as="li"
 											className="d-flex justify-content-between align-items-center">
@@ -179,14 +181,14 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 												</div>
 												<div>
 													<span className="text-muted caption">
-														 {ticketTypes(tickets.generalAdmissionTicket.attributes)} 
+														  {ticketTypes(tickets.generalAdmissionTicket.attributes)}  
 													</span>
 												</div>
 											</div>
 											<div className="text-end">
 												<div>
 													<span className="fw-bold text-end">
-														 ${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
+														  ${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
 													</span>
 												</div>
 												<div>
@@ -196,15 +198,14 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 												</div>
 											</div>
 										</ListGroup.Item>
-										</ListGroup>									
+										</ListGroup>			
 									) : (
 										<MyTickets />
 									
 									)}
 								</div>
 							</div>
-							{isZoomed &&
-							!showFilter && (
+							{isZoomed && (
 								<TicketPurchaseFooter>
 									<Link
 										to={'/checkout/1'}
@@ -213,9 +214,9 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 									</Link>
 								</TicketPurchaseFooter>
 							)}
+							</>
+						)}
 						</>
-						
-						
 					) : (
 						<NotAvailableMessage>
 							<h1 className="normal">Please adjust your search</h1>
@@ -224,16 +225,18 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								quantity or filter you applied. Please try adjusting the number of
 								tickets selected or use the seat map to search for available seats.
 							</p>
-						</NotAvailableMessage>
-					)}
+						</NotAvailableMessage>	
+					)
+					}
 					</Stack>
-				</Fragment>
-				) : (
+
+					</Fragment>
+				) : ( 
 				<NotAvailableMessage>
 					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
 					<p>Please check back anytime later to see if new tickets appear</p>
 				</NotAvailableMessage>
-			)}
+			 )} 
 		</Fragment>
 	);
 }
