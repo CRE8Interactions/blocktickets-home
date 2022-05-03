@@ -5,8 +5,6 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import { IconButton } from '../../IconButton';
 
-import './eventCardBody.scss';
-
 export default function EventCardBody({ type = '', event }) {
 
 	return (
