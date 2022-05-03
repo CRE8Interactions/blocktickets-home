@@ -88,7 +88,7 @@ export default function SearchBar() {
 			<SearchModal show={show} setShow={setShow} />
 			<Form onSubmit={handleSubmit} id="search" className=" d-none d-lg-flex">
 				<FormControl
-					type="search"
+					type="text"
 					placeholder="Search for events"
 					className="me-2"
 					size="sm"
