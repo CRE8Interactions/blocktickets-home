@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { useMedia } from './../../utilities/hooks';
+import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { SeatingMap } from './SeatingMap';
 import { TicketPurchase } from './TicketPurchase';
@@ -32,6 +35,12 @@ export default function PurchaseTickets() {
 		setStep
 	] = useState('selection');
 
+	// state when filter menu is open for layout change
+	const [
+		isFilterOpen,
+		setIsFilterOpen
+	] = useState(false);
+
 	// better way? - only on seated map
 	const [
 		isZoomed,
@@ -42,6 +51,28 @@ export default function PurchaseTickets() {
 		ticket,
 		setTicket
 	] = useState();
+
+	const mediaQuery = useMedia('(min-width: 768px');
+
+	// layout change only in tablet size or if on ticket selection stop and filer menu is closed
+	useLayoutEffect(
+		() => {
+			if (mediaQuery || (step === 'selection' && !isFilterOpen)) {
+				const el = document.querySelector('.full-height-wrapper').parentElement;
+
+				fullHeightContainer(el);
+
+				return () => {
+					removeFullHeightContainer(el);
+				};
+			}
+		},
+		[
+			mediaQuery,
+			step,
+			isFilterOpen
+		]
+	);
 
 	const handleClick = (step, ticket) => {
 		// find key
@@ -68,6 +99,8 @@ export default function PurchaseTickets() {
 			<TicketPurchase
 				handleClick={handleClick}
 				handleGoBack={handleGoBack}
+				setIsFilterOpen={setIsFilterOpen}
+				isFilterOpen={isFilterOpen}
 				step={step}
 				type={param}
 				isZoomed={isZoomed}

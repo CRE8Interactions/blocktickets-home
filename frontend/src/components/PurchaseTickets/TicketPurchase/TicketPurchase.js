@@ -9,6 +9,8 @@ import './ticketPurchase.scss';
 export default function TicketPurchase({
 	handleClick,
 	handleGoBack,
+	setIsFilterOpen,
+	isFilterOpen,
 	step,
 	type,
 	isZoomed,
@@ -17,7 +19,13 @@ export default function TicketPurchase({
 	return (
 		<div className="left-col">
 			{step === 'selection' && (
-				<TicketSelection handleClick={handleClick} type={type} isZoomed={isZoomed} />
+				<TicketSelection
+					handleClick={handleClick}
+					setIsFilterOpen={setIsFilterOpen}
+					isFilterOpen={isFilterOpen}
+					type={type}
+					isZoomed={isZoomed}
+				/>
 			)}
 
 			{step === 'confirmation' && (

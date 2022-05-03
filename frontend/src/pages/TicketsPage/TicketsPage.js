@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-
-import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
-
-import { Event } from '../../components';
-import { PurchaseTickets } from '../../components';
 import { useParams } from 'react-router-dom';
+
 import { getEvent, getEventTickets } from '../../utilities/api';
 import TicketContext from '../../context/Ticket/Ticket';
 
+import { Event, PurchaseTickets } from '../../components';
+
 export default function TicketsPage() {
 	let { id } = useParams();
+
 	const [
 		event,
 		setEvent
@@ -26,16 +25,6 @@ export default function TicketsPage() {
 		generalAdmissionTicket,
 		setGaTicket
 	] = useState();
-
-	useEffect(() => {
-		const el = document.querySelector('.full-height-wrapper').parentElement;
-
-		fullHeightContainer(el);
-
-		return () => {
-			removeFullHeightContainer(el);
-		};
-	}, []);
 
 	useEffect(
 		() => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import TicketContext from '../../../../context/Ticket/Ticket';
@@ -17,7 +17,7 @@ import { NotAvailableMessage } from './NotAvailableMessage';
 
 import './ticketSelection.scss';
 
-export default function TicketSelection({ handleClick, type, isZoomed }) {
+export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed }) {
 
 	const tickets = useContext(TicketContext);
 
@@ -66,6 +66,12 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 		]
 	);
 
+	const handleShow = () => {
+		console.log('handle show');
+		setShowFilter(!showFilter); 
+		setIsFilterOpen(!isFilterOpen)
+	}
+
 	// for demo purposes, this will come from the database
 	// const genAdmissionTickets = [
 	// 	{
@@ -109,7 +115,7 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 		<Fragment>
 			{tickets && tickets.generalAdmissionTicket && tickets.generalAdmissionCount > 0 ? (
 				<Fragment>
-					<header>
+			<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
 							<Form.Select
 								id="form-select--numTickets"
@@ -128,7 +134,7 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 							<Button
 								className="btn--filter"
 								variant="outline-light"
-								onClick={() => setShowFilter(!showFilter)}>
+								onClick={handleShow}>
 								Filter
 							</Button>
 						</Stack>
@@ -138,12 +144,11 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 							setSliderValues={setSliderValues}
 						/>
 					</header>
-
-						<Stack direction="vertical" className="position-relative">
-							{showFilter && (
-								<FilterMenu show={showFilter}setShow={setShowFilter} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
-								)}
-								{filteredTicketCount > 0 ? (
+					<Stack direction="vertical" className="position-relative">
+					{showFilter && (
+								<FilterMenu show={showFilter} handleShow={handleShow} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
+					)}
+					{filteredTicketCount > 0 ? (
 									<>
 							{isZoomed && (
 								<Stack direction="horizontal" className="heading--flex mb-3">
@@ -153,50 +158,45 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 									</Button>
 								</Stack>
 							)}
-
-							<div className="tickets-container">
+					<div className="tickets-container">
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
-									
-										<ListGroup as="ul">
-										<ListGroup.Item
-											onClick={() =>
+							<ListGroup as="ul">
+							<ListGroup.Item
+							onClick={() =>
 												handleClick(
-													'confirmation',
-													tickets.generalAdmissionTicket
-												)}
+											 		'confirmation',
+											 		tickets.generalAdmissionTicket
+											 	)}
 											action
 											as="li"
 											className="d-flex justify-content-between align-items-center">
 											<div>
 												<div>
 													<span className="fw-bold p-0">
-														{tickets.generalAdmissionTicket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
+													 {tickets.generalAdmissionTicket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
 													</span>
 												</div>
 												<div>
 													<span className="text-muted caption">
-														{ticketTypes(tickets.generalAdmissionTicket.attributes)}
+														 {ticketTypes(tickets.generalAdmissionTicket.attributes)} 
 													</span>
 												</div>
 											</div>
 											<div className="text-end">
 												<div>
 													<span className="fw-bold text-end">
-														${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)}
+														 ${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
 													</span>
 												</div>
 												<div>
 													<span className="text-muted caption">
-														${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost).toFixed(2)} + Fees
+														${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost).toFixed(2)} + Fees 
 													</span>
 												</div>
 											</div>
 										</ListGroup.Item>
-										
-											
-										</ListGroup>
-										
+										</ListGroup>									
 									) : (
 										<MyTickets />
 									
@@ -228,7 +228,7 @@ export default function TicketSelection({ handleClick, type, isZoomed }) {
 					)}
 					</Stack>
 				</Fragment>
-			) : (
+				) : (
 				<NotAvailableMessage>
 					<h1 className="fs-md">Sorry, tickets are sold out.</h1>
 					<p>Please check back anytime later to see if new tickets appear</p>
