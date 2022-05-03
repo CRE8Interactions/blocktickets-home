@@ -70,6 +70,10 @@ export const getEvents = async () => {
   return instance.get('/events?filters[status][$eq]=on_sale')
 }
 
+export const searchEvents = async (q) => {
+  return instance.post(`/events/search`, q)
+}
+
 export const getMyEvents = async () => {
   return instance.get('/events/myUpcomingEvents')
 }

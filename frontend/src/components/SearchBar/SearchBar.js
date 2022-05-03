@@ -8,6 +8,8 @@ import FormControl from 'react-bootstrap/FormControl';
 import { SearchModal } from './SearchModal';
 import { SearchDropdown } from './SearchDropdown';
 
+import { searchEvents } from '../../utilities/api';
+
 import './searchBar.scss';
 
 export default function SearchBar() {
@@ -28,6 +30,8 @@ export default function SearchBar() {
 		query,
 		setQuery
 	] = useState('');
+
+	const [ queryResults, setQueryResults] = useState('');
 
 	// state to display search dropdown
 	const [
@@ -63,6 +67,22 @@ export default function SearchBar() {
 		]
 	);
 
+	const showResults = (e) => {
+		setQuery(e)
+		if (e && e.split('').length >= 3) {
+			let data = {
+				data: e
+			}
+			searchEvents(data)
+				.then((res) => { 
+					setQueryResults(res.data)
+					setIsSearching(true)
+				})
+				.catch((err) => console.error(err))
+		}		
+		// handleShow
+	}
+
 	return (
 		<Fragment>
 			<Button
@@ -85,7 +105,7 @@ export default function SearchBar() {
 					/>
 				</svg>
 			</Button>
-			<SearchModal show={show} setShow={setShow} />
+			<SearchModal show={show} setShow={setShow} results={queryResults} />
 			<Form onSubmit={handleSubmit} id="search" className=" d-none d-lg-flex">
 				<FormControl
 					type="search"
@@ -93,7 +113,7 @@ export default function SearchBar() {
 					className="me-2"
 					size="sm"
 					value={query}
-					onChange={(e) => setQuery(e.target.value)}
+					onChange={(e) => showResults(e.target.value)}
 					aria-label="Search for events"
 				/>
 				<div className="search-icon">
@@ -112,7 +132,7 @@ export default function SearchBar() {
 					</svg>
 				</div>
 			</Form>
-			{isSearching && query && <SearchDropdown query={query} />}
+			{isSearching && query && <SearchDropdown query={query} queryResults={queryResults} />}
 		</Fragment>
 	);
 }
