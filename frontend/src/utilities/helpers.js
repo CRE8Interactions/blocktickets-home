@@ -9,20 +9,26 @@ export const formatNumber = (number, digits = 2) => {
 	return Number(number).toFixed(digits);
 };
 
+export const checkUrl = (url) => {
+	var expression = /tickets|\/checkout/g;
+	var regex = new RegExp(expression);
+	return regex.test(url);
+};
+
 export const fullHeightContainer = (el) => {
-	el.classList.add('container--full-width');
+	el.classList.add('container--full-height');
 
 	const root = document.getElementById('root');
 
-	root.classList.add('full-width-flex');
+	root.classList.add('full-height-flex');
 };
 
 export const removeFullHeightContainer = (el) => {
-	el.classList.remove('container--full-width');
+	el.classList.remove('container--full-height');
 
 	const root = document.getElementById('root');
 
-	root.classList.remove('full-width-flex');
+	root.classList.remove('full-height-flex');
 };
 
 export const toggleNavContent = (show, ...rest) => {
