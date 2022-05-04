@@ -70,8 +70,7 @@ export default function SearchBar() {
 		setIsComponentVisible(true);
 	};
 
-	const showResults = (e) => {
-		if (isComponentVisible) setIsComponentVisible(true);
+	const showResults = (e, flag = setIsComponentVisible) => {
 		setQuery(e);
 		if (e && e.split('').length >= 3) {
 			let data = {
@@ -80,7 +79,8 @@ export default function SearchBar() {
 			searchEvents(data)
 				.then((res) => {
 					setQueryResults(res.data);
-					setIsSearching(true);
+
+					flag(true);
 				})
 				.catch((err) => console.error(err));
 		}

@@ -90,7 +90,7 @@ export default function SearchModal({ show, setShow, query, setQuery, showResult
 							aria-label="Search for events"
 							className="form-control--borderless pb-2"
 							value={query}
-							onChange={(e) => showResults(e.target.value)}
+							onChange={(e) => showResults(e.target.value, setIsSearching)}
 						/>
 					</Form>
 				</Stack>
