@@ -31,7 +31,10 @@ export default function SearchBar() {
 		setQuery
 	] = useState('');
 
-	const [ queryResults, setQueryResults] = useState('');
+	const [
+		queryResults,
+		setQueryResults
+	] = useState('');
 
 	// state to display search dropdown
 	const [
@@ -68,20 +71,20 @@ export default function SearchBar() {
 	);
 
 	const showResults = (e) => {
-		setQuery(e)
+		setQuery(e);
 		if (e && e.split('').length >= 3) {
 			let data = {
 				data: e
-			}
+			};
 			searchEvents(data)
-				.then((res) => { 
-					setQueryResults(res.data)
-					setIsSearching(true)
+				.then((res) => {
+					setQueryResults(res.data);
+					setIsSearching(true);
 				})
-				.catch((err) => console.error(err))
-		}		
+				.catch((err) => console.error(err));
+		}
 		// handleShow
-	}
+	};
 
 	return (
 		<Fragment>
@@ -105,7 +108,14 @@ export default function SearchBar() {
 					/>
 				</svg>
 			</Button>
-			<SearchModal show={show} setShow={setShow} results={queryResults} />
+			<SearchModal
+				show={show}
+				setShow={setShow}
+				setQuery={setQuery}
+				query={query}
+				showResults={showResults}
+				results={queryResults}
+			/>
 			<Form onSubmit={handleSubmit} id="search" className=" d-none d-lg-flex">
 				<FormControl
 					type="text"
