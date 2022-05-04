@@ -9,8 +9,8 @@ import './searchList.scss';
 export default function SearchList({ queryResults }) {
 	return (
 		<>
-			<span className="caption--uppercase-label">Events</span>
-			<Stack id="search-list" as="ul" gap={3}>
+			<span className="caption--uppercase-label mb-1">Events</span>
+			<Stack id="search-list" as="ul">
 				{ queryResults && queryResults.map((result, index) => {
 					return (
 						
