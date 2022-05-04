@@ -18,39 +18,43 @@ export default function SearchModal({ show, setShow, query, setQuery, showResult
 		setIsSearching
 	] = useState('');
 
-	const handleClose = () => {
-		setQuery('');
-		setIsSearching(false);
-		setShow();
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setIsSearching(true);
-	};
-
-	// when location changes, reset query and search results
+	// when location changes, reset query and search results and close modal
 	useEffect(
 		() => {
-			setQuery('');
-			setIsSearching(false);
+			reset();
+			setShow(false);
 		},
 		[
 			location
 		]
 	);
 
-	// if query is blanked out, don't show search results until user submits form
+	// if query is blanked out
 	useEffect(
 		() => {
 			if (query == '') {
-				setIsSearching(false);
+				reset();
 			}
 		},
 		[
 			query
 		]
 	);
+
+	const reset = () => {
+		setQuery('');
+		setIsSearching(false);
+	};
+
+	const handleClose = () => {
+		reset();
+		setShow(false);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setIsSearching(true);
+	};
 
 	return (
 		<Modal
