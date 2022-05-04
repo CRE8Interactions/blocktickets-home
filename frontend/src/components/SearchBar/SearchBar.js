@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+
+import { searchEvents } from '../../utilities/api';
+import { useOnOutsideClick } from '../../utilities/hooks';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,22 +10,16 @@ import FormControl from 'react-bootstrap/FormControl';
 import { SearchModal } from './SearchModal';
 import { SearchDropdown } from './SearchDropdown';
 
-import { searchEvents } from '../../utilities/api';
-
 import './searchBar.scss';
 
 export default function SearchBar() {
-	const location = useLocation();
+	const { ref, isComponentVisible, setIsComponentVisible } = useOnOutsideClick(false);
 
 	// search modal
 	const [
 		show,
 		setShow
 	] = useState(false);
-
-	const handleShow = () => {
-		setShow(true);
-	};
 
 	// search query
 	const [
@@ -36,33 +32,11 @@ export default function SearchBar() {
 		setQueryResults
 	] = useState('');
 
-	// state to display search dropdown
-	const [
-		isSearching,
-		setIsSearching
-	] = useState(false);
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setIsSearching(true);
-	};
-
-	// when location changes, close the dropdown and modal and reset query
-	useEffect(
-		() => {
-			setIsSearching(false);
-			setShow(false);
-			setQuery('');
-		},
-		[
-			location
-		]
-	);
-
+	// when no query
 	useEffect(
 		() => {
 			if (query == '') {
-				setIsSearching(false);
+				reset();
 			}
 		},
 		[
@@ -70,7 +44,34 @@ export default function SearchBar() {
 		]
 	);
 
+	// when dropdown isn't shown
+	useEffect(
+		() => {
+			if (!isComponentVisible) {
+				reset();
+			}
+		},
+		[
+			isComponentVisible
+		]
+	);
+
+	const reset = () => {
+		setIsComponentVisible(false);
+		setQuery('');
+	};
+
+	const handleShow = () => {
+		setShow(true);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setIsComponentVisible(true);
+	};
+
 	const showResults = (e) => {
+		if (isComponentVisible) setIsComponentVisible(true);
 		setQuery(e);
 		if (e && e.split('').length >= 3) {
 			let data = {
@@ -116,7 +117,7 @@ export default function SearchBar() {
 				showResults={showResults}
 				results={queryResults}
 			/>
-			<Form onSubmit={handleSubmit} id="search" className=" d-none d-lg-flex">
+			<Form onSubmit={handleSubmit} id="search" ref={ref} className="d-none d-lg-flex">
 				<FormControl
 					type="text"
 					placeholder="Search for events"
@@ -142,7 +143,8 @@ export default function SearchBar() {
 					</svg>
 				</div>
 			</Form>
-			{isSearching && query && <SearchDropdown query={query} queryResults={queryResults} />}
+			{isComponentVisible &&
+			query && <SearchDropdown query={query} queryResults={queryResults} />}
 		</Fragment>
 	);
 }
