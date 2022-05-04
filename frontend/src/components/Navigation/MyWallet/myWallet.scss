@@ -1,8 +1,8 @@
-@use './../../scss/abstracts' as *;
-@use '../../scss/theme/card' as *;
-@use '../../scss/theme/colors' as *;
-@use '../../scss/theme/links' as *;
-@use '../../scss/layout' as *;
+@use './../../../scss/abstracts' as *;
+@use '../../../scss/theme/card' as *;
+@use '../../../scss/theme/colors' as *;
+@use '../../../scss/theme/links' as *;
+@use '../../../scss/layout' as *;
 
 .wallet {
 	z-index: 2;

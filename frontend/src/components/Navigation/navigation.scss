@@ -105,4 +105,13 @@
 			}
 		}
 	}
+
+	.btn {
+		margin-top: 0px;
+		&-secondary,
+		&-outline-light {
+			min-width: 102px;
+			padding: $btn-padding-y $btn-padding-x;
+		}
+	}
 }
