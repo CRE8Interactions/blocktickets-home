@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import ListGroup from 'react-bootstrap/ListGroup';
-import { LinkContainer } from 'react-router-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 
-import authService from '../../utilities/services/auth.service';
-import UserContext from '../../context/User/user';
+import authService from '../../../utilities/services/auth.service';
+import UserContext from '../../../context/User/user';
 
 import './myWallet.scss';
 
-export default function MyWallet({ showMenu }) {
+export default function MyWallet() {
 	const { setAuthenticated, user } = useContext(UserContext);
 
 	const logout = () => {
@@ -17,34 +17,27 @@ export default function MyWallet({ showMenu }) {
 		setAuthenticated({});
 	};
 
-	const handleClick = () => {
-		if (showMenu) {
-			showMenu(false);
-		}
-		else return;
-	};
-
 	return (
 		<div className="wallet">
 			<ListGroup variant="flush" as="ul" role="my wallet menu">
 				<h5 className="name m-0 pb-3 pb-lg-2">{user?.user?.name}</h5>
-				<ListGroup.Item as="li" onClick={handleClick}>
+				<ListGroup.Item as="li" >
 					<LinkContainer to={'/upcoming-events'}>
 						<Nav.Link>My Events</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				<ListGroup.Item as="li" onClick={handleClick}>
+				<ListGroup.Item as="li" >
 					<LinkContainer to={'/collectables'}>
 						<Nav.Link>Collectables</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li">
-					<LinkContainer to={'/settings'} onClick={handleClick}>
+					<LinkContainer to={'/settings'} >
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li" onClick={logout}>
-					<LinkContainer to={'/'} onClick={handleClick}>
+					<LinkContainer to={'/'}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>

@@ -4,24 +4,12 @@
 .navigation {
 	.navbar .navbar-nav {
 		.mobile-tablet-only {
-			&.btn {
+			&#login-btn {
 				margin-top: auto;
 				@include breakpoint-max(md) {
 					margin-bottom: rem(80);
 				}
 			}
-
-			&#btn-wallet {
-				display: none;
-			}
-		}
-	}
-	.btn {
-		margin-top: 0px;
-		&-secondary,
-		&-outline-light {
-			min-width: 102px;
-			padding: $btn-padding-y $btn-padding-x;
 		}
 	}
 }

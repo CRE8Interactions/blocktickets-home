@@ -12,8 +12,9 @@ import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
 
 import { SearchBar } from './../SearchBar';
-import { MyWallet } from './../MyWallet';
-import { NavButtons } from './NavButtons';
+import { MyWallet } from './MyWallet';
+import { LoginButton } from './LoginButton';
+import { MyWalletButton } from './MyWalletButton';
 import { Timer } from './Timer';
 
 import './navigation.scss';
@@ -43,7 +44,8 @@ export default function Navigation() {
 					</LinkContainer>
 					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
-						<NavButtons styles="desktop-only" />
+						<LoginButton styles="desktop-only" />
+						<MyWalletButton styles="desktop-only" />
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
 							id="toggle"
@@ -67,7 +69,7 @@ export default function Navigation() {
 									</li>
 								</ul>
 							)}
-							<NavButtons styles="mobile-tablet-only" />
+							<LoginButton styles="mobile-tablet-only" />
 						</Nav>
 					</Navbar.Collapse>
 					<Timer />
