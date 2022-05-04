@@ -4,18 +4,19 @@ import Stack from 'react-bootstrap/Stack';
 
 import { SearchItem } from './SearchItem';
 
+import './searchList.scss';
+
 export default function SearchList({ queryResults }) {
 	return (
 		<>
-			<span className="d-block caption--uppercase-label">Events</span>
-			<Stack as="ul" gap={3}>
+			<span className="caption--uppercase-label">Events</span>
+			<Stack id="search-list" as="ul" gap={3}>
 				{ queryResults && queryResults.map((result, index) => {
 					return (
-						<li key={index}>
-							<SearchItem data={result} />
-						</li>
+						
+							<SearchItem key={index} data={result} />
 					)
-				})}
+				})}	
 			</Stack>
 		</>
 	);
