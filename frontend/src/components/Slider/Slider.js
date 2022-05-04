@@ -36,7 +36,7 @@ export default function Slider({ children }) {
 			preventClicks={false}
 			preventClicksPropagation={false}
 			noSwipingSelector={'button'}
-			spaceBetween={30}
+			spaceBetween={27}
 			slidesPerView={'auto'}
 			pagination={{ clickable: true }}
 			navigation={true}>
