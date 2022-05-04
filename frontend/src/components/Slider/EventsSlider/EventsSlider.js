@@ -4,25 +4,20 @@ import { SwiperSlide } from 'swiper/react';
 import { Slider } from '../../Slider';
 import { MyCard } from '../../Card';
 
-// Import Swiper styles
-import 'swiper/css';
-
-import './eventsSlider.scss';
-
-export default function EventsSlider({ layout, events }) {
+export default function EventsSlider({ events }) {
 	const prefix = 'event';
 
 	return (
 		<Fragment>
 			<Slider>
-				{ events && events.map((event, index) => {
-					return(
-						<SwiperSlide key={index}>
-							<MyCard prefix={prefix} type="genAdmission" event={event} />
-						</SwiperSlide>
-					)
-				})
-				}
+				{events &&
+					events.map((event, index) => {
+						return (
+							<SwiperSlide key={index}>
+								<MyCard prefix={prefix} type="genAdmission" event={event} />
+							</SwiperSlide>
+						);
+					})}
 			</Slider>
 		</Fragment>
 	);
