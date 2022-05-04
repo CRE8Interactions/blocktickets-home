@@ -162,5 +162,29 @@ module.exports = createCoreController('api::verify.verify', ({
     delete response.data.id
     delete response.data.attributes.code
     return response
+  },
+  async updatePersonalDetails(ctx) {
+    let user = ctx.state.user
+
+    const {
+      username,
+      email,
+      gender,
+      dob,
+      name
+    } = ctx.request.body.data;
+
+    user = await strapi.entityService.update("plugin::users-permissions.user", user.id, {
+      data: {
+        username,
+        email,
+        gender,
+        dob,
+        name
+      }
+    })
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+    return tokenData
   }
 }));

@@ -11,7 +11,13 @@ const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
-const orderId = require('order-id')('blocktickets')
+const orderId = require('order-id')('blocktickets');
+// Encrypts user data
+const options = {
+  password: process.env.EC_PASSWORD || 'blocktickets',
+  passwordSalt: process.env.DEFAULT_PW
+};
+const encryption = require('encryption-se')(options);
 
 module.exports = {
   /**
@@ -69,7 +75,7 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
@@ -184,6 +190,19 @@ module.exports = {
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
 
+        // Changes on payment-formation model
+        if (event.model.singularName === 'payment-information') {
+          await encryption
+            .encrypt(event.params.data.accountNumber)
+            .then(enc => {
+              event.params.data.accountNumber = enc
+            })
+            .catch((err) => {
+              console.error('Enc error: ', err)
+            })
+        }
+
+
         // Changes on Order model
         if (event.model.singularName === 'order') {
           event.params.data.orderId = orderId.generate();
@@ -286,6 +305,19 @@ module.exports = {
             .done()
         }
       },
+      async beforeUpdate(event) {
+        // Updates on payment-formation model
+        if (event.model.singularName === 'payment-information') {
+          await encryption
+            .encrypt(event.params.data.accountNumber)
+            .then(enc => {
+              event.params.data.accountNumber = enc
+            })
+            .catch((err) => {
+              console.error('Enc error: ', err)
+            })
+        }
+      }
     });
   },
 };

@@ -70,6 +70,10 @@ export const getEvents = async () => {
   return instance.get('/events?filters[status][$eq]=on_sale')
 }
 
+export const searchEvents = async (q) => {
+  return instance.post(`/events/search`, q)
+}
+
 export const getMyEvents = async () => {
   return instance.get('/events/myUpcomingEvents')
 }
@@ -84,4 +88,16 @@ export const getEventTickets = async (id) => {
 
 export const createTicketTransfer = (data) => {
   return instance.post('/ticket-transfers', data)
+}
+
+export const updatePersonalDetails = (data) => {
+  return instance.post('/verifies/personalDetails', data)
+}
+
+export const createBankAccount = (data) => {
+  return instance.post('/payment-information/generate', data)
+}
+
+export const getBankAccount = () => {
+  return instance.get('/payment-informations/0')
 }
