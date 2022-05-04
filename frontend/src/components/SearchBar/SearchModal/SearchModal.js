@@ -10,13 +10,8 @@ import { SearchResultsContainer } from '../SearchResultsContainer';
 
 import './searchModal.scss';
 
-export default function SearchModal({ show, setShow }) {
+export default function SearchModal({ show, setShow, query, setQuery, showResults, results }) {
 	const location = useLocation();
-
-	const [
-		query,
-		setQuery
-	] = useState('');
 
 	const [
 		isSearching,
@@ -84,20 +79,21 @@ export default function SearchModal({ show, setShow }) {
 							/>
 						</svg>
 					</Button>
-					<Form onSubmit={(e) => handleSubmit(e)} className="flex-grow-1">
+					<Form onSubmit={handleSubmit} className="flex-grow-1">
 						<Form.Control
 							type="text"
 							placeholder="Search for events"
 							aria-label="Search for events"
 							className="form-control--borderless pb-2"
 							value={query}
-							onChange={(e) => setQuery(e.target.value)}
+							onChange={(e) => showResults(e.target.value)}
 						/>
 					</Form>
 				</Stack>
 			</Modal.Header>
 			<Modal.Body>
-				{isSearching && query && <SearchResultsContainer query={query} />}
+				{isSearching &&
+				query && <SearchResultsContainer query={query} queryResults={results} />}
 			</Modal.Body>
 		</Modal>
 	);
