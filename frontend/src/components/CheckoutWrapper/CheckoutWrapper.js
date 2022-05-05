@@ -54,9 +54,14 @@ export default function CheckoutWrapper() {
 		toggleTimer(timer, show);
 		toggleNavContent(!show, btns, nav);
 
+		const el = document.querySelector('.full-height-wrapper').parentElement;
+
+		fullHeightContainer(el);
+
 		return () => {
 			toggleTimer(timer, !show);
 			toggleNavContent(show, btns, nav);
+			removeFullHeightContainer(el);
 		};
 	}, []);
 
@@ -78,7 +83,7 @@ export default function CheckoutWrapper() {
 				setIntentId(res.data.id);
 			})
 			.catch((err) => console.error(err));
-	});
+	}, []);
 
 	const addOns = [];
 
@@ -160,7 +165,7 @@ export default function CheckoutWrapper() {
 	}
 
 	return (
-		<div id="checkout-wrapper">
+		<div className="full-height-wrapper" id="checkout-wrapper">
 			<Row className="justify-content-between">
 				{clientSecret && (
 					<Elements stripe={stripePromise} options={options}>
