@@ -1,18 +1,36 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
 
 .ticket-card {
-	width: 300px;
+	width: 265px;
 	box-shadow: $box-shadow;
-
-	.card-img-top {
-		@include breakpoint-max(md) {
-			height: 252px;
-		}
-	}
 
 	.details {
 		.card-title {
-			font-size: $body-1;
+			font-size: $body-2;
+			margin-bottom: 3px;
+			@extend %text-truncate;
 		}
+
+		.event-details {
+			font-size: $small;
+			@extend %text-truncate;
+			margin-bottom: rem(5);
+		}
+
+		.num-tickets {
+			font-size: $caption;
+			@extend %icon-text-box;
+			gap: $gap-sm;
+			&::before {
+				content: url($data-svg-prefix + map-get($icons, 'ticketOutline'));
+			}
+		}
+	}
+
+	#apple-wallet-btn {
+		border-radius: $br-primary;
+		@extend %btn-background;
+		background-image: url('../../assets/icons/add-to-apple-wallet-logo.svg');
 	}
 }

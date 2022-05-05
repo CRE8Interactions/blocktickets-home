@@ -1,10 +1,10 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
-import { Slider } from '../../Slider';
+import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 
-export default function UpcomingEventsSlider({ order, tickets }) {
+export default function MyTicketsSlider({ id }) {
 	return (
 		<div className="page-slider">
 			<Slider>
@@ -13,7 +13,7 @@ export default function UpcomingEventsSlider({ order, tickets }) {
 					tickets.map((ticket, index) => {
 						return ( */}
 				<SwiperSlide>
-					<TicketCard />
+					<TicketCard id={id} />
 				</SwiperSlide>
 				{/* );
 					})} */}
