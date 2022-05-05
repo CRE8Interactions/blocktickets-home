@@ -9,13 +9,15 @@ export default function CollectablesSlider() {
 	const ticketType = 'collectable';
 
 	return (
-		<Slider>
-			<SwiperSlide>
-				<TicketCard ticketType={ticketType} />
-			</SwiperSlide>
-			<SwiperSlide>
-				<TicketCard ticketType={ticketType} />
-			</SwiperSlide>
-		</Slider>
+		<div className="page-slider">
+			<Slider>
+				<SwiperSlide>
+					<TicketCard ticketType={ticketType} />
+				</SwiperSlide>
+				<SwiperSlide>
+					<TicketCard ticketType={ticketType} />
+				</SwiperSlide>
+			</Slider>
+		</div>
 	);
 }
