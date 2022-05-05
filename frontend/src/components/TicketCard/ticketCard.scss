@@ -13,7 +13,7 @@
 		}
 
 		.event-details {
-			font-size: $small;
+			font-size: $caption;
 			@extend %text-truncate;
 			margin-bottom: rem(5);
 		}
