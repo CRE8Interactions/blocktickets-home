@@ -36,7 +36,7 @@ export default function EventModal({ show, handleClose, event }) {
 					<div>
 						<p className="location-caption">Location</p>
 						<p className="normal-sm">
-							<span className="loc" />{ event?.venue?.address[0]?.city}, { event?.venue?.address[0]?.state} <a href="">Directions</a>
+							{ event?.venue?.address[0]?.city}, { event?.venue?.address[0]?.state} <a href="">Directions</a>
 						</p>
 					</div>
 				</div>
