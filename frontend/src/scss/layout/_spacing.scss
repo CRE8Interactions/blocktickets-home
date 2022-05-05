@@ -62,6 +62,10 @@ $text-spacer-xs: rem(16);
 	}
 }
 
+.page-slider .swiper {
+	padding-bottom: rem(54);
+}
+
 .row + .row {
 	margin-top: rem(2);
 
@@ -82,13 +86,13 @@ $text-spacer-xs: rem(16);
 	font-size: $small;
 }
 
-.section-heading {
+.heading--flex,
+.section-heading,
+.section-heading-sm {
 	@extend %flex-between !optional;
 }
 
 .heading--flex {
-	@extend %flex-between !optional;
-
 	& > *,
 	.btn {
 		margin: 0px !important;
@@ -114,8 +118,4 @@ $text-spacer-xs: rem(16);
 
 .scrollable-heading {
 	@include scrollable-padding();
-}
-
-.swiper-page .swiper {
-	padding-bottom: $spacer-md;
 }

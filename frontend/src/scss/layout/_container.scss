@@ -81,6 +81,7 @@ $navbar-height: rem(82);
 	}
 }
 
+// event details: hero, event, event popup
 .time-caption,
 .venue-caption,
 .location-caption {
@@ -92,32 +93,33 @@ $navbar-height: rem(82);
 	line-height: 0;
 }
 
-.date,
-.venue,
-.location {
-	@extend %icon-text-box !optional;
-	gap: $gap-xs;
-	line-height: 0;
-}
-
-.time-caption,
-.date {
+.time-caption {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'calendar'));
 	}
 }
 
-.venue-caption,
-.venue {
+.venue-caption {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'venue'));
 	}
 }
 
-.location-caption,
-.location {
+.location-caption {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'location'));
+	}
+}
+
+// bulleted event details: event, ticket card, paymentConfirmation
+.time,
+.loc,
+.venue {
+	&::before {
+		content: '\2022';
+		position: relative;
+		margin: 0px rem(3);
+		left: em(-2);
 	}
 }
 
