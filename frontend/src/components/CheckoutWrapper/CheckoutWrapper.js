@@ -61,10 +61,6 @@ export default function CheckoutWrapper() {
 	}, []);
 
 	useEffect(() => {
-		const el = document.querySelector('.full-height-wrapper').parentElement;
-
-		fullHeightContainer(el);
-
 		let cart = sessionStorage.getItem('cart');
 		if (cart) cart = JSON.parse(cart);
 
@@ -82,10 +78,6 @@ export default function CheckoutWrapper() {
 				setIntentId(res.data.id);
 			})
 			.catch((err) => console.error(err));
-
-		return () => {
-			removeFullHeightContainer(el);
-		};
 	});
 
 	const addOns = [];
@@ -168,7 +160,7 @@ export default function CheckoutWrapper() {
 	}
 
 	return (
-		<div className="full-height-wrapper" id="checkout-wrapper">
+		<div id="checkout-wrapper">
 			<Row className="justify-content-between">
 				{clientSecret && (
 					<Elements stripe={stripePromise} options={options}>
