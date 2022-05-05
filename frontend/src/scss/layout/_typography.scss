@@ -35,7 +35,6 @@
 	h2,
 	h3,
 	h4 {
-		margin: 0;
 		@extend .heading-font !optional;
 	}
 
@@ -47,11 +46,21 @@
 			font-size: $h3-font-size;
 		}
 	}
+
+	&-sm {
+		@extend .section-heading !optional;
+		margin-bottom: $text-spacer-sm;
+
+		h1 {
+			@extend .heading-sm !optional;
+			margin-bottom: 0px !important;
+		}
+	}
 }
 
 .heading-sm {
 	font-size: $body-1;
-	margin-bottom: rem(16);
+	margin-bottom: $text-spacer-sm;
 
 	@include breakpoint-min(md) {
 		font-size: $h4-font-size;

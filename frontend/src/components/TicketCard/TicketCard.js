@@ -1,18 +1,19 @@
 import React, { useState, Fragment } from 'react';
-
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
-import Badge from 'react-bootstrap/Badge';
+import { Link } from 'react-router-dom';
 import * as moment from 'moment';
+
+import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 import { TicketModal } from './TicketModal';
 
+import QRCode from '../../assets/qrcode.svg'; 
+
 import './ticketCard.scss';
 
-export default function TicketCard({ ticketType = '', order, ticket }) {
+export default function TicketCard({ id, ticketType = '', order, ticket }) {
 	const [
 		modalType,
 		setModalType
@@ -38,68 +39,39 @@ export default function TicketCard({ ticketType = '', order, ticket }) {
 	return (
 		<Fragment>
 			<Card body className="ticket-card card-md">
-				<div className="heading--flex pb-2">
-					<h1 className="caption text-muted fw-normal m-0" id="options">
-						{ticketType !== 'collectable' ? 'Ticket' : 'NFT'} options
-					</h1>
-					<DropdownButton
-						id="dropdown-basic-button"
-						title=""
-						aria-labelledby="#options"
-						variant="default"
-						align="end">
-						<Dropdown.Item as="button" onClick={() => handleClick('details')}>
-							Details
-						</Dropdown.Item>
-						<Dropdown.Item as="button" onClick={() => handleClick('nft')}>
-							View NFT Media
-						</Dropdown.Item>
-						{ticketType !== 'collectable' &&
-						ticketStatus === 'sell' && (
-							<Fragment>
-								<Dropdown.Item as="button" onClick={() => handleClick('transfer')}>
-									Transfer ticket
-								</Dropdown.Item>
-								<Dropdown.Item as="button" onClick={() => handleClick('sell')}>
-									Sell ticket
-								</Dropdown.Item>
-							</Fragment>
-						)}
-
-						{ticketType !== 'collectable' &&
-						ticketStatus === 'sale' && (
-							<Dropdown.Item as="button" onClick={() => handleClick('delist')}>
-								Edit / Delist Ticket
-							</Dropdown.Item>
-						)}
-					</DropdownButton>
-				</div>
 				<Card.Img
-					variant="top"
-					src={order?.event?.image?.url}
-					width="281"
-					height="281"
+					src={QRCode}
+					width="217"
+					height="217"
 					className="event-image-lg mb-4"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5">{order?.event?.name}</Card.Title>
-					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
-						{order?.event?.presentedBy}
-					</Card.Subtitle>
-					<Stack className="event-details">
-						<p className="event-detail date small">{moment(order?.event?.start).format('MMM DD h:mm A')} EST</p>
-						<p className="event-detail venue small">{order?.event?.venue?.name}</p>
-						<p className="event-detail location small">{order?.event?.venue?.address[0]?.city}, {order?.event?.venue?.address[0]?.state}</p>
-					</Stack>
-					{ticketType !== 'collectable' && (
-						<Stack gap={2}>
-							<Badge bg="info" className="text-dark badge-lg">
-								{order.tickets[0]?.generalAdmission === true ? 'General Admission' : 'Seated'}
+					<Card.Title as="h5">Nic Fanciulli</Card.Title>
+						<p className="event-details">
+						Jun 20 <span>{moment(order?.event?.start).format('h:mm A')} </span><span className="venue">Southside Music Hall</span> <span className="loc">
+						Dallas, TX
+						</span>
+					</p>
+					
+					{ !id && ( <span className="num-tickets">4 Tickets</span> )}
+					{ticketType !== 'collectable' && (					<>
+							{ id ? (
+								<>
+							<Badge bg="info" className="mt-2 text-dark badge-lg">
+								General Admission
 							</Badge>
-							<Button variant="dark" size="lg" disabled={ticketStatus === 'sale'}>
-								Check in
-							</Button>
-						</Stack>
+								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+							<Button variant="default" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg"></Button>
+							<Link to="" className="btn btn-outline-light">Details</Link>
+							</Stack>
+							</>
+							) : (
+								
+							<Link to="/my-tickets/100" className="btn btn-primary">
+								View Tickets
+							</Link>
+							)}
+							</>
 					)}
 				</div>
 			</Card>

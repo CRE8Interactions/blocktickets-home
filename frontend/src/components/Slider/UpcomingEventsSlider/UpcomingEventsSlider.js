@@ -6,16 +6,18 @@ import { TicketCard } from '../../TicketCard';
 
 export default function UpcomingEventsSlider({ order, tickets }) {
 	return (
-		<Slider>
-			{order &&
-				tickets &&
-				tickets.map((ticket, index) => {
-					return (
-						<SwiperSlide key={index}>
-							<TicketCard order={order} ticket={ticket} />
-						</SwiperSlide>
-					);
-				})}
-		</Slider>
+		<div className="page-slider">
+			<Slider>
+				{/* {order &&
+					tickets &&
+					tickets.map((ticket, index) => {
+						return ( */}
+				<SwiperSlide>
+					<TicketCard />
+				</SwiperSlide>
+				{/* );
+					})} */}
+			</Slider>
+		</div>
 	);
 }
