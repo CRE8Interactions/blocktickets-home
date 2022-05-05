@@ -5,9 +5,7 @@ import { CollectablesSlider } from '../../components';
 export default function CollectablesPage() {
 	return (
 		<section className="spacer">
-			<div className="heading-sm">
-				<h1>Collectables</h1>
-			</div>
+			<h1 className="heading-sm">Collectables</h1>
 			<CollectablesSlider />
 		</section>
 	);
