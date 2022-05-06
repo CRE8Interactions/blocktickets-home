@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use 'spacing' as *;
+@use 'container' as *;
 @use './../theme/colors' as *;
 
 .normal {
@@ -177,5 +178,20 @@ h4,
 		@extend .caption !optional;
 		@extend .text-uppercase !optional;
 		color: $muted;
+	}
+}
+
+.disclaimer {
+	display: block;
+	font-size: $caption;
+	color: $text-muted;
+}
+
+.num-tickets {
+	font-size: $caption;
+	@extend %icon-text-box !optional;
+	gap: $gap-sm;
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'ticketOutline'));
 	}
 }
