@@ -4,32 +4,30 @@
 @use '../../../../scss/theme/input' as *;
 
 #ticket-modal {
-	.fixed-heading {
-		border-bottom: border();
-		margin-left: $text-spacer-sm;
-		margin-right: $text-spacer-sm;
-		padding-bottom: $text-spacer-sm;
-	}
 	.list {
 		.heading {
 			font-weight: $fw-medium;
 			margin-bottom: rem(8);
 		}
+
+		.split-row {
+			font-size: $body-2;
+		}
+
 		& + .list {
 			margin-top: rem(20);
 		}
 	}
 
-	#price {
-		font-size: $body-1;
-		font-weight: $fw-normal;
-	}
+	#numpad {
+		margin: rem(35) 0px;
+		display: flex;
+		flex-direction: column;
+		row-gap: $text-spacer-sm;
 
-	.selected-label {
-		font-size: $small;
-		font-weight: $fw-medium;
-		text-transform: capitalize;
-		margin: 0;
-		white-space: nowrap;
+		.col {
+			text-align: center;
+			font-size: $body-1;
+		}
 	}
 }

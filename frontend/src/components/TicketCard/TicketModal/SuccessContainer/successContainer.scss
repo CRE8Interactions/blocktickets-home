@@ -1,4 +1,9 @@
+@use '../../../../scss/layout' as *;
+
 #success {
+	.card-heading {
+		margin-bottom: $text-spacer-sm;
+	}
 	&::before {
 		content: '';
 		background-image: url('../../../../assets/icons/success.svg');

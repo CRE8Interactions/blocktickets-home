@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Modal from 'react-bootstrap/Modal';
+import Card from 'react-bootstrap/Card';
 
 import { DetailsModal } from './DetailsModal';
 import { TransferModal } from './TransferModal';
@@ -9,8 +9,8 @@ import { NFTModal } from './NFTModal';
 
 import './ticketModal.scss';
 
-const typeOfModal = (modalType, handleClose, ticketStatus, setTicketStatus, ticket, order) => {
-	switch (modalType) {
+const typeOfCard = (handleShow, ticketStatus, setTicketStatus) => {
+	switch (ticketStatus) {
 		case 'details':
 			return <DetailsModal />;
 
@@ -21,7 +21,7 @@ const typeOfModal = (modalType, handleClose, ticketStatus, setTicketStatus, tick
 			return <NFTModal handleClose={handleClose} />;
 
 		case 'sell':
-			return <SellModal ticketStatus={ticketStatus} setTicketStatus={setTicketStatus} />;
+			return <SellModal handleShow={handleShow} setTicketStatus={setTicketStatus} />;
 
 		case 'delist':
 			return <SellModal ticketStatus={ticketStatus} setTicketStatus={setTicketStatus} />;
@@ -29,19 +29,20 @@ const typeOfModal = (modalType, handleClose, ticketStatus, setTicketStatus, tick
 			return;
 	}
 };
-export default function TicketModal({ modalType, show, setShow, ticketStatus, setTicketStatus, ticket, order }) {
-	const handleClose = () => setShow(false);
+export default function TicketModal({ ticketStatus, setTicketStatus }) {
+	const [
+		show, setShow
+	] = useState(true);
+
+	const handleShow = () => setShow(false);
 
 	return (
-		<Modal
-			id="ticket-modal"
-			scrollable
-			centered
-			show={show}
-			onHide={handleClose}
-			keyboard={false}
-			backdrop="static">
-			{typeOfModal(modalType, handleClose, ticketStatus, setTicketStatus, ticket, order)}
-		</Modal>
+		<>
+		{ show && 
+			(<Card id="ticket-modal" className="card-xl card--popup">
+			{typeOfCard(handleShow, ticketStatus, setTicketStatus)}
+		</Card>
+		)}
+		</>
 	);
 }

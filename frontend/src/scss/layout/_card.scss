@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
-@use '../layout/typography' as *;
+@use 'typography' as *;
+@use 'container' as *;
 @use '../theme/card' as *;
 @use '../theme/colors' as *;
 
@@ -38,6 +39,13 @@
 
 		* {
 			color: $clr-white;
+		}
+	}
+
+	&--popup {
+		@include breakpoint-max(md) {
+			@include full-width();
+			box-shadow: $box-shadow-popupCard;
 		}
 	}
 
@@ -85,20 +93,49 @@
 		}
 	}
 
-	// used in total card
+	// used in total card and myTicketsCard
 	&-xl {
-		$pad-x: em(39);
+		$m-x: em(39);
 		$pad-y: em(24);
 
+		padding-left: 0px;
+		padding-right: 0px;
+
 		.card-header {
-			padding: $pad-y $pad-x;
+			padding: $pad-y 0px;
+			margin: 0px $m-x;
+		}
+
+		.card-title,
+		.card-heading {
+			font-size: $body-1;
+			font-weight: $fw-semi-bold;
 		}
 
 		.card-body {
-			padding: $pad-y $pad-x;
+			padding: $pad-y 0px;
+			margin: 0px $m-x;
+			display: flex;
+			flex-direction: column;
+
+			&-header {
+				padding-bottom: $pad-y;
+				border-bottom: border();
+			}
 		}
+
 		.card-footer {
-			padding: em(24) $pad-x;
+			padding: em(24) 0px;
+			margin: 0px $m-x;
 		}
+	}
+}
+
+.sticky-card {
+	@include breakpoint-max(md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin-top: auto;
 	}
 }

@@ -14,6 +14,7 @@
 }
 
 .btn-group-flex {
+	align-items: center;
 	.btn {
 		margin: 0px;
 		flex: 1;
@@ -57,6 +58,27 @@ button,
 
 	&:disabled {
 		color: inherit;
+	}
+}
+
+.btn-group {
+	> .btn:not(.dropdown-toggle) {
+		border-radius: $border-radius !important;
+		margin-right: rem(16);
+		padding: rem(26) rem(27);
+		border: none;
+
+		&:hover,
+		&:focus {
+			background-color: $primary;
+		}
+	}
+	.btn-check {
+		&:checked {
+			& + .btn {
+				background-color: $primary;
+			}
+		}
 	}
 }
 
@@ -146,12 +168,6 @@ button,
 		&::before {
 			content: url($data-svg-prefix + map-get($icons, 'plus-white'));
 		}
-	}
-}
-
-.btn-add {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'plus'));
 	}
 }
 

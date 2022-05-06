@@ -17,19 +17,10 @@
 			@extend %text-truncate;
 			margin-bottom: rem(5);
 		}
-
-		.num-tickets {
-			font-size: $caption;
-			@extend %icon-text-box;
-			gap: $gap-sm;
-			&::before {
-				content: url($data-svg-prefix + map-get($icons, 'ticketOutline'));
-			}
-		}
 	}
 
 	#apple-wallet-btn {
-		border-radius: $br-primary;
+		border-radius: 6px;
 		@extend %btn-background;
 		background-image: url('../../assets/icons/add-to-apple-wallet-logo.svg');
 	}

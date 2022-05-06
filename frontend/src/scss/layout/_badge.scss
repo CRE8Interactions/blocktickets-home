@@ -16,5 +16,13 @@
 	font-size: $small;
 	border-radius: 12px;
 	font-weight: $fw-medium;
-	padding: em(19);
+	padding: rem(19);
+}
+
+.badge-xl {
+	font-size: $h4-font-size;
+	border-radius: 12px;
+	font-weight: $fw-bold;
+	padding: rem(24);
+	font-family: $font-heading;
 }

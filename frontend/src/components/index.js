@@ -12,7 +12,7 @@ export { Event } from './Event';
 export { CheckoutWrapper } from './CheckoutWrapper';
 export { VenueInformation } from './VenueInformation';
 export { UpcomingEventsSlider } from './Slider/UpcomingEventsSlider';
-export { MyTicketsSlider } from './Slider/MyTicketsSlider';
+export { MyTicketsWrapper } from './MyTicketsWrapper';
 export { CollectablesSlider } from './Slider/CollectablesSlider';
 export { SettingsWrapper } from './SettingsWrapper';
 export { SettingsOptions } from './SettingsOptions';

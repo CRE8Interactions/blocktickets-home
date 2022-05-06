@@ -1,30 +1,22 @@
 @use '../../../scss/abstracts' as *;
 @use '../../../scss/layout' as *;
 @use '../../../scss/theme/colors' as *;
-@use '../../../scss/theme/modal' as *;
+@use '../../../scss/theme/buttons' as *;
 
 #ticket-modal {
-	.modal-content {
-		width: 420px;
-		margin: auto;
-	}
-	.modal-header {
-		padding-right: 0px;
-		padding-left: 0px;
-		margin-left: $modal-inner-padding;
-		margin-right: $modal-inner-padding;
-		align-items: flex-start;
-		padding-top: $modal-inner-padding;
-		padding-bottom: $modal-inner-padding;
-		margin-bottom: $text-spacer-sm;
-	}
+	line-height: 1.5;
+	height: 626px;
 
-	.modal-title {
-		font-size: $body-1;
-	}
+	.btn-group-flex,
+	.btn {
+		margin-top: auto;
 
-	.ticket-code {
-		display: block;
-		color: $muted;
+		> .btn {
+			flex: 0;
+
+			&:last-of-type {
+				flex: 1;
+			}
+		}
 	}
 }

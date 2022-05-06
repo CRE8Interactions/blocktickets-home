@@ -10,7 +10,7 @@ export const formatNumber = (number, digits = 2) => {
 };
 
 export const checkUrl = (url) => {
-	var expression = /tickets|\/checkout/g;
+	var expression = /tickets|\/checkout|\/my-tickets/g;
 	var regex = new RegExp(expression);
 	return regex.test(url);
 };

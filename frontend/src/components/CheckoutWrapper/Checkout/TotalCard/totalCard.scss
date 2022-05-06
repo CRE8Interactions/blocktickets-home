@@ -1,34 +1,7 @@
 @use '../../../../scss/abstracts' as *;
 @use '../../../../scss/layout' as *;
 
-#total-card {
-	@include breakpoint-max(md) {
-		position: sticky;
-		bottom: 0;
-		z-index: 999;
-		margin-top: auto;
-	}
-}
-.card.card--popup {
-	@include breakpoint-max(md) {
-		@include full-width();
-		box-shadow: $box-shadow-popupCard;
-
-		.card-body {
-			display: none;
-		}
-
-		&-expanded {
-			transition-property: height;
-			transition-duration: .5s;
-			transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-
-			.card-body {
-				display: block;
-			}
-		}
-	}
-
+#total-card.card.card--popup {
 	.card-header {
 		&-price {
 			@extend %icon-text-box;
