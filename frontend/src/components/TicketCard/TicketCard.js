@@ -7,34 +7,32 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { TicketModal } from './TicketModal';
-
 import QRCode from '../../assets/qrcode.svg'; 
 
 import './ticketCard.scss';
 
 export default function TicketCard({ id, ticketType = '', order, ticket }) {
-	const [
-		modalType,
-		setModalType
-	] = useState('');
+	// const [
+	// 	modalType,
+	// 	setModalType
+	// ] = useState('');
 
-	const [
-		ticketStatus,
-		setTicketStatus
-	] = useState('sell');
+	// const [
+	// 	ticketStatus,
+	// 	setTicketStatus
+	// ] = useState('sell');
 
-	const [
-		show,
-		setShow
-	] = useState(false);
+	// const [
+	// 	show,
+	// 	setShow
+	// ] = useState(false);
 
-	const handleShow = () => setShow(true);
+	// const handleShow = () => setShow(true);
 
-	const handleClick = (type) => {
-		setModalType(type);
-		handleShow();
-	};
+	// const handleClick = (type) => {
+	// 	setModalType(type);
+	// 	handleShow();
+	// };
 
 	return (
 		<Fragment>
@@ -61,7 +59,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 								General Admission
 							</Badge>
 								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-							<Button variant="default" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg"></Button>
+							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg"></Button>
 							<Link to="" className="btn btn-outline-light">Details</Link>
 							</Stack>
 							</>
@@ -76,15 +74,6 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 				</div>
 			</Card>
 
-			<TicketModal
-				modalType={modalType}
-				show={show}
-				setShow={setShow}
-				ticketStatus={ticketStatus}
-				setTicketStatus={setTicketStatus}
-				ticket={ticket}
-				order={order}
-			/>
 		</Fragment>
 	);
 }

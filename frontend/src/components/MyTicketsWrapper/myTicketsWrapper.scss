@@ -1,0 +1,7 @@
+@use '../../scss/abstracts' as *;
+
+#my-tickets-wrapper {
+	@include breakpoint-max(md) {
+		padding-bottom: 0px;
+	}
+}
