@@ -9,7 +9,7 @@ import axios from 'axios';
 import { createTicketTransfer } from '../../../../utilities/api';
 
 import { Error } from './../../../Error';
-import { SuccessContainer } from './../SuccessContainer';
+import { SuccessContainer } from '../SuccessContainer';
 
 export default function TransferModal({ticket, order}) {
 	const [

@@ -35,25 +35,26 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 	};
 
 	const paymentDeclined = (err) => {
-		setModalType('declined')
-		setModalError(err)
-		handleShow()
-	}
+		setModalType('declined');
+		setModalError(err);
+		handleShow();
+	};
 
 	const checkValid = (e, name) => {
-		let paymentButton = document.getElementById('payment-btn')
-		let paymentButtonDisabled = document.getElementById('payment-btn-disabled')
+		let paymentButton = document.getElementById('payment-btn');
+		let paymentButtonDisabled = document.getElementById('payment-btn-disabled');
 
 		if (e && e.complete && name && name.split('').length > 5) {
-			paymentButton.classList.add('d-block')
-			paymentButton.classList.remove('d-none')
-			paymentButtonDisabled.classList.add('d-none')
-		} else {
-			paymentButton.classList.add('d-none')
-			paymentButtonDisabled.classList.remove('d-none')
-			paymentButtonDisabled.classList.add('d-block')
+			paymentButton.classList.add('d-block');
+			paymentButton.classList.remove('d-none');
+			paymentButtonDisabled.classList.add('d-none');
 		}
-	}
+		else {
+			paymentButton.classList.add('d-none');
+			paymentButtonDisabled.classList.remove('d-none');
+			paymentButtonDisabled.classList.add('d-block');
+		}
+	};
 
 	return (
 		<Fragment>
@@ -68,7 +69,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 					<Payment checkValid={checkValid} />
 				</section>
 			</Col>
-			<Col md={6} lg={5} id="total-card">
+			<Col md={6} lg={5} id="total-card" className="sticky-card">
 				<TotalCard
 					setStatus={setStatus}
 					addOns={addOns}

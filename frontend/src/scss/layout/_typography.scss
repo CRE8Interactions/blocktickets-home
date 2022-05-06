@@ -187,6 +187,48 @@ h4,
 	color: $text-muted;
 }
 
+// event details: hero, event, event popup
+.time-caption,
+.venue-caption,
+.location-caption {
+	@extend .caption !optional;
+	@extend %icon-text-box !optional;
+	gap: $gap-xs;
+	color: $clr-neutral-4;
+	font-weight: $fw-semi-bold;
+	line-height: 0;
+}
+
+.time-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'calendar'));
+	}
+}
+
+.venue-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'venue'));
+	}
+}
+
+.location-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'location'));
+	}
+}
+
+// bulleted event details: event, ticket card, paymentConfirmation
+.time,
+.loc,
+.venue {
+	&::before {
+		content: '\2022';
+		position: relative;
+		margin: 0px rem(3);
+		left: em(-2);
+	}
+}
+
 .num-tickets {
 	font-size: $caption;
 	@extend %icon-text-box !optional;

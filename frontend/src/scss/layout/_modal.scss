@@ -17,16 +17,6 @@
 		font-size: $small;
 	}
 
-	&-content {
-		&.popup {
-			// nft modal
-			background-color: transparent;
-			padding-top: rem(9);
-			padding-right: rem(4);
-			border: none;
-		}
-	}
-
 	.modal-heading {
 		margin-bottom: $text-spacer-sm;
 
@@ -64,14 +54,6 @@
 			width: 100%;
 			padding: $btn-padding-y-lg $btn-padding-x-lg;
 			font-size: $btn-font-size-lg;
-		}
-
-		.split-row {
-			font-size: $body-2;
-		}
-
-		.form-group + .form-group {
-			margin-top: rem(19);
 		}
 	}
 }

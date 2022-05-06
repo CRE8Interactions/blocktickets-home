@@ -13,7 +13,7 @@ export default function BackButton({ handleGoBack, marginBottom = 0 }) {
 	return (
 		<Button
 			onClick={onClick}
-			className={`d-flex icon-button mt-0 mb-${marginBottom} align-self-start btn btn-back`}
+			className={`d-flex icon-button mt-0 mb-${marginBottom}  btn btn-back`}
 			variant="outline-light"
 			size="sm">
 			Back
