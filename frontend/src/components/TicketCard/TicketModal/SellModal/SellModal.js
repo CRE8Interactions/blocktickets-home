@@ -168,14 +168,14 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 			)}
 			{step === 'summary' && (
 				<>
-					<div className="card-heading">
+					<div className="card-body-header card-heading">
 						<h4 className="card-heading-title">Payment Summary</h4>
 						<p>
 							Please go to 'Settings' in your 'Wallet' and link your bank account to receive funds from ticket sales. 
 						</p>
 					</div>
 						
-							<div className='pt-4'>
+							<div>
 								<h2 className="normal text-uppercase text-muted mb-3">Ticket Breakdown</h2>
 								<ul>
 									<li className="list">
