@@ -219,6 +219,20 @@ module.exports = {
           event.params.data.uuid = Math.floor(Math.random() * 900000000) + 100000000;
           event.params.data.creatorId = user.id
           event.params.data.members = [user];
+          // Creates web3 wallet for organization
+          const web3 = await new Web3API(new Web3API.providers.HttpProvider(blockchain));
+          const account = await web3.eth.accounts.create(web3.utils.randomHex(32));
+          const wallet = await web3.eth.accounts.wallet.add(account)
+
+          const myWallet = await strapi.db.query('api::wallet.wallet').create({
+            data: {
+              account,
+              wallet,
+              keystore: wallet.encrypt(web3.utils.randomHex(32))
+            }
+          })
+          
+          event.params.data.wallet = myWallet.id
         }
 
         // Changes on event model
