@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use 'spacing' as *;
 @use 'typography' as *;
 @use 'container' as *;
 @use '../theme/card' as *;
@@ -117,8 +118,12 @@
 			margin: 0px $m-x;
 		}
 
-		.card-title,
 		.card-heading {
+			margin-bottom: $text-spacer-sm;
+		}
+
+		.card-title,
+		.card-heading-title {
 			font-size: $body-1;
 			font-weight: $fw-semi-bold;
 		}

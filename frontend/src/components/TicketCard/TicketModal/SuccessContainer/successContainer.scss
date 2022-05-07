@@ -1,8 +1,9 @@
 @use '../../../../scss/layout' as *;
 
 #success {
-	.card-heading {
+	.card-heading-title {
 		margin-bottom: $text-spacer-sm;
+		text-align: center;
 	}
 	&::before {
 		content: '';
