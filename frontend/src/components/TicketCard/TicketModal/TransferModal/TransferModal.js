@@ -44,7 +44,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		setStep('confirmation')
 	};
 
-	 const oId = ticket.uuid.split('-')[4]
+	//  const oId = ticket.uuid.split('-')[4]
 
 	useEffect(() => {
 		axios
@@ -53,18 +53,19 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 	}, []);
 
 	const submitTransfer = () => {
-		let data = {
-			phoneNumber: phoneNumber,
-			orderId: order.id,
-			ticketId: ticket.id
-		};
+		setStep('successful')
+		// let data = {
+		// 	phoneNumber: phoneNumber,
+		// 	orderId: order.id,
+		// 	ticketId: ticket.id
+		// };
 
-		createTicketTransfer(data)
-			.then((res) => {
-				setStep('successful');
-			})
-			.catch((err) => console.error(err));
-	};
+	// 	createTicketTransfer(data)
+	// 		.then((res) => {
+	// 			setStep('successful');
+	// 		})
+	// 		.catch((err) => console.error(err));
+	 };
 
 	const validNumber = () => {
 		return phoneNumber && isValidPhoneNumber(phoneNumber);
@@ -151,11 +152,12 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 						<SuccessContainer>
 							<h4 className="card-heading-title">Your tickets have been transferred! </h4>
 						</SuccessContainer>
-					<SuccessDisclaimer />
 
 						<p className="small">
 							Your transfer is pending till the recipient claims the tickets. You can cancel the transfer while it's pending. Once it's claimed by the recipient the tickets will no longer be in your account. 
 						</p>
+					<SuccessDisclaimer />
+
 						<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</Fragment>
 				)}
