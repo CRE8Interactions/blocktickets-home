@@ -9,19 +9,19 @@ import { NFTModal } from './NFTModal';
 
 import './ticketModal.scss';
 
-const typeOfCard = (handleShow, ticketStatus, setTicketStatus) => {
+const typeOfCard = (handleClose, ticketStatus, setTicketStatus) => {
 	switch (ticketStatus) {
 		case 'details':
 			return <DetailsModal />;
 
 		case 'transfer':
-			return <TransferModal ticket={ticket} order={order} />;
+			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;
 
 		case 'nft':
 			return <NFTModal handleClose={handleClose} />;
 
 		case 'sell':
-			return <SellModal handleShow={handleShow} setTicketStatus={setTicketStatus} />;
+			return <SellModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;
 
 		case 'delist':
 			return <SellModal ticketStatus={ticketStatus} setTicketStatus={setTicketStatus} />;
@@ -29,20 +29,17 @@ const typeOfCard = (handleShow, ticketStatus, setTicketStatus) => {
 			return;
 	}
 };
-export default function TicketModal({ ticketStatus, setTicketStatus }) {
-	const [
-		show, setShow
-	] = useState(true);
+export default function TicketModal({ ticketStatus, setTicketStatus, setShow}) {
 
-	const handleShow = () => setShow(false);
+	const handleClose = () => setShow(false)
 
 	return (
 		<>
-		{ show && 
-			(<Card id="ticket-modal" className="card-xl card--popup">
-			{typeOfCard(handleShow, ticketStatus, setTicketStatus)}
+		
+			<Card id="ticket-modal" className="card-xl card--popup">
+			{typeOfCard(handleClose, ticketStatus, setTicketStatus)}
 		</Card>
-		)}
+		
 		</>
 	);
 }

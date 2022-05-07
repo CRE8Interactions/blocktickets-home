@@ -1,17 +1,22 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
 
-import Modal from 'react-bootstrap/Modal';
+import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+
 import PhoneInput from 'react-phone-number-input';
 import { isValidPhoneNumber } from 'react-phone-number-input';
-import axios from 'axios';
+
 import { createTicketTransfer } from '../../../../utilities/api';
 
 import { Error } from './../../../Error';
 import { SuccessContainer } from '../SuccessContainer';
+import { SuccessDisclaimer } from '../SuccessDisclaimer';
+import { SelectTickets } from '../SelectTickets';
 
-export default function TransferModal({ticket, order}) {
+export default function TransferModal({ handleClose, setTicketStatus, ticket, order }) {
 	const [
 		step,
 		setStep
@@ -32,13 +37,14 @@ export default function TransferModal({ticket, order}) {
 		setHasError
 	] = useState(false);
 
-	const submit = () => {
-		data = {
-			phoneNumber
-		}
-	}
+	const [isSubmitted, setIsSubmitted] = useState(false)
 
-	const oId = ticket.uuid.split('-')[4]
+	const submit = () => {
+		setIsSubmitted(true);
+		setStep('confirmation')
+	};
+
+	 const oId = ticket.uuid.split('-')[4]
 
 	useEffect(() => {
 		axios
@@ -51,71 +57,109 @@ export default function TransferModal({ticket, order}) {
 			phoneNumber: phoneNumber,
 			orderId: order.id,
 			ticketId: ticket.id
-		}
+		};
 
 		createTicketTransfer(data)
 			.then((res) => {
-				setStep('successful')
+				setStep('successful');
 			})
-			.catch((err) => console.error(err))
-	}
+			.catch((err) => console.error(err));
+	};
 
 	const validNumber = () => {
-		return phoneNumber && isValidPhoneNumber(phoneNumber)
-	}
+		return phoneNumber && isValidPhoneNumber(phoneNumber);
+	};
+
+	const handleClick = () => {
+		handleClose(); 
+		if (step === 'successful') setTicketStatus('transferred')
+	};
 
 	return (
 		<Fragment>
-			<Modal.Header closeButton>
-				<div>
-					<Modal.Title as="h4">Transfer ticket</Modal.Title>
-					<p className="ticket-code">{ticket?.name} #{oId}</p>
-				</div>
-			</Modal.Header>
-			<Modal.Body>
-				{step === 'successful' ? (
-					<Fragment>
-						<SuccessContainer>
-							<h4 className="m-0 modal-heading-title">Transfer completed!</h4>
-						</SuccessContainer>
-						<p className="small">
-							We have transferred your ticket to the recipient. If they have not
-							received it please reach out to us.
-						</p>
-					</Fragment>
-				) : (
-					<Fragment>
-						<div className="modal-heading">
-							<h4 className="modal-heading-title">
-								Enter the recepient phone number{' '}
-							</h4>
-							<p className="small">
-								The recipient will get notified via text that you have transferred
-								your ticket to them.
-							</p>
-						</div>
+			<Card.Header className="heading--flex">
+				<Card.Title as="h5">Transfer</Card.Title>
+				<Button variant="close" onClick={handleClose} />
+			</Card.Header>
+			<Card.Body>
+				{step === 'transfer' &&  (
+				<><SelectTickets status="transfer" />
+				<Stack  direction="horizontal" className="btn-group-flex">
+					<Button onClick={() => setStep('phone')} className="icon-button btn-next" size="lg">
+							Next
+						</Button>
+				</Stack>
+					</>)}
+				{step === 'phone' && (
+				<Fragment>
+							<div className="card-heading">
+								<h4 className="card-heading-title">
+									Enter the recepient phone number{' '}
+								</h4>
+								<p className="small">
+									The recipient will get notified via sms that you have transferred your tickets to them.
+								</p>
+							</div>
 						<Form>
 							<Form.Group controlId="phone-number">
 								<Form.Label>Phone Number</Form.Label>
-									<PhoneInput
-										autoComplete={'off'}
-										defaultCountry={countryCode}
-										value={phoneNumber}
-										required
-										onChange={(e) => setPhoneNumber(e)}
-										className={hasError ? 'error-border' : ''}
+								<PhoneInput
+									autoComplete={'off'}
+									defaultCountry={countryCode}
+									value={phoneNumber}
+									required
+									onChange={(e) => setPhoneNumber(e)}
+									className={isSubmitted  &&!validNumber() ? 'error-border' : ''}
 								/>
 							</Form.Group>
-							<Form.Control.Feedback type="invalid">
+							{ isSubmitted && !validNumber() && (
 								<Error type="phone" />
-							</Form.Control.Feedback>
-							<Button onClick={(e) => submitTransfer() } variant="primary" disabled={ !validNumber() }>
-								Transfer
-							</Button>
+							)}
 						</Form>
+							<Stack direction="horizontal" className="btn-group-flex">
+								<Button
+									onClick={submit}
+									disabled={!validNumber()} size="lg" className="icon-button btn-next">
+									Transfer
+								</Button>
+							</Stack>
+					</Fragment>
+				)} 
+				{step === 'confirmation' && (
+					<Fragment>
+							<div className="card-heading">
+								<h4 className="card-heading-title">
+									Are you sure you want to transfer this ticket?
+								</h4>
+							</div>
+							<div>
+								<p className='fw-medium text-muted mb-2'>Recipient phone number</p>
+								<span className='fs-md fw-bold'>{phoneNumber}</span>
+							</div>
+							<Stack className="btn-group-flex" gap={3}>
+								<Button onClick={() => setStep('phone')} variant="outline-light" size="lg" className="w-100 flex-shrink-1">Cancel</Button>
+								<Button
+									onClick={(e) => submitTransfer()}
+									size="lg" className="w-100 flex-shrink-1" >
+									Transfer
+								</Button>
+							</Stack>
 					</Fragment>
 				)}
-			</Modal.Body>
+				{step === 'successful' && (
+					<Fragment>
+						<SuccessContainer>
+							<h4 className="card-heading-title">Your tickets have been transferred! </h4>
+						</SuccessContainer>
+					<SuccessDisclaimer />
+
+						<p className="small">
+							Your transfer is pending till the recipient claims the tickets. You can cancel the transfer while it's pending. Once it's claimed by the recipient the tickets will no longer be in your account. 
+						</p>
+						<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
+					</Fragment>
+				)}
+			</Card.Body>
 		</Fragment>
 	);
 }

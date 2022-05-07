@@ -15,9 +15,14 @@ import './myTicketsWrapper.scss';
 
 export default function MyTicketsWrapper({ id }) {
 	const [
+		show,
+		setShow
+	] = useState(false);
+
+	const [
 		ticketStatus,
 		setTicketStatus
-	] = useState(undefined);
+	] = useState('');
 
 	useLayoutEffect(() => {
 		const el = document.querySelector('#main-container');
@@ -29,6 +34,12 @@ export default function MyTicketsWrapper({ id }) {
 		};
 	}, []);
 
+	const handleShow = () => setShow(true);
+
+	const handleClick = (status) => {
+		handleShow();
+		setTicketStatus(status);
+	};
 	return (
 		<section className="spacer-xs full-height-wrapper" id="my-tickets-wrapper">
 			<Row className="justify-content-between">
@@ -43,22 +54,26 @@ export default function MyTicketsWrapper({ id }) {
 						direction="horizontal"
 						gap={3}
 						className="btn-group-flex justify-content-center align-items-center">
-						<Button onClick={() => setTicketStatus('transfer')} variant="dark">
+						<Button
+							onClick={() => handleClick('transfer')}
+							variant="dark"
+							disabled={ticketStatus === 'transferred'}>
 							Transfer
 						</Button>
 						<Button
 							disabled={ticketStatus === 'listed'}
-							onClick={() => setTicketStatus('sell')}
+							onClick={() => handleClick('sell')}
 							variant="dark">
 							Sell
 						</Button>
 					</Stack>
 				</Col>
 				<Col md={6} lg={5} className="sticky-card">
-					{ticketStatus && (
+					{show && (
 						<TicketModal
 							ticketStatus={ticketStatus}
 							setTicketStatus={setTicketStatus}
+							setShow={setShow}
 						/>
 					)}
 				</Col>
