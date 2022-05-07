@@ -7,10 +7,10 @@
 	line-height: 1.5;
 	height: 626px;
 
-	.btn-group-flex,
-	.btn {
+	.btn-group-flex {
 		margin-top: auto;
-
+	}
+	.btn-group-flex.hstack {
 		> .btn {
 			flex: 0;
 
@@ -18,6 +18,9 @@
 				flex: 1;
 			}
 		}
+	}
+	.btn-group-flex.vstack {
+		flex: 0;
 	}
 
 	.split-row {

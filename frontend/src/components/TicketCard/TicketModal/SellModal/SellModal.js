@@ -5,13 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
-import Form from 'react-bootstrap/Form';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 
  
 import { BackButton } from '../../../BackButton';
+import { SelectTickets } from '../SelectTickets';
 import { SuccessContainer } from '../SuccessContainer';
 
 import { formatNumber } from '../../../../utilities/helpers';
@@ -20,7 +18,7 @@ import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
 import './sellModal.scss';
 
-export default function SellModal({ handleShow, setTicketStatus }) {
+export default function SellModal({ handleClose, setTicketStatus }) {
 	// text
 	// const type = ticketStatus === 'sell' ? 'sell' : 'delist';
 
@@ -72,7 +70,7 @@ export default function SellModal({ handleShow, setTicketStatus }) {
 		]);
 
 	const handleClick = () => {
-		handleShow(); 
+		handleClose(); 
 		if (step === 'successful') setTicketStatus('listed')
 	};
 
@@ -100,46 +98,29 @@ export default function SellModal({ handleShow, setTicketStatus }) {
 		<Fragment>
 			<Card.Header className="heading--flex">
 				<Card.Title as="h5">Sell</Card.Title>
-				<Button variant="close" onClick={handleShow} />
+				<Button variant="close" onClick={handleClose} />
 			</Card.Header>
 			<Card.Body>
 			{step === 'sell' && (
 				<>
-					<h6 className="card-heading">Select tickets to sell</h6>
-					<Stack direction="horizontal" className="pt-2 split-row">
-						<div>
-							<span className="fw-medium">General Admission</span>
-						</div>
-						<div>
-							<span className="num-tickets">4 Tickets</span>
-						</div>
+					<SelectTickets status="sell" />
+					<Stack direction="horizontal" className="btn-group-flex">
+						<Button onClick={() => setStep('price')} className="icon-button btn-next" size="lg">
+							Set price
+						</Button>
 					</Stack>
-					<Form className="d-flex gap-4 pt-4">
-						<ToggleButtonGroup type="checkbox" onChange={handleChange}>
-							<ToggleButton variant="light" id="tbg-btn-1" value={1}>
-								GA
-							</ToggleButton>
-							<ToggleButton variant="light" id="tbg-btn-2" value={2}>
-								GA
-							</ToggleButton>
-							<ToggleButton variant="light"  id="tbg-btn-3" value={3}>
-								GA
-							</ToggleButton>
-						</ToggleButtonGroup>
-					</Form>
-					<Button onClick={() => setStep('price')} className="icon-button btn-next" size="lg">
-						Set price
-					</Button>
-				</>
+					</>
 			)}
 
 			{step === 'price' && (
 				<>
-						<h4>Price your tickets</h4>
-						<p className="small text-muted fw-medium">
-							Ticket face value $174.00
-						</p>
-						<Badge bg="light" className="bold mt-4 text-dark badge-xl">$0</Badge>
+						<div className="card-heading">
+							<h4 className="card-heading-title">Price your tickets</h4>
+							<p className="small text-muted fw-medium">
+								Ticket face value $174.00
+							</p>
+						</div>
+						<Badge bg="light" className="bold text-dark badge-xl">$0</Badge>
 						<div id="numpad">
 							<Row className="split-row">
 								<Col>
@@ -187,8 +168,8 @@ export default function SellModal({ handleShow, setTicketStatus }) {
 			)}
 			{step === 'summary' && (
 				<>
-					<div className="card-body-header">
-						<h4 className="card-heading">Payment Summary</h4>
+					<div className="card-heading">
+						<h4 className="card-heading-title">Payment Summary</h4>
 						<p>
 							Please go to 'Settings' in your 'Wallet' and link your bank account to receive funds from ticket sales. 
 						</p>
@@ -252,7 +233,7 @@ export default function SellModal({ handleShow, setTicketStatus }) {
 			{step === 'successful' && (
 				<>
 					<SuccessContainer>
-						<h4 className="card-heading">
+						<h4 className="card-heading-title">
 							Your tickets are listed for sale!
 						</h4>
 					</SuccessContainer>
@@ -260,7 +241,7 @@ export default function SellModal({ handleShow, setTicketStatus }) {
 							We will notify you via sms if a purchase is made. While your tickets are listed, you can change the price or delist them from the marketplace in 'My listings' at anytime	
 					</p>
 					<SuccessDisclaimer />
-					<Button onClick={handleClick} size='lg'>Close</Button>
+					<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</>
 				
 			)}</Card.Body>

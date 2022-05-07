@@ -54,6 +54,7 @@
 
 		h1 {
 			@extend .heading-sm !optional;
+			@extend .heading-font !optional;
 			margin-bottom: 0px !important;
 		}
 	}
