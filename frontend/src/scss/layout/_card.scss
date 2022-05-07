@@ -75,6 +75,21 @@
 		font-size: $caption;
 	}
 
+	.list {
+		.heading {
+			font-weight: $fw-medium;
+			margin-bottom: rem(8);
+		}
+
+		.split-row {
+			font-size: $body-2;
+		}
+
+		& + .list {
+			margin-top: rem(20);
+		}
+	}
+
 	// used in ticketCard, settings
 	&-md {
 		$padding: em(20) em(24);

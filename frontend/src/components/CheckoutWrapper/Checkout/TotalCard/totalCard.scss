@@ -1,12 +1,9 @@
 @use '../../../../scss/abstracts' as *;
 @use '../../../../scss/layout' as *;
+@use '../../../../scss/layout' as *;
 
 #total-card.card.card--popup {
 	.card-header {
-		&-price {
-			@extend %icon-text-box;
-		}
-
 		.btn--icon-sm {
 			svg {
 				transform: rotate(0deg);

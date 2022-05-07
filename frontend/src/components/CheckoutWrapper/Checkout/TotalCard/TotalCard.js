@@ -87,7 +87,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 				<Card.Title as="h5" className="normal">
 					Total
 				</Card.Title>
-				<Stack direction="horizontal" className="card-header-price">
+				<Stack direction="horizontal" gap={2} className="card-header-price">
 					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.5)}</span>
 					<Button
 						onClick={() => setExpanded(!expanded)}

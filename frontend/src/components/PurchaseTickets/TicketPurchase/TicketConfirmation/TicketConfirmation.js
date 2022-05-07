@@ -31,7 +31,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 	}, [ticketCount])
 	return (
 		<Fragment>
-			<header className="d-flex flex-column">
+			<header>
 				<BackButton handleGoBack={handleGoBack} marginBottom="3" />
 			</header>
 			<div className="ticket-details d-flex flex-column">
@@ -66,7 +66,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 				</p>
 			</div>
 
-			<div className="num-tickets">
+			<div className="ticket-counter">
 				<h2 className="caption--uppercase text-muted mb-3">Number of Tickets</h2>
 				<Stack direction="horizontal" className="justify-content-between">
 					<div className="flex-grow-1">
