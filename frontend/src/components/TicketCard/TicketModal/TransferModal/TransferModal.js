@@ -17,10 +17,15 @@ import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { SelectTickets } from '../SelectTickets';
 
 export default function TransferModal({ handleClose, setTicketStatus, ticket, order }) {
+
+	// 1 - tranfer 
+	// 2 -  phone number 
+	// 3 - confirmation 
+	// 4 - success
 	const [
 		step,
 		setStep
-	] = useState('transfer');
+	] = useState(1);
 
 	const [
 		phoneNumber,
@@ -41,7 +46,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 
 	const submit = () => {
 		setIsSubmitted(true);
-		setStep('confirmation')
+		setStep(3)
 	};
 
 	//  const oId = ticket.uuid.split('-')[4]
@@ -53,7 +58,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 	}, []);
 
 	const submitTransfer = () => {
-		setStep('successful')
+		setStep(4)
 		// let data = {
 		// 	phoneNumber: phoneNumber,
 		// 	orderId: order.id,
@@ -71,9 +76,12 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		return phoneNumber && isValidPhoneNumber(phoneNumber);
 	};
 
+	const handleGoBack = () => {
+		setStep(step -1)
+	}
 	const handleClick = () => {
 		handleClose(); 
-		if (step === 'successful') setTicketStatus('transferred')
+		if (step === 4) setTicketStatus('transferred')
 	};
 
 	return (
@@ -83,15 +91,15 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 				<Button variant="close" onClick={handleClose} />
 			</Card.Header>
 			<Card.Body>
-				{step === 'transfer' &&  (
+				{step === 1 &&  (
 				<><SelectTickets status="transfer" />
 				<Stack  direction="horizontal" className="btn-group-flex">
-					<Button onClick={() => setStep('phone')} className="icon-button btn-next" size="lg">
+					<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg">
 							Next
 						</Button>
 				</Stack>
 					</>)}
-				{step === 'phone' && (
+				{step === 2 && (
 				<Fragment>
 							<div className="card-heading">
 								<h4 className="card-heading-title">
@@ -126,7 +134,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 							</Stack>
 					</Fragment>
 				)} 
-				{step === 'confirmation' && (
+				{step === 3 && (
 					<Fragment>
 							<div className="card-heading">
 								<h4 className="card-heading-title">
@@ -138,16 +146,16 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 								<span className='fs-md fw-bold'>{phoneNumber}</span>
 							</div>
 							<Stack className="btn-group-flex" gap={3}>
-								<Button onClick={() => setStep('phone')} variant="outline-light" size="lg" className="w-100 flex-shrink-1">Cancel</Button>
+								<Button onClick={handleGoBack} variant="outline-light" size="lg" className="text-danger">Cancel</Button>
 								<Button
 									onClick={(e) => submitTransfer()}
-									size="lg" className="w-100 flex-shrink-1" >
+									size="lg" >
 									Transfer
 								</Button>
 							</Stack>
 					</Fragment>
 				)}
-				{step === 'successful' && (
+				{step === 4 && (
 					<Fragment>
 						<SuccessContainer>
 							<h4 className="card-heading-title">Your tickets have been transferred! </h4>

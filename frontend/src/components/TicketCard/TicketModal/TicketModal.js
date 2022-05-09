@@ -36,7 +36,7 @@ export default function TicketModal({ ticketStatus, setTicketStatus, setShow}) {
 	return (
 		<>
 		
-			<Card id="ticket-modal" className="card-xl card--popup">
+			<Card id="ticket-modal" className="card-xl card--popup card--light">
 			{typeOfCard(handleClose, ticketStatus, setTicketStatus)}
 		</Card>
 		

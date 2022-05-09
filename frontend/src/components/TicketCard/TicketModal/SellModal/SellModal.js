@@ -22,10 +22,14 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 	// text
 	// const type = ticketStatus === 'sell' ? 'sell' : 'delist';
 
+	// 1 - sell 
+	// 2 - price 
+	// 3 - summary 
+	// 4 - success 
 	const [
 		step,
 		setStep
-	] = useState('sell');
+	] = useState(1);
 
 	const [
 		updateSuccessful,
@@ -63,6 +67,9 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 		setValue
 	] = useState([]);
 
+	const handleGoBack = () => {
+		setStep(step - 1)
+	}
 	const handleChange = (val) =>
 		setValue((prevState) => [
 			...prevState,
@@ -71,11 +78,11 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 
 	const handleClick = () => {
 		handleClose(); 
-		if (step === 'successful') setTicketStatus('listed')
+		if (step === 4) setTicketStatus('listed')
 	};
 
 	const handleUpdatePrice = () => {
-		setStep('summary');
+		setStep(3);
 		setUpdateSuccessful(true);
 	};
 
@@ -101,18 +108,18 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 				<Button variant="close" onClick={handleClose} />
 			</Card.Header>
 			<Card.Body>
-			{step === 'sell' && (
+			{step === 1 && (
 				<>
 					<SelectTickets status="sell" />
 					<Stack direction="horizontal" className="btn-group-flex">
-						<Button onClick={() => setStep('price')} className="icon-button btn-next" size="lg">
+						<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg">
 							Set price
 						</Button>
 					</Stack>
 					</>
 			)}
 
-			{step === 'price' && (
+			{step === 2 && (
 				<>
 						<div className="card-heading">
 							<h4 className="card-heading-title">Price your tickets</h4>
@@ -120,7 +127,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								Ticket face value $174.00
 							</p>
 						</div>
-						<Badge bg="light" className="bold text-dark badge-xl">$0</Badge>
+						<Badge bg="default" className="d-flex-column gap-2 badge-xl badge--light bold text-dark ">$0 <span className='caption fw-normal text-muted'>Price per ticket</span></Badge>
 						<div id="numpad">
 							<Row className="split-row">
 								<Col>
@@ -161,12 +168,12 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								</Row>
 						</div>
 						<Stack direction="horizontal" gap={3}  className="btn-group-flex">
-							<BackButton />
-							<Button onClick={() => setStep('summary')} className="icon-button btn-next" size="lg">Payout summary</Button>
+							<BackButton variant="default" handleGoBack={handleGoBack} />
+							<Button onClick={() => setStep(3)} className="icon-button btn-next" size="lg">Payout summary</Button>
 						</Stack>
 				</>
 			)}
-			{step === 'summary' && (
+			{step === 3 && (
 				<>
 					<div className="card-body-header card-heading">
 						<h4 className="card-heading-title">Payment Summary</h4>
@@ -224,13 +231,13 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 							<div className="mt-auto">
 								<small className="disclaimer mb-3">By clicking 'Agree and sell' you are constenting to Blocktickets <a href="">terms and conditions</a>. </small>
 								<Stack direction="horizontal" gap={3}className="mt-0 btn-group-flex">
-									<BackButton />
-									<Button onClick={() => setStep('successful')} size="lg">Agree and sell</Button></Stack></div>
+									<BackButton variant="default" handleGoBack={handleGoBack} />
+									<Button onClick={() => setStep(4)} size="lg">Agree and sell</Button></Stack></div>
 						
 					
 				</>
 			)}
-			{step === 'successful' && (
+			{step === 4 && (
 				<>
 					<SuccessContainer>
 						<h4 className="card-heading-title">

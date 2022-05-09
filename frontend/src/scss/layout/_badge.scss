@@ -1,28 +1,35 @@
 @use '../abstracts' as *;
+@use '../theme/colors' as *;
 
-.badge-outline {
-	text-transform: uppercase;
-	border-style: solid;
-	border-width: $border-width;
-	background-color: $clr-white !important;
+.badge {
+	&-outline {
+		text-transform: uppercase;
+		border-style: solid;
+		border-width: $border-width;
+		background-color: $white !important;
 
-	&--primary {
-		color: $clr-primary;
-		border-color: $clr-primary;
+		&--primary {
+			color: $primary;
+			border-color: $primary;
+		}
 	}
-}
 
-.badge-lg {
-	font-size: $small;
-	border-radius: 12px;
-	font-weight: $fw-medium;
-	padding: rem(19);
-}
+	&--light {
+		background-color: $gray-300;
+	}
 
-.badge-xl {
-	font-size: $h4-font-size;
-	border-radius: 12px;
-	font-weight: $fw-bold;
-	padding: rem(24);
-	font-family: $font-heading;
+	&-lg {
+		font-size: $small;
+		border-radius: 12px;
+		font-weight: $fw-medium;
+		padding: rem(19);
+	}
+
+	&-xl {
+		font-size: $h4-font-size;
+		border-radius: 12px;
+		font-weight: $fw-bold;
+		padding: rem(12) rem(16);
+		font-family: $font-heading;
+	}
 }
