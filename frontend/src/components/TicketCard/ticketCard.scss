@@ -21,7 +21,6 @@
 
 	#apple-wallet-btn {
 		border-radius: 6px;
-		@extend %btn-background;
-		background-image: url('../../assets/icons/add-to-apple-wallet-logo.svg');
+		padding: 0px;
 	}
 }
