@@ -11,7 +11,7 @@ export { PurchaseTickets } from './PurchaseTickets';
 export { Event } from './Event';
 export { CheckoutWrapper } from './CheckoutWrapper';
 export { VenueInformation } from './VenueInformation';
-export { UpcomingEventsSlider } from './Slider/UpcomingEventsSlider';
+export { MyEventsWrapper } from './MyEventsWrapper';
 export { MyTicketsWrapper } from './MyTicketsWrapper';
 export { CollectablesSlider } from './Slider/CollectablesSlider';
 export { SettingsWrapper } from './SettingsWrapper';

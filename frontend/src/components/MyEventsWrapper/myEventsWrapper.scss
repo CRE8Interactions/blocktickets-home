@@ -1,0 +1,11 @@
+@use '../../scss/abstracts' as *;
+
+#my-events-wrapper {
+	.btn-group-flex {
+		@include breakpoint-min(md) {
+			> .btn {
+				flex: 0 0 18%;
+			}
+		}
+	}
+}

@@ -22,7 +22,7 @@ export default function MyWallet() {
 			<ListGroup variant="flush" as="ul" role="my wallet menu">
 				<h5 className="name m-0 pb-3 pb-lg-2">{user?.user?.name}</h5>
 				<ListGroup.Item as="li" >
-					<LinkContainer to={'/upcoming-events'}>
+					<LinkContainer to={'/my-events'}>
 						<Nav.Link>My Events</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>

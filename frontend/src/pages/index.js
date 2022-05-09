@@ -4,7 +4,7 @@ export { LoginPage } from './LoginPage';
 export { TicketsPage } from './TicketsPage';
 export { CheckoutPage } from './CheckoutPage';
 export { VenuePage } from './VenuePage';
-export { UpcomingEventsPage } from './UpcomingEventsPage';
+export { MyEventsPage } from './MyEventsPage';
 export { MyTicketsPage } from './MyTicketsPage';
 export { CollectablesPage } from './CollectablesPage';
 export { SettingsPage } from './SettingsPage';

@@ -12,7 +12,7 @@ $spacer-md: rem(80);
 $spacer-xs: rem(24);
 
 // Text Spacers
-$heading-spacer: rem(64); // page headings
+$heading-spacer: rem(52); // page headings
 $heading-spacer-sm: rem(29); // page headings
 $gap: rem(14);
 $gap-sm: rem(10);
@@ -63,7 +63,7 @@ $text-spacer-xs: rem(16);
 }
 
 .page-slider .swiper {
-	padding-bottom: rem(54);
+	padding-bottom: rem(50);
 }
 
 .row + .row {

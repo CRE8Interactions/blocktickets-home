@@ -50,7 +50,11 @@
 
 	&-sm {
 		@extend .section-heading !optional;
-		margin-bottom: $text-spacer-sm;
+		margin-bottom: $text-spacer-xs;
+
+		@include breakpoint-min(md) {
+			margin-bottom: $heading-spacer;
+		}
 
 		h1 {
 			@extend .heading-sm !optional;

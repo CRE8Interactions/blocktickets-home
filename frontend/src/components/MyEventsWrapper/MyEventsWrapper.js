@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -6,9 +6,12 @@ import { getMyEvents } from '../../utilities/api';
 
 import Stack from 'react-bootstrap/Stack';
 
-import { UpcomingEventsSlider } from '../../components';
+import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
+import { MyEventsSlider } from '../Slider/MyEventsSlider';
 
-export default function UpcomingEventsPage() {
+import './myEventsWrapper.scss';
+
+export default function MyEventsWrapper() {
 	const [
 		order,
 		setOrder
@@ -35,18 +38,24 @@ export default function UpcomingEventsPage() {
 			})
 			.catch((err) => console.error(err));
 	}, []);
+
 	return (
-		<section className="spacer-xs">
-			<h1 className="heading-sm">My Events</h1>
-			<UpcomingEventsSlider />
+		<section className="spacer-xs" id="my-events-wrapper">
+			<div className="section-heading-sm">
+				<h1>My Events</h1>
+				<div className="tablet-desktop-only">
+					<SwiperNavigationButtons />
+				</div>
+			</div>
+			<MyEventsSlider />
 			<Stack
 				direction="horizontal"
 				gap={3}
-				className="btn-group-flex justify-content-center align-items-center">
-				<Link to="" className="btn btn-dark">
+				className="mt-1 btn-group-flex justify-content-md-start justify-content-center align-items-center">
+				<Link to="" className="btn btn-lg btn-dark">
 					My listings
 				</Link>
-				<Link to="" className="btn btn-dark">
+				<Link to="" className="btn btn-lg btn-dark">
 					My transfers
 				</Link>
 			</Stack>
