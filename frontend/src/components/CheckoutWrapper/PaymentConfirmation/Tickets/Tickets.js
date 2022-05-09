@@ -22,7 +22,7 @@ export default function Tickets({ order }) {
 						);
 					})}
 			</Stack>
-			<Link to="/upcoming-events" className="btn btn-primary" id="myWalletBtn">
+			<Link to="/my-events" className="btn btn-primary" id="myEventsBtn">
 				Go to My Events
 			</Link>
 		</Fragment>
