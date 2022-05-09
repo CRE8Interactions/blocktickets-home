@@ -42,7 +42,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 					src={id ? QRCode : profile}
 					width="217"
 					height="217"
-					className="event-image-lg mb-4"
+					className="event-image-lg mb-3"
 				/>
 				<div className="details d-flex-column">
 					<Card.Title as="h5">Nic Fanciulli</Card.Title>
@@ -67,7 +67,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 							) : (
 								
 							<Link to="/my-tickets/100" className="btn btn-primary">
-								View Tickets
+								Event details
 							</Link>
 							)}
 							</>

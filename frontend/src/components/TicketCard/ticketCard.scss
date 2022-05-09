@@ -8,14 +8,14 @@
 	.details {
 		.card-title {
 			font-size: $body-2;
-			margin-bottom: 3px;
+			margin-bottom: rem(3);
 			@extend %text-truncate;
 		}
 
 		.event-details {
 			font-size: $caption;
 			@extend %text-truncate;
-			margin-bottom: rem(5);
+			margin-bottom: rem(8);
 		}
 	}
 
