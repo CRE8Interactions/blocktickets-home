@@ -8,6 +8,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import QRCode from '../../assets/qrcode.svg'; 
+import profile from '../../assets/profile-thumbnail.png'; 
 
 import './ticketCard.scss';
 
@@ -38,7 +39,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 		<Fragment>
 			<Card body className="ticket-card card-md">
 				<Card.Img
-					src={QRCode}
+					src={id ? QRCode : profile}
 					width="217"
 					height="217"
 					className="event-image-lg mb-4"

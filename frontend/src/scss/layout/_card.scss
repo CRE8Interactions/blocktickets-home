@@ -30,8 +30,9 @@
 	&--light {
 		background-color: $clr-white;
 
+		.card-header,
 		.card-footer {
-			background-color: $clr-white;
+			background-color: inherit;
 		}
 	}
 
