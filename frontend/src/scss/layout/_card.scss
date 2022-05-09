@@ -28,7 +28,7 @@
 		margin-top: 0px;
 	}
 	&--light {
-		background-color: $clr-white;
+		background-color: $white;
 
 		.card-header,
 		.card-footer {
@@ -77,17 +77,6 @@
 		font-size: $caption;
 	}
 
-	.list {
-		.heading {
-			font-weight: $fw-medium;
-			margin-bottom: rem(8);
-		}
-
-		& + .list {
-			margin-top: rem(20);
-		}
-	}
-
 	// used in ticketCard, settings
 	&-md {
 		$padding: em(20) em(24);
@@ -106,7 +95,7 @@
 		}
 	}
 
-	// used in total card and myTicketsCard
+	// used in total card
 	&-xl {
 		$m-x: em(39);
 		$pad-y: em(24);

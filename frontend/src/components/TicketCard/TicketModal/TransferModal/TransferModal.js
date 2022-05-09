@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Card from 'react-bootstrap/Card';
+import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
@@ -19,7 +19,7 @@ import { SelectTickets } from '../SelectTickets';
 export default function TransferModal({ handleClose, setTicketStatus, ticket, order }) {
 
 	// 1 - tranfer 
-	// 2 -  phone number 
+	// 2 - phone number 
 	// 3 - confirmation 
 	// 4 - success
 	const [
@@ -86,11 +86,11 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 
 	return (
 		<Fragment>
-			<Card.Header className="heading--flex">
-				<Card.Title as="h5">Transfer</Card.Title>
+			<Modal.Header className="heading--flex">
+				<Modal.Title as="h5">Transfer</Modal.Title>
 				<Button variant="close" onClick={handleClose} />
-			</Card.Header>
-			<Card.Body>
+			</Modal.Header>
+			<Modal.Body>
 				{step === 1 &&  (
 				<><SelectTickets status="transfer" />
 				<Stack  direction="horizontal" className="btn-group-flex">
@@ -101,8 +101,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 					</>)}
 				{step === 2 && (
 				<Fragment>
-							<div className="card-heading">
-								<h4 className="card-heading-title">
+							<div className="modal-heading">
+								<h4 className="modal-heading-title">
 									Enter the recepient phone number{' '}
 								</h4>
 								<p className="small">
@@ -136,8 +136,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 				)} 
 				{step === 3 && (
 					<Fragment>
-							<div className="card-heading">
-								<h4 className="card-heading-title">
+							<div className="modal-heading">
+								<h4 className="modal-heading-title">
 									Are you sure you want to transfer this ticket?
 								</h4>
 							</div>
@@ -158,7 +158,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 				{step === 4 && (
 					<Fragment>
 						<SuccessContainer>
-							<h4 className="card-heading-title">Your tickets have been transferred! </h4>
+							<h4 className="modal-heading-title">Your tickets have been transferred! </h4>
 						</SuccessContainer>
 
 						<p className="small">
@@ -169,7 +169,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 						<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</Fragment>
 				)}
-			</Card.Body>
+			</Modal.Body>
 		</Fragment>
 	);
 }

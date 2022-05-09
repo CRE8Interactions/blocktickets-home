@@ -15,6 +15,9 @@ export default function MyTicketsSlider({ id }) {
 				<SwiperSlide>
 					<TicketCard id={id} />
 				</SwiperSlide>
+				<SwiperSlide>
+					<TicketCard id={id} />
+				</SwiperSlide>
 				{/* );
 					})} */}
 			</Slider>

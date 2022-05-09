@@ -15,7 +15,7 @@ export default function SelectTickets({ status }) {
 
 	return (
 		<Fragment>
-			<h6 className="card-heading-title mb-4">Select tickets to {status}</h6>
+			<h6 className="modal-heading-title mb-4">Select tickets to {status}</h6>
 			<Stack direction="horizontal" className="split-row">
 				<div>
 					<span className="small fw-medium">General Admission</span>

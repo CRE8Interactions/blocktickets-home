@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import Card from 'react-bootstrap/Card';
+import { useWindowSize } from '../../../utilities/hooks';
+
+import Modal from 'react-bootstrap/Modal';
 
 import { DetailsModal } from './DetailsModal';
 import { TransferModal } from './TransferModal';
@@ -29,16 +31,19 @@ const typeOfCard = (handleClose, ticketStatus, setTicketStatus) => {
 			return;
 	}
 };
-export default function TicketModal({ ticketStatus, setTicketStatus, setShow}) {
+export default function TicketModal({ ticketStatus, setTicketStatus, show, setShow}) {
 
-	const handleClose = () => setShow(false)
+	const windowSize = useWindowSize();
+
+	const handleClose = () => setShow(false);
 
 	return (
 		<>
-		
-			<Card id="ticket-modal" className="card-xl card--popup card--light">
+			<Modal show={show} animation={false} fullscreen={'md-down'} scrollable onHide={() => setShow(false)} id="ticket-modal" className={`modal-xl modal--light ${windowSize < 768 && 'modal--popup p-0'}`} centered backdrop={windowSize < 768 ? false : true}>
 			{typeOfCard(handleClose, ticketStatus, setTicketStatus)}
-		</Card>
+		</Modal>
+		
+
 		
 		</>
 	);
