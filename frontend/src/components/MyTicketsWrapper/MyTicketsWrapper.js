@@ -57,13 +57,15 @@ export default function MyTicketsWrapper({ id }) {
 						<Button
 							onClick={() => handleClick('transfer')}
 							variant="dark"
+							size="lg"
 							disabled={ticketStatus === 'transferred'}>
 							Transfer
 						</Button>
 						<Button
 							disabled={ticketStatus === 'listed'}
 							onClick={() => handleClick('sell')}
-							variant="dark">
+							variant="dark"
+							size="lg">
 							Sell
 						</Button>
 					</Stack>

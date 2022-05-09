@@ -6,7 +6,7 @@ import {
 	TicketsPage,
 	CheckoutPage,
 	VenuePage,
-	UpcomingEventsPage,
+	MyEventsPage,
 	MyTicketsPage,
 	CollectablesPage,
 	SettingsPage,
@@ -43,7 +43,7 @@ const Router = () => {
 				/>
 
 				<Route path="venue/:id" element={<VenuePage />} />
-				<Route path="upcoming-events" element={<UpcomingEventsPage />} />
+				<Route path="my-events" element={<MyEventsPage />} />
 				<Route path="my-tickets/:id" element={<MyTicketsPage />} />
 				<Route path="collectables" element={<CollectablesPage />} />
 				<Route path="settings" element={<SettingsPage />}>

@@ -31,7 +31,7 @@ export default function VenueCard({ venue }) {
 						<Stack
 							direction="horizontal"
 							className="justify-content-center gap-2 mt-3 btn-group-flex">
-							<IconButton link="" variant="primary" btn="location" styles="mt-0">
+							<IconButton link="" variant="primary" btn="location" styles="flex-grow-0 mt-0">
 								Location
 							</IconButton>
 							
