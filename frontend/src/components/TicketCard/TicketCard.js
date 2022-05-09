@@ -62,7 +62,6 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 							</Badge>
 								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
 							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
-								<img src={addToWallet} wwidth="110" height="34" alt="Add To Wallet" />
 							</Button>
 							<Link to="" className="btn btn-outline-light">Details</Link>
 							</Stack>
