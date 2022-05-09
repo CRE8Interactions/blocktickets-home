@@ -15,7 +15,7 @@
 
 .btn-group-flex {
 	align-items: center;
-	.btn {
+	> .btn {
 		margin: 0px;
 
 		&:not(.btn--icon) {

@@ -242,3 +242,14 @@ h4,
 		content: url($data-svg-prefix + map-get($icons, 'ticketOutline'));
 	}
 }
+
+.list {
+	.heading {
+		font-weight: $fw-medium;
+		margin-bottom: rem(8);
+	}
+
+	& + .list {
+		margin-top: rem(20);
+	}
+}

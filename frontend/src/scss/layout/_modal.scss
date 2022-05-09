@@ -2,10 +2,19 @@
 @use '../layout/container' as *;
 @use '../layout/spacing' as *;
 @use '../layout/buttons' as *;
+@use '../theme/colors' as *;
 @use '../theme/buttons' as *;
 
 .modal {
 	line-height: 1.5;
+
+	&--popup {
+		box-shadow: $box-shadow-popupCard;
+		height: 626px;
+		top: 21%;
+		border-top-right-radius: $br-primary;
+		border-top-left-radius: $br-primary;
+	}
 
 	&-header {
 		// .btn-close {
@@ -17,12 +26,13 @@
 		font-size: $small;
 	}
 
-	.modal-heading {
+	&-heading {
 		margin-bottom: $text-spacer-sm;
 
 		&-title {
 			font-size: $body-1;
 			margin-bottom: $text-spacer-sm;
+			font-weight: $fw-semi-bold;
 		}
 
 		p {
@@ -39,6 +49,19 @@
 		}
 	}
 
+	&-body {
+		.btn-group-flex {
+			@extend .btn-group-flex !optional;
+		}
+		.btn {
+			margin-left: 0px;
+			margin-top: $text-spacer-sm;
+			width: 100%;
+			padding: $btn-padding-y-lg $btn-padding-x-lg;
+			font-size: $btn-font-size-lg;
+		}
+	}
+
 	&-lg {
 		padding: rem(32);
 
@@ -47,13 +70,47 @@
 		}
 	}
 
-	&-body {
-		.btn {
-			margin-left: 0px;
-			margin-top: $text-spacer-sm;
-			width: 100%;
-			padding: $btn-padding-y-lg $btn-padding-x-lg;
-			font-size: $btn-font-size-lg;
+	&-xl {
+		$m-x: em(24);
+		$pad-y: em(24);
+
+		padding-left: 0px;
+		padding-right: 0px;
+
+		.modal {
+			&-header {
+				padding: $pad-y 0px;
+				margin: 0px $m-x;
+
+				.modal-title {
+					font-size: $body-1;
+				}
+			}
+
+			&-heading {
+				margin-bottom: $text-spacer-sm;
+			}
+
+			&-body {
+				padding: $pad-y 0px;
+				margin: 0px $m-x;
+				display: flex;
+				flex-direction: column;
+
+				&-header {
+					padding-bottom: $pad-y;
+					border-bottom: border();
+				}
+			}
+
+			&-footer {
+				padding: em(24) 0px;
+				margin: 0px $m-x;
+			}
 		}
+	}
+
+	&--light {
+		background-color: $white;
 	}
 }

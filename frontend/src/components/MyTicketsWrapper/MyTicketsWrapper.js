@@ -1,7 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
@@ -37,49 +35,44 @@ export default function MyTicketsWrapper({ id }) {
 	const handleShow = () => setShow(true);
 
 	const handleClick = (status) => {
+		console.log('click');
 		handleShow();
 		setTicketStatus(status);
 	};
 	return (
 		<section className="spacer-xs full-height-wrapper" id="my-tickets-wrapper">
-			<Row className="justify-content-between">
-				<Col md={6}>
-					<div className="section-heading-sm">
-						<h1>My Tickets</h1>
-						<BackButton />
-					</div>
+			<div className="section-heading-sm">
+				<h1>Event details</h1>
+				<BackButton />
+			</div>
 
-					<MyTicketsSlider id={id} />
-					<Stack
-						direction="horizontal"
-						gap={3}
-						className="btn-group-flex justify-content-center align-items-center">
-						<Button
-							onClick={() => handleClick('transfer')}
-							variant="dark"
-							size="lg"
-							disabled={ticketStatus === 'transferred'}>
-							Transfer
-						</Button>
-						<Button
-							disabled={ticketStatus === 'listed'}
-							onClick={() => handleClick('sell')}
-							variant="dark"
-							size="lg">
-							Sell
-						</Button>
-					</Stack>
-				</Col>
-				<Col md={6} lg={5} className="sticky-card">
-					{show && (
-						<TicketModal
-							ticketStatus={ticketStatus}
-							setTicketStatus={setTicketStatus}
-							setShow={setShow}
-						/>
-					)}
-				</Col>
-			</Row>
+			<MyTicketsSlider id={id} />
+			<Stack
+				direction="horizontal"
+				gap={3}
+				className="btn-group-flex justify-content-center align-items-center">
+				<Button
+					onClick={() => handleClick('transfer')}
+					variant="dark"
+					size="lg"
+					disabled={ticketStatus === 'transferred'}>
+					Transfer
+				</Button>
+				<Button
+					disabled={ticketStatus === 'listed'}
+					onClick={() => handleClick('sell')}
+					variant="dark"
+					size="lg">
+					Sell
+				</Button>
+			</Stack>
+
+			<TicketModal
+				ticketStatus={ticketStatus}
+				setTicketStatus={setTicketStatus}
+				show={show}
+				setShow={setShow}
+			/>
 		</section>
 	);
 }

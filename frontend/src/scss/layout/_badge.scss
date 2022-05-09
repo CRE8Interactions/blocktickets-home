@@ -31,5 +31,9 @@
 		font-weight: $fw-bold;
 		padding: rem(12) rem(16);
 		font-family: $font-heading;
+
+		.badge-label {
+			font-family: $font-body;
+		}
 	}
 }

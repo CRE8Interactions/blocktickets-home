@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-import Card from 'react-bootstrap/Card';
+import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
@@ -103,11 +103,10 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 
 	return (
 		<Fragment>
-			<Card.Header className="heading--flex">
-				<Card.Title as="h5">Sell</Card.Title>
-				<Button variant="close" onClick={handleClose} />
-			</Card.Header>
-			<Card.Body>
+			<Modal.Header closeButton>
+				<Modal.Title as="h5">Sell</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
 			{step === 1 && (
 				<>
 					<SelectTickets status="sell" />
@@ -121,13 +120,13 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 
 			{step === 2 && (
 				<>
-						<div className="card-heading">
-							<h4 className="card-heading-title">Price your tickets</h4>
+						<div className="modal-heading">
+							<h4 className="modal-heading-title mb-2">Price your tickets</h4>
 							<p className="small text-muted fw-medium">
 								Ticket face value $174.00
 							</p>
 						</div>
-						<Badge bg="default" className="d-flex-column gap-2 badge-xl badge--light bold text-dark ">$0 <span className='caption fw-normal text-muted'>Price per ticket</span></Badge>
+						<Badge bg="default" className="d-flex-column gap-2 badge-xl badge--light bold text-dark ">$0 <span className='caption fw-normal text-muted badge-label'>Price per ticket</span></Badge>
 						<div id="numpad">
 							<Row className="split-row">
 								<Col>
@@ -175,8 +174,8 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 			)}
 			{step === 3 && (
 				<>
-					<div className="card-body-header card-heading">
-						<h4 className="card-heading-title">Payment Summary</h4>
+					<div className="modal-body-header modal-heading">
+						<h4 className="modal-heading-title mb-2">Payment Summary</h4>
 						<p>
 							Please go to 'Settings' in your 'Wallet' and link your bank account to receive funds from ticket sales. 
 						</p>
@@ -240,7 +239,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 			{step === 4 && (
 				<>
 					<SuccessContainer>
-						<h4 className="card-heading-title">
+						<h4 className="modal-heading-title">
 							Your tickets are listed for sale!
 						</h4>
 					</SuccessContainer>
@@ -251,7 +250,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 					<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</>
 				
-			)}</Card.Body>
+			)}</Modal.Body>
 		</Fragment>
 	);
 }
