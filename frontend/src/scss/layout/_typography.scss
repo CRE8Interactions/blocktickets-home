@@ -41,7 +41,8 @@
 
 	margin-bottom: $heading-spacer;
 
-	h1 {
+	h1,
+	h2 {
 		font-size: $h4-font-size;
 		@include breakpoint-min(md) {
 			font-size: $h3-font-size;
@@ -50,13 +51,14 @@
 
 	&-sm {
 		@extend .section-heading !optional;
-		margin-bottom: $text-spacer-xs;
+		margin-bottom: $text-spacer-sm;
 
 		@include breakpoint-min(md) {
 			margin-bottom: $heading-spacer;
 		}
 
-		h1 {
+		h1,
+		h2 {
 			@extend .heading-sm !optional;
 			@extend .heading-font !optional;
 			margin-bottom: 0px !important;

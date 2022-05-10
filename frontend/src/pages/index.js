@@ -5,7 +5,7 @@ export { TicketsPage } from './TicketsPage';
 export { CheckoutPage } from './CheckoutPage';
 export { VenuePage } from './VenuePage';
 export { MyEventsPage } from './MyEventsPage';
-export { MyTicketsPage } from './MyTicketsPage';
+export { EventDetailsPage } from './EventDetailsPage';
 export { CollectablesPage } from './CollectablesPage';
 export { SettingsPage } from './SettingsPage';
 export { SettingsOptionsPage } from './SettingsPage/SettingsOptionsPage';

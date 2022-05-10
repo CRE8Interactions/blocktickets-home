@@ -67,12 +67,13 @@ button,
 .btn-group {
 	> .btn:not(.dropdown-toggle) {
 		border-radius: $border-radius !important;
-		margin-right: rem(16);
+		margin-right: rem(14);
 		padding: rem(26) rem(27);
 		border: none;
 		background-color: $gray-300;
 		color: $text-muted;
 		font-size: $body-2;
+		flex: 0;
 
 		&:hover,
 		&:focus {

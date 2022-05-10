@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; 
 
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
@@ -166,7 +167,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								</Col>
 								</Row>
 						</div>
-						<Stack direction="horizontal" gap={3}  className="btn-group-flex">
+						<Stack direction="horizontal"  className="btn-group-flex">
 							<BackButton variant="default" handleGoBack={handleGoBack} />
 							<Button onClick={() => setStep(3)} className="icon-button btn-next" size="lg">Payout summary</Button>
 						</Stack>
@@ -227,9 +228,9 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								</ul>
 							</div>
 							
-							<div className="mt-auto">
+							<div className="mt-auto mt-md-4">
 								<small className="disclaimer mb-3">By clicking 'Agree and sell' you are constenting to Blocktickets <a href="">terms and conditions</a>. </small>
-								<Stack direction="horizontal" gap={3}className="mt-0 btn-group-flex">
+								<Stack direction="horizontal" className="mt-0 btn-group-flex">
 									<BackButton variant="default" handleGoBack={handleGoBack} />
 									<Button onClick={() => setStep(4)} size="lg">Agree and sell</Button></Stack></div>
 						
@@ -247,7 +248,10 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 							We will notify you via sms if a purchase is made. While your tickets are listed, you can change the price or delist them from the marketplace in 'My listings' at anytime	
 					</p>
 					<SuccessDisclaimer />
-					<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
+					<Stack className="btn-group-flex">
+						<Link to="" className="btn btn-lg btn-outline-light">Go to My listings</Link>
+						<Button onClick={handleClick} size='lg'>Close</Button>
+						</Stack>
 					</>
 				
 			)}</Modal.Body>

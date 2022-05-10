@@ -45,6 +45,10 @@ $navbar-height: rem(82);
 	overflow: hidden;
 }
 
+.noBodyPadding {
+	padding: 0px 0px 0px 0px !important;
+}
+
 @mixin full-width() {
 	position: relative;
 	width: 100vw;
@@ -52,6 +56,15 @@ $navbar-height: rem(82);
 	right: 50%;
 	margin-left: -50vw;
 	margin-right: -50vw;
+}
+
+.sticky {
+	@include breakpoint-max(md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin-top: auto;
+	}
 }
 
 .d-flex-column {

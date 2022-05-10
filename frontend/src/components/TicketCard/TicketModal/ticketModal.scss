@@ -4,23 +4,13 @@
 @use '../../../scss/theme/buttons' as *;
 
 #ticket-modal {
+	@extend .modal-xl;
+
 	.btn-group-flex {
 		margin-top: auto;
-	}
-	.btn-group-flex.hstack {
-		> .btn {
-			flex: 0;
 
-			&:last-of-type {
-				flex: 1;
-			}
-		}
-	}
-	.btn-group-flex.vstack {
-		flex: 0;
-
-		> .btn {
-			width: 100%;
+		@include breakpoint-min(md) {
+			margin-top: $text-spacer-sm;
 		}
 	}
 

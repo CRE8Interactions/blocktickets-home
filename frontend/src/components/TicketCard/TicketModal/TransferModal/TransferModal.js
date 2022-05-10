@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; 
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -145,8 +146,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 								<p className='fw-medium text-muted mb-2'>Recipient phone number</p>
 								<span className='fs-md fw-bold'>{phoneNumber}</span>
 							</div>
-							<Stack className="btn-group-flex" gap={3}>
-								<Button onClick={handleGoBack} variant="outline-light" size="lg" className="text-danger">Cancel</Button>
+							<Stack className="btn-group-flex">
+								<Button onClick={handleClose} variant="outline-light" size="lg" className="text-danger">Cancel</Button>
 								<Button
 									onClick={(e) => submitTransfer()}
 									size="lg" >
@@ -166,7 +167,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 						</p>
 					<SuccessDisclaimer />
 
-						<Stack direction="horizontal" className="btn-group-flex"><Button onClick={handleClick} size='lg'>Close</Button></Stack>
+						<Stack className="btn-group-flex">
+							<Link to="" className="btn btn-lg btn-outline-light">Go to My transfers</Link><Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</Fragment>
 				)}
 			</Modal.Body>

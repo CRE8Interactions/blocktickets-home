@@ -1,7 +1,19 @@
+@use '../abstracts' as *;
 @use '../theme/colors' as *;
 
 .alert {
-	color: $danger;
-	background: rgba(239, 70, 111, 0.08);
+	display: flex;
+	align-items: center;
+	column-gap: rem(8);
 	border: none;
+
+	&-danger {
+		color: $danger;
+		background: rgba(239, 70, 111, 0.08);
+	}
+
+	&-light {
+		color: $body-color;
+		background-color: $light;
+	}
 }

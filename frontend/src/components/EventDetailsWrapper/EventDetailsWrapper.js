@@ -1,17 +1,15 @@
 import React, { useLayoutEffect, useState } from 'react';
 
-import Stack from 'react-bootstrap/Stack';
-import Button from 'react-bootstrap/Button';
-
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
-import { MyTicketsSlider } from './../Slider/MyTicketsSlider';
-import { TicketModal } from './../TicketCard/TicketModal';
+import { Event } from '../Event';
+import { MyTickets } from './MyTickets';
+import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
+import { ActionBtns } from './ActionBtns';
+import { TicketModal } from '../TicketCard/TicketModal';
 
-import './myTicketsWrapper.scss';
-
-export default function MyTicketsWrapper({ id }) {
+export default function EventDetailsWrapper({ id }) {
 	const [
 		show,
 		setShow
@@ -40,33 +38,21 @@ export default function MyTicketsWrapper({ id }) {
 		setTicketStatus(status);
 	};
 	return (
-		<section className="spacer-xs full-height-wrapper" id="my-tickets-wrapper">
+		<section className="spacer-xs full-height-wrapper" id="event-details-wrapper">
 			<div className="section-heading-sm">
 				<h1>Event details</h1>
 				<BackButton />
 			</div>
-
-			<MyTicketsSlider id={id} />
-			<Stack
-				direction="horizontal"
-				gap={3}
-				className="btn-group-flex justify-content-center align-items-center">
-				<Button
-					onClick={() => handleClick('transfer')}
-					variant="dark"
-					size="lg"
-					disabled={ticketStatus === 'transferred'}>
-					Transfer
-				</Button>
-				<Button
-					disabled={ticketStatus === 'listed'}
-					onClick={() => handleClick('sell')}
-					variant="dark"
-					size="lg">
-					Sell
-				</Button>
-			</Stack>
-
+			<div className="tablet-desktop-only">
+				<Event />
+			</div>
+			<div className="mobile-only">
+				<MyTicketsSlider id={id} />
+				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
+			</div>
+			<div className="tablet-desktop-only">
+				<MyTickets id={id} handleClick={handleClick} ticketStatus={ticketStatus} />
+			</div>
 			<TicketModal
 				ticketStatus={ticketStatus}
 				setTicketStatus={setTicketStatus}

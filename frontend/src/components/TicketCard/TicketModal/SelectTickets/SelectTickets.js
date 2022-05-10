@@ -24,8 +24,8 @@ export default function SelectTickets({ status }) {
 					<span className="num-tickets">4 Tickets</span>
 				</div>
 			</Stack>
-			<Form className="d-flex gap-4 pt-2">
-				<ToggleButtonGroup type="checkbox" onChange={handleChange}>
+			<Form className="d-flex gap-4 mt-2 mb-4">
+				<ToggleButtonGroup type="checkbox" onChange={handleChange} className="flex-wrap">
 					<ToggleButton id="tbg-btn-1" value={1}>
 						GA
 					</ToggleButton>
@@ -33,6 +33,18 @@ export default function SelectTickets({ status }) {
 						GA
 					</ToggleButton>
 					<ToggleButton id="tbg-btn-3" value={3}>
+						GA
+					</ToggleButton>
+					<ToggleButton id="tbg-btn-4" value={4}>
+						GA
+					</ToggleButton>
+					<ToggleButton id="tbg-btn-5" value={5}>
+						GA
+					</ToggleButton>
+					<ToggleButton id="tbg-btn-6" value={6}>
+						GA
+					</ToggleButton>
+					<ToggleButton id="tbg-btn-7" value={7}>
 						GA
 					</ToggleButton>
 				</ToggleButtonGroup>

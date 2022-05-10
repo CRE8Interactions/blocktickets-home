@@ -23,7 +23,7 @@ export default function Event(props) {
 	return (
 		<div className="event">
 			<header>
-				<Row gap={2} className="py-2 py-md-3 align-items-center">
+				<Row gap={2} className="pb-2 pb-md-3 align-items-center">
 					<Col md={2} id="event-image-col" className="image-wrapper tablet-desktop-only">
 						<img
 							src={event?.image?.url}

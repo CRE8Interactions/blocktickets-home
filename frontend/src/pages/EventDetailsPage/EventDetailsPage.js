@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { MyTicketsWrapper } from '../../components';
+import { EventDetailsWrapper } from '../../components';
 
-export default function MyTicketsPage() {
+export default function EventDetailsPage() {
 	let { id } = useParams();
 	const [
 		order,
@@ -12,5 +12,5 @@ export default function MyTicketsPage() {
 	// useEffect(() => {
 	// 	getOrder(id).then((res) => setOrder(res.data)).catch((err) => console.error(err));
 	// }, []);
-	return <MyTicketsWrapper id={id} />;
+	return <EventDetailsWrapper id={id} />;
 }
