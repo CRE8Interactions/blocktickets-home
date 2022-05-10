@@ -45,6 +45,10 @@ $navbar-height: rem(82);
 	overflow: hidden;
 }
 
+.noBodyPadding {
+	padding: 0px 0px 0px 0px !important;
+}
+
 @mixin full-width() {
 	position: relative;
 	width: 100vw;

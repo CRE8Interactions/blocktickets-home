@@ -9,11 +9,26 @@
 	line-height: 1.5;
 
 	&--popup {
-		box-shadow: $box-shadow-popupCard;
-		height: 626px;
-		top: 21%;
-		border-top-right-radius: $br-primary;
-		border-top-left-radius: $br-primary;
+		$border-radius: 12px 12px 0px 0px;
+
+		@include breakpoint-max(md) {
+			box-shadow: $box-shadow-popupCard;
+			height: 626px;
+			border-radius: $border-radius;
+			width: 100vw;
+
+			.modal-dialog {
+				margin: 0px;
+				height: 100%;
+				border-radius: $border-radius;
+				max-width: 100%;
+			}
+
+			.modal-content {
+				height: 100%;
+				border-radius: $border-radius;
+			}
+		}
 	}
 
 	&-header {
@@ -110,7 +125,25 @@
 		}
 	}
 
-	&--light {
-		background-color: $white;
+	.btn-group-flex {
+		gap: $text-spacer-xs;
+
+		&.hstack {
+			> .btn {
+				flex: 0;
+
+				&:last-of-type {
+					flex: 1;
+				}
+			}
+		}
+
+		&.vstack {
+			flex: 0;
+
+			> .btn {
+				width: 100%;
+			}
+		}
 	}
 }
