@@ -54,7 +54,7 @@ export default function EventDetailsWrapper({ id }) {
 				<BackButton />
 			</div>
 			<div className="tablet-desktop-only">
-				<Event />
+				<Event event={event} />
 			</div>
 			<div className="mobile-only">
 				<MyTicketsSlider id={id} />
