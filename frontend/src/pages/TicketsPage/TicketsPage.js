@@ -57,7 +57,9 @@ export default function TicketsPage() {
 		<div className="full-height-wrapper">
 			<TicketContext.Provider
 				value={{ tickets, generalAdmissionCount, generalAdmissionTicket }}>
-				<Event event={event} />
+				<div className="pt-2 pt-md-3">
+					<Event event={event} />
+				</div>
 				<PurchaseTickets />
 			</TicketContext.Provider>
 		</div>

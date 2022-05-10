@@ -58,6 +58,15 @@ $navbar-height: rem(82);
 	margin-right: -50vw;
 }
 
+.sticky {
+	@include breakpoint-max(md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin-top: auto;
+	}
+}
+
 .d-flex-column {
 	display: flex;
 	flex-direction: column;

@@ -136,12 +136,3 @@
 		}
 	}
 }
-
-.sticky-card {
-	@include breakpoint-max(md) {
-		position: sticky;
-		bottom: 0;
-		z-index: 999;
-		margin-top: auto;
-	}
-}
