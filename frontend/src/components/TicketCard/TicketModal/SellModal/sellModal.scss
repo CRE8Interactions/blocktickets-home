@@ -3,16 +3,15 @@
 @use '../../../../scss/theme/colors' as *;
 @use '../../../../scss/theme/input' as *;
 
-#ticket-modal {
-	#numpad {
-		margin: rem(33) 0px;
-		display: flex;
-		flex-direction: column;
-		row-gap: $text-spacer-sm;
+#numpad {
+	@extend .mobile-only;
+	margin: rem(33) 0px;
+	display: flex;
+	flex-direction: column;
+	row-gap: $text-spacer-sm;
 
-		.col {
-			text-align: center;
-			font-size: $body-1;
-		}
+	.col {
+		text-align: center;
+		font-size: $body-1;
 	}
 }

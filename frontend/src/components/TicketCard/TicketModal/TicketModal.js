@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect} from 'react';
 
 import { useWindowSize } from '../../../utilities/hooks';
 
@@ -35,11 +35,19 @@ export default function TicketModal({ ticketStatus, setTicketStatus, show, setSh
 
 	const windowSize = useWindowSize();
 
+	useLayoutEffect(() => {
+		const el = document.querySelector('body');
+		if(el) {
+	  el.classList.add('noBodyPadding');
+		}
+	
+	}, [ show ])
+
 	const handleClose = () => setShow(false);
 
 	return (
 		<>
-			<Modal show={show} animation={false} fullscreen={'md-down'} scrollable onHide={() => setShow(false)} id="ticket-modal" className={`modal-xl modal--light ${windowSize < 768 && 'modal--popup p-0'}`} centered backdrop={windowSize < 768 ? false : true}>
+			<Modal show={show} animation={false}  onHide={() => setShow(false)} id="ticket-modal" className='sticky modal--popup' scrollable centered backdrop={windowSize < 768 ? false : 'static'}>
 			{typeOfCard(handleClose, ticketStatus, setTicketStatus)}
 		</Modal>
 		

@@ -68,7 +68,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 							</>
 							) : (
 								
-							<Link to="/my-tickets/100" className="btn btn-primary">
+							<Link to="/event-details/100" className="btn btn-primary">
 								Event details
 							</Link>
 							)}
