@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
+import { getEvent } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
@@ -10,6 +11,16 @@ import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketCard/TicketModal';
 
 export default function EventDetailsWrapper({ id }) {
+	// demo purposes for event object
+	useEffect(() => {
+		getEvent(41).then((res) => setEvent(res.data)).catch((err) => console.error(err));
+	}, []);
+
+	const [
+		event,
+		setEvent
+	] = useState();
+
 	const [
 		show,
 		setShow
@@ -33,7 +44,6 @@ export default function EventDetailsWrapper({ id }) {
 	const handleShow = () => setShow(true);
 
 	const handleClick = (status) => {
-		console.log('click');
 		handleShow();
 		setTicketStatus(status);
 	};
