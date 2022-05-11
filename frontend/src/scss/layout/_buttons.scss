@@ -65,11 +65,14 @@ button,
 }
 
 .btn-group {
+	> .btn:not(:first-child) {
+		margin-left: 2px;
+	}
 	> .btn:not(.dropdown-toggle),
 	.ticket-pick {
 		border-radius: $border-radius !important;
-		margin-right: rem(14);
-		padding: rem(26) rem(27);
+		margin-right: rem(16);
+		padding: rem(26) rem(24);
 		border: none;
 		background-color: $gray-300;
 		color: $text-muted;

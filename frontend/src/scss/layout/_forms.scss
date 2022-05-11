@@ -61,6 +61,7 @@ select:-webkit-autofill:focus {
 		.form-control,
 		.input-group-text {
 			font-weight: $fw-bold;
+			padding: 0px;
 		}
 
 		.input-group {
@@ -122,7 +123,7 @@ select:-webkit-autofill:focus {
 
 .input-group {
 	.form-control {
-		flex: 0 0 17%;
+		flex: 0 0 7%;
 	}
 	&-lg {
 		.input-group-text,
