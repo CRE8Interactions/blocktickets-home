@@ -57,7 +57,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 					{ticketType !== 'collectable' && (					<>
 							{ id ? (
 								<>
-							<Badge bg="info" className="mt-2 text-dark badge-lg">
+							<Badge bg="light" className="mt-2 text-dark badge-lg">
 								General Admission
 							</Badge>
 								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">

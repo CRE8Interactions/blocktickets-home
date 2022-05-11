@@ -2,18 +2,20 @@
 @use '../theme/colors' as *;
 
 .alert {
+	padding: rem(16);
 	display: flex;
 	align-items: center;
 	column-gap: rem(8);
 	border: none;
 
 	&-danger {
+		padding: rem(12);
 		color: $danger;
 		background: rgba(239, 70, 111, 0.08);
 	}
 
-	&-light {
+	&-info {
 		color: $body-color;
-		background-color: $light;
+		background-color: $info;
 	}
 }

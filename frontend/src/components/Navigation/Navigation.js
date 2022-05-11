@@ -49,7 +49,7 @@ export default function Navigation() {
 						<Navbar.Toggle
 							aria-controls="responsive-navbar-nav"
 							id="toggle"
-							className="btn--icon pe-0"
+							className="pe-0"
 						/>
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">

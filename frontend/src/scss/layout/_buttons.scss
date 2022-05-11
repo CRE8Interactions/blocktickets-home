@@ -65,7 +65,8 @@ button,
 }
 
 .btn-group {
-	> .btn:not(.dropdown-toggle) {
+	> .btn:not(.dropdown-toggle),
+	.ticket-pick {
 		border-radius: $border-radius !important;
 		margin-right: rem(14);
 		padding: rem(26) rem(27);
@@ -74,12 +75,11 @@ button,
 		color: $text-muted;
 		font-size: $body-2;
 		flex: 0;
-
-		&:hover,
-		&:focus {
-			background-color: $primary;
-			color: $white;
-		}
+	}
+	label.btn:hover,
+	label.btn:focus {
+		background-color: $primary;
+		color: $white;
 	}
 	.btn-check {
 		&:checked {
@@ -89,6 +89,10 @@ button,
 			}
 		}
 	}
+}
+
+.ticket-pick {
+	cursor: initial;
 }
 
 .btn-link {
