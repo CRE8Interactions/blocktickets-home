@@ -22,9 +22,9 @@ export default function InvoiceTable({ details }) {
 					return (
 						<tr key={index}>
 							<th scope="row">{ moment(detail.createdAt).format('M.DD.YYYY') }</th>
-							<td>{detail.event.name} - {detail.details.ticket.attributes.name}</td>
-							<td>{detail.tickets.length} Tickets</td>
-							<td>{detail.total}</td>
+							<td>{detail?.event.name} - {detail?.details.ticket.attributes.name}</td>
+							<td>{detail?.tickets.length} Tickets</td>
+							<td>{detail?.total}</td>
 							<td>
 								<a href="">Download</a>
 							</td>

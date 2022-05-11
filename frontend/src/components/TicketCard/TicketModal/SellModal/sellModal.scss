@@ -5,7 +5,7 @@
 
 #numpad {
 	@extend .mobile-only;
-	margin: rem(33) 0px;
+	margin: rem(29) 0px;
 	@include breakpoint-max(md) {
 		display: flex;
 	}
