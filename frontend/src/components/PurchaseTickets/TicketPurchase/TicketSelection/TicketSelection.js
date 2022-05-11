@@ -148,9 +148,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 					{showFilter && (
 								<FilterMenu show={showFilter} handleShow={handleShow} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
 					)}
-					{filteredTicketCount > 0 ? (
-						<>
-						{!isFilterOpen && (
+					{filteredTicketCount > 0 && !isFilterOpen ? (
 							<>
 							{isZoomed && (
 								<Stack direction="horizontal" className="heading--flex mb-3">
@@ -215,8 +213,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								</TicketPurchaseFooter>
 							)}
 							</>
-						)}
-						</>
 					) : (
 						<NotAvailableMessage>
 							<h1 className="normal">Please adjust your search</h1>
