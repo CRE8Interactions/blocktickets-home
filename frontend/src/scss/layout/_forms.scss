@@ -42,6 +42,51 @@ select:-webkit-autofill:focus {
 	}
 }
 
+.form-card {
+	border-radius: $br-primary;
+	padding: rem(12) rem(16);
+
+	&,
+	& .form-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.form-label {
+			text-transform: initial;
+			font-weight: $fw-normal;
+			margin: 0px;
+		}
+
+		.form-control,
+		.input-group-text {
+			font-weight: $fw-bold;
+		}
+
+		.input-group {
+			order: -1;
+			justify-content: center;
+			gap: rem(5);
+
+			.input-group-text {
+				padding-right: 0px;
+			}
+
+			.form-control {
+				padding-left: 0px;
+			}
+		}
+
+		.form-control,
+		.input-group {
+			font-family: $font-heading;
+			margin: 0px;
+			background-color: transparent;
+			@extend .form-control--borderless !optional;
+		}
+	}
+}
+
 .error-border {
 	border-color: $danger;
 }
@@ -71,6 +116,27 @@ select:-webkit-autofill:focus {
 	}
 }
 
+#custom-switch {
+	height: 26px;
+}
+
+.input-group {
+	.form-control {
+		flex: 0 0 17%;
+	}
+	&-lg {
+		.input-group-text,
+		.form-control {
+			font-size: $h4-font-size;
+		}
+	}
+
+	&-text {
+		background-color: transparent;
+		border: none;
+	}
+}
+
 @mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
 	display: flex;
 	align-items: center;
@@ -85,8 +151,4 @@ select:-webkit-autofill:focus {
 		padding: 0px;
 		min-height: auto;
 	}
-}
-
-#custom-switch {
-	height: 26px;
 }

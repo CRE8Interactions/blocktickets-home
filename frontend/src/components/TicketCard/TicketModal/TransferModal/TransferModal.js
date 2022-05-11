@@ -15,7 +15,7 @@ import { createTicketTransfer } from '../../../../utilities/api';
 import { Error } from './../../../Error';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
-import { SelectTickets } from '../SelectTickets';
+import { DisplayTickets } from '../DisplayTickets';
 
 export default function TransferModal({ handleClose, setTicketStatus, ticket, order }) {
 
@@ -93,7 +93,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 			</Modal.Header>
 			<Modal.Body>
 				{step === 1 &&  (
-				<><SelectTickets status="transfer" />
+				<>             <DisplayTickets status="transfer" role='select' />
 				<Stack  direction="horizontal" className="btn-group-flex">
 					<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg">
 							Next
@@ -139,15 +139,16 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 					<Fragment>
 							<div className="modal-heading">
 								<h4 className="modal-heading-title">
-									Are you sure you want to transfer this ticket?
+									Are you sure you want to transfer these tickets?
 								</h4>
+								<DisplayTickets />
 							</div>
 							<div>
 								<p className='fw-medium text-muted mb-2'>Recipient phone number</p>
 								<span className='fs-md fw-bold'>{phoneNumber}</span>
 							</div>
 							<Stack className="btn-group-flex">
-								<Button onClick={handleClose} variant="outline-light" size="lg" className="text-danger">Cancel</Button>
+								<Button onClick={handleClose} variant="outline-light" size="lg">Cancel</Button>
 								<Button
 									onClick={(e) => submitTransfer()}
 									size="lg" >

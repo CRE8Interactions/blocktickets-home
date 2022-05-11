@@ -77,24 +77,17 @@
 		}
 	}
 
+	// used for my tickets popups, checkout modals
 	&-lg {
-		padding: rem(32);
-
-		p {
-			font-size: $body-2;
-		}
-	}
-
-	&-xl {
-		$m-x: em(24);
-		$pad-y: em(24);
+		$m-x: rem(32);
+		$pad-y: rem(32);
 
 		padding-left: 0px;
 		padding-right: 0px;
 
 		.modal {
 			&-header {
-				padding: $pad-y 0px;
+				padding: rem(24) 0px;
 				margin: 0px $m-x;
 
 				.modal-title {

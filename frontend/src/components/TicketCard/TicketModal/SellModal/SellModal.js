@@ -5,12 +5,12 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
-import Badge from 'react-bootstrap/Badge';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
-
  
 import { BackButton } from '../../../BackButton';
-import { SelectTickets } from '../SelectTickets';
+import { DisplayTickets } from '../DisplayTickets';
 import { SuccessContainer } from '../SuccessContainer';
 
 import { formatNumber } from '../../../../utilities/helpers';
@@ -37,46 +37,22 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 		setUpdateSuccessful
 	] = useState(false);
 
-	// for price range
-	const [
-		sliderValue,
-		setSliderValue
-	] = useState(formatNumber(20));
+	const [price, setPrice] = useState(0);
 
-	// counter to conditionally add ticket
-	const [
-		addTickets,
-		setAddTickets
-	] = useState(0);
-
-	// all tickets - for demo purposes, will come from database
-	const tickets = [
-		'Nicfanciulli#9358',
-		'Another#1234',
-		'Nicfanciulli#9358',
-		'Another#4321'
-	];
-
-	// object to collect the tickets selected - used to send to database
+	// select tickets
 	const [
 		selectedTickets,
 		setSelectedTickets
-	] = useState({ 1: 'Nicfanciulli#9358' });
-
-	const [
-		value,
-		setValue
 	] = useState([]);
+
+	const handlePrice = (val) => {	
+		setPrice(val)}
+		
 
 	const handleGoBack = () => {
 		setStep(step - 1)
 	}
-	const handleChange = (val) =>
-		setValue((prevState) => [
-			...prevState,
-			val
-		]);
-
+	
 	const handleClick = () => {
 		handleClose(); 
 		if (step === 4) setTicketStatus('listed')
@@ -110,9 +86,9 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 			<Modal.Body>
 			{step === 1 && (
 				<>
-					<SelectTickets status="sell" />
+					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} />
 					<Stack direction="horizontal" className="btn-group-flex">
-						<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg">
+						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 }         className="icon-button btn-next" size="lg">
 							Set price
 						</Button>
 					</Stack>
@@ -127,49 +103,57 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								Ticket face value $174.00
 							</p>
 						</div>
-						<Badge bg="default" className="d-flex-column gap-2 badge-xl badge--light bold text-dark ">$0 <span className='caption fw-normal text-muted badge-label'>Price per ticket</span></Badge>
+						<Form.Group controlId='price' className="form-card bg-info">
+							<Form.Label>Price per ticket</Form.Label>
+							<InputGroup className="input-group-lg">
+								<InputGroup.Text>$</InputGroup.Text>
+								<Form.Control
+								  type="text" value={price} required
+								/>
+							  </InputGroup>
+						</Form.Group>
 						<div id="numpad">
 							<Row className="split-row">
 								<Col>
-									<span>1</span>
+									<Button value="1" variant="default" onClick={(e) => handlePrice(e.target.value)}>1</Button>
 									</Col>
-									<Col><span>2</span></Col>
+									<Col><Button value="2" variant="default" onClick={(e) => handlePrice(e.target.value)}>2</Button></Col>
 									<Col>
-									<span>3</span>
+									<Button value="3" variant="default" onClick={(e) => handlePrice(e.target.value)}>3</Button>
 								</Col>
 								</Row>
 							
 								<Row className="split-row">
 								<Col>
-									<span>4</span>
+								<Button value="4" variant="default" onClick={(e) => handlePrice(e.target.value)}>4</Button>
 									</Col>
-									<Col><span>5</span></Col>
+									<Col><Button value="5" variant="default" onClick={(e) => handlePrice(e.target.value)}>5</Button></Col>
 									<Col>
-									<span>6</span>
+									<Button value="6" variant="default" onClick={(e) => handlePrice(e.target.value)}>6</Button>
 								</Col>
 								</Row>
 								<Row className="split-row">
 								<Col>
-									<span>7</span>
+									<Button value="7" variant="default" onClick={(e) => handlePrice(e.target.value)}>7</Button>
 									</Col>
-									<Col><span>8</span></Col>
+									<Col><Button value="8" variant="default" onClick={(e) => handlePrice(e.target.value)}>8</Button></Col>
 									<Col>
-									<span>9</span>
+									<Button value="9" variant="default" onClick={(e) => handlePrice(e.target.value)}>9</Button>
 								</Col>
 								</Row>
 								<Row className="split-row">
 								<Col>
-									<span>.</span>
+									<Button value="." variant="default" onClick={(e) => handlePrice(e.target.value)}>.</Button>
 									</Col>
-									<Col><span>0</span></Col>
+									<Col><Button value="0" variant="default" onClick={(e) => handlePrice(e.target.value)}>0</Button></Col>
 									<Col>
-									<span>&larr;</span>
+									<Button value="1" variant="default" onClick={(e) => handlePrice(e.target.value)}>&larr;</Button>
 								</Col>
 								</Row>
 						</div>
 						<Stack direction="horizontal"  className="btn-group-flex">
 							<BackButton variant="default" handleGoBack={handleGoBack} />
-							<Button onClick={() => setStep(3)} className="icon-button btn-next" size="lg">Payout summary</Button>
+							<Button onClick={() => setStep(3)} className="icon-button btn-next" disabled={price === 0} size="lg">Payout summary</Button>
 						</Stack>
 				</>
 			)}

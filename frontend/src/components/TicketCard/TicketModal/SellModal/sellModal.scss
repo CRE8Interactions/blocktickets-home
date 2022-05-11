@@ -6,12 +6,17 @@
 #numpad {
 	@extend .mobile-only;
 	margin: rem(33) 0px;
-	display: flex;
+	@include breakpoint-max(md) {
+		display: flex;
+	}
 	flex-direction: column;
-	row-gap: $text-spacer-sm;
 
-	.col {
+	.col > .btn {
 		text-align: center;
 		font-size: $body-1;
+		font-family: $font-body;
+		margin-top: 0px;
+		padding: rem(12) rem(16);
+		font-weight: $fw-normal;
 	}
 }

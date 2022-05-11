@@ -14,26 +14,10 @@
 		}
 	}
 
-	&--light {
-		background-color: $gray-300;
-	}
-
 	&-lg {
 		font-size: $body-2;
-		border-radius: 12px;
+		border-radius: $br-primary;
 		font-weight: $fw-medium;
 		padding: rem(19);
-	}
-
-	&-xl {
-		font-size: $h4-font-size;
-		border-radius: 12px;
-		font-weight: $fw-bold;
-		padding: rem(12) rem(16);
-		font-family: $font-heading;
-
-		.badge-label {
-			font-family: $font-body;
-		}
 	}
 }

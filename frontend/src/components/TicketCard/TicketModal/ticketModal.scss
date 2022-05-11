@@ -4,7 +4,7 @@
 @use '../../../scss/theme/buttons' as *;
 
 #ticket-modal {
-	@extend .modal-xl;
+	@extend .modal-lg;
 
 	.btn-group-flex {
 		margin-top: auto;
