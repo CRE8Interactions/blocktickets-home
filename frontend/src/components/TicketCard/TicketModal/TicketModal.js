@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import { DetailsModal } from './DetailsModal';
 import { TransferModal } from './TransferModal';
 import { SellModal } from './SellModal';
-import { NFTModal } from './NFTModal';
+import { CancelModal } from './CancelModal';
 
 import './ticketModal.scss';
 
@@ -17,16 +17,13 @@ const typeOfCard = (handleClose, ticketStatus, setTicketStatus) => {
 			return <DetailsModal />;
 
 		case 'transfer':
-			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;
-
-		case 'nft':
-			return <NFTModal handleClose={handleClose} />;
+			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;         
 
 		case 'sell':
 			return <SellModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;
 
-		case 'delist':
-			return <SellModal ticketStatus={ticketStatus} setTicketStatus={setTicketStatus} />;
+		case 'cancel':
+			return <CancelModal handleClose={handleClose} />
 		default:
 			return;
 	}

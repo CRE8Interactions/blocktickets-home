@@ -48,7 +48,7 @@ export default function EventDetailsWrapper({ id }) {
 		setTicketStatus(status);
 	};
 	return (
-		<section className="spacer-xs full-height-wrapper" id="event-details-wrapper">
+		<section className="spacer-xs full-height-wrapper">
 			<div className="section-heading-sm">
 				<h1>Event details</h1>
 				<BackButton />

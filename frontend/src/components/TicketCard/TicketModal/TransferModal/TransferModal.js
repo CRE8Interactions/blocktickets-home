@@ -169,7 +169,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 					<SuccessDisclaimer />
 
 						<Stack className="btn-group-flex">
-							<Link to="" className="btn btn-lg btn-outline-light">Go to My transfers</Link><Button onClick={handleClick} size='lg'>Close</Button></Stack>
+							<Link to="/my-tranfers" className="btn btn-lg btn-outline-light">Go to My transfers</Link><Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</Fragment>
 				)}
 			</Modal.Body>

@@ -1,12 +1,13 @@
+@forward 'container';
 @use 'typography';
 @forward 'spacing';
 @use 'dropdown';
 @use 'buttons';
 @use 'badge';
-@forward 'container';
+@use 'alert';
+@use 'pills';
 @use 'modal';
 @use 'forms';
 @use 'tables';
-@forward 'card';
+@use 'card';
 @use 'list-group';
-@use 'alert';

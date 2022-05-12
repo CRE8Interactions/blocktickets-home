@@ -18,3 +18,11 @@
 		font-size: $body-2;
 	}
 }
+
+.action-btns.btn-group-flex {
+	@include breakpoint-min(md) {
+		.btn {
+			flex: 0 0 171px !important;
+		}
+	}
+}

@@ -9,11 +9,10 @@ import Button from 'react-bootstrap/Button';
 
 import QRCode from '../../assets/qrcode.svg'; 
 import profile from '../../assets/profile-thumbnail.png'; 
-import addToWallet from '../../assets/icons/add-to-apple-wallet-logo.svg'
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType = '', order, ticket }) {
+export default function TicketCard({ id, ticketType, ticketStatus, order, ticket }) {
 	// const [
 	// 	modalType,
 	// 	setModalType
@@ -54,17 +53,21 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 					</p>
 					
 					{ !id && ( <span className="num-tickets">4 Tickets</span> )}
-					{ticketType !== 'collectable' && (					<>
-							{ id ? (
+					{ticketType !== 'collectable' && (					
+					<>
+					{/* ticketType or is specific ticket - transfers, listings, event details */}
+							{ ticketStatus || id ? (
 								<>
 							<Badge bg="light" className="mt-2 text-dark badge-lg">
 								General Admission
 							</Badge>
-								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
 							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
 							</Button>
 							<Link to="" className="btn btn-outline-light">Details</Link>
 							</Stack>
+								)
+							}
 							</>
 							) : (
 								
