@@ -31,12 +31,11 @@ export default function VenueInformation({ venue }) {
 					</Col>
 					<Col md={6} xxl={6} className="flex-grow-1">
 						<Tabs
-							id="venue-events"
 							defaultActiveKey="upcoming"
 							variant="pills"
 							activeKey={key}
 							onSelect={(k) => setKey(k)}
-							className="mb-4">
+							>
 							<Tab eventKey="upcoming" title="Upcoming Events">
 								<EventsList venue={venue} />
 							</Tab>
