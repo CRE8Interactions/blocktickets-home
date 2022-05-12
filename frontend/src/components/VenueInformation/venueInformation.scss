@@ -1,1 +1,18 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/colors' as *;
 
+#venue {
+	.nav-pills {
+		.nav-item {
+			flex: 0;
+
+			.nav-link {
+				padding: rem(8) rem(16);
+
+				&.active {
+					background-color: $body-color;
+				}
+			}
+		}
+	}
+}
