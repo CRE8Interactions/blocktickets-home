@@ -35,10 +35,20 @@
 			}
 			&:nth-of-type(3) .nav-link {
 				&::before {
-					content: url($data-svg-prefix + map-get($icons, 'settings'));
+					content: url($data-svg-prefix + map-get($icons, 'collectables'));
 				}
 			}
 			&:nth-of-type(4) .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'collectables'));
+				}
+			}
+			&:nth-of-type(5) .nav-link {
+				&::before {
+					content: url($data-svg-prefix + map-get($icons, 'settings'));
+				}
+			}
+			&:nth-of-type(6) .nav-link {
 				&::before {
 					content: url($data-svg-prefix + map-get($icons, 'logout'));
 				}
