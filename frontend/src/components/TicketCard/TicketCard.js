@@ -7,33 +7,30 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
+import { TicketModal } from '../TicketCard/TicketModal';
+
 import QRCode from '../../assets/qrcode.svg'; 
 import profile from '../../assets/profile-thumbnail.png'; 
 
 import './ticketCard.scss';
 
 export default function TicketCard({ id, ticketType, ticketStatus, order, ticket }) {
-	// const [
-	// 	modalType,
-	// 	setModalType
-	// ] = useState('');
+	const [
+		ticketAction,
+		setTicketAction
+	] = useState('');
 
-	// const [
-	// 	ticketStatus,
-	// 	setTicketStatus
-	// ] = useState('sell');
+	const [
+		show,
+		setShow
+	] = useState(false);
 
-	// const [
-	// 	show,
-	// 	setShow
-	// ] = useState(false);
+	const handleShow = () => setShow(true);
 
-	// const handleShow = () => setShow(true);
-
-	// const handleClick = (type) => {
-	// 	setModalType(type);
-	// 	handleShow();
-	// };
+	const handleClick = (action) => {
+		handleShow();
+		setTicketAction(action)
+	};
 
 	return (
 		<Fragment>
@@ -51,7 +48,15 @@ export default function TicketCard({ id, ticketType, ticketStatus, order, ticket
 						Dallas, TX
 						</span>
 					</p>
-					
+					{ ticketStatus === 'listed' && (
+						<Stack className='mb-2'>
+							<Stack direction="horizontal" className="split-row mb-1">
+								<span className='m-0 caption'>Listing price per ticket</span>
+								<span className='text-end fw-medium'>$1346.00</span>
+							</Stack>
+							<p className='caption text-muted'>You will make $1346.00 per ticket</p>
+						</Stack>
+					)}
 					{ !id && ( <span className="num-tickets">4 Tickets</span> )}
 					{ticketType !== 'collectable' && (					
 					<>
@@ -64,10 +69,17 @@ export default function TicketCard({ id, ticketType, ticketStatus, order, ticket
 								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
 							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
 							</Button>
-							<Link to="" className="btn btn-outline-light">Details</Link>
+							<Button variant='outline-light' size="xs">Details</Button>
 							</Stack>
 								)
 							}
+							{ ticketStatus === 'listed' && (
+								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+							<Button onClick={() => handleClick('remove')}>Remove listing
+							</Button>
+							<Button onClick={() => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+							</Stack>
+							)}
 							</>
 							) : (
 								
@@ -79,6 +91,8 @@ export default function TicketCard({ id, ticketType, ticketStatus, order, ticket
 					)}
 				</div>
 			</Card>
+
+			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} />
 
 		</Fragment>
 	);

@@ -7,6 +7,7 @@ export { VenuePage } from './VenuePage';
 export { MyEventsPage } from './MyEventsPage';
 export { EventDetailsPage } from './EventDetailsPage';
 export { MyTransfersPage } from './MyTransfersPage';
+export { MyListingsPage } from './MyListingsPage';
 export { CollectablesPage } from './CollectablesPage';
 export { SettingsPage } from './SettingsPage';
 export { SettingsOptionsPage } from './SettingsPage/SettingsOptionsPage';
