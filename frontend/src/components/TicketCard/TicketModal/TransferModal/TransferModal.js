@@ -28,6 +28,12 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		setStep
 	] = useState(1);
 
+	// select tickets
+	const [
+		selectedTickets,
+		setSelectedTickets
+	] = useState([]);
+
 	const [
 		phoneNumber,
 		setPhoneNumber
@@ -77,9 +83,6 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		return phoneNumber && isValidPhoneNumber(phoneNumber);
 	};
 
-	const handleGoBack = () => {
-		setStep(step -1)
-	}
 	const handleClick = () => {
 		handleClose(); 
 		if (step === 4) setTicketStatus('transferred')
@@ -93,9 +96,10 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 			</Modal.Header>
 			<Modal.Body>
 				{step === 1 &&  (
-				<>             <DisplayTickets status="transfer" role='select' />
+				<>             
+				<DisplayTickets status="transfer" role='select' setSelectedTickets={setSelectedTickets}/>
 				<Stack  direction="horizontal" className="btn-group-flex">
-					<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg">
+					<Button onClick={() => setStep(2)} className="btn-next" size="lg" disabled={selectedTickets.length === 0 } >
 							Next
 						</Button>
 				</Stack>
@@ -129,7 +133,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 							<Stack direction="horizontal" className="btn-group-flex">
 								<Button
 									onClick={submit}
-									disabled={!validNumber()} size="lg" className="icon-button btn-next">
+									disabled={!validNumber()} size="lg" className="btn-next">
 									Transfer
 								</Button>
 							</Stack>
@@ -169,7 +173,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 					<SuccessDisclaimer />
 
 						<Stack className="btn-group-flex">
-							<Link to="/my-tranfers" className="btn btn-lg btn-outline-light">Go to My transfers</Link><Button onClick={handleClick} size='lg'>Close</Button></Stack>
+							<Link to="/my-transfers" className="btn btn-lg btn-outline-light">Go to My transfers</Link>
+							<Button onClick={handleClick} size='lg'>Close</Button></Stack>
 					</Fragment>
 				)}
 			</Modal.Body>

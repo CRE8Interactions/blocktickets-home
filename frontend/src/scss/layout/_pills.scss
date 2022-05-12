@@ -22,9 +22,6 @@
 	.nav-pills {
 		@include breakpoint-min(md) {
 			margin-bottom: $text-spacer-lg;
-			.nav-item {
-				flex: 0 0 171px;
-			}
 		}
 	}
 }

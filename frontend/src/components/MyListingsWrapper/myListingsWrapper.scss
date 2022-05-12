@@ -1,0 +1,11 @@
+@use '../../scss/abstracts' as *;
+
+#my-listings-wrapper {
+	.nav-pills {
+		@include breakpoint-min(md) {
+			.nav-item {
+				flex: 0 0 112px;
+			}
+		}
+	}
+}

@@ -8,7 +8,7 @@ import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-export default function CancelModal({ handleClose, ticket, order }) {
+export default function RemoveModal({ handleClose, ticket, order }) {
 	// 1 - confirmation
 	// 2 - success
 	const [
@@ -16,17 +16,14 @@ export default function CancelModal({ handleClose, ticket, order }) {
 		setStep
 	] = useState(1);
 
-	// come from database
-	const phoneNumber = '';
-
-	const cancel = () => {
+	const remove = () => {
 		setStep(2);
 	};
 
 	return (
 		<Fragment>
 			<Modal.Header className="heading--flex">
-				<Modal.Title as="h5">Cancel transfer</Modal.Title>
+				<Modal.Title as="h5">Remove listing</Modal.Title>
 				<Button variant="close" onClick={handleClose} />
 			</Modal.Header>
 			<Modal.Body>
@@ -34,24 +31,20 @@ export default function CancelModal({ handleClose, ticket, order }) {
 					<Fragment>
 						<div className="modal-heading">
 							<h4 className="modal-heading-title">
-								Are you sure you want to cancel this transfer?
+								Are you sure you want to remove this listing?
 							</h4>
 							<DisplayTickets />
 						</div>
-						<div>
-							<p className="fw-medium text-muted mb-2">Recipient phone number</p>
-							<span className="fs-md fw-bold">{phoneNumber}</span>
-						</div>
 						<Stack className="btn-group-flex">
 							<Button
-								onClick={cancel}
+								onClick={remove}
 								variant="outline-light"
 								size="lg"
 								className="text-danger">
-								Cancel Transfer
+								Remove
 							</Button>
 							<Button onClick={handleClose} size="lg">
-								Go back
+								Cancel
 							</Button>
 						</Stack>
 					</Fragment>
@@ -59,14 +52,12 @@ export default function CancelModal({ handleClose, ticket, order }) {
 				{step === 2 && (
 					<Fragment>
 						<SuccessContainer>
-							<h4 className="modal-heading-title">
-								Your transfer has been canceled!
-							</h4>
+							<h4 className="modal-heading-title">Your listing has been removed!</h4>
 						</SuccessContainer>
 
 						<p className="small">
-							You can view your tickets in 'My Events' and transfer / sell them at
-							anytime.
+							You can re-list them at anytime on the marketplace. Please go to 'My
+							Events' to view your tickets.
 						</p>
 						<SuccessDisclaimer />
 						<Stack direction="horizontal" className="btn-group-flex">

@@ -13,15 +13,11 @@ import { BackButton } from '../../../BackButton';
 import { DisplayTickets } from '../DisplayTickets';
 import { SuccessContainer } from '../SuccessContainer';
 
-import { formatNumber } from '../../../../utilities/helpers';
-
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
 import './sellModal.scss';
 
-export default function SellModal({ handleClose, setTicketStatus }) {
-	// text
-	// const type = ticketStatus === 'sell' ? 'sell' : 'delist';
+export default function SellModal({ handleClose, setTicketStatus, ticketAction }) {
 
 	// 1 - sell 
 	// 2 - price 
@@ -33,8 +29,8 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 	] = useState(1);
 
 	const [
-		updateSuccessful,
-		setUpdateSuccessful
+		isUpdate,
+		setIsUpdate
 	] = useState(false);
 
 	const [price, setPrice] = useState(0);
@@ -55,40 +51,28 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 	
 	const handleClick = () => {
 		handleClose(); 
-		if (step === 4) setTicketStatus('listed')
+		if (!isUpdate && step === 4) setTicketStatus('listed')
 	};
 
-	const handleUpdatePrice = () => {
-		setStep(3);
-		setUpdateSuccessful(true);
-	};
-
-	useEffect(
-		() => {
-			// ticket status changes when component unmounts and step is successful
-			return () => {
-				// if (step === 'successful') {
-				// 	const status = ticketStatus === 'sell' ? 'sale' : 'sell';
-				// 	setTicketStatus(status);
-				// }
-			};
-		},
-		[
-			step
-		]
-	);
+	useEffect(() => {
+	  if (ticketAction === 'edit') {
+		  setIsUpdate(true)
+		  setStep(2)
+	  }
+	}, [])
+	
 
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
-				<Modal.Title as="h5">Sell</Modal.Title>
+				<Modal.Title as="h5"> { isUpdate ? 'Edit' : 'Sell' }</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 			{step === 1 && (
 				<>
 					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} />
 					<Stack direction="horizontal" className="btn-group-flex">
-						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 }         className="icon-button btn-next" size="lg">
+						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 }         className="btn-next" size="lg">
 							Set price
 						</Button>
 					</Stack>
@@ -108,7 +92,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 							<InputGroup className="input-group-lg">
 								<InputGroup.Text>$</InputGroup.Text>
 								<Form.Control
-								  type="text" value={price} required
+								  type="text" value={price} onChange={(e) => handlePrice(e.target.value)} required
 								/>
 							  </InputGroup>
 						</Form.Group>
@@ -153,7 +137,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 						</div>
 						<Stack direction="horizontal"  className="btn-group-flex">
 							<BackButton variant="default" handleGoBack={handleGoBack} />
-							<Button onClick={() => setStep(3)} className="icon-button btn-next" disabled={price === 0} size="lg">Payout summary</Button>
+							<Button onClick={() => setStep(3)} className="btn-next" disabled={price === 0} size="lg">Payout summary</Button>
 						</Stack>
 				</>
 			)}
@@ -172,43 +156,25 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 									<li className="list">
 										<p className="heading">Tickets</p>
 										<ul>
-											<li>
-												<Row className="split-row">
-													<Col>
+											<Stack as="li" direction="horizontal" className="split-row">
 														<span>Tickets: $35.00 x 2</span>
-													</Col>
-													<Col className="text-end ">
-														<span>$70.00</span>
-													</Col>
-												</Row>
-											</li>
+														<span className='text-end'>$70.00</span>
+											</Stack>
 										</ul>
 									</li>
 									<li className="list">
 										<p className="heading">Service Fees</p>
 										<ul>
-											<li>
-				     								<Row className="split-row">
-													<Col>
-														<span>Service Fees: 7.00 x 2</span>
-													</Col>
-													<Col className="text-end ">
-														<span>($14.00)</span>
-													</Col>
-												</Row>
-											</li>
+											<Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: 7.00 x 2</span>
+											<span className='text-end'>($14.00)</span>
+													
+											</Stack>
 										</ul>
 									</li>
-									<li className="list">
-										<Row className="split-row">
-											<Col>
+									<Stack direction='horizontal' as="li" className="split-row list">
 												<span className="heading m-0">Your Payout</span>
-											</Col>
-											<Col className="text-end ">
-												<span className="fw-medium">$63.00</span>
-											</Col>
-										</Row>
-									</li>
+												<span className="text-end fw-medium">$63.00</span>
+									</Stack>
 								</ul>
 							</div>
 							
@@ -216,7 +182,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								<small className="disclaimer mb-3">By clicking 'Agree and sell' you are constenting to Blocktickets <a href="">terms and conditions</a>. </small>
 								<Stack direction="horizontal" className="mt-0 btn-group-flex">
 									<BackButton variant="default" handleGoBack={handleGoBack} />
-									<Button onClick={() => setStep(4)} size="lg">Agree and sell</Button></Stack></div>
+									<Button onClick={() => setStep(4)} className="btn-next" size="lg">Agree and sell</Button></Stack></div>
 						
 					
 				</>
@@ -225,15 +191,15 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 				<>
 					<SuccessContainer>
 						<h4 className="modal-heading-title">
-							Your tickets are listed for sale!
+							{isUpdate ? 'Your tickes price has been updated' : 'Your tickets are listed for sale!' }
 						</h4>
 					</SuccessContainer>
 					<p className="small">
-							We will notify you via sms if a purchase is made. While your tickets are listed, you can change the price or delist them from the marketplace in 'My listings' at anytime	
+							{isUpdate ? "Your updated price will be in effect within 2 hours on the marketplace. If your tickets are sold before the price is updated you will receive funds based on the original price." : "We will notify you via sms if a purchase is made. While your tickets are listed, you can change the price or delist them from the marketplace in 'My listings' at anytime" }	
 					</p>
 					<SuccessDisclaimer />
 					<Stack className="btn-group-flex">
-						<Link to="" className="btn btn-lg btn-outline-light">Go to My listings</Link>
+						{!isUpdate && (<Link to="/my-listings" className="btn btn-lg btn-outline-light">Go to My listings</Link>)}
 						<Button onClick={handleClick} size='lg'>Close</Button>
 						</Stack>
 					</>

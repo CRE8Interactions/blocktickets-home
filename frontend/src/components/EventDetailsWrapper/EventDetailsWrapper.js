@@ -27,6 +27,11 @@ export default function EventDetailsWrapper({ id }) {
 	] = useState(false);
 
 	const [
+		ticketAction,
+		setTicketAction
+	] = useState('');
+
+	const [
 		ticketStatus,
 		setTicketStatus
 	] = useState('');
@@ -43,9 +48,9 @@ export default function EventDetailsWrapper({ id }) {
 
 	const handleShow = () => setShow(true);
 
-	const handleClick = (status) => {
+	const handleClick = (action) => {
 		handleShow();
-		setTicketStatus(status);
+		setTicketAction(action);
 	};
 	return (
 		<section className="spacer-xs full-height-wrapper">
@@ -64,7 +69,7 @@ export default function EventDetailsWrapper({ id }) {
 				<MyTickets id={id} handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<TicketModal
-				ticketStatus={ticketStatus}
+				ticketAction={ticketAction}
 				setTicketStatus={setTicketStatus}
 				show={show}
 				setShow={setShow}
