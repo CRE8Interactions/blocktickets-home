@@ -25,8 +25,8 @@ export default function MyTransfersWrapper() {
 	] = useState(false);
 
 	const [
-		ticketStatus,
-		setTicketStatus
+		ticketAction,
+		setTicketAction
 	] = useState('');
 
 	useLayoutEffect(() => {
@@ -41,9 +41,9 @@ export default function MyTransfersWrapper() {
 
 	const handleShow = () => setShow(true);
 
-	const handleClick = (status) => {
+	const handleClick = (action) => {
 		handleShow();
-		setTicketStatus(status);
+		setTicketAction(action);
 	};
 
 	return (
@@ -81,7 +81,7 @@ export default function MyTransfersWrapper() {
 				</Stack>
 			</div>
 
-			<TicketModal ticketStatus={ticketStatus} show={show} setShow={setShow} />
+			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} />
 		</section>
 	);
 }

@@ -162,6 +162,16 @@ button,
 	}
 }
 
+.icon-button {
+	@extend %icon-text-box !optional;
+	justify-content: center;
+
+	&::before,
+	&::after {
+		line-height: 0;
+	}
+}
+
 .btn-tickets {
 	&--plain {
 		&::before {
@@ -188,6 +198,7 @@ button,
 }
 
 .btn-next {
+	@extend .icon-button !optional;
 	&::after {
 		content: url($data-svg-prefix + map-get($icons, 'rightArrow'));
 	}

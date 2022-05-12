@@ -43,7 +43,11 @@ export default function CancelModal({ handleClose, ticket, order }) {
 							<span className="fs-md fw-bold">{phoneNumber}</span>
 						</div>
 						<Stack className="btn-group-flex">
-							<Button onClick={cancel} variant="outline-light" size="lg">
+							<Button
+								onClick={cancel}
+								variant="outline-light"
+								size="lg"
+								className="text-danger">
 								Cancel Transfer
 							</Button>
 							<Button onClick={handleClose} size="lg">
