@@ -1,0 +1,30 @@
+@use '../abstracts' as *;
+@use './spacing' as *;
+
+.nav-pills {
+	margin-bottom: $text-spacer-sm;
+	gap: rem(8);
+
+	.nav-item {
+		flex: 1;
+
+		.nav-link {
+			width: 100%;
+			border: border();
+			padding: rem(12) rem(16);
+			white-space: nowrap;
+		}
+	}
+}
+
+#my-transfers-wrapper,
+#my-listings-wrapper {
+	.nav-pills {
+		@include breakpoint-min(md) {
+			margin-bottom: $text-spacer-lg;
+			.nav-item {
+				flex: 0 0 171px;
+			}
+		}
+	}
+}

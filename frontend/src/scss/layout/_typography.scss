@@ -238,6 +238,7 @@ h4,
 
 .num-tickets {
 	font-size: $caption;
+	font-weight: $fw-semi-bold;
 	@extend %icon-text-box !optional;
 	gap: $gap-sm;
 	&::before {
