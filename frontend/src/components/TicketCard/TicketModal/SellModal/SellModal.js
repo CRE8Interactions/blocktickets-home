@@ -13,15 +13,11 @@ import { BackButton } from '../../../BackButton';
 import { DisplayTickets } from '../DisplayTickets';
 import { SuccessContainer } from '../SuccessContainer';
 
-import { formatNumber } from '../../../../utilities/helpers';
-
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
 import './sellModal.scss';
 
 export default function SellModal({ handleClose, setTicketStatus }) {
-	// text
-	// const type = ticketStatus === 'sell' ? 'sell' : 'delist';
 
 	// 1 - sell 
 	// 2 - price 
@@ -62,21 +58,6 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 		setStep(3);
 		setUpdateSuccessful(true);
 	};
-
-	useEffect(
-		() => {
-			// ticket status changes when component unmounts and step is successful
-			return () => {
-				// if (step === 'successful') {
-				// 	const status = ticketStatus === 'sell' ? 'sale' : 'sell';
-				// 	setTicketStatus(status);
-				// }
-			};
-		},
-		[
-			step
-		]
-	);
 
 	return (
 		<Fragment>

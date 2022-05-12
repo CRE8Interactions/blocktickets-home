@@ -28,6 +28,12 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		setStep
 	] = useState(1);
 
+	// select tickets
+	const [
+		selectedTickets,
+		setSelectedTickets
+	] = useState([]);
+
 	const [
 		phoneNumber,
 		setPhoneNumber
@@ -93,9 +99,10 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 			</Modal.Header>
 			<Modal.Body>
 				{step === 1 &&  (
-				<>             <DisplayTickets status="transfer" role='select' />
+				<>             
+				<DisplayTickets status="transfer" role='select' setSelectedTickets={setSelectedTickets}/>
 				<Stack  direction="horizontal" className="btn-group-flex">
-					<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg">
+					<Button onClick={() => setStep(2)} className="icon-button btn-next" size="lg" disabled={selectedTickets.length === 0 } >
 							Next
 						</Button>
 				</Stack>
