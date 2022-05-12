@@ -8,6 +8,7 @@ import {
 	VenuePage,
 	MyEventsPage,
 	EventDetailsPage,
+	MyTransfersPage,
 	CollectablesPage,
 	SettingsPage,
 	SettingsOptionsPage,
@@ -45,6 +46,7 @@ const Router = () => {
 				<Route path="venue/:id" element={<VenuePage />} />
 				<Route path="my-events" element={<MyEventsPage />} />
 				<Route path="event-details/:id" element={<EventDetailsPage />} />
+				<Route path="my-transfers" element={<MyTransfersPage />} />
 				<Route path="collectables" element={<CollectablesPage />} />
 				<Route path="settings" element={<SettingsPage />}>
 					<Route index element={<SettingsOptionsPage />} />

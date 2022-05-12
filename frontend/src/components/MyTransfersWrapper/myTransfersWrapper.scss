@@ -1,0 +1,12 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+
+#my-transfers-wrapper {
+	#cancel-btn {
+		@include breakpoint-min(md) {
+			order: -2;
+			position: absolute;
+			right: 0px;
+		}
+	}
+}

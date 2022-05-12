@@ -13,6 +13,7 @@ export { CheckoutWrapper } from './CheckoutWrapper';
 export { VenueInformation } from './VenueInformation';
 export { MyEventsWrapper } from './MyEventsWrapper';
 export { EventDetailsWrapper } from './EventDetailsWrapper';
+export { MyTransfersWrapper } from './MyTransfersWrapper';
 export { CollectablesSlider } from './Slider/CollectablesSlider';
 export { SettingsWrapper } from './SettingsWrapper';
 export { SettingsOptions } from './SettingsOptions';
