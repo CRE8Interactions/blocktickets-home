@@ -15,7 +15,7 @@ export { MyEventsWrapper } from './MyEventsWrapper';
 export { EventDetailsWrapper } from './EventDetailsWrapper';
 export { MyTransfersWrapper } from './MyTransfersWrapper';
 export { MyListingsWrapper } from './MyListingsWrapper';
-export { CollectablesSlider } from './Slider/CollectablesSlider';
+export { MyCollectablesWrapper } from './MyCollectablesWrapper';
 export { SettingsWrapper } from './SettingsWrapper';
 export { SettingsOptions } from './SettingsOptions';
 export { PersonalDetailsForm } from './SettingsWrapper/PersonalDetailsForm';

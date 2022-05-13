@@ -4,7 +4,7 @@ import { SwiperSlide } from 'swiper/react';
 import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 
-export default function CollectablesSlider() {
+export default function MyCollectablesSlider() {
 	// will come from database
 	const ticketType = 'collectable';
 
