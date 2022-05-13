@@ -37,13 +37,6 @@ export default function MyListingsWrapper() {
 		};
 	}, []);
 
-	const handleShow = () => setShow(true);
-
-	const handleClick = (status) => {
-		handleShow();
-		setTicketStatus(status);
-	};
-
 	return (
 		<section className="spacer-xs" id="my-listings-wrapper">
 			<div className="section-heading-sm">
