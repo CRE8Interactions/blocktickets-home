@@ -38,11 +38,14 @@ export default function EventDetailsWrapper({ id }) {
 
 	useLayoutEffect(() => {
 		const el = document.querySelector('#main-container');
+		const body = document.body;
 
 		fullHeightContainer(el);
+		body.classList.add('noBodyPadding');
 
 		return () => {
 			removeFullHeightContainer(el);
+			body.classList.remove('noBodyPadding');
 		};
 	}, []);
 
