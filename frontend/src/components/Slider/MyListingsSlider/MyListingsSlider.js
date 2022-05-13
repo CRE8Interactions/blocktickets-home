@@ -4,7 +4,7 @@ import { SwiperSlide } from 'swiper/react';
 import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 
-export default function MyListingsSlider({ order, tickets }) {
+export default function MyListingsSlider({ ticketStatus, ticketState, order, tickets }) {
 	return (
 		<div className="page-slider">
 			<Slider>
@@ -13,10 +13,10 @@ export default function MyListingsSlider({ order, tickets }) {
 					tickets.map((ticket, index) => {
 						return ( */}
 				<SwiperSlide>
-					<TicketCard ticketStatus="listed" />
+					<TicketCard ticketStatus={ticketStatus} ticketState={ticketState} />
 				</SwiperSlide>
 				<SwiperSlide>
-					<TicketCard ticketStatus="listed" />
+					<TicketCard ticketStatus={ticketStatus} ticketState={ticketState} />
 				</SwiperSlide>
 				{/* );
 					})} */}

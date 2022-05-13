@@ -49,13 +49,13 @@ export default function MyListingsWrapper() {
 				activeKey={key}
 				onSelect={(k) => setKey(k)}>
 				<Tab eventKey="active" title="Active">
-					<MyListingsSlider />
+					<MyListingsSlider ticketStatus={'listed'} ticketState={key} />
 				</Tab>
 				<Tab eventKey="sold" title="Sold">
-					<MyListingsSlider />
+					<MyListingsSlider ticketStatus={'listed'} ticketState={key} />
 				</Tab>
 				<Tab eventKey="expired" title="Expired">
-					<MyListingsSlider />
+					<MyListingsSlider ticketStatus={'listed'} ticketState={key} />
 				</Tab>
 			</Tabs>
 
