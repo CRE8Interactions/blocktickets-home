@@ -14,7 +14,7 @@ import profile from '../../assets/profile-thumbnail.png';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType, ticketStatus, order, ticket }) {
+export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, ticket }) {
 	const [
 		ticketAction,
 		setTicketAction
@@ -58,9 +58,10 @@ export default function TicketCard({ id, ticketType, ticketStatus, order, ticket
 						</Stack>
 					)}
 					{ !id && ( <span className="num-tickets">4 Tickets</span> )}
+					
 					{ticketType !== 'collectable' && (					
 					<>
-					{/* ticketType or is specific ticket - transfers, listings, event details */}
+					{/* ticketStatus or specific event - transferred, listed, event details */}
 							{ ticketStatus || id ? (
 								<>
 							<Badge bg="light" className="mt-2 text-dark badge-lg">
@@ -75,12 +76,19 @@ export default function TicketCard({ id, ticketType, ticketStatus, order, ticket
 							}
 							{ ticketStatus === 'listed' && (
 								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-							<Button onClick={() => handleClick('remove')}>Remove listing
-							</Button>
-							<Button onClick={() => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+								{ ticketState === 'active' ? (
+								<>								
+									<Button onClick={() => handleClick('remove')}>Remove listing
+									</Button>
+									<Button onClick={() => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+								</>
+							 ) : (
+								<Button variant='outline-light' size="xs">Details</Button>
+							)
+								}
 							</Stack>
 							)}
-							</>
+							</>							
 							) : (
 								
 							<Link to="/event-details/100" className="btn btn-primary">
