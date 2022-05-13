@@ -22,18 +22,16 @@ export default function MyListingsWrapper() {
 		setShow
 	] = useState(false);
 
-	const [
-		ticketStatus,
-		setTicketStatus
-	] = useState('');
-
 	useLayoutEffect(() => {
 		const el = document.querySelector('#main-container');
+		const body = document.body;
 
 		fullHeightContainer(el);
+		body.classList.add('noBodyPadding');
 
 		return () => {
 			removeFullHeightContainer(el);
+			body.classList.remove('noBodyPadding');
 		};
 	}, []);
 
@@ -61,7 +59,7 @@ export default function MyListingsWrapper() {
 				</Tab>
 			</Tabs>
 
-			<TicketModal ticketStatus={ticketStatus} show={show} setShow={setShow} />
+			<TicketModal show={show} setShow={setShow} />
 		</section>
 	);
 }

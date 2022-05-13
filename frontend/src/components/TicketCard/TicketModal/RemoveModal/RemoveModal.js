@@ -22,9 +22,8 @@ export default function RemoveModal({ handleClose, ticket, order }) {
 
 	return (
 		<Fragment>
-			<Modal.Header className="heading--flex">
+			<Modal.Header closeButton>
 				<Modal.Title as="h5">Remove listing</Modal.Title>
-				<Button variant="close" onClick={handleClose} />
 			</Modal.Header>
 			<Modal.Body>
 				{step === 1 && (

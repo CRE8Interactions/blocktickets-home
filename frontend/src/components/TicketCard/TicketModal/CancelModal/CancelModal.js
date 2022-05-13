@@ -25,9 +25,8 @@ export default function CancelModal({ handleClose, ticket, order }) {
 
 	return (
 		<Fragment>
-			<Modal.Header className="heading--flex">
+			<Modal.Header closeButton>
 				<Modal.Title as="h5">Cancel transfer</Modal.Title>
-				<Button variant="close" onClick={handleClose} />
 			</Modal.Header>
 			<Modal.Body>
 				{step === 1 && (
