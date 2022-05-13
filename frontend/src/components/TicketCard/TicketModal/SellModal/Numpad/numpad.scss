@@ -1,17 +1,16 @@
-@use '../../../../scss/abstracts' as *;
-@use '../../../../scss/layout' as *;
-@use '../../../../scss/theme/colors' as *;
-@use '../../../../scss/theme/input' as *;
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/layout' as *;
+@use '../../../../../scss/theme/colors' as *;
+@use '../../../../../scss/theme/input' as *;
 
 #numpad {
-	@extend .mobile-only;
 	margin: rem(29) 0px;
 	@include breakpoint-max(md) {
 		display: flex;
 	}
 	flex-direction: column;
 
-	.col > .btn {
+	.btn {
 		text-align: center;
 		font-size: $body-1;
 		font-family: $font-body;

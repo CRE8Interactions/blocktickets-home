@@ -74,6 +74,7 @@ select:-webkit-autofill:focus {
 			}
 
 			.form-control {
+				border-radius: 0px;
 				padding-left: 0px;
 			}
 		}
@@ -123,7 +124,12 @@ select:-webkit-autofill:focus {
 
 .input-group {
 	.form-control {
-		flex: 0 0 7%;
+		flex: 0 0;
+		flex-basis: 60%;
+		@include breakpoint-min(sm) {
+			flex-basis: 38%;
+		}
+		text-align: center;
 	}
 	&-lg {
 		.input-group-text,

@@ -1,23 +1,24 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 
+import { useWindowSize } from './../../../../utilities/hooks';
+
 import Modal from 'react-bootstrap/Modal';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
- 
+
 import { BackButton } from '../../../BackButton';
 import { DisplayTickets } from '../DisplayTickets';
+import { Numpad } from './Numpad';
 import { SuccessContainer } from '../SuccessContainer';
 
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
-import './sellModal.scss';
-
 export default function SellModal({ handleClose, setTicketStatus, ticketAction }) {
+
+	const windowSize = useWindowSize();
 
 	// 1 - sell 
 	// 2 - price 
@@ -33,17 +34,17 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 		setIsUpdate
 	] = useState(false);
 
+	const [label, setLabel] = useState('Price per ticket')
+
 	const [price, setPrice] = useState(0);
+
+	const [priceValid, setPriceValid] = useState(price >= 0 && (price > 1000 || price < 2000))
 
 	// select tickets
 	const [
 		selectedTickets,
 		setSelectedTickets
-	] = useState([]);
-
-	const handlePrice = (val) => {	
-		setPrice(val)}
-		
+	] = useState([]);		
 
 	const handleGoBack = () => {
 		setStep(step - 1)
@@ -53,6 +54,16 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 		handleClose(); 
 		if (!isUpdate && step === 4) setTicketStatus('listed')
 	};
+
+	useEffect(() => {
+		if (price > 0 && (price < 1000 || price > 2000)) {
+			setLabel("Enter amount between $1000.00 - $2000.00");
+			setPriceValid(false)		  
+	  } else { 
+		  setLabel("Price per ticket") 
+		  setPriceValid(true)
+		}
+	}, [ price ])
 
 	useEffect(() => {
 	  if (ticketAction === 'edit') {
@@ -87,57 +98,21 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 								Ticket face value $174.00
 							</p>
 						</div>
-						<Form.Group controlId='price' className="form-card bg-info">
-							<Form.Label>Price per ticket</Form.Label>
+						 <Form.Group controlId='price' className="form-card bg-info">
+							<Form.Label className={!priceValid ? 'text-danger' : ''}>{label}</Form.Label>
 							<InputGroup className="input-group-lg">
 								<InputGroup.Text>$</InputGroup.Text>
-								<Form.Control
-								  type="text" value={price} onChange={(e) => handlePrice(e.target.value)} required
+								<Form.Control readOnly={windowSize < 768}
+								  type="text" value={price} onChange={(e) => setPrice(e.target.value)} required
 								/>
 							  </InputGroup>
-						</Form.Group>
-						<div id="numpad">
-							<Row className="split-row">
-								<Col>
-									<Button value="1" variant="default" onClick={(e) => handlePrice(e.target.value)}>1</Button>
-									</Col>
-									<Col><Button value="2" variant="default" onClick={(e) => handlePrice(e.target.value)}>2</Button></Col>
-									<Col>
-									<Button value="3" variant="default" onClick={(e) => handlePrice(e.target.value)}>3</Button>
-								</Col>
-								</Row>
-							
-								<Row className="split-row">
-								<Col>
-								<Button value="4" variant="default" onClick={(e) => handlePrice(e.target.value)}>4</Button>
-									</Col>
-									<Col><Button value="5" variant="default" onClick={(e) => handlePrice(e.target.value)}>5</Button></Col>
-									<Col>
-									<Button value="6" variant="default" onClick={(e) => handlePrice(e.target.value)}>6</Button>
-								</Col>
-								</Row>
-								<Row className="split-row">
-								<Col>
-									<Button value="7" variant="default" onClick={(e) => handlePrice(e.target.value)}>7</Button>
-									</Col>
-									<Col><Button value="8" variant="default" onClick={(e) => handlePrice(e.target.value)}>8</Button></Col>
-									<Col>
-									<Button value="9" variant="default" onClick={(e) => handlePrice(e.target.value)}>9</Button>
-								</Col>
-								</Row>
-								<Row className="split-row">
-								<Col>
-									<Button value="." variant="default" onClick={(e) => handlePrice(e.target.value)}>.</Button>
-									</Col>
-									<Col><Button value="0" variant="default" onClick={(e) => handlePrice(e.target.value)}>0</Button></Col>
-									<Col>
-									<Button value="1" variant="default" onClick={(e) => handlePrice(e.target.value)}>&larr;</Button>
-								</Col>
-								</Row>
-						</div>
+						</Form.Group> 
+					{windowSize < 768 && (
+							<Numpad price={price} setPrice={setPrice} />
+						)} 
 						<Stack direction="horizontal"  className="btn-group-flex">
 							<BackButton variant="default" handleGoBack={handleGoBack} />
-							<Button onClick={() => setStep(3)} className="btn-next" disabled={price === 0} size="lg">Payout summary</Button>
+							<Button onClick={() => setStep(3)} className="btn-next" disabled={price === 0 || !priceValid} size="lg">Payout summary</Button>
 						</Stack>
 				</>
 			)}
