@@ -8,7 +8,7 @@ export { MyEventsPage } from './MyEventsPage';
 export { EventDetailsPage } from './EventDetailsPage';
 export { MyTransfersPage } from './MyTransfersPage';
 export { MyListingsPage } from './MyListingsPage';
-export { CollectablesPage } from './CollectablesPage';
+export { MyCollectablesPage } from './MyCollectablesPage';
 export { SettingsPage } from './SettingsPage';
 export { SettingsOptionsPage } from './SettingsPage/SettingsOptionsPage';
 export { PersonalDetailsPage } from './SettingsPage/PersonalDetailsPage';
