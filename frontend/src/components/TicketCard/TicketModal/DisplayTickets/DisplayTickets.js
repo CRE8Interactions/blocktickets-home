@@ -5,8 +5,9 @@ import Form from 'react-bootstrap/Form';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
-export default function DisplayTickets({ role, status, setSelectedTickets }) {
+export default function DisplayTickets({ role, status, setSelectedTickets, tickets, selectedTickets }) {
 	const handleChange = (val) => setSelectedTickets(val);
+	tickets ? tickets = tickets.filter(ticket => ticket.on_sale_status !== "pendingTransfer") : ''
 
 	return (
 		<Fragment>
@@ -18,7 +19,7 @@ export default function DisplayTickets({ role, status, setSelectedTickets }) {
 					<span className="small fw-medium">General Admission</span>
 				</div>
 				<div>
-					<span className="num-tickets">4 Tickets</span>
+					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} Tickets</span>
 				</div>
 			</Stack>
 			{role === 'select' ? (
@@ -27,34 +28,24 @@ export default function DisplayTickets({ role, status, setSelectedTickets }) {
 						type="checkbox"
 						onChange={handleChange}
 						className="flex-wrap">
-						<ToggleButton id="tbg-btn-1" value={1}>
-							GA
-						</ToggleButton>
-						<ToggleButton id="tbg-btn-2" value={2}>
-							GA
-						</ToggleButton>
-						<ToggleButton id="tbg-btn-3" value={3}>
-							GA
-						</ToggleButton>
-						<ToggleButton id="tbg-btn-4" value={4}>
-							GA
-						</ToggleButton>
-						<ToggleButton id="tbg-btn-5" value={5}>
-							GA
-						</ToggleButton>
-						<ToggleButton id="tbg-btn-6" value={6}>
-							GA
-						</ToggleButton>
-						<ToggleButton id="tbg-btn-7" value={7}>
-							GA
-						</ToggleButton>
+							{
+								tickets.map((ticket, index) => {
+									return (<ToggleButton id={`tbg-btn-${index}`} value={ticket} key={index}>
+														GA
+													</ToggleButton>
+									)
+								})
+							}
 					</ToggleButtonGroup>
 				</Form>
 			) : (
 				<Stack direction="horizontal" className="btn-group flex-wrap">
-					<div className="btn btn-primary ticket-pick">GA</div>
-					<div className="btn btn-primary ticket-pick">GA</div>
-					<div className="btn btn-primary ticket-pick">GA</div>
+					{ selectedTickets && selectedTickets.map((ticket, index) => {
+						return(
+							<div className="btn btn-primary ticket-pick" key={index}>GA</div>
+						)
+					})}
+					
 				</Stack>
 			)}
 		</Fragment>

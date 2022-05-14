@@ -8,7 +8,9 @@ import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-export default function CancelModal({ handleClose, ticket, order }) {
+import { cancelMyTransfers } from '../../../../utilities/api';
+
+export default function CancelModal({ handleClose, ticket, order, transfer, getMyTransfers }) {
 	// 1 - confirmation
 	// 2 - success
 	const [
@@ -16,11 +18,14 @@ export default function CancelModal({ handleClose, ticket, order }) {
 		setStep
 	] = useState(1);
 
-	// come from database
-	const phoneNumber = '';
-
 	const cancel = () => {
-		setStep(2);
+		
+		cancelMyTransfers({data: {transferId: transfer.id }})
+			.then((res) => {
+				setStep(2);
+				getMyTransfers()
+			})
+			.catch((err) => console.error(err))
 	};
 
 	return (
@@ -35,11 +40,11 @@ export default function CancelModal({ handleClose, ticket, order }) {
 							<h4 className="modal-heading-title">
 								Are you sure you want to cancel this transfer?
 							</h4>
-							<DisplayTickets />
+							<DisplayTickets selectedTickets={transfer?.tickets} />
 						</div>
 						<div>
 							<p className="fw-medium text-muted mb-2">Recipient phone number</p>
-							<span className="fs-md fw-bold">{phoneNumber}</span>
+							<span className="fs-md fw-bold">{transfer?.phoneNumberToUser}</span>
 						</div>
 						<Stack className="btn-group-flex">
 							<Button

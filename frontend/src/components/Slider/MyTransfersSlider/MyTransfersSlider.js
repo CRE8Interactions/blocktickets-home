@@ -2,24 +2,19 @@ import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
 import { Slider } from '..';
-import { TicketCard } from '../../TicketCard';
+import { TransferCard } from '../../TransferCard';
 
-export default function MyTransfersSlider({ order, tickets }) {
+export default function MyTransfersSlider({ order, tickets, transfers, cancel }) {
 	return (
 		<div className="page-slider">
-			<Slider>
-				{/* {order &&
-					tickets &&
-					tickets.map((ticket, index) => {
-						return ( */}
-				<SwiperSlide>
-					<TicketCard ticketStatus="transferred" />
-				</SwiperSlide>
-				<SwiperSlide>
-					<TicketCard ticketStatus="transferred" />
-				</SwiperSlide>
-				{/* );
-					})} */}
+			<Slider>				
+				{transfers && transfers.map((transfer, index) => {
+					return (
+						<SwiperSlide key={index}>
+							<TransferCard transfer={transfer} cancel={cancel} />
+						</SwiperSlide>
+					)
+				})}
 			</Slider>
 		</div>
 	);
