@@ -109,3 +109,11 @@ export const getMyTransfers = () => {
 export const cancelMyTransfers = (data) => {
   return instance.post('/ticket-transfers/cancel', data)
 }
+
+export const getIncomingTransfers = () => {
+  return instance.get('/ticket-transfers/incoming')
+}
+
+export const acceptIncomingTransfers = (data) => {
+  return instance.post('/ticket-transfers/accept', data)
+}

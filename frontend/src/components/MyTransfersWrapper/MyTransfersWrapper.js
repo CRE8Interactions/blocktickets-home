@@ -84,7 +84,7 @@ export default function MyTransfersWrapper() {
 						<MyTransfersSlider transfers={transfers.filter(transfer => transfer.status === "pending")} cancel={handleClick} />
 					</Tab>
 					<Tab eventKey="completed" title="Completed">
-						<MyTransfersSlider transfers={transfers.filter(transfer => transfer.status === "complete")} />
+						<MyTransfersSlider transfers={transfers.filter(transfer => transfer.status === "claimed")} />
 					</Tab>
 				</Tabs>
 			</div>
