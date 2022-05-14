@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
-import { getMyEvents } from '../../utilities/api';
+import { getMyEvents, getIncomingTransfers, acceptIncomingTransfers } from '../../utilities/api';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyEventsSlider } from '../Slider/MyEventsSlider';
@@ -15,7 +15,9 @@ export default function MyEventsWrapper() {
 		upcoming: []
 	});
 
-	useEffect(() => {
+	const [transfers, setTransfers] = useState([])
+
+	const getMyTickets = () => {
 		getMyEvents()
 			.then((res) => {
 				let upcoming = [];
@@ -32,7 +34,24 @@ export default function MyEventsWrapper() {
 				});
 			})
 			.catch((err) => console.error(err));
+
+		getIncomingTransfers()
+			.then((res) => setTransfers(res.data))
+			.catch((err) => console.log(err))
+	}
+
+	useEffect(() => {
+		getMyTickets()
 	}, []);
+
+	const acceptTransfer = (transfer) => {
+		let data = {
+			transferId: transfer.id
+		}
+		acceptIncomingTransfers(data)
+			.then((res) => getMyTickets())
+			.catch((err) => console.error(err))
+	}
 
 	return (
 		<section className="spacer-xs">
@@ -42,7 +61,7 @@ export default function MyEventsWrapper() {
 					<SwiperNavigationButtons />
 				</div>
 			</div>
-			<MyEventsSlider order={order} />
+			<MyEventsSlider order={order} transfers={transfers} acceptTransfer={acceptTransfer}  />
 		</section>
 	);
 }
