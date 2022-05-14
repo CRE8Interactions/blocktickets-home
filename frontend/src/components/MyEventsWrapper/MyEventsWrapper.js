@@ -42,7 +42,7 @@ export default function MyEventsWrapper() {
 					<SwiperNavigationButtons />
 				</div>
 			</div>
-			<MyEventsSlider />
+			<MyEventsSlider order={order} />
 		</section>
 	);
 }

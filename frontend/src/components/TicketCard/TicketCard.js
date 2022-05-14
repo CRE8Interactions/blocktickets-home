@@ -13,7 +13,7 @@ import addToWallet from '../../assets/icons/add-to-apple-wallet-logo.svg'
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType = '', order, ticket }) {
+export default function TicketCard({ id, ticketType = '', order, tickets, event }) {
 	// const [
 	// 	modalType,
 	// 	setModalType
@@ -40,20 +40,20 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 		<Fragment>
 			<Card body className="ticket-card card-md">
 				<Card.Img
-					src={id ? QRCode : profile}
+					src={event?.image.url}
 					width="217"
 					height="217"
 					className="event-image-lg mb-3"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5">Nic Fanciulli</Card.Title>
+					<Card.Title as="h5">{event?.name}</Card.Title>
 						<p className="event-details">
-						Jun 20 <span>{moment(order?.event?.start).format('h:mm A')} </span><span className="venue">Southside Music Hall</span> <span className="loc">
+						{moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')} </span><span className="venue">{event?.venue.name}</span> <span className="loc">
 						Dallas, TX
 						</span>
 					</p>
 					
-					{ !id && ( <span className="num-tickets">4 Tickets</span> )}
+					{ !id && ( <span className="num-tickets">{tickets?.length} Tickets</span> )}
 					{ticketType !== 'collectable' && (					<>
 							{ id ? (
 								<>
@@ -68,7 +68,7 @@ export default function TicketCard({ id, ticketType = '', order, ticket }) {
 							</>
 							) : (
 								
-							<Link to="/event-details/100" className="btn btn-primary">
+							<Link to={`/event-details/${order?.id}`} className="btn btn-primary">
 								Event details
 							</Link>
 							)}
