@@ -31,20 +31,22 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 		handleShow();
 		setTicketAction(action)
 	};
+	
+	const event = order?.event;
 
 	return (
 		<Fragment>
 			<Card body className="ticket-card card-md">
 				<Card.Img
-					src={id ? QRCode : profile}
+					src={event?.image.url}
 					width="217"
 					height="217"
 					className="event-image-lg mb-3"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5">Nic Fanciulli</Card.Title>
+					<Card.Title as="h5">{event?.name}</Card.Title>
 						<p className="event-details">
-						Jun 20 <span>{moment(order?.event?.start).format('h:mm A')} </span><span className="venue">Southside Music Hall</span> <span className="loc">
+						{moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')} </span><span className="venue">{event?.venue.name}</span> <span className="loc">
 						Dallas, TX
 						</span>
 					</p>
@@ -57,7 +59,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 							<p className='caption text-muted'>You will make $1346.00 per ticket</p>
 						</Stack>
 					)}
-					{ !id && ( <span className="num-tickets">4 Tickets</span> )}
+					{ !id && ( <span className="num-tickets">{order?.tickets.length} Tickets</span> )}
 					
 					{ticketType !== 'collectable' && (					
 					<>
@@ -91,7 +93,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 							</>							
 							) : (
 								
-							<Link to="/event-details/100" className="btn btn-primary">
+							<Link to={`/event-details/${order?.orderId}`} className="btn btn-primary">
 								Event details
 							</Link>
 							)}

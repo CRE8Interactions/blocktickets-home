@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 
-import { getEvent } from '../../utilities/api';
+import { getEvent, getOrder } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
@@ -9,16 +9,21 @@ import { MyTickets } from './MyTickets';
 import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketCard/TicketModal';
+import { useParams } from 'react-router-dom';
 
-export default function EventDetailsWrapper({ id }) {
+export default function EventDetailsWrapper() {
 	// demo purposes for event object
+	let { orderId } = useParams();
+
 	useEffect(() => {
-		getEvent(41).then((res) => setEvent(res.data)).catch((err) => console.error(err));
-	}, []);
+		getOrder(orderId)
+			.then((res) => setOrder(res.data))
+			.catch(err => console.error(err))
+	}, [orderId]);
 
 	const [
-		event,
-		setEvent
+		order,
+		setOrder
 	] = useState();
 
 	const [
@@ -62,14 +67,14 @@ export default function EventDetailsWrapper({ id }) {
 				<BackButton />
 			</div>
 			<div className="tablet-desktop-only">
-				<Event event={event} />
+				<Event event={order?.event} />
 			</div>
 			<div className="mobile-only">
-				<MyTicketsSlider id={id} />
+				<MyTicketsSlider id={'id'} />
 				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<div className="tablet-desktop-only">
-				<MyTickets id={id} handleClick={handleClick} ticketStatus={ticketStatus} />
+				<MyTickets order={order} handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<TicketModal
 				ticketAction={ticketAction}

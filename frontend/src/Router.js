@@ -46,7 +46,7 @@ const Router = () => {
 
 				<Route path="venue/:id" element={<VenuePage />} />
 				<Route path="my-events" element={<MyEventsPage />} />
-				<Route path="event-details/:id" element={<EventDetailsPage />} />
+				<Route path="event-details/:orderId" element={<EventDetailsPage />} />
 				<Route path="my-transfers" element={<MyTransfersPage />} />
 				<Route path="my-listings" element={<MyListingsPage />} />
 				<Route path="my-collectables" element={<MyCollectablesPage />} />

@@ -81,8 +81,9 @@ export default function Event(props) {
 							<InfoIcon />
 							<span className="tablet-desktop-only">Event description</span>
 						</Button>
-
-						<EventModal show={show} handleClose={handleClose} event={event} />
+						{ event &&
+							<EventModal show={show} handleClose={handleClose} event={event} />
+						}
 					</Col>
 				</Row>
 			</header>

@@ -4,22 +4,17 @@ import { SwiperSlide } from 'swiper/react';
 import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 
-export default function MyEventsSlider({ order, tickets }) {
+export default function MyEventsSlider({ order }) {
 	return (
 		<div className="page-slider">
 			<Slider>
-				{/* {order &&
-					tickets &&
-					tickets.map((ticket, index) => {
-						return ( */}
-				<SwiperSlide>
-					<TicketCard />
-				</SwiperSlide>
-				<SwiperSlide>
-					<TicketCard />
-				</SwiperSlide>
-				{/* );
-					})} */}
+				{ order && order.upcoming.map((o, index) => {
+					return(
+						<SwiperSlide key={index}>
+							<TicketCard event={o.event} tickets={o.tickets} order={o} />
+						</SwiperSlide>
+					)
+				})}
 			</Slider>
 		</div>
 	);
