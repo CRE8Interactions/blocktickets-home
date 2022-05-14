@@ -36,6 +36,7 @@
 	h2,
 	h3,
 	h4 {
+		margin: 0;
 		@extend .heading-font !optional;
 	}
 
@@ -51,24 +52,20 @@
 
 	&-sm {
 		@extend .section-heading !optional;
-		margin-bottom: $text-spacer-sm;
-
-		@include breakpoint-min(md) {
-			margin-bottom: $heading-spacer;
-		}
+		margin-bottom: $heading-spacer-sm;
 
 		h1,
 		h2 {
 			@extend .heading-sm !optional;
 			@extend .heading-font !optional;
-			margin-bottom: 0px !important;
+			margin: 0px !important;
 		}
 	}
 }
 
 .heading-sm {
 	font-size: $body-1;
-	margin-bottom: $text-spacer-sm;
+	margin-bottom: $heading-spacer-sm;
 
 	@include breakpoint-min(md) {
 		font-size: $h4-font-size;
@@ -238,6 +235,7 @@ h4,
 
 .num-tickets {
 	font-size: $caption;
+	font-weight: $fw-semi-bold;
 	@extend %icon-text-box !optional;
 	gap: $gap-sm;
 	&::before {

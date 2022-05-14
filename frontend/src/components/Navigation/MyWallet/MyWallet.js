@@ -27,8 +27,18 @@ export default function MyWallet() {
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li" >
-					<LinkContainer to={'/collectables'}>
-						<Nav.Link>Collectables</Nav.Link>
+					<LinkContainer to={'/my-transfers'}>
+						<Nav.Link>My Transfers</Nav.Link>
+					</LinkContainer>
+				</ListGroup.Item>
+				<ListGroup.Item as="li" >
+					<LinkContainer to={'/my-listings'}>
+						<Nav.Link>My Listings</Nav.Link>
+					</LinkContainer>
+				</ListGroup.Item>
+				<ListGroup.Item as="li" >
+					<LinkContainer to={'/my-collectables'}>
+						<Nav.Link>My Collectables</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
 				<ListGroup.Item as="li">

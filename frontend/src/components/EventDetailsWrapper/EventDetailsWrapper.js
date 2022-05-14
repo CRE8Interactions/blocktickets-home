@@ -9,17 +9,21 @@ import { MyTickets } from './MyTickets';
 import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketCard/TicketModal';
+import { useParams } from 'react-router-dom';
 
-export default function EventDetailsWrapper({ id }) {
+export default function EventDetailsWrapper() {
 	// demo purposes for event object
+	let { orderId } = useParams();
+
 	useEffect(() => {
-		getOrder({id: 49})
-			.then((res) => console.log(res))
-	}, []);
+		getOrder(orderId)
+			.then((res) => setOrder(res.data))
+			.catch(err => console.error(err))
+	}, [orderId]);
 
 	const [
-		event,
-		setEvent
+		order,
+		setOrder
 	] = useState();
 
 	const [
@@ -28,44 +32,52 @@ export default function EventDetailsWrapper({ id }) {
 	] = useState(false);
 
 	const [
+		ticketAction,
+		setTicketAction
+	] = useState('');
+
+	const [
 		ticketStatus,
 		setTicketStatus
 	] = useState('');
 
 	useLayoutEffect(() => {
 		const el = document.querySelector('#main-container');
+		const body = document.body;
 
 		fullHeightContainer(el);
+		body.classList.add('noBodyPadding');
 
 		return () => {
 			removeFullHeightContainer(el);
+			body.classList.remove('noBodyPadding');
 		};
 	}, []);
 
 	const handleShow = () => setShow(true);
 
-	const handleClick = (status) => {
+	const handleClick = (action) => {
 		handleShow();
-		setTicketStatus(status);
+		setTicketAction(action);
 	};
 	return (
-		<section className="spacer-xs full-height-wrapper" id="event-details-wrapper">
+		<section className="spacer-xs full-height-wrapper">
 			<div className="section-heading-sm">
 				<h1>Event details</h1>
 				<BackButton />
 			</div>
 			<div className="tablet-desktop-only">
-				<Event event={event} />
+				<Event event={order?.event} />
 			</div>
 			<div className="mobile-only">
-				<MyTicketsSlider id={id} />
+				<MyTicketsSlider id={'id'} />
 				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<div className="tablet-desktop-only">
-				<MyTickets id={id} handleClick={handleClick} ticketStatus={ticketStatus} />
+				<MyTickets order={order} handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<TicketModal
-				ticketStatus={ticketStatus}
+				ticketAction={ticketAction}
 				setTicketStatus={setTicketStatus}
 				show={show}
 				setShow={setShow}

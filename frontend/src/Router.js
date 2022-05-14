@@ -8,7 +8,9 @@ import {
 	VenuePage,
 	MyEventsPage,
 	EventDetailsPage,
-	CollectablesPage,
+	MyTransfersPage,
+	MyListingsPage,
+	MyCollectablesPage,
 	SettingsPage,
 	SettingsOptionsPage,
 	PersonalDetailsPage,
@@ -44,8 +46,10 @@ const Router = () => {
 
 				<Route path="venue/:id" element={<VenuePage />} />
 				<Route path="my-events" element={<MyEventsPage />} />
-				<Route path="event-details/:id" element={<EventDetailsPage />} />
-				<Route path="collectables" element={<CollectablesPage />} />
+				<Route path="event-details/:orderId" element={<EventDetailsPage />} />
+				<Route path="my-transfers" element={<MyTransfersPage />} />
+				<Route path="my-listings" element={<MyListingsPage />} />
+				<Route path="my-collectables" element={<MyCollectablesPage />} />
 				<Route path="settings" element={<SettingsPage />}>
 					<Route index element={<SettingsOptionsPage />} />
 					<Route path="personal-details" element={<PersonalDetailsPage />} />

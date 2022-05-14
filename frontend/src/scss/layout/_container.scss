@@ -83,16 +83,6 @@ $navbar-height: rem(82);
 	}
 }
 
-.icon-button {
-	@extend %icon-text-box !optional;
-	justify-content: center;
-
-	&::before,
-	&::after {
-		line-height: 0;
-	}
-}
-
 .mobile-only {
 	@include breakpoint-min(md) {
 		display: none;

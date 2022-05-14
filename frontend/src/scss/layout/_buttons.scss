@@ -65,19 +65,25 @@ button,
 }
 
 .btn-group {
+	column-gap: rem(14.7);
+
 	> .btn:not(:first-child) {
-		margin-left: 2px;
+		margin-left: 0px;
 	}
 	> .btn:not(.dropdown-toggle),
 	.ticket-pick {
 		border-radius: $border-radius !important;
-		margin-right: rem(16);
-		padding: rem(26) rem(24);
+		padding: rem(26) rem(25.7);
 		border: none;
 		background-color: $gray-300;
 		color: $text-muted;
 		font-size: $body-2;
 		flex: 0;
+
+		@include breakpoint-min(md) {
+			// padding-right: rem(25);
+			// padding-left: rem(25);
+		}
 	}
 	label.btn:hover,
 	label.btn:focus {
@@ -162,6 +168,16 @@ button,
 	}
 }
 
+.icon-button {
+	@extend %icon-text-box !optional;
+	justify-content: center;
+
+	&::before,
+	&::after {
+		line-height: 0;
+	}
+}
+
 .btn-tickets {
 	&--plain {
 		&::before {
@@ -188,6 +204,7 @@ button,
 }
 
 .btn-next {
+	@extend .icon-button !optional;
 	&::after {
 		content: url($data-svg-prefix + map-get($icons, 'rightArrow'));
 	}

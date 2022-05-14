@@ -1,27 +1,24 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 
+import { useWindowSize } from './../../../../utilities/hooks';
+
 import Modal from 'react-bootstrap/Modal';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
- 
+
 import { BackButton } from '../../../BackButton';
 import { DisplayTickets } from '../DisplayTickets';
+import { Numpad } from './Numpad';
 import { SuccessContainer } from '../SuccessContainer';
-
-import { formatNumber } from '../../../../utilities/helpers';
 
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
-import './sellModal.scss';
+export default function SellModal({ handleClose, setTicketStatus, ticketAction }) {
 
-export default function SellModal({ handleClose, setTicketStatus }) {
-	// text
-	// const type = ticketStatus === 'sell' ? 'sell' : 'delist';
+	const windowSize = useWindowSize();
 
 	// 1 - sell 
 	// 2 - price 
@@ -33,21 +30,21 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 	] = useState(1);
 
 	const [
-		updateSuccessful,
-		setUpdateSuccessful
+		isUpdate,
+		setIsUpdate
 	] = useState(false);
 
+	const [label, setLabel] = useState('Price per ticket')
+
 	const [price, setPrice] = useState(0);
+
+	const [priceValid, setPriceValid] = useState(price >= 0 && (price > 1000 || price < 2000))
 
 	// select tickets
 	const [
 		selectedTickets,
 		setSelectedTickets
-	] = useState([]);
-
-	const handlePrice = (val) => {	
-		setPrice(val)}
-		
+	] = useState([]);		
 
 	const handleGoBack = () => {
 		setStep(step - 1)
@@ -55,40 +52,38 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 	
 	const handleClick = () => {
 		handleClose(); 
-		if (step === 4) setTicketStatus('listed')
+		if (!isUpdate && step === 4) setTicketStatus('listed')
 	};
 
-	const handleUpdatePrice = () => {
-		setStep(3);
-		setUpdateSuccessful(true);
-	};
+	useEffect(() => {
+		if (price > 0 && (price < 1000 || price > 2000)) {
+			setLabel("Enter amount between $1000.00 - $2000.00");
+			setPriceValid(false)		  
+	  } else { 
+		  setLabel("Price per ticket") 
+		  setPriceValid(true)
+		}
+	}, [ price ])
 
-	useEffect(
-		() => {
-			// ticket status changes when component unmounts and step is successful
-			return () => {
-				// if (step === 'successful') {
-				// 	const status = ticketStatus === 'sell' ? 'sale' : 'sell';
-				// 	setTicketStatus(status);
-				// }
-			};
-		},
-		[
-			step
-		]
-	);
+	useEffect(() => {
+	  if (ticketAction === 'edit') {
+		  setIsUpdate(true)
+		  setStep(2)
+	  }
+	}, [])
+	
 
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
-				<Modal.Title as="h5">Sell</Modal.Title>
+				<Modal.Title as="h5"> { isUpdate ? 'Edit' : 'Sell' }</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 			{step === 1 && (
 				<>
 					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} />
 					<Stack direction="horizontal" className="btn-group-flex">
-						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 }         className="icon-button btn-next" size="lg">
+						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 }         className="btn-next" size="lg">
 							Set price
 						</Button>
 					</Stack>
@@ -103,57 +98,21 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								Ticket face value $174.00
 							</p>
 						</div>
-						<Form.Group controlId='price' className="form-card bg-info">
-							<Form.Label>Price per ticket</Form.Label>
+						 <Form.Group controlId='price' className="form-card bg-info">
+							<Form.Label className={!priceValid ? 'text-danger' : ''}>{label}</Form.Label>
 							<InputGroup className="input-group-lg">
 								<InputGroup.Text>$</InputGroup.Text>
-								<Form.Control
-								  type="text" value={price} required
+								<Form.Control readOnly={windowSize < 768}
+								  type="text" value={price} onChange={(e) => setPrice(e.target.value)} required
 								/>
 							  </InputGroup>
-						</Form.Group>
-						<div id="numpad">
-							<Row className="split-row">
-								<Col>
-									<Button value="1" variant="default" onClick={(e) => handlePrice(e.target.value)}>1</Button>
-									</Col>
-									<Col><Button value="2" variant="default" onClick={(e) => handlePrice(e.target.value)}>2</Button></Col>
-									<Col>
-									<Button value="3" variant="default" onClick={(e) => handlePrice(e.target.value)}>3</Button>
-								</Col>
-								</Row>
-							
-								<Row className="split-row">
-								<Col>
-								<Button value="4" variant="default" onClick={(e) => handlePrice(e.target.value)}>4</Button>
-									</Col>
-									<Col><Button value="5" variant="default" onClick={(e) => handlePrice(e.target.value)}>5</Button></Col>
-									<Col>
-									<Button value="6" variant="default" onClick={(e) => handlePrice(e.target.value)}>6</Button>
-								</Col>
-								</Row>
-								<Row className="split-row">
-								<Col>
-									<Button value="7" variant="default" onClick={(e) => handlePrice(e.target.value)}>7</Button>
-									</Col>
-									<Col><Button value="8" variant="default" onClick={(e) => handlePrice(e.target.value)}>8</Button></Col>
-									<Col>
-									<Button value="9" variant="default" onClick={(e) => handlePrice(e.target.value)}>9</Button>
-								</Col>
-								</Row>
-								<Row className="split-row">
-								<Col>
-									<Button value="." variant="default" onClick={(e) => handlePrice(e.target.value)}>.</Button>
-									</Col>
-									<Col><Button value="0" variant="default" onClick={(e) => handlePrice(e.target.value)}>0</Button></Col>
-									<Col>
-									<Button value="1" variant="default" onClick={(e) => handlePrice(e.target.value)}>&larr;</Button>
-								</Col>
-								</Row>
-						</div>
+						</Form.Group> 
+					{windowSize < 768 && (
+							<Numpad price={price} setPrice={setPrice} />
+						)} 
 						<Stack direction="horizontal"  className="btn-group-flex">
 							<BackButton variant="default" handleGoBack={handleGoBack} />
-							<Button onClick={() => setStep(3)} className="icon-button btn-next" disabled={price === 0} size="lg">Payout summary</Button>
+							<Button onClick={() => setStep(3)} className="btn-next" disabled={price === 0 || !priceValid} size="lg">Payout summary</Button>
 						</Stack>
 				</>
 			)}
@@ -172,43 +131,25 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 									<li className="list">
 										<p className="heading">Tickets</p>
 										<ul>
-											<li>
-												<Row className="split-row">
-													<Col>
+											<Stack as="li" direction="horizontal" className="split-row">
 														<span>Tickets: $35.00 x 2</span>
-													</Col>
-													<Col className="text-end ">
-														<span>$70.00</span>
-													</Col>
-												</Row>
-											</li>
+														<span className='text-end'>$70.00</span>
+											</Stack>
 										</ul>
 									</li>
 									<li className="list">
 										<p className="heading">Service Fees</p>
 										<ul>
-											<li>
-				     								<Row className="split-row">
-													<Col>
-														<span>Service Fees: 7.00 x 2</span>
-													</Col>
-													<Col className="text-end ">
-														<span>($14.00)</span>
-													</Col>
-												</Row>
-											</li>
+											<Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: 7.00 x 2</span>
+											<span className='text-end'>($14.00)</span>
+													
+											</Stack>
 										</ul>
 									</li>
-									<li className="list">
-										<Row className="split-row">
-											<Col>
+									<Stack direction='horizontal' as="li" className="split-row list">
 												<span className="heading m-0">Your Payout</span>
-											</Col>
-											<Col className="text-end ">
-												<span className="fw-medium">$63.00</span>
-											</Col>
-										</Row>
-									</li>
+												<span className="text-end fw-medium">$63.00</span>
+									</Stack>
 								</ul>
 							</div>
 							
@@ -216,7 +157,7 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 								<small className="disclaimer mb-3">By clicking 'Agree and sell' you are constenting to Blocktickets <a href="">terms and conditions</a>. </small>
 								<Stack direction="horizontal" className="mt-0 btn-group-flex">
 									<BackButton variant="default" handleGoBack={handleGoBack} />
-									<Button onClick={() => setStep(4)} size="lg">Agree and sell</Button></Stack></div>
+									<Button onClick={() => setStep(4)} className="btn-next" size="lg">Agree and sell</Button></Stack></div>
 						
 					
 				</>
@@ -225,15 +166,15 @@ export default function SellModal({ handleClose, setTicketStatus }) {
 				<>
 					<SuccessContainer>
 						<h4 className="modal-heading-title">
-							Your tickets are listed for sale!
+							{isUpdate ? 'Your tickes price has been updated' : 'Your tickets are listed for sale!' }
 						</h4>
 					</SuccessContainer>
 					<p className="small">
-							We will notify you via sms if a purchase is made. While your tickets are listed, you can change the price or delist them from the marketplace in 'My listings' at anytime	
+							{isUpdate ? "Your updated price will be in effect within 2 hours on the marketplace. If your tickets are sold before the price is updated you will receive funds based on the original price." : "We will notify you via sms if a purchase is made. While your tickets are listed, you can change the price or delist them from the marketplace in 'My listings' at anytime" }	
 					</p>
 					<SuccessDisclaimer />
 					<Stack className="btn-group-flex">
-						<Link to="" className="btn btn-lg btn-outline-light">Go to My listings</Link>
+						{!isUpdate && (<Link to="/my-listings" className="btn btn-lg btn-outline-light">Go to My listings</Link>)}
 						<Button onClick={handleClick} size='lg'>Close</Button>
 						</Stack>
 					</>

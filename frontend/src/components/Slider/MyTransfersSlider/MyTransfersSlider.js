@@ -4,19 +4,22 @@ import { SwiperSlide } from 'swiper/react';
 import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 
-export default function CollectablesSlider() {
-	// will come from database
-	const ticketType = 'collectable';
-
+export default function MyTransfersSlider({ order, tickets }) {
 	return (
 		<div className="page-slider">
 			<Slider>
+				{/* {order &&
+					tickets &&
+					tickets.map((ticket, index) => {
+						return ( */}
 				<SwiperSlide>
-					<TicketCard ticketType={ticketType} />
+					<TicketCard ticketStatus="transferred" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<TicketCard ticketType={ticketType} />
+					<TicketCard ticketStatus="transferred" />
 				</SwiperSlide>
+				{/* );
+					})} */}
 			</Slider>
 		</div>
 	);

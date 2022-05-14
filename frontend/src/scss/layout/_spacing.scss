@@ -11,8 +11,8 @@ $spacer-sm: rem(64);
 $spacer-md: rem(80);
 
 // Text Spacers
-$heading-spacer: rem(52); // page headings
-$heading-spacer-sm: rem(29); // page headings
+$heading-spacer: rem(64); // page headings
+$heading-spacer-sm: rem(27); // page headings
 $gap: rem(14);
 $gap-sm: rem(10);
 $gap-xs: rem(4);
@@ -81,7 +81,6 @@ $text-spacer-xs: rem(16);
 
 .split-row {
 	@extend %flex-between !optional;
-
 	font-size: $small;
 }
 

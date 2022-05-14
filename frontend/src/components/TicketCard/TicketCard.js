@@ -7,34 +7,32 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
+import { TicketModal } from '../TicketCard/TicketModal';
+
 import QRCode from '../../assets/qrcode.svg'; 
 import profile from '../../assets/profile-thumbnail.png'; 
-import addToWallet from '../../assets/icons/add-to-apple-wallet-logo.svg'
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType = '', order, tickets, event }) {
-	// const [
-	// 	modalType,
-	// 	setModalType
-	// ] = useState('');
+export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, ticket }) {
+	const [
+		ticketAction,
+		setTicketAction
+	] = useState('');
 
-	// const [
-	// 	ticketStatus,
-	// 	setTicketStatus
-	// ] = useState('sell');
+	const [
+		show,
+		setShow
+	] = useState(false);
 
-	// const [
-	// 	show,
-	// 	setShow
-	// ] = useState(false);
+	const handleShow = () => setShow(true);
 
-	// const handleShow = () => setShow(true);
-
-	// const handleClick = (type) => {
-	// 	setModalType(type);
-	// 	handleShow();
-	// };
+	const handleClick = (action) => {
+		handleShow();
+		setTicketAction(action)
+	};
+	
+	const event = order?.event;
 
 	return (
 		<Fragment>
@@ -52,23 +50,50 @@ export default function TicketCard({ id, ticketType = '', order, tickets, event 
 						Dallas, TX
 						</span>
 					</p>
+					{ ticketStatus === 'listed' && (
+						<Stack className='mb-2'>
+							<Stack direction="horizontal" className="split-row mb-1">
+								<span className='m-0 caption'>Listing price per ticket</span>
+								<span className='text-end fw-medium'>$1346.00</span>
+							</Stack>
+							<p className='caption text-muted'>You will make $1346.00 per ticket</p>
+						</Stack>
+					)}
+					{ !id && ( <span className="num-tickets">{order?.tickets.length} Tickets</span> )}
 					
-					{ !id && ( <span className="num-tickets">{tickets?.length} Tickets</span> )}
-					{ticketType !== 'collectable' && (					<>
-							{ id ? (
+					{ticketType !== 'collectable' && (					
+					<>
+					{/* ticketStatus or specific event - transferred, listed, event details */}
+							{ ticketStatus || id ? (
 								<>
 							<Badge bg="light" className="mt-2 text-dark badge-lg">
 								General Admission
 							</Badge>
-								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
 							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
 							</Button>
-							<Link to="" className="btn btn-outline-light">Details</Link>
+							<Button variant='outline-light' size="xs">Details</Button>
 							</Stack>
-							</>
+								)
+							}
+							{ ticketStatus === 'listed' && (
+								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+								{ ticketState === 'active' ? (
+								<>								
+									<Button onClick={() => handleClick('remove')}>Remove listing
+									</Button>
+									<Button onClick={() => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+								</>
+							 ) : (
+								<Button variant='outline-light' size="xs">Details</Button>
+							)
+								}
+							</Stack>
+							)}
+							</>							
 							) : (
 								
-							<Link to={`/event-details/${order?.id}`} className="btn btn-primary">
+							<Link to={`/event-details/${order?.orderId}`} className="btn btn-primary">
 								Event details
 							</Link>
 							)}
@@ -76,6 +101,8 @@ export default function TicketCard({ id, ticketType = '', order, tickets, event 
 					)}
 				</div>
 			</Card>
+
+			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} />
 
 		</Fragment>
 	);

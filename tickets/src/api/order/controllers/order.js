@@ -137,6 +137,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
   },
   async find(ctx) {
     const { data, meta } = await super.find(ctx);
+
     const order = await strapi.entityService.findOne('api::order.order', data[0].id, {
       populate: { 
         tickets: true,
