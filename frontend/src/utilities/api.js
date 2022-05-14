@@ -101,3 +101,11 @@ export const createBankAccount = (data) => {
 export const getBankAccount = () => {
   return instance.get('/payment-informations/0')
 }
+
+export const getMyTransfers = () => {
+  return instance.get('/ticket-transfers')
+}
+
+export const cancelMyTransfers = (data) => {
+  return instance.post('/ticket-transfers/cancel', data)
+}

@@ -12,22 +12,22 @@ import { RemoveModal } from './RemoveModal';
 
 import './ticketModal.scss';
 
-const type = (handleClose, ticketAction, setTicketStatus) => {
+const type = (handleClose, ticketAction, setTicketStatus, order, transfer, getMyTransfers) => {
 	switch (ticketAction) {
 		case 'details':
 			return <DetailsModal />;
 
 		case 'transfer':
-			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;         
+			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} order={order} />;         
 
 		case 'sell':
 			return <SellModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;
 
 		case 'edit':
-			return <SellModal handleClose={handleClose}ticketAction={ticketAction} />;
+			return <SellModal handleClose={handleClose} ticketAction={ticketAction} />;
 
 		case 'cancel':
-			return <CancelModal handleClose={handleClose} />
+			return <CancelModal handleClose={handleClose} transfer={transfer} getMyTransfers={getMyTransfers} />
 
 		case 'remove':
 			return <RemoveModal handleClose={handleClose} />
@@ -37,7 +37,7 @@ const type = (handleClose, ticketAction, setTicketStatus) => {
 			return;
 	}
 };
-export default function TicketModal({ ticketAction, setTicketStatus, show, setShow}) {
+export default function TicketModal({ ticketAction, setTicketStatus, show, setShow, order, transfer, getMyTransfers}) {
 
 	const windowSize = useWindowSize();
 
@@ -46,7 +46,7 @@ export default function TicketModal({ ticketAction, setTicketStatus, show, setSh
 	return (
 		<>
 			<Modal show={show} animation={false}  onHide={() => setShow(false)} id="ticket-modal" className='sticky modal--popup' scrollable centered backdrop={windowSize < 768 ? false : 'static'}>
-			{type(handleClose, ticketAction, setTicketStatus)}
+			{type(handleClose, ticketAction, setTicketStatus, order, transfer, getMyTransfers)}
 		</Modal>
 		
 

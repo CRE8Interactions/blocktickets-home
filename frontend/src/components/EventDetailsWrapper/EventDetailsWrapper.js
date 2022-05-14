@@ -81,6 +81,7 @@ export default function EventDetailsWrapper() {
 				setTicketStatus={setTicketStatus}
 				show={show}
 				setShow={setShow}
+				order={order}
 			/>
 		</section>
 	);
