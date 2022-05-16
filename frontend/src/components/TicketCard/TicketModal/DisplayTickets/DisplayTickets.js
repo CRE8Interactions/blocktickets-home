@@ -22,7 +22,7 @@ export default function DisplayTickets({ role, status, setSelectedTickets }) {
 				</div>
 			</Stack>
 			{role === 'select' ? (
-				<Form className="d-flex gap-4 mb-4">
+				<Form className="d-flex mb-4">
 					<ToggleButtonGroup
 						type="checkbox"
 						onChange={handleChange}

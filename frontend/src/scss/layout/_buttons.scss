@@ -65,7 +65,11 @@ button,
 }
 
 .btn-group {
-	column-gap: rem(14.7);
+	column-gap: rem(18);
+
+	@media (max-width: 375px) {
+		column-gap: rem(5);
+	}
 
 	> .btn:not(:first-child) {
 		margin-left: 0px;
@@ -73,24 +77,30 @@ button,
 	> .btn:not(.dropdown-toggle),
 	.ticket-pick {
 		border-radius: $border-radius !important;
-		padding: rem(26) rem(25.7);
+		padding: rem(26) rem(24);
 		border: none;
 		background-color: $gray-300;
 		color: $text-muted;
 		font-size: $body-2;
-		flex: 0;
+		flex: 0 0;
+		flex-basis: 73.5px;
 
-		@include breakpoint-min(md) {
-			// padding-right: rem(25);
-			// padding-left: rem(25);
+		@media (min-width: 500px) {
+			flex-basis: 95px;
 		}
 	}
-	label.btn:hover,
-	label.btn:focus {
-		background-color: $primary;
-		color: $white;
-	}
+	// label.btn:hover,
+	// label.btn:focus {
+	// 	outline: 1px solid $primary;
+	// 	outline-offset: inset;
+	// }
 	.btn-check {
+		&:checked,
+		&:focus {
+			& + .btn {
+				box-shadow: none;
+			}
+		}
 		&:checked {
 			& + .btn {
 				background-color: $primary;
