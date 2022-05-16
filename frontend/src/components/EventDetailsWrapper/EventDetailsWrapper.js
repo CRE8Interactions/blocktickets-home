@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 
+import { getOrder } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
@@ -9,7 +10,9 @@ import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketCard/TicketModal';
 
-export default function EventDetailsWrapper({ order }) {
+export default function EventDetailsWrapper({ orderId }) {
+
+	const [order, setOrder] = useState()
 
 	const [
 		show,
@@ -38,6 +41,15 @@ export default function EventDetailsWrapper({ order }) {
 			body.classList.remove('noBodyPadding');
 		};
 	}, []);
+
+		useEffect(
+		() => {
+			getOrder(orderId).then((res) => setOrder(res.data)).catch((err) => console.error(err));
+		},
+		[
+			orderId
+		]
+	);
 
 	const handleShow = () => setShow(true);
 
