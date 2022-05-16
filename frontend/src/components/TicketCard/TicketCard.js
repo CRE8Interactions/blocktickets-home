@@ -9,9 +9,6 @@ import Button from 'react-bootstrap/Button';
 
 import { TicketModal } from '../TicketCard/TicketModal';
 
-import QRCode from '../../assets/qrcode.svg'; 
-import profile from '../../assets/profile-thumbnail.png'; 
-
 import './ticketCard.scss';
 
 export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, ticket, listing, removeListing, getListings }) {
