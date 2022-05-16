@@ -161,7 +161,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 										<ul>
 											<Stack as="li" direction="horizontal" className="split-row">
 														<span>Tickets: ${parseFloat(price).toFixed(2)} x {selectedTickets?.length}</span>
-														<span className='text-end'>${parseFloat(price).toFixed(2) * selectedTickets?.length}.toFixed(2)</span>
+														<span className='text-end'>${(parseFloat(price).toFixed(2) * selectedTickets?.length).toFixed(2)}</span>
 											</Stack>
 										</ul>
 									</li>
