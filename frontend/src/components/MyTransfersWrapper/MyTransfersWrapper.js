@@ -11,6 +11,8 @@ import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyTransfersSlider } from '../Slider/MyTransfersSlider';
 import { TicketModal } from '../TicketCard/TicketModal';
 
+import { getMyTransfers } from '../../utilities/api';
+
 import './myTransfersWrapper.scss';
 
 export default function MyTransfersWrapper() {
@@ -29,6 +31,10 @@ export default function MyTransfersWrapper() {
 		setTicketAction
 	] = useState('');
 
+	const [transfers, setTransfers] = useState([])
+
+	const [transfer, setTransfer] = useState('')
+
 	useLayoutEffect(() => {
 		const el = document.querySelector('#main-container');
 		const body = document.body;
@@ -42,9 +48,20 @@ export default function MyTransfersWrapper() {
 		};
 	}, []);
 
+	useEffect(() => {
+		getTransfers()
+	}, [])
+
+	const getTransfers = () => {
+		getMyTransfers()
+		.then((res) => setTransfers(res.data))
+		.catch((err) => console.error(err))
+	}
+
 	const handleShow = () => setShow(true);
 
-	const handleClick = (action) => {
+	const handleClick = (action, transfer) => {
+		setTransfer(transfer)
 		handleShow();
 		setTicketAction(action);
 	};
@@ -64,29 +81,15 @@ export default function MyTransfersWrapper() {
 					activeKey={key}
 					onSelect={(k) => setKey(k)}>
 					<Tab eventKey="pending" title="Pending">
-						<MyTransfersSlider />
+						<MyTransfersSlider transfers={transfers.filter(transfer => transfer.status === "pending")} cancel={handleClick} />
 					</Tab>
 					<Tab eventKey="completed" title="Completed">
-						<MyTransfersSlider />
+						<MyTransfersSlider transfers={transfers.filter(transfer => transfer.status === "claimed")} />
 					</Tab>
 				</Tabs>
-				{key === 'pending' && (
-					<Stack
-						direction="horizontal"
-						className="btn-group-flex justify-content-center action-btns"
-						id="cancel-btn">
-						<Button
-							variant="outline-light"
-							onClick={() => handleClick('cancel')}
-							className="text-danger"
-							size="lg">
-							Cancel transfer
-						</Button>
-					</Stack>
-				)}
 			</div>
 
-			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} />
+			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} transfer={transfer} getMyTransfers={getTransfers} />
 		</section>
 	);
 }

@@ -8,7 +8,7 @@ import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-export default function RemoveModal({ handleClose, ticket, order }) {
+export default function RemoveModal({ handleClose, ticket, order, removeListing, listing }) {
 	// 1 - confirmation
 	// 2 - success
 	const [
@@ -17,7 +17,8 @@ export default function RemoveModal({ handleClose, ticket, order }) {
 	] = useState(1);
 
 	const remove = () => {
-		setStep(2);
+		removeListing(listing.id)
+		setStep(2)
 	};
 
 	return (

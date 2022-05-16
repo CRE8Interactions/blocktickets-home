@@ -38,8 +38,8 @@ export const createOrder = (data) => {
   return instance.post('/orders', data)
 }
 
-export const getOrder = (id) => {
-  return instance.get(`/orders?filters[orderId][$eq]=${id}`)
+export const getOrder = (orderId) => {
+  return instance.get(`/orders?filters[orderId][$eq]=${orderId}`)
 }
 
 export const getMyOrganizations = async () => {
@@ -100,4 +100,40 @@ export const createBankAccount = (data) => {
 
 export const getBankAccount = () => {
   return instance.get('/payment-informations/0')
+}
+
+export const getMyTransfers = () => {
+  return instance.get('/ticket-transfers')
+}
+
+export const cancelMyTransfers = (data) => {
+  return instance.post('/ticket-transfers/cancel', data)
+}
+
+export const getIncomingTransfers = () => {
+  return instance.get('/ticket-transfers/incoming')
+}
+
+export const acceptIncomingTransfers = (data) => {
+  return instance.post('/ticket-transfers/accept', data)
+}
+
+export const createListing = (data) => {
+  return instance.post('/listings', data)
+}
+
+export const getMyListings = () => {
+  return instance.get('/listings/mylisting')
+}
+
+export const removeMyListings = (id) => {
+  return instance.delete(`/listings/${id}`)
+}
+
+export const updateMyListings = (id, data) => {
+  return instance.put(`/listings/${id}`, data)
+}
+
+export const getResaleTickets = (eventId) => {
+  return instance.get(`/tickets?filters[eventId][$eq]=${eventId}&filters[on_sale_status][$eq]=resaleAvailable`)
 }

@@ -56,8 +56,6 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		setStep(3)
 	};
 
-	//  const oId = ticket.uuid.split('-')[4]
-
 	useEffect(() => {
 		axios
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
@@ -65,18 +63,18 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 	}, []);
 
 	const submitTransfer = () => {
-		setStep(4)
-		// let data = {
-		// 	phoneNumber: phoneNumber,
-		// 	orderId: order.id,
-		// 	ticketId: ticket.id
-		// };
+		let ticketIds = selectedTickets.map((ticket) => ticket.id)
+		let data = {
+			phoneNumber: phoneNumber,
+			orderId: order.id,
+			ticketIds
+		};
 
-	// 	createTicketTransfer(data)
-	// 		.then((res) => {
-	// 			setStep('successful');
-	// 		})
-	// 		.catch((err) => console.error(err));
+		createTicketTransfer(data)
+			.then((res) => {
+				setStep(4)
+			})
+			.catch((err) => console.error(err));
 	 };
 
 	const validNumber = () => {
@@ -96,7 +94,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 			<Modal.Body>
 				{step === 1 &&  (
 				<>             
-				<DisplayTickets status="transfer" role='select' setSelectedTickets={setSelectedTickets}/>
+				<DisplayTickets status="transfer" role='select' setSelectedTickets={setSelectedTickets} tickets={order?.tickets} />
 				<Stack  direction="horizontal" className="btn-group-flex">
 					<Button onClick={() => setStep(2)} className="btn-next" size="lg" disabled={selectedTickets.length === 0 } >
 							Next
@@ -144,7 +142,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 								<h4 className="modal-heading-title">
 									Are you sure you want to transfer these tickets?
 								</h4>
-								<DisplayTickets />
+								<DisplayTickets selectedTickets={selectedTickets} />
 							</div>
 							<div>
 								<p className='fw-medium text-muted mb-2'>Recipient phone number</p>

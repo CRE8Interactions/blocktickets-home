@@ -1,0 +1,21 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+
+.transfer-card {
+	width: 265px;
+	box-shadow: $box-shadow;
+
+	.details {
+		.card-title {
+			font-size: $body-2;
+			margin-bottom: rem(3);
+			@extend %text-truncate;
+		}
+
+		.event-details {
+			font-size: $caption;
+			@extend %text-truncate;
+			margin-bottom: rem(8);
+		}
+	}
+}

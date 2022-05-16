@@ -12,32 +12,32 @@ import { RemoveModal } from './RemoveModal';
 
 import './ticketModal.scss';
 
-const type = (handleClose, ticketAction, setTicketStatus) => {
+const type = (handleClose, ticketAction, setTicketStatus, order, transfer, getMyTransfers, removeListing, listing, getListings) => {
 	switch (ticketAction) {
 		case 'details':
 			return <DetailsModal />;
 
 		case 'transfer':
-			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;         
+			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} order={order} />;         
 
 		case 'sell':
-			return <SellModal handleClose={handleClose} setTicketStatus={setTicketStatus} />;
+			return <SellModal handleClose={handleClose} setTicketStatus={setTicketStatus} order={order} getListings={getListings} />;
 
 		case 'edit':
-			return <SellModal handleClose={handleClose}ticketAction={ticketAction} />;
+			return <SellModal handleClose={handleClose} ticketAction={ticketAction} listing={listing} getListings={getListings} />;
 
 		case 'cancel':
-			return <CancelModal handleClose={handleClose} />
+			return <CancelModal handleClose={handleClose} transfer={transfer} getMyTransfers={getMyTransfers} />
 
 		case 'remove':
-			return <RemoveModal handleClose={handleClose} />
+			return <RemoveModal handleClose={handleClose} removeListing={removeListing} listing={listing} />
 
 		
 		default:
 			return;
 	}
 };
-export default function TicketModal({ ticketAction, setTicketStatus, show, setShow}) {
+export default function TicketModal({ ticketAction, setTicketStatus, show, setShow, order, transfer, getMyTransfers, removeListing, listing, updateListing, getListings }) {
 
 	const windowSize = useWindowSize();
 
@@ -46,7 +46,7 @@ export default function TicketModal({ ticketAction, setTicketStatus, show, setSh
 	return (
 		<>
 			<Modal show={show} animation={false}  onHide={() => setShow(false)} id="ticket-modal" className='sticky modal--popup' scrollable centered backdrop={windowSize < 768 ? false : 'static'}>
-			{type(handleClose, ticketAction, setTicketStatus)}
+			{type(handleClose, ticketAction, setTicketStatus, order, transfer, getMyTransfers, removeListing, listing, updateListing, getListings)}
 		</Modal>
 		
 

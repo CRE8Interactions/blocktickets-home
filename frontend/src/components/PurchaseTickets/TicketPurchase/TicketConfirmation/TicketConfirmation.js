@@ -10,16 +10,15 @@ import { BackButton } from '../../../BackButton';
 import './ticketConfirmation.scss';
 
 export default function TicketConfirmation({ handleGoBack, type, ticket }) {
-
 	let [ticketCount, setTicketCount] = useState(1);
 	
 	let [prices, setPrices] = useState({
-		sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
+		sum: (parseFloat(ticket?.attributes?.resale ? ticket?.attributes?.listingAskingPrice : ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
 	})
 	
 	useEffect(() => {
 		setPrices({
-			sum: (parseFloat(ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
+			sum: (parseFloat(ticket?.attributes?.resale ? ticket?.attributes?.listingAskingPrice : ticket.attributes.cost + ticket.attributes.fee + ticket.attributes.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
 		})
 
 		let data = {
@@ -73,7 +72,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 						<p className="caption">General Admissions</p>
 						<p className="fw-bold">
 							${ prices?.sum } {' '}
-							<span className="caption fw-normal text-muted">${ticket.attributes.cost.toFixed(2)} ea + Fees</span>
+							<span className="caption fw-normal text-muted">${ticket?.attributes?.resale ? ticket?.attributes?.listingAskingPrice : ticket.attributes.cost.toFixed(2)} ea + Fees</span>
 						</p>
 					</div>
 					<Stack direction="horizontal" className="counter fw-bolder">
@@ -84,7 +83,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 </svg>
 						</Button> 
 						<span className='flex-grow-1 text-center'>{ ticketCount }</span>
-						<Button title="increase quantity of tickets" className="btn--icon ms-0" variant="outline-light" onClick={() => setTicketCount(ticketCount + 1)} disabled={ticketCount >= ticket.attributes.maximum_quantity}
+						<Button title="increase quantity of tickets" className="btn--icon ms-0" variant="outline-light" onClick={() => setTicketCount(ticketCount + 1)} disabled={ticketCount >= (ticket?.attributes?.resale ? 1 : ticket.attributes.maximum_quantity)}
 						aria-disabled={ticketCount >= ticket.attributes.maximum_quantity} >
 							<svg role="img" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fillRule="evenodd" clipRule="evenodd" d="M13.95 7C13.95 6.44772 13.5022 6 12.95 6C12.3977 6 11.95 6.44772 11.95 7V11H7.94995C7.39767 11 6.94995 11.4477 6.94995 12C6.94995 12.5523 7.39767 13 7.94995 13H11.95V17C11.95 17.5523 12.3977 18 12.95 18C13.5022 18 13.95 17.5523 13.95 17V13H17.95C18.5022 13 18.95 12.5523 18.95 12C18.95 11.4477 18.5022 11 17.95 11H13.95V7Z" fill="#777E91"/>

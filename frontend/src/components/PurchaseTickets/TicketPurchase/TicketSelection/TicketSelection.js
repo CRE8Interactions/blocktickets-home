@@ -106,7 +106,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const ticketTypes = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Ticket';
 		if (!ticket.resale && ticket.on_sale_status === 'presale') return 'Presale';
-		if (ticket.resale && ticket.on_sale_status === 'available') return 'Resale Ticket';
+		if (ticket.resale && ticket.on_sale_status === 'resaleAvailable') return 'Resale Ticket';
 	};
 
 	const handleNext = (ticketType) => {}
@@ -163,46 +163,88 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 					<div className="tickets-container">
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
-							<ListGroup as="ul">
-							<ListGroup.Item
-							onClick={() =>
-							 					handleClick(
-							 				 		'confirmation',
-							 				 		tickets.generalAdmissionTicket
-							 				 	)}
-											action
-											as="li"
-											className="d-flex justify-content-between align-items-center">
-											<div>
-												<div>
-													<span className="fw-bold p-0">
-													 {tickets.generalAdmissionTicket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
-													</span>
-												</div>
-												<div>
-													<span className="text-muted caption">
-														  {ticketTypes(tickets.generalAdmissionTicket.attributes)}  
-													</span>
-												</div>
-											</div>
-											<div className="text-end">
-												<div>
-													<span className="fw-bold text-end">
-														  ${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
-													</span>
-												</div>
-												<div>
-													<span className="text-muted caption">
-														${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost).toFixed(2)} + Fees 
-													</span>
-												</div>
-											</div>
+										<ListGroup as="ul">
+										<ListGroup.Item
+										onClick={() =>
+															handleClick(
+																'confirmation',
+																tickets.generalAdmissionTicket
+															)}
+														action
+														as="li"
+														className="d-flex justify-content-between align-items-center">
+														<div>
+															<div>
+																<span className="fw-bold p-0">
+																{tickets.generalAdmissionTicket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
+																</span>
+															</div>
+															<div>
+																<span className="text-muted caption">
+																		{ticketTypes(tickets.generalAdmissionTicket.attributes)}  
+																</span>
+															</div>
+														</div>
+														<div className="text-end">
+															<div>
+																<span className="fw-bold text-end">
+																		${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
+																</span>
+															</div>
+															<div>
+																<span className="text-muted caption">
+																	${parseFloat(tickets.generalAdmissionTicket?.attributes?.cost).toFixed(2)} + Fees 
+																</span>
+															</div>
+														</div>
 										</ListGroup.Item>
-										</ListGroup>			
+										</ListGroup>	
 									) : (
 										<MyTickets />
-									
 									)}
+									{
+										<ListGroup>
+											{
+												tickets && tickets.reSaleTickets && tickets.reSaleTickets.map((ticket, index) => {
+													return (<ListGroup.Item
+														onClick={() =>
+																handleClick(
+																	'confirmation',
+																	ticket
+																)}
+															action
+															as="li"
+															key={index}
+															className="d-flex justify-content-between align-items-center">
+															<div>
+																<div>
+																	<span className="fw-bold p-0">
+																	{ticket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
+																	</span>
+																</div>
+																<div>
+																	<span className="text-muted caption">
+																			{ticketTypes(ticket?.attributes)}  
+																	</span>
+																</div>
+															</div>
+															<div className="text-end">
+																<div>
+																	<span className="fw-bold text-end">
+																			${parseFloat(ticket?.attributes?.listingAskingPrice + ticket?.attributes?.fee + ticket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
+																	</span>
+																</div>
+																<div>
+																	<span className="text-muted caption">
+																		${parseFloat(ticket?.attributes?.listingAskingPrice).toFixed(2)} + Fees 
+																	</span>
+																</div>
+															</div>
+													</ListGroup.Item>)
+												})
+											}
+										</ListGroup>
+									}
 								</div>
 							</div>
 							{isZoomed && (

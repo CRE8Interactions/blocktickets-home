@@ -60,8 +60,8 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     const order = await strapi.entityService.findMany('api::order.order', {
       filters: {
         $and:[
-          { status: 'complete'},
-          { userId: user.id }
+          { status: ['complete', 'completeFromTransfer']},
+          { userId: user.id },
         ]
       },
       populate: {

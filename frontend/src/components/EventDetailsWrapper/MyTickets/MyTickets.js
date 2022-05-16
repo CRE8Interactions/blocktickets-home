@@ -11,11 +11,11 @@ import scanQR from '../../../assets/icons/scan-qr-code.svg';
 
 import './myTickets.scss';
 
-export default function MyTickets({ id, handleClick, ticketStatus }) {
+export default function MyTickets({ order, handleClick, ticketStatus }) {
 	return (
 		<section id="my-tickets">
 			<div className="heading--flex mb-4">
-				<h2 className="fs-md">Tickets (4)</h2>
+				<h2 className="fs-md">Tickets ({order?.tickets.length})</h2>
 				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<Alert variant="info">
@@ -29,38 +29,17 @@ export default function MyTickets({ id, handleClick, ticketStatus }) {
 				</div>
 			</Alert>
 			<Stack gap={3} className="mt-4">
-				<Card body className="card--light">
-					<div className="heading--flex">
-						<Card.Title as="h5" className="normal">
-							General Admissions
-						</Card.Title>
-						<Button variant="link">Details</Button>
-					</div>
-				</Card>
-				<Card body className="card--light">
-					<div className="heading--flex">
-						<Card.Title as="h5" className="normal">
-							General Admissions
-						</Card.Title>
-						<Button variant="link">Details</Button>
-					</div>
-				</Card>
-				<Card body className="card--light">
-					<div className="heading--flex">
-						<Card.Title as="h5" className="normal">
-							General Admissions
-						</Card.Title>
-						<Button variant="link">Details</Button>
-					</div>
-				</Card>
-				<Card body className="card--light">
-					<div className="heading--flex">
-						<Card.Title as="h5" className="normal">
-							General Admissions
-						</Card.Title>
-						<Button variant="link">Details</Button>
-					</div>
-				</Card>
+				{ order && order?.tickets.map((ticket, index) => {
+						return (<Card body className="card--light" key={index}>
+							<div className="heading--flex">
+								<Card.Title as="h5" className="normal">
+									{ticket?.name}
+								</Card.Title>
+								<Button variant="link">Details</Button>
+							</div>
+						</Card>)
+					})
+				}
 			</Stack>
 		</section>
 	);

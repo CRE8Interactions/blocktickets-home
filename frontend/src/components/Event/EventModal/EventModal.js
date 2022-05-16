@@ -21,7 +21,7 @@ export default function EventModal({ show, handleClose, event }) {
 						</Col>
 						<Col xs='auto' className="d-flex align-self-center">
 							<Badge className="ms-auto badge-outline badge-outline--primary">
-								{event?.categories[0]?.name}
+								{/* {event?.categories[0]?.name} */}
 							</Badge>
 						</Col>
 					</Row>
