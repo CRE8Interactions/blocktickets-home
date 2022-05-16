@@ -5,6 +5,11 @@
 	width: 265px;
 	box-shadow: $box-shadow;
 
+	.event-image-lg {
+		width: 217px;
+		height: 217px;
+	}
+
 	.details {
 		.card-title {
 			font-size: $body-2;
