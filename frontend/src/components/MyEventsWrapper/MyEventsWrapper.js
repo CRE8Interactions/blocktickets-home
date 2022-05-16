@@ -24,8 +24,8 @@ export default function MyEventsWrapper() {
 				let past = [];
 
 				res.data.map((o) => {
-					if (moment(o.event.start) >= moment()) upcoming.push(o);
-					if (moment(o.event.start) < moment()) past.push(o);
+					if (moment(o.event.start) >= moment() && o.tickets.length >= 1) upcoming.push(o);
+					if (moment(o.event.start) < moment() && o.tickets.length >= 1) past.push(o);
 				});
 
 				setOrder({

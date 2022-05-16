@@ -61,7 +61,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       filters: {
         $and:[
           { status: ['complete', 'completeFromTransfer']},
-          { userId: user.id }
+          { userId: user.id },
         ]
       },
       populate: {

@@ -121,6 +121,12 @@
     },
     "transferredOn": {
       "type": "datetime"
+    },
+    "listingId": {
+      "type": "string"
+    },
+    "listingAskingPrice": {
+      "type": "decimal"
     }
   }
 }

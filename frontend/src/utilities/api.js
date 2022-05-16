@@ -117,3 +117,23 @@ export const getIncomingTransfers = () => {
 export const acceptIncomingTransfers = (data) => {
   return instance.post('/ticket-transfers/accept', data)
 }
+
+export const createListing = (data) => {
+  return instance.post('/listings', data)
+}
+
+export const getMyListings = () => {
+  return instance.get('/listings/mylisting')
+}
+
+export const removeMyListings = (id) => {
+  return instance.delete(`/listings/${id}`)
+}
+
+export const updateMyListings = (id, data) => {
+  return instance.put(`/listings/${id}`, data)
+}
+
+export const getResaleTickets = (eventId) => {
+  return instance.get(`/tickets?filters[eventId][$eq]=${eventId}&filters[on_sale_status][$eq]=resaleAvailable`)
+}

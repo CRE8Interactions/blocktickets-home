@@ -16,7 +16,9 @@ import { SuccessContainer } from '../SuccessContainer';
 
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
-export default function SellModal({ handleClose, setTicketStatus, ticketAction }) {
+import { createListing, updateMyListings } from '../../../../utilities/api';
+
+export default function SellModal({ handleClose, setTicketStatus, ticketAction, order, listing, getListings }) {
 
 	const windowSize = useWindowSize();
 
@@ -55,9 +57,11 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 		if (!isUpdate && step === 4) setTicketStatus('listed')
 	};
 
+	const ticketsTotalPrice = selectedTickets.map((ticket) => ticket.cost).reduce((a,v) => a + v, 0)
+
 	useEffect(() => {
-		if (price > 0 && (price < 1000 || price > 2000)) {
-			setLabel("Enter amount between $1000.00 - $2000.00");
+		if (price > 0 && (price < ticketsTotalPrice || price > 2000)) {
+			setLabel(`Enter amount between $${ticketsTotalPrice} - $2000.00`);
 			setPriceValid(false)		  
 	  } else { 
 		  setLabel("Price per ticket") 
@@ -69,9 +73,36 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 	  if (ticketAction === 'edit') {
 		  setIsUpdate(true)
 		  setStep(2)
+			setPrice(listing.askingPrice)
+			setSelectedTickets(listing.tickets)
+			console.log(listing)
 	  }
 	}, [])
-	
+
+	const submit = () => {
+		let data = {
+			tickets: selectedTickets,
+			quantity: selectedTickets.length,
+			askingPrice: price,
+			event: order?.event,
+			serviceFees: (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length).toFixed(2),
+			payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length)).toFixed(2)
+		}
+
+		if (ticketAction === 'edit') {
+			data.event = listing.event
+			updateMyListings(listing.id, data)
+				.then((res) => {
+					getListings()
+					setStep(4)
+				})
+				.catch((err) => console.error(err))
+		} else {
+			createListing(data)
+				.then((res) => setStep(4))
+				.catch((err) => console.error(err))
+		}
+	} 
 
 	return (
 		<Fragment>
@@ -81,9 +112,9 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 			<Modal.Body>
 			{step === 1 && (
 				<>
-					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} />
+					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} tickets={order?.tickets} />
 					<Stack direction="horizontal" className="btn-group-flex">
-						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 }         className="btn-next" size="lg">
+						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 } className="btn-next" size="lg">
 							Set price
 						</Button>
 					</Stack>
@@ -95,7 +126,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 						<div className="modal-heading">
 							<h4 className="modal-heading-title mb-2">Price your tickets</h4>
 							<p className="small text-muted fw-medium">
-								Ticket face value $174.00
+								Ticket face value ${ticketsTotalPrice}
 							</p>
 						</div>
 						 <Form.Group controlId='price' className="form-card bg-info">
@@ -132,23 +163,23 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 										<p className="heading">Tickets</p>
 										<ul>
 											<Stack as="li" direction="horizontal" className="split-row">
-														<span>Tickets: $35.00 x 2</span>
-														<span className='text-end'>$70.00</span>
+														<span>Tickets: ${parseFloat(price).toFixed(2)} x {selectedTickets?.length}</span>
+														<span className='text-end'>${parseFloat(price).toFixed(2) * selectedTickets?.length}</span>
 											</Stack>
 										</ul>
 									</li>
 									<li className="list">
 										<p className="heading">Service Fees</p>
 										<ul>
-											<Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: 7.00 x 2</span>
-											<span className='text-end'>($14.00)</span>
+											<Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: {parseFloat(selectedTickets[0]?.fee).toFixed(2)} x {selectedTickets?.length}</span>
+											<span className='text-end'>(-${(parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length).toFixed(2)})</span>
 													
 											</Stack>
 										</ul>
 									</li>
 									<Stack direction='horizontal' as="li" className="split-row list">
 												<span className="heading m-0">Your Payout</span>
-												<span className="text-end fw-medium">$63.00</span>
+												<span className="text-end fw-medium">${((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length)).toFixed(2)}</span>
 									</Stack>
 								</ul>
 							</div>
@@ -157,7 +188,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction }
 								<small className="disclaimer mb-3">By clicking 'Agree and sell' you are constenting to Blocktickets <a href="">terms and conditions</a>. </small>
 								<Stack direction="horizontal" className="mt-0 btn-group-flex">
 									<BackButton variant="default" handleGoBack={handleGoBack} />
-									<Button onClick={() => setStep(4)} className="btn-next" size="lg">Agree and sell</Button></Stack></div>
+									<Button onClick={(e) => submit() } className="btn-next" size="lg">Agree and sell</Button></Stack></div>
 						
 					
 				</>
