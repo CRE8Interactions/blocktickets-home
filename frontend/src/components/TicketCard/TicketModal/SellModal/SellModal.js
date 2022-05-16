@@ -139,8 +139,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 							<Numpad price={price} setPrice={setPrice} />
 						)} 
 						<Stack direction="horizontal"  className="btn-group-flex">
-							<BackButton variant="default" handleGoBack={handleGoBack} />
-							<Button onClick={() => setStep(3)} className="btn-next" disabled={price === 0 || !priceValid} size="lg">Payout summary</Button>
+							{!isUpdate && ( <BackButton variant="default" handleGoBack={handleGoBack} /> )}
+							<Button onClick={() => setStep(3)} className="btn-next" disabled={price === 0 || !priceValid} size="lg">{!isUpdate ? 'Payout summary' : 'Update price'}</Button>
 						</Stack>
 				</>
 			)}
@@ -161,7 +161,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 										<ul>
 											<Stack as="li" direction="horizontal" className="split-row">
 														<span>Tickets: ${parseFloat(price).toFixed(2)} x {selectedTickets?.length}</span>
-														<span className='text-end'>${parseFloat(price).toFixed(2) * selectedTickets?.length}</span>
+														<span className='text-end'>${parseFloat(price).toFixed(2) * selectedTickets?.length}.toFixed(2)</span>
 											</Stack>
 										</ul>
 									</li>
