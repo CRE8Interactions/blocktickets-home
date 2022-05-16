@@ -41,7 +41,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 
 	const [priceValid, setPriceValid] = useState(price > 0 && (price > 1000 || price < 2000))
 
-	// select tickets
+	// selected tickets
 	const [
 		selectedTickets,
 		setSelectedTickets
