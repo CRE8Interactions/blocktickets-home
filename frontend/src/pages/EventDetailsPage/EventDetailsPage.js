@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { getOrder } from '../../utilities/api';
+
 import { EventDetailsWrapper } from '../../components';
 
 export default function EventDetailsPage() {
