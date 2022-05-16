@@ -266,18 +266,6 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 						)}
 					</Button>
 				</div>
-
-				<div id="payment-request-button">
-					{/* Need to rethink how payment element and totalCard manage state */}
-					<Button
-						id="payment-btn-disabled"
-						disabled
-						variant="primary"
-						size="lg"
-						className="icon-button w-100">
-						<span>Complete Purchase</span>
-					</Button>
-				</div>
 			</Card.Footer>
 		</Card>
 	);
