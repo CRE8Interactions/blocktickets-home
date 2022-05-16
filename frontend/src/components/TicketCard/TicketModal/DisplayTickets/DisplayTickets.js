@@ -23,8 +23,8 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} Tickets</span>
 				</div>
 			</Stack>
-			{role && role === 'select' ? (
-				<Form className="d-flex gap-4 mb-4">
+			{role === 'select' ? (
+				<Form className="d-flex mb-4">
 					<ToggleButtonGroup
 						type="checkbox"
 						onChange={handleChange}

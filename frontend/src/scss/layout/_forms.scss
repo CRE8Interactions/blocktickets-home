@@ -46,6 +46,12 @@ select:-webkit-autofill:focus {
 	border-radius: $br-primary;
 	padding: rem(12) rem(16);
 
+	&-lg {
+		.form-control {
+			font-size: $h4-font-size;
+		}
+	}
+
 	&,
 	& .form-group {
 		display: flex;
@@ -58,29 +64,14 @@ select:-webkit-autofill:focus {
 			margin: 0px;
 		}
 
-		.form-control,
-		.input-group-text {
+		.form-control {
 			font-weight: $fw-bold;
 			padding: 0px;
-		}
-
-		.input-group {
 			order: -1;
-			justify-content: center;
-			gap: rem(5);
-
-			.input-group-text {
-				padding-right: 0px;
-			}
-
-			.form-control {
-				border-radius: 0px;
-				padding-left: 0px;
-			}
+			text-align: center;
 		}
 
-		.form-control,
-		.input-group {
+		.form-control {
 			font-family: $font-heading;
 			margin: 0px;
 			background-color: transparent;
@@ -120,28 +111,6 @@ select:-webkit-autofill:focus {
 
 #custom-switch {
 	height: 26px;
-}
-
-.input-group {
-	.form-control {
-		flex: 0 0;
-		flex-basis: 60%;
-		@include breakpoint-min(sm) {
-			flex-basis: 38%;
-		}
-		text-align: center;
-	}
-	&-lg {
-		.input-group-text,
-		.form-control {
-			font-size: $h4-font-size;
-		}
-	}
-
-	&-text {
-		background-color: transparent;
-		border: none;
-	}
 }
 
 @mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {

@@ -6,7 +6,6 @@ import { useWindowSize } from './../../../../utilities/hooks';
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 
 import { BackButton } from '../../../BackButton';
@@ -40,24 +39,13 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 
 	const [price, setPrice] = useState(0);
 
-	const [priceValid, setPriceValid] = useState(price >= 0 && (price > 1000 || price < 2000))
+	const [priceValid, setPriceValid] = useState(price > 0 && (price > 1000 || price < 2000))
 
 	// select tickets
 	const [
 		selectedTickets,
 		setSelectedTickets
 	] = useState([]);		
-
-	const handleGoBack = () => {
-		setStep(step - 1)
-	}
-	
-	const handleClick = () => {
-		handleClose(); 
-		if (!isUpdate && step === 4) setTicketStatus('listed')
-	};
-
-	const ticketsTotalPrice = selectedTickets.map((ticket) => ticket.cost).reduce((a,v) => a + v, 0)
 
 	useEffect(() => {
 		if (price > 0 && (price < ticketsTotalPrice || price > 2000)) {
@@ -67,6 +55,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 		  setLabel("Price per ticket") 
 		  setPriceValid(true)
 		}
+
 	}, [ price ])
 
 	useEffect(() => {
@@ -78,6 +67,17 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 			console.log(listing)
 	  }
 	}, [])
+
+	const handleGoBack = () => {
+		setStep(step - 1)
+	}
+	
+	const handleClick = () => {
+		handleClose(); 
+		if (!isUpdate && step === 4) setTicketStatus('listed')
+	};
+
+	const ticketsTotalPrice = selectedTickets.map((ticket) => ticket.cost).reduce((a,v) => a + v, 0)
 
 	const submit = () => {
 		let data = {
@@ -129,14 +129,11 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 								Ticket face value ${ticketsTotalPrice}
 							</p>
 						</div>
-						 <Form.Group controlId='price' className="form-card bg-info">
+						 <Form.Group controlId='price' className="form-card form-card-lg bg-info">
 							<Form.Label className={!priceValid ? 'text-danger' : ''}>{label}</Form.Label>
-							<InputGroup className="input-group-lg">
-								<InputGroup.Text>$</InputGroup.Text>
 								<Form.Control readOnly={windowSize < 768}
-								  type="text" value={price} onChange={(e) => setPrice(e.target.value)} required
+								  type="text" value={`$${price}`} maxLength="7" onChange={(e) => setPrice(e.target.value.substring(1).trim())} required
 								/>
-							  </InputGroup>
 						</Form.Group> 
 					{windowSize < 768 && (
 							<Numpad price={price} setPrice={setPrice} />

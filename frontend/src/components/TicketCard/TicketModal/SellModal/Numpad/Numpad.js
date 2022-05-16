@@ -18,15 +18,18 @@ export default function Numpad({ price, setPrice }) {
 	);
 
 	const handleClick = (val, key) => {
-		console.log(val, key);
-		if (price === 0) {
-			setPrice(val);
+		if (!key) {
+			if (price === 0 || price.length < 6) {
+				if (price === 0) {
+					setPrice(val);
+				}
+				else {
+					setPrice((prevState) => prevState + val);
+				}
+			}
 		}
-		else if (key === 'backspace') {
+		else if (price > 0 && key === 'backspace') {
 			setPrice(price.slice(0, -1));
-		}
-		else if (price > 0) {
-			setPrice((prevState) => prevState + val);
 		}
 	};
 

@@ -9,7 +9,7 @@ import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyListingsSlider } from '../Slider/MyListingsSlider';
 import { TicketModal } from '../TicketCard/TicketModal';
 
-import { getMyListings, removeMyListings, updateMyListings } from '../../utilities/api';
+import { getMyListings, removeMyListings } from '../../utilities/api';
 
 import './myListingsWrapper.scss';
 
@@ -24,7 +24,10 @@ export default function MyListingsWrapper() {
 		setShow
 	] = useState(false);
 
-	const [listings, setListings] = useState({})
+	const [
+		listings,
+		setListings
+	] = useState({});
 
 	useLayoutEffect(() => {
 		const el = document.querySelector('#main-container');
@@ -46,31 +49,29 @@ export default function MyListingsWrapper() {
 					active: [],
 					sold: [],
 					expired: []
-				}
+				};
 				let active = [];
 				let sold = [];
 				let expired = [];
-				res.data.map(listing => {
-					if (listing.status === 'new') types.active.push(listing)
-					if (listing.status === 'sold') types.sold.push(listing)
-					if (listing.status === 'expired') types.expired.push(listing)
-				})
+				res.data.map((listing) => {
+					if (listing.status === 'new') types.active.push(listing);
+					if (listing.status === 'sold') types.sold.push(listing);
+					if (listing.status === 'expired') types.expired.push(listing);
+				});
 				setListings({
 					types
-				})				
+				});
 			})
-			.catch((err) => console.error(err))
-	}
+			.catch((err) => console.error(err));
+	};
 
 	const removeListing = (id) => {
-		removeMyListings(id)
-			.then((res) => myListings())
-			.catch((err) => console.error(err))
-	}
+		removeMyListings(id).then((res) => myListings()).catch((err) => console.error(err));
+	};
 
 	useEffect(() => {
-		myListings()
-	}, [])
+		myListings();
+	}, []);
 
 	return (
 		<section className="spacer-xs" id="my-listings-wrapper">
@@ -86,13 +87,27 @@ export default function MyListingsWrapper() {
 				activeKey={key}
 				onSelect={(k) => setKey(k)}>
 				<Tab eventKey="active" title="Active">
-					<MyListingsSlider ticketStatus={'listed'} ticketState={key} listings={listings} removeListing={removeListing}  getListings={myListings} />
+					<MyListingsSlider
+						ticketStatus={'listed'}
+						ticketState={key}
+						listings={listings}
+						removeListing={removeListing}
+						getListings={myListings}
+					/>
 				</Tab>
 				<Tab eventKey="sold" title="Sold">
-					<MyListingsSlider ticketStatus={'listed'} ticketState={key} listings={listings}/>
+					<MyListingsSlider
+						ticketStatus={'listed'}
+						ticketState={key}
+						listings={listings}
+					/>
 				</Tab>
 				<Tab eventKey="expired" title="Expired">
-					<MyListingsSlider ticketStatus={'listed'} ticketState={key} listings={listings} />
+					<MyListingsSlider
+						ticketStatus={'listed'}
+						ticketState={key}
+						listings={listings}
+					/>
 				</Tab>
 			</Tabs>
 

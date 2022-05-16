@@ -1,9 +1,7 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import * as moment from 'moment';
 
 import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
-import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 export default function TransferCard({transfer, cancel, status, acceptTransfer}) {
