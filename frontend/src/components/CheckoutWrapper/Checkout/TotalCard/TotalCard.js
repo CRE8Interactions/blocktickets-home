@@ -267,6 +267,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 					</Button>
 				</div>
 
+				{/* why is this duplicated from the button above? */}
 				<div id="payment-request-button">
 					{/* Need to rethink how payment element and totalCard manage state */}
 					<Button

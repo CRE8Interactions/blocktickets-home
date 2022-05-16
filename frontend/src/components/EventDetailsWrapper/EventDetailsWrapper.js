@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { getEvent, getOrder } from '../../utilities/api';
+import { getOrder } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
@@ -9,7 +10,6 @@ import { MyTickets } from './MyTickets';
 import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketCard/TicketModal';
-import { useParams } from 'react-router-dom';
 
 export default function EventDetailsWrapper() {
 	// demo purposes for event object
