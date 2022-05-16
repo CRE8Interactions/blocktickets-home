@@ -7,6 +7,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 
 export default function DisplayTickets({ role, status, setSelectedTickets, tickets, selectedTickets }) {
 	const handleChange = (val) => setSelectedTickets(val);
+
 	tickets ? tickets = tickets.filter(ticket => ticket.on_sale_status !== "pendingTransfer") : ''
 
 	return (
@@ -22,14 +23,14 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} Tickets</span>
 				</div>
 			</Stack>
-			{role === 'select' ? (
+			{role && role === 'select' ? (
 				<Form className="d-flex gap-4 mb-4">
 					<ToggleButtonGroup
 						type="checkbox"
 						onChange={handleChange}
 						className="flex-wrap">
 							{
-								tickets.map((ticket, index) => {
+								tickets && tickets.map((ticket, index) => {
 									return (<ToggleButton id={`tbg-btn-${index}`} value={ticket} key={index}>
 														GA
 													</ToggleButton>

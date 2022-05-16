@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "total": {
-      "type": "decimal",
-      "required": true
-    },
     "tickets": {
       "type": "relation",
       "relation": "oneToMany",
@@ -30,6 +26,25 @@
       "type": "string",
       "required": true,
       "default": "active"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "serviceFees": {
+      "type": "decimal"
+    },
+    "payout": {
+      "type": "decimal"
+    },
+    "askingPrice": {
+      "type": "decimal"
     }
   }
 }

@@ -14,7 +14,7 @@ import profile from '../../assets/profile-thumbnail.png';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, ticket }) {
+export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, ticket, listing, removeListing, getListings }) {
 	const [
 		ticketAction,
 		setTicketAction
@@ -32,7 +32,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 		setTicketAction(action)
 	};
 	
-	const event = order?.event;
+	const event = listing ? listing?.event : order?.event;
 
 	return (
 		<Fragment>
@@ -54,12 +54,12 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 						<Stack className='mb-2'>
 							<Stack direction="horizontal" className="split-row mb-1">
 								<span className='m-0 caption'>Listing price per ticket</span>
-								<span className='text-end fw-medium'>$1346.00</span>
+								<span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
 							</Stack>
-							<p className='caption text-muted'>You will make $1346.00 per ticket</p>
+							<p className='caption text-muted'>You will make ${(listing?.payout - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
 						</Stack>
 					)}
-					{ !id && ( <span className="num-tickets">{order?.tickets.length} Tickets</span> )}
+					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} Ticket(s)</span> )}
 					
 					{ticketType !== 'collectable' && (					
 					<>
@@ -80,9 +80,9 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
 								{ ticketState === 'active' ? (
 								<>								
-									<Button onClick={() => handleClick('remove')}>Remove listing
+									<Button onClick={(e) => handleClick('remove')}>Remove listing
 									</Button>
-									<Button onClick={() => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+									<Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
 								</>
 							 ) : (
 								<Button variant='outline-light' size="xs">Details</Button>
@@ -102,7 +102,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 				</div>
 			</Card>
 
-			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} />
+			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} removeListing={removeListing} listing={listing} getListings={getListings} />
 
 		</Fragment>
 	);

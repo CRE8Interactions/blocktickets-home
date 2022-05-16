@@ -29,7 +29,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
 	let tickets = sessionStorage.getItem('cart');
 	if (tickets) tickets = JSON.parse(tickets);
-
+	console.log(tickets)
 	const stripe = useStripe();
 	const elements = useElements();
 

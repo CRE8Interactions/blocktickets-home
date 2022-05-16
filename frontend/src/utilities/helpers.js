@@ -41,7 +41,7 @@ export const toggleTimer = (el, show) => {
 
 export const cartTotal = (cart, processingFee, tax) => {
 	let totalTicketPrices = Number(
-		parseFloat(cart.ticket.attributes.cost * cart.ticketCount).toFixed(2)
+		parseFloat(cart.ticket.attributes.resale ? cart.ticket.attributes.listingAskingPrice : cart.ticket.attributes.cost * cart.ticketCount).toFixed(2)
 	);
 	let fees = Number(
 		parseFloat(
