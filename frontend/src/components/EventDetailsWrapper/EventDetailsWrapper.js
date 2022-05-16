@@ -1,7 +1,5 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useLayoutEffect, useState } from 'react';
 
-import { getOrder } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
@@ -11,20 +9,7 @@ import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketCard/TicketModal';
 
-export default function EventDetailsWrapper() {
-	// demo purposes for event object
-	let { orderId } = useParams();
-
-	useEffect(() => {
-		getOrder(orderId)
-			.then((res) => setOrder(res.data))
-			.catch(err => console.error(err))
-	}, [orderId]);
-
-	const [
-		order,
-		setOrder
-	] = useState();
+export default function EventDetailsWrapper({ order }) {
 
 	const [
 		show,
