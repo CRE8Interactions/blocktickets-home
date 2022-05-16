@@ -16,11 +16,11 @@ export default function MyListingsSlider({
 	return (
 		<div className="page-slider">
 			<Slider>
-				<SwiperSlide>
-					{listings &&
-						listings.length >= 1 &&
-						listings.map((listing, index) => {
-							return (
+				{listings &&
+					listings.length >= 1 &&
+					listings.map((listing, index) => {
+						return (
+							<SwiperSlide>
 								<TicketCard
 									ticketStatus={ticketStatus}
 									ticketState={ticketState}
@@ -29,9 +29,9 @@ export default function MyListingsSlider({
 									removeListing={removeListing}
 									getListings={getListings}
 								/>
-							);
-						})}
-				</SwiperSlide>
+							</SwiperSlide>
+						);
+					})}
 			</Slider>
 		</div>
 	);

@@ -8,7 +8,7 @@ import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-export default function RemoveModal({ handleClose, ticket, order, removeListing, listing }) {
+export default function RemoveModal({ handleClose, removeListing, listing }) {
 	// 1 - confirmation
 	// 2 - success
 	const [
@@ -17,8 +17,8 @@ export default function RemoveModal({ handleClose, ticket, order, removeListing,
 	] = useState(1);
 
 	const remove = () => {
-		removeListing(listing.id)
-		setStep(2)
+		removeListing(listing.id);
+		setStep(2);
 	};
 
 	return (
@@ -33,7 +33,7 @@ export default function RemoveModal({ handleClose, ticket, order, removeListing,
 							<h4 className="modal-heading-title">
 								Are you sure you want to remove this listing?
 							</h4>
-							<DisplayTickets />
+							<DisplayTickets selectedTickets={listing.id} />
 						</div>
 						<Stack className="btn-group-flex">
 							<Button
