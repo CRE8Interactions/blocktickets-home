@@ -29,7 +29,7 @@ export default function Numpad({ price, setPrice }) {
 			}
 		}
 		else if (price > 0 && key === 'backspace') {
-			setPrice(price.slice(0, -1));
+			setPrice(price.toString().slice(0, -1));
 		}
 	};
 
