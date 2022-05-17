@@ -6,8 +6,6 @@ import { cartTotal } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import { Disclaimer } from './Disclaimer';
@@ -115,74 +113,50 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 						<li className="list">
 							<p className="heading">Tickets</p>
 							<ul>
-								<li>
-									<Row className="split-row">
-										<Col>
-											<span>
-												Tickets: ${parseFloat(tickets.ticket.attributes.cost).toFixed(2)}{' '}
-												x {tickets.ticketCount}
-											</span>
-										</Col>
-
-										<Col className="text-end ">
-											<span>
-												${parseFloat(
-													tickets.ticket.attributes.cost
-												).toFixed(2) * tickets.ticketCount}
-											</span>
-										</Col>
-									</Row>
-								</li>
+								<Stack direction="horizontal" as="li" className="split-row">
+									<span>
+										Tickets: ${parseFloat(
+											tickets.ticket.attributes.cost
+										).toFixed(2)}{' '}
+										x {tickets.ticketCount}
+									</span>
+									<span className="text-end">
+										${(parseFloat(tickets.ticket.attributes.cost).toFixed(2) *
+											tickets.ticketCount).toFixed(2)}
+									</span>
+								</Stack>
 							</ul>
 						</li>
 						<li className="list">
 							<p className="heading">Fees</p>
 							<ul>
-								<li>
-									<Row className="split-row">
-										<Col>
-											<span>
-												Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)}{' '}
-												x {tickets.ticketCount}
-											</span>
-										</Col>
-										<Col className="text-end ">
-											<span>
-												${(parseFloat(
-													tickets.ticket.attributes.fee
-												).toFixed(2) * tickets.ticketCount).toFixed(2)}
-											</span>
-										</Col>
-									</Row>
-								</li>
-								<li className="list">
-									<Row className="split-row">
-										<Col>
-											<span>
-												Facility Charge: ${parseFloat(tickets.ticket.attributes.facilityFee).toFixed(2)}{' '}
-												x {tickets.ticketCount}
-											</span>
-										</Col>
-										<Col className="text-end ">
-											<span>
-												${(parseFloat(
-													tickets.ticket.attributes.facilityFee
-												).toFixed(2) * tickets.ticketCount).toFixed(2)}
-											</span>
-										</Col>
-									</Row>
-								</li>
-								<li>
-									<Row className="split-row">
-										<Col>
-											<span>Order Processing Fee</span>
-										</Col>
-										<Col className="text-end 
-										">
-											<span>$4.35</span>
-										</Col>
-									</Row>
-								</li>
+								<Stack direction="horizontal" as="li" className="split-row">
+									<span>
+										Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)}{' '}
+										x {tickets.ticketCount}
+									</span>
+									<span className="text-end">
+										${(parseFloat(tickets.ticket.attributes.fee).toFixed(2) *
+											tickets.ticketCount).toFixed(2)}
+									</span>
+								</Stack>
+								<Stack direction="horizontal" as="li" className="split-row">
+									<span>
+										Facility Charge: ${parseFloat(
+											tickets.ticket.attributes.facilityFee
+										).toFixed(2)}{' '}
+										x {tickets.ticketCount}
+									</span>
+									<span className="text-end">
+										${(parseFloat(
+											tickets.ticket.attributes.facilityFee
+										).toFixed(2) * tickets.ticketCount).toFixed(2)}
+									</span>
+								</Stack>
+								<Stack direction="horizontal" as="li" className="split-row">
+									<span>Order Processing Fee</span>
+									<span className="text-end">$4.35</span>
+								</Stack>
 							</ul>
 						</li>
 
@@ -190,52 +164,32 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<li className="list">
 								<p className="heading">Add on</p>
 								<ul>
-									<li>
-										<Row className="split-row">
-											<Col>
-												<span>Meet &amp; Greet</span>
-											</Col>
-											<Col className="text-end">
-												<span>$45.00</span>
-											</Col>
-										</Row>
-									</li>
-									<li>
-										<Row className="split-row">
-											<Col>
-												<span>Merch</span>
-											</Col>
-											<Col className="text-end">
-												<span>$45.00</span>
-											</Col>
-										</Row>
-									</li>
-									<li>
-										<Row className="split-row">
-											<Col>
-												<span>Parking Pass</span>
-											</Col>
-											<Col className="text-end ">
-												<span>$12.00</span>
-											</Col>
-										</Row>
-									</li>
+									<Stack direction="horizontal" as="li" className="split-row">
+										<span>Meet &amp; Greet</span>
+
+										<span className="text-end">$45.00</span>
+									</Stack>
+									<Stack direction="horizontal" as="li" className="split-row">
+										<span>Merch</span>
+
+										<span className="text-end">$45.00</span>
+									</Stack>
+									<Stack direction="horizontal" as="li" className="split-row">
+										<span>Parking Pass</span>
+
+										<span className="text-end">$12.00</span>
+									</Stack>
 								</ul>
 							</li>
 						)}
 
 						<li className="list">
 							<ul>
-								<li>
-									<Row className="split-row">
-										<Col>
-											<span className="heading m-0">Tax</span>
-										</Col>
-										<Col className="text-end ">
-											<span>$2.50</span>
-										</Col>
-									</Row>
-								</li>
+								<Stack direction="horizontal" as="li" className="split-row">
+									<span className="heading m-0">Tax</span>
+
+									<span className="text-end">$2.50</span>
+								</Stack>
 							</ul>
 						</li>
 					</ul>
