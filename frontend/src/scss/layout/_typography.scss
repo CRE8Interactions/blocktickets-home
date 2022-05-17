@@ -244,12 +244,14 @@ h4,
 }
 
 .list {
+	padding-left: 0px;
+	padding-right: 0px;
 	.heading {
 		font-weight: $fw-medium;
 		margin-bottom: rem(8);
 	}
 
-	& + .list {
+	& + .list:not(.list.list-group-item) {
 		margin-top: rem(20);
 	}
 }
