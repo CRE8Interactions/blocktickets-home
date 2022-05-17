@@ -36,11 +36,11 @@ export default function MyWallet() {
 						<Nav.Link>My Listings</Nav.Link>
 					</LinkContainer>
 				</ListGroup.Item>
-				<ListGroup.Item as="li" >
+				{/* <ListGroup.Item as="li" >
 					<LinkContainer to={'/my-collectables'}>
 						<Nav.Link>My Collectables</Nav.Link>
 					</LinkContainer>
-				</ListGroup.Item>
+				</ListGroup.Item> */}
 				<ListGroup.Item as="li">
 					<LinkContainer to={'/settings'} >
 						<Nav.Link>Settings</Nav.Link>
