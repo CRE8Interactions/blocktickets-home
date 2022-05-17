@@ -12,7 +12,7 @@ export default function EventModal({ show, handleClose, event }) {
 	return (
 			<Modal id="event-modal" scrollable centered animation={false} fullscreen="md-down" show={show} onHide={handleClose}>
 				<Modal.Header closeButton className='mb-0'>
-					<Modal.Title as="h4">Event information</Modal.Title>
+					<Modal.Title as="h4">Event description</Modal.Title>
 				</Modal.Header>
 				<div className="event-details mb-3">
 					<Row className="justify-content-between align-items-center mb-2">

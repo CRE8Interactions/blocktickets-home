@@ -15,32 +15,6 @@
 		transform: rotate(180deg);
 	}
 
-	.list + .list {
-		margin-top: rem(15);
-
-		@include breakpoint-min(md) {
-			margin-top: rem(28);
-		}
-	}
-
-	.heading {
-		font-weight: $fw-medium;
-		margin-bottom: rem(7);
-		font-size: rem(16);
-	}
-	ul {
-		li {
-			font-size: $small;
-
-			li + li {
-				margin-top: rem(6);
-			}
-			.col {
-				white-space: nowrap;
-			}
-		}
-	}
-
 	.card-footer {
 		border-width: 0px;
 
