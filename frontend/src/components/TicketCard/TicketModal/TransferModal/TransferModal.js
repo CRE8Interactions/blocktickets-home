@@ -26,7 +26,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 	const [
 		step,
 		setStep
-	] = useState(2);
+	] = useState(1);
 
 	// select tickets
 	const [
