@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // import { Navigation } from 'swiper';
 import { Swiper } from 'swiper/react';
@@ -10,6 +10,20 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 export default function Slider({ addedModule = 'navigation', children }) {
+	let moduleArr;
+
+	if (addedModule === 'pagination') {
+		moduleArr = [
+			Pagination,
+			Navigation
+		];
+	}
+	else {
+		moduleArr = [
+			Navigation
+		];
+	}
+
 	return (
 		<Swiper
 			preventClicks={false}
@@ -21,10 +35,7 @@ export default function Slider({ addedModule = 'navigation', children }) {
 				clickable: true
 			}}
 			navigation={true}
-			modules={[
-				addedModule === 'pagination' && Pagination,
-				Navigation
-			]}>
+			modules={moduleArr}>
 			{children}
 		</Swiper>
 	);
