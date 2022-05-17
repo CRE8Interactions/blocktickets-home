@@ -57,6 +57,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 	}, []);
 
 	const submitTransfer = () => {
+		if (validNumber()) {
 		let ticketIds = selectedTickets.map((ticket) => ticket.id)
 		let data = {
 			phoneNumber: phoneNumber,
@@ -69,7 +70,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 				setStep(4)
 			})
 			.catch((err) => console.error(err));
-	 };
+	 }
+	}
 
 	const validNumber = () => {
 		return phoneNumber && isValidPhoneNumber(phoneNumber);
@@ -124,7 +126,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 							<Stack direction="horizontal" className="btn-group-flex">
 								<Button
 									onClick={submit}
-									disabled={!validNumber()} size="lg" className="btn-next">
+									disabled={phoneNumber} size="lg" className="btn-next">
 									Transfer
 								</Button>
 							</Stack>
