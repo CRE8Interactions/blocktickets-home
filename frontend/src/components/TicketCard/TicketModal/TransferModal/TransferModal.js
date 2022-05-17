@@ -44,16 +44,9 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		setCountrycode
 	] = useState('');
 
-	const [
-		hasError,
-		setHasError
-	] = useState(false);
-
-	const [isSubmitted, setIsSubmitted] = useState(false)
 
 	const submit = (e) => {
 		if (e) e.preventDefault(); 
-		setIsSubmitted(true);
 		setStep(3)
 	};
 
@@ -121,10 +114,10 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 									value={phoneNumber}
 									required
 									onChange={(e) => setPhoneNumber(e)}
-									className={isSubmitted  &&!validNumber() ? 'error-border' : ''}
+									className={!validNumber() ? 'error-border' : ''}
 								/>
 							</Form.Group>
-							{ isSubmitted && !validNumber() && (
+							{ !validNumber() && (
 								<Error type="phone" />
 							)}
 						</Form>
