@@ -7,7 +7,7 @@ import { TicketCard } from '../../TicketCard';
 export default function MyTicketsSlider({ id }) {
 	return (
 		<div className="page-slider">
-			<Slider>
+			<Slider addedModule="pagination">
 				{/* {order &&
 					tickets &&
 					tickets.map((ticket, index) => {

@@ -15,7 +15,7 @@ export default function MyListingsSlider({
 
 	return (
 		<div className="page-slider">
-			<Slider>
+			<Slider addedModule="pagination">
 				{listings &&
 					listings.length >= 1 &&
 					listings.map((listing, index) => {
