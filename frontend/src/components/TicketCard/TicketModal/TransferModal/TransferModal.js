@@ -12,12 +12,11 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 
 import { createTicketTransfer } from '../../../../utilities/api';
 
-import { Error } from './../../../Error';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-export default function TransferModal({ handleClose, setTicketStatus, ticket, order }) {
+export default function TransferModal({ handleClose, setTicketStatus, order }) {
 
 	// 1 - tranfer 
 	// 2 - phone number 
@@ -26,7 +25,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 	const [
 		step,
 		setStep
-	] = useState(1);
+	] = useState(2);
 
 	// select tickets
 	const [
@@ -44,20 +43,18 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 		setCountrycode
 	] = useState('');
 
-
-	const submit = (e) => {
-		if (e) e.preventDefault(); 
-		setStep(3)
-	};
-
 	useEffect(() => {
 		axios
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
 			.then((res) => setCountrycode(res.data.country_code));
 	}, []);
 
+		const submit = (e) => {
+		if (e) e.preventDefault(); 
+		setStep(3)
+	};
+
 	const submitTransfer = () => {
-		if (validNumber()) {
 		let ticketIds = selectedTickets.map((ticket) => ticket.id)
 		let data = {
 			phoneNumber: phoneNumber,
@@ -70,8 +67,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 				setStep(4)
 			})
 			.catch((err) => console.error(err));
-	 }
-	}
+	 };
 
 	const validNumber = () => {
 		return phoneNumber && isValidPhoneNumber(phoneNumber);
@@ -116,17 +112,13 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 									value={phoneNumber}
 									required
 									onChange={(e) => setPhoneNumber(e)}
-									className={!validNumber() ? 'error-border' : ''}
 								/>
 							</Form.Group>
-							{ !validNumber() && (
-								<Error type="phone" />
-							)}
 						</Form>
 							<Stack direction="horizontal" className="btn-group-flex">
 								<Button
 									onClick={submit}
-									disabled={phoneNumber} size="lg" className="btn-next">
+									disabled={!validNumber()} size="lg" className="btn-next">
 									Transfer
 								</Button>
 							</Stack>
