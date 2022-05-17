@@ -12,6 +12,7 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 
 import { createTicketTransfer } from '../../../../utilities/api';
 
+import { Error } from '../../../Error';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
@@ -43,15 +44,30 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 		setCountrycode
 	] = useState('');
 
+	const [isValid, setIsValid] = useState(true)
+
 	useEffect(() => {
 		axios
 			.get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
 			.then((res) => setCountrycode(res.data.country_code));
+
 	}, []);
+
+
+	// reset validation
+	useEffect(() => {
+	  if (!phoneNumber) {
+		  setIsValid(true)
+	  }
+	
+	}, [ phoneNumber])
+	
 
 		const submit = (e) => {
 		if (e) e.preventDefault(); 
+		if (validNumber())
 		setStep(3)
+		else { setIsValid(false)}
 	};
 
 	const submitTransfer = () => {
@@ -67,7 +83,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 				setStep(4)
 			})
 			.catch((err) => console.error(err));
-	 };
+	 }
 
 	const validNumber = () => {
 		return phoneNumber && isValidPhoneNumber(phoneNumber);
@@ -112,13 +128,16 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 									value={phoneNumber}
 									required
 									onChange={(e) => setPhoneNumber(e)}
+									className={phoneNumber && !isValid && 'error-border'}
 								/>
+
+								<span>{phoneNumber && !isValid && (<Error type="phone" />)}</span>
 							</Form.Group>
 						</Form>
 							<Stack direction="horizontal" className="btn-group-flex">
 								<Button
 									onClick={submit}
-									disabled={!validNumber()} size="lg" className="btn-next">
+									disabled={!phoneNumber || !isValid} size="lg" className="btn-next">
 									Transfer
 								</Button>
 							</Stack>
