@@ -51,7 +51,8 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 
 	const [isSubmitted, setIsSubmitted] = useState(false)
 
-	const submit = () => {
+	const submit = (e) => {
+		if (e) e.preventDefault(); 
 		setIsSubmitted(true);
 		setStep(3)
 	};
@@ -111,7 +112,7 @@ export default function TransferModal({ handleClose, setTicketStatus, ticket, or
 									The recipient will get notified via sms that you have transferred your tickets to them.
 								</p>
 							</div>
-						<Form>
+						<Form onSubmit={(e) => submit(e)}>
 							<Form.Group controlId="phone-number">
 								<Form.Label>Phone Number</Form.Label>
 								<PhoneInput
