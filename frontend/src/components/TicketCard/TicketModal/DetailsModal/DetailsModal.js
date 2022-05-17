@@ -48,19 +48,19 @@ export default function DetailsModal() {
 						<p>Wed, Sep 15 2021 - 8:28AM</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
-						<p>Contact Address</p>
+						<p className="heading">Contact Address</p>
 						<p className="text-secondary">Oxa7d8…..d270</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
-						<p>Token ID</p>
+						<p className="heading">Token ID</p>
 						<p className="text-secondary">23000121</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
-						<p>Token Standard</p>
+						<p className="heading">Token Standard</p>
 						<p className="text-secondary">ERC - 721</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
-						<p>Blockchain</p>
+						<p className="heading">Blockchain</p>
 						<p className="text-secondary">Ethereum</p>
 					</ListGroup.Item>
 				</ListGroup>
