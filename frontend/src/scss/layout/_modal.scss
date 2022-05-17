@@ -2,14 +2,12 @@
 @use '../layout/container' as *;
 @use '../layout/spacing' as *;
 @use '../layout/buttons' as *;
-@use '../theme/colors' as *;
-@use '../theme/buttons' as *;
 
 .modal {
 	line-height: 1.5;
 
 	&--popup {
-		$border-radius: 12px 12px 0px 0px;
+		$border-radius: $br-primary $br-primary 0px 0px;
 
 		@include breakpoint-max(md) {
 			box-shadow: $box-shadow-popupCard;
@@ -50,10 +48,14 @@
 	}
 
 	&-dialog-scrollable {
+		.modal-header {
+			margin-bottom: $text-spacer-xs;
+		}
+
 		.modal-body {
 			display: flex;
 			flex-direction: column;
-			padding-top: 0px;
+			padding-top: 0px !important;
 			@include remove-scrollbar();
 		}
 	}
@@ -80,15 +82,12 @@
 		.modal {
 			&-header {
 				padding: rem(24) 0px;
-				margin: 0px $m-x;
+				margin-right: $m-x;
+				margin-left: $m-x;
 
 				.modal-title {
 					font-size: $body-1;
 				}
-			}
-
-			&-heading {
-				margin-bottom: $text-spacer-sm;
 			}
 
 			&-body {

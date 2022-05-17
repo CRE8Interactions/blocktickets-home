@@ -69,7 +69,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
 							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
 							</Button>
-							<Button variant='outline-light' size="xs">Details</Button>
+							<Button variant='outline-light' size="xs" onClick={()=>handleClick('details')}>Details</Button>
 							</Stack>
 								)
 							}
@@ -82,7 +82,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 									<Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
 								</>
 							 ) : (
-								<Button variant='outline-light' size="xs">Details</Button>
+								<Button variant='outline-light' onClick={handleClick('details')} size="xs">Details</Button>
 							)
 								}
 							</Stack>
