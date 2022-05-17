@@ -7,7 +7,7 @@ import { TransferCard } from '../../TransferCard';
 export default function MyTransfersSlider({ transfers, cancel }) {
 	return (
 		<div className="page-slider">
-			<Slider>
+			<Slider addedModule="pagination">
 				{transfers &&
 					transfers.map((transfer, index) => {
 						return (

@@ -10,7 +10,7 @@ export default function MyCollectablesSlider() {
 
 	return (
 		<div className="page-slider">
-			<Slider>
+			<Slider addedModule="pagination">
 				<SwiperSlide>
 					<TicketCard ticketType={ticketType} />
 				</SwiperSlide>
