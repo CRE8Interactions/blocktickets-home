@@ -5,13 +5,12 @@ import Stack from 'react-bootstrap/Stack';
 
 import './orderSummary.scss';
 
-
 export default function OrderSummary({order}) {
 
-	let sum = order.tickets.map(ticket => ticket.cost).toFixed(2)
-	sum = sum.reduce((a,v) => a + v ,0)
-	let fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee).toFixed(2)
-	fees = fees.reduce((a,v) => a + v ,0)
+	let sum = order.tickets.map(ticket => ticket.cost)
+	sum = sum.reduce((a,v) => a + v ,0).toFixed(2)
+	let fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee)
+	fees = fees.reduce((a,v) => a + v ,0).toFixed(2)
 
 	return (
 		<ListGroup as="ul" variant="flush" id="order">
