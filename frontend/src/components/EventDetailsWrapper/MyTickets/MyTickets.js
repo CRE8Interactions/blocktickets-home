@@ -35,7 +35,7 @@ export default function MyTickets({ order, handleClick, ticketStatus }) {
 								<Card.Title as="h5" className="normal">
 									{ticket?.name}
 								</Card.Title>
-								<Button variant="link">Details</Button>
+								<Button onClick={() => handleClick('details')} variant="link">Details</Button>
 							</div>
 						</Card>)
 					})

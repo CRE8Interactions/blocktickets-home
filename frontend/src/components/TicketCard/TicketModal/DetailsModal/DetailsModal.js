@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 
 import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Stack from 'react-bootstrap/Stack';
 
 export default function DetailsModal() {
 	return (
@@ -49,24 +48,20 @@ export default function DetailsModal() {
 						<p>Wed, Sep 15 2021 - 8:28AM</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
-						<ul>
-							<Stack direction="horizontal" as="li" className="list split-row">
-								<p>Contact Address</p>
-								<span className="text-end text-secondary">Oxa7d8…..d270</span>
-							</Stack>
-							<Stack direction="horizontal" as="li" className="list split-row">
-								<p>Token ID</p>
-								<span className="text-end text-secondary">23000121</span>
-							</Stack>
-							<Stack direction="horizontal" as="li" className="list split-row">
-								<p>Token Standard</p>
-								<span className="text-end text-secondary">ERC - 721</span>
-							</Stack>
-							<Stack direction="horizontal" as="li" className="list split-row">
-								<p>Blockchain</p>
-								<span className="text-end text-secondary">Ethereum</span>
-							</Stack>
-						</ul>
+						<p>Contact Address</p>
+						<p className="text-secondary">Oxa7d8…..d270</p>
+					</ListGroup.Item>
+					<ListGroup.Item as="li" className="list">
+						<p>Token ID</p>
+						<p className="text-secondary">23000121</p>
+					</ListGroup.Item>
+					<ListGroup.Item as="li" className="list">
+						<p>Token Standard</p>
+						<p className="text-secondary">ERC - 721</p>
+					</ListGroup.Item>
+					<ListGroup.Item as="li" className="list">
+						<p>Blockchain</p>
+						<p className="text-secondary">Ethereum</p>
 					</ListGroup.Item>
 				</ListGroup>
 			</Modal.Body>
