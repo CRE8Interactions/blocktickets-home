@@ -2,7 +2,6 @@
 @use '../../scss/layout' as *;
 
 .card.myCard {
-	width: rem(256);
 	@extend %plain-card;
 
 	.card {

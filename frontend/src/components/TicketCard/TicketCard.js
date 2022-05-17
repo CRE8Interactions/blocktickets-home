@@ -33,7 +33,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 
 	return (
 		<Fragment>
-			<Card body className="ticket-card card-md">
+			<Card body className="ticket-card">
 				<Card.Img
 					src={event?.image.url}
 					width="217"
