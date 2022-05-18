@@ -56,7 +56,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 							<p className='caption text-muted'>You will make ${(listing?.payout - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
 						</Stack>
 					)}
-					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} Ticket(s)</span> )}
+					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} Tickets</span> )}
 					
 					{ticketType !== 'collectable' && (					
 					<>
