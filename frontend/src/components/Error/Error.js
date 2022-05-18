@@ -12,6 +12,9 @@ export default function Error({ type }) {
 			case 'phone':
 				return 'Phone number is not valid';
 
+			case 'email':
+				return 'Email does not match records. Try Again';
+
 			case 'code':
 				return 'Code entered is incorrect';
 

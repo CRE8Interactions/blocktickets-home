@@ -25,6 +25,7 @@ export default function LoginSignupForm() {
 		setStep
 	] = useState(0);
 
+	const [choice, setChoice] = useState('number')
 	const [
 		code,
 		setCode
@@ -93,7 +94,7 @@ export default function LoginSignupForm() {
 		},
 		[
 			phoneNumber,
-			formValid,
+			email,
 			code
 		]
 	);
@@ -144,10 +145,13 @@ export default function LoginSignupForm() {
 		}
 	}
 
+	// submit phoneNumber or email 
 	function submit() {
+		if (validNumber() && !hasError) {
 		let data = {
 			data: {
-				phoneNumber
+				phoneNumber,
+				email
 			}
 		};
 		verifyUser(data)
@@ -158,7 +162,10 @@ export default function LoginSignupForm() {
 				setHasError(true);
 				console.error(err);
 			});
+	} else {
+		setHasError(true)
 	}
+}
 
 	function verifyUserCode(code) {
 		let data = {
@@ -205,9 +212,6 @@ export default function LoginSignupForm() {
 				AuthService.setUser(res.data);
 				navigate('/');
 			}
-			else {
-				setHasError(true);
-			}
 		});
 	};
 
@@ -223,6 +227,8 @@ export default function LoginSignupForm() {
 								The future of ticketing is here
 							</h2>
 						</div>
+						{choice == 'number' ? ( 
+						<>
 						<div className="step-desc">
 							<h3 className="title">Verify your mobile number</h3>
 							<h4 className="subtitle">
@@ -239,18 +245,50 @@ export default function LoginSignupForm() {
 								value={phoneNumber}
 								required
 								onChange={setValue}
-								className={hasError ? 'error-border' : ''}
+								className={phoneNumber && hasError && 'error-border'}
 							/>
 						</Form.Group>
-						{hasError && <Error type="phone" />}
+						{phoneNumber && hasError && <Error type="phone" />}
 
 						<Button
 							size="lg"
 							className="icon-button btn-next"
-							disabled={!validNumber()}
+							disabled={!phoneNumber || hasError}
 							onClick={(e) => submit()}>
 							Validate
 						</Button>
+						<small><p>Don't have access to your phone?</p> <p><Button variant="link" onClick={() => setChoice('email')}>Click here</Button> to use your email to log in.</p></small>
+						</>
+						) : (
+							<>
+<div className="step-desc">
+							<h3 className="title">Verify your email address</h3>
+							<h4 className="subtitle">
+								Please enter your email below and we will send you the security code there.
+							</h4>
+						</div>
+						<Form.Group className="form-group" controlId="email">
+								<Form.Label>Email</Form.Label>
+								<Form.Control
+									type="email"
+									placeholder="Enter your email"
+									required
+									name="email"
+									onChange={(e) => setEmail(e.target.value)}
+									className={email && hasError ? 'error-border' : ''}
+								/>
+							</Form.Group>
+						{email && hasError && <Error type="email" />}
+
+						<Button
+							size="lg"
+							className="icon-button btn-next"
+							disabled={!email || hasError}
+							onClick={(e) => submit()}>
+							Send
+						</Button>
+						</>
+						)}
 					</Fragment>
 				)}
 				{step === 1 && (
@@ -332,7 +370,7 @@ export default function LoginSignupForm() {
 								/>
 							</Form.Group>
 
-							<Form.Group className="form-group" controlId="name">
+							<Form.Group className="form-group" controlId="firstName">
 								<Form.Label>First Name</Form.Label>
 								<Form.Control
 									type="text"
@@ -342,7 +380,7 @@ export default function LoginSignupForm() {
 									onChange={(e) => setFirstName(e.target.value)}
 								/>
 							</Form.Group>
-							<Form.Group className="form-group" controlId="name">
+							<Form.Group className="form-group" controlId="lastName">
 								<Form.Label>Last Name</Form.Label>
 								<Form.Control
 									type="text"
