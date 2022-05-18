@@ -24,11 +24,9 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 				</div>
 			</Stack>
 			{role === 'select' ? (
-				<Form className="d-flex mb-4">
 					<ToggleButtonGroup
 						type="checkbox"
-						onChange={handleChange}
-						className="flex-wrap">
+						onChange={handleChange} className="flex-wrap">
 							{
 								tickets && tickets.map((ticket, index) => {
 									return (<ToggleButton id={`tbg-btn-${index}`} value={ticket} key={index}>
@@ -38,7 +36,6 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 								})
 							}
 					</ToggleButtonGroup>
-				</Form>
 			) : (
 				<Stack direction="horizontal" className="btn-group flex-wrap">
 					{ selectedTickets && selectedTickets.map((ticket, index) => {
