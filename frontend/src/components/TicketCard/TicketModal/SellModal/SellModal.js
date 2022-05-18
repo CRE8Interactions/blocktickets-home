@@ -112,7 +112,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 			<Modal.Body>
 			{step === 1 && (
 				<>
-					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} selectedTickets={selectedTickets} tickets={order?.tickets} />
+					<DisplayTickets status="sell" role="select" setSelectedTickets={setSelectedTickets} tickets={order?.tickets} />
 					<Stack direction="horizontal" className="btn-group-flex">
 						<Button onClick={() => setStep(2)} disabled={selectedTickets.length === 0 } className="btn-next" size="lg">
 							Set price

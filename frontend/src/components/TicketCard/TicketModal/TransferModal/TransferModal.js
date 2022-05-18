@@ -102,7 +102,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 			<Modal.Body>
 				{step === 1 &&  (
 				<>             
-				<DisplayTickets status="transfer" role='select' setSelectedTickets={setSelectedTickets} selectedTickets={selelectedTickets} tickets={order?.tickets} />
+				<DisplayTickets status="transfer" role='select' setSelectedTickets={setSelectedTickets} tickets={order?.tickets} />
 				<Stack  direction="horizontal" className="btn-group-flex">
 					<Button onClick={() => setStep(2)} className="btn-next" size="lg" disabled={selectedTickets.length === 0 } >
 							Next
