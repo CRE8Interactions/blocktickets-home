@@ -67,7 +67,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	);
 
 	const handleShow = () => {
-		console.log('handle show');
 		setShowFilter(!showFilter); 
 		setIsFilterOpen(!isFilterOpen)
 	}
@@ -148,7 +147,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 					{showFilter && (
 								<FilterMenu show={showFilter} handleShow={handleShow} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
 					)}
-					{filteredTicketCount > 0 && !isFilterOpen ? (
+					{filteredTicketCount > 0 ? (
 						<>
 						{!isFilterOpen && (
 							<>
@@ -260,6 +259,8 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 						)}
 						</>
 					) : (
+						<>
+						{!isFilterOpen && (
 						<NotAvailableMessage>
 							<h1 className="normal">Please adjust your search</h1>
 							<p>
@@ -268,6 +269,8 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								tickets selected or use the seat map to search for available seats.
 							</p>
 						</NotAvailableMessage>	
+						)}
+						</>
 					)
 					}
 					</Stack>

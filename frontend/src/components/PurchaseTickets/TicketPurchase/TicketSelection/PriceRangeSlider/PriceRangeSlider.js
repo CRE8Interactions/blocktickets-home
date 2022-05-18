@@ -25,7 +25,7 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 				range
 				min={0}
 				max={100}
-				pushable={15}
+				pushable={20}
 				defaultValue={sliderValues}
 				onChange={handleChange}
 			/>
