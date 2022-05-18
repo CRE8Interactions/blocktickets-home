@@ -121,10 +121,22 @@ select:-webkit-autofill:focus {
 	border: $input-border-width solid $color;
 	padding-right: rem(8);
 
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+
 	.form-control {
 		border: none;
 		border-radius: 0;
 		padding: 0px;
 		min-height: auto;
+	}
+}
+
+.input-wrapper {
+	@include input-icon-box();
+
+	&-lg {
+		@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
 	}
 }

@@ -258,7 +258,7 @@ export default function LoginSignupForm() {
 							onClick={(e) => submit()}>
 							Validate
 						</Button>
-						<small><p>Don't have access to your phone?</p> <p><Button variant="link" onClick={() => setChoice('email')}>Click here</Button> to use your email to log in.</p></small>
+						<Form.Text><p>Don't have access to your phone?</p> <p><Button variant="link" onClick={() => setChoice('email')}>Click here</Button> to use your email to log in.</p></Form.Text>
 						</>
 						) : (
 							<>
@@ -349,9 +349,9 @@ export default function LoginSignupForm() {
 							</Stack>
 						</Form.Group>
 						{hasError && <Error type="code" />}
-						<small>
+						<Form.Text>
 							Did not recieve code? <Button variant="link">Resend Code</Button>
-						</small>
+						</Form.Text>
 					</Fragment>
 				)}
 				{step === 2 && (

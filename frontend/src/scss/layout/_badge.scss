@@ -12,6 +12,12 @@
 			color: $primary;
 			border-color: $primary;
 		}
+
+		&--light {
+			border-radius: $br-secondary;
+			border-color: $light;
+			color: $body-color;
+		}
 	}
 
 	&-lg {
