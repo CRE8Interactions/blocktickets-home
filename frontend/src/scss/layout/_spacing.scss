@@ -63,6 +63,10 @@ $text-spacer-xs: rem(16);
 
 .page-slider .swiper {
 	padding-bottom: rem(50);
+
+	@include breakpoint-min(md) {
+		padding-bottom: rem(90);
+	}
 }
 
 .row + .row {
