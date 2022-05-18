@@ -9,17 +9,12 @@ import { updatePersonalDetails } from '../../../utilities/api';
 import authService from '../../../utilities/services/auth.service';
 
 export default function PersonalDetailsForm() {
-	let user = sessionStorage.getItem('user')
-	user = JSON.parse(user).user
+	let user = sessionStorage.getItem('user');
+	user = JSON.parse(user).user;
 
 	const [
 		formValid,
 		setFormValid
-	] = useState(false);
-
-	const [
-		hasError,
-		setHasError
 	] = useState(false);
 
 	const [
@@ -28,47 +23,42 @@ export default function PersonalDetailsForm() {
 	] = useState({});
 
 	const [
-		name,
-		setName
+		firstName,
+		setFirstName
 	] = useState(user.name);
+
 	const [
-		username,
-		setUsername
-	] = useState(user.username);
+		lastName,
+		setLastName
+	] = useState(user.name);
+
 	const [
 		email,
 		setEmail
 	] = useState(user.email);
+
 	const [
 		dob,
 		setDob
 	] = useState(user.dob);
+
 	const [
 		gender,
 		setGender
 	] = useState(user.gender);
 
-	// reset error when inputs are changed
 	useEffect(
 		() => {
-			setHasError(false);
-		},
-		[
-			formValid
-		]
-	);
-
-	useEffect(
-		() => {
-			if (name && email && gender && dob && username) {
+			if (firstName && lastName && email && gender && dob) {
 				setFormValid(true);
-			} else {
+			}
+			else {
 				setFormValid(false);
 			}
 		},
 		[
-			name,
-			username,
+			firstName,
+			lastName,
 			email,
 			dob,
 			gender
@@ -77,45 +67,33 @@ export default function PersonalDetailsForm() {
 
 	useEffect(() => {
 		// set default value for gender dropdown
-		let select = document.getElementById('gender')
-		for (let i = 0; i < select.options.length; i ++) {
-			if (select.options[i].value === user.gender) select.options[i].setAttribute('selected', true)
+		let select = document.getElementById('gender');
+		for (let i = 0; i < select.options.length; i++) {
+			if (select.options[i].value === user.gender)
+				select.options[i].setAttribute('selected', true);
 		}
-		if (name && email && gender && dob && username) {
+		if (firstName && lastName && email && gender && dob) {
 			setFormValid(true);
-		} else {
+		}
+		else {
 			setFormValid(false);
 		}
-	}, [])
-
-	function setVal(e) {
-		const num1 = document.getElementById('num1');
-		const num2 = document.getElementById('num2');
-		const num3 = document.getElementById('num3');
-		const num4 = document.getElementById('num4');
-
-		if (num1.value) num2.focus();
-		if (num1.value && num2.value) num3.focus();
-		if (num1.value && num2.value && num3.value) num4.focus();
-		if (num1.value && num2.value && num3.value && num4.value) {
-			const code = Number(`${num1.value}${num2.value}${num3.value}${num4.value}`);
-		}
-	}
+	}, []);
 
 	const submitForm = () => {
 		let data = {
 			data: {
 				dob,
 				email,
-				name,
-				username,
+				firstName,
+				lastName,
 				gender
 			}
 		};
 
 		updatePersonalDetails(data)
 			.then((res) => authService.setUser(res.data))
-			.catch((err) => console.error(err))
+			.catch((err) => console.error(err));
 	};
 
 	return (
@@ -134,25 +112,25 @@ export default function PersonalDetailsForm() {
 				</Form.Group>
 
 				<Form.Group className="form-group" controlId="name">
-					<Form.Label>Full Name</Form.Label>
+					<Form.Label>First Name</Form.Label>
 					<Form.Control
 						type="text"
-						placeholder="Enter your full name"
+						placeholder="Enter your first name"
 						required
-						name="name"
+						name="firstName"
 						defaultValue={user.name}
-						onChange={(e) => setName(e.target.value)}
+						onChange={(e) => setFirstName(e.target.value)}
 					/>
 				</Form.Group>
-				<Form.Group className="form-group" controlId="username">
-					<Form.Label>Username</Form.Label>
+				<Form.Group className="form-group" controlId="name">
+					<Form.Label>Last Name</Form.Label>
 					<Form.Control
 						type="text"
-						placeholder="Enter your username"
+						placeholder="Enter your last name"
 						required
-						name="username"
-						defaultValue={user.username}
-						onChange={(e) => setUsername(e.target.value)}
+						name="lastName"
+						defaultValue={user.name}
+						onChange={(e) => setLastName(e.target.value)}
 					/>
 				</Form.Group>
 				<Row className="form-group">
@@ -176,7 +154,7 @@ export default function PersonalDetailsForm() {
 								required
 								defaultValue={user.gender}
 								onChange={(e) => setGender(e.target.value)}>
-								<option>Select Gender</option>
+								<option>Select</option>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 								<option value="other">Other</option>
