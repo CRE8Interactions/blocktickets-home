@@ -25,7 +25,8 @@ export default function LoginSignupForm() {
 		setStep
 	] = useState(0);
 
-	const [choice, setChoice] = useState('number')
+	const [choice, setChoice] = useState('phone-number');
+
 	const [
 		code,
 		setCode
@@ -227,7 +228,7 @@ export default function LoginSignupForm() {
 								The future of ticketing is here
 							</h2>
 						</div>
-						{choice == 'number' ? ( 
+						{choice == 'phone-number' ? ( 
 						<>
 						<div className="step-desc">
 							<h3 className="title">Verify your mobile number</h3>
