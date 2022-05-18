@@ -4,7 +4,7 @@
 
 #login-signup-container {
 	@include breakpoint-max(md) {
-		gap: rem(16);
+		gap: $text-spacer;
 	}
 
 	.form-container {
