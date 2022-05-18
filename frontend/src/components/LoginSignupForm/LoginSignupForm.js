@@ -56,17 +56,20 @@ export default function LoginSignupForm() {
 	] = useState({});
 
 	const [
-		name,
-		setName
+		firstName,
+		setFirstName
 	] = useState('');
+
 	const [
-		username,
-		setUsername
+		lastName,
+		setLastName
 	] = useState('');
+
 	const [
 		email,
 		setEmail
 	] = useState('');
+
 	const [
 		dob,
 		setDob
@@ -112,13 +115,13 @@ export default function LoginSignupForm() {
 
 	useEffect(
 		() => {
-			if (name && email && gender && dob && username) {
+			if (firstName && lastName && email && gender && dob) {
 				setFormValid(true);
 			}
 		},
 		[
-			name,
-			username,
+			firstName,
+			lastName,
 			email,
 			dob,
 			gender
@@ -191,8 +194,8 @@ export default function LoginSignupForm() {
 			data: {
 				dob,
 				email,
-				name,
-				username,
+				firstName,
+				lastName,
 				gender,
 				phoneNumber
 			}
@@ -315,7 +318,7 @@ export default function LoginSignupForm() {
 				{step === 2 && (
 					<Fragment>
 						<div className="heading">
-							<h1 className="text-uppercase">Let's Set Up your Profile</h1>
+							<h1 className="title">Let's Set Up your Profile</h1>
 						</div>
 						<Form className="d-flex-column">
 							<Form.Group className="form-group" controlId="email">
@@ -330,23 +333,23 @@ export default function LoginSignupForm() {
 							</Form.Group>
 
 							<Form.Group className="form-group" controlId="name">
-								<Form.Label>First and Last Name</Form.Label>
+								<Form.Label>First Name</Form.Label>
 								<Form.Control
 									type="text"
-									placeholder="Enter your full name"
+									placeholder="Enter your first name"
 									required
-									name="name"
-									onChange={(e) => setName(e.target.value)}
+									name="firstName"
+									onChange={(e) => setFirstName(e.target.value)}
 								/>
 							</Form.Group>
-							<Form.Group className="form-group" controlId="username">
-								<Form.Label>Username</Form.Label>
+							<Form.Group className="form-group" controlId="name">
+								<Form.Label>Last Name</Form.Label>
 								<Form.Control
 									type="text"
-									placeholder="Enter your username"
+									placeholder="Enter your last name"
 									required
-									name="username"
-									onChange={(e) => setUsername(e.target.value)}
+									name="lastName"
+									onChange={(e) => setLastName(e.target.value)}
 								/>
 							</Form.Group>
 							<Row className="form-group">
@@ -368,7 +371,7 @@ export default function LoginSignupForm() {
 											name="gender"
 											required
 											onChange={(e) => setGender(e.target.value)}>
-											<option>Select Gender</option>
+											<option>Select</option>
 											<option value="male">Male</option>
 											<option value="female">Female</option>
 											<option value="other">Other</option>
@@ -377,6 +380,9 @@ export default function LoginSignupForm() {
 								</Col>
 							</Row>
 							{hasError && <Error />}
+							<Form.Group className="form-group fw-semi-bold" controlId="upcoming-events">
+    <Form.Check type="checkbox" label="Opt out of receiving emails and texts for our upcoming events" className='mt-2'/>
+  </Form.Group>
 							<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
 								Sign up
 							</Button>
