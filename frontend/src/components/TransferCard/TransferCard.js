@@ -20,7 +20,7 @@ export default function TransferCard({transfer, cancel, status, acceptTransfer})
 						{moment(transfer?.event?.start).format('MMM DD')} <span>{moment(transfer?.event?.start).format('h:mm A')} </span><span className="venue">{transfer?.event?.venue?.name}</span> <span className="loc">
 						</span>
 					</p>
-          <span className="num-tickets">{transfer?.tickets.length} {status ? 'Pending' : ''} {transfer?.tickets.length > 1 ? 'Tickets' : 'Ticket'}</span>
+          <span className="num-tickets">{transfer?.tickets.length} {status ? 'Pending' : ''} Tickets</span>
 						{
 							!status && transfer?.status !== 'claimed' &&
 							<Button
