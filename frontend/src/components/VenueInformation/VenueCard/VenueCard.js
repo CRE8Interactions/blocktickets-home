@@ -108,7 +108,7 @@ export default function VenueCard({ venue }) {
 							</li>
 						</Stack>
 						<Card.Footer className="pt-4 pt-md-5">
-							<span className="caption text-muted">{ venue[0]?.allEvents?.length } Streamed shows</span>
+							<span className="caption text-muted">{ venue[0]?.allEvents?.length } Events</span>
 						</Card.Footer>
 				</>
 			}
