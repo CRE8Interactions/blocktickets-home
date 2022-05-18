@@ -1,17 +1,15 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Badge from 'react-bootstrap/Badge';
+
+import './loginSecurityForm.scss';
 
 export default function LoginSecurityForm() {
 	const [
 		formValid,
 		setFormValid
-	] = useState(false);
-
-	const [
-		hasError,
-		setHasError
 	] = useState(false);
 
 	const [
@@ -33,18 +31,6 @@ export default function LoginSecurityForm() {
 		setValue
 	] = useState();
 
-	// reset error when inputs are changed
-	useEffect(
-		() => {
-			setHasError(false);
-		},
-		[
-			formValid,
-			phoneNumber,
-			code
-		]
-	);
-
 	useEffect(
 		() => {
 			if (phoneNumber && newPhoneNumber && code) {
@@ -57,14 +43,6 @@ export default function LoginSecurityForm() {
 			code
 		]
 	);
-
-	function submit() {
-		let data = {
-			data: {
-				phoneNumber
-			}
-		};
-	}
 
 	const submitForm = () => {
 		let data = {
@@ -95,7 +73,7 @@ export default function LoginSecurityForm() {
 
 	return (
 		<Fragment>
-			<Form className="d-flex-column">
+			<Form className="d-flex-column" id="login-security-form">
 				<Form.Group className="form-group" controlId="phoneNumber">
 					<Form.Label>Current Phone Number</Form.Label>
 					<Form.Control
@@ -110,14 +88,19 @@ export default function LoginSecurityForm() {
 
 				<Form.Group className="form-group" controlId="newPhoneNumber">
 					<Form.Label>New Phone Number</Form.Label>
-					<Form.Control
-						type="tel"
-						placeholder="Enter your new number"
-						required
-						pattern="^0[1-9]|[1-9]\d$"
-						name="newPhoneNumber"
-						onChange={(e) => setVal(e.target.value)}
-					/>
+					<div className="input-wrapper">
+						<Form.Control
+							type="tel"
+							placeholder="Enter your new number"
+							required
+							pattern="^0[1-9]|[1-9]\d$"
+							name="newPhoneNumber"
+							onChange={(e) => setVal(e.target.value)}
+						/>
+						<Badge className="badge-outline badge-outline--light text-capitalize">
+							Verify via SMS
+						</Badge>
+					</div>
 				</Form.Group>
 				<Form.Group className="form-group" controlId="code">
 					<Form.Label>Verify Code</Form.Label>
@@ -128,8 +111,9 @@ export default function LoginSecurityForm() {
 						name="code"
 						onChange={(e) => setCode(e.target.value)}
 					/>
-					<Form.Text>
-						A new code should have been set using the new phone number specified.
+					<Form.Text className="d-block mt-2">
+						A new code should have been set to you using the new phone number specified
+						above.
 					</Form.Text>
 				</Form.Group>
 				<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
