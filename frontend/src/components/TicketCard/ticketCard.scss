@@ -2,7 +2,6 @@
 @use '../../scss/layout' as *;
 
 .ticket-card {
-	width: 265px;
 	box-shadow: $box-shadow;
 
 	.event-image-lg {
@@ -25,10 +24,10 @@
 	}
 
 	#apple-wallet-btn {
+		border: none;
 		border-radius: 6px;
 		@extend %btn-background;
 		background-image: url('../../assets/icons/add-to-apple-wallet-logo.svg');
-		height: 35px;
-		border: none;
+		padding: rem(28);
 	}
 }

@@ -66,7 +66,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 							<Badge bg="light" className="mt-2 text-dark badge-lg">
 								General Admission
 							</Badge>
-								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+								{ id && (<Stack direction="horizontal" gap={3} className="mt-2 btn-group-flex">
 							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
 							</Button>
 							<Button variant='outline-light' size="xs" onClick={()=>handleClick('details')}>Details</Button>
