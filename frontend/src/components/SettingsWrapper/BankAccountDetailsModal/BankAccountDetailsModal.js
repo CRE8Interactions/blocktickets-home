@@ -129,7 +129,13 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 
 	return (
 		<Fragment>
-			<Modal show={show} centered onHide={handleClose} scrollable animation={false}>
+			<Modal
+				show={show}
+				centered
+				onHide={handleClose}
+				backdrop={'static'}
+				scrollable
+				animation={false}>
 				<Modal.Header closeButton>
 					<Modal.Title as="h5">Bank Information</Modal.Title>
 				</Modal.Header>
