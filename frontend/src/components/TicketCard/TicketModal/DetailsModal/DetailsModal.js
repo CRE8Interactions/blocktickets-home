@@ -11,7 +11,7 @@ export default function DetailsModal() {
 			</Modal.Header>
 			<Modal.Body>
 				<div className="modal-body-header pb-2">
-					<h4 className="modal-heading-title mb-2">Nic Fancuilli</h4>
+					<h4 className="modal-body-heading-title mb-2">Nic Fancuilli</h4>
 					<p>Sun May 1, 2022 8 PM</p>
 				</div>
 				<ListGroup as="ul" variant="flush">

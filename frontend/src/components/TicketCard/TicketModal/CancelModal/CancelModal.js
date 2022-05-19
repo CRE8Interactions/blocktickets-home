@@ -36,8 +36,8 @@ export default function CancelModal({ handleClose, ticket, order, transfer, getM
 			<Modal.Body>
 				{step === 1 && (
 					<Fragment>
-						<div className="modal-heading">
-							<h4 className="modal-heading-title">
+						<div className="modal-body-heading">
+							<h4 className="modal-body-heading-title">
 								Are you sure you want to cancel this transfer?
 							</h4>
 							<DisplayTickets selectedTickets={transfer?.tickets} />
@@ -63,7 +63,7 @@ export default function CancelModal({ handleClose, ticket, order, transfer, getM
 				{step === 2 && (
 					<Fragment>
 						<SuccessContainer>
-							<h4 className="modal-heading-title">
+							<h4 className="modal-body-heading-title">
 								Your transfer has been canceled!
 							</h4>
 						</SuccessContainer>

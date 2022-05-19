@@ -111,8 +111,8 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 					</>)}
 				{step === 2 && (
 				<Fragment>
-							<div className="modal-heading">
-								<h4 className="modal-heading-title">
+							<div className="modal-body-heading">
+								<h4 className="modal-body-heading-title">
 									Enter the recepient phone number{' '}
 								</h4>
 								<p className="small">
@@ -145,8 +145,8 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 				)} 
 				{step === 3 && (
 					<Fragment>
-							<div className="modal-heading">
-								<h4 className="modal-heading-title">
+							<div className="modal-body-heading">
+								<h4 className="modal-body-heading-title">
 									Are you sure you want to transfer these tickets?
 								</h4>
 								<DisplayTickets selectedTickets={selectedTickets} />
@@ -168,7 +168,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 				{step === 4 && (
 					<Fragment>
 						<SuccessContainer>
-							<h4 className="modal-heading-title">Your tickets have been transferred! </h4>
+							<h4 className="modal-body-heading-title">Your tickets have been transferred! </h4>
 						</SuccessContainer>
 
 						<p className="small">
