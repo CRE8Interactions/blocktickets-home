@@ -8,6 +8,10 @@
 		border-width: $border-width;
 		background-color: $white !important;
 
+		&.text-normal {
+			text-transform: none;
+		}
+
 		&--primary {
 			color: $primary;
 			border-color: $primary;
