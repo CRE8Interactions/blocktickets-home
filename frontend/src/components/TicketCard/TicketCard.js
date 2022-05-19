@@ -11,7 +11,7 @@ import { TicketModal } from '../TicketCard/TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, listing, removeListing, getListings }) {
+export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, tickets, listing, removeListing, getListings }) {
 	const [
 		ticketAction,
 		setTicketAction
@@ -56,7 +56,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 							<p className='caption text-muted'>You will make ${(listing?.payout - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
 						</Stack>
 					)}
-					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span> )}
+					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {tickets.length > 1 ? 'Tickets' : 'Ticket'} </span> )}
 					
 					{ticketType !== 'collectable' && (					
 					<>

@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 
 import Stack from 'react-bootstrap/Stack';
-import Form from 'react-bootstrap/Form';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
@@ -20,7 +19,7 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 					<span className="small fw-medium">General Admission</span>
 				</div>
 				<div>
-					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} {tickets?.length || selectedTickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
+					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} {tickets?.length > 1 ||selectedTickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
 				</div>
 			</Stack>
 			{role === 'select' ? (

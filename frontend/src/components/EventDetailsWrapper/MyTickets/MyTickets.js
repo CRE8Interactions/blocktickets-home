@@ -15,7 +15,7 @@ export default function MyTickets({ order, handleClick, ticketStatus }) {
 	return (
 		<section id="my-tickets">
 			<div className="heading--flex mb-4">
-				<h2 className="fs-md">Tickets ({order?.tickets.length})</h2>
+				<h2 className="fs-md">{order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} ({order?.tickets.length})</h2>
 				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<Alert variant="info">
