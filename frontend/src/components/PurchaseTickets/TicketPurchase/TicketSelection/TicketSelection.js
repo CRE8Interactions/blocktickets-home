@@ -177,7 +177,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
 										<ListGroup as="ul">
-										{tickets.map((ticket, index) => (<Ticket key={index} ticket={ticket} handleNext={handleNext} />))}
+										{Object.keys(tickets).map((ticket, index) => (<Ticket key={index} ticket={ticket} handleNext={handleNext} />))}
 										</ListGroup>	
 									) : (
 										<MyTickets />
