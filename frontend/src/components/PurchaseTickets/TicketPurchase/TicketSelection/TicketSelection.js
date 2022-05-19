@@ -72,30 +72,30 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	}
 
 	// for demo purposes, this will come from the database
-// 	 const genAdmissionTickets = [
-// 		{
-// 			id: 5277, 
-// 			attributes: {
-// 				cost: 20,
-// createdAt: "2022-05-03T17:17:01.471Z",
-// description: null,
-// eventId: "50",
-// facilityFee: 3,
-// fee: 5,
-// free: false,
-// generalAdmission: true,
-// listingAskingPrice: 34,
-// listingId: "19",
-// maximum_quantity: 4,
-// minimum_quantity: 1,
-// name: "General Admission",
-// on_sale_status: "available",
-// resale: false,
-// row: null,
-// royalty: 10
-// 			}
-// 		}
-// 	];
+	 const genAdmissionTickets = [
+		{
+			id: 5277, 
+			attributes: {
+				cost: 20,
+createdAt: "2022-05-03T17:17:01.471Z",
+description: null,
+eventId: "50",
+facilityFee: 3,
+fee: 5,
+free: false,
+generalAdmission: true,
+listingAskingPrice: 34,
+listingId: "19",
+maximum_quantity: 4,
+minimum_quantity: 1,
+name: "General Admission",
+on_sale_status: "available",
+resale: false,
+row: null,
+royalty: 10
+			}
+		}
+	];
 
 	// const seatedTickets = [
 	// 	{
@@ -126,7 +126,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	return (
 		<Fragment>
-			{tickets && Object.keys(tickets).length > 0 ? ( 
+			{genAdmissionTickets && genAdmissionTickets.length > 0 ? ( 
 				<Fragment>
 			<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
@@ -177,7 +177,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
 										<ListGroup as="ul">
-										{Object.keys(tickets).map((ticket, index) => (<Ticket key={index} ticket={ticket} handleNext={handleNext} />))}
+										{genAdmissionTickets.map((ticket, index) => (<Ticket key={index} ticket={ticket} handleNext={handleNext} />))}
 										</ListGroup>	
 									) : (
 										<MyTickets />
