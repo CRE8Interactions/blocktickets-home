@@ -49,7 +49,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	useEffect(() => {
 		setSliderValues([20, tickets.attributes?.cost])
 		console.log(tickets);
-		console.log(tickets.length);
+		console.log(Object.keys(tickets).length);
 	}, [tickets]); 
 
 	useEffect(
