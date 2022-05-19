@@ -47,6 +47,7 @@ export default function CheckoutWrapper() {
 	] = useState();
 
 	useLayoutEffect(() => {
+		document.getElementById('logo-link').style.pointerEvents = 'none';
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
 		const timer = document.getElementById('timer-container');
@@ -62,6 +63,7 @@ export default function CheckoutWrapper() {
 			toggleTimer(timer, !show);
 			toggleNavContent(show, btns, nav);
 			removeFullHeightContainer(el);
+			document.getElementById('logo-link').style.pointerEvents = 'auto';
 		};
 	}, []);
 

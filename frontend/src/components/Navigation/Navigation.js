@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+
 import authService from '../../utilities/services/auth.service';
 import { useWindowSize } from '../../utilities/hooks';
 
@@ -37,7 +38,7 @@ export default function Navigation() {
 		<div className="navigation position-sticky">
 			<Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
 				<Container>
-					<LinkContainer to="/">
+					<LinkContainer to="/" id="logo-link">
 						<Navbar.Brand>
 							<img src={logo} alt="blocktickets" />
 						</Navbar.Brand>
@@ -72,7 +73,7 @@ export default function Navigation() {
 							<LoginButton styles="mobile-tablet-only" />
 						</Nav>
 					</Navbar.Collapse>
-					<Timer />
+					<Timer className="d-block" />
 				</Container>
 			</Navbar>
 		</div>
