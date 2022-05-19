@@ -60,17 +60,6 @@
 		}
 	}
 
-	&-body {
-		.btn-group-flex {
-			@extend .btn-group-flex !optional;
-		}
-		.btn {
-			margin-left: 0px;
-			margin-top: $text-spacer-sm;
-			width: 100%;
-		}
-	}
-
 	// used for my tickets popups
 	&-lg {
 		$m-x: rem(32);
@@ -114,24 +103,21 @@
 		$padding: rem(32);
 
 		.modal {
-			&-header {
-				padding: $padding;
-
-				.modal-title {
-					font-size: $h4-font-size;
-				}
-			}
-
 			&-body {
 				padding: $padding;
 				display: flex;
 				flex-direction: column;
+
+				&-heading-title {
+					font-size: $h4-font-size;
+				}
 			}
 		}
 	}
 
 	.btn-group-flex {
 		gap: $text-spacer-xs;
+		margin-top: $text-spacer-sm;
 
 		&.hstack {
 			> .btn {

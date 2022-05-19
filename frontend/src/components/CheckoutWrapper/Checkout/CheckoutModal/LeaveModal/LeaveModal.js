@@ -10,9 +10,9 @@ export default function LeaveModal({ handleClose }) {
 
 	return (
 		<Modal.Body>
-			<h1>Are you sure you want to leave checkout?</h1>
+			<h1 className="modal-body-heading-title">Are you sure you want to leave checkout?</h1>
 			<p>If you leave this page, you'll lose your chance to purchase these tickets.</p>
-			<Stack className="btn-flex-group">
+			<Stack className="btn-group-flex">
 				<Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>
 					Cancel order
 				</Button>
