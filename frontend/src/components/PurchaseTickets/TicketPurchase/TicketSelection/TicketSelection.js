@@ -48,8 +48,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	useEffect(() => {
 		setSliderValues([20, tickets.attributes?.cost])
-		console.log(tickets);
-		console.log(Object.keys(tickets).length);
 	}, [tickets]); 
 
 	useEffect(
@@ -128,7 +126,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	return (
 		<Fragment>
-			{tickets && tickets.length > 0 ? ( 
+			{tickets && Object.keys(tickets).length > 0 ? ( 
 				<Fragment>
 			<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
