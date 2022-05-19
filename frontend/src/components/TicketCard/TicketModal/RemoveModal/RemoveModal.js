@@ -29,8 +29,8 @@ export default function RemoveModal({ handleClose, removeListing, listing }) {
 			<Modal.Body>
 				{step === 1 && (
 					<Fragment>
-						<div className="modal-heading">
-							<h4 className="modal-heading-title">
+						<div className="modal-body-heading">
+							<h4 className="modal-body-heading-title">
 								Are you sure you want to remove this listing?
 							</h4>
 							<DisplayTickets />
@@ -52,7 +52,9 @@ export default function RemoveModal({ handleClose, removeListing, listing }) {
 				{step === 2 && (
 					<Fragment>
 						<SuccessContainer>
-							<h4 className="modal-heading-title">Your listing has been removed!</h4>
+							<h4 className="modal-body-heading-title">
+								Your listing has been removed!
+							</h4>
 						</SuccessContainer>
 
 						<p className="small">

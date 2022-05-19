@@ -13,7 +13,7 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 	return (
 		<Fragment>
 			{role === 'select' && (
-				<h6 className="modal-heading-title mb-4">Select tickets to {status}</h6>
+				<h6 className="modal-body-heading-title mb-4">Select tickets to {status}</h6>
 			)}
 			<Stack direction="horizontal" className="split-row">
 				<div>

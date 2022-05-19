@@ -123,8 +123,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 
 			{step === 2 && (
 				<>
-						<div className="modal-heading">
-							<h4 className="modal-heading-title mb-2">Price your tickets</h4>
+						<div className="modal-body-heading">
+							<h4 className="modal-body-heading-title mb-2">Price your tickets</h4>
 							<p className="small text-muted fw-medium">
 								Ticket face value ${ticketsTotalPrice}
 							</p>
@@ -146,8 +146,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 			)}
 			{step === 3 && (
 				<>
-					<div className="modal-body-header modal-heading">
-						<h4 className="modal-heading-title mb-2">Payment Summary</h4>
+					<div className="modal-body-heading">
+						<h4 className="modal-body-heading-title mb-2">Payment Summary</h4>
 						<p>
 							Please go to 'Settings' in your 'Wallet' and link your bank account to receive funds from ticket sales. 
 						</p>
@@ -193,7 +193,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 			{step === 4 && (
 				<>
 					<SuccessContainer>
-						<h4 className="modal-heading-title">
+						<h4 className="modal-body-heading-title">
 							{isUpdate ? 'Your tickes price has been updated' : 'Your tickets are listed for sale!' }
 						</h4>
 					</SuccessContainer>
