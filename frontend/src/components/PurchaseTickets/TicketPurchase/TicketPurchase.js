@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TicketSelection } from './TicketSelection';
 import { TicketConfirmation } from './TicketConfirmation';
@@ -16,6 +16,12 @@ export default function TicketPurchase({
 	isZoomed,
 	ticket
 }) {
+	// how many tickets user wants
+	const [
+		ticketCount,
+		setTicketCount
+	] = useState(1);
+
 	return (
 		<div className="left-col">
 			{step === 'selection' && (
@@ -25,11 +31,19 @@ export default function TicketPurchase({
 					isFilterOpen={isFilterOpen}
 					type={type}
 					isZoomed={isZoomed}
+					setTicketCount={setTicketCount}
+					ticketCount={ticketCount}
 				/>
 			)}
 
 			{step === 'confirmation' && (
-				<TicketConfirmation handleGoBack={handleGoBack} type={type} ticket={ticket} />
+				<TicketConfirmation
+					handleGoBack={handleGoBack}
+					type={type}
+					ticket={ticket}
+					setTicketCount={setTicketCount}
+					ticketCount={ticketCount}
+				/>
 			)}
 
 			{step === 'presale' && <TicketPresale handleClick={handleClick} />}
