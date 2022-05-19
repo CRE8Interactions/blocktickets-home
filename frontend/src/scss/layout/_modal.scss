@@ -42,6 +42,11 @@
 			font-weight: $fw-semi-bold;
 		}
 
+		&--with-border {
+			padding-bottom: $pad-y;
+			border-bottom: border();
+		}
+
 		p {
 			font-size: $small;
 		}
@@ -84,11 +89,6 @@
 				margin: 0px $m-x;
 				display: flex;
 				flex-direction: column;
-
-				&-heading {
-					padding-bottom: $pad-y;
-					border-bottom: border();
-				}
 			}
 
 			&-footer {
