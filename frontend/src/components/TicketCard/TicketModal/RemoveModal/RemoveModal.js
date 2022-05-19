@@ -32,7 +32,7 @@ export default function RemoveModal({ handleClose, removeListing, listing }) {
 						<h4 className="modal-body-heading-title">
 							Are you sure you want to remove this listing?
 						</h4>
-						<DisplayTickets />
+						<DisplayTickets selectedTickets={listing.tickets} />
 						<Stack className="btn-group-flex">
 							<Button
 								onClick={remove}
