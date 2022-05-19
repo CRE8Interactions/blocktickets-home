@@ -29,12 +29,10 @@ export default function RemoveModal({ handleClose, removeListing, listing }) {
 			<Modal.Body>
 				{step === 1 && (
 					<Fragment>
-						<div className="modal-body-heading">
-							<h4 className="modal-body-heading-title">
-								Are you sure you want to remove this listing?
-							</h4>
-							<DisplayTickets />
-						</div>
+						<h4 className="modal-body-heading-title">
+							Are you sure you want to remove this listing?
+						</h4>
+						<DisplayTickets />
 						<Stack className="btn-group-flex">
 							<Button
 								onClick={remove}

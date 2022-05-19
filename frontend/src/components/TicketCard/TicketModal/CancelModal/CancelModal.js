@@ -36,12 +36,10 @@ export default function CancelModal({ handleClose, ticket, order, transfer, getM
 			<Modal.Body>
 				{step === 1 && (
 					<Fragment>
-						<div className="modal-body-heading">
 							<h4 className="modal-body-heading-title">
 								Are you sure you want to cancel this transfer?
 							</h4>
 							<DisplayTickets selectedTickets={transfer?.tickets} />
-						</div>
 						<div>
 							<p className="fw-medium text-muted mb-2">Recipient phone number</p>
 							<span className="fs-md fw-bold">{transfer?.phoneNumberToUser}</span>
