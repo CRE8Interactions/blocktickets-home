@@ -1,4 +1,5 @@
 @use '../../scss/theme/input' as *;
+@use '../../scss/theme/colors' as *;
 @use '../../scss/layout/forms' as *;
 @use '../../scss/abstracts' as *;
 
@@ -6,6 +7,11 @@
 	width: 452px;
 	position: relative;
 	@include input-icon-box($border-radius-sm, $input-padding-y-sm, $input-padding-x-sm);
+	&:hover,
+	&:focus,
+	&:focus-within {
+		border-color: $text-muted;
+	}
 }
 
 #search,
