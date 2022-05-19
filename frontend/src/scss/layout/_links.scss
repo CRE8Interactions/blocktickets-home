@@ -1,0 +1,7 @@
+@use '../theme/colors' as *;
+@use '../abstracts' as *;
+
+%hover-effect {
+	background-color: $gray-400;
+	border-radius: $br-sm;
+}

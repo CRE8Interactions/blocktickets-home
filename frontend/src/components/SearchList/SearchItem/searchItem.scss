@@ -7,9 +7,9 @@
 
 	&:hover,
 	&:focus {
-		background-color: rgb(251, 253, 255);
-		box-shadow: rgb(0 0 0 / 16%) 0px 4px 16px;
+		@extend %hover-effect;
 	}
+
 	.details-info {
 		flex: 1;
 		min-width: 0;

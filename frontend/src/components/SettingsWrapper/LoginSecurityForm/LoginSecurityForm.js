@@ -97,8 +97,8 @@ export default function LoginSecurityForm() {
 							name="newPhoneNumber"
 							onChange={(e) => setVal(e.target.value)}
 						/>
-						<Badge className="badge-outline badge-outline--light text-capitalize">
-							Verify via SMS
+						<Badge className="badge-outline badge-outline--light text-normal p-2">
+							Verify via text
 						</Badge>
 					</div>
 				</Form.Group>
