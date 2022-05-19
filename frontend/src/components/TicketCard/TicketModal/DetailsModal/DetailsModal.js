@@ -10,7 +10,7 @@ export default function DetailsModal() {
 				<Modal.Title as="h4">Details</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<div className="modal-body-header pb-2">
+				<div className="modal-body-heading--with-border pb-2">
 					<h4 className="modal-body-heading-title mb-2">Nic Fancuilli</h4>
 					<p>Sun May 1, 2022 8 PM</p>
 				</div>
