@@ -20,7 +20,7 @@ export default function DisplayTickets({ role, status, setSelectedTickets, ticke
 					<span className="small fw-medium">General Admission</span>
 				</div>
 				<div>
-					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} Tickets</span>
+					<span className="num-tickets">{tickets ? tickets?.length : selectedTickets?.length} {tickets?.length || selectedTickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
 				</div>
 			</Stack>
 			{role === 'select' ? (
