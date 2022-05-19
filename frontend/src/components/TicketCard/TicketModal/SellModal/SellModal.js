@@ -149,7 +149,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 					<div className="modal-body-heading--with-border">
 						<h4 className="modal-body-heading-title mb-2">Payment Summary</h4>
 						<p>
-							Please go to 'Settings' in your 'Wallet' and make sure your bank account is linked to receive funds from ticket sales. 
+							Please go to 'Settings' in your 'Wallet' and make sure your bank account is linked in order to receive funds from ticket sales. 
 						</p>
 					</div>
 						
