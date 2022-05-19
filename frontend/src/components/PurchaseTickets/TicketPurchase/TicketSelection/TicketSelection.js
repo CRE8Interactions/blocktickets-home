@@ -19,7 +19,7 @@ import './ticketSelection.scss';
 
 export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed }) {
 
-	// const tickets = useContext(TicketContext);
+	const tickets = useContext(TicketContext);
 
 	const [
 		numTickets,
@@ -48,6 +48,8 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	useEffect(() => {
 		setSliderValues([20, tickets.attributes?.cost])
+		console.log(tickets);
+		console.log(Object.keys(tickets).length);
 	}, [tickets]); 
 
 	useEffect(
@@ -72,30 +74,30 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	}
 
 	// for demo purposes, this will come from the database
-	 const tickets = [
-		{
-			id: 5277, 
-			attributes: {
-				cost: 20,
-createdAt: "2022-05-03T17:17:01.471Z",
-description: null,
-eventId: "50",
-facilityFee: 3,
-fee: 5,
-free: false,
-generalAdmission: true,
-listingAskingPrice: 34,
-listingId: "19",
-maximum_quantity: 4,
-minimum_quantity: 1,
-name: "General Admission",
-on_sale_status: "available",
-resale: false,
-row: null,
-royalty: 10
-			}
-		}
-	];
+// 	 const genAdmissionTickets = [
+// 		{
+// 			id: 5277, 
+// 			attributes: {
+// 				cost: 20,
+// createdAt: "2022-05-03T17:17:01.471Z",
+// description: null,
+// eventId: "50",
+// facilityFee: 3,
+// fee: 5,
+// free: false,
+// generalAdmission: true,
+// listingAskingPrice: 34,
+// listingId: "19",
+// maximum_quantity: 4,
+// minimum_quantity: 1,
+// name: "General Admission",
+// on_sale_status: "available",
+// resale: false,
+// row: null,
+// royalty: 10
+// 			}
+// 		}
+// 	];
 
 	// const seatedTickets = [
 	// 	{
