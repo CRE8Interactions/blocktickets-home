@@ -47,13 +47,15 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	] = useState(1);
 
 	useEffect(() => {
-		setSliderValues([20, tickets.generalAdmissionTicket?.attributes?.cost])
+		setSliderValues([20, tickets.attributes?.cost])
+		console.log(tickets);
+		console.log(tickets.length);
 	}, [tickets]); 
 
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < tickets.generalAdmissionTicket?.attributes?.cost || numTickets > tickets.generalAdmissionTicket?.attributes?.maximum_quantity) {
+			if (sliderValues[1] < tickets.attributes?.cost || numTickets > tickets.attributes?.maximum_quantity) {
 				setFilteredTicketCount(0);
 			}
 
