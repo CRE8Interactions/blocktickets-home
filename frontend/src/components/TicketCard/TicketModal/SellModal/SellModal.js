@@ -123,7 +123,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 
 			{step === 2 && (
 				<>
-						<div className="modal-body-heading">
+						<div className="modal-body-heading--with-border">
 							<h4 className="modal-body-heading-title mb-2">Price your tickets</h4>
 							<p className="small text-muted fw-medium">
 								Ticket face value ${ticketsTotalPrice}
