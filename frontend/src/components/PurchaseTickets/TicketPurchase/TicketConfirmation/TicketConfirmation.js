@@ -9,8 +9,7 @@ import { BackButton } from '../../../BackButton';
 
 import './ticketConfirmation.scss';
 
-export default function TicketConfirmation({ handleGoBack, type, ticket }) {
-	let [ticketCount, setTicketCount] = useState(1);
+export default function TicketConfirmation({ handleGoBack, type, ticket, setTicketCount, ticketCount }) {
 	
 	let [prices, setPrices] = useState({
 		sum: (parseFloat(ticket.resale ? ticket.listingAskingPrice : ticket.cost + ticket.fee + ticket.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
@@ -34,7 +33,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket }) {
 				<BackButton handleGoBack={handleGoBack} marginBottom="3" />
 			</header>
 			<div className="ticket-details d-flex flex-column">
-				<h1 className="normal--uppercase">Section general admission</h1>
+				<h1 className="normal--uppercase">Section {ticket.name}</h1>
 				{!type && (
 					<div className="seat caption text-muted fw-bold d-flex justify-content-between align-items-center">
 						<div>

@@ -13,7 +13,6 @@ export default function PurchaseTickets() {
 	// 1 - ticket selection
 	// 2 - ticket confirmation
 	// 3 - presale
-
 	const steps = {
 		selection: 1,
 		confirmation: 2,
@@ -47,6 +46,7 @@ export default function PurchaseTickets() {
 		setIsZoomed
 	] = useState(false);
 
+	// current ticket
 	const [
 		ticket,
 		setTicket

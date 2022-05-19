@@ -17,14 +17,13 @@ import { NotAvailableMessage } from './NotAvailableMessage';
 
 import './ticketSelection.scss';
 
-export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed }) {
+export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed, setTicketCount, ticketCount }) {
 
 	const tickets = useContext(TicketContext);
 
-	const [
-		numTickets,
-		setNumTickets
-	] = useState(1);
+	// all tickets costs and ticket count combined for filtering 
+	let totalCosts = 0; 
+	let totalTicketCount = 0;
 
 	const [
 		ticketFilters,
@@ -47,13 +46,13 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	] = useState(1);
 
 	useEffect(() => {
-		setSliderValues([20, tickets.attributes?.cost])
+		setSliderValues([20, genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost)])
 	}, [tickets]); 
 
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < tickets.attributes?.cost || numTickets > tickets.attributes?.maximum_quantity) {
+			if (sliderValues[1] < genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost) || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
 				setFilteredTicketCount(0);
 			}
 
@@ -62,7 +61,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 			};
 		},
 		[
-			sliderValues, numTickets 
+			sliderValues, ticketCount 
 		]
 	);
 
@@ -89,8 +88,8 @@ listingId: "19",
 maximum_quantity: 4,
 minimum_quantity: 1,
 name: "General Admission",
-on_sale_status: "available",
-resale: false,
+on_sale_status: "resaleAvailable",
+resale: true,
 row: null,
 royalty: 10
 			}
@@ -131,10 +130,9 @@ royalty: 10
 			<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
 							<Form.Select
-								id="form-select--numTickets"
 								aria-label="Number of Tickets"
-								value={numTickets}
-								onChange={(e) => setNumTickets(e.target.value)}>
+								value={ticketCount}
+								onChange={(e) => setTicketCount(parseInt(e.target.value))}>
 								<option value="1">1 Ticket</option>
 								<option value="2">2 Tickets</option>
 								<option value="3">3 Tickets</option>
