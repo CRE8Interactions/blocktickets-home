@@ -8,6 +8,8 @@
 /* Set core root defaults */
 body {
 	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: antialiased;
 }
 
 html:focus-within {
