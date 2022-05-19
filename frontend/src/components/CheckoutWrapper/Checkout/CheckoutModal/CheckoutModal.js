@@ -35,7 +35,13 @@ export default function CheckoutModal({ modalType, setModalType, show, setShow, 
 	};
 
 	return (
-		<Modal id="checkout-modal" centered keyboard={false} backdrop="static" show={show}>
+		<Modal
+			id="checkout-modal"
+			animation={false}
+			centered
+			keyboard={false}
+			backdrop="static"
+			show={show}>
 			{typeOfModal(modalType, handleClose, modalError)}
 		</Modal>
 	);
