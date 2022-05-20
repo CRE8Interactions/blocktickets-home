@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import ListGroup from 'react-bootstrap/ListGroup';
 import Nav from 'react-bootstrap/Nav';
 
 import authService from '../../../utilities/services/auth.service';
@@ -19,39 +18,40 @@ export default function MyWallet() {
 
 	return (
 		<div className="wallet">
-			<ListGroup variant="flush" as="ul" role="my wallet menu">
+			<ul role="my wallet menu">
 				<h5 className="name m-0 pb-3 pb-lg-2">{user?.user?.name}</h5>
-				<ListGroup.Item as="li" >
+				<li className="list-item">
 					<LinkContainer to={'/my-events'}>
-						<Nav.Link>My Events</Nav.Link>
+						<Nav.Link>My events</Nav.Link>
 					</LinkContainer>
-				</ListGroup.Item>
-				<ListGroup.Item as="li" >
-					<LinkContainer to={'/my-transfers'}>
-						<Nav.Link>My Transfers</Nav.Link>
-					</LinkContainer>
-				</ListGroup.Item>
-				<ListGroup.Item as="li" >
+				</li>
+				<li className="list-item">
 					<LinkContainer to={'/my-listings'}>
-						<Nav.Link>My Listings</Nav.Link>
+						<Nav.Link>My listings</Nav.Link>
 					</LinkContainer>
-				</ListGroup.Item>
-				{/* <ListGroup.Item as="li" >
+				</li>
+				<li className="list-item">
+					<LinkContainer to={'/my-transfers'}>
+						<Nav.Link>My transfers</Nav.Link>
+					</LinkContainer>
+				</li>
+				{/* <li >
 					<LinkContainer to={'/my-collectables'}>
 						<Nav.Link>My Collectables</Nav.Link>
 					</LinkContainer>
-				</ListGroup.Item> */}
-				<ListGroup.Item as="li">
+				</li> */}
+				<li className="list-item">
 					<LinkContainer to={'/settings'} >
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
-				</ListGroup.Item>
-				<ListGroup.Item as="li" onClick={logout}>
+				</li>
+				<hr/>
+				<li className="list-item" onClick={logout}>
 					<LinkContainer to={'/'}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
-				</ListGroup.Item>
-			</ListGroup>
+				</li>
+			</ul>
 		</div>
 	);
 }

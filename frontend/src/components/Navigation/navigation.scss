@@ -1,7 +1,8 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/links' as *;
 @use '../../scss/layout/typography' as *;
 @use '../../scss/layout/container' as *;
-@use '../../scss/theme/custom' as *;
+@use '../../scss/theme/buttons' as *;
 
 .navigation {
 	&.position-sticky {
@@ -91,19 +92,15 @@
 				}
 
 				.nav-link {
-					@include breakpoint-min(lg) {
-						padding-left: rem(15);
-					}
-
 					@include breakpoint-max(lg) {
-						font-size: rem(24);
+						font-size: $body-2;
+						padding: $nav-link-padding;
+						margin: $nav-link-margin;
+
+						&:hover,
+						&:focus,
 						&.active {
-							border-left: border(2px, $clr-primary);
-							@include full-width();
-							padding-left: calc($pad-sm - rem(2));
-							@include breakpoint-min(md) {
-								padding-left: calc($pad-md - rem(2));
-							}
+							@include hover-effect();
 						}
 					}
 				}
