@@ -7,7 +7,7 @@
 
 	&:hover,
 	&:focus {
-		@extend %hover-effect;
+		@include hover-effect();
 	}
 
 	.details-info {
