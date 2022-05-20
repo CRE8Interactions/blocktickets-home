@@ -1,8 +1,7 @@
-@use '../theme/colors' as *;
 @use '../abstracts' as *;
 
 @mixin hover-effect() {
-	background-color: $gray-400;
+	background-color: $clr-lightGray;
 	border-radius: $br-sm;
 }
 
