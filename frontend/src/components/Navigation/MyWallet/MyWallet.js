@@ -19,7 +19,7 @@ export default function MyWallet() {
 	return (
 		<div className="wallet">
 			<ul role="my wallet menu">
-				<h5 className="name m-0 pb-3 pb-lg-2">{user?.user?.name}</h5>
+				<h5 className="name m-0 pb-3 pb-lg-4">{user?.user?.name}</h5>
 				<li className="list-item">
 					<LinkContainer to={'/my-events'}>
 						<Nav.Link>My events</Nav.Link>
