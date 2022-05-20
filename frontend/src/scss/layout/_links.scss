@@ -1,7 +1,10 @@
 @use '../theme/colors' as *;
 @use '../abstracts' as *;
 
-%hover-effect {
+@mixin hover-effect() {
 	background-color: $gray-400;
 	border-radius: $br-sm;
 }
+
+$nav-link-padding: rem(14) rem(16);
+$nav-link-margin: 0px rem(-16);

@@ -6,31 +6,29 @@
 
 .wallet {
 	z-index: 2;
-	.list-group {
+	ul {
 		font-weight: 700;
 
 		.name {
 			font-weight: 600;
+			text-transform: uppercase;
 			@include breakpoint-max(lg) {
 				font-size: $body-1;
 			}
 		}
 
-		&-item {
-			padding: em(16) 0px;
+		li.list-item {
+			padding-bottom: rem(8);
 
-			@include breakpoint-min(lg) {
-				font-size: rem(14);
-			}
 			&:first-of-type .nav-link {
 				&::before {
-					content: url($data-svg-prefix + map-get($icons, 'calendar'));
+					content: url($data-svg-prefix + map-get($icons, 'calendar-large'));
 				}
 			}
 
 			&:nth-of-type(2) .nav-link {
 				&::before {
-					content: url($data-svg-prefix + map-get($icons, 'collectables'));
+					content: url($data-svg-prefix + map-get($icons, 'star'));
 				}
 			}
 			// &:nth-of-type(3) .nav-link {
@@ -40,7 +38,7 @@
 			// }
 			&:nth-of-type(3) .nav-link {
 				&::before {
-					content: url($data-svg-prefix + map-get($icons, 'collectables'));
+					content: url($data-svg-prefix + map-get($icons, 'paper-plane-large'));
 				}
 			}
 			&:nth-of-type(4) .nav-link {
@@ -48,29 +46,38 @@
 					content: url($data-svg-prefix + map-get($icons, 'settings'));
 				}
 			}
-			&:nth-of-type(5) .nav-link {
-				&::before {
-					content: url($data-svg-prefix + map-get($icons, 'logout'));
+
+			&:last-of-type .nav-link {
+				&:focus,
+				&:hover,
+				&.active {
+					background-color: transparent;
+					color: $text-muted;
 				}
 			}
+		}
 
-			.nav-link {
-				@extend %icon-text-box;
-				gap: $gap-sm;
-				font-size: rem(16);
-				padding: 0px;
-				color: $body-color;
-				font-size: inherit;
+		hr {
+			margin: $text-spacer-xs 0px;
+		}
 
-				&:hover,
-				&:focus,
-				&.active {
-					color: $link-color;
-					&::before {
-						filter: brightness(0) saturate(100%) invert(78%) sepia(48%) saturate(4629%)
-							hue-rotate(179deg) brightness(102%) contrast(95%);
-					}
-				}
+		.nav-link {
+			@extend %icon-text-box;
+			gap: $gap-sm;
+			padding: $nav-link-padding;
+			font-size: rem(16);
+			margin: $nav-link-margin;
+
+			@include breakpoint-min(lg) {
+				font-size: rem(14);
+				padding: rem(10) rem(14);
+				margin: 0px;
+			}
+
+			&:hover,
+			&:focus,
+			&.active {
+				@include hover-effect();
 			}
 		}
 	}

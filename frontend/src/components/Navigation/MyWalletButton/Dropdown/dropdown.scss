@@ -7,9 +7,9 @@
 	right: 0;
 	border-radius: 0px 0px 12px 12px;
 	box-shadow: $box-shadow;
-	padding: em(26) em(16) em(16);
+	padding: em(26) em(11) em(11);
 	background: $clr-white;
-	min-width: 256px;
+	min-width: rem(233);
 	border: border();
 	border-top: none;
 }
