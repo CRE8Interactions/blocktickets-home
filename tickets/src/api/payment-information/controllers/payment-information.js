@@ -16,7 +16,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::payment-information.payment-information', ({ strapi }) => ({
   async findOrCreate(ctx) {
     let user = ctx.state.user;
-    let { accountNumber, routingNumber, bankName, currency, accountName, accountType } = ctx.request.body.data;
+    let { accountNumber, routingNumber, firstName, lastName, currency, accountName, accountType } = ctx.request.body.data;
     user = await strapi.db.query('plugin::users-permissions.user').findOne({
       where: {
         id: user.id
@@ -49,7 +49,8 @@ module.exports = createCoreController('api::payment-information.payment-informat
               routingNumber,
               accountName,
               currency,
-              bankName,
+              firstName,
+              lastName,
               accountType
             }
           })
@@ -65,7 +66,8 @@ module.exports = createCoreController('api::payment-information.payment-informat
           routingNumber,
           accountName,
           currency,
-          bankName,
+          firstName,
+          lastName,
           accountType
         }
       })

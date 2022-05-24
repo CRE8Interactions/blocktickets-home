@@ -91,7 +91,7 @@ module.exports = {
 
           await client.messages
             .create({
-              body: `${params.data.fromUser.name} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`,
+              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`,
               messagingServiceSid: messagingServiceSid,
               to: params.data.phoneNumberToUser,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
@@ -259,16 +259,15 @@ module.exports = {
         if (event.model.singularName === 'user') {
           const profile = await strapi.db.query('api::profile.profile').create({
             data: {
-              username: event.params.data.username.toLowerCase(),
-              gender: event.params.data.gender.toLowerCase(),
-              name: event.params.data.name.toLowerCase(),
-              // dob: event.params.data.dob
+              username: event.params.data.email.toLowerCase()
             }
           })
+
           event.params.data.profile = profile
           event.params.data.email = event.params.data.email.toLowerCase()
-          event.params.data.username = event.params.data.username.toLowerCase()
-          event.params.data.name = event.params.data.name.toLowerCase()
+          event.params.data.username = event.params.data.email.toLowerCase()
+          event.params.data.firstName = event.params.data.firstName.toLowerCase()
+          event.params.data.lastName = event.params.data.lastName.toLowerCase()
           event.params.data.gender = event.params.data.gender.toLowerCase()
         }
 

@@ -7,6 +7,10 @@ import Badge from 'react-bootstrap/Badge';
 import './loginSecurityForm.scss';
 
 export default function LoginSecurityForm() {
+	let user = sessionStorage.getItem('user');
+	user = JSON.parse(user).user;
+	console.log(user)
+
 	const [
 		formValid,
 		setFormValid
@@ -78,11 +82,10 @@ export default function LoginSecurityForm() {
 					<Form.Label>Current Phone Number</Form.Label>
 					<Form.Control
 						type="tel"
-						placeholder="Enter your current number"
-						required
+						disabled
 						pattern="^0[1-9]|[1-9]\d$"
 						name="phoneNumber"
-						onChange={(e) => setNumber(e.target.value)}
+						placeholder={user.phoneNumber}
 					/>
 				</Form.Group>
 
