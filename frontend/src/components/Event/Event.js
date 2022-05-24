@@ -44,7 +44,7 @@ export default function Event(props) {
 							</Col>
 							<Col>
 								<p className="small">
-									{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')} <span className="time">{moment(event?.start).format('h:mm A')}</span>
+									{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')} <span className="time">{moment(event?.start).format('h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
 								</p>
 							</Col>
 						</Row>

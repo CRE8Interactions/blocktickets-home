@@ -21,13 +21,13 @@ export default function EventModal({ show, handleClose, event }) {
 						</Col>
 						<Col xs='auto' className="d-flex align-self-center">
 							<Badge className="ms-auto badge-outline badge-outline--primary">
-								{/* {event?.categories[0]?.name} */}
+								{event?.categories[0]?.name}
 							</Badge>
 						</Col>
 					</Row>
 					<div className="mb-2">
 						<p className="time-caption">Time</p>
-						<p className="normal-sm">{moment(event?.start).format('MMM DD hh:mm A')} - {moment(event?.end).format('hh:mm A')} EST</p>
+						<p className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')} - {moment(event?.end).format('h:mm A')} EST</p>
 					</div>
 					<div className="mb-2">
 						<p className="venue-caption">Venue</p>
