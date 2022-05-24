@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, { useContext } from "react";
+import { LinkContainer } from "react-router-bootstrap";
 
-import Nav from 'react-bootstrap/Nav';
+import Nav from "react-bootstrap/Nav";
 
-import authService from '../../../utilities/services/auth.service';
-import UserContext from '../../../context/User/user';
+import authService from "../../../utilities/services/auth.service";
+import UserContext from "../../../context/User/user";
 
-import './myWallet.scss';
+import "./myWallet.scss";
 
 export default function MyWallet() {
 	const { setAuthenticated, user } = useContext(UserContext);
+
+	const splitName = user?.user?.name.split(" ");
 
 	const logout = () => {
 		authService.logoutUser();
@@ -19,19 +21,23 @@ export default function MyWallet() {
 	return (
 		<div className="wallet">
 			<ul role="my wallet menu">
-				<h5 className="name m-0 pb-3 pb-lg-4">{user?.user?.name}</h5>
+				<h5 className="name m-0 pb-3 pb-lg-4">
+					{splitName[0]}
+					<br />
+					{splitName[1]}
+				</h5>
 				<li className="list-item">
-					<LinkContainer to={'/my-events'}>
+					<LinkContainer to={"/my-events"}>
 						<Nav.Link>My events</Nav.Link>
 					</LinkContainer>
 				</li>
 				<li className="list-item">
-					<LinkContainer to={'/my-listings'}>
+					<LinkContainer to={"/my-listings"}>
 						<Nav.Link>My listings</Nav.Link>
 					</LinkContainer>
 				</li>
 				<li className="list-item">
-					<LinkContainer to={'/my-transfers'}>
+					<LinkContainer to={"/my-transfers"}>
 						<Nav.Link>My transfers</Nav.Link>
 					</LinkContainer>
 				</li>
@@ -41,13 +47,13 @@ export default function MyWallet() {
 					</LinkContainer>
 				</li> */}
 				<li className="list-item">
-					<LinkContainer to={'/settings'} >
+					<LinkContainer to={"/settings"}>
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</li>
-				<hr/>
+				<hr />
 				<li className="list-item" onClick={logout}>
-					<LinkContainer to={'/'}>
+					<LinkContainer to={"/"}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
 				</li>
