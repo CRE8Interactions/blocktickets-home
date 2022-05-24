@@ -38,6 +38,7 @@
 		}
 
 		&-brand {
+			padding-top: rem(3);
 			@include breakpoint-min(lg) {
 				border-right: border(2px);
 				padding-right: rem(13);
@@ -113,7 +114,7 @@
 		&-secondary,
 		&-outline-light {
 			min-width: 102px;
-			padding: $btn-padding-y $btn-padding-x;
+			padding: rem(11) $btn-padding-x;
 		}
 	}
 }
