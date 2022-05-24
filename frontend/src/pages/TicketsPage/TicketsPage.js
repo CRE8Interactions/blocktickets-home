@@ -25,7 +25,10 @@ export default function TicketsPage() {
 		generalAdmissionTicket,
 		setGaTicket
 	] = useState();
-	const [reSaleTickets, setResaleTickets] = useState();
+	const [
+		reSaleTickets,
+		setResaleTickets
+	] = useState();
 
 	useEffect(
 		() => {
@@ -49,9 +52,7 @@ export default function TicketsPage() {
 
 			getEvent(id).then((res) => setEvent(res.data)).catch((err) => console.error(err));
 
-			getResaleTickets(id)
-				.then((res) => setResaleTickets(res.data.data))
-				.catch(err => console.error(err))
+			getResaleTickets(id).then((res) => setResaleTickets(res.data.data)).catch((err) => console.error(err));
 		},
 		[
 			id
@@ -60,9 +61,8 @@ export default function TicketsPage() {
 
 	return (
 		<div className="full-height-wrapper">
-			<TicketContext.Provider
-				value={{ tickets, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
-				<div className="pt-2 pt-md-3">
+			<TicketContext.Provider value={{ tickets, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
+				<div className="pt-md-3">
 					<Event event={event} />
 				</div>
 				<PurchaseTickets />
