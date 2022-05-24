@@ -94,6 +94,12 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 	}, []);
 
 	const validInputs = () => {
+		if (routingNumber.length < 9) {
+			setRoutingNumError(true);
+		}
+		if (accountNumber.length < 9) {
+			setAccountNumError(true);
+		}
 		if (account && firstName && lastName && accountNumber && routingNumber) {
 			setFormValid(true);
 		}
@@ -103,28 +109,20 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 	};
 
 	const submitForm = () => {
-		if (routingNumber.length < 9) {
-			setRoutingNumError(true);
-		}
-		if (accountNumber.length < 9) {
-			setAccountNumError(true);
-		}
-		if (validInputs() && !routingNumError && !accountNumError) {
-			let data = {
-				data: {
-					accountType: account,
-					firstName,
-					lastName,
-					accountNumber,
-					routingNumber,
-					currency: 'usd'
-				}
-			};
+		let data = {
+			data: {
+				accountType: account,
+				firstName,
+				lastName,
+				accountNumber,
+				routingNumber,
+				currency: 'usd'
+			}
+		};
 
-			createBankAccount(data)
-				.then((res) => console.log(res))
-				.catch((err) => console.error(err));
-		}
+		createBankAccount(data)
+			.then((res) => console.log(res))
+			.catch((err) => console.error(err));
 	};
 
 	return (
