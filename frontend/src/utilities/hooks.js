@@ -30,7 +30,7 @@ export const useOnOutsideClick = () => {
 
 	const handleClickOutside = (event) => {
 		if (ref.current && !ref.current.contains(event.target)) {
-			setIsComponentVisible(!isComponentVisible);
+			setIsComponentVisible(false);
 		}
 	};
 

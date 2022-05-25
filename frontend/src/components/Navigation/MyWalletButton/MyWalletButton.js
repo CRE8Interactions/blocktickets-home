@@ -16,12 +16,12 @@ export default function MyWalletButton({ styles }) {
 	return (
 		<Fragment>
 			{authService.isLoggedIn() && (
-				<Fragment>
-					<Button onClick={handleClick} variant="outline-light" className={styles} ref={ref}>
+				<div ref={ref}>
+					<Button onClick={handleClick} variant="outline-light" className={styles}>
 						My Wallet
 					</Button>
-					{isComponentVisible && <Dropdown reference={ref} handleClick={handleClick} />}
-				</Fragment>
+					{isComponentVisible && <Dropdown handleClick={handleClick} />}
+				</div>
 			)}
 		</Fragment>
 	);
