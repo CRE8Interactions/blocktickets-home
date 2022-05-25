@@ -10,19 +10,18 @@ import { Dropdown } from './Dropdown';
 export default function MyWalletButton({ styles }) {
 	const { ref, isComponentVisible, setIsComponentVisible } = useOnOutsideClick(false);
 
+	const handleClick = () => {
+		setIsComponentVisible(!isComponentVisible);
+	};
 	return (
 		<Fragment>
 			{authService.isLoggedIn() && (
-				<Fragment>
-					<Button
-						onClick={() => setIsComponentVisible(!isComponentVisible)}
-						variant="outline-light"
-						className={styles}
-						ref={ref}>
+				<div ref={ref}>
+					<Button onClick={handleClick} variant="outline-light" className={styles}>
 						My Wallet
 					</Button>
-					{isComponentVisible && <Dropdown />}
-				</Fragment>
+					{isComponentVisible && <Dropdown handleClick={handleClick} />}
+				</div>
 			)}
 		</Fragment>
 	);

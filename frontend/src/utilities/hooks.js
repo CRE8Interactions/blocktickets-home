@@ -35,10 +35,10 @@ export const useOnOutsideClick = () => {
 	};
 
 	useEffect(() => {
-		document.addEventListener('click', handleClickOutside, !isComponentVisible);
+		document.addEventListener('click', handleClickOutside);
 
 		return () => {
-			document.removeEventListener('click', handleClickOutside, !isComponentVisible);
+			document.removeEventListener('click', handleClickOutside);
 		};
 	});
 
