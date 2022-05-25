@@ -151,7 +151,7 @@ h4,
 %nav-mobile-headings {
 	@include breakpoint-max(lg) {
 		display: block;
-		margin-bottom: em(12);
+		margin-bottom: $text-spacer-xs;
 		font-size: $caption;
 		color: $text-muted;
 		text-transform: uppercase;

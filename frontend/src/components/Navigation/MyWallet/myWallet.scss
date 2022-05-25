@@ -4,17 +4,15 @@
 @use '../../../scss/theme/links' as *;
 @use '../../../scss/layout' as *;
 
-.wallet {
+#wallet {
 	z-index: 2;
 	ul {
 		font-weight: 700;
 
 		.name {
-			font-weight: 600;
+			font-weight: $fw-bold;
 			text-transform: uppercase;
-			@include breakpoint-max(lg) {
-				font-size: $body-1;
-			}
+			font-size: $body-2;
 		}
 
 		li.list-item {
@@ -58,15 +56,21 @@
 		}
 
 		hr {
-			margin: $text-spacer-xs 0px;
+			margin: $text-spacer 0px;
+
+			@include breakpoint-min(lg) {
+				margin: $text-spacer-xs 0px;
+			}
 		}
 
 		.nav-link {
 			@extend %icon-text-box;
 			gap: $gap-sm;
 			padding: $nav-link-padding;
-			font-size: rem(16);
+			font-size: $body-2;
 			margin: $nav-link-margin;
+			font-weight: $fw-medium;
+			font-family: $font-body;
 
 			@include breakpoint-min(lg) {
 				font-size: rem(14);

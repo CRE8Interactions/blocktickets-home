@@ -19,7 +19,7 @@ export default function MyWallet() {
 	};
 
 	return (
-		<div className="wallet">
+		<div id="wallet">
 			<ul role="my wallet menu">
 				<h5 className="name m-0 pb-3 pb-lg-4">
 					{splitName[0]}
