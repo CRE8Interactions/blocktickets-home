@@ -53,7 +53,7 @@ export default function MyWallet({ handleClick }) {
 					</LinkContainer>
 				</li>
 				<hr />
-				<li className="list-item" onClick={logout}>
+				<li className="list-item d-inline-block" onClick={logout}>
 					<LinkContainer to={"/"}>
 						<Nav.Link>Log out</Nav.Link>
 					</LinkContainer>
