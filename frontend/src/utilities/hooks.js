@@ -30,15 +30,15 @@ export const useOnOutsideClick = () => {
 
 	const handleClickOutside = (event) => {
 		if (ref.current && !ref.current.contains(event.target)) {
-			setIsComponentVisible(false);
+			setIsComponentVisible(!isComponentVisible);
 		}
 	};
 
 	useEffect(() => {
-		document.addEventListener('click', handleClickOutside, !isComponentVisible);
+		document.addEventListener('click', handleClickOutside);
 
 		return () => {
-			document.removeEventListener('click', handleClickOutside, !isComponentVisible);
+			document.removeEventListener('click', handleClickOutside);
 		};
 	});
 
