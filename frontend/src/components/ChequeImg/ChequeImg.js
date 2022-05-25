@@ -4,15 +4,7 @@ export default function ChequeImg() {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" width="240" height="118" viewBox="0 0 240 118">
 			<g fill="none" fillRule="evenodd">
-				<rect
-					width="239"
-					height="89"
-					x=".5"
-					y=".5"
-					fill="#F6F6F6"
-					stroke="#DFE4E7"
-					rx="4"
-				/>
+				<rect width="239" height="89" x=".5" y=".5" fill="#F6F6F6" stroke="#DFE4E7" rx="4" />
 				<g fill="#EBF4FD" stroke="#014085" transform="translate(17 67)">
 					<rect width="71" height="15" x=".5" y=".5" rx="2" />
 					<rect width="73" height="15" x="88.5" y=".5" rx="2" />
@@ -32,28 +24,20 @@ export default function ChequeImg() {
 					</g>
 				</g>
 				<g transform="translate(181 10)">
-					<rect
-						width="48"
-						height="14"
-						x=".5"
-						y=".5"
-						fill="#FFF"
-						stroke="#DFE4E7"
-						rx="2"
-					/>
+					<rect width="48" height="14" x=".5" y=".5" fill="#FFF" stroke="#DFE4E7" rx="2" />
 					<path
 						fill="#262626"
 						fillRule="nonzero"
 						d="M7.34 4.23l-.02.44c.19.02.38.06.57.11.65.18.99.49.99.73 0 .18-.12.36-.34.36-.29 0-.5-.38-1.24-.5l-.06 1.94c.89.33 1.8.77 1.8 1.85 0 1.04-.83 1.58-1.81 1.7v.47c0 .12.01.22-.05.3-.06.07-.15.12-.32.12s-.26-.05-.32-.12c-.06-.08-.05-.19-.05-.33l.01-.43c-.26-.02-.51-.06-.75-.13-.69-.19-1.07-.54-1.07-.78 0-.18.14-.35.35-.35.3 0 .55.46 1.48.56l.06-2.26c-.89-.33-1.8-.71-1.8-1.7 0-.96.83-1.46 1.81-1.55V4.2c0-.13.01-.22.07-.3.06-.07.15-.12.31-.12s.25.05.31.12c.06.08.07.19.07.33zm.91 4.98c0-.52-.45-.8-1.02-1.04v1.99c.61-.1 1.02-.43 1.02-.95zm-2.7-3.05c0 .45.45.69 1.03.91V5.36c-.66.07-1.03.38-1.03.8z"
 					/>
 				</g>
-				<text fill="#262626" font-family="Averta-Regular, Averta" font-size="8">
+				<text fill="#262626" fontFamily="Averta-Regular, Averta" fontSize="8">
 					<tspan x="10" y="54">
 						Memo
 					</tspan>
 				</text>
 				<path fill="#DFE4E7" d="M140 53h90v2h-90z" />
-				<text fill="#262626" font-family="Averta-Regular, Averta" font-size="8">
+				<text fill="#262626" fontFamily="Averta-Regular, Averta" fontSize="8">
 					<tspan x="10" y="19">
 						Pay to
 					</tspan>
@@ -65,20 +49,12 @@ export default function ChequeImg() {
 				<g fill="#69747C">
 					<path d="M142 97h1v6h-1zM105 96h74v1h-74z" />
 				</g>
-				<text
-					fill="#1F262D"
-					font-family="Averta-Regular, Averta"
-					font-size="12"
-					transform="translate(17 96)">
+				<text fill="#1F262D" fontFamily="Averta-Regular, Averta" fontSize="12" transform="translate(17 96)">
 					<tspan x="102.712" y="19">
 						Account
 					</tspan>
 				</text>
-				<text
-					fill="#1F262D"
-					font-family="Averta-Regular, Averta"
-					font-size="12"
-					transform="translate(17 96)">
+				<text fill="#1F262D" fontFamily="Averta-Regular, Averta" fontSize="12" transform="translate(17 96)">
 					<tspan x="15.098" y="19">
 						Routing
 					</tspan>
