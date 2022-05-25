@@ -47,11 +47,7 @@ export default function Navigation() {
 						<SearchBar />
 						<LoginButton styles="desktop-only" />
 						<MyWalletButton styles="desktop-only" />
-						<Navbar.Toggle
-							aria-controls="responsive-navbar-nav"
-							id="toggle"
-							className="pe-0"
-						/>
+						<Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
@@ -65,7 +61,7 @@ export default function Navigation() {
 
 							{authService.isLoggedIn() && (
 								<ul className="mobile-tablet-only" role="wallet-navigation">
-									<li className="pt-2">
+									<li className="mt-4">
 										<MyWallet />
 									</li>
 								</ul>
