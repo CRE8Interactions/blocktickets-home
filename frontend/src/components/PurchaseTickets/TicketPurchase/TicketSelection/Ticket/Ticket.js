@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // import './ticket.scss';
 
 export default function Ticket({ ticket, handleNext }) {
+	console.log(ticket)
 	const ticketTypes = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Ticket';
 		if (!ticket.resale && ticket.on_sale_status === 'presale') return 'Presale';

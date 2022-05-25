@@ -12,6 +12,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
   async getClientId(ctx) {  
     const ticket = ctx.request.body.ticket
+    console.log(ticket)
     const ticketCount = ctx.request.body.ticketCount
     let user = ctx.state.user;
     let totalTicketPrices = Number(parseFloat(ticket.attributes.cost * ticketCount).toFixed(2))

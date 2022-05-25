@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 
 import Nav from "react-bootstrap/Nav";
@@ -10,21 +10,24 @@ import "./myWallet.scss";
 
 export default function MyWallet() {
 	const { setAuthenticated, user } = useContext(UserContext);
-
-	const splitName = user?.user?.name.split(" ");
+	const [ me, setUser] = useState({})
 
 	const logout = () => {
 		authService.logoutUser();
 		setAuthenticated({});
 	};
 
+	useEffect(() => {
+		setUser(user)
+	}, [user])
+
 	return (
 		<div className="wallet">
 			<ul role="my wallet menu">
 				<h5 className="name m-0 pb-3 pb-lg-4">
-					{splitName[0]}
+					{me.firstName}
 					<br />
-					{splitName[1]}
+					{me.lastName}
 				</h5>
 				<li className="list-item">
 					<LinkContainer to={"/my-events"}>
