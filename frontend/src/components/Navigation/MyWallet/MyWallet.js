@@ -8,12 +8,13 @@ import UserContext from "../../../context/User/user";
 
 import "./myWallet.scss";
 
-export default function MyWallet() {
+export default function MyWallet({ handleClick }) {
 	const { setAuthenticated, user } = useContext(UserContext);
 
 	const splitName = user?.user?.name.split(" ");
 
 	const logout = () => {
+        handleClick();
 		authService.logoutUser();
 		setAuthenticated({});
 	};
@@ -27,17 +28,17 @@ export default function MyWallet() {
 					{splitName[1]}
 				</h5>
 				<li className="list-item">
-					<LinkContainer to={"/my-events"}>
+					<LinkContainer to={"/my-events"} onClick={handleClick}>
 						<Nav.Link>My events</Nav.Link>
 					</LinkContainer>
 				</li>
 				<li className="list-item">
-					<LinkContainer to={"/my-listings"}>
+					<LinkContainer to={"/my-listings"} onClick={handleClick}>
 						<Nav.Link>My listings</Nav.Link>
 					</LinkContainer>
 				</li>
 				<li className="list-item">
-					<LinkContainer to={"/my-transfers"}>
+					<LinkContainer to={"/my-transfers"} onClick={handleClick}>
 						<Nav.Link>My transfers</Nav.Link>
 					</LinkContainer>
 				</li>
@@ -47,7 +48,7 @@ export default function MyWallet() {
 					</LinkContainer>
 				</li> */}
 				<li className="list-item">
-					<LinkContainer to={"/settings"}>
+					<LinkContainer to={"/settings"} onClick={handleClick}>
 						<Nav.Link>Settings</Nav.Link>
 					</LinkContainer>
 				</li>
