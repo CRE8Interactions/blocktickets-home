@@ -20,7 +20,6 @@ import './ticketSelection.scss';
 export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed, setTicketCount, ticketCount }) {
 
 	const tickets = useContext(TicketContext);
-	// console.log(tickets)
 	// all tickets costs and ticket count combined for filtering 
 	let totalCosts = 0; 
 	let totalTicketCount = 0;
@@ -55,9 +54,15 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicket
 	] = useState({})
 
+	const [
+		resaleTickets,
+		setResaleTickets
+	] = useState({})
+
 	useEffect(() => {
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket)
+		setResaleTickets(tickets?.reSaleTickets)
 		setSliderValues([20, genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost)])
 	}, [tickets]); 
 
@@ -188,6 +193,9 @@ royalty: 10
 									{!isZoomed ? (
 										<ListGroup as="ul">
 											<Ticket ticket={gaTicket} handleNext={handleNext} />
+											{
+												resaleTickets && resaleTickets.map((ticket, index) => <Ticket ticket={ticket} key={index} handleNext={handleNext} />)
+											}
 										</ListGroup>	
 									) : (
 										<MyTickets />

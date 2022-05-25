@@ -78,13 +78,13 @@ export default function CheckoutWrapper() {
 			ticket: cart.ticket,
 			ticketCount: cart.ticketCount
 		};
-		console.log(data)
-		// getPaymentIntent(data)
-		// 	.then((res) => {
-		// 		setClientSecret(res.data.client_secret);
-		// 		setIntentId(res.data.id);
-		// 	})
-		// 	.catch((err) => console.error(err));
+
+		getPaymentIntent(data)
+			.then((res) => {
+				setClientSecret(res.data.client_secret);
+				setIntentId(res.data.id);
+			})
+			.catch((err) => console.error(err));
 	}, []);
 
 	const addOns = [];
