@@ -20,7 +20,6 @@ import './ticketSelection.scss';
 export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed, setTicketCount, ticketCount }) {
 
 	const tickets = useContext(TicketContext);
-
 	// all tickets costs and ticket count combined for filtering 
 	let totalCosts = 0; 
 	let totalTicketCount = 0;
@@ -45,7 +44,25 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setFilteredTicketCount
 	] = useState(1);
 
+	const [
+		gaTicketsAvailable,
+		setGaTicketsAvailable
+	] = useState(0)
+
+	const [
+		gaTicket,
+		setGaTicket
+	] = useState({})
+
+	const [
+		resaleTickets,
+		setResaleTickets
+	] = useState({})
+
 	useEffect(() => {
+		setGaTicketsAvailable(tickets?.generalAdmissionCount)
+		setGaTicket(tickets?.generalAdmissionTicket)
+		setResaleTickets(tickets?.reSaleTickets)
 		setSliderValues([20, genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost)])
 	}, [tickets]); 
 
@@ -125,7 +142,7 @@ royalty: 10
 
 	return (
 		<Fragment>
-			{genAdmissionTickets && genAdmissionTickets.length > 0 ? ( 
+			{gaTicketsAvailable && gaTicketsAvailable >= 1 ? ( 
 				<Fragment>
 			<header>
 						<Stack direction="horizontal" gap={2} className="option-btns">
@@ -175,7 +192,10 @@ royalty: 10
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
 										<ListGroup as="ul">
-										{genAdmissionTickets.map((ticket, index) => (<Ticket key={index} ticket={ticket} handleNext={handleNext} />))}
+											<Ticket ticket={gaTicket} handleNext={handleNext} />
+											{
+												resaleTickets && resaleTickets.map((ticket, index) => <Ticket ticket={ticket} key={index} handleNext={handleNext} />)
+											}
 										</ListGroup>	
 									) : (
 										<MyTickets />

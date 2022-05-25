@@ -10,14 +10,16 @@ import { BackButton } from '../../../BackButton';
 import './ticketConfirmation.scss';
 
 export default function TicketConfirmation({ handleGoBack, type, ticket, setTicketCount, ticketCount }) {
+
+	const ticketPrice = ticket.resale ? ticket.listingAskingPrice : ticket.cost;
 	
 	let [prices, setPrices] = useState({
-		sum: (parseFloat(ticket.resale ? ticket.listingAskingPrice : ticket.cost + ticket.fee + ticket.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
+		sum: ticketPrice * ticketCount
 	})
 	
 	useEffect(() => {
 		setPrices({
-			sum: (parseFloat(ticket.resale ? ticket.listingAskingPrice : ticket.cost + ticket.fee + ticket.facilityFee).toFixed(2) * ticketCount + 2.50 + 4.35).toFixed(2),
+			sum: (parseFloat(ticketPrice) * ticketCount).toFixed(2),
 		})
 
 		let data = {
@@ -71,8 +73,14 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 						<p className="fw-semi-bold caption">{ticket.resale && ticket.on_sale_status === 'resaleAvailable' && 'Resale Ticket' }</p>
 						<p className="caption">{ticket.name}</p>
 						<p className="fw-bold">
-							${ prices?.sum } {' '}
-							<span className="caption fw-normal text-muted">${ticket.resale ? ticket.listingAskingPrice : ticket.cost.toFixed(2)} ea + Fees</span>
+						${parseFloat(
+							 ticketPrice +
+								ticket.fee +
+								ticket.facilityFee +
+								2.5 +
+								4.35
+						).toFixed(2)}
+							<span className="caption fw-normal text-muted">${ticketPrice} ea + Fees</span>
 						</p>
 					</div>
 					<Stack direction="horizontal" className="counter fw-bolder">
