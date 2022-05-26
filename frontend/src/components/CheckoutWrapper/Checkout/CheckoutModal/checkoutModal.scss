@@ -2,11 +2,9 @@
 @use './../../../../scss/layout/modal' as *;
 
 #checkout-modal {
-	.modal-body {
-		@extend .modal-xl;
+	@extend .modal-xl;
 
-		.modal-heading {
-			margin-bottom: 0px;
-		}
+	.modal-heading {
+		margin-bottom: 0px;
 	}
 }
