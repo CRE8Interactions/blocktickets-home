@@ -59,11 +59,11 @@ $navbar-height: rem(82);
 }
 
 .page-slider {
-	@include breakpoint-max(md) {
-		@include full-width();
-		left: 0%;
-		margin-left: 0px;
-	}
+	// @include breakpoint-max(md) {
+	// 	@include full-width();
+	// 	left: 0%;
+	// 	margin-left: 0px;
+	// }
 }
 
 .sticky {
