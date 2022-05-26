@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 export default function Ticket({ ticket, handleNext }) {
 	const ticketPrice = ticket.attributes.resale ? ticket.attributes.listingAskingPrice : ticket.attributes.cost;
 	const ticketTypes = (ticket) => {
-		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Ticket';
+		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Standard Ticket';
 		if (!ticket.resale && ticket.on_sale_status === 'presale') return 'Presale';
 		if (ticket.resale && ticket.on_sale_status === 'resaleAvailable') return 'Resale Ticket';
 	};
