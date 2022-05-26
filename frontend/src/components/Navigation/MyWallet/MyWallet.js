@@ -11,8 +11,6 @@ import "./myWallet.scss";
 export default function MyWallet({ handleClick }) {
 	const { setAuthenticated, user } = useContext(UserContext);
 
-	const splitName = user?.user?.name.split(" ");
-
 	const logout = () => {
         handleClick();
 		authService.logoutUser();
@@ -23,9 +21,7 @@ export default function MyWallet({ handleClick }) {
 		<div id="wallet">
 			<ul role="my wallet menu">
 				<h5 className="name m-0 pb-3 pb-lg-4">
-					{splitName[0]}
-					<br />
-					{splitName[1]}
+					{user?.user?.name}
 				</h5>
 				<li className="list-item">
 					<LinkContainer to={"/my-events"} onClick={handleClick}>
