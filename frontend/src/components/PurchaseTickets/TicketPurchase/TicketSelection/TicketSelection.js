@@ -22,7 +22,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const tickets = useContext(TicketContext);
 
 	// all tickets costs and ticket count combined for filtering 
-	let totalCosts = 0; 
 	let totalTicketCount = 0;
 
 	const [
@@ -30,10 +29,13 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setTicketFilters
 	] = useState([]);
 
+    // all tickets costs and ticket count combined for filtering 
+    const [totalCost, setTotalCost] = useState(0)
+
 	const [
 		sliderValues,
 		setSliderValues
-	] = useState([20, getTotalCosts()]);
+	] = useState([20, totalCost]);
 
 	const [
 		showFilter,
@@ -64,13 +66,14 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket)
 		setResaleTickets(tickets?.reSaleTickets)
-		setSliderValues([20, getTotalCosts()])
+        getTotalCost();
+		setSliderValues([20, totalCost])
 	}, [tickets]); 
 
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < getTotalCosts() || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
+			if (sliderValues[1] < totalCost || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
 				setFilteredTicketCount(0);
 			}
 
@@ -83,8 +86,8 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		]
 	);
 
-    const getTotalCosts = () => {
-        return (resaleTickets.map(ticket => totalCosts += ticket.attributes?.cost) + gaTicket.attributes?.cost)
+    const getTotalCost = () => {
+        setTotalCost(resaleTickets.map(ticket => totalCost += ticket.attributes?.cost) + gaTicket.attributes?.cost)
     }
 
 	const handleShow = () => {
