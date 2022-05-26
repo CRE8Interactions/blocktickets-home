@@ -67,7 +67,7 @@ footer {
 	margin-top: $text-spacer;
 
 	@include breakpoint-min(lg) {
-		margin-top: rem(41);
+		margin-top: rem(29);
 		font-size: rem(24);
 		width: 18ch;
 	}
