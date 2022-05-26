@@ -9,8 +9,9 @@ export const formatNumber = (number, digits = 2) => {
 	return Number(number).toFixed(digits);
 };
 
+// check to see if page should be full height
 export const checkUrl = (url) => {
-	var expression = /tickets|\/checkout|\/my-tickets/g;
+	var expression = /tickets|\/checkout|\/event-details/g;
 	var regex = new RegExp(expression);
 	return regex.test(url);
 };
@@ -45,10 +46,7 @@ export const cartTotal = (cart, processingFee, tax) => {
 	);
 	let fees = Number(
 		parseFloat(
-			cart.ticket.fee * cart.ticketCount +
-				cart.ticket.facilityFee * cart.ticketCount +
-				processingFee +
-				tax
+			cart.ticket.fee * cart.ticketCount + cart.ticket.facilityFee * cart.ticketCount + processingFee + tax
 		).toFixed(2)
 	);
 	let total = totalTicketPrices + fees;

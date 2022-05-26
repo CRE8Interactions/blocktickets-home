@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { getPaymentIntent } from '../../utilities/api';
 
 import Row from 'react-bootstrap/Row';
 
-import {
-	toggleNavContent,
-	fullHeightContainer,
-	removeFullHeightContainer,
-	toggleTimer
-} from '../../utilities/helpers';
+import { toggleNavContent, fullHeightContainer, removeFullHeightContainer, toggleTimer } from '../../utilities/helpers';
 
 import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
@@ -55,7 +49,7 @@ export default function CheckoutWrapper() {
 		toggleTimer(timer, show);
 		toggleNavContent(!show, btns, nav);
 
-		const el = document.querySelector('.full-height-wrapper').parentElement;
+		const el = document.querySelector('#main-container');
 
 		fullHeightContainer(el);
 
@@ -172,16 +166,9 @@ export default function CheckoutWrapper() {
 				{clientSecret && (
 					<Elements stripe={stripePromise} options={options}>
 						{status === 'checkout' && (
-							<Checkout
-								addOns={addOns}
-								setStatus={setStatus}
-								setOrder={setOrder}
-								intentId={intentId}
-							/>
+							<Checkout addOns={addOns} setStatus={setStatus} setOrder={setOrder} intentId={intentId} />
 						)}
-						{status === 'successful' && (
-							<PaymentConfirmation addOns={addOns} order={order} />
-						)}
+						{status === 'successful' && <PaymentConfirmation addOns={addOns} order={order} />}
 					</Elements>
 				)}
 			</Row>

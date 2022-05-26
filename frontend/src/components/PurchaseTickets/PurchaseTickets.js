@@ -54,11 +54,11 @@ export default function PurchaseTickets() {
 
 	const mediaQuery = useMedia('(min-width: 768px');
 
-	// layout change only in tablet size or if on ticket selection stop and filer menu is closed
+	// layout change to full height only in tablet size or if on ticket selection step and filter menu is closed to allow scrolling on mobile and for mobile menu to display properly
 	useLayoutEffect(
 		() => {
 			if (mediaQuery || (step === 'selection' && !isFilterOpen)) {
-				const el = document.querySelector('.full-height-wrapper').parentElement;
+				const el = document.querySelector('#main-container');
 
 				fullHeightContainer(el);
 
