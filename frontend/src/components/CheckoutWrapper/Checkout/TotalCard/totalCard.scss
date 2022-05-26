@@ -16,14 +16,14 @@
 	}
 
 	.card-footer {
-		border-width: 0px;
+		border-top-width: 0px;
 
 		> * {
 			flex: 1;
 		}
 
 		&.with-border {
-			border-width: 1px;
+			border-top-width: 1px;
 		}
 
 		#payment-request-button {
