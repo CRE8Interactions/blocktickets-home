@@ -20,7 +20,7 @@ export default function MyWallet({ handleClick }) {
 	return (
 		<div id="wallet">
 			<ul role="my wallet menu">
-				<h5 className="name m-0 pb-3 pb-lg-4">{user?.name}</h5>
+				<h5 className="name m-0 pb-3 pb-lg-4">{user?.user?.name}</h5>
 				<li className="list-item">
 					<LinkContainer to={'/my-events'} onClick={handleClick}>
 						<Nav.Link>My events</Nav.Link>
