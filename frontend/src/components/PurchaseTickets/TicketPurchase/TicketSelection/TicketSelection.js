@@ -20,7 +20,7 @@ import './ticketSelection.scss';
 export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed, setTicketCount, ticketCount }) {
 
 	const tickets = useContext(TicketContext);
-
+	// console.log(tickets)
 	// all tickets costs and ticket count combined for filtering 
 	let totalCosts = 0; 
 	let totalTicketCount = 0;
@@ -55,15 +55,15 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicket
 	] = useState({})
 
-	const [
+    const [
 		resaleTickets,
 		setResaleTickets
 	] = useState({})
 
 	useEffect(() => {
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
-		setGaTicket(tickets?.generalAdmissionTicket)
-		setResaleTickets(tickets?.reSaleTickets)
+		setGaTicket(tickets?.generalAdmissionTicket);
+        setResaleTickets(tickets?.reSaleTickets)
 		setSliderValues([20, genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost)])
 	}, [tickets]); 
 
@@ -82,10 +82,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 			sliderValues, ticketCount 
 		]
 	);
-
-    // const getTotalCosts = () => {
-    //     return (resaleTickets.map(ticket => totalCosts += ticket.attributes?.cost) + gaTicket.attributes?.cost )
-    // }
 
 	const handleShow = () => {
 		setShowFilter(!showFilter); 
@@ -117,6 +113,25 @@ royalty: 10
 			}
 		}
 	];
+
+	// const seatedTickets = [
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	},
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	},
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	},
+	// 	{
+	// 		seat: 'Sec Row',
+	// 		type: 'Presale'
+	// 	}
+	// ];
 
 	const handleNext = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'presaleAvailable') {
@@ -179,13 +194,56 @@ royalty: 10
 									{!isZoomed ? (
 										<ListGroup as="ul">
 											<Ticket ticket={gaTicket} handleNext={handleNext} />
-											{
+                                            {
 												resaleTickets && resaleTickets.map((ticket, index) => <Ticket ticket={ticket} key={index} handleNext={handleNext} />)
 											}
 										</ListGroup>	
 									) : (
 										<MyTickets />
 									)}
+									{
+										// <ListGroup>
+										// 	{
+										// 		tickets && tickets.reSaleTickets && tickets.reSaleTickets.map((ticket, index) => {
+										// 			return (<ListGroup.Item
+										// 				onClick={() =>
+										// 						handleClick(
+										// 							'confirmation',
+										// 							ticket
+										// 						)}
+										// 					action
+										// 					as="li"
+										// 					key={index}
+										// 					className="d-flex justify-content-between align-items-center">
+										// 					<div>
+										// 						<div>
+										// 							<span className="fw-bold p-0">
+										// 							{ticket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
+										// 							</span>
+										// 						</div>
+										// 						<div>
+										// 							<span className="text-muted caption">
+										// 									{ticketTypes(ticket?.attributes)}  
+										// 							</span>
+										// 						</div>
+										// 					</div>
+										// 					<div className="text-end">
+										// 						<div>
+										// 							<span className="fw-bold text-end">
+										// 									${parseFloat(ticket?.attributes?.listingAskingPrice + ticket?.attributes?.fee + ticket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
+										// 							</span>
+										// 						</div>
+										// 						<div>
+										// 							<span className="text-muted caption">
+										// 								${parseFloat(ticket?.attributes?.listingAskingPrice).toFixed(2)} + Fees 
+										// 							</span>
+										// 						</div>
+										// 					</div>
+										// 			</ListGroup.Item>)
+										// 		})
+										// 	}
+										// </ListGroup>
+									}
 								</div>
 							</div>
 							{isZoomed && (
