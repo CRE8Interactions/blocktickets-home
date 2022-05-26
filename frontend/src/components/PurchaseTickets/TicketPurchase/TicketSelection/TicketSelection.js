@@ -20,6 +20,7 @@ import './ticketSelection.scss';
 export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed, setTicketCount, ticketCount }) {
 
 	const tickets = useContext(TicketContext);
+
 	// all tickets costs and ticket count combined for filtering 
 	let totalCosts = 0; 
 	let totalTicketCount = 0;
@@ -32,7 +33,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const [
 		sliderValues,
 		setSliderValues
-	] = useState([20, tickets.generalAdmissionTicket?.attributes?.cost]);
+	] = useState([20, getTotalCosts()]);
 
 	const [
 		showFilter,
@@ -63,13 +64,13 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket)
 		setResaleTickets(tickets?.reSaleTickets)
-		setSliderValues([20, genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost)])
+		setSliderValues([20, getTotalCosts()])
 	}, [tickets]); 
 
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost) || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
+			if (sliderValues[1] < getTotalCosts() || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
 				setFilteredTicketCount(0);
 			}
 
@@ -81,6 +82,10 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 			sliderValues, ticketCount 
 		]
 	);
+
+    const getTotalCosts = () => {
+        return (resaleTickets.map(ticket => totalCosts += ticket.attributes?.cost) + gaTicket.attributes?.cost)
+    }
 
 	const handleShow = () => {
 		setShowFilter(!showFilter); 
@@ -112,25 +117,6 @@ royalty: 10
 			}
 		}
 	];
-
-	// const seatedTickets = [
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	}
-	// ];
 
 	const handleNext = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'presaleAvailable') {
@@ -200,49 +186,6 @@ royalty: 10
 									) : (
 										<MyTickets />
 									)}
-									{
-										// <ListGroup>
-										// 	{
-										// 		tickets && tickets.reSaleTickets && tickets.reSaleTickets.map((ticket, index) => {
-										// 			return (<ListGroup.Item
-										// 				onClick={() =>
-										// 						handleClick(
-										// 							'confirmation',
-										// 							ticket
-										// 						)}
-										// 					action
-										// 					as="li"
-										// 					key={index}
-										// 					className="d-flex justify-content-between align-items-center">
-										// 					<div>
-										// 						<div>
-										// 							<span className="fw-bold p-0">
-										// 							{ticket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
-										// 							</span>
-										// 						</div>
-										// 						<div>
-										// 							<span className="text-muted caption">
-										// 									{ticketTypes(ticket?.attributes)}  
-										// 							</span>
-										// 						</div>
-										// 					</div>
-										// 					<div className="text-end">
-										// 						<div>
-										// 							<span className="fw-bold text-end">
-										// 									${parseFloat(ticket?.attributes?.listingAskingPrice + ticket?.attributes?.fee + ticket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
-										// 							</span>
-										// 						</div>
-										// 						<div>
-										// 							<span className="text-muted caption">
-										// 								${parseFloat(ticket?.attributes?.listingAskingPrice).toFixed(2)} + Fees 
-										// 							</span>
-										// 						</div>
-										// 					</div>
-										// 			</ListGroup.Item>)
-										// 		})
-										// 	}
-										// </ListGroup>
-									}
 								</div>
 							</div>
 							{isZoomed && (
