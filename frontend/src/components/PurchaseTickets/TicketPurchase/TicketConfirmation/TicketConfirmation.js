@@ -16,7 +16,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 		prices,
 		setPrices
 	] = useState({
-		sum: (ticketPrice * ticketCount).toFixed(2)
+		sum: ticketPrice * ticketCount
 	});
 
 	useEffect(
@@ -82,7 +82,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 						<p className="caption">{ticket.name}</p>
 						<p className="fw-bold">
 							${parseFloat(ticketPrice + ticket.fee + ticket.facilityFee + 2.5 + 4.35).toFixed(2)}
-							<span className="caption fw-normal text-muted"> ${ticketPrice} ea + Fees</span>
+							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} ea + Fees</span>
 						</p>
 					</div>
 					<Stack direction="horizontal" className="counter fw-bolder">

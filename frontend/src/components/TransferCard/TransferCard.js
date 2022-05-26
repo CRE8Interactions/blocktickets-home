@@ -36,8 +36,7 @@ export default function TransferCard({transfer, cancel, status, acceptTransfer})
 							<Button
 								variant="outline-light"
 								onClick={(e) => acceptTransfer(transfer)}
-								className="text-primary"
-								size="lg">
+								className="text-primary">
 								Accept transfer
 							</Button>
 						}
