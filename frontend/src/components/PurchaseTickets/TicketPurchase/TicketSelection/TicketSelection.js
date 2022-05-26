@@ -87,7 +87,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	);
 
     const getTotalCost = () => {
-        setTotalCost(resaleTickets.map(ticket => totalCost += ticket.attributes?.cost) + gaTicket.attributes?.cost)
+        setTotalCost(resaleTickets && resaleTickets.map(ticket => totalCost += ticket.attributes?.cost) + gaTicket.attributes?.cost)
     }
 
 	const handleShow = () => {
