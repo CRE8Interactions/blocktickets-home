@@ -108,11 +108,12 @@ select:-webkit-autofill:focus {
 	height: 26px;
 }
 
+// search field
 @mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
 	display: flex;
 	align-items: center;
 	border-radius: $radius;
-	padding: $padding-y $padding-x;
+	// padding: $padding-y $padding-x;
 	border: $input-border-width solid $color;
 	padding-right: rem(8);
 
@@ -121,17 +122,20 @@ select:-webkit-autofill:focus {
 	}
 
 	.form-control {
+		background-color: transparent;
 		border: none;
 		border-radius: 0;
-		padding: 0px;
 		min-height: auto;
 	}
 }
 
-.input-wrapper {
-	@include input-icon-box();
+// .input-wrapper {
+// 	&:focus {
+// 		border-color: $input-focus-border-color;
+// 	}
+// 	@include input-icon-box();
 
-	&-lg {
-		@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
-	}
-}
+// 	// &-lg {
+// 	// 	@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
+// 	// }
+// }
