@@ -66,7 +66,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket)
 		setResaleTickets(tickets?.reSaleTickets)
-        getTotalCost();
+        // getTotalCost();
 		setSliderValues([20, totalCost])
 	}, [tickets]); 
 
