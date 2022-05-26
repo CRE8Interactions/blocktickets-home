@@ -18,6 +18,11 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 	] = useState();
 
 	const [
+		modalError,
+		setModalError
+	] = useState();
+
+	const [
 		show,
 		setShow
 	] = useState(false);
@@ -29,20 +34,27 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 		handleShow();
 	};
 
-	const checkValid = (e, name) => {
-		let paymentButton = document.getElementById('payment-btn')
-		let paymentButtonDisabled = document.getElementById('payment-btn-disabled')
+	const paymentDeclined = (err) => {
+		setModalType('declined');
+		setModalError(err);
+		handleShow();
+	};
 
-		if (e && e.complete && name && name.split('').length > 5) {
-			paymentButton.classList.add('d-block')
-			paymentButton.classList.remove('d-none')
-			paymentButtonDisabled.classList.add('d-none')
-		} else {
-			paymentButton.classList.add('d-none')
-			paymentButtonDisabled.classList.remove('d-none')
-			paymentButtonDisabled.classList.add('d-block')
+	const checkValid = (e) => {
+		let paymentButton = document.getElementById('payment-btn');
+		let paymentButtonDisabled = document.getElementById('payment-btn-disabled');
+
+		if (e && e.complete) {
+			paymentButton.classList.add('d-block');
+			paymentButton.classList.remove('d-none');
+			paymentButtonDisabled.classList.add('d-none');
 		}
-	}
+		else {
+			paymentButton.classList.add('d-none');
+			paymentButtonDisabled.classList.remove('d-none');
+			paymentButtonDisabled.classList.add('d-block');
+		}
+	};
 
 	return (
 		<Fragment>
@@ -57,12 +69,13 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 					<Payment checkValid={checkValid} />
 				</section>
 			</Col>
-			<Col md={6} lg={5} id="total-card">
+			<Col md={6} lg={5} className="sticky">
 				<TotalCard
 					setStatus={setStatus}
 					addOns={addOns}
 					setOrder={setOrder}
 					intentId={intentId}
+					paymentDeclined={paymentDeclined}
 				/>
 			</Col>
 			<CheckoutModal
@@ -70,6 +83,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 				setModalType={setModalType}
 				show={show}
 				setShow={setShow}
+				modalError={modalError}
 			/>
 		</Fragment>
 	);

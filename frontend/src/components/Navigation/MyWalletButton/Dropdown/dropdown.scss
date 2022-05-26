@@ -1,0 +1,18 @@
+@use './../../../../scss/abstracts' as *;
+
+.myDropdown {
+	position: absolute;
+	top: rem(61);
+	right: 0;
+	border-radius: 0px 0px 1rem 1rem;
+	box-shadow: $box-shadow;
+	padding: em(26) em(16) em(16);
+	background: $clr-white;
+	width: rem(233);
+	border: border();
+	border-top: none;
+
+	@include breakpoint-min(xxl) {
+		right: rem(-65);
+	}
+}

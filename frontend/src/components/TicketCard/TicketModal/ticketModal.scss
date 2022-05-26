@@ -1,30 +1,28 @@
 @use '../../../scss/abstracts' as *;
 @use '../../../scss/layout' as *;
 @use '../../../scss/theme/colors' as *;
-@use '../../../scss/theme/modal' as *;
+@use '../../../scss/theme/buttons' as *;
 
 #ticket-modal {
-	.modal-content {
-		width: 420px;
-		margin: auto;
-	}
-	.modal-header {
-		padding-right: 0px;
-		padding-left: 0px;
-		margin-left: $modal-inner-padding;
-		margin-right: $modal-inner-padding;
-		align-items: flex-start;
-		padding-top: $modal-inner-padding;
-		padding-bottom: $modal-inner-padding;
-		margin-bottom: $text-spacer-sm;
+	@extend .modal-lg;
+
+	.btn-group-flex {
+		margin-top: auto;
+
+		@include breakpoint-min(md) {
+			margin-top: $text-spacer-sm;
+		}
 	}
 
-	.modal-title {
-		font-size: $body-1;
+	.split-row {
+		font-size: $body-2;
 	}
+}
 
-	.ticket-code {
-		display: block;
-		color: $muted;
+.action-btns.btn-group-flex {
+	@include breakpoint-min(md) {
+		.btn {
+			flex: 0 0 171px !important;
+		}
 	}
 }

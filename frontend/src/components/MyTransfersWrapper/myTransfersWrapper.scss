@@ -1,0 +1,19 @@
+@use '../../scss/abstracts' as *;
+
+#my-transfers-wrapper {
+	.nav-pills {
+		@include breakpoint-min(md) {
+			.nav-item {
+				flex: 0 0 171px;
+			}
+		}
+	}
+
+	#cancel-btn {
+		@include breakpoint-min(md) {
+			order: -2;
+			position: absolute;
+			right: 0px;
+		}
+	}
+}

@@ -116,7 +116,8 @@ module.exports = createCoreController('api::verify.verify', ({
       phoneNumber,
       gender,
       // dob,
-      name
+      firstName,
+      lastName
     } = ctx.request.body.data;
 
     const invite = await strapi.db.query('api::invite.invite').findOne({
@@ -137,7 +138,8 @@ module.exports = createCoreController('api::verify.verify', ({
         username,
         email,
         phoneNumber,
-        name,
+        firstName,
+        lastName,
         gender,
         // dob: new Date(dob),
         role,
@@ -162,5 +164,31 @@ module.exports = createCoreController('api::verify.verify', ({
     delete response.data.id
     delete response.data.attributes.code
     return response
+  },
+  async updatePersonalDetails(ctx) {
+    let user = ctx.state.user
+
+    const {
+      username,
+      email,
+      gender,
+      dob,
+      firstName,
+      lastName
+    } = ctx.request.body.data;
+
+    user = await strapi.entityService.update("plugin::users-permissions.user", user.id, {
+      data: {
+        username,
+        email,
+        gender,
+        dob,
+        firstName,
+        lastName
+      }
+    })
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+    return tokenData
   }
 }));

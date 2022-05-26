@@ -1,29 +1,21 @@
 import React, { useState, Fragment } from 'react';
-
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
-import Badge from 'react-bootstrap/Badge';
+import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
-import profile from '../../assets/profile.svg';
+import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
-import { TicketModal } from './TicketModal';
+import { TicketModal } from '../TicketCard/TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ ticketType = '', order, ticket }) {
+export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, tickets, listing, removeListing, getListings }) {
 	const [
-		modalType,
-		setModalType
+		ticketAction,
+		setTicketAction
 	] = useState('');
-
-	const [
-		ticketStatus,
-		setTicketStatus
-	] = useState('sell');
 
 	const [
 		show,
@@ -32,89 +24,83 @@ export default function TicketCard({ ticketType = '', order, ticket }) {
 
 	const handleShow = () => setShow(true);
 
-	const handleClick = (type) => {
-		setModalType(type);
+	const handleClick = (action) => {
 		handleShow();
+		setTicketAction(action)
 	};
+	
+	const event = listing ? listing?.event : order?.event;
 
 	return (
 		<Fragment>
-			<Card body className="ticket-card card-md">
-				<div className="heading--flex pb-2">
-					<h1 className="caption text-muted fw-normal m-0" id="options">
-						{ticketType !== 'collectable' ? 'Ticket' : 'NFT'} options
-					</h1>
-					<DropdownButton
-						id="dropdown-basic-button"
-						title=""
-						aria-labelledby="#options"
-						variant="default"
-						align="end">
-						<Dropdown.Item as="button" onClick={() => handleClick('details')}>
-							Details
-						</Dropdown.Item>
-						<Dropdown.Item as="button" onClick={() => handleClick('nft')}>
-							View NFT Media
-						</Dropdown.Item>
-						{ticketType !== 'collectable' &&
-						ticketStatus === 'sell' && (
-							<Fragment>
-								<Dropdown.Item as="button" onClick={() => handleClick('transfer')}>
-									Transfer ticket
-								</Dropdown.Item>
-								<Dropdown.Item as="button" onClick={() => handleClick('sell')}>
-									Sell ticket
-								</Dropdown.Item>
-							</Fragment>
-						)}
-
-						{ticketType !== 'collectable' &&
-						ticketStatus === 'sale' && (
-							<Dropdown.Item as="button" onClick={() => handleClick('delist')}>
-								Edit / Delist Ticket
-							</Dropdown.Item>
-						)}
-					</DropdownButton>
-				</div>
+			<Card body className="ticket-card">
 				<Card.Img
-					variant="top"
-					src={order?.event?.image?.url}
-					width="281"
-					height="281"
-					className="rounded-lg mb-4"
+					src={event?.image.url}
+					width="217"
+					height="217"
+					className="event-image-lg mb-3"
 				/>
 				<div className="details d-flex-column">
-					<Card.Title as="h5">{order?.event?.name}</Card.Title>
-					<Card.Subtitle as="h6" className="caption--uppercase text-muted">
-						{order?.event?.presentedBy}
-					</Card.Subtitle>
-					<Stack className="event-details">
-						<p className="event-detail date small">{moment(order?.event?.start).format('MMM DD h:mm A')} EST</p>
-						<p className="event-detail venue small">{order?.event?.venue?.name}</p>
-						<p className="event-detail location small">{order?.event?.venue?.address[0]?.city}, {order?.event?.venue?.address[0]?.state}</p>
-					</Stack>
-					{ticketType !== 'collectable' && (
-						<Stack gap={2}>
-							<Badge bg="info" className="text-dark badge-lg">
-								{order.tickets[0]?.generalAdmission === true ? 'General Admission' : 'Seated'}
-							</Badge>
-							<Button variant="dark" size="lg" disabled={ticketStatus === 'sale'}>
-								Check in
-							</Button>
+					<Card.Title as="h5">{event?.name}</Card.Title>
+						<p className="event-details">
+						{moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')} </span><span className="venue">{event?.venue.name}</span> <span className="loc">
+						Dallas, TX
+						</span>
+					</p>
+					{ ticketStatus === 'listed' && (
+						<Stack className='mb-2'>
+							<Stack direction="horizontal" className="split-row mb-1">
+								<span className='m-0 caption'>Listing price per ticket</span>
+								<span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
+							</Stack>
+							<p className='caption text-muted'>You will make ${(listing?.payout - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
 						</Stack>
+					)}
+					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length > 1 || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span> )}
+					
+					{ticketType !== 'collectable' && (					
+					<>
+					{/* ticketStatus or specific event - transferred, listed, event details */}
+							{ ticketStatus || id ? (
+								<>
+							<Badge bg="light" className="mt-2 text-dark badge-lg">
+								General Admission
+							</Badge>
+								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
+							</Button>
+							<Button variant='outline-light' size="xs" onClick={()=>handleClick('details')}>Details</Button>
+							</Stack>
+								)
+							}
+							{ ticketStatus === 'listed' && (
+								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+								{ ticketState === 'active' ? (
+								<>								
+									<Button onClick={(e) => handleClick('remove')}>Remove listing
+									</Button>
+									<Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+								</>
+							 ) : (
+								<Button variant='outline-light' onClick={handleClick('details')} size="xs">Details</Button>
+							)
+								}
+							</Stack>
+							)}
+							</>							
+							) : (
+								
+							<Link to={`/event-details/${order?.orderId}`} className="btn btn-primary">
+								Event details
+							</Link>
+							)}
+							</>
 					)}
 				</div>
 			</Card>
 
-			<TicketModal
-				modalType={modalType}
-				show={show}
-				setShow={setShow}
-				ticketStatus={ticketStatus}
-				setTicketStatus={setTicketStatus}
-				ticket={ticket}
-				order={order}
-			/>
+			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} removeListing={removeListing} listing={listing} getListings={getListings} />
+
 		</Fragment>
 	);
 }

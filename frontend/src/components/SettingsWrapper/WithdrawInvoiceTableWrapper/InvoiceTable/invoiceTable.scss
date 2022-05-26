@@ -1,0 +1,12 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout' as *;
+
+#invoice-table {
+	th {
+		min-width: 148px;
+
+		&:nth-of-type(2) {
+			min-width: 526px;
+		}
+	}
+}

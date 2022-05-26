@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-
-import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
-
-import { Event } from '../../components';
-import { PurchaseTickets } from '../../components';
 import { useParams } from 'react-router-dom';
-import { getEvent, getEventTickets } from '../../utilities/api';
+
+import { getEvent, getEventTickets, getResaleTickets } from '../../utilities/api';
 import TicketContext from '../../context/Ticket/Ticket';
+
+import { Event, PurchaseTickets } from '../../components';
 
 export default function TicketsPage() {
 	let { id } = useParams();
+
 	const [
 		event,
 		setEvent
@@ -26,16 +25,10 @@ export default function TicketsPage() {
 		generalAdmissionTicket,
 		setGaTicket
 	] = useState();
-
-	useEffect(() => {
-		const el = document.querySelector('.full-height-wrapper').parentElement;
-
-		fullHeightContainer(el);
-
-		return () => {
-			removeFullHeightContainer(el);
-		};
-	}, []);
+	const [
+		reSaleTickets,
+		setResaleTickets
+	] = useState();
 
 	useEffect(
 		() => {
@@ -58,6 +51,8 @@ export default function TicketsPage() {
 				.catch((err) => console.error(err));
 
 			getEvent(id).then((res) => setEvent(res.data)).catch((err) => console.error(err));
+
+			getResaleTickets(id).then((res) => setResaleTickets(res.data.data)).catch((err) => console.error(err));
 		},
 		[
 			id
@@ -66,9 +61,10 @@ export default function TicketsPage() {
 
 	return (
 		<div className="full-height-wrapper">
-			<TicketContext.Provider
-				value={{ tickets, generalAdmissionCount, generalAdmissionTicket }}>
-				<Event event={event} />
+			<TicketContext.Provider value={{ tickets, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
+				<div className="pt-md-3">
+					<Event event={event} />
+				</div>
 				<PurchaseTickets />
 			</TicketContext.Provider>
 		</div>

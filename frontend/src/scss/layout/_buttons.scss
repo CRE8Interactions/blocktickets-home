@@ -14,8 +14,13 @@
 }
 
 .btn-group-flex {
-	.btn {
+	align-items: center;
+	> .btn {
 		margin: 0px;
+
+		&:not(.btn--icon) {
+			flex: 1;
+		}
 	}
 }
 
@@ -59,6 +64,56 @@ button,
 	}
 }
 
+.btn-group {
+	column-gap: rem(18);
+
+	@media (max-width: 375px) {
+		column-gap: rem(5);
+	}
+
+	> .btn:not(:first-child) {
+		margin-left: 0px;
+	}
+	> .btn:not(.dropdown-toggle),
+	.ticket-pick {
+		border-radius: $border-radius !important;
+		padding: rem(26) rem(24);
+		border: none;
+		background-color: $gray-300;
+		color: $text-muted;
+		font-size: $body-2;
+		flex: 0 0;
+		flex-basis: 73.5px;
+
+		@media (min-width: 500px) {
+			flex-basis: 95px;
+		}
+	}
+	// label.btn:hover,
+	// label.btn:focus {
+	// 	outline: 1px solid $primary;
+	// 	outline-offset: inset;
+	// }
+	.btn-check {
+		&:checked,
+		&:focus {
+			& + .btn {
+				box-shadow: none;
+			}
+		}
+		&:checked {
+			& + .btn {
+				background-color: $primary;
+				color: $white;
+			}
+		}
+	}
+}
+
+.ticket-pick {
+	cursor: initial;
+}
+
 .btn-link {
 	margin-top: 0px;
 	padding: 0px;
@@ -91,7 +146,7 @@ button,
 
 .btn--filter {
 	line-height: 1.4;
-	border-radius: $br-input;
+	border-radius: $br-primary;
 	margin-top: 0px;
 	width: 100%;
 	font-family: $font-body;
@@ -123,6 +178,16 @@ button,
 	}
 }
 
+.icon-button {
+	@extend %icon-text-box !optional;
+	justify-content: center;
+
+	&::before,
+	&::after {
+		line-height: 0;
+	}
+}
+
 .btn-tickets {
 	&--plain {
 		&::before {
@@ -136,13 +201,8 @@ button,
 	}
 }
 
-.btn-add {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'plus'));
-	}
-}
-
 .btn-next {
+	@extend .icon-button !optional;
 	&::after {
 		content: url($data-svg-prefix + map-get($icons, 'rightArrow'));
 	}

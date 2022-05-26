@@ -31,7 +31,7 @@ export default function VenueCard({ venue }) {
 						<Stack
 							direction="horizontal"
 							className="justify-content-center gap-2 mt-3 btn-group-flex">
-							<IconButton link="" variant="primary" btn="location" styles="mt-0">
+							<IconButton link="" variant="primary" btn="location" styles="flex-grow-0 mt-0">
 								Location
 							</IconButton>
 							
@@ -108,7 +108,7 @@ export default function VenueCard({ venue }) {
 							</li>
 						</Stack>
 						<Card.Footer className="pt-4 pt-md-5">
-							<span className="caption text-muted">{ venue[0]?.allEvents?.length } Streamed shows</span>
+							<span className="caption text-muted">{ venue[0]?.allEvents?.length } Events</span>
 						</Card.Footer>
 				</>
 			}

@@ -1,0 +1,5 @@
+@use '../../../scss/layout' as *;
+
+#my-tickets {
+	margin-top: calc($heading-spacer - 1rem);
+}

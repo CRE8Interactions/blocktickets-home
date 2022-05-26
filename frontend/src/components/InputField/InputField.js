@@ -4,12 +4,10 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 
-import './inputField.scss';
-
 // single inputs
 export default function InputField({ size, state, type, placeholder, children, styles }) {
 	return (
-		<Form className={`input-wrapper ${size} ${styles}`}>
+		<Form className={`input-wrapper input-wrapper-${size} ${styles}`}>
 			<FormControl
 				className="me-2"
 				type={type}

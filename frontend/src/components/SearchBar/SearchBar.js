@@ -1,23 +1,101 @@
-import React, { Component, Fragment, useContext } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+
+import { searchEvents } from '../../utilities/api';
+import { useOnOutsideClick } from '../../utilities/hooks';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
+import { SearchModal } from './SearchModal';
+import { SearchDropdown } from './SearchDropdown';
+
 import './searchBar.scss';
 
 export default function SearchBar() {
+	const { ref, isComponentVisible, setIsComponentVisible } = useOnOutsideClick(false);
+
+	// search modal
+	const [
+		show,
+		setShow
+	] = useState(false);
+
+	// search query
+	const [
+		query,
+		setQuery
+	] = useState('');
+
+	const [
+		queryResults,
+		setQueryResults
+	] = useState('');
+
+	// when no query
+	useEffect(
+		() => {
+			if (query == '') {
+				reset();
+			}
+		},
+		[
+			query
+		]
+	);
+
+	// when dropdown isn't shown
+	useEffect(
+		() => {
+			if (!isComponentVisible) {
+				reset();
+			}
+		},
+		[
+			isComponentVisible
+		]
+	);
+
+	const reset = () => {
+		setIsComponentVisible(false);
+		setQuery('');
+	};
+
+	const handleShow = () => {
+		setShow(true);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setIsComponentVisible(true);
+	};
+
+	const showResults = (e, flag = setIsComponentVisible) => {
+		setQuery(e);
+		if (e && e.split('').length >= 3) {
+			let data = {
+				data: e
+			};
+			searchEvents(data)
+				.then((res) => {
+					setQueryResults(res.data);
+
+					flag(true);
+				})
+				.catch((err) => console.error(err));
+		}
+		// handleShow
+	};
+
 	return (
 		<Fragment>
 			<Button
+				onClick={handleShow}
 				variant="default"
-				className="btn--icon mobile-tablet-only search-mobile"
+				className="btn--icon mobile-tablet-only"
+				id="search-mobile"
 				aria-label="search">
-				<svg
-					width="20"
-					height="20"
-					viewBox="0 0 20 20"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg">
+				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
 						fillRule="evenodd"
 						clipRule="evenodd"
@@ -26,21 +104,26 @@ export default function SearchBar() {
 					/>
 				</svg>
 			</Button>
-			<Form className="search d-none d-lg-flex">
+			<SearchModal
+				show={show}
+				setShow={setShow}
+				setQuery={setQuery}
+				query={query}
+				showResults={showResults}
+				results={queryResults}
+			/>
+			<Form onSubmit={handleSubmit} id="search" ref={ref} className="d-none d-lg-flex">
 				<FormControl
-					type="search"
+					type="text"
 					placeholder="Search for events"
 					className="me-2"
 					size="sm"
+					value={query}
+					onChange={(e) => showResults(e.target.value)}
 					aria-label="Search for events"
 				/>
 				<div className="search-icon">
-					<svg
-						width="20"
-						height="20"
-						viewBox="0 0 20 20"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							fillRule="evenodd"
 							clipRule="evenodd"
@@ -50,6 +133,7 @@ export default function SearchBar() {
 					</svg>
 				</div>
 			</Form>
+			{isComponentVisible && query && <SearchDropdown query={query} queryResults={queryResults} />}
 		</Fragment>
 	);
 }

@@ -1,0 +1,13 @@
+@use './../../../scss/abstracts' as *;
+@use './../../../scss/theme/colors' as *;
+
+#search-dropdown {
+	background-color: $white;
+	box-shadow: rgb(0 0 0 / 16%) 0px 4px 16px;
+	position: absolute;
+	top: 41px;
+	z-index: 999;
+	width: 452px;
+	border-radius: $br-primary;
+	padding: rem(16) rem(24);
+}

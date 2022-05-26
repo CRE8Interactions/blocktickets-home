@@ -6,13 +6,10 @@
 }
 
 /* Set core root defaults */
-html,
-body {
-	height: 100%; // for sticky navbar to work when scrolling
-}
-
 body {
 	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: antialiased;
 }
 
 html:focus-within {

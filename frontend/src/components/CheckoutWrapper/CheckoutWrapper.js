@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { getPaymentIntent } from '../../utilities/api';
 
 import Row from 'react-bootstrap/Row';
 
-import {
-	toggleNavContent,
-	fullHeightContainer,
-	removeFullHeightContainer,
-	toggleTimer
-} from '../../utilities/helpers';
+import { toggleNavContent, fullHeightContainer, removeFullHeightContainer, toggleTimer } from '../../utilities/helpers';
 
 import { Checkout } from './Checkout';
 import { PaymentConfirmation } from './PaymentConfirmation';
@@ -20,7 +14,7 @@ import './checkoutWrapper.scss';
 
 export default function CheckoutWrapper() {
 	let show = true;
-	let cart = sessionStorage.getItem('cart')
+	let cart = sessionStorage.getItem('cart');
 
 	// Make sure to call `loadStripe` outside of a component’s render to avoid
 	// recreating the `Stripe` object on every render.
@@ -36,48 +30,56 @@ export default function CheckoutWrapper() {
 		setStatus
 	] = useState('checkout');
 
-	const [ intentId, setIntentId] = useState('')
+	const [
+		intentId,
+		setIntentId
+	] = useState('');
 
-	const [order, setOrder] = useState()
+	const [
+		order,
+		setOrder
+	] = useState();
 
 	useLayoutEffect(() => {
+		document.getElementById('logo-link').style.pointerEvents = 'none';
 		const btns = document.querySelector('.desktop-btns');
 		const nav = document.querySelector('.navbar-nav');
 		const timer = document.getElementById('timer-container');
 
-		let cart = sessionStorage.getItem('cart')
-		if (cart) cart = JSON.parse(cart)
-		
+		toggleTimer(timer, show);
+		toggleNavContent(!show, btns, nav);
+
+		const el = document.querySelector('#main-container');
+
+		fullHeightContainer(el);
+
+		return () => {
+			toggleTimer(timer, !show);
+			toggleNavContent(show, btns, nav);
+			removeFullHeightContainer(el);
+			document.getElementById('logo-link').style.pointerEvents = 'auto';
+		};
+	}, []);
+
+	useEffect(() => {
+		let cart = sessionStorage.getItem('cart');
+		if (cart) cart = JSON.parse(cart);
+
 		// let total = cartTotal(cart, 4.35, 2.50)
 		// total = (parseFloat(total) * 100).toFixed()
 
 		let data = {
 			ticket: cart.ticket,
 			ticketCount: cart.ticketCount
-		}
+		};
 
 		getPaymentIntent(data)
-			.then((res) => {setClientSecret(res.data.client_secret); setIntentId(res.data.id)})
+			.then((res) => {
+				setClientSecret(res.data.client_secret);
+				setIntentId(res.data.id);
+			})
 			.catch((err) => console.error(err));
-
-		toggleTimer(timer, show);
-		toggleNavContent(!show, btns, nav);
-
-		return () => {
-			toggleTimer(timer, !show);
-			toggleNavContent(show, btns, nav);
-		};
 	}, []);
-
-	useEffect(() => {
-		const el = document.querySelector('.full-height-wrapper').parentElement;
-
-		fullHeightContainer(el);
-
-		return () => {
-			removeFullHeightContainer(el);
-		};
-	});
 
 	const addOns = [];
 
@@ -161,10 +163,14 @@ export default function CheckoutWrapper() {
 	return (
 		<div className="full-height-wrapper" id="checkout-wrapper">
 			<Row className="justify-content-between">
-				{clientSecret && ( <Elements stripe={stripePromise} options={options}>
-					{status === 'checkout' && <Checkout addOns={addOns} setStatus={setStatus} setOrder={setOrder} intentId={intentId} />}
-					{status === 'successful' && <PaymentConfirmation addOns={addOns} order={order} />}
-				</Elements> )}
+				{clientSecret && (
+					<Elements stripe={stripePromise} options={options}>
+						{status === 'checkout' && (
+							<Checkout addOns={addOns} setStatus={setStatus} setOrder={setOrder} intentId={intentId} />
+						)}
+						{status === 'successful' && <PaymentConfirmation addOns={addOns} order={order} />}
+					</Elements>
+				)}
 			</Row>
 		</div>
 	);

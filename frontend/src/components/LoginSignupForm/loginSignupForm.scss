@@ -4,7 +4,7 @@
 
 #login-signup-container {
 	@include breakpoint-max(md) {
-		gap: rem(16);
+		gap: $text-spacer;
 	}
 
 	.form-container {
@@ -17,10 +17,9 @@
 	.step-desc {
 		margin-bottom: $text-spacer;
 	}
+
 	.title {
-		text-transform: uppercase;
-		font-size: $body-2;
-		font-weight: bold;
+		@extend .normal--uppercase;
 		margin-bottom: rem(14);
 	}
 
@@ -29,13 +28,18 @@
 		color: $muted;
 		line-height: $line-height-base;
 		font-weight: $fw-normal;
+		margin: 0px;
 	}
 
-	small {
+	.form-text {
 		font-size: $caption;
 		color: $muted;
 		margin-top: $text-spacer;
 		text-align: center;
+
+		.btn {
+			font-size: $caption;
+		}
 	}
 
 	.form-control[name="pincode"] {

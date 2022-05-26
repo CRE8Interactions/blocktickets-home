@@ -1,0 +1,41 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout' as *;
+
+#venue {
+	.event-name-date-wrapper {
+		@include breakpoint-min(lg) {
+			width: 50%;
+		}
+
+		.event-name {
+			@extend %text-truncate;
+			font-size: rem(16);
+			margin-bottom: rem(6);
+			font-weight: $fw-medium;
+		}
+	}
+
+	.event-image {
+		width: 120px;
+		height: 120px;
+	}
+
+	ul {
+		.item {
+			& + .item {
+				margin-top: rem(32);
+			}
+
+			.event-info {
+				min-width: 0;
+				flex: 1;
+			}
+
+			.icon-button {
+				@include breakpoint-max(lg) {
+					align-self: flex-start;
+				}
+			}
+		}
+	}
+}

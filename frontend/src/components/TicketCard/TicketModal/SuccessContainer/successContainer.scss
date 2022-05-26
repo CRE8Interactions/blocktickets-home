@@ -1,4 +1,9 @@
+@use '../../../../scss/layout' as *;
+
 #success {
+	.modal-body-heading-title {
+		text-align: center;
+	}
 	&::before {
 		content: '';
 		background-image: url('../../../../assets/icons/success.svg');

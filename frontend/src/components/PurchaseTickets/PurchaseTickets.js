@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { useMedia } from './../../utilities/hooks';
+import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { SeatingMap } from './SeatingMap';
 import { TicketPurchase } from './TicketPurchase';
@@ -10,7 +13,6 @@ export default function PurchaseTickets() {
 	// 1 - ticket selection
 	// 2 - ticket confirmation
 	// 3 - presale
-
 	const steps = {
 		selection: 1,
 		confirmation: 2,
@@ -32,16 +34,45 @@ export default function PurchaseTickets() {
 		setStep
 	] = useState('selection');
 
+	// state when filter menu is open for layout change
+	const [
+		isFilterOpen,
+		setIsFilterOpen
+	] = useState(false);
+
 	// better way? - only on seated map
 	const [
 		isZoomed,
 		setIsZoomed
 	] = useState(false);
 
+	// current ticket
 	const [
 		ticket,
 		setTicket
 	] = useState();
+
+	const mediaQuery = useMedia('(min-width: 768px');
+
+	// layout change to full height only in tablet size or if on ticket selection step and filter menu is closed to allow scrolling on mobile and for mobile menu to display properly
+	useLayoutEffect(
+		() => {
+			if (mediaQuery || (step === 'selection' && !isFilterOpen)) {
+				const el = document.querySelector('#main-container');
+
+				fullHeightContainer(el);
+
+				return () => {
+					removeFullHeightContainer(el);
+				};
+			}
+		},
+		[
+			mediaQuery,
+			step,
+			isFilterOpen
+		]
+	);
 
 	const handleClick = (step, ticket) => {
 		// find key
@@ -68,6 +99,8 @@ export default function PurchaseTickets() {
 			<TicketPurchase
 				handleClick={handleClick}
 				handleGoBack={handleGoBack}
+				setIsFilterOpen={setIsFilterOpen}
+				isFilterOpen={isFilterOpen}
 				step={step}
 				type={param}
 				isZoomed={isZoomed}

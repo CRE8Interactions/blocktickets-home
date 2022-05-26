@@ -76,7 +76,7 @@ export default function Footer() {
 				</Col>
 			</Row>
 
-			<div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center pt-4 copyright caption">
+			<div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center py-4 copyright caption">
 				<p className="text-muted">
 					Copyright &copy; {getCopyrightYear()} Blocktickets. All rights reserved
 				</p>

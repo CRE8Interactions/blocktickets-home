@@ -1,0 +1,10 @@
+@use './../../../scss/abstracts' as *;
+@use './../../../scss/theme/colors' as *;
+
+#bank-account-card {
+	box-shadow: $box-shadow;
+	.card-text {
+		color: $muted;
+		font-size: $small;
+	}
+}

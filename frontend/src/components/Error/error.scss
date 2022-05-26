@@ -1,8 +1,6 @@
-@use '../../scss/abstracts' as *;
+@use '../../scss/theme/colors' as *;
 
 .alert {
-	display: flex;
-	align-items: center;
 	.icon {
 		svg {
 			max-width: initial;

@@ -1,0 +1,8 @@
+@use '../../../scss/abstracts' as *;
+
+#login-security-form {
+	.input-wrapper {
+		padding-top: rem(6);
+		padding-bottom: rem(6);
+	}
+}

@@ -1,32 +1,51 @@
 @use '../abstracts' as *;
 @use '../layout/container' as *;
 @use '../layout/spacing' as *;
-@use '../theme/buttons' as *;
+@use '../layout/buttons' as *;
 
 .modal {
 	line-height: 1.5;
+
+	&--popup {
+		$border-radius: $br-primary $br-primary 0px 0px;
+
+		@include breakpoint-max(md) {
+			box-shadow: $box-shadow-popupCard;
+			height: 626px;
+			border-radius: $border-radius;
+			width: 100vw;
+
+			.modal-dialog {
+				margin: 0px;
+				height: 100%;
+				border-radius: $border-radius;
+				max-width: 100%;
+			}
+
+			.modal-content {
+				height: 100%;
+				border-radius: $border-radius;
+			}
+		}
+	}
 
 	&-title {
 		font-size: $small;
 	}
 
-	&-content {
-		width: 448px;
-		margin: auto;
-		&.popup {
-			background-color: transparent;
-			padding-top: rem(9);
-			padding-right: rem(4);
-			border: none;
-		}
-	}
-
-	.modal-heading {
+	&-body-heading {
 		margin-bottom: $text-spacer-sm;
 
 		&-title {
 			font-size: $body-1;
 			margin-bottom: $text-spacer-sm;
+			font-weight: $fw-semi-bold;
+		}
+
+		&--with-border {
+			padding-bottom: $text-spacer-sm;
+			margin-bottom: $text-spacer-sm;
+			border-bottom: border();
 		}
 
 		p {
@@ -35,41 +54,88 @@
 	}
 
 	&-dialog-scrollable {
+		.modal-header {
+			margin-bottom: $text-spacer-xs;
+		}
+
 		.modal-body {
 			display: flex;
 			flex-direction: column;
-			padding-top: 0px;
+			padding-top: 0px !important;
 			@include remove-scrollbar();
 		}
 	}
 
+	// used for my tickets popups
 	&-lg {
-		padding: rem(32);
+		$m-x: rem(32);
+		$pad-y: rem(24);
 
-		p {
-			font-size: $body-2;
+		padding-left: 0px;
+		padding-right: 0px;
+
+		.modal {
+			&-header {
+				padding: rem(24) 0px;
+				margin-right: $m-x;
+				margin-left: $m-x;
+
+				.modal-title {
+					font-size: $body-1;
+				}
+			}
+
+			&-body {
+				padding: $pad-y 0px;
+				margin: 0px $m-x;
+				display: flex;
+				flex-direction: column;
+			}
+
+			&-footer {
+				padding: em(24) 0px;
+				margin: 0px $m-x;
+			}
 		}
 	}
 
-	&-body {
-		.btn {
-			margin-left: 0px;
-			margin-top: $text-spacer-sm;
-			width: 100%;
-			padding: $btn-padding-y-lg $btn-padding-x-lg;
-			font-size: $btn-font-size-lg;
+	// used for checkout modals
+	&-xl {
+		$padding: rem(32);
+
+		.modal {
+			&-body {
+				padding: $padding;
+				display: flex;
+				flex-direction: column;
+
+				&-heading-title {
+					font-size: $h4-font-size;
+				}
+			}
+		}
+	}
+
+	.btn-group-flex {
+		gap: $text-spacer-xs;
+		margin-top: $text-spacer-sm;
+
+		&.hstack {
+			> .btn {
+				flex: 0;
+
+				&:last-of-type {
+					flex: 1;
+				}
+			}
 		}
 
-		li + li {
-			margin-top: rem(20);
-		}
+		&.vstack {
+			flex: 0;
 
-		.split-row {
-			font-size: $body-2;
-		}
-
-		.form-group + .form-group {
-			margin-top: rem(19);
+			> .btn {
+				width: 100%;
+			}
 		}
 	}
 }

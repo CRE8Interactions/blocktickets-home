@@ -2,14 +2,13 @@
 @use '../../scss/layout' as *;
 
 .card.myCard {
-	width: rem(256);
 	@extend %plain-card;
 
 	.card {
 		&-img-top {
 			height: rem(303);
 			background-color: $clr-neutral-6;
-			border-radius: $br-textile;
+			border-radius: $br-md;
 		}
 
 		&-body {

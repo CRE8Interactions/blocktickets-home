@@ -6,8 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import profile from '../../assets/profile-thumbnail.png';
-import info from '../../assets/icons/info.svg';
+import { InfoIcon } from '../InfoIcon';
 
 import './event.scss';
 
@@ -24,14 +23,14 @@ export default function Event(props) {
 	return (
 		<div className="event">
 			<header>
-				<Row gap={2} className="py-2 py-md-3 align-items-center">
-					<Col md={2} id="artist-image-col" className="image-wrapper tablet-desktop-only">
+				<Row gap={2} className="py-2 pt-md-0 pb-md-3 align-items-center">
+					<Col md={2} id="event-image-col" className="image-wrapper tablet-desktop-only">
 						<img
 							src={event?.image?.url}
 							alt={event?.name}
 							width="139"
 							height="139"
-							className="artist-image"
+							className="event-image"
 						/>
 					</Col>
 					<Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
@@ -45,7 +44,7 @@ export default function Event(props) {
 							</Col>
 							<Col>
 								<p className="small">
-									{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')} <span className="time">{moment(event?.start).format('h:mm A')}</span>
+									{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')} <span className="time">{moment(event?.start).format('h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
 								</p>
 							</Col>
 						</Row>
@@ -79,11 +78,12 @@ export default function Event(props) {
 							id="event-info"
 							className="btn--info"
 							onClick={handleShow}>
-							<img src={info} alt="" />
+							<InfoIcon />
 							<span className="tablet-desktop-only">Event description</span>
 						</Button>
-
-						<EventModal show={show} handleClose={handleClose} event={event} />
+						{ event &&
+							<EventModal show={show} handleClose={handleClose} event={event} />
+						}
 					</Col>
 				</Row>
 			</header>

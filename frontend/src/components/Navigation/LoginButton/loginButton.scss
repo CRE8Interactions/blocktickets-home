@@ -1,0 +1,15 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/theme/buttons' as *;
+
+.navigation {
+	.navbar .navbar-nav {
+		.mobile-tablet-only {
+			&#login-btn {
+				margin-top: auto;
+				@include breakpoint-max(md) {
+					margin-bottom: rem(80);
+				}
+			}
+		}
+	}
+}

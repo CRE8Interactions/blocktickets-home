@@ -60,8 +60,8 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     const order = await strapi.entityService.findMany('api::order.order', {
       filters: {
         $and:[
-          { status: 'complete'},
-          { userId: user.id }
+          { status: ['complete', 'completeFromTransfer']},
+          { userId: user.id },
         ]
       },
       populate: {
@@ -87,5 +87,28 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     })
 
     return order
+  },
+  async search(ctx) {
+    let query = ctx.request.body.data
+    let events = await strapi.db.query('api::event.event').findMany({
+      where: {
+        $and: [
+          { status: 'on_sale' },
+          { name: { $containsi: query } }
+        ]
+      },
+      populate: {
+        venue: {
+          populate: {
+            image: true,
+            address: true
+          }
+        },
+        artists: true,
+        image: true
+      }
+    })
+
+    return events
   }
 }));

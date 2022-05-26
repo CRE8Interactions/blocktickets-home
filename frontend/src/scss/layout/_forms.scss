@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use './spacing' as *;
+@use './typography' as *;
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
@@ -32,8 +33,50 @@ select:-webkit-autofill:focus {
 		margin-top: 0px;
 	}
 
+	&--borderless {
+		border: none;
+	}
+
 	&:disabled {
 		opacity: .5;
+	}
+}
+
+.form-card {
+	border-radius: $br-primary;
+	padding: rem(12) rem(16);
+
+	&-lg {
+		.form-control {
+			font-size: $h4-font-size;
+		}
+	}
+
+	&,
+	& .form-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.form-label {
+			text-transform: initial;
+			font-weight: $fw-normal;
+			margin: 0px;
+		}
+
+		.form-control {
+			font-weight: $fw-bold;
+			padding: 0px;
+			order: -1;
+			text-align: center;
+		}
+
+		.form-control {
+			font-family: $font-heading;
+			margin: 0px;
+			background-color: transparent;
+			@extend .form-control--borderless !optional;
+		}
 	}
 }
 
@@ -42,11 +85,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-label {
-	text-transform: uppercase;
-	font-size: $caption;
-	font-weight: $fw-bold;
-	color: $muted;
-	margin-bottom: em(12);
+	@extend .caption--uppercase-label !optional;
 }
 
 .form-check {
@@ -63,11 +102,10 @@ select:-webkit-autofill:focus {
 
 .form-select {
 	padding: $input-padding-y $input-padding-x;
+}
 
-	&#form-select--numTickets {
-		background-size: initial;
-		background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M20.2071 13.7929C19.8166 13.4024 19.1834 13.4024 18.7929 13.7929L16 16.5858L13.2071 13.7929C12.8166 13.4024 12.1834 13.4024 11.7929 13.7929C11.4024 14.1834 11.4024 14.8166 11.7929 15.2071L15.2929 18.7071C15.6834 19.0976 16.3166 19.0976 16.7071 18.7071L20.2071 15.2071C20.5976 14.8166 20.5976 14.1834 20.2071 13.7929Z' fill='%23777E91'/%3E%3Crect x='1' y='1' width='30' height='30' rx='15' stroke='%23E6E8EC' stroke-width='2'/%3E%3C/svg%3E%0A");
-	}
+#custom-switch {
+	height: 26px;
 }
 
 @mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
@@ -76,18 +114,24 @@ select:-webkit-autofill:focus {
 	border-radius: $radius;
 	padding: $padding-y $padding-x;
 	border: $input-border-width solid $color;
+	padding-right: rem(8);
 
-	@include breakpoint-min(xl) {
-		padding-right: rem(8);
+	&:focus-within {
+		border-color: $input-focus-border-color;
 	}
 
 	.form-control {
 		border: none;
+		border-radius: 0;
 		padding: 0px;
 		min-height: auto;
 	}
 }
 
-#custom-switch {
-	height: 26px;
+.input-wrapper {
+	@include input-icon-box();
+
+	&-lg {
+		@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
+	}
 }

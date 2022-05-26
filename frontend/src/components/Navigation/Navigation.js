@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+
 import authService from '../../utilities/services/auth.service';
 import { useWindowSize } from '../../utilities/hooks';
 
@@ -12,8 +13,9 @@ import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
 
 import { SearchBar } from './../SearchBar';
-import { MyWallet } from './../MyWallet';
-import { NavButtons } from './NavButtons';
+import { MyWallet } from './MyWallet';
+import { LoginButton } from './LoginButton';
+import { MyWalletButton } from './MyWalletButton';
 import { Timer } from './Timer';
 
 import './navigation.scss';
@@ -24,27 +26,28 @@ export default function Navigation() {
 	const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
 	const toggleOverflow = (expanded) => {
-		document.body.style.overflowY = expanded ? 'hidden' : 'visible';
-		document.querySelector('.navbar').style.borderWidth = expanded ? '0px' : '1px';
+		if (expanded) {
+			document.body.classList.add('nav-is-open');
+		}
+		else {
+			document.body.classList.remove('nav-is-open');
+		}
 	};
 
 	return (
 		<div className="navigation position-sticky">
 			<Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
 				<Container>
-					<LinkContainer to="/">
+					<LinkContainer to="/" id="logo-link">
 						<Navbar.Brand>
 							<img src={logo} alt="blocktickets" />
 						</Navbar.Brand>
 					</LinkContainer>
 					<Stack direction="horizontal" className="desktop-btns">
 						<SearchBar />
-						<NavButtons styles="desktop-only" />
-						<Navbar.Toggle
-							aria-controls="responsive-navbar-nav"
-							id="toggle"
-							className="btn--icon pe-0"
-						/>
+						<LoginButton styles="desktop-only" />
+						<MyWalletButton styles="desktop-only" />
+						<Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
@@ -58,15 +61,15 @@ export default function Navigation() {
 
 							{authService.isLoggedIn() && (
 								<ul className="mobile-tablet-only" role="wallet-navigation">
-									<li className="pt-2">
+									<li className="mt-4">
 										<MyWallet />
 									</li>
 								</ul>
 							)}
-							<NavButtons styles="mobile-tablet-only" />
+							<LoginButton styles="mobile-tablet-only" />
 						</Nav>
 					</Navbar.Collapse>
-					<Timer />
+					<Timer className="d-block" />
 				</Container>
 			</Navbar>
 		</div>

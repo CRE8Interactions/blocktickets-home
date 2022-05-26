@@ -1,6 +1,7 @@
 'use strict';
 const Web3API = require('web3');
 const axios = require('axios');
+const order = require('./api/order/controllers/order');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const smsNumber = process.env.SMS_NUMBER;
@@ -11,7 +12,13 @@ const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
-const orderId = require('order-id')('blocktickets')
+const orderId = require('order-id')('blocktickets');
+// Encrypts user data
+const options = {
+  password: process.env.EC_PASSWORD || 'blocktickets',
+  passwordSalt: process.env.DEFAULT_PW
+};
+const encryption = require('encryption-se')(options);
 
 module.exports = {
   /**
@@ -69,7 +76,7 @@ module.exports = {
     initCategories()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
@@ -84,7 +91,7 @@ module.exports = {
 
           await client.messages
             .create({
-              body: `${params.data.fromUser.name} has transfer a ticket to ${params.data.event.name}, access BlockTicket.xyz and go to your wallet to claim your ticket`,
+              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`,
               messagingServiceSid: messagingServiceSid,
               to: params.data.phoneNumberToUser,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
@@ -95,6 +102,7 @@ module.exports = {
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
+          if (params.data.status === 'completeFromTransfer') return
           const paymentIntent = await stripe.paymentIntents.update(
             event.params.data.paymentIntentId,
             { metadata: {order_id: result.id }}
@@ -184,6 +192,19 @@ module.exports = {
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
 
+        // Changes on payment-formation model
+        if (event.model.singularName === 'payment-information') {
+          await encryption
+            .encrypt(event.params.data.accountNumber)
+            .then(enc => {
+              event.params.data.accountNumber = enc
+            })
+            .catch((err) => {
+              console.error('Enc error: ', err)
+            })
+        }
+
+
         // Changes on Order model
         if (event.model.singularName === 'order') {
           event.params.data.orderId = orderId.generate();
@@ -200,6 +221,20 @@ module.exports = {
           event.params.data.uuid = Math.floor(Math.random() * 900000000) + 100000000;
           event.params.data.creatorId = user.id
           event.params.data.members = [user];
+          // Creates web3 wallet for organization
+          const web3 = await new Web3API(new Web3API.providers.HttpProvider(blockchain));
+          const account = await web3.eth.accounts.create(web3.utils.randomHex(32));
+          const wallet = await web3.eth.accounts.wallet.add(account)
+
+          const myWallet = await strapi.db.query('api::wallet.wallet').create({
+            data: {
+              account,
+              wallet,
+              keystore: wallet.encrypt(web3.utils.randomHex(32))
+            }
+          })
+          
+          event.params.data.wallet = myWallet.id
         }
 
         // Changes on event model
@@ -224,16 +259,15 @@ module.exports = {
         if (event.model.singularName === 'user') {
           const profile = await strapi.db.query('api::profile.profile').create({
             data: {
-              username: event.params.data.username.toLowerCase(),
-              gender: event.params.data.gender.toLowerCase(),
-              name: event.params.data.name.toLowerCase(),
-              // dob: event.params.data.dob
+              username: event.params.data.email.toLowerCase()
             }
           })
+
           event.params.data.profile = profile
           event.params.data.email = event.params.data.email.toLowerCase()
-          event.params.data.username = event.params.data.username.toLowerCase()
-          event.params.data.name = event.params.data.name.toLowerCase()
+          event.params.data.username = event.params.data.email.toLowerCase()
+          event.params.data.firstName = event.params.data.firstName.toLowerCase()
+          event.params.data.lastName = event.params.data.lastName.toLowerCase()
           event.params.data.gender = event.params.data.gender.toLowerCase()
         }
 
@@ -286,6 +320,19 @@ module.exports = {
             .done()
         }
       },
+      async beforeUpdate(event) {
+        // Updates on payment-formation model
+        if (event.model.singularName === 'payment-information') {
+          await encryption
+            .encrypt(event.params.data.accountNumber)
+            .then(enc => {
+              event.params.data.accountNumber = enc
+            })
+            .catch((err) => {
+              console.error('Enc error: ', err)
+            })
+        }
+      }
     });
   },
 };

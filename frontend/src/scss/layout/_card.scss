@@ -1,5 +1,7 @@
 @use '../abstracts' as *;
-@use '../layout/typography' as *;
+@use 'spacing' as *;
+@use 'typography' as *;
+@use 'container' as *;
 @use '../theme/card' as *;
 @use '../theme/colors' as *;
 
@@ -21,15 +23,35 @@
 	}
 }
 
+.myCard,
+.ticket-card {
+	width: rem(256);
+}
 .card {
-	.card-subtitle {
+	&-subtitle {
 		margin-top: 0px;
 	}
 	&--light {
-		background-color: $clr-white;
+		background-color: $white;
 
+		.card-header,
 		.card-footer {
-			background-color: $clr-white;
+			background-color: inherit;
+		}
+	}
+
+	&--dark {
+		background-color: $clr-neutral-3;
+
+		* {
+			color: $clr-white;
+		}
+	}
+
+	&--popup {
+		@include breakpoint-max(md) {
+			@include full-width();
+			box-shadow: $box-shadow-popupCard;
 		}
 	}
 
@@ -59,30 +81,62 @@
 		font-size: $caption;
 	}
 
+	// used in addons
 	&-md {
 		$padding: em(20) em(24);
 
-		.card-header {
-			padding: $padding;
-		}
 		.card-body {
 			padding: $padding;
 		}
 	}
 
+	// used in settings options
 	&-lg {
-		$pad-x: em(31);
-		$pad-y: em(20);
+		$padding: em(30) em(20);
+
+		.card-body {
+			padding: $padding;
+		}
+	}
+
+	// used in total card
+	&-xl {
+		$m-x: em(39);
+		$pad-y: em(24);
+
+		padding-left: 0px;
+		padding-right: 0px;
 
 		.card-header {
-			padding: $pad-y $pad-x;
+			padding: $pad-y 0px;
+			margin: 0px $m-x;
+		}
+
+		.card-heading {
+			margin-bottom: $text-spacer-sm;
+		}
+
+		.card-title,
+		.card-heading-title {
+			font-size: $body-1;
+			font-weight: $fw-semi-bold;
 		}
 
 		.card-body {
-			padding: $pad-y $pad-x;
+			padding: $pad-y 0px;
+			margin: 0px $m-x;
+			display: flex;
+			flex-direction: column;
+
+			&-header {
+				padding-bottom: $pad-y;
+				border-bottom: border();
+			}
 		}
+
 		.card-footer {
-			padding: em(24) $pad-x;
+			padding: em(24) 0px;
+			margin: 0px $m-x;
 		}
 	}
 }

@@ -10,5 +10,10 @@ module.exports = {
       path: '/verifies/newUser',
       handler: 'verify.newUser'
     },
+    {
+      method: 'POST',
+      path: '/verifies/personalDetails',
+      handler: 'verify.updatePersonalDetails'
+    },
   ]
 }

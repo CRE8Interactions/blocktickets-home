@@ -3,9 +3,6 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
-import rightArrow from '../../assets/icons/right-arrow.svg';
-import leftArrow from '../../assets/icons/left-arrow.svg';
-
 import './swiperNavigationButtons.scss';
 
 export default function SwiperNavigationButtons({ styles }) {

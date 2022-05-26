@@ -1,7 +1,8 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/links' as *;
 @use '../../scss/layout/typography' as *;
 @use '../../scss/layout/container' as *;
-@use '../../scss/theme/custom' as *;
+@use '../../scss/theme/buttons' as *;
 
 .navigation {
 	&.position-sticky {
@@ -32,36 +33,37 @@
 		background-color: $clr-white;
 
 		@include breakpoint-min(lg) {
-			padding-top: rem(20);
-			padding-bottom: rem(20);
+			padding-top: rem(21);
+			padding-bottom: rem(21);
 		}
 
 		&-brand {
+			padding-top: rem(3);
 			@include breakpoint-min(lg) {
 				border-right: border(2px);
+				padding-right: rem(13);
+			}
+
+			@include breakpoint-min(xl) {
 				padding-right: rem(47);
 			}
 		}
 
-		&-collapse {
-			@include breakpoint-max(lg) {
-				margin-top: $navbar-padding-y;
-			}
+		&-toggler {
+			margin-right: 0px !important;
 		}
+
+		&-collapse {
+			z-index: 999;
+		}
+
 		&-nav {
-			padding-top: em(20);
+			padding-top: em(73);
+			padding-bottom: em(60);
 
-			@media screen and (min-device-height: 812px) {
-				padding-bottom: em(60);
-				padding-top: em(73);
-			}
 			@include breakpoint-max(lg) {
-				height: calc(100vh - 90px);
-			}
-
-			@include breakpoint-min(lg) {
-				padding-top: em(19);
-				padding-bottom: em(19);
+				min-height: -webkit-fill-available;
+				height: calc(100vh - 88px);
 			}
 
 			ul {
@@ -91,23 +93,28 @@
 				}
 
 				.nav-link {
-					@include breakpoint-min(lg) {
-						padding-left: rem(15);
-					}
-
 					@include breakpoint-max(lg) {
-						font-size: rem(24);
+						font-size: $body-2;
+						padding: $nav-link-padding;
+						margin: $nav-link-margin;
+
+						&:hover,
+						&:focus,
 						&.active {
-							border-left: border(2px, $clr-primary);
-							@include full-width();
-							padding-left: calc($pad-sm - rem(2));
-							@include breakpoint-min(md) {
-								padding-left: calc($pad-md - rem(2));
-							}
+							@include hover-effect();
 						}
 					}
 				}
 			}
+		}
+	}
+
+	.btn {
+		margin-top: 0px;
+		&-secondary,
+		&-outline-light {
+			min-width: 102px;
+			padding: rem(11) $btn-padding-x;
 		}
 	}
 }

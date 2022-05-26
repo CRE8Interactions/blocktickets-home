@@ -1,10 +1,11 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout/spacing' as *;
+@use '../../scss/layout/typography' as *;
 @use '../../scss/layout/container' as *;
 
 .hero {
 	header {
-		.banner-image {
+		.event-image {
 			@include breakpoint-min(md) {
 				height: 556px;
 			}

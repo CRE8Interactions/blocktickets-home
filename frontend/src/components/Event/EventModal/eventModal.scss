@@ -12,12 +12,11 @@
 		border-bottom: border();
 
 		.event-name {
-			@extend %text-truncate !optional;
-			width: 350px;
+			@extend %text-truncate;
 		}
 	}
 
-	.artist-image {
+	.event-image {
 		width: 195px;
 		height: 195px;
 	}

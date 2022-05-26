@@ -1,6 +1,5 @@
 @use './spacing' as *;
 @use '../abstracts' as *;
-@use './typography';
 
 $pad-sm: rem(32);
 $pad-md: rem(81);
@@ -19,13 +18,18 @@ $navbar-height: rem(82);
 		padding: 0px $pad-md;
 	}
 
-	&--full-width {
+	&--full-height {
 		flex: 1;
 	}
 }
 
+// on body and html
+.full-height {
+	height: 100%;
+}
+
 // on the root element
-.full-width-flex {
+.full-height-flex {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -37,6 +41,14 @@ $navbar-height: rem(82);
 	height: 100%;
 }
 
+.nav-is-open {
+	overflow: hidden;
+}
+
+.noBodyPadding {
+	padding: 0px 0px 0px 0px !important;
+}
+
 @mixin full-width() {
 	position: relative;
 	width: 100vw;
@@ -44,6 +56,23 @@ $navbar-height: rem(82);
 	right: 50%;
 	margin-left: -50vw;
 	margin-right: -50vw;
+}
+
+.page-slider {
+	@include breakpoint-max(md) {
+		@include full-width();
+		left: 0%;
+		margin-left: 0px;
+	}
+}
+
+.sticky {
+	@include breakpoint-max(md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin-top: auto;
+	}
 }
 
 .d-flex-column {
@@ -59,56 +88,6 @@ $navbar-height: rem(82);
 	&::before,
 	&::after {
 		line-height: 0;
-	}
-}
-
-.icon-button {
-	@extend %icon-text-box !optional;
-	justify-content: center;
-
-	&::before,
-	&::after {
-		line-height: 0;
-	}
-}
-
-.time-caption,
-.venue-caption,
-.location-caption {
-	@extend .caption !optional;
-	@extend %icon-text-box !optional;
-	gap: $gap-xs;
-	color: $clr-neutral-4;
-	font-weight: $fw-semi-bold;
-	line-height: 0;
-}
-
-.date,
-.venue,
-.location {
-	@extend %icon-text-box !optional;
-	gap: $gap-xs;
-	line-height: 0;
-}
-
-.time-caption,
-.date {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'calendar'));
-	}
-}
-
-.venue-caption,
-.venue {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'venue'));
-	}
-}
-
-.location-caption,
-.location {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'location'));
 	}
 }
 
@@ -149,24 +128,24 @@ $navbar-height: rem(82);
 	@include remove-scrollbar();
 }
 
-.artist-image {
+.event-image {
 	aspect-ratio: 1/1;
+}
 
-	// browsers that do not support aspect-ratio like Explorer and Safari
-	@supports not (aspect-ratio: 1/1) {
-		/* defined that the height of the depends on its width */
-		.image-wrapper {
-			position: relative;
-			padding-top: 100%; // aspect-ratio 1 / 1
-			/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
-			.artist-image {
-				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
+// browsers that do not support aspect-ratio like Explorer and Safari
+@supports not (aspect-ratio: 1/1) {
+	/* defined that the height of the depends on its width */
+	.image-wrapper {
+		position: relative;
+		padding-top: 100%; // aspect-ratio 1 / 1
+		/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
+		.event-image {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	}
 }

@@ -1,7 +1,7 @@
 @use '../../../../scss/abstracts' as *;
 
 .left-col {
-	.num-tickets {
+	.ticket-counter {
 		border-top: border();
 		padding: em(23) 0px;
 	}
@@ -16,5 +16,9 @@
 
 	.disclaimer {
 		padding: em(23) 0px;
+	}
+
+	.counter {
+		width: 120px;
 	}
 }
