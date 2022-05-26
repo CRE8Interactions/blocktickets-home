@@ -81,23 +81,15 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 	};
 
 	return (
-		<Card className={`card-xl card--popup ${expanded && 'card--popup-expanded'}`}>
+		<Card id="totalCard" className={`card-xl card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
 				<Card.Title as="h5" className="normal">
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" gap={2} className="card-header-price">
 					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.5)}</span>
-					<Button
-						onClick={() => setExpanded(!expanded)}
-						variant="outline-light"
-						className=" btn--icon-sm">
-						<svg
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg">
+					<Button onClick={() => setExpanded(!expanded)} variant="outline-light" className=" btn--icon-sm">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
 								fillRule="evenodd"
 								clipRule="evenodd"
@@ -116,14 +108,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<ul>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Tickets: ${parseFloat(
-											ticketPrice
-										).toFixed(2)}{' '}
-										x {tickets.ticketCount}
+										Tickets: ${parseFloat(ticketPrice).toFixed(2)} x {tickets.ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(ticketPrice).toFixed(2) *
-											tickets.ticketCount).toFixed(2)}
+										${(parseFloat(ticketPrice).toFixed(2) * tickets.ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 							</ul>
@@ -133,25 +121,21 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<ul>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Service Fee: ${parseFloat(tickets.ticket.fee).toFixed(2)}{' '}
-										x {tickets.ticketCount}
+										Service Fee: ${parseFloat(tickets.ticket.fee).toFixed(2)} x{' '}
+										{tickets.ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(tickets.ticket.fee).toFixed(2) *
-											tickets.ticketCount).toFixed(2)}
+										${(parseFloat(tickets.ticket.fee).toFixed(2) * tickets.ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Facility Charge: ${parseFloat(
-											tickets.ticket.facilityFee
-										).toFixed(2)}{' '}
-										x {tickets.ticketCount}
+										Facility Charge: ${parseFloat(tickets.ticket.facilityFee).toFixed(2)} x{' '}
+										{tickets.ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(
-											tickets.ticket.facilityFee
-										).toFixed(2) * tickets.ticketCount).toFixed(2)}
+										${(parseFloat(tickets.ticket.facilityFee).toFixed(2) *
+											tickets.ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">
