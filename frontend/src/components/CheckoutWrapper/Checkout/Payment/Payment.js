@@ -5,11 +5,10 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import './payment.scss';
 
 export default function Payment({ checkValid }) {
-	let name;
 	const CheckoutForm = () => {
 		return (
 			<Form id="checkout-form">
-				<PaymentElement onChange={(e) => checkValid(e, name)} />
+				<PaymentElement onChange={(e) => checkValid(e)} />
 			</Form>
 		);
 	};

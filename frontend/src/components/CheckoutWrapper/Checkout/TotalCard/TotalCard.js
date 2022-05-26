@@ -28,6 +28,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 	let tickets = sessionStorage.getItem('cart');
 	if (tickets) tickets = JSON.parse(tickets);
 
+	const ticketPrice = tickets.ticket.resale ? tickets.ticket.listingAskingPrice : tickets.ticket.cost;
 	const stripe = useStripe();
 	const elements = useElements();
 
@@ -116,12 +117,12 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
 										Tickets: ${parseFloat(
-											tickets.ticket.attributes.cost
+											ticketPrice
 										).toFixed(2)}{' '}
 										x {tickets.ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(tickets.ticket.attributes.cost).toFixed(2) *
+										${(parseFloat(ticketPrice).toFixed(2) *
 											tickets.ticketCount).toFixed(2)}
 									</span>
 								</Stack>
@@ -132,24 +133,24 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<ul>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Service Fee: ${parseFloat(tickets.ticket.attributes.fee).toFixed(2)}{' '}
+										Service Fee: ${parseFloat(tickets.ticket.fee).toFixed(2)}{' '}
 										x {tickets.ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(tickets.ticket.attributes.fee).toFixed(2) *
+										${(parseFloat(tickets.ticket.fee).toFixed(2) *
 											tickets.ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
 										Facility Charge: ${parseFloat(
-											tickets.ticket.attributes.facilityFee
+											tickets.ticket.facilityFee
 										).toFixed(2)}{' '}
 										x {tickets.ticketCount}
 									</span>
 									<span className="text-end">
 										${(parseFloat(
-											tickets.ticket.attributes.facilityFee
+											tickets.ticket.facilityFee
 										).toFixed(2) * tickets.ticketCount).toFixed(2)}
 									</span>
 								</Stack>

@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // import './ticket.scss';
 
 export default function Ticket({ ticket, handleNext }) {
+	const ticketPrice = ticket.attributes.resale ? ticket.attributes.listingAskingPrice : ticket.attributes.cost;
 	const ticketTypes = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Ticket';
 		if (!ticket.resale && ticket.on_sale_status === 'presale') return 'Presale';
@@ -29,7 +30,7 @@ export default function Ticket({ ticket, handleNext }) {
 				<div>
 					<span className="fw-bold text-end">
 						${parseFloat(
-							ticket.attributes.cost +
+							 ticketPrice +
 								ticket.attributes.fee +
 								ticket.attributes.facilityFee +
 								2.5 +
@@ -39,7 +40,7 @@ export default function Ticket({ ticket, handleNext }) {
 				</div>
 				<div>
 					<span className="text-muted caption">
-						${parseFloat(ticket.attributes.cost).toFixed(2)} + Fees
+						${parseFloat(ticketPrice).toFixed(2)} + Fees
 					</span>
 				</div>
 			</div>

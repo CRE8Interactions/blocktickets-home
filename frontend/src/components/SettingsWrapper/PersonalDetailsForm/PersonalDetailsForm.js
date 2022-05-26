@@ -25,12 +25,12 @@ export default function PersonalDetailsForm() {
 	const [
 		firstName,
 		setFirstName
-	] = useState(user.name);
+	] = useState(user.firstName);
 
 	const [
 		lastName,
 		setLastName
-	] = useState(user.name);
+	] = useState(user.lastName);
 
 	const [
 		email,
@@ -118,7 +118,7 @@ export default function PersonalDetailsForm() {
 						placeholder="Enter your first name"
 						required
 						name="firstName"
-						defaultValue={user.name}
+						defaultValue={user.firstName}
 						onChange={(e) => setFirstName(e.target.value)}
 					/>
 				</Form.Group>
@@ -129,7 +129,7 @@ export default function PersonalDetailsForm() {
 						placeholder="Enter your last name"
 						required
 						name="lastName"
-						defaultValue={user.name}
+						defaultValue={user.lastName}
 						onChange={(e) => setLastName(e.target.value)}
 					/>
 				</Form.Group>

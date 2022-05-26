@@ -40,11 +40,11 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 		handleShow();
 	};
 
-	const checkValid = (e, name) => {
+	const checkValid = (e) => {
 		let paymentButton = document.getElementById('payment-btn');
 		let paymentButtonDisabled = document.getElementById('payment-btn-disabled');
 
-		if (e && e.complete && name && name.split('').length > 5) {
+		if (e && e.complete) {
 			paymentButton.classList.add('d-block');
 			paymentButton.classList.remove('d-none');
 			paymentButtonDisabled.classList.add('d-none');

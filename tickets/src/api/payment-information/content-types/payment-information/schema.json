@@ -21,7 +21,7 @@
       "type": "string",
       "required": true
     },
-    "bankName": {
+    "firstName": {
       "type": "string",
       "required": true
     },
@@ -36,6 +36,9 @@
     "accountType": {
       "type": "string",
       "required": true
+    },
+    "lastName": {
+      "type": "string"
     }
   }
 }
