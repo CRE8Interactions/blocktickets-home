@@ -2,8 +2,6 @@ import React from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
-// import './ticket.scss';
-
 export default function Ticket({ ticket, handleNext }) {
 	const ticketPrice = ticket.attributes.resale ? ticket.attributes.listingAskingPrice : ticket.attributes.cost;
 	const ticketTypes = (ticket) => {
@@ -30,18 +28,12 @@ export default function Ticket({ ticket, handleNext }) {
 				<div>
 					<span className="fw-bold text-end">
 						${parseFloat(
-							 ticketPrice +
-								ticket.attributes.fee +
-								ticket.attributes.facilityFee +
-								2.5 +
-								4.35
+							ticketPrice + ticket.attributes.fee + ticket.attributes.facilityFee + 2.5 + 4.35
 						).toFixed(2)}
 					</span>
 				</div>
 				<div>
-					<span className="text-muted caption">
-						${parseFloat(ticketPrice).toFixed(2)} + Fees
-					</span>
+					<span className="text-muted caption">${parseFloat(ticketPrice).toFixed(2)} + Fees</span>
 				</div>
 			</div>
 		</ListGroup.Item>

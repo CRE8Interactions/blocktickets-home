@@ -1,5 +1,4 @@
 @use './../../../../scss/abstracts' as *;
-@use './../../../../scss/layout' as *;
 
 .myDropdown {
 	position: absolute;
@@ -12,4 +11,8 @@
 	width: rem(233);
 	border: border();
 	border-top: none;
+
+	@include breakpoint-min(xxl) {
+		right: rem(-65);
+	}
 }
