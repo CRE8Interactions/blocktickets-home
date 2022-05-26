@@ -33,37 +33,22 @@ export default function FilterMenu({ handleShow, show, sliderValues, setSliderVa
 						sliderValues={sliderValues}
 						setSliderValues={setSliderValues}
 					/>
-					<Form.Check
-						type="checkbox"
-						label="Show prices with fees"
-						id="fees"
-						className="fw-bold"
-					/>
+					<Form.Check type="checkbox" label="Show prices with fees" id="fees" />
 				</header>
 				<div className="filter-container">
 					<div className="scrollable-content">
 						<legend>
-							<p className="caption--uppercase text-muted legend-heading">
-								Ticket Type
-							</p>
+							<p className="caption--uppercase text-muted legend-heading">Ticket Type</p>
 							<ul>
 								<li>
-									<Form.Check
-										type="checkbox"
-										id="standard"
-										label="Standard Admission"
-									/>
+									<Form.Check type="checkbox" id="standard" label="Standard Ticket" />
 								</li>
 								<li>
-									<Form.Check
-										type="checkbox"
-										id="resale"
-										label="Verified Resale Ticket"
-									/>
+									<Form.Check type="checkbox" id="resale" label="Resale Ticket" />
 								</li>
 							</ul>
 						</legend>
-						<legend>
+						{/* <legend>
 							<Stack direction="horizontal" className="heading--flex">
 								<p className="small legend-heading accessibility">Accessibility</p>
 								<Form.Switch
@@ -93,7 +78,7 @@ export default function FilterMenu({ handleShow, show, sliderValues, setSliderVa
 									</ul>
 								)}
 							</div>
-						</legend>
+						</legend> */}
 					</div>
 				</div>
 				<TicketPurchaseFooter>
