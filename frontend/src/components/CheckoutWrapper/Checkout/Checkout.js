@@ -69,7 +69,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 					<Payment checkValid={checkValid} />
 				</section>
 			</Col>
-			<Col md={6} lg={5} id="total-card" className="sticky">
+			<Col md={6} lg={5} className="sticky">
 				<TotalCard
 					setStatus={setStatus}
 					addOns={addOns}
