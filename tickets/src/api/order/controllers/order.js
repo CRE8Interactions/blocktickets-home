@@ -14,7 +14,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     // Find Available Tickets
     let tickets = await strapi.db.query('api::ticket.ticket').findMany({
       where: {
-        eventId: cart.ticket.attributes.eventId,
+        eventId: cart.ticket.eventId,
         on_sale_status: "available"
       },
       limit: cart.ticketCount
@@ -31,13 +31,13 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       }
     })
     // Creates Order with details
-    let totalTicketPrices = Number(parseFloat(cart.ticket.attributes.cost * cart.ticketCount).toFixed(2))
-    let fees = Number(parseFloat((cart.ticket.attributes.fee * cart.ticketCount) + (cart.ticket.attributes.facilityFee * cart.ticketCount) + 4.35 + 2.50).toFixed(2))
+    let totalTicketPrices = Number(parseFloat(cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost * cart.ticketCount).toFixed(2))
+    let fees = Number(parseFloat((cart.ticket.fee * cart.ticketCount) + (cart.ticket.facilityFee * cart.ticketCount) + 4.35 + 2.50).toFixed(2))
     let total = (totalTicketPrices + fees)
 
     let order = await strapi.db.query('api::order.order').create({
       data: {
-        event: cart.ticket.attributes.eventId,
+        event: cart.ticket.eventId,
         users_permissions_user: user,
         userId: user.id,
         tickets,
