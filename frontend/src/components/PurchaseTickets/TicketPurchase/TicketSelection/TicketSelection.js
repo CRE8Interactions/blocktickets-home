@@ -30,7 +30,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	] = useState([]);
 
     // all tickets costs and ticket count combined for filtering 
-    const [totalCost, setTotalCost] = useState(0)
+    const [totalCost, setTotalCost] = useState(60)
 
 	const [
 		sliderValues,
@@ -86,9 +86,9 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		]
 	);
 
-    const getTotalCost = () => {
-        setTotalCost(resaleTickets && resaleTickets.map(ticket => totalCost += ticket.attributes?.cost) + gaTicket.attributes?.cost)
-    }
+    // const getTotalCost = () => {
+    //     setTotalCost(resaleTickets && resaleTickets.map(ticket => totalCost += ticket.attributes?.cost) + gaTicket.attributes?.cost)
+    // }
 
 	const handleShow = () => {
 		setShowFilter(!showFilter); 
