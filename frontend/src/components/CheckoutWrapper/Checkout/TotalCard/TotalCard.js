@@ -81,7 +81,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 	};
 
 	return (
-		<Card id="totalCard" className={`card-xl card--popup ${expanded && 'card--popup-expanded'}`}>
+		<Card id="total-card" className={`card-xl card--popup ${expanded && 'card--popup-expanded'}`}>
 			<Card.Header className="heading--flex">
 				<Card.Title as="h5" className="normal">
 					Total
