@@ -10,12 +10,12 @@ export default function CardDeclineModal({ modalError }) {
 
 	return (
 		<Modal.Body>
-			<div className="modal-body-heading">
-				<h1 className="modal-body-heading-title">{modalError}</h1>
-				<p>Please check your card details and try again.</p>
-			</div>
+			<h1 className="modal-body-heading-title">{modalError}</h1>
+			<p>Please check your card details and try again.</p>
 			<Stack className="btn-group-flex">
-				<Button onClick={() => navigate(-1)}>Try Again</Button>
+				<Button size="lg" onClick={() => navigate(-1)}>
+					Try Again
+				</Button>
 			</Stack>
 		</Modal.Body>
 	);
