@@ -10,12 +10,12 @@ export default function TimeoutModal() {
 
 	return (
 		<Modal.Body>
-			<div className="modal-body-heading">
-				<h1 className="modal-body-heading-title">Sorry... Time’s up!</h1>
-				<p>The time limit gives all fans a fair shot at tickets.</p>
-			</div>
+			<h1 className="modal-body-heading-title">Sorry... Time’s up!</h1>
+			<p>The time limit gives all fans a fair shot at tickets.</p>
 			<Stack className="btn-group-flex">
-				<Button onClick={() => navigate(-1)}>Try again</Button>
+				<Button size="lg" onClick={() => navigate(-1)}>
+					Try again
+				</Button>
 			</Stack>
 		</Modal.Body>
 	);
