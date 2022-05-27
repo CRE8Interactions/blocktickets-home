@@ -10,14 +10,32 @@ import Stack from 'react-bootstrap/Stack';
 
 import './filterMenu.scss';
 
-export default function FilterMenu({ handleShow, show, sliderValues, setSliderValues }) {
+export default function FilterMenu({
+	handleShow,
+	show,
+	sliderValues,
+	setSliderValues,
+	ticketFilters,
+	setTicketFilters
+}) {
 	const [
 		on,
 		setOn
 	] = useState(false);
 
+	const handleChecked = (e) => {
+		const { name, value } = e.target;
+
+		console.log(name, value);
+		setTicketFilters((prevState) => ({
+			...prevState,
+			[e.target.name]: !prevState[name]
+		}));
+	};
+
 	const handleFilter = (action) => {
 		handleShow(!show);
+		// setTicketFilters(filters);
 	};
 
 	return (
@@ -33,7 +51,14 @@ export default function FilterMenu({ handleShow, show, sliderValues, setSliderVa
 						sliderValues={sliderValues}
 						setSliderValues={setSliderValues}
 					/>
-					<Form.Check type="checkbox" label="Show prices with fees" id="fees" />
+					<Form.Check
+						type="checkbox"
+						label="Show prices with fees"
+						id="fees"
+						name="showFees"
+						onChange={handleChecked}
+						checked={ticketFilters.showFees}
+					/>
 				</header>
 				<div className="filter-container">
 					<div className="scrollable-content">
@@ -41,10 +66,24 @@ export default function FilterMenu({ handleShow, show, sliderValues, setSliderVa
 							<p className="caption--uppercase text-muted legend-heading">Ticket Type</p>
 							<ul>
 								<li>
-									<Form.Check type="checkbox" id="standard" label="Standard Ticket" />
+									<Form.Check
+										type="checkbox"
+										id="standard"
+										onChange={handleChecked}
+										checked={ticketFilters.standard}
+										name="standard"
+										label="Standard Ticket"
+									/>
 								</li>
 								<li>
-									<Form.Check type="checkbox" id="resale" label="Resale Ticket" />
+									<Form.Check
+										type="checkbox"
+										onChange={handleChecked}
+										checked={ticketFilters.resale}
+										id="resale"
+										name="resale"
+										label="Resale Ticket"
+									/>
 								</li>
 							</ul>
 						</legend>
