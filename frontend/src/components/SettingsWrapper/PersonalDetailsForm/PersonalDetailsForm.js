@@ -69,8 +69,7 @@ export default function PersonalDetailsForm() {
 		// set default value for gender dropdown
 		let select = document.getElementById('gender');
 		for (let i = 0; i < select.options.length; i++) {
-			if (select.options[i].value === user.gender)
-				select.options[i].setAttribute('selected', true);
+			if (select.options[i].value === user.gender) select.options[i].setAttribute('selected', true);
 		}
 		if (firstName && lastName && email && gender && dob) {
 			setFormValid(true);
@@ -91,9 +90,7 @@ export default function PersonalDetailsForm() {
 			}
 		};
 
-		updatePersonalDetails(data)
-			.then((res) => authService.setUser(res.data))
-			.catch((err) => console.error(err));
+		updatePersonalDetails(data).then((res) => authService.setUser(res.data)).catch((err) => console.error(err));
 	};
 
 	return (
@@ -163,7 +160,7 @@ export default function PersonalDetailsForm() {
 					</Col>
 				</Row>
 				<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
-					Update Profile
+					Update
 				</Button>
 			</Form>
 		</Fragment>
