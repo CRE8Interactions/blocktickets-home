@@ -180,7 +180,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 										(routing) =>
 											e.target.validity.valid || e.target.value === '' ? e.target.value : routing
 									)}
-								className={routingNumber && routingNumError && 'error-border'}
+								className={routingNumber && routingNumError ? 'error-border' : ''}
 							/>
 							{routingNumber &&
 							routingNumError && (
@@ -201,7 +201,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 										(acc) =>
 											e.target.validity.valid || e.target.value === '' ? e.target.value : acc
 									)}
-								className={accountNumber && accountNumError && 'error-border'}
+								className={accountNumber && accountNumError ? 'error-border' : ''}
 							/>
 							{accountNumber &&
 							accountNumError && (
