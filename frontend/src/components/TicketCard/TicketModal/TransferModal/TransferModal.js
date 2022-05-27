@@ -128,7 +128,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order }) {
 									value={phoneNumber}
 									required
 									onChange={(e) => setPhoneNumber(e)}
-									className={phoneNumber && !isValid && 'error-border'}
+									className={phoneNumber && !isValid ? 'error-border' : ''}
 								/>
 
 								<span>{phoneNumber && !isValid && (<Error type="phone" />)}</span>

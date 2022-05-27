@@ -246,7 +246,7 @@ export default function LoginSignupForm() {
 								value={phoneNumber}
 								required
 								onChange={setValue}
-								className={phoneNumber && hasError && 'error-border'}
+								className={phoneNumber && hasError ? 'error-border' : ''}
 							/>
 						</Form.Group>
 						{phoneNumber && hasError && <Error type="phone" />}
