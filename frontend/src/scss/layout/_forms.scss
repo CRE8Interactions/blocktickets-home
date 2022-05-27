@@ -113,7 +113,6 @@ select:-webkit-autofill:focus {
 	display: flex;
 	align-items: center;
 	border-radius: $radius;
-	// padding: $padding-y $padding-x;
 	border: $input-border-width solid $color;
 	padding-right: rem(8);
 
@@ -129,13 +128,11 @@ select:-webkit-autofill:focus {
 	}
 }
 
-// .input-wrapper {
-// 	&:focus {
-// 		border-color: $input-focus-border-color;
-// 	}
-// 	@include input-icon-box();
+// login & security new phone number field
+.input-wrapper {
+	@include input-icon-box();
 
-// 	// &-lg {
-// 	// 	@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
-// 	// }
-// }
+	// &-lg {
+	// 	@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
+	// }
+}
