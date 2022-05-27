@@ -3,6 +3,9 @@
 @use '../../../../../scss/theme/colors' as *;
 
 #addOns {
+	.card {
+		@extend .card-xs;
+	}
 	.price {
 		@extend %icon-text-box;
 		gap: $gap-xs;

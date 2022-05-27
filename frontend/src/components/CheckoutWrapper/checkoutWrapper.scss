@@ -20,9 +20,16 @@
 	}
 
 	section {
-		padding: em(24) 0px;
+		padding: $text-spacer-sm 0px;
+
 		& + section {
 			border-top: border();
+		}
+
+		@include breakpoint-max(md) {
+			&:last-of-type {
+				padding-bottom: $text-spacer-sm;
+			}
 		}
 
 		.section-title {
@@ -30,6 +37,7 @@
 			font-weight: $fw-semi-bold;
 			margin-bottom: rem(20);
 
+			// payment confirmation
 			&.section-title--muted {
 				font-size: $body-2;
 				color: $muted;
@@ -38,7 +46,9 @@
 		}
 
 		&:first-of-type {
-			padding-top: 0px;
+			@include breakpoint-min(md) {
+				padding-top: 0px;
+			}
 		}
 	}
 }
