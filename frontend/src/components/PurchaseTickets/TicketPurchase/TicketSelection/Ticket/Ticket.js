@@ -2,8 +2,9 @@ import React from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function Ticket({ ticket, handleNext }) {
+export default function Ticket({ ticket, handleNext, ticketFilters }) {
 	const ticketPrice = ticket.attributes.resale ? ticket.attributes.listingAskingPrice : ticket.attributes.cost;
+
 	const ticketTypes = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'available') return 'Standard Ticket';
 		if (!ticket.resale && ticket.on_sale_status === 'presale') return 'Presale';
@@ -27,13 +28,23 @@ export default function Ticket({ ticket, handleNext }) {
 			<div className="text-end">
 				<div>
 					<span className="fw-bold text-end">
-						${parseFloat(
-							ticketPrice + ticket.attributes.fee + ticket.attributes.facilityFee + 2.5 + 4.35
-						).toFixed(2)}
+						{ticketFilters.showFees ? (
+							`$${parseFloat(
+								ticketPrice + ticket.attributes.fee + ticket.attributes.facilityFee + 2.5 + 4.35
+							).toFixed(2)}`
+						) : (
+							`$${parseFloat(ticketPrice).toFixed(2)}`
+						)}
 					</span>
 				</div>
 				<div>
-					<span className="text-muted caption">${parseFloat(ticketPrice).toFixed(2)} + Fees</span>
+					{ticketFilters.showFees && (
+						<span className="text-muted caption">
+							${parseFloat(ticketPrice).toFixed(2)} + ${parseFloat(
+								ticket.attributes.fee + ticket.attributes.facilityFee + 2.5 + 4.35
+							).toFixed(2)}
+						</span>
+					)}
 				</div>
 			</div>
 		</ListGroup.Item>

@@ -28,7 +28,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const [
 		ticketFilters,
 		setTicketFilters
-	] = useState([]);
+	] = useState({ showFees: false, standard: true, resale: true });
 
 	const [
 		sliderValues,
@@ -70,7 +70,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	useEffect(
 		() => {
 			// demo purposes - tickets with filters applied
-			if (sliderValues[1] < genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost) || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
+			if (!ticketFilters.standard && !ticketFilters.resale || sliderValues[1] < genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost) || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
 				setFilteredTicketCount(0);
 			}
 
@@ -79,7 +79,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 			};
 		},
 		[
-			sliderValues, ticketCount 
+			sliderValues, ticketCount, ticketFilters 
 		]
 	);
 
@@ -175,7 +175,7 @@ royalty: 10
 					</header>
 					<Stack direction="vertical">
 					{showFilter && (
-								<FilterMenu show={showFilter} handleShow={handleShow} sliderValues={sliderValues} setSliderValues={setSliderValues}  />
+								<FilterMenu show={showFilter} handleShow={handleShow} sliderValues={sliderValues} setSliderValues={setSliderValues} ticketFilters={ticketFilters} setTicketFilters={setTicketFilters} />
 					)}
 					{filteredTicketCount > 0 ? (
 						<>
@@ -193,10 +193,14 @@ royalty: 10
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
 										<ListGroup as="ul">
-											<Ticket ticket={gaTicket} handleNext={handleNext} />
-                                            {
-												resaleTickets && resaleTickets.map((ticket, index) => <Ticket ticket={ticket} key={index} handleNext={handleNext} />)
-											}
+											{ticketFilters.standard && (<Ticket ticket={gaTicket} handleNext={handleNext} ticketFilters={ticketFilters} /> )}
+                                            
+                                            {ticketFilters.resale && ( 
+                                                <>
+												{resaleTickets && resaleTickets.map((ticket, index) => <Ticket ticket={ticket} key={index} handleNext={handleNext} ticketFilters={ticketFilters} />)
+											} 
+                                            </>
+                                            )}
 										</ListGroup>	
 									) : (
 										<MyTickets />

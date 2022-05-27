@@ -9,6 +9,11 @@
 		.event-image {
 			width: 64px;
 			height: 64px;
+
+			@include breakpoint-min(md) {
+				width: 84px;
+				height: 84px;
+			}
 		}
 
 		.event {
