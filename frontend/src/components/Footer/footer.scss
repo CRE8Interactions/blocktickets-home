@@ -13,15 +13,24 @@ footer {
 
 	.copyright {
 		border-top: border();
+		padding: $text-spacer-sm 0px;
+
+		@include breakpoint-min(lg) {
+			padding: $text-spacer 0px;
+		}
 	}
 
 	.main-links {
-		@include breakpoint-max(md) {
+		@include breakpoint-max(lg) {
 			justify-content: space-between;
 		}
 
-		@include breakpoint-min(md) {
+		@include breakpoint-min(lg) {
 			gap: rem(46);
+		}
+
+		@include breakpoint-min(xl) {
+			gap: rem(116);
 		}
 	}
 
@@ -48,17 +57,23 @@ footer {
 			}
 		}
 		@include breakpoint-min(lg) {
-			padding-bottom: $text-spacer;
+			padding-bottom: rem(12);
 		}
 
 		.footer-title {
 			margin-bottom: $text-spacer;
-		}
-
-		.footer-title {
 			font-weight: $fw-bold;
 			font-family: $font-heading;
 			font-size: $small;
+		}
+
+		.social-icons {
+			justify-content: space-between;
+
+			@include breakpoint-inBetween(md, lg) {
+				gap: $text-spacer;
+				justify-content: initial;
+			}
 		}
 	}
 }

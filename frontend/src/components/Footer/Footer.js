@@ -29,7 +29,7 @@ export default function Footer() {
 					</Link>
 					<p className="tag-line">The future of ticketing is here</p>
 				</Col>
-				<Col xs={10} lg="auto" xl={5} className="col">
+				<Col xs={11} md={8} lg="auto" xl={5} className="col">
 					<Stack direction="horizontal" className="main-links">
 						<ul>
 							<li>
@@ -79,7 +79,7 @@ export default function Footer() {
 				</Col>
 				<Col className="col">
 					<h3 className="footer-title">Also find us on</h3>
-					<Stack as="ul" direction="horizontal" className="justify-content-between">
+					<Stack as="ul" direction="horizontal" className="social-icons">
 						<li>
 							<a href="">
 								<img src={facebook} alt="facebook" />
@@ -109,7 +109,7 @@ export default function Footer() {
 				</Col>
 			</Row>
 
-			<div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center py-4 copyright caption">
+			<div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center copyright caption">
 				<p className="text-muted">Copyright &copy; {getCopyrightYear()} Blocktickets. All rights reserved</p>
 			</div>
 		</footer>
