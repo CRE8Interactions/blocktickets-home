@@ -30,7 +30,7 @@ footer {
 		}
 
 		@include breakpoint-min(xl) {
-			gap: rem(116);
+			gap: rem(100);
 		}
 	}
 
@@ -54,6 +54,7 @@ footer {
 			}
 			&:last-of-type {
 				border-top: border();
+				padding-bottom: 0px;
 			}
 		}
 		@include breakpoint-min(lg) {
@@ -61,7 +62,7 @@ footer {
 		}
 
 		.footer-title {
-			margin-bottom: $text-spacer;
+			margin-bottom: $text-spacer-xs;
 			font-weight: $fw-bold;
 			font-family: $font-heading;
 			font-size: $small;

@@ -22,7 +22,7 @@ import './footer.scss';
 export default function Footer() {
 	return (
 		<footer id="footer">
-			<Row className="footer-spacer main-content d-flex  gap-lg-3 flex-column flex-lg-row">
+			<Row className="footer-spacer main-content d-flex  gap-lg-4 flex-column flex-lg-row">
 				<Col lg={4} className="col">
 					<Link to={'/'} className="brand-logo">
 						<img src={logo} alt="blocktickets" />
