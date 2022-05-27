@@ -106,11 +106,11 @@ export default function LoginSecurityForm() {
 						onChange={(e) => setCode(e.target.value)}
 					/>
 					<Form.Text className="d-block mt-2">
-						A new code should have been set to you using the new phone number specified above.
+						A 4-digit code should have been set to you using the new phone number specified above.
 					</Form.Text>
 				</Form.Group>
 				<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
-					Update Phone Number
+					Update
 				</Button>
 			</Form>
 		</Fragment>
