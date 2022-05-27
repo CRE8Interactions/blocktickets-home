@@ -2,6 +2,9 @@ import React, { Fragment, useState } from 'react';
 
 import Col from 'react-bootstrap/Col';
 
+import { useMedia } from './../../../utilities/hooks';
+
+import { Ticket } from '../PaymentConfirmation/Tickets/Ticket';
 import { AddOns } from './AddOns';
 import { Payment } from './Payment';
 import { TotalCard } from './TotalCard';
@@ -11,6 +14,12 @@ import { CheckoutModal } from './CheckoutModal';
 import './checkout.scss';
 
 export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
+	let order = sessionStorage.getItem('order');
+	if (order) order = JSON.parse(order);
+
+	const mobileMediaQuery = useMedia('(max-width: 767px)');
+	const tabletDesktopMediaQuery = useMedia('(min-width: 768px)');
+
 	// Modal State
 	const [
 		modalType,
@@ -60,24 +69,39 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 		<Fragment>
 			<Col md={6}>
 				<BackButton marginBottom="4" handleGoBack={handleClick} />
+				{mobileMediaQuery && (
+					<div id="order-ticket">
+						<Ticket order={order} />
+					</div>
+				)}
 				{addOns.length > 0 && (
 					<section id="addOns">
 						<AddOns />
 					</section>
 				)}
+
 				<section>
 					<Payment checkValid={checkValid} />
 				</section>
 			</Col>
 			<Col md={6} lg={5} className="sticky">
-				<TotalCard
-					setStatus={setStatus}
-					addOns={addOns}
-					setOrder={setOrder}
-					intentId={intentId}
-					paymentDeclined={paymentDeclined}
-				/>
+				{tabletDesktopMediaQuery && (
+					<Col className="mb-3">
+						<Ticket order={order} />
+					</Col>
+				)}
+
+				<Col>
+					<TotalCard
+						setStatus={setStatus}
+						addOns={addOns}
+						setOrder={setOrder}
+						intentId={intentId}
+						paymentDeclined={paymentDeclined}
+					/>
+				</Col>
 			</Col>
+
 			<CheckoutModal
 				modalType={modalType}
 				setModalType={setModalType}

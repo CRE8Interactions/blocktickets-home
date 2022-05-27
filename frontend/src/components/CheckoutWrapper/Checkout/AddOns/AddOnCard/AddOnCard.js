@@ -2,11 +2,8 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 
 import { ParkingCard } from './ParkingCard';
@@ -30,7 +27,7 @@ const typeOfCard = (type) => {
 };
 export default function AddOnCard({ data }) {
 	return (
-		<Card body>
+		<Card body className="card--light">
 			<Stack direction="horizontal" className="heading--flex heading--flex--card">
 				<Stack direction="horizontal" className="card-title-flex">
 					<Card.Title as="h5" className="normal">
