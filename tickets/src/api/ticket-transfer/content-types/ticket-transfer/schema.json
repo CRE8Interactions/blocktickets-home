@@ -68,6 +68,9 @@
     },
     "orderId": {
       "type": "biginteger"
+    },
+    "cancelledOn": {
+      "type": "datetime"
     }
   }
 }

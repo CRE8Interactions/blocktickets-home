@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 export default function TransferCard({transfer, cancel, status, acceptTransfer}) {
   return (
     <Fragment>
-			<Card body className="ticket-card card-md">
+			<Card body className="ticket-card">
       <Card.Img
 					src={transfer?.event?.image?.url}
 					width="217"
@@ -26,8 +26,7 @@ export default function TransferCard({transfer, cancel, status, acceptTransfer})
 							<Button
 								variant="outline-light"
 								onClick={() => cancel('cancel', transfer)}
-								className="text-danger"
-								size="lg">
+								className="text-danger">
 								Cancel transfer
 							</Button>
 						}
@@ -36,8 +35,7 @@ export default function TransferCard({transfer, cancel, status, acceptTransfer})
 							<Button
 								variant="outline-light"
 								onClick={(e) => acceptTransfer(transfer)}
-								className="text-primary"
-								size="lg">
+								className="text-primary">
 								Accept transfer
 							</Button>
 						}

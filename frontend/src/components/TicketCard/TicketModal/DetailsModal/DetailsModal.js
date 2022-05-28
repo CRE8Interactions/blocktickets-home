@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+import moment from 'moment';
 
 import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function DetailsModal() {
+export default function DetailsModal({ order }) {
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
@@ -11,13 +12,13 @@ export default function DetailsModal() {
 			</Modal.Header>
 			<Modal.Body>
 				<div className="modal-body-heading--with-border pb-2 mb-0">
-					<h4 className="modal-body-heading-title mb-2">Nic Fancuilli</h4>
-					<p>Sun May 1, 2022 8 PM</p>
+					<h4 className="modal-body-heading-title mb-2">{order?.event?.name}</h4>
+					<p>{moment(order?.event?.start).format('ddd MMM D, YYYY h A')}</p>
 				</div>
 				<ListGroup as="ul" variant="flush">
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Entry Info</p>
-						<p>Floor</p>
+						<p>GA</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Seat Location</p>
@@ -26,26 +27,28 @@ export default function DetailsModal() {
 
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Ticket Info</p>
-						<p>Live Nation Presents</p>
-						<p>Bill Maher MGM National Harbor</p>
-						<p>Doors Open at 7:00 PM</p>
-						<p>Sun May 01 2022 8:00 PM</p>
+						{ order?.event?.presentedBy &&
+							<p>{order?.event?.presentedBy}</p>
+						}
+						<p>{order?.event?.name}</p>
+						<p>Doors Open at {moment(order?.event?.doorsOpen).format('h:mm A')}</p>
+						<p>{moment(order?.event?.start).format('ddd MMM D YYYY h:mm A')}</p>
 					</ListGroup.Item>
-					<ListGroup.Item as="li" className="list">
+					{/* <ListGroup.Item as="li" className="list">
 						<p className="heading">Barcode Number</p>
 						<p>6708570159387676</p>
-					</ListGroup.Item>
+					</ListGroup.Item> */}
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Location</p>
-						<p>The Theater at MGM National Harbor National Harbor MD US</p>
+						<p>{order?.event?.venue?.name} {order?.event?.venue?.address[0]?.city} {order?.event?.venue?.address[0]?.state} {order?.event?.venue?.address[0]?.country}</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Order Number</p>
-						<p>51-22116/WDC</p>
+						<p>{order?.orderId}</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Purchase Date</p>
-						<p>Wed, Sep 15 2021 - 8:28AM</p>
+						<p>{moment(order?.event?.createdAt).format('ddd, MMM D YYYY - h:mmA')}</p>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list">
 						<p className="heading">Contact Address</p>

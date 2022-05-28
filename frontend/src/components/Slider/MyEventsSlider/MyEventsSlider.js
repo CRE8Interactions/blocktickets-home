@@ -5,7 +5,7 @@ import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 import TransferCard from '../../TransferCard/TransferCard';
 
-export default function MyEventsSlider({ order, transfers, acceptTransfer }) {
+export default function MyEventsSlider({ orders, transfers, acceptTransfer }) {
 	return (
 		<div className="page-slider">
 			<Slider addedModule="pagination">
@@ -22,8 +22,9 @@ export default function MyEventsSlider({ order, transfers, acceptTransfer }) {
 						);
 					})}
 
-				{order &&
-					order.upcoming.map((o, index) => {
+				{orders &&
+					orders.map((o, index) => {
+						if (o.tickets.length === 0) return
 						return (
 							<SwiperSlide key={index}>
 								<TicketCard event={o.event} tickets={o.tickets} order={o} />

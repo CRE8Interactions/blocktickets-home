@@ -13,49 +13,77 @@ footer {
 
 	.copyright {
 		border-top: border();
+		padding: $text-spacer-sm 0px;
+
+		@include breakpoint-min(lg) {
+			padding: $text-spacer 0px;
+		}
 	}
 
-	.col:not(:last-child) {
-		@include breakpoint-max(md) {
-			border-bottom: border();
+	.main-links {
+		@include breakpoint-max(lg) {
+			justify-content: space-between;
+		}
+
+		@include breakpoint-min(lg) {
+			gap: rem(46);
+		}
+
+		@include breakpoint-min(xl) {
+			gap: rem(100);
+		}
+	}
+
+	.main-links,
+	.col:last-of-type {
+		@include breakpoint-max(lg) {
+			padding-top: $text-spacer;
+		}
+
+		ul li:first-child a {
+			padding-top: 0px;
 		}
 	}
 
 	.col {
-		padding-bottom: $text-spacer-sm;
+		padding-bottom: $text-spacer;
 
-		&:not(:first-of-type) {
-			@include breakpoint-max(md) {
-				padding-top: em(28);
+		@include breakpoint-max(lg) {
+			&:first-of-type {
+				border-bottom: border();
 			}
+			&:last-of-type {
+				border-top: border();
+				padding-bottom: 0px;
+			}
+		}
+		@include breakpoint-min(lg) {
+			padding-bottom: rem(12);
 		}
 
 		.footer-title {
-			margin-bottom: $text-spacer;
+			margin-bottom: $text-spacer-xs;
+			font-weight: $fw-bold;
+			font-family: $font-heading;
+			font-size: $small;
 		}
 
-		.footer-title {
-			font-size: initial;
-			font-family: $font-body;
-			font-weight: $fw-medium;
-		}
-		.footer-nav-list-title {
-			@include breakpoint-max(md) {
-				margin-bottom: rem(17);
-			}
+		.social-icons {
+			justify-content: space-between;
 
-			@include breakpoint-min(md) {
-				margin-bottom: $text-spacer;
+			@include breakpoint-inBetween(md, lg) {
+				gap: $text-spacer;
+				justify-content: initial;
 			}
 		}
 	}
 }
 
 .tag-line {
-	width: 21ch;
 	margin-top: $text-spacer;
 
-	@include breakpoint-min(xl) {
+	@include breakpoint-min(lg) {
+		margin-top: rem(29);
 		font-size: rem(24);
 		width: 18ch;
 	}

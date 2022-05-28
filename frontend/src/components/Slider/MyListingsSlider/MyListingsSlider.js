@@ -20,7 +20,7 @@ export default function MyListingsSlider({
 					listings.length >= 1 &&
 					listings.map((listing, index) => {
 						return (
-							<SwiperSlide>
+							<SwiperSlide key={index}>
 								<TicketCard
 									ticketStatus={ticketStatus}
 									ticketState={ticketState}

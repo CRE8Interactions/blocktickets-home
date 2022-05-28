@@ -120,20 +120,12 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 			}
 		};
 
-		createBankAccount(data)
-			.then((res) => console.log(res))
-			.catch((err) => console.error(err));
+		createBankAccount(data).then((res) => console.log(res)).catch((err) => console.error(err));
 	};
 
 	return (
 		<Fragment>
-			<Modal
-				show={show}
-				centered
-				onHide={handleClose}
-				backdrop={'static'}
-				scrollable
-				animation={false}>
+			<Modal show={show} centered onHide={handleClose} backdrop={'static'} scrollable animation={false}>
 				<Modal.Header closeButton>
 					<Modal.Title as="h5">Bank Information</Modal.Title>
 				</Modal.Header>
@@ -186,17 +178,13 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								onChange={(e) =>
 									setRoutingNumber(
 										(routing) =>
-											e.target.validity.valid || e.target.value === ''
-												? e.target.value
-												: routing
+											e.target.validity.valid || e.target.value === '' ? e.target.value : routing
 									)}
-								className={routingNumber && routingNumError && 'error-border'}
+								className={routingNumber && routingNumError ? 'error-border' : ''}
 							/>
 							{routingNumber &&
 							routingNumError && (
-								<Form.Text className="text-danger">
-									Routing Number must be 9 digits
-								</Form.Text>
+								<Form.Text className="text-danger">Routing Number must be 9 digits</Form.Text>
 							)}
 						</Form.Group>
 						<Form.Group className="form-group" controlId="accountNumber">
@@ -211,11 +199,9 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								onChange={(e) =>
 									setAccountNumber(
 										(acc) =>
-											e.target.validity.valid || e.target.value === ''
-												? e.target.value
-												: acc
+											e.target.validity.valid || e.target.value === '' ? e.target.value : acc
 									)}
-								className={accountNumber && accountNumError && 'error-border'}
+								className={accountNumber && accountNumError ? 'error-border' : ''}
 							/>
 							{accountNumber &&
 							accountNumError && (

@@ -96,6 +96,8 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     await strapi.entityService.update('api::ticket-transfer.ticket-transfer', transferId, {
       data: {
         status: 'canceled',
+        complete: true,
+        cancelledOn: new Date()
       },
     });
 

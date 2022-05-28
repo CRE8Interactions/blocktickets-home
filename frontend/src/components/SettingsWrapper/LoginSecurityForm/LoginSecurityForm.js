@@ -4,13 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
 
-import './loginSecurityForm.scss';
-
 export default function LoginSecurityForm() {
-	let user = sessionStorage.getItem('user');
-	user = JSON.parse(user).user;
-	console.log(user)
-
 	const [
 		formValid,
 		setFormValid
@@ -82,10 +76,9 @@ export default function LoginSecurityForm() {
 					<Form.Label>Current Phone Number</Form.Label>
 					<Form.Control
 						type="tel"
-						disabled
 						pattern="^0[1-9]|[1-9]\d$"
 						name="phoneNumber"
-						placeholder={user.phoneNumber}
+						placeholder="Enter your current phone number"
 					/>
 				</Form.Group>
 
@@ -100,9 +93,7 @@ export default function LoginSecurityForm() {
 							name="newPhoneNumber"
 							onChange={(e) => setVal(e.target.value)}
 						/>
-						<Badge className="badge-outline badge-outline--light text-normal p-2">
-							Verify via text
-						</Badge>
+						<Badge className="badge-outline badge-outline--light text-normal p-2">Verify via text</Badge>
 					</div>
 				</Form.Group>
 				<Form.Group className="form-group" controlId="code">
@@ -115,12 +106,11 @@ export default function LoginSecurityForm() {
 						onChange={(e) => setCode(e.target.value)}
 					/>
 					<Form.Text className="d-block mt-2">
-						A new code should have been set to you using the new phone number specified
-						above.
+						A 4-digit code should have been sent to you using the new phone number specified above.
 					</Form.Text>
 				</Form.Group>
 				<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
-					Update Phone Number
+					Update
 				</Button>
 			</Form>
 		</Fragment>

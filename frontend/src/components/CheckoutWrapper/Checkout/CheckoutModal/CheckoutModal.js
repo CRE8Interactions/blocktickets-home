@@ -21,7 +21,7 @@ const typeOfModal = (modalType, handleClose, modalError) => {
 			return <LeaveModal handleClose={handleClose} />;
 
 		case 'declined':
-			return <CardDeclineModal handleClose={handleClose} modalError={modalError} />;
+			return <CardDeclineModal modalError={modalError} />;
 
 		default:
 			return;
@@ -35,13 +35,7 @@ export default function CheckoutModal({ modalType, setModalType, show, setShow, 
 	};
 
 	return (
-		<Modal
-			id="checkout-modal"
-			animation={false}
-			centered
-			keyboard={false}
-			backdrop="static"
-			show={show}>
+		<Modal id="checkout-modal" animation={false} centered keyboard={false} backdrop="static" show={show}>
 			{typeOfModal(modalType, handleClose, modalError)}
 		</Modal>
 	);

@@ -81,9 +81,9 @@
 		font-size: $caption;
 	}
 
-	// used in addons
-	&-md {
-		$padding: em(20) em(24);
+	// used in addons, checkout ticket card
+	&-xs {
+		$padding: em(14) em(16);
 
 		.card-body {
 			padding: $padding;

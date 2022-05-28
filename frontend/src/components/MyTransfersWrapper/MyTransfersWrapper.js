@@ -93,7 +93,7 @@ export default function MyTransfersWrapper() {
 					<Tab eventKey="completed" title="Completed">
 						<MyTransfersSlider
 							transfers={transfers.filter(
-								(transfer) => transfer.status === 'claimed'
+								(transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled'
 							)}
 						/>
 					</Tab>
