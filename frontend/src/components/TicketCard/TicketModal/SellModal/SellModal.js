@@ -64,7 +64,6 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 		  setStep(2)
 			setPrice(listing.askingPrice)
 			setSelectedTickets(listing.tickets)
-			console.log(listing)
 	  }
 	}, [])
 

@@ -86,27 +86,30 @@ export default function MyListingsWrapper() {
 				variant="pills"
 				activeKey={key}
 				onSelect={(k) => setKey(k)}>
-				<Tab eventKey="active" title="Active">
+				<Tab eventKey="active" title="Active" key={new Date().getTime()}>
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
 						listings={listings}
 						removeListing={removeListing}
 						getListings={myListings}
+						key={new Date().getTime()}
 					/>
 				</Tab>
-				<Tab eventKey="sold" title="Sold">
+				<Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
 						listings={listings}
+						key={new Date().getTime() + 1}
 					/>
 				</Tab>
-				<Tab eventKey="expired" title="Expired">
+				<Tab eventKey="expired" title="Expired" key={new Date().getTime() + 2}>
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
 						listings={listings}
+						key={new Date().getTime() + 2}
 					/>
 				</Tab>
 			</Tabs>

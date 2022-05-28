@@ -24,6 +24,7 @@ export default function MyEventsSlider({ orders, transfers, acceptTransfer }) {
 
 				{orders &&
 					orders.map((o, index) => {
+						if (o.tickets.length === 0) return
 						return (
 							<SwiperSlide key={index}>
 								<TicketCard event={o.event} tickets={o.tickets} order={o} />
