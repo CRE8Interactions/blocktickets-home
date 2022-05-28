@@ -114,6 +114,9 @@
     },
     "presentedBy": {
       "type": "string"
+    },
+    "doorsOpen": {
+      "type": "datetime"
     }
   }
 }

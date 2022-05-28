@@ -15,7 +15,7 @@ import './ticketModal.scss';
 const type = (handleClose, ticketAction, setTicketStatus, order, transfer, getMyTransfers, removeListing, listing, getListings) => {
 	switch (ticketAction) {
 		case 'details':
-			return <DetailsModal />;
+			return <DetailsModal order={order} />;
 
 		case 'transfer':
 			return <TransferModal handleClose={handleClose} setTicketStatus={setTicketStatus} order={order} />;         
