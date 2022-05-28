@@ -7,7 +7,6 @@ import Stack from 'react-bootstrap/Stack';
 import './ticket.scss';
 
 export default function Ticket({order}) {
-
 	return (
 		<Card body className="card--light" id="order-card">
             <Stack direction="horizontal" gap={3}>

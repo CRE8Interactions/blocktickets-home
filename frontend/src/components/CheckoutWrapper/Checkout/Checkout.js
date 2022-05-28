@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 
 import { useMedia } from './../../../utilities/hooks';
 
-import { Ticket } from '../PaymentConfirmation/Tickets/Ticket';
+import { OrderPreview } from './OrderPreview';
 import { AddOns } from './AddOns';
 import { Payment } from './Payment';
 import { TotalCard } from './TotalCard';
@@ -71,7 +71,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 				<BackButton marginBottom="4" handleGoBack={handleClick} />
 				{mobileMediaQuery && (
 					<div id="order-ticket">
-						<Ticket order={order} />
+						<OrderPreview />
 					</div>
 				)}
 				{addOns.length > 0 && (
@@ -87,7 +87,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
 			<Col md={6} lg={5} className="sticky">
 				{tabletDesktopMediaQuery && (
 					<Col className="mb-3">
-						<Ticket order={order} />
+						<OrderPreview />
 					</Col>
 				)}
 
