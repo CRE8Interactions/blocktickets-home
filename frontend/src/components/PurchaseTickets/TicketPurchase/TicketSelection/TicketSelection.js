@@ -33,7 +33,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const [
 		sliderValues,
 		setSliderValues
-	] = useState([20, tickets.generalAdmissionTicket?.attributes?.cost]);
+	] = useState([0, 0]);
 
 	const [
 		showFilter,
@@ -64,7 +64,9 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket);
         setResaleTickets(tickets?.reSaleTickets)
-		setSliderValues([20, genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost)])
+		let higestPrice = tickets?.reSaleTickets.length > 0 ? Math.max(tickets?.reSaleTickets.map(ticket => ticket.attributes.listingAskingPrice)) : tickets.generalAdmissionTicket?.attributes?.cost;
+		let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost;
+		setSliderValues([lowestPrice, higestPrice])
 	}, [tickets]); 
 
 	useEffect(
@@ -133,6 +135,14 @@ royalty: 10
 	// 	}
 	// ];
 
+	const selectOptions = () => {
+		let options = [];
+		for (let i = 1; i <= tickets?.generalAdmissionTicket?.attributes?.maximum_quantity; i++) {
+			options.push({key: i, value: i, name: i === 1 ? `${i} Ticket` : `${i} Tickets`})
+		}
+		return options;
+	}
+
 	const handleNext = (ticket) => {
 		if (!ticket.resale && ticket.on_sale_status === 'presaleAvailable') {
 			handleClick('presale', ticket)
@@ -151,14 +161,9 @@ royalty: 10
 								aria-label="Number of Tickets"
 								value={ticketCount}
 								onChange={(e) => setTicketCount(parseInt(e.target.value))}>
-								<option value="1">1 Ticket</option>
-								<option value="2">2 Tickets</option>
-								<option value="3">3 Tickets</option>
-								<option value="4">4 Tickets</option>
-								<option value="5">5 Tickets</option>
-								<option value="6">6 Tickets</option>
-								<option value="7">7 Tickets</option>
-								<option value="8">8 Tickets</option>
+								{ selectOptions().map((o, index) => {
+									return <option value={o.key} key={o.key}>{o.name}</option>
+								})}
 							</Form.Select>
 							<Button
 								className="btn--filter"
