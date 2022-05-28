@@ -8,30 +8,16 @@ import { MyEventsSlider } from '../Slider/MyEventsSlider';
 
 export default function MyEventsWrapper() {
 	const [
-		order,
-		setOrder
-	] = useState({
-		past: [],
-		upcoming: []
-	});
+		orders,
+		setOrders
+	] = useState([]);
 
 	const [transfers, setTransfers] = useState([])
 
 	const getMyTickets = () => {
 		getMyEvents()
 			.then((res) => {
-				let upcoming = [];
-				let past = [];
-
-				res.data.map((o) => {
-					if (moment(o.event.start) >= moment() && o.tickets.length >= 1) upcoming.push(o);
-					if (moment(o.event.start) < moment() && o.tickets.length >= 1) past.push(o);
-				});
-
-				setOrder({
-					past,
-					upcoming
-				});
+				setOrders(res.data)
 			})
 			.catch((err) => console.error(err));
 
@@ -61,7 +47,7 @@ export default function MyEventsWrapper() {
 					<SwiperNavigationButtons />
 				</div>
 			</div>
-			<MyEventsSlider order={order} transfers={transfers} acceptTransfer={acceptTransfer}  />
+			<MyEventsSlider orders={orders} transfers={transfers} acceptTransfer={acceptTransfer}  />
 		</section>
 	);
 }
