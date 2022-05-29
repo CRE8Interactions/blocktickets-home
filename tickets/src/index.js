@@ -72,8 +72,60 @@ module.exports = {
       }
     }
 
+    let resetDevelopmentEnv = async () => {
+      await strapi.db.query('api::ticket.ticket').updateMany({
+        where: {
+          $or: [
+            {
+              on_sale_status: { $notIn: 'available'}
+            },
+            {
+              transferred: true,
+            },
+            {
+              resale: true,
+            }
+          ]
+        },
+        data: {
+          on_sale_status: 'available',
+          trasferred: false,
+          resale: false,
+          listingAskingPrice: null,
+          listingId: null
+        },
+      });
+
+      await strapi.db.query('api::order.order').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::ticket-transfer.ticket-transfer').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::listing.listing').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+
+    }
+
     initOrganization()
     initCategories()
+    // resetDevelopmentEnv()
 
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information'],
