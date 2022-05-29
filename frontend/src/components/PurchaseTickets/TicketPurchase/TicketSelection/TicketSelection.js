@@ -63,8 +63,13 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	useEffect(() => {
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket);
-        setResaleTickets(tickets?.reSaleTickets)
-		let higestPrice = tickets?.reSaleTickets?.length > 0 ? Math.max(tickets?.reSaleTickets.map(ticket => ticket.attributes.listingAskingPrice)) : tickets.generalAdmissionTicket?.attributes?.cost;
+    setResaleTickets(tickets?.reSaleTickets)
+		if (!tickets) return;
+		let higestResalePrice = tickets.generalAdmissionTicket?.attributes?.cost
+		if (tickets?.reSaleTickets && tickets?.reSaleTickets.length > 0) {
+			let higestResalePrice = tickets?.reSaleTickets?.map(ticket => ticket?.attributes?.listingAskingPrice).reduce((a, b) => Math.max(a,b))
+		}
+		let higestPrice = tickets?.reSaleTickets && tickets?.reSaleTickets?.length > 0 ? higestResalePrice : tickets.generalAdmissionTicket?.attributes?.cost;
 		let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost;
 		setSliderValues([lowestPrice, higestPrice])
 	}, [tickets]); 

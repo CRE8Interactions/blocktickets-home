@@ -11,6 +11,7 @@ import './priceRangeSlider.scss';
 export default function PriceRangeSlider({ styles, sliderValues, setSliderValues }) {
 	const handleChange = (sliderValues) => {
 		setSliderValues(sliderValues);
+		console.log(sliderValues)
 	};
 
 	return (
@@ -23,8 +24,8 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 			/>
 			<Slider
 				range
-				min={0}
-				max={100}
+				min={sliderValues[0]}
+				max={sliderValues[1]}
 				pushable={20}
 				defaultValue={sliderValues}
 				onChange={handleChange}

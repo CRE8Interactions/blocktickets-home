@@ -67,7 +67,8 @@ export const getVenue = async (id) => {
 }
 
 export const getEvents = async () => {
-  return instance.get('/events?filters[status][$eq]=on_sale')
+  let date = new Date().toISOString();
+  return instance.get(`/events?filters[status][$eq]=on_sale&filters[start][$gte]=${date}`)
 }
 
 export const searchEvents = async (q) => {
