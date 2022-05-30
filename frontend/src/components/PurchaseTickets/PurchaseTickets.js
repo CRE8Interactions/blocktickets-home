@@ -52,6 +52,12 @@ export default function PurchaseTickets() {
 		setTicket
 	] = useState();
 
+	// current listing
+	const [
+		listing,
+		setListing
+	] = useState();
+
 	const mediaQuery = useMedia('(min-width: 768px');
 
 	// layout change to full height only in tablet size or if on ticket selection step and filter menu is closed to allow scrolling on mobile and for mobile menu to display properly
@@ -74,10 +80,11 @@ export default function PurchaseTickets() {
 		]
 	);
 
-	const handleClick = (step, ticket) => {
+	const handleClick = (step, ticket, listing) => {
 		// find key
 		setStep(Object.keys(steps).find((key) => key === step));
-		setTicket(ticket);
+		if (ticket) setTicket(ticket);
+		if (listing) setListing(listing)
 	};
 
 	const handleGoBack = () => {
@@ -86,6 +93,8 @@ export default function PurchaseTickets() {
 
 		// find key based on value
 		setStep(Object.keys(steps).find((key) => steps[key] === prevStep));
+		setListing(null)
+		setTicket(null)
 	};
 
 	return (
@@ -105,6 +114,7 @@ export default function PurchaseTickets() {
 				type={param}
 				isZoomed={isZoomed}
 				ticket={ticket}
+				listing={listing}
 			/>
 		</div>
 	);

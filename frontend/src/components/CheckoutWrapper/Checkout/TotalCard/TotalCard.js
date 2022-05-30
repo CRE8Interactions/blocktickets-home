@@ -25,17 +25,34 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 		setPurchasing
 	] = useState(false);
 
-	let tickets = sessionStorage.getItem('cart');
-	if (tickets) tickets = JSON.parse(tickets);
+	let cart = sessionStorage.getItem('cart');
+	if (cart) cart = JSON.parse(cart);
 
-	const ticketPrice = tickets.ticket.resale ? tickets.ticket.listingAskingPrice : tickets.ticket.cost;
 	const stripe = useStripe();
 	const elements = useElements();
+	
+	let ticketPrice;
+	let ticketCount;
+	let ticketFee;
+	let facilityFee;
+
+	if (cart.listing) {
+		let listing = cart.listing;
+		ticketPrice = listing.askingPrice + listing.tickets.map(ticket => ticket.fee).reduce((a, b) => a + b) + listing.tickets.map(ticket => ticket.facilityFee).reduce((a, b) => a + b) + 2.5 + 4.35;
+		ticketCount = cart.listing.tickets.length;
+		ticketFee = cart.listing.tickets[0].fee;
+		facilityFee = cart.listing.tickets[0].facilityFee;
+	} else if (cart.ticket) {
+		ticketPrice = cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost;
+		ticketCount = cart.ticketCount;
+		ticketFee = cart.ticket.fee;
+		facilityFee = cart.ticket.facilityFee;
+	}
 
 	const completePurchase = () => {
 		setPurchasing(true);
 		let data = {
-			cart: tickets,
+			cart: cart,
 			paymentIntentId: intentId
 		};
 
@@ -87,7 +104,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" gap={2} className="card-header-price">
-					<span className="fw-bold fs-md">${cartTotal(tickets, 4.35, 2.5)}</span>
+					<span className="fw-bold fs-md">${cartTotal(cart, 4.35, 2.5)}</span>
 					<Button onClick={() => setExpanded(!expanded)} variant="outline-light" className=" btn--icon-sm">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
@@ -108,10 +125,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<ul>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Tickets: ${parseFloat(ticketPrice).toFixed(2)} x {tickets.ticketCount}
+										Tickets: ${parseFloat(ticketPrice).toFixed(2)} x {ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(ticketPrice).toFixed(2) * tickets.ticketCount).toFixed(2)}
+										${(parseFloat(ticketPrice).toFixed(2) * ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 							</ul>
@@ -121,21 +138,21 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<ul>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Service Fee: ${parseFloat(tickets.ticket.fee).toFixed(2)} x{' '}
-										{tickets.ticketCount}
+										Service Fee: ${parseFloat(ticketFee).toFixed(2)} x{' '}
+										{ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(tickets.ticket.fee).toFixed(2) * tickets.ticketCount).toFixed(2)}
+										${(parseFloat(ticketFee).toFixed(2) * ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Facility Charge: ${parseFloat(tickets.ticket.facilityFee).toFixed(2)} x{' '}
-										{tickets.ticketCount}
+										Facility Charge: ${parseFloat(facilityFee).toFixed(2)} x{' '}
+										{ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(tickets.ticket.facilityFee).toFixed(2) *
-											tickets.ticketCount).toFixed(2)}
+										${(parseFloat(facilityFee).toFixed(2) *
+											ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">

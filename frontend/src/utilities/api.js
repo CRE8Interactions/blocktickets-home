@@ -123,6 +123,10 @@ export const createListing = (data) => {
   return instance.post('/listings', data)
 }
 
+export const getListingsByEvent = (id) => {
+  return instance.get(`/listings/byEvent?id=${id}`)
+}
+
 export const getMyListings = () => {
   return instance.get('/listings/mylisting')
 }

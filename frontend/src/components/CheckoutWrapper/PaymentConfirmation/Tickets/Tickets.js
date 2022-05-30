@@ -14,13 +14,10 @@ export default function Tickets({ order }) {
 
 			<Stack gap={4} as="ul" className="mt-md-3 ">
 				{order &&
-					order.tickets.map((ticket, index) => {
-						return (
-							<li className="ticket" key={index}>
-								<Ticket ticket={ticket} order={order} />
-							</li>
-						);
-					})}
+					<li className="ticket">
+						<Ticket order={order} />
+					</li>
+				}
 			</Stack>
 			<Link to="/my-events" className="btn btn-primary" id="myEventsBtn">
 				Go to My Events

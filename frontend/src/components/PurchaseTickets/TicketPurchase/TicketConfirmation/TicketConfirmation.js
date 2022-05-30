@@ -9,14 +9,32 @@ import { BackButton } from '../../../BackButton';
 
 import './ticketConfirmation.scss';
 
-export default function TicketConfirmation({ handleGoBack, type, ticket, setTicketCount, ticketCount }) {
-	const ticketPrice = ticket.resale ? ticket.listingAskingPrice : ticket.cost;
+export default function TicketConfirmation({ handleGoBack, type, ticket, listing, setTicketCount, ticketCount }) {
+	let ticketPrice;
+	let totalTicketPrice;
+	let section;
+	let sum;
+	let maxQuantity;
+
+	if (listing) {
+		ticketPrice = listing.askingPrice / listing.tickets.length;
+		section = listing.tickets[0].name;
+		sum = listing.askingPrice;
+		maxQuantity = listing.tickets.length;
+		totalTicketPrice = listing.askingPrice + listing.tickets.map(ticket => ticket.fee).reduce((a, b) => a + b) + listing.tickets.map(ticket => ticket.facilityFee).reduce((a, b) => a + b) + 2.5 + 4.35
+	} else if (ticket) {
+		ticketPrice = ticket.resale ? ticket.listingAskingPrice : ticket.cost;
+		section = ticket.name;
+		sum = ticketPrice * ticketCount;
+		maxQuantity = ticket.maximum_quantity;
+		totalTicketPrice = parseFloat(ticketPrice + ticket.fee + ticket.facilityFee + 2.5 + 4.35).toFixed(2)
+	}
 
 	let [
 		prices,
 		setPrices
 	] = useState({
-		sum: ticketPrice * ticketCount
+		sum: sum 
 	});
 
 	useEffect(
@@ -27,7 +45,8 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 
 			let data = {
 				ticket,
-				ticketCount
+				ticketCount,
+				listing
 			};
 
 			sessionStorage.setItem('cart', JSON.stringify(data));
@@ -42,7 +61,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 				<BackButton handleGoBack={handleGoBack} marginBottom="3" />
 			</header>
 			<div className="ticket-details d-flex flex-column">
-				<h1 className="normal--uppercase">Section {ticket.name}</h1>
+				<h1 className="normal--uppercase">Section {section}</h1>
 				{!type && (
 					<div className="seat caption text-muted fw-bold d-flex justify-content-between align-items-center">
 						<div>
@@ -65,7 +84,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 				)}
 			</div>
 			<div className="disclaimer text-muted">
-				<h2 className="caption fw-bold">Event Ticket limit: {ticket.maximum_quantity}</h2>
+				<h2 className="caption fw-bold">Event Ticket limit: {maxQuantity}</h2>
 				<p className="m-0 caption">
 					*As official local health guidelines evolve regarding COVID-19 safety protocols, select venues may
 					shift seating configurations and/or increase capacity.
@@ -77,11 +96,11 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 				<Stack direction="horizontal" className="justify-content-between">
 					<div className="flex-grow-1">
 						<p className="fw-semi-bold caption">
-							{ticket.resale && ticket.on_sale_status === 'resaleAvailable' && 'Resale Ticket'}
+							{/* {ticket.resale && ticket.on_sale_status === 'resaleAvailable' && 'Resale Ticket'} */}
 						</p>
-						<p className="caption">{ticket.name}</p>
+						{/* <p className="caption">{ticket.name}</p> */}
 						<p className="fw-bold">
-							${parseFloat(ticketPrice + ticket.fee + ticket.facilityFee + 2.5 + 4.35).toFixed(2)}
+							${totalTicketPrice}
 							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} ea + Fees</span>
 						</p>
 					</div>
@@ -91,8 +110,8 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 							className="btn--icon"
 							variant="outline-light"
 							onClick={() => setTicketCount(ticketCount - 1)}
-							disabled={ticketCount === ticket.minimum_quantity}
-							aria-disabled={ticketCount === ticket.minimum_quantity}>
+							disabled={listing ? true : ticket ? ticketCount === ticket.minimum_quantity : false }
+							aria-disabled={ticket ? ticketCount === ticket.minimum_quantity : 'true'}>
 							<svg
 								role="img"
 								width="25"
@@ -108,14 +127,14 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, setTick
 								/>
 							</svg>
 						</Button>
-						<span className="flex-grow-1 text-center">{ticketCount}</span>
+						<span className="flex-grow-1 text-center">{listing ? listing.tickets.length : ticketCount}</span>
 						<Button
 							title="increase quantity of tickets"
 							className="btn--icon ms-0"
 							variant="outline-light"
 							onClick={() => setTicketCount(ticketCount + 1)}
-							disabled={ticketCount >= (ticket.resale ? 1 : ticket.maximum_quantity)}
-							aria-disabled={ticketCount >= ticket.maximum_quantity}>
+							disabled={listing ? true : ticketCount >= (ticket.resale ? 1 : ticket.maximum_quantity)}
+							aria-disabled={listing ? true : ticket ? ticketCount >= ticket.maximum_quantity : true}>
 							<svg
 								role="img"
 								width="25"

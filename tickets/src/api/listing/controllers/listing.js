@@ -9,7 +9,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
   async create(ctx) {
     const user = ctx.state.user;
-    const { tickets, quantity, event, serviceFees, payout, askingPrice } = ctx.request.body
+    const { tickets, quantity, event, serviceFees, payout, askingPrice, fromOrder } = ctx.request.body
 
     const entity = await strapi.entityService.create('api::listing.listing', {
       data: {
@@ -20,7 +20,8 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         status: 'new',
         payout,
         serviceFees,
-        askingPrice
+        askingPrice,
+        fromOrder
       }
     })
 
@@ -57,6 +58,31 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     });
 
     return entries
+  },
+  async byEventId(ctx) {
+    const { id } = ctx.request.query;
+    
+    let listings = await strapi.db.query('api::listing.listing').findMany({
+      where: { status: 'new'},
+      populate: {
+        tickets: true,
+        event: {
+          where: { id },
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
+    });
+
+    listings = listings.filter((entry => entry.event && entry.event.id == id ))
+
+    return listings
   },
   async update(ctx) {
     const user = ctx.state.user;

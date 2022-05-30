@@ -6,9 +6,17 @@ import Stack from 'react-bootstrap/Stack';
 import './orderSummary.scss';
 
 export default function OrderSummary({order}) {
-	let sum = (order.details.ticket.resale ? order.details.ticket.listingAskingPrice : order.details.ticket.cost).toFixed(2)
-	// sum = sum.reduce((a,v) => a + v ,0).toFixed(2)
-	let fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee)
+	let sum;
+	let fees;
+
+	if (order.details.listing) {
+		sum = (order.details.listing.askingPrice).toFixed(2)
+		// sum = sum.reduce((a,v) => a + v ,0).toFixed(2)
+	} else if (order.details) {
+		sum = (order.details.ticket.resale ? order.details.ticket.listingAskingPrice : order.details.ticket.cost).toFixed(2)
+	}
+
+	fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee)
 	fees = fees.reduce((a,v) => a + v ,0).toFixed(2)
 
 	return (

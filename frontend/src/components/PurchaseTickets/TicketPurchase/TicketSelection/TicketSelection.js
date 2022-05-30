@@ -60,10 +60,16 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setResaleTickets
 	] = useState({})
 
+	const [
+		listings,
+		setListings
+	] = useState({})
+
 	useEffect(() => {
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket);
     setResaleTickets(tickets?.reSaleTickets)
+		setListings(tickets.listings)
 		if (!tickets) return;
 		let higestResalePrice = tickets.generalAdmissionTicket?.attributes?.cost
 		if (tickets?.reSaleTickets && tickets?.reSaleTickets.length > 0) {
@@ -103,12 +109,9 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		return options;
 	}
 
-	const handleNext = (ticket) => {
-		if (!ticket.resale && ticket.on_sale_status === 'presaleAvailable') {
-			handleClick('presale', ticket)
-		} else {
-			handleClick('confirmation', ticket)
-		}
+	const handleNext = (ticket, listing = {}) => {
+		if (ticket && ticket.on_sale_status === 'available') handleClick('confirmation', ticket, null)
+		if (listing && !ticket) handleClick('confirmation', null, listing)
 	}
 
 	return (
@@ -162,7 +165,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
                                             
                                             {ticketFilters.resale && ( 
                                                 <>
-												{resaleTickets && resaleTickets.map((ticket, index) => <Ticket ticket={ticket} key={index} handleNext={handleNext} ticketFilters={ticketFilters} />)
+												{listings && listings.map((listing, index) => <Ticket key={index} handleNext={handleNext} ticketFilters={ticketFilters} listing={listing} />)
 											} 
                                             </>
                                             )}

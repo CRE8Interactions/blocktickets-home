@@ -93,7 +93,13 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
             image: true,
           }
         },
-        tickets: true,
+        tickets: {
+          filters: {
+            $not: {
+              on_sale_status: 'resaleAvailable'
+            }
+          }
+        },
 
       }
     })

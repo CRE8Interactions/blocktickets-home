@@ -50,17 +50,13 @@ export default function MyListingsWrapper() {
 					sold: [],
 					expired: []
 				};
-				let active = [];
-				let sold = [];
-				let expired = [];
+
 				res.data.map((listing) => {
 					if (listing.status === 'new') types.active.push(listing);
-					if (listing.status === 'sold') types.sold.push(listing);
+					if (listing.status === 'complete') types.sold.push(listing);
 					if (listing.status === 'expired') types.expired.push(listing);
 				});
-				setListings({
-					types
-				});
+				setListings(types)
 			})
 			.catch((err) => console.error(err));
 	};
@@ -90,17 +86,17 @@ export default function MyListingsWrapper() {
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
-						listings={listings}
+						listings={listings.active}
 						removeListing={removeListing}
 						getListings={myListings}
 						key={new Date().getTime()}
 					/>
 				</Tab>
-				<Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
+				{/* <Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
-						listings={listings}
+						listings={listings.sold}
 						key={new Date().getTime() + 1}
 					/>
 				</Tab>
@@ -108,10 +104,10 @@ export default function MyListingsWrapper() {
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
-						listings={listings}
+						listings={listings.expired}
 						key={new Date().getTime() + 2}
 					/>
-				</Tab>
+				</Tab> */}
 			</Tabs>
 
 			<TicketModal show={show} setShow={setShow} />

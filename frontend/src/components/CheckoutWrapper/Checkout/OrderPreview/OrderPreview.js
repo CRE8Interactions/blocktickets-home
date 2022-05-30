@@ -12,8 +12,15 @@ export default function OrderPreview({purchase}) {
   let cart = sessionStorage.getItem('cart');
 	if (cart) cart = JSON.parse(cart);
 
+  let eventId;
+  let ticketCount;
+  let ticketType;
+
+  if (cart.listing) { eventId = cart.listing.event.id; ticketCount = cart.listing.tickets.length; ticketType = 'Resale' };
+  if (cart.ticket) { eventId = cart.ticket.eventId; ticketCount = cart?.ticketCount; ticketType = cart.ticket?.resale ? 'Resale' : 'General Admission' }
+
   useEffect(() => {
-    getEvent(Number(cart.ticket.eventId))
+    getEvent(Number(eventId))
       .then((res) => setData(res.data))
       .catch((err) => console.error(err))
   }, [])
@@ -39,8 +46,8 @@ export default function OrderPreview({purchase}) {
                             </span>
                         </p>
                         <Stack direction='horizontal' gap={1}>
-                            <span>{cart?.ticketCount > 1 ? `${cart?.ticketCount } Tickets` : `${cart?.ticketCount } Ticket` }</span>
-                            <span>&bull; {cart?.ticket?.resale ? 'Resale' : 'General Admission'}</span>
+                            <span>{ticketCount > 1 ? `${ticketCount } Tickets` : `${ticketCount } Ticket` }</span>
+                            <span>&bull; {ticketType}</span>
                         </Stack>
                     </Stack>
                 
