@@ -82,6 +82,11 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	useEffect(
 		() => {
+			// if no ticket type is selected, display filter message 
+			if ((tickets?.generalAdmissionTicket && !ticketFilters.standard) || (tickets?.reSaleTickets && tickets?.reSaleTickets.length > 0 && !ticketFilters.resale)) {
+				setFilteredTicketCount(0);
+			}
+
 			return () => {
 				setFilteredTicketCount(1);
 			};
@@ -95,25 +100,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setShowFilter(!showFilter); 
 		setIsFilterOpen(!isFilterOpen)
 	}
-
-	// const seatedTickets = [
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	}
-	// ];
 
 	const selectOptions = () => {
 		let options = [];
