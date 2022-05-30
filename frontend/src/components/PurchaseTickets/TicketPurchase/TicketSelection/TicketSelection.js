@@ -76,8 +76,8 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 
 	useEffect(
 		() => {
-			// demo purposes - tickets with filters applied
-			if (!ticketFilters.standard && !ticketFilters.resale || sliderValues[1] < genAdmissionTickets.map(ticket => totalCosts += ticket.attributes?.cost) || ticketCount > genAdmissionTickets.map(ticket => totalTicketCount += ticket.attributes?.maximum_quantity)) {
+			// if no ticket type is selected, display filter message 
+			if ((tickets?.generalAdmissionTicket && !ticketFilters.standard) || (tickets?.reSaleTickets && tickets?.reSaleTickets.length > 0 && !ticketFilters.resale)) {
 				setFilteredTicketCount(0);
 			}
 
@@ -94,51 +94,6 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setShowFilter(!showFilter); 
 		setIsFilterOpen(!isFilterOpen)
 	}
-
-	// for demo purposes, this will come from the database
-	 const genAdmissionTickets = [
-		{
-			id: 5277, 
-			attributes: {
-				cost: 20,
-createdAt: "2022-05-03T17:17:01.471Z",
-description: null,
-eventId: "50",
-facilityFee: 3,
-fee: 5,
-free: false,
-generalAdmission: true,
-listingAskingPrice: 34,
-listingId: "19",
-maximum_quantity: 4,
-minimum_quantity: 1,
-name: "General Admission",
-on_sale_status: "resaleAvailable",
-resale: true,
-row: null,
-royalty: 10
-			}
-		}
-	];
-
-	// const seatedTickets = [
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	},
-	// 	{
-	// 		seat: 'Sec Row',
-	// 		type: 'Presale'
-	// 	}
-	// ];
 
 	const selectOptions = () => {
 		let options = [];
@@ -215,49 +170,6 @@ royalty: 10
 									) : (
 										<MyTickets />
 									)}
-									{
-										// <ListGroup>
-										// 	{
-										// 		tickets && tickets.reSaleTickets && tickets.reSaleTickets.map((ticket, index) => {
-										// 			return (<ListGroup.Item
-										// 				onClick={() =>
-										// 						handleClick(
-										// 							'confirmation',
-										// 							ticket
-										// 						)}
-										// 					action
-										// 					as="li"
-										// 					key={index}
-										// 					className="d-flex justify-content-between align-items-center">
-										// 					<div>
-										// 						<div>
-										// 							<span className="fw-bold p-0">
-										// 							{ticket.attributes.generalAdmission ? 'General Admission' : 'Seated'}
-										// 							</span>
-										// 						</div>
-										// 						<div>
-										// 							<span className="text-muted caption">
-										// 									{ticketTypes(ticket?.attributes)}  
-										// 							</span>
-										// 						</div>
-										// 					</div>
-										// 					<div className="text-end">
-										// 						<div>
-										// 							<span className="fw-bold text-end">
-										// 									${parseFloat(ticket?.attributes?.listingAskingPrice + ticket?.attributes?.fee + ticket?.attributes?.facilityFee + 2.50 + 4.35).toFixed(2)} 
-										// 							</span>
-										// 						</div>
-										// 						<div>
-										// 							<span className="text-muted caption">
-										// 								${parseFloat(ticket?.attributes?.listingAskingPrice).toFixed(2)} + Fees 
-										// 							</span>
-										// 						</div>
-										// 					</div>
-										// 			</ListGroup.Item>)
-										// 		})
-										// 	}
-										// </ListGroup>
-									}
 								</div>
 							</div>
 							{isZoomed && (
