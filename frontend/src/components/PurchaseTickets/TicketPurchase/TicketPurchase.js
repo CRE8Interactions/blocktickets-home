@@ -14,7 +14,8 @@ export default function TicketPurchase({
 	step,
 	type,
 	isZoomed,
-	ticket
+	ticket,
+	listing
 }) {
 	// how many tickets user wants
 	const [
@@ -41,6 +42,7 @@ export default function TicketPurchase({
 					handleGoBack={handleGoBack}
 					type={type}
 					ticket={ticket}
+					listing={listing}
 					setTicketCount={setTicketCount}
 					ticketCount={ticketCount}
 				/>

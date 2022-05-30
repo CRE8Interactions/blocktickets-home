@@ -18,17 +18,17 @@ export default function Ticket({order}) {
                         className="event-image"
                     />
                     <Stack className="d-flex flex-column details" >
-                        <h1 className="event-name fw-bold">Nic Fanciulli</h1>
+                        <h1 className="event-name fw-bold">{order?.event?.name}</h1>
                         <p className="small">
                         {moment(order?.event?.start).format('MMM DD')} <span className="time">{moment(order?.event?.start).format('h:mm A')} EST</span>
                         </p>
                         <p className="small">
-                            CODA<span className="loc">
-                            Toronto, ON
+                            {order?.event?.venue?.name}<span className="loc">
+                            {order?.event?.venue?.address[0]?.city}, {order?.event?.venue?.address[0]?.state}
                             </span>
                         </p>
                         <Stack direction='horizontal' gap={1}>
-                            <span>4 Tickets</span>
+                            <span>{order.tickets.length} Tickets</span>
                             <span>&bull; General Admission</span>
                         </Stack>
                     </Stack>

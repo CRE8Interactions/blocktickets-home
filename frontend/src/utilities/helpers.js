@@ -41,14 +41,28 @@ export const toggleTimer = (el, show) => {
 };
 
 export const cartTotal = (cart, processingFee, tax) => {
-	let totalTicketPrices = Number(
-		parseFloat(cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost * cart.ticketCount).toFixed(2)
-	);
-	let fees = Number(
-		parseFloat(
-			cart.ticket.fee * cart.ticketCount + cart.ticket.facilityFee * cart.ticketCount + processingFee + tax
-		).toFixed(2)
-	);
-	let total = totalTicketPrices + fees;
+	let total;
+	if (cart.listing) {
+			let totalTicketPrices = Number(
+			parseFloat(cart.listing.askingPrice).toFixed(2)
+		);
+		let fees = Number(
+			parseFloat(
+				cart?.listing?.tickets[0]?.fee * cart.listing?.tickets?.length + cart?.listing?.tickets[0]?.facilityFee * cart.listing?.tickets?.length + processingFee + tax
+			).toFixed(2)
+		);
+		total = totalTicketPrices + fees;
+	} else if (cart.ticket) {
+		let totalTicketPrices = Number(
+			parseFloat(cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost * cart.ticketCount).toFixed(2)
+		);
+		let fees = Number(
+			parseFloat(
+				cart.ticket.fee * cart.ticketCount + cart.ticket.facilityFee * cart.ticketCount + processingFee + tax
+			).toFixed(2)
+		);
+		total = totalTicketPrices + fees;
+	}
+	
 	return total;
 };

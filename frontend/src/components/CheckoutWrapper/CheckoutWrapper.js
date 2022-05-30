@@ -65,11 +65,9 @@ export default function CheckoutWrapper() {
 		let cart = sessionStorage.getItem('cart');
 		if (cart) cart = JSON.parse(cart);
 
-		// let total = cartTotal(cart, 4.35, 2.50)
-		// total = (parseFloat(total) * 100).toFixed()
-
 		let data = {
 			ticket: cart.ticket,
+			listing: cart.listing,
 			ticketCount: cart.ticketCount
 		};
 

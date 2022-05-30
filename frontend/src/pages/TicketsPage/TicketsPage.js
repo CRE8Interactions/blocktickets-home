@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getEvent, getEventTickets, getResaleTickets } from '../../utilities/api';
+import { getEvent, getEventTickets, getResaleTickets, getListingsByEvent } from '../../utilities/api';
 import TicketContext from '../../context/Ticket/Ticket';
 
 import { Event, PurchaseTickets } from '../../components';
@@ -16,6 +16,10 @@ export default function TicketsPage() {
 	const [
 		tickets,
 		setTickets
+	] = useState();
+	const [
+		listings,
+		setListings
 	] = useState();
 	const [
 		generalAdmissionCount,
@@ -53,6 +57,8 @@ export default function TicketsPage() {
 			getEvent(id).then((res) => setEvent(res.data)).catch((err) => console.error(err));
 
 			getResaleTickets(id).then((res) => setResaleTickets(res.data.data)).catch((err) => console.error(err));
+
+			getListingsByEvent(id).then((res) => setListings(res.data)).catch((err) => console.error(err));
 		},
 		[
 			id
@@ -61,7 +67,7 @@ export default function TicketsPage() {
 
 	return (
 		<div className="full-height-wrapper">
-			<TicketContext.Provider value={{ tickets, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
+			<TicketContext.Provider value={{ tickets, listings, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
 				<div className="pt-md-3">
 					<Event event={event} />
 				</div>

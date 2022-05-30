@@ -45,6 +45,9 @@
     },
     "askingPrice": {
       "type": "decimal"
+    },
+    "fromOrder": {
+      "type": "integer"
     }
   }
 }

@@ -85,7 +85,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 			askingPrice: price,
 			event: order?.event,
 			serviceFees: (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length).toFixed(2),
-			payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length)).toFixed(2)
+			payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length)).toFixed(2),
+			fromOrder: order?.id
 		}
 
 		if (ticketAction === 'edit') {
