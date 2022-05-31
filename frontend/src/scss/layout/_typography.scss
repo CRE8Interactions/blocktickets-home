@@ -271,18 +271,30 @@ h4,
 		}
 	}
 
+	&-section-heading,
+	&-header-title {
+		font-size: $body-1;
+	}
+
+	&-heading,
+	&-header-title {
+		margin-bottom: $text-spacer-xs;
+	}
+
 	&-heading {
 		font-size: $h3-font-size;
-		margin-bottom: $text-spacer-xs;
 	}
 
 	&-desc {
 		font-size: $body-2;
 	}
 
+	&-header {
+		margin: $text-spacer-lg 0px;
+	}
+
 	&-section {
 		&-heading {
-			font-size: $body-1;
 			margin: $text-spacer-lg 0px $text-spacer-xs;
 		}
 	}
@@ -305,10 +317,28 @@ h4,
 	}
 
 	.unstyled-list {
-		ul {
+		& {
 			padding-left: $text-spacer-xs;
 		}
-		& li {
+
+		&.float {
+			dt:not(:first-of-type) {
+				float: left;
+				margin-right: rem(3);
+			}
+
+			dt:first-of-type {
+				margin-bottom: rem(4);
+			}
+		}
+
+		dl {
+			dt,
+			dd {
+				display: block;
+			}
+		}
+		li {
 			list-style: none;
 
 			ul {
@@ -318,7 +348,7 @@ h4,
 		}
 	}
 
-	.unstyled-list > ul > li ~ li {
+	.unstyled-list > li ~ li {
 		padding-top: $text-spacer-xs;
 	}
 
@@ -332,21 +362,10 @@ h4,
 		margin-bottom: rem(3);
 	}
 
-	dl:not(.unstyled-list) {
+	dl {
 		dt,
 		dd {
 			display: inline;
-		}
-	}
-
-	dl.float {
-		dt:not(:first-of-type) {
-			float: left;
-			margin-right: rem(3);
-		}
-
-		dt:first-of-type {
-			margin-bottom: rem(4);
 		}
 	}
 }

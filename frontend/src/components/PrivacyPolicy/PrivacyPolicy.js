@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 export default function PrivacyPolicy() {
 	return (
@@ -12,27 +12,30 @@ export default function PrivacyPolicy() {
 				the collection and use of information in accordance with this Privacy Policy.
 			</p>
 
+			<div className="docs-header">
+				<h2 className="docs-header-title">Interpretation and Definitions</h2>
+			</div>
+
+			<h3 className="normal">Interpretation</h3>
+			<p>
+				The words of which the initial letter is capitalized have meanings defined under the following
+				conditions. The following definitions shall have the same meaning regardless of whether they appear in
+				singular or in plural.
+			</p>
 			<section>
-				<div className="docs-section-header">
-					<h2 className="docs-section-heading">Interpretation and Definitions</h2>
-				</div>
-				<h3 className="normal">Interpretation</h3>
-				<p>
-					The words of which the initial letter is capitalized have meanings defined under the following
-					conditions. The following definitions shall have the same meaning regardless of whether they appear
-					in singular or in plural.
-				</p>
 				<h3 className="normal mt-4">Definitions</h3>
 				<p>For the purposes of this Privacy Policy:</p>
-				<dl>
-					<ul>
-						<li>
+				<ul>
+					<li>
+						<dl>
 							<dt>Account </dt>
 							<dd>
 								means a unique account created for You to access our Services or ports of our Service.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Business</dt>
 							<dd>
 								, for the purpose of the CCPA (California Consumer Privacy Act), refers to the Company
@@ -42,15 +45,19 @@ export default function PrivacyPolicy() {
 								the purposes and means of the processing of consumers' personal information, that does
 								business in the State of California.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Company </dt>
 							<dd>
 								(referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to
 								Blocktickets LLC, 320 W MAIN ST LEWISVILLE, TX 75057.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Consumer</dt>
 							<dd>
 								, for the purpose of the CCPA (California Consumer Privacy Act), means a natural person
@@ -59,35 +66,45 @@ export default function PrivacyPolicy() {
 								every individual who is domiciled in the USA who is outside the USA for a temporary or
 								transitory purpose.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Cookies </dt>
 							<dd>
 								are small files that are placed on Your computer, mobile device or any other device by a
 								website, containing the details of Your browsing history on that website among its many
 								uses.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Country </dt>
 							<dd>refers to: Texas, United States</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Data controller</dt>
 							<dd>
 								, for the purposes of the GDPR (General Data Protection Regulation), refers to the
 								Company as the legal person which alone or jointly with others determines the purposes
 								and means of the processing of Personal Data.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Device </dt>
 							<dd>
 								means any device that can access the Service such as a computer, a cellphone or a
 								digital tablet.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Do Not Track </dt>
 							<dd>
 								(DNT) is a concept that has been promoted by US regulatory authorities, in particular
@@ -95,8 +112,10 @@ export default function PrivacyPolicy() {
 								implement a mechanism for allowing internet users to control the tracking of their
 								online activities across websites.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Facebook Fan Page </dt>
 							<dd>
 								is a public profile named Blocktickets specifically created by the Company on the
@@ -105,8 +124,10 @@ export default function PrivacyPolicy() {
 									https://www.facebook.com/blocktickets
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Personal Data </dt>
 							<dd>
 								is any information that relates to an identified or identifiable individual. For the
@@ -117,8 +138,10 @@ export default function PrivacyPolicy() {
 								identifies, relates to, describes or is capable of being associated with, or could
 								reasonably be linked, directly or indirectly, with You.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Sale</dt>
 							<dd>
 								, for the purpose of the CCPA (California Consumer Privacy Act), means selling, renting,
@@ -127,12 +150,16 @@ export default function PrivacyPolicy() {
 								information to another business or a third party for monetary or other valuable
 								consideration.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Service </dt>
 							<dd>refers to the Website</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Service Provider </dt>
 							<dd>
 								means any natural or legal person who processes the data on behalf of the Company. It
@@ -141,15 +168,19 @@ export default function PrivacyPolicy() {
 								the Service or to assist the Company in analyzing how the Service is used. For the
 								purpose of the GDPR, Service Providers are considered Data Processors.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Third-party Social Media Service </dt>
 							<dd>
 								refers to data collected automatically, either generated by the use of the Service or
 								from the Service infrastructure itself (for example, the duration of a page visit).
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Usage Data </dt>
 							<dd>
 								means any natural or legal person who processes the data on behalf of the Company. It
@@ -158,8 +189,10 @@ export default function PrivacyPolicy() {
 								the Service or to assist the Company in analyzing how the Service is used. For the
 								purpose of the GDPR, Service Providers are considered Data Processors.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Website </dt>
 							<dd>
 								refers to Blocktickets, accessible from{' '}
@@ -167,8 +200,10 @@ export default function PrivacyPolicy() {
 									www.blocktickets.xyz
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>You </dt>
 							<dd>
 								means the individual accessing or using the Service, or the company, or other legal
@@ -176,9 +211,9 @@ export default function PrivacyPolicy() {
 								applicable. Under GDPR (General Data Protection Regulation), You can be referred to as
 								the Data Subject or as the User as you are the individual using the Service.
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 			</section>
 			<section>
 				<h2 className="docs-section-heading">Collecting Your Personal Data</h2>
@@ -233,9 +268,9 @@ export default function PrivacyPolicy() {
 					certain information. Tracking technologies used are beacons, tags, and scripts to collect and track
 					information and to improve and analyze Our Service. The technologies We use may include:
 				</p>
-				<dl>
-					<ul>
-						<li>
+				<ul>
+					<li>
+						<dl>
 							<dt>Cookies or Browser Cookies. </dt>
 							<dd>
 								A cookie is a small file placed on Your Device. You can instruct Your browser to refuse
@@ -243,8 +278,10 @@ export default function PrivacyPolicy() {
 								Cookies, You may not be able to use some parts of our Service. Unless you have adjusted
 								Your browser setting so that it will refuse Cookies, our Service may use Cookies.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Flash Cookies </dt>
 							<dd>
 								Certain features of our Service may use local stored objects (or Flash Cookies) to
@@ -258,8 +295,10 @@ export default function PrivacyPolicy() {
 									https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Web Beacons </dt>
 							<dd>
 								Certain sections of our Service and our emails may contain small electronic files known
@@ -268,18 +307,18 @@ export default function PrivacyPolicy() {
 								an email and for other related website statistics (for example, recording the popularity
 								of a certain section and verifying system and server integrity).
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<p>
 					Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal
 					computer or mobile device when You go offline, while Session Cookies are deleted as soon as You
 					close Your web browser. You can learn more about cookies here: All About Cookies by TermsFeed. We
-					use both Session and Persistent Cookies for the purposes set out below:{' '}
+					use both Session and Persistent Cookies for the purposes set out below:
 				</p>
-				<dl className="unstyled-list float">
-					<ul>
-						<li>
+				<ul className="unstyled-list float">
+					<li>
+						<dl>
 							<dt>Necessary / Essential Cookies</dt>
 							<dt>Type:</dt>
 							<dd>Session Cookies</dd>
@@ -293,8 +332,10 @@ export default function PrivacyPolicy() {
 								have asked for cannot be provided, and We only use these Cookies to provide You with
 								those services.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Cookes Policy / Notice Acceptance Cookies</dt>
 							<dt>Type: </dt>
 							<dd>Persistent Cookies</dd>
@@ -302,8 +343,10 @@ export default function PrivacyPolicy() {
 							<dd>Us</dd>
 							<dt>Purpose:</dt>
 							<dd>These Cookies identify if users have accepted the use of cookies on the Website.</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Functionality Cookies</dt>
 							<dt>Type: </dt>
 							<dd>Persistent Cookies</dd>
@@ -316,8 +359,10 @@ export default function PrivacyPolicy() {
 								to provide You with a more personal experience and to avoid You having to re-enter your
 								preferences every time You use the Website.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Tracking and Performance Cookies</dt>
 							<dt>Type: </dt>
 							<dd>Persistent Cookies</dd>
@@ -332,9 +377,9 @@ export default function PrivacyPolicy() {
 								access the Website. We may also use these Cookies to test new pages, features or new
 								functionality of the Website to see how our users react to them.
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<p>
 					For more information about the cookies we use and your choices regarding cookies, please visit our
 					Cookies Policy or the Cookies section of our Privacy Policy.
@@ -343,29 +388,35 @@ export default function PrivacyPolicy() {
 			<section>
 				<h2 className="docs-section-heading">Use of Your Personal Data</h2>
 				<p>The Company may use Personal Data for the following purposes:</p>
-				<dl>
-					<ul>
-						<li>
+				<ul>
+					<li>
+						<dl>
 							<dt>To provide and maintain our Service</dt>
 							<dd>, including to monitor the usage of our Service.</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>To manage Your Account: </dt>
 							<dd>
 								to manage Your registration as a user of the Service. The Personal Data You provide can
 								give You access to different functionalities of the Service that are available to You as
 								a registered user.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>For the performance of a contract: </dt>
 							<dd>
 								the development, compliance and undertaking of the purchase contract for the products,
 								items or services You have purchased or of any other contract with Us through the
 								Service.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>To contact You: </dt>
 							<dd>
 								To contact You by email, telephone calls, SMS, or other equivalent forms of electronic
@@ -374,28 +425,36 @@ export default function PrivacyPolicy() {
 								services, including the security updates, when necessary or reasonable for their
 								implementation.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>To provide You </dt>
 							<dd>
 								with news, special offers and general information about other goods, services and events
 								which we offer that are similar to those that you have already purchased or enquired
 								about unless You have opted not to receive such information.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>To manage Your requests: </dt>
 							<dd>To attend and manage Your requests to Us.</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>To deliver targeted advertising to You: </dt>
 							<dd>
 								We may use Your information to develop and display content and advertising (and work
 								with third-party vendors who do so) tailored to Your interests and/or location and to
 								measure its effectiveness.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>For business transfers: </dt>
 							<dd>
 								We may use Your information to evaluate or conduct a merger, divestiture, restructuring,
@@ -404,37 +463,43 @@ export default function PrivacyPolicy() {
 								in which Personal Data held by Us about our Service users is among the assets
 								transferred.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>For other purposes: </dt>
 							<dd>
 								We may use Your information for other purposes, such as data analysis, identifying usage
 								trends, determining the effectiveness of our promotional campaigns and to evaluate and
 								improve our Service, products, services, marketing and your experience.
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<p>We may share Your personal information in the following situations:</p>
-				<dl>
-					<ul>
-						<li>
+				<ul>
+					<li>
+						<dl>
 							<dt>With Service Providers: </dt>
 							<dd>
 								We may share Your personal information with Service Providers to monitor and analyze the
 								use of our Service, to advertise on third party websites to You after You visited our
 								Service, for payment processing, to contact You.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>For business transfers: </dt>
 							<dd>
 								We may share or transfer Your personal information in connection with, or during
 								negotiations of, any merger, sale of Company assets, financing, or acquisition of all or
 								a portion of Our business to another company.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>With Affiliates: </dt>
 							<dd>
 								We may share Your information with Our affiliates, in which case we will require those
@@ -442,15 +507,19 @@ export default function PrivacyPolicy() {
 								other subsidiaries, joint venture partners or other companies that We control or that
 								are under common control with Us.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>With business partners: </dt>
 							<dd>
 								We may share Your information with Our business partners to offer You certain products,
 								services or promotions.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>With other users: </dt>
 							<dd>
 								when You share personal information or otherwise interact in the public areas with other
@@ -460,13 +529,15 @@ export default function PrivacyPolicy() {
 								profile, pictures and description of Your activity. Similarly, other users will be able
 								to view descriptions of Your activity, communicate with You and view Your profile.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>With Your consent: </dt>
 							<dd>We may disclose Your personal information for any other purpose with Your consent.</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<h3 className="normal mt-4">Retention of Your Personal Data</h3>
 				<p>
 					The Company will retain Your Personal Data only for as long as is necessary for the purposes set out
@@ -492,19 +563,19 @@ export default function PrivacyPolicy() {
 					information.
 				</p>
 				<h3 className="normal mt-4">Disclosure of Your Personal Data</h3>
-				<h3 className="normal mt-2">Business Transactions</h3>
+				<h3 className="small mt-2">Business Transactions</h3>
 				<p>
 					If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be
 					transferred. We will provide notice before Your Personal Data is transferred and becomes subject to
 					a different Privacy Policy.
 				</p>
-				<h3 className="normal mt-2">Law enforcement</h3>
+				<h3 className="small mt-2">Law enforcement</h3>
 				<p>
 					Under certain circumstances, the Company may be required to disclose Your Personal Data if required
 					to do so by law or in response to valid requests by public authorities (e.g. a court or a government
 					agency).
 				</p>
-				<h3 className="normal mt-2">Other legal requrements</h3>
+				<h3 className="small mt-2">Other legal requrements</h3>
 				<p>
 					The Company may disclose Your Personal Data in the good faith belief that such action is necessary
 					to:
@@ -516,7 +587,7 @@ export default function PrivacyPolicy() {
 					<li>Protect the personal safety of Users of the Service or the public</li>
 					<li>Protect against legal liability</li>
 				</ul>
-				<h3 className="normal mt-2">Security of Your Personal Data</h3>
+				<h3 className="small mt-2">Security of Your Personal Data</h3>
 				<p>
 					The security of Your Personal Data is important to Us, but remember that no method of transmission
 					over the Internet, or method of electronic storage is 100% secure. While We strive to use
@@ -533,45 +604,54 @@ export default function PrivacyPolicy() {
 				</p>
 				<h3 className="normal mt-4">Analytics</h3>
 				<p>We may use third-party Service providers to monitor and analyze the use of our Service.</p>
-				<dl className="unstyled-list">
-					<ul>
-						<li>
+				<ul className="unstyled-list">
+					<li>
+						<dl>
 							<dt>Google Analytics</dt>
 							<dd>
 								Google Analytics is a web analytics service offered by Google that tracks and reports
 								website traffic. Google uses the data collected to track and monitor the use of our
 								Service. This data is shared with other Google services. Google may use the collected
-								data to contextualize and personalize the ads of its own advertising network. <br />You
-								can opt-out of having made your activity on the Service available to Google Analytics by
-								installing the Google Analytics opt-out browser add-on. The add-on prevents the Google
-								Analytics JavaScript (ga.js, analytics.js and dc.js) from sharing information with
-								Google Analytics about visits activity. <br />
+								data to contextualize and personalize the ads of its own advertising network.
+							</dd>
+							<dd>
+								You can opt-out of having made your activity on the Service available to Google
+								Analytics by installing the Google Analytics opt-out browser add-on. The add-on prevents
+								the Google Analytics JavaScript (ga.js, analytics.js and dc.js) from sharing information
+								with Google Analytics about visits activity.{' '}
+							</dd>
+							<dd>
 								For more information on the privacy practices of Google, please visit the Google Privacy
 								& Terms web page:{' '}
 								<a target="_blank" href="https://policies.google.com/privacy">
 									https://policies.google.com/privacy
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Firebase</dt>
+							<dd>Firebase is an analytics service provided by Google Inc.</dd>
 							<dd>
-								Firebase is an analytics service provided by Google Inc. <br />You may opt-out of
-								certain Firebase features through your mobile device settings, such as your device
-								advertising settings or by following the instructions provided by Google in their
-								Privacy Policy:{' '}
+								You may opt-out of certain Firebase features through your mobile device settings, such
+								as your device advertising settings or by following the instructions provided by Google
+								in their Privacy Policy:{' '}
 								<a target="_blank" href="https://policies.google.com/privacy">
 									https://policies.google.com/privacy
 								</a>
-								<br />
+							</dd>
+							<dd>
 								For more information on what type of information Firebase collects, please visit the How
 								Google uses data when you use our partners' sites or apps webpage:{' '}
 								<a target="_blank" href="https://policies.google.com/technologies/partner-sites">
 									https://policies.google.com/technologies/partner-sites
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Matomo</dt>
 							<dd>
 								Matomo is a web analytics service. You can visit their Privacy Policy page here:{' '}
@@ -579,85 +659,91 @@ export default function PrivacyPolicy() {
 									https://matomo.org/privacy-policy
 								</a>
 							</dd>
-						</li>
-						<li>
-							<dt>Clicky</dt>
-							<dd>
-								Clicky is a web analytics service. Read the Privacy Policy for Clicky here:{' '}
-								<a target="_blank" href="https://clicky.com/terms">
-									https://clicky.com/terms
-								</a>
-							</dd>
-						</li>
-						<li>
-							<dt>Statcounter</dt>
-							<dd>
-								Statcounter is a web traffic analysis tool. You can read the Privacy Policy for
-								Statcounter here:{' '}
-								<a target="_blank" href="https://statcounter.com/about/legal/">
-									https://statcounter.com/about/legal/
-								</a>
-							</dd>
-						</li>
-						<li>
-							<dt>Flurry Analytics</dt>
-							<dd>
-								Flurry Analytics service is provided by Yahoo! Inc. <br /> You can opt-out from Flurry
-								Analytics service to prevent Flurry Analytics from using and sharing your information by
-								visiting the Flurry's Opt-out page:{' '}
-								<a target="_blank" href="https://developer.yahoo.com/flurry/end-user-opt-out/">
-									https://developer.yahoo.com/flurry/end-user-opt-out/
-								</a>
-								<br />
-								For more information on the privacy practices and policies of Yahoo!, please visit their
-								Privacy Policy page:{' '}
-								<a target="_blank" href="https://legal.yahoo.com/us/en/yahoo/privacy/index.html">
-									https://policies.yahoo.com/xa/en/yahoo/privacy/index.html
-								</a>
-							</dd>
-						</li>
-						<li>
-							<dt>Mixpanel</dt>
-							<dd>
-								Mixpanel is provided by Mixpanel Inc.<br /> You can prevent Mixpanel from using your
-								information for analytics purposes by opting-out. To opt-out of Mixpanel service, please
-								visit this page: {' '}
-								<a target="_blank" href="https://mixpanel.com/optout/">
-									https://mixpanel.com/optout/
-								</a>
-								<br />
-								For more information on what type of information Mixpanel collects, please visit the
-								Terms of Use page of Mixpanel: {' '}
-								<a target="_blank" href="https://mixpanel.com/legal/terms-of-use/">
-									https://mixpanel.com/legal/terms-of-use/
-								</a>
-							</dd>
-						</li>
-						<li>
-							<dt>Unity Analytics</dt>
-							<dd>
-								Unity Analytics is provided by Unity Technologies.<br />Unity Analytics collects,
-								stores, uses, processes, and transfers personal information to provide, operate, and
-								improve Unity Technologies services, including personalized advertising services. For
-								more information on what type of information Unity Technologies collects, please visit
-								their Privacy Policy page:{' '}
-								<a target="_blank" href="https://unity3d.com/legal/privacy-policy">
-									https://unity3d.com/legal/privacy-policy
-								</a>
-								<br />
-								You can prevent Unity Analytics from using your information by opting-out. To opt-out of
-								Unity Analytics, please visit this page: {' '}
-								<a target="_blank" href="https://unity3d.com/legal/privacy-policy">
-									https://unity3d.com/legal/privacy-policy
-								</a>
-								<br />
-								You may opt-out of all personalized advertising by enabling privacy features on Your
-								mobile device such as Limit Ad Tracking (iOS) and Opt Out of Ads Personalization
-								(Android). See Your mobile device Help system for more information.
-							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+					<li>
+						<dt>Clicky</dt>
+						<dd>
+							Clicky is a web analytics service. Read the Privacy Policy for Clicky here:{' '}
+							<a target="_blank" href="https://clicky.com/terms">
+								https://clicky.com/terms
+							</a>
+						</dd>
+					</li>
+					<li>
+						<dt>Statcounter</dt>
+						<dd>
+							Statcounter is a web traffic analysis tool. You can read the Privacy Policy for Statcounter
+							here:{' '}
+							<a target="_blank" href="https://statcounter.com/about/legal/">
+								https://statcounter.com/about/legal/
+							</a>
+						</dd>
+					</li>
+					<li>
+						<dt>Flurry Analytics</dt>
+						<dd>Flurry Analytics service is provided by Yahoo! Inc.</dd>{' '}
+						<dd>
+							{' '}
+							You can opt-out from Flurry Analytics service to prevent Flurry Analytics from using and
+							sharing your information by visiting the Flurry's Opt-out page:{' '}
+							<a target="_blank" href="https://developer.yahoo.com/flurry/end-user-opt-out/">
+								https://developer.yahoo.com/flurry/end-user-opt-out/
+							</a>
+						</dd>
+						<dd>
+							For more information on the privacy practices and policies of Yahoo!, please visit their
+							Privacy Policy page:{' '}
+							<a target="_blank" href="https://legal.yahoo.com/us/en/yahoo/privacy/index.html">
+								https://policies.yahoo.com/xa/en/yahoo/privacy/index.html
+							</a>
+						</dd>
+					</li>
+					<li>
+						<dt>Mixpanel</dt>
+						<dd>Mixpanel is provided by Mixpanel Inc.</dd>
+						<dd>
+							{' '}
+							You can prevent Mixpanel from using your information for analytics purposes by opting-out.
+							To opt-out of Mixpanel service, please visit this page: {' '}
+							<a target="_blank" href="https://mixpanel.com/optout/">
+								https://mixpanel.com/optout/
+							</a>
+						</dd>
+						<dd>
+							For more information on what type of information Mixpanel collects, please visit the Terms
+							of Use page of Mixpanel: {' '}
+							<a target="_blank" href="https://mixpanel.com/legal/terms-of-use/">
+								https://mixpanel.com/legal/terms-of-use/
+							</a>
+						</dd>
+					</li>
+					<li>
+						<dt>Unity Analytics</dt>
+						<dd>Unity Analytics is provided by Unity Technologies.</dd>
+						<dd>
+							Unity Analytics collects, stores, uses, processes, and transfers personal information to
+							provide, operate, and improve Unity Technologies services, including personalized
+							advertising services. For more information on what type of information Unity Technologies
+							collects, please visit their Privacy Policy page:{' '}
+							<a target="_blank" href="https://unity3d.com/legal/privacy-policy">
+								https://unity3d.com/legal/privacy-policy
+							</a>
+						</dd>
+						<dd>
+							You can prevent Unity Analytics from using your information by opting-out. To opt-out of
+							Unity Analytics, please visit this page: {' '}
+							<a target="_blank" href="https://unity3d.com/legal/privacy-policy">
+								https://unity3d.com/legal/privacy-policy
+							</a>
+						</dd>
+						<dd>
+							You may opt-out of all personalized advertising by enabling privacy features on Your mobile
+							device such as Limit Ad Tracking (iOS) and Opt Out of Ads Personalization (Android). See
+							Your mobile device Help system for more information.
+						</dd>
+					</li>
+				</ul>
 				<h3 className="normal mt-2">Email Marketing</h3>
 				<p>
 					We may use Your Personal Data to contact You with newsletters, marketing or promotional materials
@@ -666,22 +752,24 @@ export default function PrivacyPolicy() {
 					We send or by contacting Us. We may use Email Marketing Service Providers to manage and send emails
 					to You.
 				</p>
-				<dl className="unstyled-list">
-					<ul>
-						<li>
+				<ul className="unstyled-list">
+					<li>
+						<dl>
 							<dt>Mailchimp</dt>
 							<dd>
 								Mailchimp is an email marketing sending service provided by The Rocket Science Group
-								LLC. <br />
+								LLC.{' '}
+							</dd>
+							<dd>
 								For more information on the privacy practices of Mailchimp, please visit their Privacy
 								policy: {' '}
 								<a target="_blank" href="https://www.intuit.com/privacy/statement/">
 									https://www.intuit.com/privacy/statement/
 								</a>
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<h3 className="normal mt-2">Payments</h3>
 				<p>
 					We may provide paid products and/or services within the Service. In that case, we may use
@@ -692,9 +780,9 @@ export default function PrivacyPolicy() {
 					which is a joint effort of brands like Visa, Mastercard, American Express and Discover. PCI-DSS
 					requirements help ensure the secure handling of payment information.
 				</p>
-				<dl className="unstyled-list">
-					<ul>
-						<li>
+				<ul className="unstyled-list">
+					<li>
+						<dl>
 							<dt>Stripe</dt>
 							<dd>
 								Their Privacy Policy can be viewed at{' '}
@@ -702,9 +790,9 @@ export default function PrivacyPolicy() {
 									https://stripe.com/privacy
 								</a>
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<h3 className="normal mt-2">Behavioural Remarketing</h3>
 				<p>
 					The Company uses remarketing services to advertise to You after You accessed or visited our Service.
@@ -748,66 +836,83 @@ export default function PrivacyPolicy() {
 				<p>
 					You may opt-out of all personalized advertising by enabling privacy features on Your mobile device
 					such as Limit Ad Tracking (iOS) and Opt Out of Ads Personalization (Android). See Your mobile device
-					Help system for more information. <br /> We may share information, such as hashed email addresses
-					(if available) or other online identifiers collected on Our Service with these third-party vendors.
-					This allows Our third-party vendors to recognize and deliver You ads across devices and browsers. To
-					read more about the technologies used by these third-party vendors and their cross-device
-					capabilities please refer to the Privacy Policy of each vendor listed below.<br />
-					The third-party vendors We use are:
+					Help system for more information.
 				</p>
-				<dl className="unstyled-list">
-					<ul>
-						<li>
+				<p>
+					{' '}
+					We may share information, such as hashed email addresses (if available) or other online identifiers
+					collected on Our Service with these third-party vendors. This allows Our third-party vendors to
+					recognize and deliver You ads across devices and browsers. To read more about the technologies used
+					by these third-party vendors and their cross-device capabilities please refer to the Privacy Policy
+					of each vendor listed below.
+				</p>
+				<p>The third-party vendors We use are:</p>
+				<ul className="unstyled-list">
+					<li>
+						<dl>
 							<dt>Google Ads (AdWords)</dt>
+							<dd>Google Ads (AdWords) remarketing service is provided by Google Inc. </dd>
 							<dd>
-								Google Ads (AdWords) remarketing service is provided by Google Inc. <br /> You can
-								opt-out of Google Analytics for Display Advertising and customise the Google Display
-								Network ads by visiting the Google Ads Settings page{' '}
+								{' '}
+								You can opt-out of Google Analytics for Display Advertising and customise the Google
+								Display Network ads by visiting the Google Ads Settings page{' '}
 								<a target="_blank" href="http://www.google.com/settings/ads">
 									http://www.google.com/settings/ads
 								</a>
-								<br />
+							</dd>{' '}
+							<dd>
 								Google also recommends installing the Google Analytics Opt-out Browser Add-on -{' '}
 								<a target="_blank" href="https://tools.google.com/dlpage/gaoptout">
 									https://tools.google.com/dlpage/gaoptout
 								</a>{' '}
-								for your web browser. <br /> For more information on the privacy practices of Google,
-								please visit the Google Privacy & Terms web page:{' '}
+								for your web browser.{' '}
+							</dd>{' '}
+							<dd>
+								{' '}
+								For more information on the privacy practices of Google, please visit the Google Privacy
+								& Terms web page:{' '}
 								<a target="_blank" href="https://policies.google.com/privacy">
 									https://policies.google.com/privacy
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Twitter</dt>
+							<dd>Twitter remarketing service is provided by Twitter Inc.</dd>
 							<dd>
-								Twitter remarketing service is provided by Twitter Inc.<br /> You can opt-out from
-								Twitter's interest-based ads by following their instructions:{' '}
+								You can opt-out from Twitter's interest-based ads by following their instructions:{' '}
 								<a target="_blank" href="https://support.twitter.com/articles/20170405">
 									https://support.twitter.com/articles/20170405
 								</a>
-								<br />
+							</dd>
+							<dd>
 								You can learn more about the privacy practices and policies of Twitter by visiting their
 								Privacy Policy page:{' '}
 								<a target="_blank" href="https://twitter.com/privacy">
 									https://twitter.com/privacy
 								</a>
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Facebook</dt>
+							<dd>Facebook remarketing service is provided by Facebook Inc.</dd>
 							<dd>
-								Facebook remarketing service is provided by Facebook Inc.<br /> You can learn more about
-								interest-based advertising from Facebook by visiting this page:{' '}
+								You can learn more about interest-based advertising from Facebook by visiting this page:{' '}
 								<a target="_blank" href="https://www.facebook.com/help/516147308587266">
 									https://www.facebook.com/help/516147308587266
 								</a>
-								<br />
+							</dd>
+							<dd>
 								To opt-out from Facebook's interest-based ads, follow these instructions from Facebook:{' '}
 								<a target="_blank" href="https://www.facebook.com/help/568137493302217">
 									https://www.facebook.com/help/568137493302217
 								</a>{' '}
-								<br />
+							</dd>
+							<dd>
 								Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising
 								established by the Digital Advertising Alliance. You can also opt-out from Facebook and
 								other participating companies through the Digital Advertising Alliance in the USA{' '}
@@ -821,15 +926,18 @@ export default function PrivacyPolicy() {
 								<a target="_blank" href="http://www.youronlinechoices.eu/">
 									http://www.youronlinechoices.eu/
 								</a>{' '}
-								or opt-out using your mobile device settings. <br /> For more information on the privacy
-								practices of Facebook, please visit Facebook's Data Policy:{' '}
+								or opt-out using your mobile device settings.{' '}
+							</dd>
+							<dd>
+								For more information on the privacy practices of Facebook, please visit Facebook's Data
+								Policy:{' '}
 								<a target="_blank" href="https://www.facebook.com/privacy/explanation">
 									https://www.facebook.com/privacy/explanation
 								</a>
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 			</section>
 			<section>
 				<h2 className="docs-section-heading">CCPA Privacy</h2>
@@ -843,17 +951,19 @@ export default function PrivacyPolicy() {
 					We collect information that identifies, relates to, describes, references, is capable of being
 					associated with, or could reasonably be linked, directly or indirectly, with a particular Consumer
 					or Device. The following is a list of categories of personal information which we may collect or may
-					have been collected from California residents within the last twelve (12) months. <br />Please note
-					that the categories and examples provided in the list below are those defined in the CCPA. This does
-					not mean that all examples of that category of personal information were in fact collected by Us,
-					but reflects our good faith belief to the best of our knowledge that some of that information from
-					the applicable category may be and may have been collected. For example, certain categories of
-					personal information would only be collected if You provided such personal information directly to
-					Us.
+					have been collected from California residents within the last twelve (12) months.{' '}
 				</p>
-				<dl className="unstyled-list float">
-					<ul>
-						<li>
+				<p>
+					Please note that the categories and examples provided in the list below are those defined in the
+					CCPA. This does not mean that all examples of that category of personal information were in fact
+					collected by Us, but reflects our good faith belief to the best of our knowledge that some of that
+					information from the applicable category may be and may have been collected. For example, certain
+					categories of personal information would only be collected if You provided such personal information
+					directly to Us.
+				</p>
+				<ul className="unstyled-list float">
+					<li>
+						<dl>
 							<dt>Category A: Identifiers.</dt>
 							<dt>Examples:</dt>
 							<dd>
@@ -863,9 +973,11 @@ export default function PrivacyPolicy() {
 							</dd>
 							<dt>Collected:</dt>
 							<dd>Yes</dd>
-						</li>
-						<li>
-							<dt className="mb-1">
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>
 								Category B: Personal information categories listed in the California Customer Records
 								statute (Cal. Civ. Code § 1798.80(e)).
 							</dt>
@@ -880,8 +992,10 @@ export default function PrivacyPolicy() {
 							</dd>
 							<dt>Collected:</dt>
 							<dd>Yes</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Protected classification characteristics under California or federal law.</dt>
 							<dt>Examples:</dt>
 							<dd>
@@ -894,17 +1008,20 @@ export default function PrivacyPolicy() {
 							</dd>
 							<dt>Collected:</dt>
 							<dd>Yes</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category D: Commercial information.</dt>
 							<dt>Examples:</dt>
 							<dd>Records and history of products or services purchased or considered.</dd>
 							<dt>Collected: </dt>
 							<dd>Yes</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category E: Biometric information.</dt>
-
 							<dt>Examples:</dt>
 							<dd>
 								Genetic, physiological, behavioral, and biological characteristics, or activity patterns
@@ -914,41 +1031,50 @@ export default function PrivacyPolicy() {
 							</dd>
 							<dt>Collected: </dt>
 							<dd>No</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category F: Internet or other similar network activity.</dt>
 							<dt>Examples:</dt>
 							<dd>Interaction with our Service or advertisement.</dd>
 							<dt>Collected: </dt>
 							<dd>Yes</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category G: Geolocation data.</dt>
 							<dt>Examples:</dt>
 							<dd>Approximate physical location.</dd>
 							<dt>Collected:</dt>
 							<dd>No</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category H: Sensory data.</dt>
 							<dt>Examples:</dt>
 							<dd>Audio, electronic, visual, thermal, olfactory, or similar information.</dd>
 							<dt>Collected:</dt>
 							<dd>No</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category I: Professional or employment-related information.</dt>
 							<dt>Examples:</dt>
 							<dd>Current or past job history or performance evaluations.</dd>
 							<dt>Collected:</dt>
 							<dd>No</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>
 								Category J: Non-public education information (per the Family Educational Rights and
 								Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99)).
 							</dt>
-
 							<dt>Examples:</dt>
 							<dd>
 								Education records directly related to a student maintained by an educational institution
@@ -958,10 +1084,11 @@ export default function PrivacyPolicy() {
 							</dd>
 							<dt>Collected:</dt>
 							<dd>No</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Category K: Inferences drawn from other personal information.</dt>
-
 							<dt>Examples:</dt>
 							<dd>
 								Profile reflecting a person's preferences, characteristics, psychological trends,
@@ -969,9 +1096,9 @@ export default function PrivacyPolicy() {
 							</dd>
 							<dt>Collected:</dt>
 							<dd>No</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<p>Under CCPA, personal information does not include:</p>
 				<ul>
 					<li>Publicly available information from government records</li>
@@ -997,27 +1124,33 @@ export default function PrivacyPolicy() {
 					We obtain the categories of personal information listed above from the following categories of
 					sources:
 				</p>
-				<dl>
-					<ul>
-						<li>
+				<ul>
+					<li>
+						<dl>
 							<dt>Directly from You. </dt>
 							<dd>
 								For example, from the forms You complete on our Service, preferences You express or
 								provide through our Service, or from Your purchases on our Service.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Indirectly from You. </dt>
 							<dd>For example, from observing Your activity on our Service.</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>Automatically from You. </dt>
 							<dd>
 								For example, through cookies We or our Service Providers set on Your Device as You
 								navigate through our Service.
 							</dd>
-						</li>
-						<li>
+						</dl>
+					</li>
+					<li>
+						<dl>
 							<dt>From Service Providers. </dt>
 							<dd>
 								For example, third-party vendors to monitor and analyze the use of our Service,
@@ -1025,9 +1158,9 @@ export default function PrivacyPolicy() {
 								payment processing, or other third-party vendors that We use to provide the Service to
 								You.
 							</dd>
-						</li>
-					</ul>
-				</dl>
+						</dl>
+					</li>
+				</ul>
 				<h3 className="normal mt-4">
 					Use of Personal Information for Business Purposes or Commercial Purposes
 				</h3>
