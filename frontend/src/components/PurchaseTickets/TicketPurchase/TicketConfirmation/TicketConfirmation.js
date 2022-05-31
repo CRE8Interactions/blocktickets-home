@@ -96,9 +96,9 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 				<Stack direction="horizontal" className="justify-content-between">
 					<div className="flex-grow-1">
 						<p className="fw-semi-bold caption">
-							{/* {ticket.resale && ticket.on_sale_status === 'resaleAvailable' && 'Resale Ticket'} */}
+							{listing && 'Resale Ticket'}
 						</p>
-						{/* <p className="caption">{ticket.name}</p> */}
+						<p className="caption">{listing ? listing.tickets[0].name : ticket.name}</p>
 						<p className="fw-bold">
 							${totalTicketPrice}
 							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} ea + Fees</span>
