@@ -55,6 +55,13 @@
 
 		&-collapse {
 			z-index: 999;
+
+			@include breakpoint-max(lg) {
+				padding: 0px rem(16);
+				position: relative;
+				left: -4%;
+				right: -4%;
+			}
 		}
 
 		&-nav {

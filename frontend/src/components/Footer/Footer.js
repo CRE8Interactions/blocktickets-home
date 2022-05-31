@@ -32,7 +32,7 @@ export default function Footer() {
 					<Stack direction="horizontal" className="main-links">
 						<ul>
 							<li>
-								<LinkContainer to="/">
+								<LinkContainer to="/terms-conditions">
 									<Nav.Link>Terms & Conditions</Nav.Link>
 								</LinkContainer>
 							</li>
