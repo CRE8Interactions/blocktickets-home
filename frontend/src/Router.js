@@ -16,7 +16,8 @@ import {
 	PersonalDetailsPage,
 	LoginSecurityPage,
 	WithdrawInvoicesPage,
-	PaymentInformationPage
+	PaymentInformationPage,
+	PrivacyPolicyPage
 } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Authorization/useAuth';
@@ -57,6 +58,7 @@ const Router = () => {
 					<Route path="withdraw-invoices" element={<WithdrawInvoicesPage />} />
 					<Route path="payment-information" element={<PaymentInformationPage />} />
 				</Route>
+				<Route path="privacy-policy" element={<PrivacyPolicyPage />} />
 				{/* Add a NotFound route */}
 			</Routes>
 		</ScrollToTop>

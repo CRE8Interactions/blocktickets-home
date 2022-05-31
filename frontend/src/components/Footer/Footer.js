@@ -8,7 +8,6 @@ import Nav from 'react-bootstrap/Nav';
 import Stack from 'react-bootstrap/Stack';
 
 import { getCopyrightYear } from '../../utilities/helpers';
-import InputField from './../InputField/InputField';
 
 import logo from '../../assets/logo.svg';
 import facebook from '../../assets/icons/facebook-filled.svg';
@@ -34,44 +33,44 @@ export default function Footer() {
 						<ul>
 							<li>
 								<LinkContainer to="/">
-									<Nav.Link to="">Terms & Conditions</Nav.Link>
+									<Nav.Link>Terms & Conditions</Nav.Link>
 								</LinkContainer>
 							</li>
 							<li>
 								<LinkContainer to="/">
-									<Nav.Link to="">Purchase Policy</Nav.Link>
+									<Nav.Link>Purchase Policy</Nav.Link>
+								</LinkContainer>
+							</li>
+							<li>
+								<LinkContainer to="/privacy-policy">
+									<Nav.Link>Privacy Policy</Nav.Link>
 								</LinkContainer>
 							</li>
 							<li>
 								<LinkContainer to="/">
-									<Nav.Link to="">Privacy Policy</Nav.Link>
-								</LinkContainer>
-							</li>
-							<li>
-								<LinkContainer to="/">
-									<Nav.Link to="">Cookies Policy</Nav.Link>
+									<Nav.Link>Cookies Policy</Nav.Link>
 								</LinkContainer>
 							</li>
 						</ul>
 						<ul>
 							<li>
 								<LinkContainer to="/">
-									<Nav.Link to="">Disclaimer</Nav.Link>
+									<Nav.Link>Disclaimer</Nav.Link>
 								</LinkContainer>
 							</li>
 							<li>
 								<LinkContainer to="/login">
-									<Nav.Link to="">Client Login</Nav.Link>
+									<Nav.Link>Client Login</Nav.Link>
 								</LinkContainer>
 							</li>
 							<li>
 								<LinkContainer to="/">
-									<Nav.Link to="">About Us</Nav.Link>
+									<Nav.Link>About Us</Nav.Link>
 								</LinkContainer>
 							</li>
 							<li>
 								<LinkContainer to="/">
-									<Nav.Link to="">Help</Nav.Link>
+									<Nav.Link>Help</Nav.Link>
 								</LinkContainer>
 							</li>
 						</ul>
@@ -81,27 +80,27 @@ export default function Footer() {
 					<h3 className="footer-title">Also find us on</h3>
 					<Stack as="ul" direction="horizontal" className="social-icons">
 						<li>
-							<a href="">
+							<a href="https://www.facebook.com/blocktickets" target="_blank">
 								<img src={facebook} alt="facebook" />
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="https://www.instagram.com/blocktickets" target="_blank">
 								<img src={instagram} alt="instagram" />
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="https://www.twitter.com/blocktickets" target="_blank">
 								<img src={twitter} alt="twitter" />
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="https://www.tiktok.com/blocktickets" target="_blank">
 								<img src={tiktok} alt="tiktok" />
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="https://www.discord.com/blocktickets" target="_blank">
 								<img src={discord} alt="discord" />
 							</a>
 						</li>
