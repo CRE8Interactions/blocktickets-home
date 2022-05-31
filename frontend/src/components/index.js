@@ -16,6 +16,7 @@ export { EventDetailsWrapper } from './EventDetailsWrapper';
 export { MyTransfersWrapper } from './MyTransfersWrapper';
 export { MyListingsWrapper } from './MyListingsWrapper';
 export { MyCollectablesWrapper } from './MyCollectablesWrapper';
+export { PrivacyPolicy } from './PrivacyPolicy';
 export { SettingsWrapper } from './SettingsWrapper';
 export { SettingsOptions } from './SettingsOptions';
 export { PersonalDetailsForm } from './SettingsWrapper/PersonalDetailsForm';

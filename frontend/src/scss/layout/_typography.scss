@@ -256,3 +256,90 @@ h4,
 		margin-top: rem(20);
 	}
 }
+
+// docs styling
+.docs {
+	p {
+		font-size: $small;
+
+		+ p {
+			margin-top: $text-spacer-xs;
+		}
+	}
+
+	&-heading {
+		font-size: $h3-font-size;
+	}
+
+	&-desc {
+		font-size: $body-2;
+	}
+
+	&-section-heading {
+		font-size: $body-1;
+		margin: $text-spacer-lg 0px $text-spacer-xs;
+	}
+
+	&-date {
+		margin-bottom: $text-spacer-xs;
+	}
+
+	ul {
+		padding-left: $text-spacer;
+		li {
+			list-style-type: disc;
+			margin-bottom: rem(4);
+
+			.list-heading {
+				font-weight: $fw-semi-bold;
+				margin-bottom: rem(8);
+			}
+		}
+	}
+
+	.unstyled-list {
+		ul {
+			padding-left: $text-spacer-xs;
+		}
+		& li {
+			list-style: none;
+
+			ul {
+				margin-top: 0px;
+				padding: 0px;
+			}
+		}
+	}
+
+	.unstyled-list > ul > li ~ li {
+		padding-top: $text-spacer-xs;
+	}
+
+	dl,
+	ul {
+		font-size: $small;
+		margin: rem(10) 0px;
+	}
+
+	dd {
+		margin-bottom: rem(3);
+	}
+
+	dl:not(.unstyled-list) {
+		dt,
+		dd {
+			display: inline;
+		}
+	}
+
+	dl.float {
+		dt:not(:first-of-type) {
+			float: left;
+			margin-right: rem(3);
+		}
+
+		dt:first-of-type {
+			margin-bottom: rem(4);
+		}
+	}
+}
