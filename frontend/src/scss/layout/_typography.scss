@@ -269,15 +269,18 @@ h4,
 
 	&-heading {
 		font-size: $h3-font-size;
+		margin-bottom: $text-spacer-xs;
 	}
 
 	&-desc {
 		font-size: $body-2;
 	}
 
-	&-section-heading {
-		font-size: $body-1;
-		margin: $text-spacer-lg 0px $text-spacer-xs;
+	&-section {
+		&-heading {
+			font-size: $body-1;
+			margin: $text-spacer-lg 0px $text-spacer-xs;
+		}
 	}
 
 	&-date {

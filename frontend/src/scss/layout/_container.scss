@@ -23,6 +23,11 @@ $navbar-height: rem(82);
 	}
 }
 
+.docs-container {
+	max-width: 672px;
+	margin: 0px auto;
+}
+
 // on body and html
 .full-height {
 	height: 100%;

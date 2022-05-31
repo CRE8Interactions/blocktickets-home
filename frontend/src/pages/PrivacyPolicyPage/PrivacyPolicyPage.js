@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { PrivacyPolicy } from '../../components'
+import { PrivacyPolicy, Footer } from '../../components'
 
 export default function PrivacyPolicyPage() {
 	return (
 			<>
-            <div className="spacer docs">
+            
 			    <PrivacyPolicy />
-			</div>
+                <Footer />
+			
             </>
 	);
 }
