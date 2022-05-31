@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 export default function PrivacyPolicy() {
 	return (
-		<Fragment>
+		<div className="spacer docs-container docs">
 			<span className="time-caption docs-date">Last updated: 05.25.2022</span>
 			<h1 className="docs-heading">Privacy Policy</h1>
 			<p className="doc-desc">
@@ -13,7 +13,9 @@ export default function PrivacyPolicy() {
 			</p>
 
 			<section>
-				<h2 className="docs-section-heading">Interpretation and Definitions</h2>
+				<div className="docs-section-header">
+					<h2 className="docs-section-heading">Interpretation and Definitions</h2>
+				</div>
 				<h3 className="normal">Interpretation</h3>
 				<p>
 					The words of which the initial letter is capitalized have meanings defined under the following
@@ -117,7 +119,7 @@ export default function PrivacyPolicy() {
 							</dd>
 						</li>
 						<li>
-							<dt>Sale </dt>
+							<dt>Sale</dt>
 							<dd>
 								, for the purpose of the CCPA (California Consumer Privacy Act), means selling, renting,
 								releasing, disclosing, disseminating, making available, transferring, or otherwise
@@ -1507,6 +1509,6 @@ export default function PrivacyPolicy() {
 					</li>
 				</ul>
 			</section>
-		</Fragment>
+		</div>
 	);
 }
