@@ -19,3 +19,4 @@ export { PrivacyPolicyPage } from './PrivacyPolicyPage';
 export { TermsConditionsPage } from './TermsConditionsPage';
 export { PurchasePolicyPage } from './PurchasePolicyPage';
 export { CookiesPolicyPage } from './CookiesPolicyPage';
+export { DisclaimerPage } from './DisclaimerPage';
