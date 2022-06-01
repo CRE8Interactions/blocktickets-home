@@ -20,8 +20,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 	}
 
 	if (listing) {
-		// console.log(listing)
-		ticketPrice = `${parseFloat(listing.askingPrice / listing.tickets.length).toFixed(2)} ea`;
+		ticketPrice = `${parseFloat(listing.askingPrice).toFixed(2)} ea`;
 		ticketName = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
 		ticketType = `Resale ${listing.tickets.length} Tickets`;
 	}
