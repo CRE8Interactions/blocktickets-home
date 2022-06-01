@@ -48,8 +48,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 	] = useState([]);		
 
 	useEffect(() => {
-		if (price > 0 && (price < ticketsTotalPrice || price > 2000)) {
-			setLabel(`Enter amount between $${ticketsTotalPrice} - $2000.00`);
+		if (price > 0 && (price < (ticketsTotalPrice / selectedTickets.length) || price > (ticketsTotalPrice / selectedTickets.length) * 100)) {
+			setLabel(`Enter amount between $${ticketsTotalPrice / selectedTickets.length} - ${(ticketsTotalPrice / selectedTickets.length) * 100}`);
 			setPriceValid(false)		  
 	  } else { 
 		  setLabel("Price per ticket") 
