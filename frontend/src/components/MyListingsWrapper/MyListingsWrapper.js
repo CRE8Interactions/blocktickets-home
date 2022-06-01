@@ -56,7 +56,7 @@ export default function MyListingsWrapper() {
 					if (listing.status === 'complete') types.sold.push(listing);
 					if (listing.status === 'expired') types.expired.push(listing);
 				});
-				setListings(types)
+				setListings(types);
 			})
 			.catch((err) => console.error(err));
 	};
@@ -77,11 +77,7 @@ export default function MyListingsWrapper() {
 					<SwiperNavigationButtons />
 				</div>
 			</div>
-			<Tabs
-				defaultActiveKey="active"
-				variant="pills"
-				activeKey={key}
-				onSelect={(k) => setKey(k)}>
+			<Tabs defaultActiveKey="active" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
 				<Tab eventKey="active" title="Active" key={new Date().getTime()}>
 					<MyListingsSlider
 						ticketStatus={'listed'}
@@ -92,7 +88,7 @@ export default function MyListingsWrapper() {
 						key={new Date().getTime()}
 					/>
 				</Tab>
-				{/* <Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
+				<Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
 					<MyListingsSlider
 						ticketStatus={'listed'}
 						ticketState={key}
@@ -107,7 +103,7 @@ export default function MyListingsWrapper() {
 						listings={listings.expired}
 						key={new Date().getTime() + 2}
 					/>
-				</Tab> */}
+				</Tab>
 			</Tabs>
 
 			<TicketModal show={show} setShow={setShow} />
