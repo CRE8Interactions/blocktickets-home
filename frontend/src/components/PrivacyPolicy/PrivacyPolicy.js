@@ -1441,7 +1441,7 @@ export default function PrivacyPolicy() {
 					Please note that any opt out is specific to the browser You use. You may need to opt out on every
 					browser that You use.
 				</p>
-				<h3 className="normal mt-2">Website</h3>
+				<h3 className="small mt-2">Website</h3>
 				<p>
 					You can opt out of receiving ads that are personalized as served by our Service Providers by
 					following our instructions presented on the Service:
@@ -1470,7 +1470,7 @@ export default function PrivacyPolicy() {
 					The opt out will place a cookie on Your computer that is unique to the browser You use to opt out.
 					If you change browsers or delete the cookies saved by your browser, You will need to opt out again.
 				</p>
-				<h3 className="normal mt-2">Mobile Devices</h3>
+				<h3 className="small mt-2">Mobile Devices</h3>
 				<p>
 					Your mobile device may give You the ability to opt out of the use of information about the apps You
 					use in order to serve You ads that are targeted to Your interests
