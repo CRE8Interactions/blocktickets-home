@@ -57,10 +57,8 @@
 			z-index: 999;
 
 			@include breakpoint-max(lg) {
-				padding: 0px rem(16);
-				position: relative;
-				left: -4%;
-				right: -4%;
+				padding: 0px $nav-link-padding-x;
+				margin: $nav-link-margin;
 			}
 		}
 
@@ -102,7 +100,7 @@
 				.nav-link {
 					@include breakpoint-max(lg) {
 						font-size: $body-2;
-						padding: $nav-link-padding;
+						padding: $nav-link-padding-y $nav-link-padding-x;
 						margin: $nav-link-margin;
 
 						&:hover,
