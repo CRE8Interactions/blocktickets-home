@@ -178,7 +178,8 @@ button,
 	}
 }
 
-.icon-button {
+.icon-button,
+.btn--icon {
 	@extend %icon-text-box !optional;
 	justify-content: center;
 

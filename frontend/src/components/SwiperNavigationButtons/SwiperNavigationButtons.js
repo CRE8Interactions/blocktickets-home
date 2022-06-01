@@ -8,10 +8,7 @@ import './swiperNavigationButtons.scss';
 export default function SwiperNavigationButtons({ styles }) {
 	return (
 		<Stack direction="horizontal" className={styles}>
-			<Button
-				variant="outline-light"
-				className="btn--icon swiper-button-prev"
-				aria-label="left arrow">
+			<Button variant="outline-light" className="btn--icon swiper-button-prev" aria-label="left arrow">
 				<svg
 					role="img"
 					title="left arrow"
@@ -28,10 +25,7 @@ export default function SwiperNavigationButtons({ styles }) {
 					/>
 				</svg>
 			</Button>
-			<Button
-				variant="outline-light"
-				className="btn--icon swiper-button-next"
-				aria-label="right arrow">
+			<Button variant="outline-light" className="btn--icon swiper-button-next" aria-label="right arrow">
 				<svg
 					role="img"
 					title="right arrow"
