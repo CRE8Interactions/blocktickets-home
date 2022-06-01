@@ -38,7 +38,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
 	if (cart.listing) {
 		let listing = cart.listing;
-		ticketPrice = listing.askingPrice + listing.tickets.map(ticket => ticket.fee).reduce((a, b) => a + b) + listing.tickets.map(ticket => ticket.facilityFee).reduce((a, b) => a + b) + 2.5 + 4.35;
+		ticketPrice = listing.askingPrice;
 		ticketCount = cart.listing.tickets.length;
 		ticketFee = cart.listing.tickets[0].fee;
 		facilityFee = cart.listing.tickets[0].facilityFee;

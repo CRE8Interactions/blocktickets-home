@@ -53,7 +53,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 								<span className='m-0 caption'>Listing price per ticket</span>
 								<span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
 							</Stack>
-							<p className='caption text-muted'>You will make ${(listing?.payout - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
+							<p className='caption text-muted'>You will make ${(listing?.askingPrice - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
 						</Stack>
 					)}
 					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length > 1 || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span> )}

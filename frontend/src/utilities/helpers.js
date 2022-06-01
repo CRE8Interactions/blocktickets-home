@@ -44,7 +44,7 @@ export const cartTotal = (cart, processingFee, tax) => {
 	let total;
 	if (cart.listing) {
 			let totalTicketPrices = Number(
-			parseFloat(cart.listing.askingPrice).toFixed(2)
+			parseFloat(cart.listing.askingPrice * cart.listing.tickets.length).toFixed(2)
 		);
 		let fees = Number(
 			parseFloat(
