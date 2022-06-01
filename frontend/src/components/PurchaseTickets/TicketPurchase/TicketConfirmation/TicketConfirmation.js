@@ -21,7 +21,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 		section = listing.tickets[0].name;
 		sum = listing.askingPrice * listing.tickets.length;
 		maxQuantity = listing.tickets.length;
-		totalTicketPrice = (listing.askingPrice * listing.tickets.length) + listing.tickets.map(ticket => ticket.fee).reduce((a, b) => a + b) + listing.tickets.map(ticket => ticket.facilityFee).reduce((a, b) => a + b) + 2.5 + 4.35
+		totalTicketPrice = listing.askingPrice + (listing.tickets[0].fee + listing.tickets[0].facilityFee + 2.5 + 4.35)
 	} else if (ticket) {
 		ticketPrice = ticket.resale ? ticket.listingAskingPrice : ticket.cost;
 		section = ticket.name;
