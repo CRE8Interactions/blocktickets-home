@@ -1,0 +1,9 @@
+@use '../theme/colors' as *;
+
+.swiper-slide {
+	width: auto;
+}
+
+.swiper-pagination-bullet-active {
+	background-color: $muted;
+}

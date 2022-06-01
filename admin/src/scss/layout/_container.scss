@@ -1,9 +1,11 @@
 @use './spacing' as *;
 @use '../abstracts' as *;
-@use './typography';
 
 $pad-sm: rem(32);
 $pad-md: rem(81);
+
+$navbar-height-sm: rem(88);
+$navbar-height: rem(82);
 
 .container {
 	max-width: 1130px;
@@ -16,15 +18,40 @@ $pad-md: rem(81);
 		padding: 0px $pad-md;
 	}
 
-	&--full-width {
+	&--full-height {
 		flex: 1;
 	}
+}
+
+.docs-container {
+	max-width: 672px;
+	margin: 0px auto;
+}
+
+// on body and html
+.full-height {
+	height: 100%;
+}
+
+// on the root element
+.full-height-flex {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .full-height-wrapper {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+}
+
+.nav-is-open {
+	overflow: hidden;
+}
+
+.noBodyPadding {
+	padding: 0px 0px 0px 0px !important;
 }
 
 @mixin full-width() {
@@ -36,6 +63,23 @@ $pad-md: rem(81);
 	margin-right: -50vw;
 }
 
+.page-slider {
+	// @include breakpoint-max(md) {
+	// 	@include full-width();
+	// 	left: 0%;
+	// 	margin-left: 0px;
+	// }
+}
+
+.sticky {
+	@include breakpoint-max(md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin-top: auto;
+	}
+}
+
 .d-flex-column {
 	display: flex;
 	flex-direction: column;
@@ -45,35 +89,10 @@ $pad-md: rem(81);
 	display: flex;
 	gap: $gap;
 	align-items: center;
-	line-height: 0;
-}
 
-.time-caption,
-.venue-caption,
-.location-caption {
-	@extend .caption !optional;
-	@extend %icon-text-box !optional;
-	gap: $gap-xs;
-	color: $clr-neutral-4;
-	font-weight: $fw-semi-bold;
-	line-height: 0;
-}
-
-.time-caption {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'calendar'));
-	}
-}
-
-.venue-caption {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'venue'));
-	}
-}
-
-.location-caption {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'location'));
+	&::before,
+	&::after {
+		line-height: 0;
 	}
 }
 
@@ -112,4 +131,26 @@ $pad-md: rem(81);
 	overflow-y: auto;
 	height: 100%;
 	@include remove-scrollbar();
+}
+
+.event-image {
+	aspect-ratio: 1/1;
+}
+
+// browsers that do not support aspect-ratio like Explorer and Safari
+@supports not (aspect-ratio: 1/1) {
+	/* defined that the height of the depends on its width */
+	.image-wrapper {
+		position: relative;
+		padding-top: 100%; // aspect-ratio 1 / 1
+		/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
+		.event-image {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 }

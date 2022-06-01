@@ -1,32 +1,48 @@
 @use '../abstracts' as *;
 
 // Banner Spacers
-$banner-spacer-md-top: em(100);
-$banner-spacer-md-bottom: em(110);
+$banner-spacer-md-top: rem(100);
+$banner-spacer-md-bottom: rem(110);
 $banner-spacer: rem(21);
 
 // Page Spacers
-$spacer-xs: rem(38);
-$spacer-sm: em(64);
-$spacer-md: em(80);
-$spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
-$copyright-spacer: rem(17); // change variable name when you get more pages
+$spacer-xs: rem(32);
+$spacer-sm: rem(64);
+$spacer-md: rem(80);
 
 // Text Spacers
-$heading-spacer: rem(64);
-$title-spacer: rem(30);
+$heading-spacer: rem(64); // page headings
+$heading-spacer-sm: rem(27); // page headings
 $gap: rem(14);
-$gap-sm: rem(9);
+$gap-sm: rem(10);
 $gap-xs: rem(4);
+
+$text-spacer-lg: rem(40);
+$text-spacer: rem(32);
+$text-spacer-sm: rem(24);
+$text-spacer-xs: rem(16);
 
 .spacer-xs {
 	padding: $spacer-xs 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-sm 0px;
+	}
 }
+
 .spacer {
 	padding: $spacer-sm 0px;
 
 	@include breakpoint-min(md) {
 		padding: $spacer-md 0px;
+	}
+}
+
+.spacer-md {
+	padding: $spacer-md 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-sm 0px;
 	}
 }
 
@@ -39,10 +55,18 @@ $gap-xs: rem(4);
 }
 
 .footer-spacer {
-	padding: $spacer-sm 0px $spacer-footer-sm-bottom;
+	padding: $spacer-sm 0px $spacer-xs;
 
 	@include breakpoint-min(md) {
 		padding-top: $spacer-md;
+	}
+}
+
+.page-slider .swiper {
+	padding-bottom: rem(50);
+
+	@include breakpoint-min(md) {
+		padding-bottom: rem(90);
 	}
 }
 
@@ -50,7 +74,7 @@ $gap-xs: rem(4);
 	margin-top: rem(2);
 
 	@include breakpoint-min(md) {
-		margin-top: rem(3);
+		margin-top: rem(4);
 	}
 }
 
@@ -62,17 +86,19 @@ $gap-xs: rem(4);
 
 .split-row {
 	@extend %flex-between !optional;
-	* {
-		font-size: $small;
-	}
+	font-size: $small;
+}
+
+.heading--flex,
+.section-heading,
+.section-heading-sm {
+	@extend %flex-between !optional;
 }
 
 .heading--flex {
-	@extend %flex-between !optional;
-
 	& > *,
 	.btn {
-		margin: 0px;
+		margin: 0px !important;
 	}
 
 	.card-title {

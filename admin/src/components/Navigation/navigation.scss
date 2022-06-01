@@ -44,7 +44,7 @@
 
 			@include breakpoint-min(xl) {
 				padding-right: rem(47);
-				margin-right: $text-spacer-sm;
+				margin-right: $text-spacer;
 			}
 		}
 
@@ -123,10 +123,6 @@
 
 	.btn {
 		margin-top: 0px;
-		&-secondary,
-		&-outline-light {
-			min-width: 102px;
-			padding: rem(11) $btn-padding-x;
-		}
+		height: 100%;
 	}
 }
