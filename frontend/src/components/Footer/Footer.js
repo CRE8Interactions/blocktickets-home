@@ -37,7 +37,7 @@ export default function Footer() {
 								</LinkContainer>
 							</li>
 							<li>
-								<LinkContainer to="/">
+								<LinkContainer to="/purchase-policy">
 									<Nav.Link>Purchase Policy</Nav.Link>
 								</LinkContainer>
 							</li>

@@ -28,3 +28,4 @@ export { EventsTable } from './Tables/EventsTable';
 export { CreateEvent } from './Modals/CreateEvent';
 export { PrivacyPolicy } from './PrivacyPolicy';
 export { TermsConditions } from './TermsConditions';
+export { PurchasePolicy } from './PurchasePolicy';
