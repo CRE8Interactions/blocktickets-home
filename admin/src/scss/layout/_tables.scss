@@ -1,0 +1,38 @@
+@use '../abstracts' as *;
+@use '../theme/colors' as *;
+
+.table {
+	> *,
+	th {
+		font-size: $small;
+		text-align: center;
+		font-weight: $fw-normal;
+	}
+
+	thead {
+		tr {
+			border: none;
+		}
+		th {
+			font-weight: $fw-medium;
+			background-color: $clr-neutral-7;
+			border: border();
+
+			&:first-of-type {
+				border-top-left-radius: 12px;
+			}
+
+			&:last-of-type {
+				border-top-right-radius: 12px;
+			}
+		}
+	}
+
+	tbody {
+		border-top: border() !important;
+		th,
+		td {
+			vertical-align: middle;
+		}
+	}
+}

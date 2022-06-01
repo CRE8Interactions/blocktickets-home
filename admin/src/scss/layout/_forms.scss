@@ -1,15 +1,91 @@
 @use '../abstracts' as *;
+@use './spacing' as *;
+@use './typography' as *;
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
-.form-control {
-	color: $clr-neutral-4;
-	font-weight: $fw-medium;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	color: $body-color;
+	-webkit-text-fill-color: $body-color;
+	transition: background-color 5000s ease-in-out 0s;
 }
 
-input::placeholder {
-	color: $clr-neutral-4;
+.form-group + .form-group {
+	margin-top: $text-spacer-sm;
+}
+
+.form-control {
 	font-weight: $fw-medium;
+
+	&-xs {
+		border-radius: 4px;
+		width: 40%;
+		font-size: $caption;
+		font-weight: $fw-normal;
+		text-align: center;
+		padding: rem(2) rem(8);
+		margin-top: 0px;
+	}
+
+	&--borderless {
+		border: none;
+	}
+
+	&:disabled {
+		opacity: .5;
+	}
+}
+
+.form-card {
+	border-radius: $br-primary;
+	padding: rem(12) rem(16);
+
+	&-lg {
+		.form-control {
+			font-size: $h4-font-size;
+		}
+	}
+
+	&,
+	& .form-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.form-label {
+			text-transform: initial;
+			font-weight: $fw-normal;
+			margin: 0px;
+		}
+
+		.form-control {
+			font-weight: $fw-bold;
+			padding: 0px;
+			order: -1;
+			text-align: center;
+		}
+
+		.form-control {
+			font-family: $font-heading;
+			margin: 0px;
+			background-color: transparent;
+			@extend .form-control--borderless !optional;
+		}
+	}
+}
+
+.error-border {
+	border-color: $danger;
+}
+
+.form-label {
+	@extend .caption--uppercase-label !optional;
 }
 
 .form-check {
@@ -18,32 +94,45 @@ input::placeholder {
 	&-label {
 		font-size: rem(14);
 	}
+
+	&-input:focus {
+		box-shadow: none;
+	}
 }
 
 .form-select {
-	background-size: initial;
-	padding-right: $btn-padding-x-lg;
-	line-height: 1;
-}
-
-@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
-	display: flex;
-	align-items: center;
-	border-radius: $radius;
-	padding: $padding-y $padding-x;
-	border: $input-border-width solid $color;
-
-	@include breakpoint-min(xl) {
-		padding-left: em(10);
-	}
-
-	.form-control {
-		border: none;
-		padding: 0px;
-		min-height: auto;
-	}
+	padding: $input-padding-y $input-padding-x;
 }
 
 #custom-switch {
 	height: 26px;
+}
+
+// search field
+@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
+	display: flex;
+	align-items: center;
+	border-radius: $radius;
+	border: $input-border-width solid $color;
+	padding-right: rem(8);
+
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+
+	.form-control {
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		min-height: auto;
+	}
+}
+
+// login & security new phone number field
+.input-wrapper {
+	@include input-icon-box();
+
+	// &-lg {
+	// 	@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
+	// }
 }

@@ -1,0 +1,10 @@
+@use '../abstracts' as *;
+
+@mixin hover-effect() {
+	background-color: $clr-lightGray;
+	border-radius: $br-sm;
+}
+
+$nav-link-padding-y: rem(12);
+$nav-link-padding-x: rem(16);
+$nav-link-margin: 0px rem(-16);
