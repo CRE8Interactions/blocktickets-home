@@ -157,10 +157,6 @@ h4,
 		text-transform: uppercase;
 		font-weight: $fw-bold;
 		font-family: $font-body;
-
-		@include breakpoint-inBetween(md, lg) {
-			padding-left: rem(5);
-		}
 	}
 }
 
