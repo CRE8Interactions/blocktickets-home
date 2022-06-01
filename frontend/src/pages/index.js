@@ -18,3 +18,4 @@ export { PaymentInformationPage } from './SettingsPage/PaymentInformationPage';
 export { PrivacyPolicyPage } from './PrivacyPolicyPage';
 export { TermsConditionsPage } from './TermsConditionsPage';
 export { PurchasePolicyPage } from './PurchasePolicyPage';
+export { CookiesPolicyPage } from './CookiesPolicyPage';

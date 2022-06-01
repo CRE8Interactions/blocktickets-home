@@ -25,3 +25,4 @@ export { WithdrawInvoiceTableWrapper } from './SettingsWrapper/WithdrawInvoiceTa
 export { PrivacyPolicy } from './PrivacyPolicy';
 export { TermsConditions } from './TermsConditions';
 export { PurchasePolicy } from './PurchasePolicy';
+export { CookiesPolicy } from './CookiesPolicy';

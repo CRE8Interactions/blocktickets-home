@@ -47,7 +47,7 @@ export default function Footer() {
 								</LinkContainer>
 							</li>
 							<li>
-								<LinkContainer to="/">
+								<LinkContainer to="/cookies-policy">
 									<Nav.Link>Cookies Policy</Nav.Link>
 								</LinkContainer>
 							</li>

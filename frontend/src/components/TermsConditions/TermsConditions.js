@@ -24,7 +24,7 @@ export default function TermsConditions() {
 
 			<section>
 				<h3 className="normal mt-4">Definitions</h3>
-				<p>For the purposes of this Privacy Policy:</p>
+				<p>For the purposes of these terms and conditions:</p>
 				<ul>
 					<li>
 						<dl>
