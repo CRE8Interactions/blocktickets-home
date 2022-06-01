@@ -54,7 +54,7 @@ export default function Footer() {
 						</ul>
 						<ul>
 							<li>
-								<LinkContainer to="/">
+								<LinkContainer to="/disclaimer">
 									<Nav.Link>Disclaimer</Nav.Link>
 								</LinkContainer>
 							</li>

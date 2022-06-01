@@ -26,3 +26,4 @@ export { PrivacyPolicy } from './PrivacyPolicy';
 export { TermsConditions } from './TermsConditions';
 export { PurchasePolicy } from './PurchasePolicy';
 export { CookiesPolicy } from './CookiesPolicy';
+export { Disclaimer } from './Disclaimer';
