@@ -9,7 +9,7 @@ export default function Spinner({ variant = 'default', size }) {
 
 	switch (variant) {
 		case 'light':
-			color = 'fcfcfd';
+			color = '#fcfcfd';
 			break;
 
 		default:

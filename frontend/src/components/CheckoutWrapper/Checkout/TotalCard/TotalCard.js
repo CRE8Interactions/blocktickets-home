@@ -10,7 +10,6 @@ import Card from 'react-bootstrap/Card';
 
 import { Disclaimer } from './Disclaimer';
 import { Spinner } from '../../../SpinnerContainer/Spinner';
-import { CardDeclineModal } from '../CheckoutModal/CardDeclineModal';
 
 import './totalCard.scss';
 
