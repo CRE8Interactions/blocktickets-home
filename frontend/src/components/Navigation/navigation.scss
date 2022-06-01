@@ -1,7 +1,5 @@
 @use '../../scss/abstracts' as *;
-@use '../../scss/layout/links' as *;
-@use '../../scss/layout/typography' as *;
-@use '../../scss/layout/container' as *;
+@use '../../scss/layout' as *;
 @use '../../scss/theme/buttons' as *;
 
 .navigation {
@@ -46,6 +44,7 @@
 
 			@include breakpoint-min(xl) {
 				padding-right: rem(47);
+				margin-right: $text-spacer-sm;
 			}
 		}
 
@@ -72,6 +71,14 @@
 			}
 
 			ul {
+				li + li {
+					padding-top: rem(8);
+					@include breakpoint-min(lg) {
+						padding-top: 0px;
+						padding-left: $text-spacer;
+					}
+				}
+
 				&::before {
 					@extend %nav-mobile-headings;
 				}

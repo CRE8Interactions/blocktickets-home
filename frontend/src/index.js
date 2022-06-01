@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import * as Sentry from "@sentry/react";
-import {
-	BrowserTracing
-} from "@sentry/tracing";
-import {
-	BrowserRouter
-} from 'react-router-dom';
+import { BrowserTracing } from '@sentry/tracing';
+import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-
 
 import './scss/main.scss';
 

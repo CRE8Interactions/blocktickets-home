@@ -51,7 +51,7 @@ export default function Navigation() {
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
-							<ul id="main" role="main-navigation">
+							<ul id="main" role="main-navigation" className="d-flex flex-column flex-lg-row">
 								<li>
 									<LinkContainer to="/">
 										<Nav.Link>Browse</Nav.Link>
