@@ -5,8 +5,9 @@ export default function IconButton({ children, styles, variant, btn = '', size, 
 	return (
 		<Link
 			to={`${link}`}
-			className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles &&
-				styles} ${size ? `btn-${size}` : ''} `}>
+			className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
+				? `btn-${size}`
+				: ''} `}>
 			{children}
 		</Link>
 	);

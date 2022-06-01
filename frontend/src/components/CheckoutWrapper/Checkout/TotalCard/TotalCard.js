@@ -30,7 +30,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
 	const stripe = useStripe();
 	const elements = useElements();
-	
+
 	let ticketPrice;
 	let ticketCount;
 	let ticketFee;
@@ -42,7 +42,8 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 		ticketCount = cart.listing.tickets.length;
 		ticketFee = cart.listing.tickets[0].fee;
 		facilityFee = cart.listing.tickets[0].facilityFee;
-	} else if (cart.ticket) {
+	}
+	else if (cart.ticket) {
 		ticketPrice = cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost;
 		ticketCount = cart.ticketCount;
 		ticketFee = cart.ticket.fee;
@@ -105,7 +106,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 				</Card.Title>
 				<Stack direction="horizontal" gap={2} className="card-header-price">
 					<span className="fw-bold fs-md">${cartTotal(cart, 4.35, 2.5)}</span>
-					<Button onClick={() => setExpanded(!expanded)} variant="outline-light" className=" btn--icon-sm">
+					<Button
+						onClick={() => setExpanded(!expanded)}
+						variant="outline-light"
+						className=" btn--icon btn--icon-sm">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
 								fillRule="evenodd"
@@ -138,8 +142,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 							<ul>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Service Fee: ${parseFloat(ticketFee).toFixed(2)} x{' '}
-										{ticketCount}
+										Service Fee: ${parseFloat(ticketFee).toFixed(2)} x {ticketCount}
 									</span>
 									<span className="text-end">
 										${(parseFloat(ticketFee).toFixed(2) * ticketCount).toFixed(2)}
@@ -147,12 +150,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span>
-										Facility Charge: ${parseFloat(facilityFee).toFixed(2)} x{' '}
-										{ticketCount}
+										Facility Charge: ${parseFloat(facilityFee).toFixed(2)} x {ticketCount}
 									</span>
 									<span className="text-end">
-										${(parseFloat(facilityFee).toFixed(2) *
-											ticketCount).toFixed(2)}
+										${(parseFloat(facilityFee).toFixed(2) * ticketCount).toFixed(2)}
 									</span>
 								</Stack>
 								<Stack direction="horizontal" as="li" className="split-row">
