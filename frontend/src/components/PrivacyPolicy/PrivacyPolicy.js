@@ -313,8 +313,10 @@ export default function PrivacyPolicy() {
 				<p>
 					Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal
 					computer or mobile device when You go offline, while Session Cookies are deleted as soon as You
-					close Your web browser. You can learn more about cookies here: All About Cookies by TermsFeed. We
-					use both Session and Persistent Cookies for the purposes set out below:
+					close Your web browser. You can learn more about cookies here:{' '}
+					<a href="https://www.termsfeed.com/blog/cookies/" target="_blank">
+						All About Cookies by TermsFeed
+					</a>. We use both Session and Persistent Cookies for the purposes set out below:
 				</p>
 				<ul className="unstyled-list float">
 					<li>
@@ -381,8 +383,11 @@ export default function PrivacyPolicy() {
 					</li>
 				</ul>
 				<p>
-					For more information about the cookies we use and your choices regarding cookies, please visit our
-					Cookies Policy or the Cookies section of our Privacy Policy.
+					For more information about the cookies we use and your choices regarding cookies, please visit our{' '}
+					<a href="/cookies-policy" target="_blank">
+						Cookies Policy
+					</a>{' '}
+					or the Cookies section of our Privacy Policy.
 				</p>
 			</section>
 			<section>
