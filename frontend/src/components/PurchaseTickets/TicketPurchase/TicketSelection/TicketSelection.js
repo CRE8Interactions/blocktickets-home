@@ -17,13 +17,9 @@ import { NotAvailableMessage } from './NotAvailableMessage';
 
 import './ticketSelection.scss';
 
-export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, type, isZoomed, setTicketCount, ticketCount }) {
+export default function TicketSelection({ handleClick, setIsFilterOpen, isFilterOpen, isZoomed, setTicketCount, ticketCount }) {
 
 	const tickets = useContext(TicketContext);
-	// console.log(tickets)
-	// all tickets costs and ticket count combined for filtering 
-	let totalCosts = 0; 
-	let totalTicketCount = 0;
 
 	const [
 		ticketFilters,
