@@ -12,7 +12,7 @@ export default function MyEventsSlider({ orders, transfers, acceptTransfer }) {
 				{transfers &&
 					transfers.map((transfer, index) => {
 						return (
-							<SwiperSlide key={index}>
+							<SwiperSlide key={index} className="swiper-lazy">
 								<TransferCard
 									transfer={transfer}
 									status={'userAccepting'}
