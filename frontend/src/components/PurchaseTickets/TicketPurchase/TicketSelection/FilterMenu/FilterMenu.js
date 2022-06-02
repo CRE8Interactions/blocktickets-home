@@ -26,7 +26,6 @@ export default function FilterMenu({
 	const handleChecked = (e) => {
 		const { name, value } = e.target;
 
-		console.log(name, value);
 		setTicketFilters((prevState) => ({
 			...prevState,
 			[e.target.name]: !prevState[name]
@@ -35,7 +34,7 @@ export default function FilterMenu({
 
 	const handleFilter = (action) => {
 		handleShow(!show);
-		// setTicketFilters(filters);
+		console.log(action)
 	};
 
 	return (
