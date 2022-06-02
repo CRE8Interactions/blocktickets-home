@@ -13,7 +13,7 @@ export default function VenuesSlider({ venues }) {
 				{venues &&
 					venues.map((venue, index) => {
 						return (
-							<SwiperSlide key={index}>
+							<SwiperSlide key={index} className="swiper-lazy">
 								<MyCard prefix={prefix} venue={venue} />
 							</SwiperSlide>
 						);

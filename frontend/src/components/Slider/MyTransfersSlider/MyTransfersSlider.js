@@ -11,7 +11,7 @@ export default function MyTransfersSlider({ transfers, cancel }) {
 				{transfers &&
 					transfers.map((transfer, index) => {
 						return (
-							<SwiperSlide key={index}>
+							<SwiperSlide key={index} className="swiper-lazy">
 								<TransferCard transfer={transfer} cancel={cancel} />
 							</SwiperSlide>
 						);

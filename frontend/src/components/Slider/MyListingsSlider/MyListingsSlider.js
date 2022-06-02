@@ -4,13 +4,7 @@ import { SwiperSlide } from 'swiper/react';
 import { Slider } from '..';
 import { TicketCard } from '../../TicketCard';
 
-export default function MyListingsSlider({
-	ticketStatus,
-	ticketState,
-	listings,
-	removeListing,
-	getListings
-}) {
+export default function MyListingsSlider({ ticketStatus, ticketState, listings, removeListing, getListings }) {
 	if (listings && listings.types && ticketState) listings = listings.types[ticketState];
 
 	return (
@@ -20,7 +14,7 @@ export default function MyListingsSlider({
 					listings.length >= 1 &&
 					listings.map((listing, index) => {
 						return (
-							<SwiperSlide key={index}>
+							<SwiperSlide key={index} className="swiper-lazy">
 								<TicketCard
 									ticketStatus={ticketStatus}
 									ticketState={ticketState}
