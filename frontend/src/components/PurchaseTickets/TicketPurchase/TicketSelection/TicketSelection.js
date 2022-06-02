@@ -69,13 +69,15 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket);
     setResaleTickets(tickets?.reSaleTickets)
-		setListings(tickets.listings)
+		setListings(tickets.listings);
 		if (!tickets) return;
-		let higestResalePrice = tickets.generalAdmissionTicket?.attributes?.cost
-		if (tickets?.reSaleTickets && tickets?.reSaleTickets.length > 0) {
-			let higestResalePrice = tickets?.reSaleTickets?.map(ticket => ticket?.attributes?.listingAskingPrice).reduce((a, b) => Math.max(a,b))
+
+		let higestResalePrice;
+
+		if (tickets?.listings && tickets?.listings.length > 0) {
+			higestResalePrice = tickets?.listings?.map(listing => listing.askingPrice).reduce((a, b) => Math.max(a,b))
 		}
-		let higestPrice = tickets?.reSaleTickets && tickets?.reSaleTickets?.length > 0 ? higestResalePrice : tickets.generalAdmissionTicket?.attributes?.cost;
+		let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice + 1 : tickets.generalAdmissionTicket?.attributes?.cost + 1;
 		let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost;
 		setSliderValues([lowestPrice, higestPrice])
 	}, [tickets]); 
@@ -83,13 +85,10 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	useEffect(
 		() => {
 			// if no ticket type is selected, display filter message 
-			if ((tickets?.generalAdmissionTicket && !ticketFilters.standard) || (tickets?.reSaleTickets && tickets?.reSaleTickets.length > 0 && !ticketFilters.resale)) {
-				setFilteredTicketCount(0);
-			}
-
-			return () => {
-				setFilteredTicketCount(1);
-			};
+			setFilteredTicketCount(1);
+			if (!tickets || !tickets.listings) return
+			let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && listing.askingPrice >= sliderValues[0] && listing.askingPrice <= sliderValues[1]);
+			setListings(filteredlisting)
 		},
 		[
 			sliderValues, ticketCount, ticketFilters 
