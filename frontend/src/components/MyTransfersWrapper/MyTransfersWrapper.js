@@ -7,7 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyTransfersSlider } from '../Slider/MyTransfersSlider';
-import { TicketModal } from '../TicketCard/TicketModal';
+import { TicketModal } from '../TicketModal';
 
 import { getMyTransfers } from '../../utilities/api';
 
@@ -77,16 +77,10 @@ export default function MyTransfersWrapper() {
 				</div>
 			</div>
 			<div className="d-flex-column position-relative">
-				<Tabs
-					defaultActiveKey="pending"
-					variant="pills"
-					activeKey={key}
-					onSelect={(k) => setKey(k)}>
+				<Tabs defaultActiveKey="pending" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
 					<Tab eventKey="pending" title="Pending">
 						<MyTransfersSlider
-							transfers={transfers.filter(
-								(transfer) => transfer.status === 'pending'
-							)}
+							transfers={transfers.filter((transfer) => transfer.status === 'pending')}
 							cancel={handleClick}
 						/>
 					</Tab>

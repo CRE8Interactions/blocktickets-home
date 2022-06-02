@@ -8,7 +8,7 @@ import { Event } from '../Event';
 import { MyTickets } from './MyTickets';
 import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
-import { TicketModal } from '../TicketCard/TicketModal';
+import { TicketModal } from '../TicketModal';
 
 export default function EventDetailsWrapper({ orderId }) {
 

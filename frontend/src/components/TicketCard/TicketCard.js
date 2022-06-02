@@ -7,7 +7,7 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { TicketModal } from '../TicketCard/TicketModal';
+import { TicketModal } from '../TicketModal';
 
 import './ticketCard.scss';
 

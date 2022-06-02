@@ -8,7 +8,7 @@ import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-import { cancelMyTransfers } from '../../../../utilities/api';
+import { cancelMyTransfers } from '../../../utilities/api';
 
 export default function CancelModal({ handleClose, ticket, order, transfer, getMyTransfers }) {
 	// 1 - confirmation
