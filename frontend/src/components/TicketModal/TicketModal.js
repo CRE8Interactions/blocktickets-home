@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useWindowSize } from '../../../utilities/hooks';
+import { useWindowSize } from '../../utilities/hooks';
 
 import Modal from 'react-bootstrap/Modal';
 

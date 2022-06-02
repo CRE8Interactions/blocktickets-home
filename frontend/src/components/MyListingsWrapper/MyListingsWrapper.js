@@ -7,7 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyListingsSlider } from '../Slider/MyListingsSlider';
-import { TicketModal } from '../TicketCard/TicketModal';
+import { TicketModal } from '../TicketModal';
 
 import { getMyListings, removeMyListings } from '../../utilities/api';
 

@@ -1,21 +1,21 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 
-import { useWindowSize } from './../../../../utilities/hooks';
+import { useWindowSize } from '../../../utilities/hooks';
 
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import { BackButton } from '../../../BackButton';
+import { BackButton } from '../../BackButton';
 import { DisplayTickets } from '../DisplayTickets';
 import { Numpad } from './Numpad';
 import { SuccessContainer } from '../SuccessContainer';
 
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
-import { createListing, updateMyListings } from '../../../../utilities/api';
+import { createListing, updateMyListings } from '../../../utilities/api';
 
 export default function SellModal({ handleClose, setTicketStatus, ticketAction, order, listing, getListings }) {
 

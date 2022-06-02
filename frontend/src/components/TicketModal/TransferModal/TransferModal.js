@@ -10,9 +10,9 @@ import Button from 'react-bootstrap/Button';
 import PhoneInput from 'react-phone-number-input';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
-import { createTicketTransfer } from '../../../../utilities/api';
+import { createTicketTransfer } from '../../../utilities/api';
 
-import { Error } from '../../../Error';
+import { Error } from '../../Error';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
