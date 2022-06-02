@@ -30,7 +30,6 @@ export default function TicketPurchase({
 					handleClick={handleClick}
 					setIsFilterOpen={setIsFilterOpen}
 					isFilterOpen={isFilterOpen}
-					type={type}
 					isZoomed={isZoomed}
 					setTicketCount={setTicketCount}
 					ticketCount={ticketCount}
