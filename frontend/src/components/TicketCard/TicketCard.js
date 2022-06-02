@@ -43,8 +43,8 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 				<div className="details d-flex-column">
 					<Card.Title as="h5">{event?.name}</Card.Title>
 						<p className="event-details">
-						{moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')} </span><span className="venue">{event?.venue.name}</span> <span className="loc">
-						Dallas, TX
+						{moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')}</span><span className="venue">{event?.venue.name}</span><span className="loc">
+						{event?.venue.address[0]?.city}, {event?.venue.address[0].state}
 						</span>
 					</p>
 					{ ticketStatus === 'listed' && (

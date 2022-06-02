@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import * as moment from 'moment';
+
 import { getEvent } from '../../../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
-import './styles.scss';
+import './orderPreview.scss';
 
-export default function OrderPreview({purchase}) {
+export default function OrderPreview() {
   const [data, setData] = useState()
   let cart = sessionStorage.getItem('cart');
 	if (cart) cart = JSON.parse(cart);
@@ -38,17 +39,14 @@ export default function OrderPreview({purchase}) {
                     <Stack className="d-flex flex-column details" >
                         <h1 className="event-name fw-bold">{data?.name}</h1>
                         <p className="small">
-                        {moment(data?.start).format('MMM DD')} <span className="time">{moment(data?.start).format('h:mm A')} EST</span>
+                        {moment(data?.start).format('MMM DD')}<span className="time">{moment(data?.start).format('h:mm A')} EST</span>
                         </p>
                         <p className="small">
                             {data?.venue?.name}<span className="loc">
                             {data?.venue?.address[0]?.city}, {data?.venue?.address[0]?.state}
                             </span>
                         </p>
-                        <Stack direction='horizontal' gap={1}>
-                            <span>{ticketCount > 1 ? `${ticketCount } Tickets` : `${ticketCount } Ticket` }</span>
-                            <span>&bull; {ticketType}</span>
-                        </Stack>
+                        <p className='small'>{ticketCount > 1 ? `${ticketCount } Tickets` : `${ticketCount } Ticket` }<span className='ticket-type'>{ticketType}</span></p>
                     </Stack>
                 
             </Stack>
