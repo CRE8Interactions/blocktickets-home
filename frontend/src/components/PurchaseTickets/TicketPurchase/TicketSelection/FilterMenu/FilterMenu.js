@@ -34,7 +34,6 @@ export default function FilterMenu({
 
 	const handleFilter = (action) => {
 		handleShow(!show);
-		console.log(action)
 	};
 
 	return (

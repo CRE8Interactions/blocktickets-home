@@ -4,8 +4,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 	let ticketPrice;
+	let ticketPriceWithFees;
 	let ticketName;
 	let ticketType;
+	let ticketFee;
 
 	const ticketTypes = (ticket) => {
 		if (!ticket?.resale && ticket?.on_sale_status === 'available') return 'Standard Ticket';
@@ -17,12 +19,16 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 		ticketPrice = `${parseFloat(ticket?.attributes.resale ? ticket?.attributes.listingAskingPrice : ticket?.attributes.cost).toFixed(2)} ea`;
 		ticketName = ticket?.attributes.name;
 		ticketType = ticketTypes(ticket?.attributes);
+		ticketFee = ticket?.attributes.fee + ticket?.attributes.facilityFee + 2.5 + 4.35;
+		ticketPriceWithFees = parseFloat(ticket?.attributes.resale ? ticket?.attributes.listingAskingPrice : ticket?.attributes.cost  + ticketFee).toFixed(2);
 	}
 
 	if (listing) {
 		ticketPrice = `${parseFloat(listing.askingPrice).toFixed(2)} ea`;
 		ticketName = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
 		ticketType = `Resale ${listing.tickets.length} Tickets`;
+		ticketFee = listing.tickets.map(ticket => ticket.fee + ticket.facilityFee + 2.5 + 4.35);
+		ticketPriceWithFees = (Number(listing.askingPrice) + Number(ticketFee)).toFixed(2);
 	}
 
 	return (
@@ -43,9 +49,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 				<div>
 					<span className="fw-bold text-end">
 						{ticketFilters.showFees ? (
-							`$${parseFloat(
-								ticketPrice + ticket?.attributes.fee + ticket?.attributes.facilityFee + 2.5 + 4.35
-							).toFixed(2)}`
+							`$${ticketPriceWithFees} ea`
 						) : (
 							`$${ticketPrice}`
 						)}
@@ -55,7 +59,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 					{ticketFilters.showFees && (
 						<span className="text-muted caption">
 							${parseFloat(ticketPrice).toFixed(2)} + ${parseFloat(
-								ticket?.attributes.fee + ticket?.attributes.facilityFee + 2.5 + 4.35
+								ticketFee
 							).toFixed(2)}
 						</span>
 					)}
