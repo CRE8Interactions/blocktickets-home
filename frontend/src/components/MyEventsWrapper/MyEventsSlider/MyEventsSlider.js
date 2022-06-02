@@ -1,7 +1,7 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
-import { Slider } from '..';
+import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
 import TransferCard from '../../TransferCard/TransferCard';
 

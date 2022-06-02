@@ -1,7 +1,7 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
-import { Slider } from '..';
+import { Slider } from '../../Slider';
 import { TransferCard } from '../../TransferCard';
 
 export default function MyTransfersSlider({ transfers, cancel }) {
