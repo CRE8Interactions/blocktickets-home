@@ -222,15 +222,20 @@ h4,
 	}
 }
 
-// bulleted event details: event, ticket card, paymentConfirmation
+// bulleted event details: event, ticket card, order preview
 .time,
 .loc,
-.venue {
+.venue,
+.ticket-type {
 	&::before {
 		content: '\2022';
-		position: relative;
-		margin: 0px rem(3);
-		left: em(-2);
+		margin: 0px rem(4);
+	}
+}
+
+.date {
+	@include breakpoint-min(md) {
+		margin-right: rem(4);
 	}
 }
 
