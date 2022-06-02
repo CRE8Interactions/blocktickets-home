@@ -13,7 +13,7 @@ export default function EventsSlider({ events }) {
 				{events &&
 					events.map((event, index) => {
 						return (
-							<SwiperSlide key={index}>
+							<SwiperSlide key={index} className="swiper-lazy">
 								<MyCard prefix={prefix} type="genAdmission" event={event} />
 							</SwiperSlide>
 						);

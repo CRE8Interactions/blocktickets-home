@@ -1,19 +1,18 @@
-import React, { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React from 'react';
+import { SwiperSlide } from 'swiper/react';
+
 import * as moment from 'moment';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 
+import { Slider } from '../Slider';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { IconButton } from '../IconButton';
 
 import './hero.scss';
 
 export default function Hero(props) {
-	const navigationNextRef = useRef(null);
-	const navigationPrevRef = useRef(null);
 
 	const { events } = props;
 
@@ -22,20 +21,11 @@ export default function Hero(props) {
 			<header className="spacer-lg">
 				<Row>
 					<Col>
-						<Swiper
-							preventClicks={false}
-							preventClicksPropagation={false}
-							spaceBetween={20}
-							slidesPerView={1}
-							navigation={{
-								nextEl: navigationNextRef.current,
-								prevRef: navigationPrevRef.current
-							}}
-							pagination={{ clickable: true }}>
+						<Slider slidesPerView="1">
 								{events && 
 									events.map((event, index) => {
 										return (
-											<SwiperSlide key={index}>
+											<SwiperSlide key={index} className="swiper-lazy">
 												<Row className="justify-content-lg-between" key={index}>
 													<Col lg={7} xl={8}>
 														<div className="image-wrapper">
@@ -88,7 +78,7 @@ export default function Hero(props) {
 										)
 									})
 								}
-						</Swiper>
+						</Slider>
 					</Col>
 					<Col md={6} lg={12} xl={4} className="ms-auto navigation-buttons">
 						<SwiperNavigationButtons styles="justify-content-center justify-content-xl-start" />
