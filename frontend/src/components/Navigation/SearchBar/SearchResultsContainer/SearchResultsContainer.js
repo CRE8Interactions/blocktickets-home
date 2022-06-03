@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { SearchList } from '../../SearchList';
+import { SearchList } from '../../../SearchList';
 
 export default function SearchResultsContainer({ query, queryResults }) {
 	// api call with limit results

@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-import { searchEvents } from '../../utilities/api';
-import { useOnOutsideClick } from '../../utilities/hooks';
+import { searchEvents } from '../../../utilities/api';
+import { useOnOutsideClick } from '../../../utilities/hooks';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
