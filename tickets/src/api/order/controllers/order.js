@@ -128,6 +128,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
           data: {
             on_sale_status: 'sold',
+            resale: false
           },
         });
 
@@ -147,25 +148,27 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           }
         });
 
-        // let fromOrder = await strapi.db.query('api::order.order').findOne({
-        //   where: { id: listing.fromOrder },
-        //   populate: { 
-        //     tickets: true
-        //   }
-        // });
+        let fromOrder = await strapi.db.query('api::order.order').findOne({
+          where: { id: listing.fromOrder },
+          populate: { 
+            tickets: true
+          }
+        });
 
-        // let originalTicketIds = fromOrder.tickets.map((ticket => !listing.tickets.map(t => t.id === ticket.id)))
+        let originalTicketIds = fromOrder.tickets.map(ticket => ticket.uuid);
+        let newOrderTicketIds = order.tickets.map(ticket => ticket.uuid);
+        let filteredIds = originalTicketIds.filter(ticket => !newOrderTicketIds.includes(ticket))
 
-        // let ticketUpdates = await strapi.db.query('api::ticket.ticket').findMany({
-        //   where: { id: listing.originalTicketIds },
-        // });
+        let ticketUpdates = await strapi.db.query('api::ticket.ticket').findMany({
+          where: { uuid: filteredIds },
+        });
 
-        // await strapi.db.query('api::order.order').update({
-        //   where: { id: listing.fromOrder },
-        //   data: {
-        //     tickets: ticketUpdates
-        //   }
-        // });
+        await strapi.db.query('api::order.order').update({
+          where: { id: listing.fromOrder },
+          data: {
+            tickets: ticketUpdates
+          }
+        });
       break;
       case 'payment_intent.payment_failed':
         paymentIntentId = data.data.object.id;
