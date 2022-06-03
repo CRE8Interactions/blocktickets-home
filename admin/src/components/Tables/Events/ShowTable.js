@@ -135,9 +135,6 @@ export default function ShowTable(props) {
                 </Dropdown>
                 </td>
               </tr>
-            )
-          })
-        }
       </tbody>
       </Table>
       <PublishEvent show={show} handleClose={handleClose} event={event} publish={publish} />
