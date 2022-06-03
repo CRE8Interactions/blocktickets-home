@@ -29,7 +29,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const [
 		sliderValues,
 		setSliderValues
-	] = useState([0, 0]);
+	] = useState([0, 50]);
 
 	const [
 		showFilter,

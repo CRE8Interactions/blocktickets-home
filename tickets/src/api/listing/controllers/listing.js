@@ -89,6 +89,14 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     const { tickets, quantity, event, serviceFees, payout, askingPrice } = ctx.request.body
     const id = ctx.params.id;
 
+    const listing = await strapi.entityService.findOne('api::listing.listing', id, {
+      fields: ['status'],
+    });
+
+    if (listing.status === 'complete') {
+      return 403
+    }
+
     const entry = await strapi.db.query('api::listing.listing').update({
       where: {id: id},
       data: {
@@ -112,11 +120,19 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       }
     })
 
-    return 200
+    listing.status === 'complete' ? 403 : 200
   },
   async delete(ctx) {
     const user = ctx.state.user;
     const id = ctx.params.id;
+
+    const listing = await strapi.entityService.findOne('api::listing.listing', id, {
+      fields: ['status'],
+    });
+
+    if (listing.status === 'complete') {
+      return 403
+    }
 
     const entry = await strapi.db.query('api::listing.listing').delete({
       where: { id: id },
@@ -133,6 +149,6 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       }
     })
 
-    return 200
+    return listing.status === 'complete' ? 403 : 200
   }
 }));
