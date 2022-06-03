@@ -9,7 +9,6 @@ import 'rc-slider/assets/index.css';
 import './priceRangeSlider.scss';
 
 export default function PriceRangeSlider({ styles, sliderValues, setSliderValues }) {
-
 	const handleChange = (sliderValues) => {
 		setSliderValues(sliderValues);
 	};
@@ -21,6 +20,7 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 				className="form-control-xs"
 				onChange={handleChange}
 				value={`$${sliderValues[0]} `}
+				disabled={true}
 			/>
 			<Slider
 				range
@@ -35,6 +35,7 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 				className="form-control-xs"
 				onChange={handleChange}
 				value={`$${sliderValues[1]} `}
+				disabled={true}
 			/>
 		</Stack>
 	);

@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 
 import { createOrder } from '../../../../utilities/api';
-import { cartTotal } from '../../../../utilities/helpers';
+import { cartTotal, ticketPrices } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -34,19 +34,30 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 	let ticketCount;
 	let ticketFee;
 	let facilityFee;
+	let totalDue;
+	let tax;
 
 	if (cart.listing) {
+		let ticket = null;
 		let listing = cart.listing;
-		ticketPrice = listing.askingPrice;
-		ticketCount = cart.listing.tickets.length;
-		ticketFee = cart.listing.tickets[0].fee;
-		facilityFee = cart.listing.tickets[0].facilityFee;
+		let prices = ticketPrices(ticket, listing);
+		ticketPrice = prices.ticketCost;
+		ticketCount = prices.ticketCount;
+		ticketFee = prices.ticketServiceFee;
+		facilityFee = prices.ticketFacilityFee;
+		totalDue = (Number(prices.ticketCostWithFees) * ticketCount + prices.tax).toFixed(2);
+		tax = prices.tax.toFixed(2);
 	}
 	else if (cart.ticket) {
-		ticketPrice = cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost;
+		let ticket = cart.ticket;
+		let listing = null;
+		let prices = ticketPrices(ticket, listing);
+		ticketPrice = prices.ticketCost;
 		ticketCount = cart.ticketCount;
-		ticketFee = cart.ticket.fee;
-		facilityFee = cart.ticket.facilityFee;
+		ticketFee = prices.ticketServiceFee;
+		facilityFee = prices.ticketFacilityFee;
+		totalDue = (Number(prices.ticketCostWithFees) * ticketCount + prices.tax).toFixed(2);
+		tax = prices.tax.toFixed(2);
 	}
 
 	const completePurchase = () => {
@@ -104,7 +115,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 					Total
 				</Card.Title>
 				<Stack direction="horizontal" gap={2} className="card-header-price">
-					<span className="fw-bold fs-md">${cartTotal(cart, 4.35, 2.5)}</span>
+					<span className="fw-bold fs-md">${totalDue}</span>
 					<Button
 						onClick={() => setExpanded(!expanded)}
 						variant="outline-light"
@@ -155,10 +166,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 										${(parseFloat(facilityFee).toFixed(2) * ticketCount).toFixed(2)}
 									</span>
 								</Stack>
-								<Stack direction="horizontal" as="li" className="split-row">
+								{/* <Stack direction="horizontal" as="li" className="split-row">
 									<span>Order Processing Fee</span>
 									<span className="text-end">$4.35</span>
-								</Stack>
+								</Stack> */}
 							</ul>
 						</li>
 
@@ -190,7 +201,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 								<Stack direction="horizontal" as="li" className="split-row">
 									<span className="heading m-0">Tax</span>
 
-									<span className="text-end">$2.50</span>
+									<span className="text-end">${tax}</span>
 								</Stack>
 							</ul>
 						</li>

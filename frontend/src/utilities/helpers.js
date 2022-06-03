@@ -48,7 +48,7 @@ export const cartTotal = (cart, processingFee, tax) => {
 		);
 		let fees = Number(
 			parseFloat(
-				cart?.listing?.tickets[0]?.fee * cart.listing?.tickets?.length + cart?.listing?.tickets[0]?.facilityFee * cart.listing?.tickets?.length + processingFee + tax
+				cart?.listing?.tickets[0]?.fee + cart?.listing?.tickets[0]?.facilityFee + processingFee + tax
 			).toFixed(2)
 		);
 		total = totalTicketPrices + fees;
@@ -66,3 +66,35 @@ export const cartTotal = (cart, processingFee, tax) => {
 	
 	return total;
 };
+
+export const ticketPrices = (ticket = null, listing = null, showFees = true) => {
+	if (ticket) {
+		let prices = {}
+		prices['ticketCost'] = ticket?.attributes ? ticket?.attributes?.cost : ticket?.cost;
+		prices['ticketServiceFee'] = ticket?.attributes ? ticket?.attributes?.fee : ticket?.fee;
+		prices['ticketFacilityFee'] = ticket?.attributes ? ticket?.attributes?.facilityFee : ticket.facilityFee;
+		prices['tax'] = 5;
+		prices['totalFees'] = prices.ticketServiceFee + prices.ticketFacilityFee;
+		prices['ticketType'] = ticket?.attributes ? ticket?.attributes?.resale ? 'Resale' : 'General Admissions' : ticket?.resale ? 'Resale' : 'General Admissions';
+		prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
+		prices['ticketName'] = ticket?.attributes ? ticket?.attributes?.name : ticket?.name;
+		prices['ticketCount'] = 1;
+		prices['listing'] = false;
+		return prices;
+	}
+	if (listing) {
+		let prices = {}
+		prices['ticketCost'] = listing.askingPrice;
+		prices['ticketServiceFee'] = listing.tickets[0]?.fee;
+		prices['ticketFacilityFee'] = 0;
+		prices['tax'] = 5;
+		prices['totalFees'] = (listing.tickets[0].fee + 0);
+		prices['ticketType'] = listing.tickets[0]?.resale ? 'Resale' : 'General Admissions';
+		prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
+		prices['ticketName'] = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
+		prices['ticketCount'] = listing.tickets.length;
+		prices['listingTotal'] = listing.askingPrice * listing.tickets.length;
+		prices['listing'] = true;
+		return prices;
+	}
+}
