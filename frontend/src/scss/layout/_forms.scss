@@ -131,8 +131,4 @@ select:-webkit-autofill:focus {
 // login & security new phone number field
 .input-wrapper {
 	@include input-icon-box();
-
-	// &-lg {
-	// 	@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
-	// }
 }
