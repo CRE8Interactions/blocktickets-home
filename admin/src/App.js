@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import Router from './Router';
+
 import authService from './utilities/services/auth.service';
 import UserContext from './context/User/User';
 import OrganizationContext from './context/Organization/Organization';
@@ -24,9 +26,9 @@ function App() {
 	] = useState(false);
 	const myOrgs = useContext(OrganizationContext);
 
-	useEffect(() => {
-		if (user) getOrg();
-	}, []);
+	// useEffect(() => {
+	// 	if (user) getOrg();
+	// }, []);
 
 	const getOrg = () => {
 		myOrgs
@@ -56,10 +58,7 @@ function App() {
 			<UserContext.Provider value={{ authenticated, setAuthenticated, user }}>
 				<Navigation />
 				<div className="container">
-					{/* <Sidenav enabled={sideNavEnabled} /> */}
-					<div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-						<OrganizationContext.Provider value={{ orgs }}>{showHome(orgs)}</OrganizationContext.Provider>
-					</div>
+					<Router />
 				</div>
 			</UserContext.Provider>
 		</div>

@@ -3,6 +3,11 @@
 @use './../theme/colors' as *;
 
 .dropdown {
+	&-toggle {
+		border-radius: $br-sm;
+		font-family: $font-body;
+		font-weight: $fw-medium;
+	}
 	&-menu {
 		width: 200px;
 	}

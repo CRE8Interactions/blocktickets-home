@@ -1,7 +1,17 @@
-import { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+
 import OrganizationContext from "../../../context/Organization/Organization";
-import { Table, Row, Col, ProgressBar, Image, Dropdown } from "react-bootstrap";
-import { FaEllipsisV } from 'react-icons/fa';
+
+import Table from "react-bootstrap/Table";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Dropdown from "react-bootstrap/Dropdown";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import Stack from "react-bootstrap/Stack";
+import Badge from "react-bootstrap/Badge";
+
+import { UpArrow } from "../../../components";
 import { PublishEvent } from "../../Modals/PublishEvent";
 import { publishEvent } from "../../../utilities/api";
 
@@ -17,10 +27,10 @@ export default function ShowTable(props) {
   let sum;
   let selectedEvent;
 
-  useEffect(() => {
-    setEvents(org.orgs[0]['events'])
-    console.log(org.orgs[0]['events'])
-  }, [org.orgs])
+//   useEffect(() => {
+//     setEvents(org.orgs[0]['events'])
+//     console.log(org.orgs[0]['events'])
+//   }, [org.orgs])
 
   const calculateSold = (tickets) => {
     let availableTickets = tickets
@@ -51,41 +61,67 @@ export default function ShowTable(props) {
 
   return(
     <>
-      <Table bordered hover>
+      <Table hover>
       <thead>
         <tr>
           <th>Event</th>
-          <th>Sold</th>
+          <th>Primary sold</th>
           <th>Gross</th>
+          <th>Secondary sold</th>
+          <th>Royalties</th>
           <th>Status</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        { events && 
-          events.map((event, index) => {
-            return(
-              <tr key={index}>
-                <td>
+        
+              <tr>
+                <td className="text-left">
                   <Row>
                     <Col md="4">
-                      <Image src={event?.image?.url} rounded="true" width="120" height="80" />
+                      <Image src={event?.image?.url} alt={event?.name} rounded width="80" height="80" />
                     </Col>
                     <Col>
-                      <p className="mb-0">{event?.name}</p>
-                      <p className="mb-0">{event?.venue?.name}</p>
-                      <p className="mb-0">{event?.start}</p>
+                      <p className="fw-bold">Nic Fanciulli</p>
+                      <p className="fw-bold">CODA</p>
+                      <p className="mb-0">Mar 19, 2022</p>
                     </Col>
                   </Row>
                 </td>
                 <td>
-                  { calculateSold(event.tickets)}
+                    <Stack gap={3}>
+                        <Badge bg='light' className="badge-label">50/500</Badge>
+                        <ProgressBar now={20} />
+                    </Stack>
+                  {/* { calculateSold(event.tickets)} */}
                 </td>
-                <td>$ {sum}</td>
-                <td> {event.status} </td>
                 <td>
+                    <Stack gap={2}>
+                    <Badge bg='light' className="badge-label">$3,200</Badge>
+                    <Stack direction="horizontal" gap={2}>
+                        <UpArrow /><span className="caption"><span className="text-success">55.8%</span> this week</span>
+                    </Stack>
+                    </Stack>
+                    </td>
+                    
+                <td>
+                     <Stack gap={3}>
+                        <Badge bg='light' className="badge-label">50/500</Badge>
+                        <ProgressBar now={20} />
+                        </Stack>
+                  {/* { calculateSold(event.tickets)} */}
+                </td>
+                <td>
+                    <Stack gap={2}>
+                    <Badge bg='light' className="badge-label">$3,200</Badge>
+                    <Stack direction="horizontal" gap={2}>
+                        <UpArrow /><span className="caption"><span className="text-success">55.8%</span> this week</span>
+                    </Stack>
+                    </Stack>
+                </td>
+                <td>Event on sale</td>
+                <td className="btn-cell">
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle variant="default">
                     
                   </Dropdown.Toggle>
 

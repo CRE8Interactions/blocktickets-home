@@ -4,7 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import authService from '../../utilities/services/auth.service';
 import { useWindowSize } from '../../utilities/hooks';
 
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -41,30 +42,33 @@ export default function Navigation() {
 						</Navbar.Brand>
 					</LinkContainer>
 					<Stack direction="horizontal" className="desktop-btns">
-						<NavDropdown id="nav-dropdown-dark-example" title="Organization name" menuVariant="dark">
-							<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-							<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-							<NavDropdown.Divider />
-							<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-						</NavDropdown>
+						<DropdownButton id="dropdown-basic-button" title="Organization name" variant="info">
+							<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+							<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+							<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+						</DropdownButton>
 						<Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
-							<ul id="main" role="main-navigation" className="d-flex flex-column flex-lg-row">
+							<ul
+								id="main"
+								role="main-navigation"
+								className="d-flex flex-column flex-lg-row align-items-lg-center">
 								<li>
-									<IconButton variant="primary" size="sm">
-										Create an event
-									</IconButton>
+									<LinkContainer
+										to="/create"
+										className="btn btn-primary btn-plus icon-button text-white btn-sm">
+										<Nav.Link>Create an event</Nav.Link>
+									</LinkContainer>
 								</li>
 								<li>
-									<LinkContainer to="/">
+									<LinkContainer to="/events">
 										<Nav.Link>Events</Nav.Link>
 									</LinkContainer>
 								</li>
 								<li>
-									<LinkContainer to="/">
+									<LinkContainer to="/reports">
 										<Nav.Link>Reports</Nav.Link>
 									</LinkContainer>
 								</li>

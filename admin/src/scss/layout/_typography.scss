@@ -27,28 +27,25 @@
 	}
 }
 
-.heading-font {
-	font-family: $font-heading;
-}
-
 .section-heading {
 	h1,
 	h2,
 	h3,
 	h4 {
 		margin: 0;
-		@extend .heading-font !optional;
+		font-size: $body-1;
+		display: flex;
+
+		&::before {
+			content: '';
+			flex: 1 0 20px;
+			margin-right: 20px;
+			background-color: $primary;
+			border-radius: 4px;
+		}
 	}
 
 	margin-bottom: $heading-spacer;
-
-	h1,
-	h2 {
-		font-size: $h4-font-size;
-		@include breakpoint-min(md) {
-			font-size: $h3-font-size;
-		}
-	}
 
 	&-sm {
 		@extend .section-heading !optional;
