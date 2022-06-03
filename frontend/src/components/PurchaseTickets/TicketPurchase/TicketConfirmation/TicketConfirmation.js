@@ -15,19 +15,23 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 	let section;
 	let sum;
 	let maxQuantity;
+	let ticketFees;
 
 	if (listing) {
 		ticketPrice = listing.askingPrice;
 		section = listing.tickets[0].name;
 		sum = listing.askingPrice * listing.tickets.length;
 		maxQuantity = listing.tickets.length;
-		totalTicketPrice = listing.askingPrice + (listing.tickets[0].fee + listing.tickets[0].facilityFee + 2.5 + 4.35)
+		ticketFees = (listing.tickets[0].fee + listing.tickets[0].facilityFee + 2.5 + 4.35);
+		totalTicketPrice = listing.askingPrice + ticketFees;
+		
 	} else if (ticket) {
 		ticketPrice = ticket.resale ? ticket.listingAskingPrice : ticket.cost;
 		section = ticket.name;
 		sum = ticketPrice * ticketCount;
 		maxQuantity = ticket.maximum_quantity;
-		totalTicketPrice = parseFloat(ticketPrice + ticket.fee + ticket.facilityFee + 2.5 + 4.35).toFixed(2)
+		ticketFees = ticket.fee + ticket.facilityFee + 2.5 + 4.35;
+		totalTicketPrice = parseFloat(ticketPrice + ticketFees).toFixed(2)
 	}
 
 	let [
@@ -101,7 +105,8 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 						<p className="caption">{listing ? listing.tickets[0].name : ticket.name}</p>
 						<p className="fw-bold">
 							${totalTicketPrice}
-							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} ea + Fees</span>
+							<br />
+							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} ea + ${ticketFees} Fees</span>
 						</p>
 					</div>
 					<Stack direction="horizontal" className="counter fw-bolder">

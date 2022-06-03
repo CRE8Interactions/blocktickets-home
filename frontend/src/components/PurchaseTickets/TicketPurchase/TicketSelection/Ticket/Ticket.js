@@ -60,7 +60,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 						<span className="text-muted caption">
 							${parseFloat(ticketPrice).toFixed(2)} + ${parseFloat(
 								ticketFee
-							).toFixed(2)}
+							).toFixed(2)} Fees
 						</span>
 					)}
 				</div>
