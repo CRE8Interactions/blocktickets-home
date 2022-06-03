@@ -24,7 +24,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 		section = prices.ticketName;
 		sum = prices.ticketCostWithFees;
 		maxQuantity = prices.ticketCount;
-		ticketFees = prices.totalFees;
+		ticketFees = (prices.totalFees).toFixed(2);
 		totalTicketPrice = prices.ticketCostWithFees;
 		
 	} else if (ticket) {
@@ -33,7 +33,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 		section = prices.ticketName;
 		sum = prices.ticketCostWithFees;
 		maxQuantity = ticket.maximum_quantity;
-		ticketFees = prices.totalFees;
+		ticketFees = (prices.totalFees).toFixed(2);
 		totalTicketPrice = prices.ticketCostWithFees
 	}
 
