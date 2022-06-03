@@ -21,7 +21,7 @@ export default function TicketPurchase({
 	const [
 		ticketCount,
 		setTicketCount
-	] = useState(1);
+	] = useState(2);
 
 	return (
 		<div className="left-col">

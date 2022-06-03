@@ -49,14 +49,15 @@ export default function FilterMenu({
 						sliderValues={sliderValues}
 						setSliderValues={setSliderValues}
 					/>
-					<Form.Check
+					{/* Disabling until we have more ticket types */}
+					{/* <Form.Check
 						type="checkbox"
 						label="Show prices with fees"
 						id="fees"
 						name="showFees"
 						onChange={handleChecked}
 						checked={ticketFilters.showFees}
-					/>
+					/> */}
 				</header>
 				<div className="filter-container">
 					<div className="scrollable-content">
