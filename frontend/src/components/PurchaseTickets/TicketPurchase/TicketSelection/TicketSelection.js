@@ -24,12 +24,12 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	const [
 		ticketFilters,
 		setTicketFilters
-	] = useState({ showFees: false, standard: true, resale: true });
+	] = useState({ showFees: true, standard: true, resale: true });
 
 	const [
 		sliderValues,
 		setSliderValues
-	] = useState([0, 0]);
+	] = useState([0, 50]);
 
 	const [
 		showFilter,

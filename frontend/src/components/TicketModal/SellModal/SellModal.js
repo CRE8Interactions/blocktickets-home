@@ -76,7 +76,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 		if (!isUpdate && step === 4) setTicketStatus('listed')
 	};
 
-	const ticketsTotalPrice = selectedTickets.map((ticket) => ticket.cost).reduce((a,v) => a + v, 0)
+	const ticketsTotalPrice = selectedTickets.map((ticket) => ticket.cost).reduce((a,v) => a + v, 0);
+	const ticketPrice = ticketsTotalPrice / selectedTickets.length
 
 	const submit = () => {
 		let data = {
@@ -126,7 +127,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 						<div className="modal-body-heading">
 							<h4 className="modal-body-heading-title mb-2">Price your tickets</h4>
 							<p className="small text-muted fw-medium">
-								Ticket face value ${ticketsTotalPrice}
+								Ticket face value ${ticketPrice}
 							</p>
 						</div>
 						 <Form.Group controlId='price' className="form-card form-card-lg bg-info">

@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 import { BackButton } from '../../../BackButton';
+import { ticketPrices } from '../../../../utilities/helpers';
 
 import './ticketConfirmation.scss';
 
@@ -15,19 +16,25 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 	let section;
 	let sum;
 	let maxQuantity;
+	let ticketFees;
 
 	if (listing) {
-		ticketPrice = listing.askingPrice;
-		section = listing.tickets[0].name;
-		sum = listing.askingPrice * listing.tickets.length;
-		maxQuantity = listing.tickets.length;
-		totalTicketPrice = listing.askingPrice + (listing.tickets[0].fee + listing.tickets[0].facilityFee + 2.5 + 4.35)
+		let prices = ticketPrices(ticket, listing);
+		ticketPrice = prices.ticketCost;
+		section = prices.ticketName;
+		sum = prices.ticketCostWithFees;
+		maxQuantity = prices.ticketCount;
+		ticketFees = (prices.totalFees).toFixed(2);
+		totalTicketPrice = prices.ticketCostWithFees;
+		
 	} else if (ticket) {
-		ticketPrice = ticket.resale ? ticket.listingAskingPrice : ticket.cost;
-		section = ticket.name;
-		sum = ticketPrice * ticketCount;
+		let prices = ticketPrices(ticket, listing);
+		ticketPrice = prices.ticketCost;
+		section = prices.ticketName;
+		sum = prices.ticketCostWithFees;
 		maxQuantity = ticket.maximum_quantity;
-		totalTicketPrice = parseFloat(ticketPrice + ticket.fee + ticket.facilityFee + 2.5 + 4.35).toFixed(2)
+		ticketFees = (prices.totalFees).toFixed(2);
+		totalTicketPrice = prices.ticketCostWithFees
 	}
 
 	let [
@@ -100,8 +107,9 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 						</p>
 						<p className="caption">{listing ? listing.tickets[0].name : ticket.name}</p>
 						<p className="fw-bold">
-							${totalTicketPrice}
-							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} ea + Fees</span>
+							${totalTicketPrice} ea
+							<br />
+							<span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} + ${ticketFees} Fees</span>
 						</p>
 					</div>
 					<Stack direction="horizontal" className="counter fw-bolder">

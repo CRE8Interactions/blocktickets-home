@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
+import { ticketPrices } from '../../../../../utilities/helpers';
 
 export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 	let ticketPrice;
@@ -16,19 +17,21 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 	};
 	
 	if (ticket) {
-		ticketPrice = `${parseFloat(ticket?.attributes.resale ? ticket?.attributes.listingAskingPrice : ticket?.attributes.cost).toFixed(2)} ea`;
-		ticketName = ticket?.attributes.name;
-		ticketType = ticketTypes(ticket?.attributes);
-		ticketFee = ticket?.attributes.fee + ticket?.attributes.facilityFee + 2.5 + 4.35;
-		ticketPriceWithFees = parseFloat(ticket?.attributes.resale ? ticket?.attributes.listingAskingPrice : ticket?.attributes.cost  + ticketFee).toFixed(2);
+		let prices = ticketPrices(ticket, listing);
+		ticketPrice = `${prices.ticketCost} ea`;
+		ticketName = prices.ticketName;
+		ticketType = prices.ticketType;
+		ticketFee = prices.totalFees;
+		ticketPriceWithFees = prices.ticketCostWithFees;
 	}
 
 	if (listing) {
-		ticketPrice = `${parseFloat(listing.askingPrice).toFixed(2)} ea`;
-		ticketName = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
+		let prices = ticketPrices(ticket, listing);
+		ticketPrice = `${prices.ticketCost} ea`;
+		ticketName = prices.ticketName;
 		ticketType = `Resale ${listing.tickets.length} Tickets`;
-		ticketFee = listing.tickets.map(ticket => ticket.fee + ticket.facilityFee + 2.5 + 4.35);
-		ticketPriceWithFees = (Number(listing.askingPrice) + Number(ticketFee)).toFixed(2);
+		ticketFee = prices.totalFees;
+		ticketPriceWithFees = prices.ticketCostWithFees;
 	}
 
 	return (
@@ -60,7 +63,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 						<span className="text-muted caption">
 							${parseFloat(ticketPrice).toFixed(2)} + ${parseFloat(
 								ticketFee
-							).toFixed(2)}
+							).toFixed(2)} Fees
 						</span>
 					)}
 				</div>
