@@ -62,7 +62,7 @@ export default function MyListingsWrapper() {
 	};
 
 	const removeListing = (id) => {
-		removeMyListings(id).then((res) => {myListings(); console.log(res)}).catch((err) => console.error(err));
+		removeMyListings(id).then((res) => myListings()).catch((err) => console.error(err));
 	};
 
 	useEffect(() => {
