@@ -204,7 +204,15 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
     const order = await strapi.entityService.findOne('api::order.order', data[0].id, {
       populate: { 
-        tickets: true,
+        tickets: {
+          filters: {
+            $and: [
+              {
+                on_sale_status: { $notIn: 'resaleAvailable'}
+              }
+            ]
+          }
+        },
         event: {
           populate: {
             image: true,

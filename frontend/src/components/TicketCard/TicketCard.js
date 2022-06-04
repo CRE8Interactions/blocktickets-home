@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
@@ -31,6 +31,9 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 	
 	const event = listing ? listing?.event : order?.event;
 
+	useEffect(() => {
+	}, [ticketState, ticketStatus])
+
 	return (
 		<Fragment>
 			<Card body className="ticket-card">
@@ -42,63 +45,64 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 				/>
 				<div className="details d-flex-column">
 					<Card.Title as="h5">{event?.name}</Card.Title>
-						<p className="event-details">
+					<p className="event-details">
 						{moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')}</span><span className="venue">{event?.venue.name}</span><span className="loc">
 						{event?.venue.address[0]?.city}, {event?.venue.address[0].state}
 						</span>
 					</p>
-					{ ticketStatus === 'listed' && (
-						<Stack className='mb-2'>
-							<Stack direction="horizontal" className="split-row mb-1">
-								<span className='m-0 caption'>Listing price per ticket</span>
-								<span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
-							</Stack>
-							<p className='caption text-muted'>You will make ${(listing?.askingPrice - listing?.tickets[0].cost).toFixed(2)} per ticket</p>
-						</Stack>
-					)}
+
 					{ !id && ( <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length > 1 || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span> )}
-					
-					{ticketType !== 'collectable' && (					
 					<>
-					{/* ticketStatus or specific event - transferred, listed, event details */}
-							{ ticketStatus || id ? (
+						{ ticketState && ticketState === 'active' &&
+							(
 								<>
-							<Badge bg="light" className="mt-2 text-dark badge-lg">
-								General Admission
-							</Badge>
-								{ id && (<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-							<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
-							</Button>
-							<Button variant='outline-light' size="xs" onClick={()=>handleClick('details')}>Details</Button>
-							</Stack>
-								)
-							}
-							{ ticketStatus === 'listed' && (
-								<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-								{ ticketState === 'active' ? (
-								<>								
-									<Button onClick={(e) => handleClick('remove')}>Remove listing
-									</Button>
-									<Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+									<Stack className='mb-2'>
+										<Stack direction="horizontal" className="split-row mb-1">
+											<span className='m-0 caption'>Listing price per ticket</span>
+											<span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
+										</Stack>
+										<p className='caption text-muted'>You will make ${(listing?.askingPrice / listing?.tickets.length).toFixed(2)} per ticket</p>
+									</Stack>
 								</>
-							 ) : (
-								<Button variant='outline-light' onClick={handleClick('details')} size="xs">Details</Button>
 							)
-								}
-							</Stack>
-							)}
-							</>							
-							) : (
-								
-							<Link to={`/event-details/${order?.orderId}`} className="btn btn-primary">
-								Event details
-							</Link>
-							)}
-							</>
-					)}
+						}
+						
+						<Badge bg="light" className="mt-2 text-dark badge-lg">
+							General Admission
+						</Badge>
+
+						{ ticketState && ticketState === 'active' &&
+							(
+								<>
+									<Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+										<Button onClick={(e) => handleClick('remove')}>Remove listing</Button>
+										<Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+									</Stack>
+								</>
+							)
+						}
+
+						{
+							!ticketStatus &&
+							(
+								<>
+									{/* <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+										<Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
+										</Button>
+										<Button variant='outline-light' size="xs" onClick={()=>handleClick('details')}>Details</Button>
+									</Stack> */}
+									<Link to={`/event-details/${order?.orderId}`} className="btn btn-primary">
+										Event details
+									</Link>
+								</>
+							)
+						}
+					</>
+
+					
+
 				</div>
 			</Card>
-
 			<TicketModal ticketAction={ticketAction} show={show} setShow={setShow} removeListing={removeListing} listing={listing} getListings={getListings} />
 
 		</Fragment>
