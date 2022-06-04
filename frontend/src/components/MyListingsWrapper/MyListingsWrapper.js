@@ -62,7 +62,7 @@ export default function MyListingsWrapper() {
 	};
 
 	const removeListing = (id) => {
-		removeMyListings(id).then((res) => myListings()).catch((err) => console.error(err));
+		removeMyListings(id).then((res) => {myListings(); console.log(res)}).catch((err) => console.error(err));
 	};
 
 	useEffect(() => {
@@ -85,7 +85,6 @@ export default function MyListingsWrapper() {
 						listings={listings.active}
 						removeListing={removeListing}
 						getListings={myListings}
-						key={new Date().getTime()}
 					/>
 				</Tab>
 				<Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
@@ -93,7 +92,6 @@ export default function MyListingsWrapper() {
 						ticketStatus={'listed'}
 						ticketState={key}
 						listings={listings.sold}
-						key={new Date().getTime() + 1}
 					/>
 				</Tab>
 				<Tab eventKey="expired" title="Expired" key={new Date().getTime() + 2}>
@@ -101,7 +99,6 @@ export default function MyListingsWrapper() {
 						ticketStatus={'listed'}
 						ticketState={key}
 						listings={listings.expired}
-						key={new Date().getTime() + 2}
 					/>
 				</Tab>
 			</Tabs>
