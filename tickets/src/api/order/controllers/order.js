@@ -20,8 +20,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     // Find Available Tickets
     if (cart.ticket) {
       totalTicketPrices = Number(parseFloat(cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost * cart.ticketCount).toFixed(2))
-      fees = Number(parseFloat((cart.ticket.fee * cart.ticketCount) + (cart.ticket.facilityFee * cart.ticketCount) + 4.35 + 2.50).toFixed(2))
-      total = (totalTicketPrices + fees)
+      fees = Number(parseFloat((cart.ticket.fee * cart.ticketCount) + (cart.ticket.facilityFee * cart.ticketCount) + 5.00).toFixed(2))
+      total = (totalTicketPrices + fees).toFixed(2)
       eventId = cart.ticket.eventId
 
       tickets = await strapi.db.query('api::ticket.ticket').findMany({
@@ -32,9 +32,9 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         limit: cart.ticketCount
       })
     } else if (cart.listing) {
-      totalTicketPrices = Number(parseFloat(cart.listing.askingPrice).toFixed(2))
-      fees = Number(parseFloat((cart.listing.tickets[0].fee * cart.listing.tickets.length) + (cart.listing.tickets[0].facilityFee * cart.listing.tickets.length) + 4.35 + 2.50).toFixed(2))
-      total = (totalTicketPrices + fees)
+      totalTicketPrices = Number(parseFloat(cart.listing.askingPrice * cart.listing.tickets.length).toFixed(2))
+      fees = Number(parseFloat((cart.listing.tickets[0].fee * cart.listing.tickets.length) + 5.00).toFixed(2))
+      total = (totalTicketPrices + fees).toFixed(2)
       eventId = cart.listing.event.id
 
       tickets = await strapi.db.query('api::ticket.ticket').findMany({

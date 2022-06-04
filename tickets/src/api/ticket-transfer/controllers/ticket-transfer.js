@@ -79,8 +79,15 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     const { transferId } = ctx.request.body.data;
 
     const entry = await strapi.entityService.findOne('api::ticket-transfer.ticket-transfer', transferId, {
-      populate: { tickets: true },
+      populate: { 
+        tickets: true,
+        toUser: true
+      },
     });
+
+    if (entry.complete) {
+      return ctx.badRequest('Transfer has been claimed', { message: `Your transfer was claimed by ${entry.toUser.firstName} ${entry.toUser.lastName}`})
+    }
 
     let ticketIds = entry.ticketIds;
 
