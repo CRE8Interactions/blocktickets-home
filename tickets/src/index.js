@@ -5,9 +5,11 @@ const order = require('./api/order/controllers/order');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const smsNumber = process.env.SMS_NUMBER;
+const smsNotificationsNumber = process.env.SMS_NOTIFICATIONS_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const blockchain = process.env.BLOCKCHAIN;
-const messagingServiceSid = process.env.MG80e1372892690914b598b6478a992c1a;
+const messagingServiceSid = process.env.MESSAGING_SERVICE_SID;
+const notificationsServiceSid = process.env.MESSAGING_NOTIFICATIONS_SERVICE_SID;
 const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
@@ -144,9 +146,9 @@ module.exports = {
           await client.messages
             .create({
               body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`,
-              messagingServiceSid: messagingServiceSid,
+              messagingServiceSid: notificationsServiceSid,
               to: params.data.phoneNumberToUser,
-              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
+              from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
             })
             .then(message => console.log(message.body))
             .done()

@@ -31,6 +31,10 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         },
         limit: cart.ticketCount
       })
+
+      if (tickets.length < cart.ticketCount) {
+        return ctx.badRequest('Tickets not available', { message: `There are only ${tickets.length} tickets available`})
+      }
     } else if (cart.listing) {
       totalTicketPrices = Number(parseFloat(cart.listing.askingPrice * cart.listing.tickets.length).toFixed(2))
       fees = Number(parseFloat((cart.listing.tickets[0].fee * cart.listing.tickets.length) + 5.00).toFixed(2))
@@ -44,7 +48,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         }
       })
     }
-    
+
     let ids = tickets.map(ticket => ticket.id)
     // Updates statuses
     let cartTickets = await strapi.db.query('api::ticket.ticket').updateMany({
