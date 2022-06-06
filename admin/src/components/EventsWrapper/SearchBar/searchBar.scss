@@ -1,0 +1,8 @@
+@use '../../../scss/theme/input' as *;
+@use '../../../scss/layout/forms' as *;
+
+#search {
+	width: 360px;
+	position: relative;
+	@include input-icon-box($input-padding-y, $input-padding-x);
+}

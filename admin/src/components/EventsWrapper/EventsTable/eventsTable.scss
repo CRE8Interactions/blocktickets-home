@@ -1,0 +1,23 @@
+@use '../../../scss/abstracts' as *;
+
+#events-table {
+	tbody {
+		tr:first-of-type {
+			td {
+				padding-top: rem(24);
+			}
+		}
+
+		.vstack {
+			> * {
+				flex-basis: rem(24);
+				align-items: center;
+				justify-content: center;
+			}
+
+			.hstack {
+				padding-top: rem(8);
+			}
+		}
+	}
+}
