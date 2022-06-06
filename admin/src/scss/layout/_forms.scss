@@ -115,6 +115,8 @@ select:-webkit-autofill:focus {
 	border-radius: $radius;
 	border: $input-border-width solid $color;
 	padding-right: rem(8);
+	background-color: $gray-300;
+	border-color: transparent;
 
 	&:focus-within {
 		border-color: $input-focus-border-color;
@@ -128,7 +130,7 @@ select:-webkit-autofill:focus {
 	}
 }
 
-// login & security new phone number field
+// search
 .input-wrapper {
 	@include input-icon-box();
 }

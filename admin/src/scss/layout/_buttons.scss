@@ -25,7 +25,6 @@
 }
 
 .btn {
-	// margin-top: rem(14);
 	white-space: nowrap;
 
 	&.d-flex {
@@ -149,7 +148,7 @@ button,
 }
 
 .btn-plus {
-	gap: $gap-sm;
+	gap: $gap-xs;
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'plus'));
 	}
