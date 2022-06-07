@@ -113,13 +113,6 @@ h4,
 	@extend .text-uppercase !optional;
 }
 
-.caption--uppercase-label {
-	font-size: $caption;
-	@extend .text-uppercase !optional;
-	color: $muted;
-	margin-bottom: rem(12);
-}
-
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;

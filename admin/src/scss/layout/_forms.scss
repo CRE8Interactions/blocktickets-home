@@ -85,7 +85,13 @@ select:-webkit-autofill:focus {
 }
 
 .form-label {
-	@extend .caption--uppercase-label !optional;
+	font-weight: $fw-medium;
+	font-size: $small;
+}
+
+.form-label,
+.form-label--flex {
+	margin-bottom: rem(12);
 }
 
 .form-check {

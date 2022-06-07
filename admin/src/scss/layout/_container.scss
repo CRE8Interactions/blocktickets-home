@@ -58,7 +58,7 @@ $navbar-height: rem(82);
 @mixin heading-psuedo($color: $primary) {
 	h1::before {
 		content: '';
-		flex: 1 0 16px;
+		width: 16px;
 		margin-right: $text-spacer-xs;
 		background-color: $color;
 		border-radius: 4px;
