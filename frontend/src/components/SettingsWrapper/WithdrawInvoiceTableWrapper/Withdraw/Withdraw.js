@@ -40,7 +40,7 @@ export default function Withdraw({ details }) {
 				{hasBankAccount ? <Button onClick={setTotalFunds(0)}>Withdraw Funds</Button> : <LinkBankAccountBtn />}
 			</Card>
 			<Card body className="withdraw-card card-md card--light">
-				<div className="heading--flex mb-2" direction="horizontal">
+				<Stack direction="horizontal" className="heading--flex mb-2">
 					<Card.Title as="h5" className="flex-grow-1">
 						Funds On Hold
 					</Card.Title>
@@ -51,7 +51,7 @@ export default function Withdraw({ details }) {
 							<InfoIcon />
 						</Button>
 					</OverlayTrigger>
-				</div>
+				</Stack>
 				<span className="total">${parseFloat(totalFunds).toFixed(2)}</span>
 			</Card>
 		</Stack>

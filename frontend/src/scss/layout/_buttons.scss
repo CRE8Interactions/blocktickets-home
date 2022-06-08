@@ -3,6 +3,7 @@
 @use 'spacing' as *;
 @use '../theme/input' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 
 %btn-background {
 	background-repeat: no-repeat;
@@ -155,8 +156,7 @@ button,
 	text-align: left;
 }
 
-.icon-button,
-.btn--icon {
+.icon-button {
 	@extend %icon-text-box !optional;
 	justify-content: center;
 
@@ -164,6 +164,10 @@ button,
 	&::after {
 		line-height: 0;
 	}
+}
+
+.btn--icon {
+	@extend .icon-button !optional;
 }
 
 .btn-tickets {

@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 @use '../layout' as *;
 @use '../theme/input' as *;
+@use '../theme/borders' as *;
 
 :root {
 	--PhoneInput-color--focus: $input-focus-border-color;
