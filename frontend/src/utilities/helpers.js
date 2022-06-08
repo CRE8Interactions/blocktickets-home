@@ -75,7 +75,7 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true) => 
 		prices['ticketFacilityFee'] = ticket?.attributes ? ticket?.attributes?.facilityFee : ticket.facilityFee;
 		prices['tax'] = 5;
 		prices['totalFees'] = prices.ticketServiceFee + prices.ticketFacilityFee;
-		prices['ticketType'] = ticket?.attributes ? ticket?.attributes?.resale ? 'Resale' : 'General Admissions' : ticket?.resale ? 'Resale' : 'General Admissions';
+		prices['ticketType'] = ticket?.attributes ? ticket?.attributes?.resale ? 'Resale Ticket' : 'Standard Ticket' : ticket?.resale ? 'Resale Ticket' : 'Standard Ticket';
 		prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
 		prices['ticketName'] = ticket?.attributes ? ticket?.attributes?.name : ticket?.name;
 		prices['ticketCount'] = 1;
@@ -89,7 +89,7 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true) => 
 		prices['ticketFacilityFee'] = 0;
 		prices['tax'] = 5;
 		prices['totalFees'] = (listing.tickets[0].fee + 0);
-		prices['ticketType'] = listing.tickets[0]?.resale ? 'Resale' : 'General Admissions';
+		prices['ticketType'] = listing.tickets[0]?.resale ? 'Resale Ticket' : 'Standard Ticket';
 		prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
 		prices['ticketName'] = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
 		prices['ticketCount'] = listing.tickets.length;

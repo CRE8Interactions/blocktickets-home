@@ -94,7 +94,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     });
 
     if (listing.status === 'complete') {
-      return 403
+      return ctx.badRequest('Listing has been completed', { message: `Your listing has already been purchased`})
     }
 
     const entry = await strapi.db.query('api::listing.listing').update({
@@ -120,7 +120,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       }
     })
 
-    listing.status === 'complete' ? 403 : 200
+    return 200
   },
   async delete(ctx) {
     const user = ctx.state.user;
@@ -131,7 +131,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     });
 
     if (listing.status === 'complete') {
-      return 403
+      return ctx.badRequest('Listing has been completed', { message: `Your listing has already been purchased`})
     }
 
     const entry = await strapi.db.query('api::listing.listing').delete({
@@ -149,6 +149,6 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       }
     })
 
-    return listing.status === 'complete' ? 403 : 200
+    return 200
   }
 }));

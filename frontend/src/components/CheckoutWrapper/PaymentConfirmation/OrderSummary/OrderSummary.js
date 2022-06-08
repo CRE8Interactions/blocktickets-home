@@ -10,15 +10,15 @@ export default function OrderSummary({order}) {
 	let fees;
 
 	if (order.details.listing) {
-		sum = (order.details.listing.askingPrice).toFixed(2)
-		// sum = sum.reduce((a,v) => a + v ,0).toFixed(2)
+		sum = (order.details.listing.askingPrice * order.details.listing.tickets.length).toFixed(2);
+		fees = (order.details.listing.tickets[0].fee * order.details.listing.tickets.length).toFixed(2);
 	} else if (order.details) {
-		sum = (order.details.ticket.resale ? order.details.ticket.listingAskingPrice : order.details.ticket.cost).toFixed(2)
+		sum = order.tickets.map(ticket => ticket.cost).reduce((a,v) => a + v ,0).toFixed(2)
+		fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee)
+		fees = fees.reduce((a,v) => a + v ,0).toFixed(2)
 	}
 
-	fees = order.tickets.map(ticket => ticket.fee + ticket.facilityFee)
-	fees = fees.reduce((a,v) => a + v ,0).toFixed(2)
-
+	
 	return (
 		<ListGroup as="ul" variant="flush" id="order">
 			<ListGroup.Item as="li" className="list">
@@ -39,11 +39,11 @@ export default function OrderSummary({order}) {
 						</Stack>
 					<Stack direction="horizontal" as="li"  className="split-row">
 								<span>Tax</span>
-								<span className='text-end'>${(4.35 + 2.50).toFixed(2)}</span>
+								<span className='text-end'>${(5.00).toFixed(2)}</span>
 							</Stack>
 					<Stack direction="horizontal" as="li"  className="split-row">
 								<span>Total</span>
-								<span className='text-end'>${order?.total}</span>
+								<span className='text-end'>${(order?.total).toFixed(2)}</span>
 							</Stack>
 				</ul>
 			</ListGroup.Item>
