@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -47,6 +48,8 @@ export default function PersonalDetailsForm() {
 		setGender
 	] = useState(user.gender);
 
+	const [show, setShow] = useState(false);
+
 	useEffect(
 		() => {
 			if (firstName && lastName && email && gender && dob) {
@@ -90,12 +93,25 @@ export default function PersonalDetailsForm() {
 			}
 		};
 
-		updatePersonalDetails(data).then((res) => authService.setUser(res.data)).catch((err) => console.error(err));
+		updatePersonalDetails(data).then((res) => {authService.setUser(res.data); setShow(true)}).catch((err) => console.error(err));
 	};
+
+	const notificationModal = () => {
+		if (show) {
+			return (
+				<Alert variant="success" onClose={() => setShow(false)} dismissible>
+					<p>
+						Your Personal Details have successfully been updated.  
+					</p>
+				</Alert>
+			);
+		}
+	}
 
 	return (
 		<Fragment>
 			<Form className="d-flex-column">
+				{ notificationModal() }
 				<Form.Group className="form-group" controlId="email">
 					<Form.Label>Email</Form.Label>
 					<Form.Control

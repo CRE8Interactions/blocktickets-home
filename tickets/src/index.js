@@ -122,7 +122,13 @@ module.exports = {
         },
       });
 
-
+      await strapi.db.query('api::payment-information.payment-information').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
     }
 
     initOrganization()
@@ -151,6 +157,7 @@ module.exports = {
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
             })
             .then(message => console.log(message.body))
+            .catch(error => console.log('Twilio Transfer Notification Error ', error))
             .done()
         }
 
@@ -240,6 +247,7 @@ module.exports = {
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
             .then(message => console.log(message.body))
+            .catch(error => console.log('Twilio Role Notification Error ', error))
             .done()
         }
       },
@@ -362,7 +370,7 @@ module.exports = {
           event.params.data.addedAt = new Date()
           // dont send SMS when running test
           if (process.env.NODE_ENV === 'test') return;
-
+          
           await client.messages
             .create({
               body: `${code} is your temporary verification code to login at BlockTickets.xyz`,
@@ -371,12 +379,14 @@ module.exports = {
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
             .then(message => console.log(message.body))
+            .catch(error => console.log('Twilio Verification Error ', error))
             .done()
         }
       },
       async beforeUpdate(event) {
         // Updates on payment-formation model
         if (event.model.singularName === 'payment-information') {
+          if (!event.params.data.accountNumber) return
           await encryption
             .encrypt(event.params.data.accountNumber)
             .then(enc => {
