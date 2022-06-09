@@ -6,12 +6,13 @@ import Stack from 'react-bootstrap/Stack';
 
 import { LinkBankAccountBtn } from './../LinkBankAccountBtn';
 import { BankAccountDetailsModal } from '../BankAccountDetailsModal';
+import { removeBankAccount } from '../../../utilities/api';
 
 import './bankAccount.scss';
 
-export default function BankAccount() {
+export default function BankAccount({account, getAccount}) {
 	// demo purposes, will come from database
-	const hasBankAccount = false;
+	const hasBankAccount = account && account.accountNumber ? true : false;
 
 	const [
 		show,
@@ -20,7 +21,13 @@ export default function BankAccount() {
 
 	const handleShow = () => setShow(true);
 
-	const handleClose = () => setShow(false);
+	const handleClose = () => {
+		setShow(false);
+	};
+
+	const removeBank = () => {
+		removeBankAccount().then(() => getAccount()).catch(err => console.error(err))
+	}
 
 	return (
 		<Fragment>
@@ -31,10 +38,10 @@ export default function BankAccount() {
 					</Card.Title>
 					<ul>
 						<li>
-							<Card.Text>Camerica Bank</Card.Text>
+							<Card.Text>{account.accountName}</Card.Text>
 						</li>
 						<li>
-							<Card.Text>Checking XXXXX6742</Card.Text>
+							<Card.Text>{account?.accountType?.toUpperCase()} XXXXX{account.accountNumber.substring(account.accountNumber.length - 4)}</Card.Text>
 						</li>
 						<li>
 							<Card.Text>U.S. Dollars, United States</Card.Text>
@@ -44,7 +51,7 @@ export default function BankAccount() {
 						<Button variant="link" onClick={handleShow}>
 							Edit
 						</Button>
-						<Button variant="link" className="text-danger">
+						<Button variant="link" className="text-danger" onClick={removeBank}>
 							Delete
 						</Button>
 					</Stack>
@@ -53,7 +60,7 @@ export default function BankAccount() {
 				<LinkBankAccountBtn marginTop="0" />
 			)}
 
-			<BankAccountDetailsModal show={show} handleClose={handleClose} />
+			<BankAccountDetailsModal handleClose={handleClose} show={show} account={account} />
 		</Fragment>
 	);
 }

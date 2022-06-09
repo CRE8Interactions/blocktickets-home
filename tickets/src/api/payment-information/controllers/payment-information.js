@@ -31,7 +31,11 @@ module.exports = createCoreController('api::payment-information.payment-informat
         id: user.profile.id
       },
       populate: {
-        payment_information: true
+        payment_information: {
+          where: {
+            active: true
+          }
+        }
       }
     })
 
@@ -84,7 +88,11 @@ module.exports = createCoreController('api::payment-information.payment-informat
       populate: {
         profile: {
           populate: {
-            payment_information: true
+            payment_information: {
+              where: {
+                active: true
+              }
+            }
           }
         }
       }
@@ -101,5 +109,41 @@ module.exports = createCoreController('api::payment-information.payment-informat
         // This is to handle errors
       })
     return user.profile.payment_information
+  },
+  async deactive(ctx) {
+    let user = ctx.state.user;
+
+    user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        id: user.id
+      },
+      populate: {
+        profile: true
+      }
+    })
+
+    let profile = await strapi.db.query('api::profile.profile').findOne({
+      where: {
+        id: user.profile.id
+      },
+      populate: {
+        payment_information: {
+          where: {
+            active: true
+          }
+        }
+      }
+    })
+
+    await strapi.db.query('api::payment-information.payment-information').update({
+      where: {
+        id: profile.payment_information.id
+      },
+      data: {
+        active: false
+      }
+    })
+
+    return 200
   }
 }));

@@ -1,13 +1,14 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { createBankAccount, getBankAccount } from '../../../utilities/api';
+import React, { Fragment, useState, useEffect, createElement } from 'react';
+import { createBankAccount } from '../../../utilities/api';
 
+import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import { ChequeImg } from '../../ChequeImg';
 
-export default function BankAccountDetailsModal({ show, handleClose }) {
+export default function BankAccountDetailsModal({ handleClose, account,  show }) {
 	const [
 		formValid,
 		setFormValid
@@ -26,32 +27,40 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 	const [
 		formData,
 		setFormData
-	] = useState({});
+	] = useState(account);
 
 	const [
-		account,
-		setAccount
-	] = useState('checking');
+		accountType,
+		setAccountType
+	] = useState(account? account?.accountType : 'checking');
+
+	const [
+		accountName,
+		setAccountName
+	] = useState(account?.accountName);
 
 	const [
 		firstName,
 		setFirstName
-	] = useState();
+	] = useState(account?.firstName);
 
 	const [
 		lastName,
 		setLastName
-	] = useState();
+	] = useState(account?.lastName);
 
 	const [
 		accountNumber,
 		setAccountNumber
-	] = useState('');
+	] = useState(account?.accountNumber);
 
 	const [
 		routingNumber,
 		setRoutingNumber
-	] = useState('');
+	] = useState(account?.routingNumber);
+
+	const [showAlert, setShowAlert] = useState(false);
+
 
 	// reset error when inputs are changed
 	useEffect(
@@ -59,11 +68,12 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 			validInputs();
 		},
 		[
-			account,
+			accountType,
 			firstName,
 			lastName,
 			accountNumber,
-			routingNumber
+			routingNumber,
+			accountName
 		]
 	);
 
@@ -89,18 +99,16 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 
 	useEffect(() => {
 		validInputs();
-
-		getBankAccount().then((res) => console.log(res)).catch((err) => console.error(err));
 	}, []);
 
 	const validInputs = () => {
-		if (routingNumber.length < 9) {
+		if (routingNumber && routingNumber.length < 9) {
 			setRoutingNumError(true);
 		}
-		if (accountNumber.length < 9) {
+		if (accountNumber && accountNumber.length < 9) {
 			setAccountNumError(true);
 		}
-		if (account && firstName && lastName && accountNumber && routingNumber) {
+		if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber)) {
 			setFormValid(true);
 		}
 		else {
@@ -108,19 +116,34 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 		}
 	};
 
+	const notificationModal = () => {
+		if (showAlert) {
+			return (
+				<Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+					<p>
+						Your Bank Details have successfully been updated.  
+					</p>
+				</Alert>
+			);
+		}
+	}
+
 	const submitForm = () => {
 		let data = {
 			data: {
-				accountType: account,
-				firstName,
-				lastName,
-				accountNumber,
-				routingNumber,
+				accountType: accountType ? accountType : account.accountType,
+				accountName: accountName ? accountName : account.accountName,
+				firstName: firstName ? firstName : account.firstName,
+				lastName: lastName ? lastName : account.lastName,
+				accountNumber: accountNumber ? accountNumber : account.accountNumber,
+				routingNumber: routingNumber ? routingNumber : account.routingNumber,
 				currency: 'usd'
 			}
 		};
 
-		createBankAccount(data).then((res) => console.log(res)).catch((err) => console.error(err));
+		createBankAccount(data).then(() => {
+			location.reload()
+		}).catch(err => console.error(err))
 	};
 
 	return (
@@ -131,12 +154,24 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 				</Modal.Header>
 				<Modal.Body>
 					<Form className="d-flex-column">
+					{ notificationModal() }
+						<Form.Group className="form-group" controlId="accountName">
+							<Form.Label>Bank Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter name of bank"
+								required
+								name="accountName"
+								defaultValue={account?.accountName}
+								onChange={(e) => setAccountName(e.target.value)}
+							/>
+						</Form.Group>
 						<Form.Group className="form-group" controlId="account">
 							<Form.Label>Payout Type</Form.Label>
 							<Form.Select
 								name="account"
-								value={account}
-								onChange={(e) => setAccount(e.target.value)}
+								defaultValue={account?.accountType}
+								onChange={(e) => setAccountType(e.target.value)}
 								required>
 								<option value="checking">Checking</option>
 								<option value="savings">Savings</option>
@@ -149,6 +184,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								placeholder="Enter your first name"
 								required
 								name="firstName"
+								defaultValue={account?.firstName}
 								onChange={(e) => setFirstName(e.target.value)}
 							/>
 						</Form.Group>
@@ -159,6 +195,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								placeholder="Enter your last name"
 								required
 								name="lastName"
+								defaultValue={account?.lastName}
 								onChange={(e) => setLastName(e.target.value)}
 							/>
 						</Form.Group>
@@ -171,7 +208,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								type="text"
 								placeholder="Enter routing number"
 								required
-								value={routingNumber}
+								value={account?.routingNumber}
 								pattern="[0-9]*"
 								maxLength="9"
 								name="routingNumber"
@@ -193,7 +230,7 @@ export default function BankAccountDetailsModal({ show, handleClose }) {
 								type="text"
 								placeholder="Enter account number"
 								required
-								value={accountNumber}
+								defaultValue={account?.accountNumber}
 								pattern="[0-9]*"
 								name="accountNumber"
 								onChange={(e) =>
