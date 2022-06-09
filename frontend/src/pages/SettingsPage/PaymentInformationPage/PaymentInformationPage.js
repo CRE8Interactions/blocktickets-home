@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SettingsWrapper, BankAccount } from '../../../components';
+import { createBankAccount, getBankAccount, removeBankAccount } from '../../../utilities/api';
 
 export default function PaymentInformationPage() {
+	const [account, setAccount] = useState('')
+
+	const getAccount = () => {
+		getBankAccount().then((res) => setAccount(res.data)).catch((err) => console.error(err));
+	}
+
+	const removeBank = () => {
+		removeBankAccount().then(setAccount('')).catch(err => console.error(err))
+	}
+
+	useEffect(() => {
+		getAccount()
+	}, [])
+
 	return (
 		<SettingsWrapper>
 			<div className="settings-heading">
@@ -12,7 +27,7 @@ export default function PaymentInformationPage() {
 					account.
 				</h2>
 			</div>
-			<BankAccount />
+			<BankAccount account={account} getAccount={getAccount} />
 		</SettingsWrapper>
 	);
 }

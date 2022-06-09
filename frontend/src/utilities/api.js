@@ -103,6 +103,10 @@ export const getBankAccount = () => {
   return instance.get('/payment-informations/0')
 }
 
+export const removeBankAccount = () => {
+  return instance.get('/payment-information/deactive')
+}
+
 export const getMyTransfers = () => {
   return instance.get('/ticket-transfers')
 }

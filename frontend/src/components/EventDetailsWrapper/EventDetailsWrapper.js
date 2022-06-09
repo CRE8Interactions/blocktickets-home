@@ -67,7 +67,7 @@ export default function EventDetailsWrapper({ orderId }) {
 				<Event event={order?.event} />
 			</div>
 			<div className="mobile-only">
-				<MyTicketsSlider id={'id'} />
+				<MyTicketsSlider order={order} />
 				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
 			</div>
 			<div className="tablet-desktop-only">
