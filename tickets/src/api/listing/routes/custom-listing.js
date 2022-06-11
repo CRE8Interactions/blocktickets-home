@@ -9,6 +9,11 @@ module.exports = {
       method: 'GET',
       path: '/listings/byEvent',
       handler: 'listing.byEventId'
+    },
+    {
+      method: 'GET',
+      path: '/listings/available-funds',
+      handler: 'listing.availableFunds'
     }
   ]
 }
