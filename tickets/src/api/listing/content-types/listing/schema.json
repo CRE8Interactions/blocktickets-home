@@ -48,6 +48,13 @@
     },
     "fromOrder": {
       "type": "integer"
+    },
+    "fundsClaimed": {
+      "type": "boolean",
+      "default": false
+    },
+    "claimedOn": {
+      "type": "datetime"
     }
   }
 }

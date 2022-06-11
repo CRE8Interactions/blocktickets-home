@@ -150,5 +150,19 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     })
 
     return 200
+  },
+  async availableFunds(ctx) {
+    const user = ctx.state.user;
+
+    const entries = await strapi.db.query('api::listing.listing').findMany({
+      select: ['payout'],
+      where: { 
+        users_permissions_user: user.id,
+        fundsClaimed: false,
+        status: 'complete'
+      }
+    });
+
+    return entries;
   }
 }));
