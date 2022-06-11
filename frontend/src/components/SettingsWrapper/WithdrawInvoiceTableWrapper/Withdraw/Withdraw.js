@@ -8,36 +8,31 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 import { InfoIcon } from '../../../InfoIcon';
 import { LinkBankAccountBtn } from '../../LinkBankAccountBtn';
+import { getBankAccount } from '../../../../utilities/api';
 
 import './withdraw.scss';
 
 export default function Withdraw({ details }) {
 	// demo purposes, comes from database
 	const hasBankAccount = false;
+	const [account, setAccount] = useState()
 
 	const [
 		totalFunds,
 		setTotalFunds
 	] = useState(0);
 
-	useEffect(
-		() => {
-			details &&
-				details.map((detail) => {
-					setTotalFunds((prevState) => (prevState += detail.total));
-				});
-		},
-		[
-			details
-		]
-	);
+	useEffect(() => {
+		getBankAccount().then((res) => {setAccount(res.data)}).catch((err) => console.error(err));
+	}, [])
+
 
 	return (
 		<Stack gap={4}>
 			<Card body className="withdraw-card card-md card--dark">
 				<Card.Title as="h5">Available Funds</Card.Title>
 				<span className="total">${parseFloat(totalFunds).toFixed(2)}</span>
-				{hasBankAccount ? <Button onClick={setTotalFunds(0)}>Withdraw Funds</Button> : <LinkBankAccountBtn />}
+				{account && account.hasOwnProperty('id') ? <Button>Withdraw Funds</Button> : <LinkBankAccountBtn />}
 			</Card>
 			<Card body className="withdraw-card card-md card--light">
 				<div className="heading--flex mb-2" direction="horizontal">

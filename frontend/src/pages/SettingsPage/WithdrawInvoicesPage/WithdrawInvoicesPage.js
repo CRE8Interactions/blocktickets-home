@@ -3,9 +3,10 @@ import { getMyEvents } from '../../../utilities/api';
 
 import { WithdrawInvoiceTableWrapper } from '../../../components';
 
+
 export default function WithdrawInvoicesPage() {
 	const [details, setDetails] = useState('')
-
+	
 	useEffect(() => {
 		getMyEvents()
 			.then((res) => setDetails(res.data))
