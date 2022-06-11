@@ -20,6 +20,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
   },
   async find(ctx) {
     let events = await strapi.db.query('api::event.event').findMany({
+      orderBy: { start: 'asc' },
       where: {
         status: 'on_sale',
         start: {
