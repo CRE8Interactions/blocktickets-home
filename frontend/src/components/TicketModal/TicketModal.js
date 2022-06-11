@@ -41,7 +41,7 @@ export default function TicketModal({ ticketAction, setTicketStatus, show, setSh
 
 	const windowSize = useWindowSize();
 
-	const handleClose = () => setShow(false);
+	const handleClose = () => { setShow(false); location.reload() };
 
 	return (
 		<>

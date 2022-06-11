@@ -29,7 +29,7 @@ export default function Ticket({order}) {
                         </p>
                         <Stack direction='horizontal' gap={1}>
                             <span>{order.tickets.length} Tickets</span>
-                            <span>&bull; General Admission</span>
+                            <span>&bull; {order.tickets[0]?.resale ? `Resale • General Admission` : `General Admission`}</span>
                         </Stack>
                     </Stack>
                 

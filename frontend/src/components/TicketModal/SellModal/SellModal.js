@@ -94,7 +94,9 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 			data.event = listing.event
 			updateMyListings(listing.id, data)
 				.then((res) => {
-					getListings()
+					if (getListings) {
+						getListings()
+					}
 					setStep(4)
 				})
 				.catch((err) => console.error(err))

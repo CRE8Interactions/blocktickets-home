@@ -17,7 +17,7 @@ import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 
-export default function TransferModal({ handleClose, setTicketStatus, order }) {
+export default function TransferModal({ handleClose, setTicketStatus, order, getMyOrders }) {
 
 	// 1 - tranfer 
 	// 2 - phone number 

@@ -149,6 +149,11 @@ module.exports = {
           // dont send SMS when running test
           if (process.env.NODE_ENV === 'test') return;
 
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`);
+            return
+          }
+
           await client.messages
             .create({
               body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`,
@@ -237,6 +242,13 @@ module.exports = {
             message = `You've been granted ${role} access in BlockTickets.xyz.  You may create or edit Organization information which your a member of.`
           } else {
             message = `You've been added to the ${organization.name} organization at BlockTickets.xyz`;
+          }
+
+          if (process.env.NODE_ENV === 'test') return;
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(message);
+            return
           }
 
           await client.messages
@@ -370,6 +382,11 @@ module.exports = {
           event.params.data.addedAt = new Date()
           // dont send SMS when running test
           if (process.env.NODE_ENV === 'test') return;
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`${code} is your temporary verification code to login at BlockTickets.xyz`);
+            return
+          }
           
           await client.messages
             .create({
