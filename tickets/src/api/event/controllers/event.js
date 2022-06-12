@@ -96,8 +96,8 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         },
         tickets: {
           filters: {
-            $not: {
-              on_sale_status: 'resaleAvailable'
+            on_sale_status: {
+              $notIn: ['resaleAvailable', 'pendingTransfer']
             }
           }
         },
