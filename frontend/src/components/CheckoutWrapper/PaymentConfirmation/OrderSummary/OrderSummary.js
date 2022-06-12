@@ -24,7 +24,7 @@ export default function OrderSummary({order}) {
 			<ListGroup.Item as="li" className="list">
 				<Stack direction="horizontal"  className="split-row">
 						<span>Payment</span>
-						<span />
+						<span className='text-end'></span>
 					</Stack>
 			</ListGroup.Item>
 			<ListGroup.Item as="li" className="list">

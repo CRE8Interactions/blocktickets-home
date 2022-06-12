@@ -14,7 +14,7 @@
   "attributes": {
     "phoneNumber": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "code": {
       "type": "biginteger",
@@ -23,6 +23,9 @@
     },
     "addedAt": {
       "type": "datetime"
+    },
+    "email": {
+      "type": "email"
     }
   }
 }

@@ -12,7 +12,7 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 	const handleChange = (sliderValues) => {
 		setSliderValues(sliderValues);
 	};
-
+	console.log(sliderValues)
 	return (
 		<Stack direction="horizontal" gap={3} className={`amount ${styles}`}>
 			<Form.Control
@@ -24,8 +24,9 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 			/>
 			<Slider
 				range
-				min={0}
-				max={100}
+				min={sliderValues[0]}
+				step={10}
+				max={sliderValues[1] + 1}
 				pushable={20}
 				defaultValue={sliderValues}
 				onChange={handleChange}
