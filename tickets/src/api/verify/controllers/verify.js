@@ -25,13 +25,26 @@ module.exports = createCoreController('api::verify.verify', ({
       })
       return
     } else {
-      // checks if user account is present
-      const user = await strapi.db.query('plugin::users-permissions.user').findOne({
-        where: {
-          phoneNumber: verify.phoneNumber
-        },
-        populate: ["role"],
-      })
+      // checks if user account is present by phone
+      let user;
+      if (verify.phoneNumber) {
+        user = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            phoneNumber: verify.phoneNumber
+          },
+          populate: ["role"],
+        })
+      }
+      // checks if user account is present by email
+      if (verify.email) {
+        user = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            email: verify.email
+          },
+          populate: ["role"],
+        })
+      }
+      
       if (user) {
         // Checks if invite present for user
         const invite = await strapi.db.query('api::invite.invite').findOne({
@@ -190,5 +203,17 @@ module.exports = createCoreController('api::verify.verify', ({
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
     ctx.send(tokenData)
+  },
+  async emailValid(ctx) {
+    const email = ctx.request.body.data.email;
+
+    const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        email: email
+      }
+    })
+
+    if (user) return 200
+    if (!user) return 404
   }
 }));

@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { verifyUser, verifiyCode, createNewUser } from '../../utilities/api';
+import { verifyUser, verifiyCode, createNewUser, validEmail } from '../../utilities/api';
 import AuthService from '../../utilities/services/auth.service';
 import PhoneInput from 'react-phone-number-input';
 import { isValidPhoneNumber } from 'react-phone-number-input';
@@ -146,9 +146,9 @@ export default function LoginSignupForm() {
 		}
 	}
 
-	// submit phoneNumber or email 
+	// submit phoneNumber
 	function submit() {
-		if (validNumber() && !hasError) {
+		if ((validNumber() || email) && !hasError) {
 		let data = {
 			data: {
 				phoneNumber,
@@ -216,6 +216,22 @@ export default function LoginSignupForm() {
 		});
 	};
 
+	const validateEmail = () => {
+		let data = {
+			data: {
+				email
+			}
+		}
+		validEmail(data).then(res => {
+			if (res.data === 404) setHasError(true)
+			if (res.data === 200) setHasError(false)
+		}).catch((err) => console.error(err))
+	}
+
+	const submitEmailRequest = (e) => {
+		submit()
+	}
+
 	return (
 		<Row className="spacer-md" id="login-signup-container">
 			<Col md={4}>{step > 0 && <BackButton handleGoBack={handleGoBack} />}</Col>
@@ -276,6 +292,7 @@ export default function LoginSignupForm() {
 									required
 									name="email"
 									onChange={(e) => setEmail(e.target.value)}
+									onBlur={(e) => validateEmail()}
 									className={email && hasError ? 'error-border' : ''}
 								/>
 							</Form.Group>
@@ -285,7 +302,7 @@ export default function LoginSignupForm() {
 							size="lg"
 							className="icon-button btn-next"
 							disabled={!email || hasError}
-							onClick={(e) => submit()}>
+							onClick={(e) => submitEmailRequest(e)}>
 							Send
 						</Button>
 						</>
@@ -297,7 +314,7 @@ export default function LoginSignupForm() {
 						<div className="heading">
 							<h3 className="title mb-1">Enter 4 Digit Verification</h3>
 							<p className="subtitle">
-								Code is set to <span className="text-primary">{phoneNumber}</span>
+								Code is set to <span className="text-primary">{phoneNumber ? phoneNumber : email}</span>
 							</p>
 						</div>
 						<Form.Group>
