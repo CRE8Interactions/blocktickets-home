@@ -4,6 +4,7 @@
 @use 'container' as *;
 @use '../theme/card' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 
 %plain-card {
 	background: transparent;
@@ -51,6 +52,8 @@
 	&--popup {
 		@include breakpoint-max(md) {
 			@include full-width();
+			border-bottom-right-radius: 0px;
+			border-bottom-left-radius: 0px;
 			box-shadow: $box-shadow-popupCard;
 		}
 	}

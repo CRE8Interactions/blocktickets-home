@@ -1,5 +1,6 @@
 @use "../abstracts" as *;
 @use './colors' as *;
+@use './borders' as *;
 
 // Buttons
 $btn-font-family: $font-heading;
@@ -19,8 +20,8 @@ $btn-padding-y: rem(10);
 $btn-padding-y-sm: rem(7);
 $btn-padding-x-sm: rem(11);
 
-$btn-border-radius: $br-secondary;
-$btn-border-radius-sm: $br-secondary;
+$btn-border-radius: $border-radius-lg;
+$btn-border-radius-sm: $border-radius-lg;
 $btn-border-width: $border-width;
 $btn-line-height: 1;
 $btn-box-shadow: none;

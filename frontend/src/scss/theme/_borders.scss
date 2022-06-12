@@ -1,7 +1,6 @@
-@use '../abstracts' as *;
+@use '../abstracts' as abstracts;
 
-$border-radius: $br-primary;
-$border-radius-sm: $br-sm;
-$border-radius-lg: $br-secondary;
-$border-width: $border-width;
-$border-color: $border-color;
+$border-radius: abstracts.$br-primary;
+$border-radius-sm: abstracts.$br-sm;
+$border-radius-lg: abstracts.$br-secondary;
+$border-color: abstracts.$border-color;
