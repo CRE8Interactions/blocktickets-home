@@ -93,7 +93,10 @@ export default function PersonalDetailsForm() {
 			}
 		};
 
-		updatePersonalDetails(data).then((res) => {authService.setUser(res.data); setShow(true)}).catch((err) => console.error(err));
+		updatePersonalDetails(data).then((res) => {
+			authService.setUser(res.data); 
+			setShow(true)
+		}).catch((err) => console.error(err));
 	};
 
 	const notificationModal = () => {

@@ -135,6 +135,10 @@ export const getMyListings = () => {
   return instance.get('/listings/mylisting')
 }
 
+export const getAvailableFunds = () => {
+  return instance.get('/listings/available-funds')
+}
+
 export const removeMyListings = (id) => {
   return instance.delete(`/listings/${id}`)
 }

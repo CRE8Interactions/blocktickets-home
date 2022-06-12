@@ -6,7 +6,7 @@ import { InvoiceTable } from './InvoiceTable';
 
 import './withdrawInvoiceTableWrapper.scss';
 
-export default function WithdrawInvoiceTableWrapper({ details }) {
+export default function WithdrawInvoiceTableWrapper({ details, account }) {
 	return (
 		<>
 		<SettingsWrapper>
@@ -15,7 +15,7 @@ export default function WithdrawInvoiceTableWrapper({ details }) {
 					<h1 className="settings-title">Withdraw</h1>
 					<h2 className="settings-subtitle">Withdraw funds from your account.</h2>
 				</div>
-			<Withdraw details={details} />
+			<Withdraw details={details} account={account} />
 			</section>
 		</SettingsWrapper>
 		<section id="invoices">

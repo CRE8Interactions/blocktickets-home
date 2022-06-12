@@ -189,6 +189,6 @@ module.exports = createCoreController('api::verify.verify', ({
     })
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
-    return tokenData
+    ctx.send(tokenData)
   }
 }));

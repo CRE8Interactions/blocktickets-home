@@ -13,6 +13,13 @@ module.exports = createCoreController('api::venue.venue', ({ strapi }) => ({
         image: true,
         address: true,
         allEvents: {
+          orderBy: { start: 'asc' },
+          where: {
+            status: 'on_sale',
+            start: {
+              $gte: new Date()
+            }
+          },
           populate: {
             image: true
           }
