@@ -25,6 +25,25 @@ commands:
                 ]
               }
             event: always
+  trigger_admin_slack_notification:
+      steps:
+        - slack/notify:
+            custom: |
+              {
+                "blocks": [
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "plain_text",
+                        "text": "Deploying new build to admin UI I'll message again once complete",
+                        "emoji": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            event: always
   notify_slack_error:
     steps:
       - slack/notify:
@@ -51,6 +70,15 @@ jobs:
       - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
       - notify_slack_error
       - notify_slack_pass
+  pull-and-build-admin:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - trigger_admin_slack_notification
+      - checkout
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$ADMIN_IP "./deploy.sh"
+      - notify_slack_error
+      - notify_slack_pass
 
 # Orchestrate our job run sequence
 workflows:
@@ -62,3 +90,8 @@ workflows:
             branches:
               only:
                 - preview
+      - pull-and-build-admin:
+          filters:
+            branches:
+              only:
+                - admin
