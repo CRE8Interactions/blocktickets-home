@@ -150,3 +150,7 @@ export const updateMyListings = (id, data) => {
 export const getResaleTickets = (eventId) => {
   return instance.get(`/tickets?filters[eventId][$eq]=${eventId}&filters[on_sale_status][$eq]=resaleAvailable`)
 }
+
+export const validEmail = (data) => {
+  return instance.post('/verifies/emailValid', data)
+}

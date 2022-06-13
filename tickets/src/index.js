@@ -15,6 +15,8 @@ const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const orderId = require('order-id')('blocktickets');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // Encrypts user data
 const options = {
   password: process.env.EC_PASSWORD || 'blocktickets',
@@ -123,6 +125,14 @@ module.exports = {
       });
 
       await strapi.db.query('api::payment-information.payment-information').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::verify.verify').deleteMany({
         where: {
           createdAt: {
             $lte: new Date()
@@ -385,10 +395,11 @@ module.exports = {
 
           if (process.env.NODE_ENV === 'development') {
             console.log(`${code} is your temporary verification code to login at BlockTickets.xyz`);
-            return
+            // return
           }
           
-          await client.messages
+          if (event.params.data.phoneNumber) {
+            await client.messages
             .create({
               body: `${code} is your temporary verification code to login at BlockTickets.xyz`,
               messagingServiceSid: messagingServiceSid,
@@ -398,6 +409,25 @@ module.exports = {
             .then(message => console.log(message.body))
             .catch(error => console.log('Twilio Verification Error ', error))
             .done()
+          }
+
+          if (event.params.data.email) {
+            const msg = {
+              to: event.params.data.email, // Change to your recipient
+              from: process.env.MAIN_EMAIL, // Change to your verified sender
+              subject: 'Blocktickets temporary verification code',
+              text: `${code} is your temporary verification code to login at BlockTickets.xyz`,
+              html: `${code} is your temporary verification code to login at BlockTickets.xyz`,
+            }
+            await sgMail
+              .send(msg)
+              .then(() => {
+                console.log('Email sent')
+              })
+              .catch((error) => {
+                console.log('SendGrid Verification Error ', error)
+              })
+          }
         }
       },
       async beforeUpdate(event) {

@@ -16,7 +16,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let fees;
     let total;
     let eventId;
-
+    
     // Find Available Tickets
     if (cart.ticket) {
       totalTicketPrices = Number(parseFloat(cart.ticket.resale ? cart.ticket.listingAskingPrice : cart.ticket.cost * cart.ticketCount).toFixed(2))
@@ -103,10 +103,13 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let paymentIntentId;
     let order;
     let ticketIds;
+    let paymentMethodOptions;
+    let results;
     // Handle the event
     switch (type) {
       case 'payment_intent.succeeded':
         paymentIntentId = data.data.object.id;
+        paymentMethodOptions = data.data.object;
 
         order = await strapi.db.query('api::order.order').findOne({
           where: { paymentIntentId },
@@ -136,10 +139,11 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
-        await strapi.db.query('api::order.order').update({
+        let originalOrder = await strapi.db.query('api::order.order').update({
           where: { paymentIntentId },
           data: {
-            status: 'complete'
+            status: 'complete',
+            intentDetails: paymentMethodOptions
           }
         });
         
@@ -212,7 +216,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           filters: {
             $and: [
               {
-                on_sale_status: { $notIn: 'resaleAvailable'}
+                on_sale_status: { $notIn: ['resaleAvailable', 'pendingTransfer']}
               }
             ]
           }
