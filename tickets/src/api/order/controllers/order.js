@@ -216,7 +216,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           filters: {
             $and: [
               {
-                on_sale_status: { $notIn: 'resaleAvailable'}
+                on_sale_status: { $notIn: ['resaleAvailable', 'pendingTransfer']}
               }
             ]
           }
