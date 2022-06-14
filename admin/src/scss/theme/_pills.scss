@@ -1,4 +1,6 @@
+@use '../abstracts/borders' as *;
 @use './colors' as *;
 
-$nav-pills-border-radius: 100px;
-$nav-pills-link-active-color: $white;
+$nav-pills-border-radius: $br-sm;
+$nav-pills-link-active-color: $body-color;
+$nav-pills-link-active-bg: $gray-300;

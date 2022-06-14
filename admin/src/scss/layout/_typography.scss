@@ -27,28 +27,23 @@
 	}
 }
 
-.heading-font {
-	font-family: $font-heading;
-}
-
 .section-heading {
+	@include heading-psuedo();
+
 	h1,
 	h2,
 	h3,
 	h4 {
 		margin: 0;
-		@extend .heading-font !optional;
+		font-size: $body-1;
+		display: flex;
+	}
+
+	&--secondary {
+		@include heading-psuedo($secondary);
 	}
 
 	margin-bottom: $heading-spacer;
-
-	h1,
-	h2 {
-		font-size: $h4-font-size;
-		@include breakpoint-min(md) {
-			font-size: $h3-font-size;
-		}
-	}
 
 	&-sm {
 		@extend .section-heading !optional;
@@ -116,13 +111,6 @@ h4,
 .caption--uppercase {
 	@extend .caption !optional;
 	@extend .text-uppercase !optional;
-}
-
-.caption--uppercase-label {
-	font-size: $caption;
-	@extend .text-uppercase !optional;
-	color: $muted;
-	margin-bottom: rem(12);
 }
 
 %text-truncate {

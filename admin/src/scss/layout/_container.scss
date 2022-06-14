@@ -1,5 +1,6 @@
-@use './spacing' as *;
 @use '../abstracts' as *;
+@use '../theme/colors' as *;
+@use './spacing' as *;
 
 $pad-sm: rem(32);
 $pad-md: rem(81);
@@ -52,6 +53,16 @@ $navbar-height: rem(82);
 
 .noBodyPadding {
 	padding: 0px 0px 0px 0px !important;
+}
+
+@mixin heading-psuedo($color: $primary) {
+	h1::before {
+		content: '';
+		width: 16px;
+		margin-right: $text-spacer-xs;
+		background-color: $color;
+		border-radius: 4px;
+	}
 }
 
 @mixin full-width() {

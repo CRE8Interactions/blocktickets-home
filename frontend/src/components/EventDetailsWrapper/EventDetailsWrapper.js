@@ -6,7 +6,7 @@ import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/
 import { BackButton } from '../BackButton';
 import { Event } from '../Event';
 import { MyTickets } from './MyTickets';
-import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
+import { MyTicketsSlider } from './MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketModal';
 import { useNavigate } from 'react-router-dom';

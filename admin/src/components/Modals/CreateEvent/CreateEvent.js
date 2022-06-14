@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Col, Form, Image, Row, Modal } from "react-bootstrap";
 import { getCategories, getVenues } from '../../../utilities/api';
-import { PriceRangeSlider } from '../../PriceRangeSlider';
+// import { PriceRangeSlider } from '../../PriceRangeSlider';
 import './createEvent.scss';
 import { createEvent as newEvent } from '../../../utilities/api';
 import { creatTickets as newTickets } from '../../../utilities/api';
@@ -408,7 +408,7 @@ export default function CreateEvent(props) {
                     <div className='col-12'>
                       <p>Resale Price Range</p>
                     </div>
-                    <PriceRangeSlider id="resaleRange" handleChange={resaleChange} minPrice={ticketPrice} required />
+                    {/* <PriceRangeSlider  id="resaleRange" handleChange={resaleChange} minPrice={ticketPrice} required /> */}
                   </>
 
                   <div className="row">

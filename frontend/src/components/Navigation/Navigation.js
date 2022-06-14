@@ -12,7 +12,7 @@ import Stack from 'react-bootstrap/Stack';
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
 
-import { SearchBar } from './../SearchBar';
+import { SearchBar } from './SearchBar';
 import { MyWallet } from './MyWallet';
 import { LoginButton } from './LoginButton';
 import { MyWalletButton } from './MyWalletButton';
@@ -51,7 +51,10 @@ export default function Navigation() {
 					</Stack>
 					<Navbar.Collapse id="responsive-navbar-nav align-items-center">
 						<Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
-							<ul id="main" role="main-navigation" className="d-flex flex-column flex-lg-row">
+							<ul
+								id="main"
+								role="main-navigation"
+								className="d-flex flex-column flex-lg-row align-items-lg-center">
 								<li>
 									<LinkContainer to="/">
 										<Nav.Link>Browse</Nav.Link>

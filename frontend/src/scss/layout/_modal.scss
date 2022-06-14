@@ -2,29 +2,26 @@
 @use '../layout/container' as *;
 @use '../layout/spacing' as *;
 @use '../layout/buttons' as *;
+@use '../theme/borders' as *;
 
 .modal {
 	line-height: 1.5;
 
 	&--popup {
-		$border-radius: $br-primary $br-primary 0px 0px;
-
 		@include breakpoint-max(md) {
 			box-shadow: $box-shadow-popupCard;
 			height: 626px;
-			border-radius: $border-radius;
 			width: 100vw;
 
 			.modal-dialog {
 				margin: 0px;
 				height: 100%;
-				border-radius: $border-radius;
 				max-width: 100%;
 			}
 
 			.modal-content {
 				height: 100%;
-				border-radius: $border-radius;
+				border-radius: $border-radius $border-radius 0px 0px;
 			}
 		}
 	}

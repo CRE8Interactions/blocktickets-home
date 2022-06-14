@@ -51,6 +51,8 @@
 	&--popup {
 		@include breakpoint-max(md) {
 			@include full-width();
+			border-bottom-right-radius: 0px;
+			border-bottom-left-radius: 0px;
 			box-shadow: $box-shadow-popupCard;
 		}
 	}

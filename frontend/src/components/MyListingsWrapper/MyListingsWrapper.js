@@ -6,7 +6,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { MyListingsSlider } from '../Slider/MyListingsSlider';
+import { MyListingsSlider } from './MyListingsSlider';
 import { TicketModal } from '../TicketModal';
 
 import { getMyListings, removeMyListings } from '../../utilities/api';

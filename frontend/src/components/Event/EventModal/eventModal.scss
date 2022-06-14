@@ -4,7 +4,9 @@
 
 #event-modal {
 	.modal-content {
-		width: 569px;
+		@include breakpoint-min(lg) {
+			max-width: 569px;
+		}
 	}
 	.event-details {
 		padding: $modal-inner-padding;

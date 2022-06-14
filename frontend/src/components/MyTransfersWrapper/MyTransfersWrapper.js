@@ -1,15 +1,14 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 
+import { getMyTransfers } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { MyTransfersSlider } from '../Slider/MyTransfersSlider';
+import { MyTransfersSlider } from './MyTransfersSlider';
 import { TicketModal } from '../TicketModal';
-
-import { getMyTransfers } from '../../utilities/api';
 
 import './myTransfersWrapper.scss';
 
