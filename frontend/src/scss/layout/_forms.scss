@@ -4,6 +4,7 @@
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -24,7 +25,7 @@ select:-webkit-autofill:focus {
 	font-weight: $fw-medium;
 
 	&-xs {
-		border-radius: 4px;
+		border-radius: $br-xs;
 		width: 40%;
 		font-size: $caption;
 		font-weight: $fw-normal;
@@ -43,7 +44,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-card {
-	border-radius: $br-primary;
+	border-radius: $border-radius;
 	padding: rem(12) rem(16);
 
 	&-lg {
@@ -131,8 +132,4 @@ select:-webkit-autofill:focus {
 // login & security new phone number field
 .input-wrapper {
 	@include input-icon-box();
-
-	// &-lg {
-	// 	@include input-icon-box($border-radius-lg, $input-padding-y-lg, $input-padding-x-lg);
-	// }
 }

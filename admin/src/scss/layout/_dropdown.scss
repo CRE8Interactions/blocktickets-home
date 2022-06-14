@@ -3,6 +3,21 @@
 @use './../theme/colors' as *;
 
 .dropdown {
+	&-toggle {
+		border-radius: $br-sm;
+		font-family: $font-body;
+		font-weight: $fw-medium;
+
+		&:after {
+			content: '';
+			margin-left: em(6);
+			vertical-align: middle;
+			display: inline-block;
+			width: 10px;
+			height: 7px;
+			background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.70711 0.302903C1.31658 -0.0876213 0.683417 -0.0876213 0.292893 0.302903C-0.0976311 0.693427 -0.0976311 1.32659 0.292893 1.71712L1.70711 0.302903ZM5 5.01001L4.29289 5.71712C4.68342 6.10764 5.31658 6.10764 5.70711 5.71712L5 5.01001ZM9.70711 1.71712C10.0976 1.32659 10.0976 0.693427 9.70711 0.302903C9.31658 -0.0876213 8.68342 -0.0876213 8.29289 0.302903L9.70711 1.71712ZM0.292893 1.71712L4.29289 5.71712L5.70711 4.3029L1.70711 0.302903L0.292893 1.71712ZM5.70711 5.71712L9.70711 1.71712L8.29289 0.302903L4.29289 4.3029L5.70711 5.71712Z' fill='%236F767E'/%3E%3C/svg%3E%0A");
+		}
+	}
 	&-menu {
 		width: 200px;
 	}

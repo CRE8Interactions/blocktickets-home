@@ -1,1 +1,0 @@
-export { default as ShowTable } from './ShowTable'

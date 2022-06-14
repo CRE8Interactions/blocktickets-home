@@ -121,8 +121,14 @@
 		}
 	}
 
-	.btn {
+	.nav-link.btn,
+	.btn.dropdown-toggle {
 		margin-top: 0px;
-		height: 100%;
+	}
+
+	.nav-link.btn {
+		padding: rem(6) rem(16) !important;
+		font-family: $font-body;
+		font-weight: $fw-medium;
 	}
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { VenuesSlider } from './../Slider/VenuesSlider';
+import { VenuesSlider } from './VenuesSlider';
 
 import './venues.scss';
 

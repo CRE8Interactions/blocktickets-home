@@ -24,10 +24,25 @@
 		}
 	}
 
+	&-label {
+		text-transform: lowercase;
+		color: $body-color;
+		font-size: $small;
+		font-weight: $fw-normal;
+		border-radius: $br-sm;
+	}
+
 	&-lg {
 		font-size: $body-2;
 		border-radius: $br-primary;
 		font-weight: $fw-medium;
 		padding: rem(19);
+	}
+}
+
+.vstack {
+	.badge-label {
+		width: min-content;
+		margin: auto;
 	}
 }

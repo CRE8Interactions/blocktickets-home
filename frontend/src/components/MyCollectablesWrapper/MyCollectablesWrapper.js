@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { MyCollectablesSlider } from '../Slider/MyCollectablesSlider';
+import { MyCollectablesSlider } from './MyCollectablesSlider';
 
 export default function MyCollectablesWrapper() {
 	return (

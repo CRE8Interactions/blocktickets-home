@@ -1,8 +1,9 @@
 @use '../abstracts' as *;
+@use '../theme/borders' as *;
 
 $modal-backdrop-bg: #262626;
 $modal-backdrop-opacity: 0.9;
 $modal-inner-padding: rem(24);
-$modal-content-border-radius: $br-md;
+$modal-content-border-radius: $border-radius;
 $modal-header-padding-y: em(15);
 $modal-header-padding-x: $modal-inner-padding;

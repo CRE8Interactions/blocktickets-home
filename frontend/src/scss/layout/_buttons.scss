@@ -3,6 +3,7 @@
 @use 'spacing' as *;
 @use '../theme/input' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 
 %btn-background {
 	background-repeat: no-repeat;
@@ -89,11 +90,7 @@ button,
 			flex-basis: 95px;
 		}
 	}
-	// label.btn:hover,
-	// label.btn:focus {
-	// 	outline: 1px solid $primary;
-	// 	outline-offset: inset;
-	// }
+
 	.btn-check {
 		&:checked,
 		&:focus {
@@ -125,6 +122,7 @@ button,
 	padding: 0px;
 	margin-top: 0px;
 }
+
 .btn--icon {
 	@extend %btn-icon !optional;
 	width: 40px;
@@ -158,28 +156,7 @@ button,
 	text-align: left;
 }
 
-.btn--input {
-	@extend %btn-background !optional;
-	padding: em(17);
-	border: none;
-
-	&-default {
-		background-color: $secondary;
-		background-image: url('../../assets/icons/right-arrow-white.svg');
-	}
-
-	&-loading {
-		background-image: url('../../assets/icons/loading.svg');
-	}
-
-	&-success {
-		background-color: $green;
-		background-image: url('../../assets/icons/checkmark.svg');
-	}
-}
-
-.icon-button,
-.btn--icon {
+.icon-button {
 	@extend %icon-text-box !optional;
 	justify-content: center;
 
@@ -187,6 +164,10 @@ button,
 	&::after {
 		line-height: 0;
 	}
+}
+
+.btn--icon {
+	@extend .icon-button !optional;
 }
 
 .btn-tickets {
