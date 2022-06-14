@@ -4,7 +4,6 @@
 @use 'container' as *;
 @use '../theme/card' as *;
 @use '../theme/colors' as *;
-@use '../theme/borders' as *;
 
 %plain-card {
 	background: transparent;
