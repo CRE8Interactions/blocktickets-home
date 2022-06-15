@@ -65,7 +65,7 @@ export default function EventDetailsWrapper({ orderId }) {
         setTicketAction(action);
     };
 
-    const mediaQuery = useMedia('(max-width: 767px');
+    const mediaQuery = useMedia('(max-width: 767px)');
 
     return (
         <section className="spacer-xs full-height-wrapper">
