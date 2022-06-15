@@ -1,6 +1,7 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout' as *;
 @use '../../scss/theme/buttons' as *;
+@use '../../scss/theme/borders' as *;
 
 .navigation {
 	&.position-sticky {
@@ -130,5 +131,6 @@
 		padding: rem(6) rem(16) !important;
 		font-family: $font-body;
 		font-weight: $fw-medium;
+		border-radius: $border-radius-sm !important;
 	}
 }

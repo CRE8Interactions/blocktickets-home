@@ -1,0 +1,5 @@
+@use '../../../../scss/layout/modal' as *;
+
+#delete-modal {
+	@extend .modal-xl;
+}

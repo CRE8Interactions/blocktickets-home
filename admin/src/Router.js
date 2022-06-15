@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Orders, Sales, Home, EventsPage } from './pages';
+import { Orders, Sales, HomePage, EventsPage, CreateEventPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -7,14 +7,15 @@ import { ScrollToTop } from './components';
  */
 
 const Router = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="events" element={<EventsPage />} />
-			<Route path="orders" element={<Orders />} />
-			<Route path="sales" element={<Sales />} />
-		</Routes>
-	);
+    return (
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="events" element={<EventsPage />} />
+            <Route path="create" element={<CreateEventPage />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="sales" element={<Sales />} />
+        </Routes>
+    );
 };
 
 export default Router;

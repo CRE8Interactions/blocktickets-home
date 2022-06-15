@@ -1,0 +1,20 @@
+@use '../../scss/abstracts' as *;
+
+#no-data {
+	max-width: 432px;
+	margin: auto;
+
+	&::before {
+		content: '';
+		background-repeat: no-repeat;
+		background-position: center;
+		background-image: url('../../assets/icons/info-large.svg');
+		width: 32px;
+		height: 32px;
+	}
+
+	p {
+		text-align: center;
+		font-weight: $fw-medium;
+	}
+}

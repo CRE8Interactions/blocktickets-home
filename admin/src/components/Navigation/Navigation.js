@@ -14,8 +14,6 @@ import Stack from 'react-bootstrap/Stack';
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
 
-import { IconButton } from '../IconButton';
-
 import './navigation.scss';
 
 export default function Navigation() {

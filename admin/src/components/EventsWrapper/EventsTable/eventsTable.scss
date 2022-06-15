@@ -1,11 +1,19 @@
 @use '../../../scss/abstracts' as *;
+@use '../../../scss/theme/colors' as *;
 
 #events-table {
+	table-layout: initial;
+
 	tbody {
 		tr:first-of-type {
 			td {
 				padding-top: rem(24);
 			}
+		}
+
+		.event-details {
+			flex: 1;
+			min-width: 0px;
 		}
 
 		.vstack {
@@ -15,9 +23,30 @@
 				justify-content: center;
 			}
 
-			.hstack {
+			.hstack,
+			.stat-row {
 				padding-top: rem(8);
 			}
+		}
+
+		td.btn-more {
+			width: 0px;
+		}
+
+		.hstack {
+			align-items: center;
+			justify-content: center;
+
+			.caption {
+				margin: 0px;
+				color: $text-muted;
+			}
+		}
+
+		.progress {
+			height: 4px;
+			width: 67px;
+			margin: auto;
 		}
 	}
 }

@@ -2,8 +2,14 @@
 @use '../theme/colors' as *;
 
 .badge {
+	--opac: 0.10;
+
 	&--success {
-		background-color: rgba($success, 0.10);
+		background-color: rgba($success, var(--opac));
+	}
+
+	&--danger {
+		background-color: rgba($danger, var(--opac));
 	}
 
 	&-label {

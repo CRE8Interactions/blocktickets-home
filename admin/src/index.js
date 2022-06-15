@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 // import * as Sentry from "@sentry/react";
 // import { BrowserTracing } from '@sentry/tracing';
 import { BrowserRouter } from 'react-router-dom';
@@ -18,13 +18,11 @@ import './scss/main.scss';
 // 	tracesSampleRate: 1.0,
 // });
 
-const rootElement = document.getElementById('root');
-const root = createRoot(rootElement);
-
-root.render(
+ReactDOM.render(
 	<BrowserRouter>
 		<App />
-	</BrowserRouter>
+	</BrowserRouter>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

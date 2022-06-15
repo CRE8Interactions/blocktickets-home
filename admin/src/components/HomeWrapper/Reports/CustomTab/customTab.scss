@@ -1,0 +1,13 @@
+@use '../../../../scss/theme/typography' as *;
+@use '../../../../scss/theme/colors' as *;
+
+#reports {
+	.nav-link {
+		font-family: $font-family-sans-serif;
+		.split-row {
+			svg {
+				fill: $body-color;
+			}
+		}
+	}
+}
