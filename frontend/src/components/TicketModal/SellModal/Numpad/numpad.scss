@@ -11,10 +11,11 @@
 	flex-direction: column;
 
 	.btn {
+		flex-basis: 107px;
 		text-align: center;
 		font-size: $body-1;
 		font-family: $font-body;
-		margin-top: 0px;
+		margin: 0px;
 		padding: rem(12) rem(16);
 		font-weight: $fw-normal;
 	}

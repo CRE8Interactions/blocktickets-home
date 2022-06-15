@@ -1,16 +1,17 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
+import PhoneInput from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+
+import { toggleElement } from '../../../utilities/helpers';
+import { createTicketTransfer } from '../../../utilities/api';
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-
-import PhoneInput from 'react-phone-number-input';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-
-import { createTicketTransfer } from '../../../utilities/api';
 
 import { Error } from '../../Error';
 import { SuccessContainer } from '../SuccessContainer';
@@ -63,6 +64,18 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
 
     }, [phoneNumber])
 
+    useLayoutEffect(() => {
+        let el = document.querySelector('.btn-close');
+
+        if (el) {
+            if (step === 4)
+                toggleElement(el, false)
+
+            return () => {
+                toggleElement(el, true)
+            }
+        };
+    }, [step])
 
     const submit = (e) => {
         if (e) e.preventDefault();
