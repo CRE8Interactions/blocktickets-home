@@ -63,14 +63,6 @@ $navbar-height: rem(82);
 	margin-right: -50vw;
 }
 
-.page-slider {
-	// @include breakpoint-max(md) {
-	// 	@include full-width();
-	// 	left: 0%;
-	// 	margin-left: 0px;
-	// }
-}
-
 .sticky {
 	@include breakpoint-max(md) {
 		position: sticky;
