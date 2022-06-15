@@ -5,10 +5,8 @@ $br-secondary: 90px; // buttons
 $br-md: 10px;
 $br-sm: 6px;
 $br-xs: 4px;
-$border-width: 2px;
+$border-width: 2px; // btns, inputs
 $border-color: $clr-neutral-6;
-$box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
-$box-shadow-popupCard: 0px -10px 30px -8px rgba(15, 15, 15, 0.12);
 
 @function border($border-width: 1px, $color: $border-color, $border-style: solid) {
 	@return $border-width $border-style $color;

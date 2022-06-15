@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 @use '../layout' as *;
 @use '../theme/input' as *;
+@use '../theme/borders' as theme;
 
 :root {
 	--PhoneInput-color--focus: $input-focus-border-color;
@@ -10,9 +11,13 @@
 }
 
 .PhoneInput {
-	border: $border-width solid $border-color;
+	border: $input-border-width solid theme.$border-color;
 	padding: $input-padding-y $input-padding-x;
-	border-radius: $border-radius;
+	border-radius: theme.$border-radius;
+
+	&--focus {
+		border-color: $input-focus-border-color;
+	}
 
 	&.error-border {
 		@extend .error-border;

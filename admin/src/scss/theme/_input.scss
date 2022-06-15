@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 @use './buttons' as *;
 @use './colors' as *;
+@use './borders' as *;
 
 $input-font-size: rem(14);
 $input-font-size-sm: rem(12);
@@ -15,15 +16,13 @@ $input-padding-x: rem(16);
 $input-padding-x-sm: rem(16);
 $input-padding-y-sm: rem(10);
 
-$border-radius: $br-primary;
-$border-width: $border-width;
 $input-border-width: $border-width;
 $input-focus-box-shadow: none;
 $input-focus-border-color: $primary;
 $input-placeholder-color: $clr-neutral-5;
 
 $form-select-focus-box-shadow: none;
-$form-select-border-radius: $br-primary;
+$form-select-border-radius: $border-radius;
 $form-select-padding-y: $btn-padding-y-lg;
 $form-select-padding-x: $btn-padding-x-lg;
 $form-select-font-weight: 500;
@@ -32,10 +31,9 @@ $form-select-bg-position: right 1em center;
 $form-switch-color: $clr-neutral-4;
 $form-switch-focus-color: $form-switch-color;
 $form-switch-width: em(50);
-// $form-switch-transition: none;
 
 $form-check-label-cursor: pointer;
-$form-check-input-width: em(25);
+$form-check-input-width: em(20);
 $form-check-margin-bottom: rem(12);
 $form-check-input-focus-box-shadow: none;
 $form-label-font-size: rem(14);

@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../theme/colors' as *;
 
 // Banner Spacers
 $banner-spacer-md-top: rem(100);
@@ -78,8 +79,7 @@ section + section {
 }
 
 .heading--flex,
-.section-heading,
-.section-heading-sm {
+.section-heading {
 	@extend %flex-between !optional;
 }
 
@@ -91,14 +91,20 @@ section + section {
 	}
 }
 
-.card-content {
-	margin-top: rem(24);
+.form-label--flex {
+	display: flex;
+	gap: $gap-sm;
+
+	legend {
+		width: max-content;
+	}
 }
 
-@mixin scrollable-padding {
-	padding: rem(8) 0px;
-}
-
-.scrollable-heading {
-	@include scrollable-padding();
+.stat-row {
+	display: flex;
+	align-items: center;
+	gap: $gap-xs;
+	font-size: $caption;
+	color: $text-muted;
+	font-weight: $fw-semi-bold;
 }
