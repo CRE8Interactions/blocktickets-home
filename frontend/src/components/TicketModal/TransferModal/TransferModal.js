@@ -1,8 +1,6 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import PhoneInput from 'react-phone-number-input';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
 import { toggleElement } from '../../../utilities/helpers';
@@ -13,10 +11,10 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { Error } from '../../Error';
+import { DisplayTickets } from '../DisplayTickets';
+import { PhoneNumberInput } from '../../PhoneNumberInput';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
-import { DisplayTickets } from '../DisplayTickets';
 
 export default function TransferModal({ handleClose, setTicketStatus, order, getMyOrders }) {
 
@@ -40,27 +38,11 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
         setPhoneNumber
     ] = useState('');
 
-    const [
-        countryCode,
-        setCountrycode
-    ] = useState('');
-
     const [isValid, setIsValid] = useState(true)
-
-    useEffect(() => {
-        axios
-            .get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
-            .then((res) => setCountrycode(res.data.country_code));
-
-    }, []);
-
 
     // reset validation
     useEffect(() => {
-        if (!phoneNumber) {
-            setIsValid(true)
-            console.log(order?.tickets?.length);
-        }
+        setIsValid(true)
 
     }, [phoneNumber])
 
@@ -134,19 +116,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
                             </p>
                         </div>
                         <Form onSubmit={(e) => submit(e)}>
-                            <Form.Group controlId="phone-number">
-                                <Form.Label>Phone Number</Form.Label>
-                                <PhoneInput
-                                    autoComplete={'off'}
-                                    defaultCountry={countryCode}
-                                    value={phoneNumber}
-                                    required
-                                    onChange={(e) => setPhoneNumber(e)}
-                                    className={phoneNumber && !isValid ? 'error-border' : ''}
-                                />
-
-                                <span>{phoneNumber && !isValid && (<Error type="phone" />)}</span>
-                            </Form.Group>
+                            <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} hasError={!isValid} />
                         </Form>
                         <Stack direction="horizontal" className="btn-group-flex">
                             <Button
