@@ -1,7 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useWindowSize } from '../../../utilities/hooks';
+import { toggleElement } from '../../../utilities/helpers';
 
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
@@ -57,6 +58,19 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
         }
 
     }, [price])
+
+    useLayoutEffect(() => {
+        let el = document.querySelector('.btn-close');
+
+        if (el) {
+            if (step === 4)
+                toggleElement(el, false)
+
+            return () => {
+                toggleElement(el, true)
+            }
+        };
+    }, [step])
 
     useEffect(() => {
         if (ticketAction === 'edit') {

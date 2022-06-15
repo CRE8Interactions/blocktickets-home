@@ -32,7 +32,7 @@ export const toggleNavContent = (show, ...rest) => {
     rest.forEach((el) => (el.style.display = show ? 'flex' : 'none'));
 };
 
-export const toggleTimer = (el, show) => {
+export const toggleElement = (el, show) => {
     el.style.display = show ? 'block' : 'none';
 };
 
