@@ -2,26 +2,8 @@
 @use '../theme/colors' as *;
 
 .badge {
-	&-outline {
-		text-transform: uppercase;
-		border-style: solid;
-		border-width: $border-width;
-		background-color: $white !important;
-
-		&.text-normal {
-			text-transform: none;
-		}
-
-		&--primary {
-			color: $primary;
-			border-color: $primary;
-		}
-
-		&--light {
-			border-radius: $br-secondary;
-			border-color: $light;
-			color: $body-color;
-		}
+	&--success {
+		background-color: rgba($success, 0.10);
 	}
 
 	&-label {
@@ -30,13 +12,6 @@
 		font-size: $small;
 		font-weight: $fw-normal;
 		border-radius: $br-sm;
-	}
-
-	&-lg {
-		font-size: $body-2;
-		border-radius: $br-primary;
-		font-weight: $fw-medium;
-		padding: rem(19);
 	}
 }
 

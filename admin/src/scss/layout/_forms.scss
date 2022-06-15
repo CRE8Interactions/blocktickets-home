@@ -4,6 +4,7 @@
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as theme;
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -43,7 +44,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-card {
-	border-radius: $br-primary;
+	border-radius: theme.$border-radius;
 	padding: rem(12) rem(16);
 
 	&-lg {
@@ -84,13 +85,27 @@ select:-webkit-autofill:focus {
 	border-color: $danger;
 }
 
+.error {
+	color: $danger;
+}
+
+.form-text.error {
+	font-weight: $fw-normal;
+}
+
 .form-label {
 	font-weight: $fw-medium;
 	font-size: $small;
 }
 
+legend {
+	font-weight: $fw-medium;
+	font-size: $body-2;
+}
+
 .form-label,
-.form-label--flex {
+.form-label--flex,
+legend {
 	margin-bottom: rem(12);
 }
 
@@ -114,8 +129,51 @@ select:-webkit-autofill:focus {
 	height: 26px;
 }
 
+.date-picker-card {
+	display: flex;
+	border-radius: theme.$border-radius;
+	border: theme.$border-color solid $border-width;
+	display: flex;
+	width: 100%;
+	cursor: pointer;
+	position: relative;
+
+	&::before {
+		margin-left: rem(12);
+		margin-top: rem(15);
+	}
+
+	&.day-picker-card {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'calendar'));
+		}
+	}
+
+	&.time-picker-card {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'clock'));
+		}
+	}
+
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+
+	&.error-border {
+		@extend .error-border !optional;
+	}
+
+	.form-label {
+		margin: 0px;
+		position: absolute;
+		padding: $input-padding-y 0px $input-padding-y $input-padding-x;
+		font-size: $caption;
+		color: #6f767e;
+	}
+}
+
 // search field
-@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
+@mixin input-icon-box($radius: theme.$border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
 	display: flex;
 	align-items: center;
 	border-radius: $radius;

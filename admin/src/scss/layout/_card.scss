@@ -5,28 +5,6 @@
 @use '../theme/card' as *;
 @use '../theme/colors' as *;
 
-%plain-card {
-	background: transparent;
-	border-color: transparent;
-	border-radius: 0px;
-
-	.card-body {
-		padding: em(21);
-
-		& * {
-			@extend %text-truncate !optional;
-		}
-	}
-
-	.card-title {
-		margin-bottom: em(10);
-	}
-}
-
-.myCard,
-.ticket-card {
-	width: rem(256);
-}
 .card {
 	&-subtitle {
 		margin-top: 0px;
@@ -45,13 +23,6 @@
 
 		* {
 			color: $clr-white;
-		}
-	}
-
-	&--popup {
-		@include breakpoint-max(md) {
-			@include full-width();
-			box-shadow: $box-shadow-popupCard;
 		}
 	}
 
