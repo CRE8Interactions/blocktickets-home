@@ -10,7 +10,6 @@ import { MyTickets } from './MyTickets';
 import { MyTicketsSlider } from './MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
 import { TicketModal } from '../TicketModal';
-import { useNavigate } from 'react-router-dom';
 
 export default function EventDetailsWrapper({ orderId }) {
 
@@ -31,14 +30,8 @@ export default function EventDetailsWrapper({ orderId }) {
         setTicketStatus
     ] = useState('');
 
-    let navigate = useNavigate();
-
     const getMyOrders = () => {
         getOrder(orderId).then((res) => {
-            if (res.data.tickets.length === 0) {
-                navigate('/my-listings', { replace: true })
-                return
-            }
             setOrder(res.data)
         }).catch((err) => console.error(err));
     }

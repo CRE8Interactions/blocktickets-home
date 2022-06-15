@@ -51,7 +51,8 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
                         </span>
                     </p>
 
-                    <span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length > 1 || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span>
+                    {!id && (<span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length > 1 || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span>
+                    )}
 
                     <>
                         {ticketState &&
@@ -102,7 +103,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
                     </>
                 </div>
             </Card>
-            <TicketModal ticketAction={ticketAction} show={show} setShow={setShow} removeListing={removeListing} listing={listing} getListings={getListings} />
+            <TicketModal ticketAction={ticketAction} show={show} setShow={setShow} order={order} removeListing={removeListing} listing={listing} getListings={getListings} />
         </Fragment>
     );
 }
