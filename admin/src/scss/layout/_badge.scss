@@ -2,26 +2,14 @@
 @use '../theme/colors' as *;
 
 .badge {
-	&-outline {
-		text-transform: uppercase;
-		border-style: solid;
-		border-width: $border-width;
-		background-color: $white !important;
+	--opac: 0.10;
 
-		&.text-normal {
-			text-transform: none;
-		}
+	&--success {
+		background-color: rgba($success, var(--opac));
+	}
 
-		&--primary {
-			color: $primary;
-			border-color: $primary;
-		}
-
-		&--light {
-			border-radius: $br-secondary;
-			border-color: $light;
-			color: $body-color;
-		}
+	&--danger {
+		background-color: rgba($danger, var(--opac));
 	}
 
 	&-label {
@@ -30,13 +18,6 @@
 		font-size: $small;
 		font-weight: $fw-normal;
 		border-radius: $br-sm;
-	}
-
-	&-lg {
-		font-size: $body-2;
-		border-radius: $br-primary;
-		font-weight: $fw-medium;
-		padding: rem(19);
 	}
 }
 

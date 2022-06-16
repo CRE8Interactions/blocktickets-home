@@ -1,8 +1,9 @@
 @use '../abstracts' as *;
+@use '../theme/borders' as theme;
 
 $card-bg: $clr-white;
-$card-border-color: $border-color;
-$card-border-radius: $br-primary;
+$card-border-color: theme.$border-color;
+$card-border-radius: theme.$border-radius;
 $card-title-spacer-y: em(15);
 
 // card body

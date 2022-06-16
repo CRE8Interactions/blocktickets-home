@@ -44,27 +44,6 @@
 	}
 
 	margin-bottom: $heading-spacer;
-
-	&-sm {
-		@extend .section-heading !optional;
-		margin-bottom: $heading-spacer-sm;
-
-		h1,
-		h2 {
-			@extend .heading-sm !optional;
-			@extend .heading-font !optional;
-			margin: 0px !important;
-		}
-	}
-}
-
-.heading-sm {
-	font-size: $body-1;
-	margin-bottom: $heading-spacer-sm;
-
-	@include breakpoint-min(md) {
-		font-size: $h4-font-size;
-	}
 }
 
 h1,
@@ -174,12 +153,6 @@ h4,
 	}
 }
 
-.disclaimer {
-	display: block;
-	font-size: $caption;
-	color: $text-muted;
-}
-
 // event details: hero, event, event popup
 .time-caption,
 .venue-caption,
@@ -237,119 +210,12 @@ h4,
 	padding-right: 0px;
 	.heading {
 		font-weight: $fw-medium;
-		margin-bottom: rem(8);
+		margin-bottom: rem(10);
 	}
 
 	& + .list:not(.list.list-group-item) {
 		margin-top: rem(20);
-	}
-}
-
-// docs styling
-.docs {
-	p {
-		font-size: $small;
-
-		+ p {
-			margin-top: $text-spacer-xs;
-		}
-	}
-
-	&-section-heading,
-	&-header-title {
-		font-size: $body-1;
-	}
-
-	&-heading,
-	&-header-title {
-		margin-bottom: $text-spacer-xs;
-	}
-
-	&-heading {
-		font-size: $h3-font-size;
-	}
-
-	&-desc {
-		font-size: $body-2;
-	}
-
-	&-header {
-		margin: $text-spacer-lg 0px;
-	}
-
-	&-section {
-		&-heading {
-			margin: $text-spacer-lg 0px $text-spacer-xs;
-		}
-	}
-
-	&-date {
-		margin-bottom: $text-spacer-xs;
-	}
-
-	ul {
-		padding-left: $text-spacer;
-		li {
-			list-style-type: disc;
-			margin-bottom: rem(4);
-
-			.list-heading {
-				font-weight: $fw-semi-bold;
-				margin-bottom: rem(8);
-			}
-		}
-	}
-
-	.unstyled-list {
-		& {
-			padding-left: $text-spacer-xs;
-		}
-
-		&.float {
-			dt:not(:first-of-type) {
-				float: left;
-				margin-right: rem(3);
-			}
-
-			dt:first-of-type {
-				margin-bottom: rem(4);
-			}
-		}
-
-		dl {
-			dt,
-			dd {
-				display: block;
-			}
-		}
-		li {
-			list-style: none;
-
-			ul {
-				margin-top: 0px;
-				padding: 0px;
-			}
-		}
-	}
-
-	.unstyled-list > li ~ li {
-		padding-top: $text-spacer-xs;
-	}
-
-	dl,
-	ul {
-		font-size: $small;
-		margin: rem(10) 0px;
-	}
-
-	dd {
-		margin-bottom: rem(3);
-	}
-
-	dl {
-		dt,
-		dd {
-			display: inline;
-		}
+		border-top: border();
+		padding-top: $text-spacer-sm;
 	}
 }

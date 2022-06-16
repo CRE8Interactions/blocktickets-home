@@ -1,0 +1,28 @@
+@use '../abstracts' as *;
+@use '../theme/input' as *;
+@use '../theme/borders' as theme;
+
+.input-group {
+	border: $input-border-width solid theme.$border-color;
+	border-radius: theme.$border-radius;
+
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+	&-text {
+		border: none;
+
+		&.transparent {
+			background-color: transparent;
+		}
+	}
+
+	.form-control {
+		border: none;
+		background-color: transparent;
+
+		&:focus {
+			border-color: transparent;
+		}
+	}
+}

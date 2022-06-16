@@ -1,4 +1,5 @@
+export { HomePage } from './HomePage';
 export { Orders } from './Orders';
-export { EventsPage } from './EventsPage';
-export { Home } from './Home';
 export { Sales } from './Sales';
+export { EventsPage } from './EventsPage';
+export { CreateEventPage } from './CreateEventPage';

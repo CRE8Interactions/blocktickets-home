@@ -1,16 +1,17 @@
 @use './../abstracts' as *;
 @use './buttons' as *;
 @use './../theme/colors' as *;
+@use './../theme/borders' as *;
 
 .dropdown {
 	&-toggle {
-		border-radius: $br-sm;
+		border-radius: $border-radius;
 		font-family: $font-body;
 		font-weight: $fw-medium;
 
 		&:after {
 			content: '';
-			margin-left: em(6);
+			margin-left: rem(12);
 			vertical-align: middle;
 			display: inline-block;
 			width: 10px;

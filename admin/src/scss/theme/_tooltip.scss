@@ -1,5 +1,6 @@
 @use './../abstracts' as *;
 
 $tooltip-font-size: $caption;
-$tooltip-bg: $clr-neutral-3;
+$tooltip-border-radius: $br-xs;
 $tooltip-padding-x: em(20);
+$tooltip-max-width: 600px;
