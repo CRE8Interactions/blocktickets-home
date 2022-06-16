@@ -62,8 +62,8 @@ export default function Reports() {
                     </Col>
                 </Row>
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-                    <Row gap={4}>
-                        <Col sm={4} id="tabs">
+                    <Row>
+                        <Col lg={4} id="tabs">
                             <Nav as="ul" variant="pills" className="flex-column">
                                 <Nav.Item as="li">
                                     <Nav.Link as="button" eventKey="net" className='btn'>
@@ -87,7 +87,7 @@ export default function Reports() {
                                 </Nav.Item>
                             </Nav>
                         </Col>
-                        <Col>
+                        <Col lg={8}>
                             <Tab.Content>
                                 <Tab.Pane eventKey="net">
                                     <Card body>

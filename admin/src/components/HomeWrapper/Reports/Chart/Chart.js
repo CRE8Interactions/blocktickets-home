@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+
 import { formatCurrency, formatNumber } from '../../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
@@ -8,9 +11,56 @@ import { StatRow } from '../../../StatRow';
 
 export default function Chart({ title, total, amount, stat, statAmount, text, sales }) {
 
+    const options = {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: null,
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+
+
+                day: '%w %e. %b',
+                milliseconds: '%H'
+            }
+        },
+
+        yAxis: {
+            title: {
+                text: null
+            },
+            labels: {
+                formatter: function () {
+                    return Highcharts.numberFormat(this.value, 2, '.', ',', ',')
+                }
+            }
+        },
+
+        tooltip: {
+            backgroundColor: '#272B30',
+            borderRadius: '8px',
+            style: {
+                color: '#FCFCFD'
+            }
+        },
+
+        series: [
+            {
+                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+            }
+        ]
+    }
     return (
         <div id="reports">
-            <Stack direction="horizontal" className="split-row">
+            <Stack direction="horizontal" className="split-row mb-4">
                 <Stack>
                     <h1 className='fs-md'>{title}</h1>
                     <StatRow bg={true} stat={stat} statAmount={statAmount} text={`vs ${text}`} />
@@ -20,6 +70,9 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
                     <span className="fw-semi-bold text-muted">{sales}</span>
                 </Stack>
             </Stack>
+            <div>
+                <HighchartsReact highcharts={Highcharts} options={options} />
+            </div>
         </div>
     );
 }
