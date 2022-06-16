@@ -27,8 +27,8 @@ export default function LoginSecurityForm() {
         setValue
     ] = useState('');
 
-    const [isValid, setIsValid] = useState(true)
-    console.log(isValid)
+    const [isValid, setIsValid] = useState(true);
+
     useEffect(
         () => {
             if (phoneNumber && newPhoneNumber && code) {
@@ -58,10 +58,8 @@ export default function LoginSecurityForm() {
     }
 
     const handleBlur = () => {
-        console.log('bllue');
         if (validNumber()) {
             setIsValid(true)
-            console.log(isValid);
         } else { setIsValid(false) }
     }
 
@@ -95,17 +93,11 @@ export default function LoginSecurityForm() {
     return (
         <Fragment>
             <Form className="d-flex-column" id="login-security-form">
-                {/* <Form.Group className="form-group" controlId="phoneNumber">
-					<Form.Label>Current Phone Number</Form.Label>
-					<Form.Control
-						type="tel"
-						pattern="^0[1-9]|[1-9]\d$"
-						name="phoneNumber"
-						placeholder="Enter your current phone number"
-					/>
-				</Form.Group> */}
 
-                <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setValue} hasError={!isValid} onBlur={handleBlur} />
+                <Form.Group className='form-group' controlId="new-phone-number">
+                    <Form.Label>New Phone Number</Form.Label>
+                    <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setValue} hasError={!isValid} onBlur={handleBlur} />
+                </Form.Group>
 
                 <Form.Group className="form-group" controlId="code">
                     <Form.Label>Verify Code</Form.Label>
