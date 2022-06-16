@@ -116,7 +116,10 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
                             </p>
                         </div>
                         <Form onSubmit={(e) => submit(e)}>
-                            <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} hasError={!isValid} />
+                            <Form.Group controlId="phone-number">
+                                <Form.Label>Phone number</Form.Label>
+                                <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} hasError={!isValid} />
+                            </Form.Group>
                         </Form>
                         <Stack direction="horizontal" className="btn-group-flex">
                             <Button

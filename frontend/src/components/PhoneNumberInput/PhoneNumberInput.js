@@ -19,8 +19,7 @@ export default function PhoneNumberInput({ phoneNumber, setPhoneNumber, onBlur, 
     }, []);
 
     return (
-        <Form.Group className="form-group" controlId="phone-number">
-            <Form.Label>Mobile Number</Form.Label>
+        <>
             <PhoneInput
                 autoComplete={'off'}
                 defaultCountry={countryCode}
@@ -31,6 +30,6 @@ export default function PhoneNumberInput({ phoneNumber, setPhoneNumber, onBlur, 
                 className={phoneNumber && hasError ? 'error-border' : ''}
             />
             {phoneNumber && hasError && (<Error type="phone" />)}
-        </Form.Group >
+        </>
     );
 }
