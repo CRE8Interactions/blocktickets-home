@@ -11,7 +11,7 @@ const {
 module.exports = createCoreController('api::verify.verify', ({
   strapi
 }) => ({
-  async byPhone(ctx) {
+  async byPhoneOrEmail(ctx) {
     const code = ctx.request.body.data.code
     const verify = await strapi.db.query('api::verify.verify').findOne({
       where: {
@@ -173,10 +173,27 @@ module.exports = createCoreController('api::verify.verify', ({
     ctx.send(tokenData)
   },
   async create(ctx) {
-    const response = await super.create(ctx);
-    delete response.data.id
-    delete response.data.attributes.code
-    return response
+    const { phoneNumber, email } = ctx.request.body.data;
+    let verify;
+    if (phoneNumber) {
+      verify = await strapi.entityService.create('api::verify.verify', {
+        data: {
+          phoneNumber
+        }
+      })
+    }
+    if (email) {
+      verify = await strapi.entityService.create('api::verify.verify', {
+        data: {
+          email
+        }
+      })
+    }
+    console.log(verify)
+    delete verify.code
+    delete verify.id
+
+    return verify
   },
   async updatePersonalDetails(ctx) {
     let user = ctx.state.user
