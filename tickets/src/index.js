@@ -375,9 +375,13 @@ module.exports = {
         // Changes on verfiy model
         if (event.model.singularName === 'verify') {
           let phoneNumber = event.params.data.phoneNumber;
+          let email = event.params.data.email;
           const account = await strapi.db.query('api::verify.verify').findOne({
             where: {
-              phoneNumber: phoneNumber
+              $or: [
+                { phoneNumber: phoneNumber },
+                { email: email }
+              ]
             }
           })
           if (account) {
@@ -395,7 +399,7 @@ module.exports = {
 
           if (process.env.NODE_ENV === 'development') {
             console.log(`${code} is your temporary verification code to login at BlockTickets.xyz`);
-            // return
+            return
           }
           
           if (event.params.data.phoneNumber) {
