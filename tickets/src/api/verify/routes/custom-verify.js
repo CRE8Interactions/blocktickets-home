@@ -20,5 +20,15 @@ module.exports = {
       path: '/verifies/emailValid',
       handler: 'verify.emailValid'
     },
+    {
+      method: 'POST',
+      path: '/verifies/change-number',
+      handler: 'verify.updateNumber'
+    },
+    {
+      method: 'POST',
+      path: '/verifies/confirm-update',
+      handler: 'verify.confirmUpdate'
+    },
   ]
 }
