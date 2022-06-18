@@ -135,7 +135,7 @@ export default function LoginSignupForm() {
         if ((validNumber() || email) && !hasError) {
             let data = {
                 data: {
-                    phoneNumber,
+                    phoneNumber: choice == 'email' ? '' : phoneNumber,
                     email
                 }
             };

@@ -2,8 +2,8 @@ module.exports = {
   routes: [
     {
       method: 'POST',
-      path: '/verifies/byPhone',
-      handler: 'verify.byPhone'
+      path: '/verifies/by-phone-or-email',
+      handler: 'verify.byPhoneOrEmail'
     },
     {
       method: 'POST',
