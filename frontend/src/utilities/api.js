@@ -154,3 +154,11 @@ export const getResaleTickets = (eventId) => {
 export const validEmail = (data) => {
   return instance.post('/verifies/emailValid', data)
 }
+
+export const requestNumberChange = (data) => {
+  return instance.post('/verifies/change-number', data)
+}
+
+export const updateNumber = (data) => {
+  return instance.post('/verifies/confirm-update', data)
+}

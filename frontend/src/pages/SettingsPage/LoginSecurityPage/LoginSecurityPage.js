@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Alert from 'react-bootstrap/Alert';
 
 import { SettingsWrapper, LoginSecurityForm } from '../../../components';
 
 export default function LoginSecurityPage() {
 	let user = sessionStorage.getItem('user');
 	user = JSON.parse(user).user;
-	console.log(user);
-
+	const [show, setShow] = useState(false);
+	const [showError, setShowError] = useState(false);
+	const [phone, setPhone] = useState(user.phoneNumber)
+	
 	return (
 		<SettingsWrapper>
 			<div className="settings-heading">
@@ -16,10 +19,26 @@ export default function LoginSecurityPage() {
 					phone number is required for security reasons.
 				</h2>
 				<p className="mt-3 fw-medium">
-					Current Phone Number: <span className="text-secondary">{user.phoneNumber}</span>
+					Current Phone Number: <span className="text-secondary">{phone}</span>
 				</p>
 			</div>
-			<LoginSecurityForm />
+			{
+				show &&
+					<Alert variant="success" onClose={() => setShow(false)} dismissible>
+					<p>
+						To complete this update please enter the 4 digit code.
+					</p>
+				</Alert>
+			}
+			{
+				showError &&
+					<Alert variant="danger" onClose={() => setShowError(false)} dismissible>
+					<p>
+						Please check verification code and try again.
+					</p>
+				</Alert>
+			}
+			<LoginSecurityForm user={user} setShow={setShow} showError={setShowError} setPhone={setPhone} />
 		</SettingsWrapper>
 	);
 }
