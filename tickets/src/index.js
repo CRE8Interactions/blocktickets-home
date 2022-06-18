@@ -376,13 +376,13 @@ module.exports = {
         if (event.model.singularName === 'update-number') {
           let code = Math.floor(1000 + Math.random() * 9000)
           event.params.data.code = code;
-          console.log(`Use code ${code} to update your phone number to ${event.params.toNumber} `)
+          console.log(`Use code ${code} to update your phone number to ${event.params.data.toNumber} `)
           if (process.env.NODE_ENV === 'development') return;
           await client.messages
             .create({
-              body: `Use code ${code} to update your phone number to ${event.params.toNumber} `,
+              body: `Use code ${code} to update your phone number to ${event.params.data.toNumber} `,
               messagingServiceSid: messagingServiceSid,
-              to: event.params.toNumber,
+              to: event.params.data.toNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
             .then(message => console.log(message.body))
