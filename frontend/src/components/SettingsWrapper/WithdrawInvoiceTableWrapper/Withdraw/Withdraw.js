@@ -33,7 +33,7 @@ export default function Withdraw({ details }) {
             <Card body className="withdraw-card card-md card--dark">
                 <Card.Title as="h5">Available Funds</Card.Title>
                 <span className="total">${parseFloat(funds).toFixed(2)}</span>
-                {account && account.hasOwnProperty('id') ? <Button>Withdraw Funds</Button> : <LinkBankAccountBtn />}
+                {account && account.hasOwnProperty('id') ? <Button disabled={funds === 0 ? true : false}>Withdraw Funds</Button> : <LinkBankAccountBtn />}
             </Card>
             <Card body className="withdraw-card card-md card--light">
                 <Stack direction="horizontal" className="heading--flex mb-2">
