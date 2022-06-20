@@ -8,8 +8,6 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 export default function Tickets({ticket, order}) {
-  console.log(ticket)
-  console.log(order)
   return (
     <Fragment>
             <Card body className="ticket-card">

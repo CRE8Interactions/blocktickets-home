@@ -30,5 +30,10 @@ module.exports = {
       path: '/verifies/confirm-update',
       handler: 'verify.confirmUpdate'
     },
+    {
+      method: 'POST',
+      path: '/verifies/phone-unique',
+      handler: 'verify.uniquePhone'
+    },
   ]
 }

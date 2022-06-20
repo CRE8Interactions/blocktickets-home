@@ -32,6 +32,11 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	] = useState([0, 50]);
 
 	const [
+		originalValues,
+		setOriginalValues
+	] = useState([0, 50]);
+
+	const [
 		showFilter,
 		setShowFilter
 	] = useState(false);
@@ -61,6 +66,8 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		setListings
 	] = useState({})
 
+	const [showGa, setShowGa] = useState(true);
+
 	useEffect(() => {
 		setGaTicketsAvailable(tickets?.generalAdmissionCount)
 		setGaTicket(tickets?.generalAdmissionTicket);
@@ -76,14 +83,21 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice + 1 : tickets.generalAdmissionTicket?.attributes?.cost + 1;
 		let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost;
 		setSliderValues([lowestPrice, higestPrice])
+		setOriginalValues([lowestPrice, higestPrice])
 	}, [tickets]); 
 
 	useEffect(
 		() => {
 			// if no ticket type is selected, display filter message 
-			setFilteredTicketCount(1);
 			if (!tickets || !tickets.listings) return
 			let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && listing.askingPrice >= sliderValues[0] && listing.askingPrice <= sliderValues[1]);
+			if (tickets.generalAdmissionTicket.attributes.cost >= sliderValues[0] && tickets.generalAdmissionTicket.attributes.cost <= sliderValues[1]) {
+				setShowGa(true)
+				setFilteredTicketCount(1)
+			} else {
+				setShowGa(false)
+				if (filteredlisting.length === 0) setFilteredTicketCount(0)
+			}
 			setListings(filteredlisting)
 		},
 		[
@@ -134,6 +148,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 							styles="tablet-desktop-only"
 							sliderValues={sliderValues}
 							setSliderValues={setSliderValues}
+							originalValues={originalValues}
 						/>
 					</header>
 					<Stack direction="vertical">
@@ -156,7 +171,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								<div className="tickets--scrollable">
 									{!isZoomed ? (
 										<ListGroup as="ul">
-											{ticketFilters.standard && (<Ticket ticket={gaTicket} handleNext={handleNext} ticketFilters={ticketFilters} /> )}
+											{showGa && ticketFilters.standard && (<Ticket ticket={gaTicket} handleNext={handleNext} ticketFilters={ticketFilters} /> )}
                                             
                                             {ticketFilters.resale && ( 
                                                 <>
