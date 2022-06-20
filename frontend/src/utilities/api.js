@@ -27,7 +27,11 @@ export const verifyUser = (data) => {
 }
 
 export const verifiyCode = (data) => {
-  return instance.post('/verifies/byPhone', data)
+  return instance.post('/verifies/by-phone-or-email', data)
+}
+
+export const phoneUnique = (data) => {
+  return instance.post('/verifies/phone-unique', data)
 }
 
 export const createNewUser = (data) => {
@@ -153,4 +157,12 @@ export const getResaleTickets = (eventId) => {
 
 export const validEmail = (data) => {
   return instance.post('/verifies/emailValid', data)
+}
+
+export const requestNumberChange = (data) => {
+  return instance.post('/verifies/change-number', data)
+}
+
+export const updateNumber = (data) => {
+  return instance.post('/verifies/confirm-update', data)
 }

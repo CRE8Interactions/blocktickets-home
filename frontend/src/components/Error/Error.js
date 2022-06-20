@@ -10,7 +10,7 @@ export default function Error({ type }) {
 	const getErrorType = (type) => {
 		switch (type) {
 			case 'phone':
-				return 'Phone number is not valid';
+				return 'Phone number is not valid or already used by another user';
 
 			case 'email':
 				return 'Email does not match records. Try Again';

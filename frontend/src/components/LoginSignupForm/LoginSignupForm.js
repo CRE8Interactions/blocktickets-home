@@ -135,7 +135,7 @@ export default function LoginSignupForm() {
         if ((validNumber() || email) && !hasError) {
             let data = {
                 data: {
-                    phoneNumber,
+                    phoneNumber: choice == 'email' ? '' : phoneNumber,
                     email
                 }
             };
@@ -238,7 +238,10 @@ export default function LoginSignupForm() {
                                         automatically create one for you.
                                     </h4>
                                 </div>
-                                <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setValue} hasError={hasError} />
+                                <Form.Group controlId="phone-number">
+                                    <Form.Label>Mobile Number</Form.Label>
+                                    <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setValue} hasError={hasError} />
+                                </Form.Group>
                                 <Button
                                     size="lg"
                                     className="icon-button btn-next"

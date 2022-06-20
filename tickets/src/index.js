@@ -146,7 +146,7 @@ module.exports = {
     // resetDevelopmentEnv()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information', 'api::update-number.update-number'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
@@ -372,12 +372,34 @@ module.exports = {
           event.params.data.wallet = myWallet.id
         }
 
+        // Changes on updateNumber
+        if (event.model.singularName === 'update-number') {
+          let code = Math.floor(1000 + Math.random() * 9000)
+          event.params.data.code = code;
+          console.log(`Use code ${code} to update your phone number to ${event.params.data.toNumber} `)
+          if (process.env.NODE_ENV === 'development') return;
+          await client.messages
+            .create({
+              body: `Use code ${code} to update your phone number to ${event.params.data.toNumber} `,
+              messagingServiceSid: messagingServiceSid,
+              to: event.params.data.toNumber,
+              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
+            })
+            .then(message => console.log(message.body))
+            .catch(error => console.log('Twilio Verification Error ', error))
+            .done()
+        }
+
         // Changes on verfiy model
         if (event.model.singularName === 'verify') {
           let phoneNumber = event.params.data.phoneNumber;
+          let email = event.params.data.email;
           const account = await strapi.db.query('api::verify.verify').findOne({
             where: {
-              phoneNumber: phoneNumber
+              $or: [
+                { phoneNumber: phoneNumber },
+                { email: email }
+              ]
             }
           })
           if (account) {
@@ -395,7 +417,7 @@ module.exports = {
 
           if (process.env.NODE_ENV === 'development') {
             console.log(`${code} is your temporary verification code to login at BlockTickets.xyz`);
-            // return
+            return
           }
           
           if (event.params.data.phoneNumber) {

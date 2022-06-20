@@ -22,8 +22,8 @@ export default function InvoiceTable({ details }) {
                     return (
                         <tr key={index}>
                             <th scope="row">{moment(detail?.createdAt).format('M.DD.YYYY')}</th>
-                            <td>{detail?.event?.name} - {detail?.details?.ticket?.resale ? 'Resale' : 'General Admission'}</td>
-                            <td>{detail?.tickets.length > 1 ? `${detail?.tickets.length} Tickets` : `Transferred`}</td>
+                            <td>{detail?.event?.name} !!! - {detail?.details?.listing ? 'Resale: General Admission' : 'General Admission'}</td>
+                            <td>{detail?.details.ticketCount} Tickets</td>
                             <td>${parseFloat(detail?.total).toFixed(2)}</td>
                             <td>
                                 <a href="">Download</a>
