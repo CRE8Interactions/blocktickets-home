@@ -91,7 +91,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 			// if no ticket type is selected, display filter message 
 			if (!tickets || !tickets.listings) return
 			let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && listing.askingPrice >= sliderValues[0] && listing.askingPrice <= sliderValues[1]);
-			if (tickets.generalAdmissionTicket.attributes.cost >= sliderValues[0] && tickets.generalAdmissionTicket.attributes.cost <= sliderValues[1]) {
+			if (tickets.generalAdmissionTicket && tickets.generalAdmissionTicket.attributes.cost >= sliderValues[0] && tickets.generalAdmissionTicket.attributes.cost <= sliderValues[1]) {
 				setShowGa(true)
 				setFilteredTicketCount(1)
 			} else {
