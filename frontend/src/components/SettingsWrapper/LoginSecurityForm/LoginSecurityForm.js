@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
 import { PhoneNumberInput } from '../../PhoneNumberInput';
-import { requestNumberChange, updateNumber } from '../../../utilities/api';
+import { requestNumberChange, updateNumber, phoneUnique } from '../../../utilities/api';
 import authService from '../../../utilities/services/auth.service';
 
 import Button from 'react-bootstrap/Button';
@@ -57,13 +57,19 @@ export default function LoginSecurityForm({user, setShow, showError, setPhone}) 
     );
 
     const validNumber = () => {
-        return phoneNumber && isValidPhoneNumber(phoneNumber)
+        return phoneNumber && isValidPhoneNumber(phoneNumber) && isValid
     }
 
     const handleBlur = () => {
-        if (validNumber()) {
-            setIsValid(true)
-        } else { setIsValid(false) }
+        let data = {
+            data: {
+                phoneNumber
+            }
+        };
+        phoneUnique(data).then(res => {
+            if (res.data === 404) { setIsValid(false) }
+            if (res.data === 200) { setIsValid(true) }
+            }).catch(err => console.error(err))
     }
 
     const submitForm = () => {

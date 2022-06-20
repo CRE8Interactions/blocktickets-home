@@ -122,6 +122,17 @@ module.exports = createCoreController('api::verify.verify', ({
       })
     }
   },
+  async uniquePhone(ctx) {
+    const { phoneNumber } = ctx.request.body.data;
+    const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    })
+
+    if (!user) return 200
+    if (user) return 404
+  },
   async newUser(ctx) {
     const {
       username,

@@ -30,6 +30,10 @@ export const verifiyCode = (data) => {
   return instance.post('/verifies/by-phone-or-email', data)
 }
 
+export const phoneUnique = (data) => {
+  return instance.post('/verifies/phone-unique', data)
+}
+
 export const createNewUser = (data) => {
   return instance.post('/verifies/newUser', data)
 }
