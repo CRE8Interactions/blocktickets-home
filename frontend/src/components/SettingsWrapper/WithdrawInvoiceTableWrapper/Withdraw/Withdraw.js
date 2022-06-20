@@ -28,7 +28,6 @@ export default function Withdraw({ details }) {
         }).catch((err) => console.error(err))
     }, [])
 
-
     return (
         <Stack gap={4}>
             <Card body className="withdraw-card card-md card--dark">
