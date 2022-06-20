@@ -98,9 +98,8 @@ module.exports = createCoreController('api::payment-information.payment-informat
       }
     })
 
-    if (!user.profile.payment_information) return 200
-
-    await encryption
+    if (user.profile.payment_information) {
+      await encryption
       .decrypt(user.profile.payment_information.accountNumber)
       .then((text) => {
         user.profile.payment_information.accountNumber = text
@@ -108,7 +107,13 @@ module.exports = createCoreController('api::payment-information.payment-informat
       .catch((err) => {
         // This is to handle errors
       })
-    return user.profile.payment_information
+
+      return user.profile.payment_information
+    } else {
+      return 404
+    }
+
+    
   },
   async deactive(ctx) {
     let user = ctx.state.user;
