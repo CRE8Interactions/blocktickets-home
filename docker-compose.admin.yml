@@ -12,7 +12,8 @@ services:
     networks:
       - block-network
     volumes:
-      - $PWD/nginx/certs/admin:/etc/nginx/certs
+      - ./nginx/certs/admin:/etc/nginx/certs
+      - ./nginx/configs/admin/upstream.conf:/etc/nginx/conf.d/upstream.conf
   admin:
     build:
       context: ./admin
