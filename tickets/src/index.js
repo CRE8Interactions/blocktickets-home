@@ -15,8 +15,7 @@ const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const orderId = require('order-id')('blocktickets');
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const moment = require('moment');
 // Encrypts user data
 const options = {
   password: process.env.EC_PASSWORD || 'blocktickets',
@@ -143,7 +142,7 @@ module.exports = {
 
     initOrganization()
     initCategories()
-    // resetDevelopmentEnv()
+    resetDevelopmentEnv()
 
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information', 'api::update-number.update-number'],
@@ -178,6 +177,50 @@ module.exports = {
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
+          if (params.data.status === 'complete') {
+            try {
+              await strapi
+                .plugin('email-designer')
+                .service('email')
+                .sendTemplatedEmail(
+                  {
+                    // required
+                    to: result.users_permissions_user.email,
+          
+                    // optional if /config/plugins.js -> email.settings.defaultFrom is set
+                    from: process.env.MAIN_EMAIL,
+          
+                    // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+                    replyTo: process.env.MAIN_EMAIL,
+          
+                    // optional array of files
+                    attachments: [],
+                  },
+                  {
+                    // required - Ref ID defined in the template designer (won't change on import)
+                    templateReferenceId: 3,
+          
+                    // If provided here will override the template's subject.
+                    // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+                    subject: `You Got Tickets To ${result.event.title}`,
+                  },
+                  {
+                    // this object must include all variables you're using in your email template
+                    event: result.event,
+                    venue: result.event.venue,
+                    address: result.event.venue.address,
+                    tickets: result.tickets,
+                    user: result.users_permissions_user,
+                    total: result.total,
+                    data: result
+                  }
+                );
+            } catch (err) {
+              strapi.log.debug('📺: ', err);
+              return ctx.badRequest(null, err);
+            }
+          }
+
           if (params.data.status === 'completeFromTransfer') return
           const paymentIntent = await stripe.paymentIntents.update(
             event.params.data.paymentIntentId,
@@ -434,21 +477,41 @@ module.exports = {
           }
 
           if (event.params.data.email) {
-            const msg = {
-              to: event.params.data.email, // Change to your recipient
-              from: process.env.MAIN_EMAIL, // Change to your verified sender
-              subject: 'Blocktickets temporary verification code',
-              text: `${code} is your temporary verification code to login at BlockTickets.xyz`,
-              html: `${code} is your temporary verification code to login at BlockTickets.xyz`,
+            try {
+              await strapi
+                .plugin('email-designer')
+                .service('email')
+                .sendTemplatedEmail(
+                  {
+                    // required
+                    to: event.params.data.email,
+          
+                    // optional if /config/plugins.js -> email.settings.defaultFrom is set
+                    from: process.env.MAIN_EMAIL,
+          
+                    // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+                    replyTo: process.env.MAIN_EMAIL,
+          
+                    // optional array of files
+                    attachments: [],
+                  },
+                  {
+                    // required - Ref ID defined in the template designer (won't change on import)
+                    templateReferenceId: 1,
+          
+                    // If provided here will override the template's subject.
+                    // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+                    subject: `Your temporary verification code to login at BlockTickets.xyz`,
+                  },
+                  {
+                    // this object must include all variables you're using in your email template
+                    code: code
+                  }
+                );
+            } catch (err) {
+              strapi.log.debug('📺: ', err);
+              return ctx.badRequest(null, err);
             }
-            await sgMail
-              .send(msg)
-              .then(() => {
-                console.log('Email sent')
-              })
-              .catch((error) => {
-                console.log('SendGrid Verification Error ', error)
-              })
           }
         }
       },
@@ -464,6 +527,73 @@ module.exports = {
             .catch((err) => {
               console.error('Enc error: ', err)
             })
+        }
+      },
+      async afterUpdate(event) {
+        const { result, params } = event;
+        if (event.model.singularName === 'order') {
+          const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+            where: {
+             id: result.userId
+            }
+          })
+          const events = await strapi.entityService.findOne('api::event.event', result.details.ticket.eventId, {
+            populate: {
+              image: true,
+              venue: {
+                populate: {
+                  address: true
+                }
+              }
+            }
+          })
+
+          if (params.data.status === 'complete') {
+            try {
+              await strapi
+                .plugin('email-designer')
+                .service('email')
+                .sendTemplatedEmail(
+                  {
+                    // required
+                    to: user.email,
+          
+                    // optional if /config/plugins.js -> email.settings.defaultFrom is set
+                    from: process.env.MAIN_EMAIL,
+          
+                    // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+                    replyTo: process.env.MAIN_EMAIL,
+          
+                    // optional array of files
+                    attachments: [],
+                  },
+                  {
+                    // required - Ref ID defined in the template designer (won't change on import)
+                    templateReferenceId: 3,
+          
+                    // If provided here will override the template's subject.
+                    // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+                    subject: `You Got Tickets To ${events.name}`,
+                  },
+                  {
+                    // this object must include all variables you're using in your email template
+                    event: events,
+                    venue: events.venue,
+                    address: events.venue.address[0],
+                    tickets: result.tickets,
+                    user: user,
+                    total: Number(result.total).toFixed(2),
+                    count: result.details.ticketCount,
+                    date: moment(events.start).format('ddd, MMM D, YYYY • h:mm'),
+                    orderId: result.orderId,
+                    image: events.image
+                  }
+                );
+            } catch (err) {
+              strapi.log.debug('📺: ', err);
+               // return ctx.badRequest(null, err);
+            }
+          }
         }
       }
     });

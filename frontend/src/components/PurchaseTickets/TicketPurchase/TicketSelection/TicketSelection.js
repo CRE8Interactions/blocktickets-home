@@ -78,10 +78,10 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		let higestResalePrice;
 
 		if (tickets?.listings && tickets?.listings.length > 0) {
-			higestResalePrice = tickets?.listings?.map(listing => listing.askingPrice).reduce((a, b) => Math.max(a,b))
+			higestResalePrice = tickets?.listings?.map(listing => listing.askingPrice + listing.tickets[0].fee).reduce((a, b) => Math.max(a,b))
 		}
-		let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice + 1 : tickets.generalAdmissionTicket?.attributes?.cost + 1;
-		let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost;
+		let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice : tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
+		let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
 		setSliderValues([lowestPrice, higestPrice])
 		setOriginalValues([lowestPrice, higestPrice])
 	}, [tickets]); 
@@ -89,16 +89,19 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 	useEffect(
 		() => {
 			// if no ticket type is selected, display filter message 
-			if (!tickets || !tickets.listings) return
-			let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && listing.askingPrice >= sliderValues[0] && listing.askingPrice <= sliderValues[1]);
-			if (tickets.generalAdmissionTicket && tickets.generalAdmissionTicket.attributes.cost >= sliderValues[0] && tickets.generalAdmissionTicket.attributes.cost <= sliderValues[1]) {
+			if (!tickets || !tickets.listings) return;
+			let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && (listing.askingPrice + listing.tickets[0].fee) >= sliderValues[0] && (listing.askingPrice + listing.tickets[0].fee) <= sliderValues[1]);
+			setListings(filteredlisting);
+			if (tickets.generalAdmissionTicket && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) >= sliderValues[0] && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) <= sliderValues[1] && ticketFilters.standard) {
 				setShowGa(true)
 				setFilteredTicketCount(1)
-			} else {
+			} else if (tickets.listings && ticketFilters.resale) {
 				setShowGa(false)
 				if (filteredlisting.length === 0) setFilteredTicketCount(0)
+				if (filteredlisting.length > 0) setFilteredTicketCount(1)
+			} else if (!ticketFilters.standard && !ticketFilters.resale) {
+				setFilteredTicketCount(0)
 			}
-			setListings(filteredlisting)
 		},
 		[
 			sliderValues, ticketCount, ticketFilters 

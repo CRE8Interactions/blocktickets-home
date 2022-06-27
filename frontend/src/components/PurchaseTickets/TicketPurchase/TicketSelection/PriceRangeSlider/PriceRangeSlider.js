@@ -26,15 +26,30 @@ export default function PriceRangeSlider({ styles, sliderValues, setSliderValues
 						value={`$${sliderValues[0]} `}
 						disabled={true}
 					/>
-					<Slider
-						range
-						step={10}
-						defaultValue={originalValues}
-						min={originalValues[0]}
-						max={originalValues[1] + 1}
-						onChange={handleChange}
-						allowCross={false}
-					/>
+					{ originalValues && originalValues[0] === originalValues[1] &&
+						<Slider
+							step={10}
+							defaultValue={originalValues}
+							min={originalValues[0]}
+							max={originalValues[1]}
+							onChange={handleChange}
+							allowCross={false}
+						/>
+					}
+
+					{ originalValues && originalValues[0] != originalValues[1] && 
+						<Slider
+							range
+							step={10}
+							defaultValue={originalValues}
+							min={originalValues[0]}
+							max={originalValues[1]}
+							onChange={handleChange}
+							allowCross={false}
+						/>
+					}
+
+					
 					<Form.Control
 						type="text"
 						className="form-control-xs"
