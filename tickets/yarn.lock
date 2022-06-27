@@ -1771,7 +1771,7 @@
     domhandler "^4.2.0"
     selderee "^0.6.0"
 
-"@sendgrid/client@^7.7.0":
+"@sendgrid/client@^7.4.7", "@sendgrid/client@^7.7.0":
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.7.0.tgz#f8f67abd604205a0d0b1af091b61517ef465fdbf"
   integrity sha512-SxH+y8jeAQSnDavrTD0uGDXYIIkFylCo+eDofVmZLQ0f862nnqbC3Vd1ej6b7Le7lboyzQF6F7Fodv02rYspuA==
@@ -1779,12 +1779,20 @@
     "@sendgrid/helpers" "^7.7.0"
     axios "^0.26.0"
 
-"@sendgrid/helpers@^7.7.0":
+"@sendgrid/helpers@^7.4.6", "@sendgrid/helpers@^7.7.0":
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/@sendgrid/helpers/-/helpers-7.7.0.tgz#93fb4b6e2f0dc65080440d6a784cc93e8e148757"
   integrity sha512-3AsAxfN3GDBcXoZ/y1mzAAbKzTtUZ5+ZrHOmWQ279AuaFXUNCh9bPnRpN504bgveTqoW+11IzPg3I0WVgDINpw==
   dependencies:
     deepmerge "^4.2.2"
+
+"@sendgrid/mail@7.4.7":
+  version "7.4.7"
+  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.4.7.tgz#cc8f77ec27443e02e7be1df01bf0899434155804"
+  integrity sha512-lGfXJBEx7PMQje/NsVsebF6MdP2ptHWjmuI4YANjReAQlIGq3Cqm4JLP5Fb4n5Bbr1LXLCM7R0gJo+/PT6ENKw==
+  dependencies:
+    "@sendgrid/client" "^7.4.7"
+    "@sendgrid/helpers" "^7.4.6"
 
 "@sendgrid/mail@^7.7.0":
   version "7.7.0"
@@ -2189,6 +2197,14 @@
     redux-saga "^0.16.0"
     request "^2.83.0"
     url-join "4.0.1"
+
+"@strapi/provider-email-sendgrid@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@strapi/provider-email-sendgrid/-/provider-email-sendgrid-4.2.0.tgz#c255a6c55d1187e82948b7c6888efcbb7a25bca5"
+  integrity sha512-immnIGV2ymL6uDeR+H9EfH4bjTPDUAF/ZjP0GX47pO5O7xkXj0TlXKwSeywKqOH2o6TAmgl0X3I5KqYMzmH2Xw==
+  dependencies:
+    "@sendgrid/mail" "7.4.7"
+    "@strapi/utils" "4.2.0"
 
 "@strapi/provider-email-sendmail@4.2.0":
   version "4.2.0"
@@ -10630,11 +10646,6 @@ q@2.0.x:
     asap "^2.0.0"
     pop-iterate "^1.0.1"
     weak-map "^1.0.5"
-
-qrcode.react@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/qrcode.react/-/qrcode.react-3.0.2.tgz#7ceaea165aa7066253ef670a25bf238eaec4eb9e"
-  integrity sha512-8F3SGxSkNb3fMIHdlseqjFjLbsPrF3WvF/1MOboSUUHytT537W8f/FtbdA3XFIHDrc+TrRBjTI/QLmwhAIGWWw==
 
 qs@6.10.1:
   version "6.10.1"

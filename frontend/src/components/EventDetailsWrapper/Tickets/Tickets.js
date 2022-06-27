@@ -7,7 +7,7 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-export default function Tickets({ticket, order}) {
+export default function Tickets({ticket, order, handleClick}) {
   return (
     <Fragment>
             <Card body className="ticket-card">
@@ -28,13 +28,7 @@ export default function Tickets({ticket, order}) {
                       <Badge bg="light" className="mt-2 text-dark badge-lg">
                           General Admission
                       </Badge>
-                      <Stack className='mb-2'>
-                          <Stack direction="horizontal" className="split-row mb-1">
-                              <span className='m-0 caption'></span>
-                              <span className='text-end fw-medium'></span>
-                          </Stack>
-                          <p className='caption text-muted'></p>
-                      </Stack>
+                      <Button variant='outline-light' size="xs" onClick={() => handleClick('details')}>Details</Button>
                     </>
                 </div>
             </Card>
