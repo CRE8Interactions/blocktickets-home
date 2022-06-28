@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 
 import { getOrder } from '../../utilities/api';
-import { useMedia } from './../../utilities/hooks';
 import { fullHeightContainer, removeFullHeightContainer, userDevice } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';

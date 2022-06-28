@@ -15,32 +15,32 @@ import './reports.scss';
 export default function Reports() {
 
     const viewsObj = [
-        {
-            "1": "This week",
-            "2": "Last month",
-        }
+        "Last 24 hrs",
+        "Last 7 days",
+        "Last 14 days",
+        "Last 30 days"
     ];
 
     const salesObj = [
-        {
-            "1": "Primary sales",
-            "2": "Secondary sales",
-        }
+
+        "Primary sales",
+        "Secondary sales",
+
     ];
     const [
         key,
         setKey
     ] = useState('net');
 
-    const [view, setView] = useState("1")
-    const [sales, setSales] = useState("1")
+    const [view, setView] = useState(0)
+    const [sales, setSales] = useState(0)
 
     const handleView = view => {
-        return viewsObj.map(obj => obj[view])
+        return viewsObj[view]
     }
 
     const handleSales = sales => {
-        return salesObj.map(obj => obj[sales])
+        return salesObj[sales]
     }
 
     return (
@@ -50,20 +50,22 @@ export default function Reports() {
                     <Col className='d-flex align-items-center'>
                         <h1>Reports</h1>
                         <Form.Select value={view} onChange={(e) => setView(e.target.value)} className='ms-auto w-auto'>
-                            <option value="1">This week</option>
-                            <option value="2">Last month</option>
+                            {viewsObj.map((view, index) => (
+                                <option key={index} value={index}>{view}</option>
+                            ))}
                         </Form.Select>
                     </Col>
                     <Col sm={4}>
                         <Form.Select value={sales} onChange={(e) => setSales(e.target.value)} className='ms-auto w-auto'>
-                            <option value="1">Primary sales</option>
-                            <option value="2">Secondary sales</option>
+                            {salesObj.map((sales, index) => (
+                                <option key={index} value={index}>{sales}</option>
+                            ))}
                         </Form.Select>
                     </Col>
                 </Row>
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-                    <Row gap={4}>
-                        <Col sm={4} id="tabs">
+                    <Row>
+                        <Col lg={4} id="tabs">
                             <Nav as="ul" variant="pills" className="flex-column">
                                 <Nav.Item as="li">
                                     <Nav.Link as="button" eventKey="net" className='btn'>
@@ -87,7 +89,7 @@ export default function Reports() {
                                 </Nav.Item>
                             </Nav>
                         </Col>
-                        <Col>
+                        <Col lg={8}>
                             <Tab.Content>
                                 <Tab.Pane eventKey="net">
                                     <Card body>

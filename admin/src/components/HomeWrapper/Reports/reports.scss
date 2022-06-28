@@ -7,7 +7,9 @@
 
 #reports {
 	#tabs {
-		order: 2;
+		@include breakpoint-min(lg) {
+			order: 2;
+		}
 	}
 
 	.form-select {
