@@ -192,21 +192,17 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                             </li>
                         )}
 
-                        <li className="list">
-                            <ul>
-                                <Stack direction="horizontal" as="li" className="split-row">
-                                    <span className="heading m-0">Tax</span>
-
-                                    <span className="text-end">${tax}</span>
-                                </Stack>
-                            </ul>
+                        <li className="split-row list">
+                            <span className="heading m-0">Tax</span>
+                            <span className="text-end">${tax}</span>
                         </li>
                     </ul>
                     <div className="mobile-only mt-4">
                         <Disclaimer />
                     </div>
-                </Card.Body>
-            )}
+                </Card.Body >
+            )
+            }
             <Card.Footer className={`d-flex-column ${expanded && 'with-border'}`}>
                 <div className="tablet-desktop-only">
                     <Disclaimer />
@@ -243,6 +239,6 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                     </Button>
                 </div>
             </Card.Footer>
-        </Card>
+        </Card >
     );
 }
