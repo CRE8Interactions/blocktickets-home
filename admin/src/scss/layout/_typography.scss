@@ -40,7 +40,7 @@
 	}
 
 	&--secondary {
-		@include heading-psuedo($secondary);
+		@include heading-psuedo($success);
 	}
 
 	margin-bottom: $heading-spacer;

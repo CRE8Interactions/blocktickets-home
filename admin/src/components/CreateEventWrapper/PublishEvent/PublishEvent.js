@@ -20,6 +20,7 @@ export default function PublishEvent() {
     const handleChoice = (e) => {
         setChoice(e.target.id)
     }
+
     return (
         <>
             <Row>

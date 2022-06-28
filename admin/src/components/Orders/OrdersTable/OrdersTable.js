@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formatCurrency } from "../../../../utilities/helpers";
+import { formatCurrency } from "../../../utilities/helpers";
 
 import Table from "react-bootstrap/Table";
 

@@ -1,9 +1,9 @@
-@use "../../../scss/abstracts" as *;
-@use "../../../scss/layout/spacing" as *;
-@use "../../../scss/layout/buttons" as *;
-@use "../../../scss/theme/buttons" as *;
-@use "../../../scss/theme/borders" as *;
-@use "../../../scss/theme/colors" as *;
+@use "../../scss/abstracts" as *;
+@use "../../scss/layout/spacing" as *;
+@use "../../scss/layout/buttons" as *;
+@use "../../scss/theme/buttons" as *;
+@use "../../scss/theme/borders" as *;
+@use "../../scss/theme/colors" as *;
 
 #reports {
 	#tabs {
@@ -44,29 +44,43 @@
 
 		&:first-of-type {
 			.nav-link:before {
-				background-image: url('../../../assets/icons/net-sales.svg');
+				background-image: url('../../assets/icons/net-sales.svg');
 				background-color: rgba($success, var(--opac));
 			}
 		}
 
 		&:nth-of-type(2) {
 			.nav-link:before {
-				background-image: url('../../../assets/icons/gross-sales.svg');
-				background-color: rgba($clr-tertiary, var(--opac));
+				background-image: url('../../assets/icons/gross-sales.svg');
+				background-color: rgba($clr-secondary, var(--opac));
 			}
 		}
 
 		&:nth-of-type(3) {
 			.nav-link:before {
-				background-image: url('../../../assets/icons/shopping-bag.svg');
+				background-image: url('../../assets/icons/ticket.svg');
 				background-color: rgba($primary, var(--opac));
 			}
 		}
 
 		&:nth-of-type(4) {
 			.nav-link:before {
-				background-image: url('../../../assets/icons/eye.svg');
+				background-image: url('../../assets/icons/eye.svg');
 				background-color: rgba($body-color, var(--opac));
+			}
+		}
+
+		&.royalties {
+			.nav-link:before {
+				background-image: url('../../assets/icons/dollar.svg');
+				background-color: rgba($clr-tertiary, var(--opac));
+			}
+		}
+
+		&.listed {
+			.nav-link:before {
+				background-image: url('../../assets/icons/list.svg');
+				background-color: rgba($success, var(--opac));
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { publishEvent } from "../../utilities/api";
 import OrganizationContext from '../../context/Organization/Organization';
 
 import Card from 'react-bootstrap/Card';
@@ -20,6 +22,8 @@ import './createEventWrapper.scss';
 
 export default function CreateEventWrapper() {
 
+    let navigate = useNavigate();
+
     const [
         show,
         setShow
@@ -30,8 +34,8 @@ export default function CreateEventWrapper() {
     ] = useState(1);
 
     const [
-        event,
-        setEvent
+        events,
+        setEvents
     ] = useState();
 
     const [editTicket, setEditTicket] = useState()
@@ -69,6 +73,16 @@ export default function CreateEventWrapper() {
         setEditTicket(ticket)
     }
 
+    const publish = (event) => {
+        publishEvent(event)
+            .then((res) => {
+                let updateEvent = events.find(e => e.id === event.id)
+                updateEvent.status = 'on_sale'
+                navigate('/dashboard')
+            })
+            .catch((err) => console.error(err))
+    }
+
     const handleGoBack = () => {
         setStep(step - 1);
     };
@@ -77,8 +91,6 @@ export default function CreateEventWrapper() {
     const orgs = useContext(OrganizationContext);
 
     const handleChange = (e) => { }
-
-    const publish = () => { }
 
     return (
         <div className={` ${step !== 4 ? 'wrapper' : ''}`}>

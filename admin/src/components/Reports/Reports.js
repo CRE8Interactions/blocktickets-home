@@ -67,16 +67,34 @@ export default function Reports() {
                     <Row>
                         <Col lg={4} id="tabs">
                             <Nav as="ul" variant="pills" className="flex-column">
-                                <Nav.Item as="li">
-                                    <Nav.Link as="button" eventKey="net" className='btn'>
-                                        <CustomTab title='Net sales' total="16290.82" stat="up" statAmount="1.6" text={`${handleView(view)}`} />
-                                    </Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item as="li">
-                                    <Nav.Link as="button" eventKey="gross">
-                                        <CustomTab title='Gross sales' total="20589.17" stat="up" statAmount="36" text={`${handleView(view)}`} />
-                                    </Nav.Link>
-                                </Nav.Item>
+                                {sales == '0' ? (
+                                    <>
+                                        <Nav.Item as="li">
+                                            <Nav.Link as="button" eventKey="net" className='btn'>
+                                                <CustomTab title='Net sales' total="16290.82" stat="up" statAmount="1.6" text={`${handleView(view)}`} />
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item as="li">
+                                            <Nav.Link as="button" eventKey="gross">
+                                                <CustomTab title='Gross sales' total="20589.17" stat="up" statAmount="36" text={`${handleView(view)}`} />
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Nav.Item as="li" className='royalties'>
+                                            <Nav.Link as="button" eventKey="royalties" className='btn'>
+                                                <CustomTab title='Royalties' total="20000.15" stat="up" statAmount="16" text={`${handleView(view)}`} />
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item as="li" className="listed">
+                                            <Nav.Link as="button" eventKey="listed">
+                                                <CustomTab title='Tickets listed' amount="1500" stat="up" statAmount="36" text={`${handleView(view)}`} />
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                    </>
+                                )
+                                }
                                 <Nav.Item as="li">
                                     <Nav.Link as="button" eventKey="tickets">
                                         <CustomTab title='Tickets sold' amount="500" stat="up" statAmount="23" text={`${handleView(view)}`} />
@@ -91,6 +109,7 @@ export default function Reports() {
                         </Col>
                         <Col lg={8}>
                             <Tab.Content>
+
                                 <Tab.Pane eventKey="net">
                                     <Card body>
                                         <Chart title='Net sales' total="16290.82" stat="up" statAmount="1.6" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
@@ -101,6 +120,19 @@ export default function Reports() {
                                         <Chart title='Gross sales' total="20589.17" stat="up" statAmount="36" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
                                     </Card>
                                 </Tab.Pane>
+
+                                <Tab.Pane eventKey="royalties">
+                                    <Card body>
+                                        <Chart title='Royalties' total="20000.15" stat="up" statAmount="16" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
+                                    </Card>
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="listed">
+                                    <Card body>
+                                        <Chart title='Tickets listed' total="1500" stat="up" statAmount="36" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
+                                    </Card>
+                                </Tab.Pane>
+
+
                                 <Tab.Pane eventKey="tickets">
                                     <Card body>
                                         <Chart title='Tickets sold' amount="500" stat="up" statAmount="23" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
@@ -113,7 +145,6 @@ export default function Reports() {
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>
-
                     </Row>
                 </Tab.Container>
             </>
