@@ -16,9 +16,9 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
     "@strapi/plugin-i18n": "4.2.0",
     "@strapi/plugin-users-permissions": "4.2.0",
+    "@strapi/provider-email-sendgrid": "^4.2.0",
     "@strapi/strapi": "4.2.0",
     "axios": "^0.26.1",
     "encryption-se": "^1.0.3",

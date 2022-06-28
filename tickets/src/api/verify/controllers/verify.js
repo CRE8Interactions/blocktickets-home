@@ -122,6 +122,17 @@ module.exports = createCoreController('api::verify.verify', ({
       })
     }
   },
+  async uniquePhone(ctx) {
+    const { phoneNumber } = ctx.request.body.data;
+    const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    })
+
+    if (!user) return 200
+    if (user) return 404
+  },
   async newUser(ctx) {
     const {
       username,
@@ -189,7 +200,6 @@ module.exports = createCoreController('api::verify.verify', ({
         }
       })
     }
-    console.log(verify)
     delete verify.code
     delete verify.id
 
@@ -232,5 +242,54 @@ module.exports = createCoreController('api::verify.verify', ({
 
     if (user) return 200
     if (!user) return 404
+  },
+  async updateNumber(ctx) {
+    const user = ctx.state.user;
+    const { toNumber } = ctx.request.body.data;
+
+    let verify = await strapi.entityService.create('api::update-number.update-number', {
+      data: {
+        users_permissions_user: user.id,
+        fromNumber: user.phoneNumber,
+        toNumber,
+      }
+    })
+    delete verify.code
+    delete verify.id
+    
+    return verify
+  },
+  async confirmUpdate(ctx) {
+    const { code } = ctx.request.body.data;
+    let user = ctx.state.user;
+
+    const entry = await strapi.db.query('api::update-number.update-number').findOne({
+      where: { 
+        $and: [
+          { code: code },
+          { completed: false }
+        ]
+       },
+    });
+
+    if (!entry) return;
+
+    user = await strapi.db.query('plugin::users-permissions.user').update({
+      where: {id: user.id },
+      data: {
+        phoneNumber: entry.toNumber
+      }
+    });
+
+    await strapi.db.query('api::update-number.update-number').update({
+      where: {id: entry.id },
+      data: {
+        completed: true
+      }
+    });
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+
+    return tokenData
   }
 }));

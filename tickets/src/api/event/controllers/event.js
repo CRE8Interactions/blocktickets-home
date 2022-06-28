@@ -113,7 +113,8 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       where: {
         $and: [
           { status: 'on_sale' },
-          { name: { $containsi: query } }
+          { name: { $containsi: query } },
+          { start: {$gte: new Date().toISOString() }}
         ]
       },
       populate: {

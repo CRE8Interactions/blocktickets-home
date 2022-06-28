@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useEffect, useState } from 'react';
 
 import { getOrder } from '../../utilities/api';
 import { useMedia } from './../../utilities/hooks';
-import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
+import { fullHeightContainer, removeFullHeightContainer, userDevice } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
 import { Event } from '../Event';
@@ -36,6 +36,8 @@ export default function EventDetailsWrapper({ orderId }) {
         }).catch((err) => console.error(err));
     }
 
+    const [deviceType, setDeviceType] = useState("");
+
     useLayoutEffect(() => {
         const el = document.querySelector('#main-container');
         const body = document.body;
@@ -51,7 +53,8 @@ export default function EventDetailsWrapper({ orderId }) {
 
     useEffect(
         () => {
-            getMyOrders()
+            getMyOrders();
+            setDeviceType(userDevice)
         },
         [
             orderId
@@ -65,25 +68,23 @@ export default function EventDetailsWrapper({ orderId }) {
         setTicketAction(action);
     };
 
-    const mediaQuery = useMedia('(max-width: 767px)');
-
     return (
         <section className="spacer-xs full-height-wrapper">
             <div className="section-heading-sm">
-                <h1>{mediaQuery ? 'Tickets' : 'Event details'}</h1>
+                <h1>{deviceType && deviceType === 'Mobile' ? 'Tickets' : 'Event details'}</h1>
                 <BackButton />
             </div>
             <div>
-                {mediaQuery ? (
+                {deviceType && deviceType === 'Mobile' ? (
                     <>
-                        <MyTicketsSlider order={order} id={orderId} />
+                        <MyTicketsSlider order={order} id={orderId} handleClick={handleClick} />
                         <ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
                     </>
                 ) : (
                     <Event event={order?.event} />
                 )}
             </div>
-            {!mediaQuery && (
+            {deviceType && deviceType === 'Desktop' && (
                 <MyTickets order={order} handleClick={handleClick} ticketStatus={ticketStatus} />
             )}
             <div>
