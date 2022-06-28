@@ -1,14 +1,14 @@
 import React from "react";
 
-import { formatCurrency, formatNumber } from "../../../../utilities/helpers";
+import { formatCurrency, formatNumber } from "../../../utilities/helpers";
 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Button from 'react-bootstrap/Button';
 import Stack from "react-bootstrap/Stack";
 
-import { StatRow } from "../../../StatRow";
-import { InfoIcon } from "../../../InfoIcon";
+import { StatRow } from "../../StatRow";
+import { InfoIcon } from "../../InfoIcon";
 
 import './customTab.scss';
 

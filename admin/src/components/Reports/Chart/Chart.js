@@ -3,11 +3,11 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-import { formatCurrency, formatNumber } from '../../../../utilities/helpers';
+import { formatCurrency, formatNumber } from '../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 
-import { StatRow } from '../../../StatRow';
+import { StatRow } from '../../StatRow';
 
 export default function Chart({ title, total, amount, stat, statAmount, text, sales }) {
 
