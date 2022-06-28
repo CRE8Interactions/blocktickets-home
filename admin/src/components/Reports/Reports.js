@@ -102,7 +102,7 @@ export default function Reports() {
                                 </Nav.Item>
                                 <Nav.Item as="li">
                                     <Nav.Link as="button" eventKey="views">
-                                        <CustomTab title='Page views' amount="500000" stat="down" statAmount="0.6" text={`${handleView(view)}`} />
+                                        <CustomTab title='Page views' amount="400000" stat="down" statAmount="0.6" text={`${handleView(view)}`} />
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>
