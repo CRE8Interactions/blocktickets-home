@@ -25,11 +25,13 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
 
         xAxis: {
             type: 'datetime',
-            dateTimeLabelFormats: {
-
-
-                day: '%w %e. %b',
-                milliseconds: '%H'
+            labels: {
+                formatter: function () {
+                    return Highcharts.dateFormat('%b %e', this.value)
+                }
+            },
+            style: {
+                color: '#777E90'
             }
         },
 
@@ -39,22 +41,38 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
             },
             labels: {
                 formatter: function () {
-                    return Highcharts.numberFormat(this.value, 2, '.', ',', ',')
+                    return '$' + Highcharts.numberFormat(this.value, 0, '.', ',', ',')
                 }
+            },
+            style: {
+                color: "#777E90"
             }
         },
 
         tooltip: {
             backgroundColor: '#272B30',
+            borderColor: '#272B30',
             borderRadius: '8px',
             style: {
                 color: '#FCFCFD'
+            },
+            xDateFormat: '%A',
+            pointFormatter: function () {
+                return '$' + Highcharts.numberFormat('{point.x}', 0, '.', ',', ',')
+            },
+
+            useHTML: true
+        },
+
+        plotOptions: {
+            series: {
+                pointInterval: 24 * 3600 * 1000
             }
         },
 
         series: [
             {
-                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+                data: [43934, 52503, 57177, 69658, 97031]
             }
         ]
     }
