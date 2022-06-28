@@ -142,7 +142,7 @@ module.exports = {
 
     initOrganization()
     initCategories()
-    resetDevelopmentEnv()
+    // resetDevelopmentEnv()
 
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information', 'api::update-number.update-number'],
