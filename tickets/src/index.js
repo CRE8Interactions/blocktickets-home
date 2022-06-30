@@ -528,73 +528,13 @@ module.exports = {
               console.error('Enc error: ', err)
             })
         }
+        // Updates on Order
+        if (event.model.singularName === 'order') {
+          event.state = event.params;
+        }
       },
       async afterUpdate(event) {
         const { result, params } = event;
-        if (event.model.singularName === 'order') {
-          const user = await strapi.db.query('plugin::users-permissions.user').findOne({
-            where: {
-             id: result.userId
-            }
-          })
-          const events = await strapi.entityService.findOne('api::event.event', result.details.ticket.eventId, {
-            populate: {
-              image: true,
-              venue: {
-                populate: {
-                  address: true
-                }
-              }
-            }
-          })
-
-          if (params.data.status === 'complete') {
-            try {
-              await strapi
-                .plugin('email-designer')
-                .service('email')
-                .sendTemplatedEmail(
-                  {
-                    // required
-                    to: user.email,
-          
-                    // optional if /config/plugins.js -> email.settings.defaultFrom is set
-                    from: process.env.MAIN_EMAIL,
-          
-                    // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
-                    replyTo: process.env.MAIN_EMAIL,
-          
-                    // optional array of files
-                    attachments: [],
-                  },
-                  {
-                    // required - Ref ID defined in the template designer (won't change on import)
-                    templateReferenceId: 3,
-          
-                    // If provided here will override the template's subject.
-                    // Can include variables like `Thank you for your order {{= USER.firstName }}!`
-                    subject: `You Got Tickets To ${events.name}`,
-                  },
-                  {
-                    // this object must include all variables you're using in your email template
-                    event: events,
-                    venue: events.venue,
-                    address: events.venue.address[0],
-                    tickets: result.tickets,
-                    user: user,
-                    total: Number(result.total).toFixed(2),
-                    count: result.details.ticketCount,
-                    date: moment(events.start).format('ddd, MMM D, YYYY • h:mm'),
-                    orderId: result.orderId,
-                    image: events.image
-                  }
-                );
-            } catch (err) {
-              strapi.log.debug('📺: ', err);
-               // return ctx.badRequest(null, err);
-            }
-          }
-        }
       }
     });
   },

@@ -102,9 +102,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     if (!type) return
     let paymentIntentId;
     let order;
-    let ticketIds;
     let paymentMethodOptions;
-    let results;
     // Handle the event
     switch (type) {
       case 'payment_intent.succeeded':
@@ -146,8 +144,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
             intentDetails: paymentMethodOptions
           }
         });
-        
-        if (!order.details.listing) return
+
+        if (!order.details.listing) return 200
 
         let listing = await strapi.db.query('api::listing.listing').update({
           where: { id: order.details.listing.id },

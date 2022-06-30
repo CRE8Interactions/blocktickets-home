@@ -127,6 +127,10 @@
     },
     "listingAskingPrice": {
       "type": "decimal"
+    },
+    "history": {
+      "type": "json",
+      "private": true
     }
   }
 }
