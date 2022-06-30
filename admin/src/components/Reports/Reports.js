@@ -66,7 +66,7 @@ export default function Reports() {
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
                     <Row>
                         <Col lg={4} id="tabs">
-                            <Nav as="ul" variant="pills" className="flex-column gap-3 mb-md-0">
+                            <Nav as="ul" variant="pills" className="flex-column gap-3 mb-lg-0">
                                 {sales == '0' ? (
                                     <>
                                         <Nav.Item as="li">
