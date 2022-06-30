@@ -48,7 +48,7 @@ export default function EventsWrapper() {
     return (
         <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
             <div className="flex-wrap d-flex align-items-center justify-content-between" id="events-header">
-                <div className="section-heading mb-5 gap-4">
+                <div className="section-heading gap-4">
                     <h1>Events</h1>
                     <SearchBar />
                 </div>

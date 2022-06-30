@@ -122,7 +122,7 @@ legend {
 }
 
 .form-select {
-	padding: $input-padding-y $input-padding-x;
+	padding: rem(8) $input-padding-x-sm;
 }
 
 #custom-switch {

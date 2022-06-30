@@ -46,7 +46,7 @@ export default function Reports() {
     return (
         <section id="reports">
             <>
-                <Row className="section-heading mb-5 gap-4 justify-content-flex-start">
+                <Row className="section-heading justify-content-flex-start">
                     <Col className='d-flex align-items-center'>
                         <h1>Reports</h1>
                         <Form.Select value={view} onChange={(e) => setView(e.target.value)} className='ms-auto w-auto'>
@@ -66,7 +66,7 @@ export default function Reports() {
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
                     <Row>
                         <Col lg={4} id="tabs">
-                            <Nav as="ul" variant="pills" className="flex-column">
+                            <Nav as="ul" variant="pills" className="flex-column gap-3 mb-md-0">
                                 {sales == '0' ? (
                                     <>
                                         <Nav.Item as="li">
