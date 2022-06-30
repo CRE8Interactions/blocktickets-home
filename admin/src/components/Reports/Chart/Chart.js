@@ -13,7 +13,14 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
 
     const options = {
         chart: {
-            type: 'spline'
+            type: 'spline',
+            backgroundColor: 'transparent',
+            height: 283,
+            style: {
+                "fontFamily": "\"Poppins\", sans-serif",
+                "fontSize": "12px",
+                "color": "#777E90"
+            }
         },
         title: {
             text: null,
@@ -30,9 +37,6 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
                     return Highcharts.dateFormat('%b %e', this.value)
                 }
             },
-            style: {
-                color: '#777E90'
-            }
         },
 
         yAxis: {
@@ -44,9 +48,6 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
                     return '$' + Highcharts.numberFormat(this.value, 0, '.', ',', ',')
                 }
             },
-            style: {
-                color: "#777E90"
-            }
         },
 
         tooltip: {
@@ -60,7 +61,6 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
             pointFormatter: function () {
                 return '$' + Highcharts.numberFormat('{point.x}', 0, '.', ',', ',')
             },
-
             useHTML: true
         },
 
