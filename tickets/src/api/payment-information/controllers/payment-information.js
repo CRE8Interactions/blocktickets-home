@@ -46,6 +46,9 @@ module.exports = createCoreController('api::payment-information.payment-informat
         where: {
           id: user.profile.id 
         },
+        populate: {
+          payment_information: true
+        },
         data: {
           payment_information: await strapi.db.query('api::payment-information.payment-information').create({
             data: {
@@ -60,8 +63,9 @@ module.exports = createCoreController('api::payment-information.payment-informat
           })
         }
       })
+      strapi.service('api::email.email').sendPaymentAccount(res, user)
     } else {
-      res = strapi.db.query('api::payment-information.payment-information').update({
+      res = await strapi.db.query('api::payment-information.payment-information').update({
         where: {
           id: profile.payment_information.id
         },
@@ -75,8 +79,8 @@ module.exports = createCoreController('api::payment-information.payment-informat
           accountType
         }
       })
+      strapi.service('api::email.email').updatePaymentAccount(res, user)
     }
-
     return res
   },
   async findOne(ctx) {

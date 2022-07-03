@@ -109,12 +109,13 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         paymentIntentId = data.data.object.id;
         paymentMethodOptions = data.data.object;
 
-        order = await strapi.db.query('api::order.order').findOne({
+        let order = await strapi.db.query('api::order.order').findOne({
           where: { paymentIntentId },
           populate: { 
             tickets: true,
             event: {
               populate: {
+                image: true,
                 venue: {
                   populate: {
                     address: true
@@ -137,11 +138,14 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
+        strapi.service('api::email.email').orderNotification(order);
+
         let originalOrder = await strapi.db.query('api::order.order').update({
           where: { paymentIntentId },
           data: {
             status: 'complete',
-            intentDetails: paymentMethodOptions
+            intentDetails: paymentMethodOptions,
+            emailSent: true
           }
         });
 
@@ -157,9 +161,16 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         let fromOrder = await strapi.db.query('api::order.order').findOne({
           where: { id: listing.fromOrder },
           populate: { 
-            tickets: true
+            tickets: true,
+            users_permissions_user: true,
           }
         });
+
+        const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            id: fromOrder.users_permissions_user.id
+          }
+        }) 
 
         let originalTicketIds = fromOrder.tickets.map(ticket => ticket.uuid);
         let newOrderTicketIds = order.tickets.map(ticket => ticket.uuid);
@@ -175,6 +186,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
             tickets: ticketUpdates
           }
         });
+        strapi.service('api::email.email').listingSold(user, order, listing, ticketUpdates);
       break;
       case 'payment_intent.payment_failed':
         paymentIntentId = data.data.object.id;
