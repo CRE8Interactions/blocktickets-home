@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "histories",
+  "info": {
+    "singularName": "history",
+    "pluralName": "histories",
+    "displayName": "history"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "action": {
+      "type": "string",
+      "required": true
+    },
+    "FromUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "ToUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "ticket": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ticket.ticket",
+      "inversedBy": "histories"
+    },
+    "state": {
+      "type": "json"
+    }
+  }
+}

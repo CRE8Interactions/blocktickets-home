@@ -34,7 +34,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         listingAskingPrice: entity.askingPrice
       }
     })
-
+    strapi.service('api::email.email').listingActive(user, tickets, event, serviceFees, payout, quantity, askingPrice)
     return 200
   },
   async myListings(ctx) {
@@ -127,7 +127,19 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     const id = ctx.params.id;
 
     const listing = await strapi.entityService.findOne('api::listing.listing', id, {
-      fields: ['status'],
+      populate: {
+        tickets: true,
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
     });
 
     if (listing.status === 'complete') {
@@ -148,7 +160,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         listingAskingPrice: ''
       }
     })
-
+    strapi.service('api::email.email').removeListing(user, listing)
     return 200
   },
   async availableFunds(ctx) {

@@ -131,6 +131,12 @@
     "history": {
       "type": "json",
       "private": true
+    },
+    "histories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::history.history",
+      "mappedBy": "ticket"
     }
   }
 }

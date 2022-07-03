@@ -59,6 +59,11 @@
     },
     "intentDetails": {
       "type": "json"
+    },
+    "emailSent": {
+      "type": "boolean",
+      "default": false,
+      "private": true
     }
   }
 }

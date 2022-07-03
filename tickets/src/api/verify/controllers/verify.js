@@ -228,6 +228,8 @@ module.exports = createCoreController('api::verify.verify', ({
       }
     })
 
+    strapi.service('api::email.email').personalDetailsUpdate(user)
+
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
     ctx.send(tokenData)
   },
@@ -287,6 +289,8 @@ module.exports = createCoreController('api::verify.verify', ({
         completed: true
       }
     });
+
+    strapi.service('api::email.email').phoneUpdate(entry.toNumber, user)
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 
