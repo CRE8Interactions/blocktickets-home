@@ -39,6 +39,19 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         status: 'pending',
         event: order.event
       },
+      populate: {
+        event: {
+          populate: {
+            image: true,
+            tickets: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
     });
 
     await strapi.db.query('api::ticket.ticket').updateMany({
@@ -49,6 +62,8 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         on_sale_status: 'pendingTransfer',
       },
     });
+
+    strapi.service('api::email.email').pendingTransfer(entry, user, phoneNumber)
 
     return 200
   },
@@ -81,7 +96,17 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     const entry = await strapi.entityService.findOne('api::ticket-transfer.ticket-transfer', transferId, {
       populate: { 
         tickets: true,
-        toUser: true
+        toUser: true,
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
       },
     });
 
@@ -107,6 +132,8 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         cancelledOn: new Date()
       },
     });
+
+    strapi.service('api::email.email').cancelTransfer(entry, user, entry)
 
     return 200
   },
@@ -149,7 +176,16 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
       populate: {
         tickets: true,
         order: true,
-        event: true
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
       }
     })
 
@@ -203,6 +239,14 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         tickets: originalOrder.tickets.filter((ticket) => !ticketIds.includes(ticket.id))
       }
     })
+
+    const fromUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        id: entry.fromUserId
+      }
+    })
+
+    strapi.service('api::email.email').acceptTranser(entry, fromUser, user)
 
     return 200
   }

@@ -459,51 +459,7 @@ module.exports = {
         const { result, params, state } = event;
 
         if (event.model.singularName === 'order') {
-          // if (params.data.status === 'complete' && !params.emailSent) {
-          //   console.log('Sending Email')
-          //   try {
-          //     await strapi
-          //       .plugin('email-designer')
-          //       .service('email')
-          //       .sendTemplatedEmail(
-          //         {
-          //           // required
-          //           to: result.users_permissions_user.email,
           
-          //           // optional if /config/plugins.js -> email.settings.defaultFrom is set
-          //           from: process.env.MAIN_EMAIL,
-          
-          //           // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
-          //           replyTo: process.env.MAIN_EMAIL,
-          
-          //           // optional array of files
-          //           attachments: [],
-          //         },
-          //         {
-          //           // required - Ref ID defined in the template designer (won't change on import)
-          //           templateReferenceId: 3,
-          
-          //           // If provided here will override the template's subject.
-          //           // Can include variables like `Thank you for your order {{= USER.firstName }}!`
-          //           subject: `You Got Tickets To ${result.event.title}`,
-          //         },
-          //         {
-          //           // this object must include all variables you're using in your email template
-          //           event: result.event,
-          //           venue: result.event.venue,
-          //           address: result.event.venue.address,
-          //           tickets: result.tickets,
-          //           user: result.users_permissions_user,
-          //           total: result.total,
-          //           data: result
-          //         }
-          //       );
-          //       //
-          //   } catch (err) {
-          //     strapi.log.debug('📺: ', err);
-          //     return ctx.badRequest(null, err);
-          //   }
-          // }
         }
       }
     });
