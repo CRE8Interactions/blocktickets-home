@@ -16,6 +16,129 @@ const encryption = require('encryption-se')(options);
 const { createCoreService } = require('@strapi/strapi').factories;
 
 module.exports = createCoreService('api::email.email', ({ strapi }) => ({
+  async cancelTransfer(order, user, transfer) {
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: user.email,
+  
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
+  
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
+  
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 7,
+  
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `Your transfer has been cancelled`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            user: user,
+            event: order.event,
+            date: moment(order.event.start).format('ddd, MMM D, YYYY • h:mm'),
+            quantity: transfer.tickets.length,
+            order: order,
+            phoneNumber: transfer.phoneNumberToUser
+          }
+        );
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
+  },
+  async pendingTransfer(order, user, phoneNumber) {
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: user.email,
+  
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
+  
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
+  
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 5,
+  
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `Your transfer is pending!`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            user: user,
+            event: order.event,
+            date: moment(order.event.start).format('ddd, MMM D, YYYY • h:mm'),
+            quantity: order.ticketIds.length,
+            order: order,
+            phoneNumber: phoneNumber
+          }
+        );
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
+  },
+  async acceptTranser(order, fromUser, user) {
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: fromUser.email,
+  
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
+  
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
+  
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 6,
+  
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `Your transfer has been completed!`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            user: user,
+            fromUser: fromUser,
+            event: order.event,
+            date: moment(order.event.start).format('ddd, MMM D, YYYY • h:mm'),
+            quantity: order.tickets.length,
+            order: order
+          }
+        );
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
+  },
   async removeListing(user, listing) {
     try {
       await strapi
@@ -37,7 +160,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
           },
           {
             // required - Ref ID defined in the template designer (won't change on import)
-            templateReferenceId: 16,
+            templateReferenceId: 13,
   
             // If provided here will override the template's subject.
             // Can include variables like `Thank you for your order {{= USER.firstName }}!`
@@ -164,7 +287,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
           },
           {
             // required - Ref ID defined in the template designer (won't change on import)
-            templateReferenceId: 17,
+            templateReferenceId: 14,
   
             // If provided here will override the template's subject.
             // Can include variables like `Thank you for your order {{= USER.firstName }}!`
@@ -200,7 +323,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
           },
           {
             // required - Ref ID defined in the template designer (won't change on import)
-            templateReferenceId: 18,
+            templateReferenceId: 15,
   
             // If provided here will override the template's subject.
             // Can include variables like `Thank you for your order {{= USER.firstName }}!`

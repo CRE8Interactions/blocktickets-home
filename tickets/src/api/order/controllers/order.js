@@ -138,8 +138,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
-        strapi.service('api::email.email').orderNotification(order);
-
         let originalOrder = await strapi.db.query('api::order.order').update({
           where: { paymentIntentId },
           data: {
@@ -148,6 +146,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
             emailSent: true
           }
         });
+
+        strapi.service('api::email.email').orderNotification(order);
 
         if (!order.details.listing) return 200
 
