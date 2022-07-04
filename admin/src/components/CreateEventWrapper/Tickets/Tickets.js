@@ -36,7 +36,7 @@ export default function Tickets({ tickets, handleEdit }) {
         <>
             {tickets && tickets.length > 0 ? (
                 <>
-                    <Stack gap={3} className="pb-4 tickets">
+                    <Stack gap={2} className="pb-4 tickets">
                         {(tickets).map((ticket, id) => (
                             <Stack direction='horizontal' className='ticket-row' key={id}>
                                 <Stack>

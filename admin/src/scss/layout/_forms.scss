@@ -93,20 +93,17 @@ select:-webkit-autofill:focus {
 	font-weight: $fw-normal;
 }
 
-.form-label {
+.form-label,
+.form-label--flex {
 	font-weight: $fw-medium;
 	font-size: $small;
+	margin-bottom: rem(12);
 }
 
 legend {
 	font-weight: $fw-medium;
 	font-size: $body-2;
-}
-
-.form-label,
-.form-label--flex,
-legend {
-	margin-bottom: rem(12);
+	margin-bottom: $text-spacer-xs;
 }
 
 .form-check {
@@ -119,10 +116,6 @@ legend {
 	&-input:focus {
 		box-shadow: none;
 	}
-}
-
-.form-select {
-	padding: rem(8) $input-padding-x-sm;
 }
 
 #custom-switch {

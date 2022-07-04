@@ -25,10 +25,6 @@ export default function CreateEventWrapper() {
     let navigate = useNavigate();
 
     const [
-        show,
-        setShow
-    ] = useState(false);
-    const [
         step,
         setStep
     ] = useState(1);
@@ -93,11 +89,11 @@ export default function CreateEventWrapper() {
     const handleChange = (e) => { }
 
     return (
-        <div className={` ${step !== 4 ? 'wrapper' : ''}`}>
+        <div className={` ${step !== 4 ? 'wrapper' : ''}`} id="create-event">
             {step === 1 && (
                 <div>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Basic info</h1>
                         </div>
                         <Card body className="card--light">
@@ -105,7 +101,7 @@ export default function CreateEventWrapper() {
                         </Card>
                     </section>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Date & Time</h1>
                         </div>
                         <Card body className="card--light">
@@ -113,7 +109,7 @@ export default function CreateEventWrapper() {
                         </Card>
                     </section>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Location</h1>
                         </div>
                         <Card body className="card--light">
@@ -129,7 +125,7 @@ export default function CreateEventWrapper() {
             {step === 2 && (
                 <div>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Main event image</h1>
                         </div>
                         <Card body className="card--light">
@@ -138,7 +134,7 @@ export default function CreateEventWrapper() {
                         </Card>
                     </section>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Event description</h1>
                         </div>
                         <Card body className="card--light">
@@ -146,6 +142,7 @@ export default function CreateEventWrapper() {
                         </Card>
                     </section>
                     <Stack direction="horizontal" className="justify-content-end btn-group-flex">
+                        <BackButton handleGoBack={handleGoBack} />
                         <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
                     </Stack>
                 </div>
@@ -154,7 +151,7 @@ export default function CreateEventWrapper() {
             {step === 3 && (
                 <div>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>{editTicket ? 'Edit ticket' : 'Create a ticket'}</h1>
                         </div>
                         <Card body className="card--light">
@@ -172,7 +169,7 @@ export default function CreateEventWrapper() {
             {step === 4 && (
                 <div>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Tickets</h1>
                             <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={() => setStep(3)}>Add ticket</Button>
                         </div>
@@ -180,6 +177,7 @@ export default function CreateEventWrapper() {
                     </section>
                     {tickets && tickets.length > 0 && (
                         <Stack direction="horizontal" className="justify-content-end mt-5 btn-group-flex">
+                            <BackButton handleGoBack={handleGoBack} />
                             <Button className="btn-next" size="lg" onClick={handleClick}>Continue</Button>
                         </Stack>
                     )}
@@ -189,7 +187,7 @@ export default function CreateEventWrapper() {
             {step === 5 && (
                 <div>
                     <section>
-                        <div className="section-heading section-heading--secondary">
+                        <div className="section-heading-sm section-heading--secondary">
                             <h1>Publish event</h1>
                         </div>
                         <Card body className="card--light">

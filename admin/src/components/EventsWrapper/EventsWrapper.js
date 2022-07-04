@@ -53,7 +53,7 @@ export default function EventsWrapper() {
                     <SearchBar />
                 </div>
 
-                <Nav as="ul" variant="pills" className="ms-auto mb-5">
+                <Nav as="ul" variant="pills" className="ms-auto">
                     <Nav.Item as="li">
                         <Nav.Link as="button" eventKey="published">
                             Published
