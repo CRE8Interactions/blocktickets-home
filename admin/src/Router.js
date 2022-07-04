@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Orders, Sales, HomePage, EventsPage, CreateEventPage } from './pages';
+import { HomePage, EventsPage, CreateEventPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -12,8 +12,7 @@ const Router = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="events" element={<EventsPage />} />
             <Route path="create" element={<CreateEventPage />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="sales" element={<Sales />} />
+            <Route path="create/:id" element={<CreateEventPage />} />
         </Routes>
     );
 };

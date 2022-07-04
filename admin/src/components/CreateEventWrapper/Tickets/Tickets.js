@@ -18,6 +18,7 @@ export default function Tickets({ tickets, handleEdit }) {
             'sale_ended': 'dark'
         }
     ]
+
     const [show, setShow] = useState(false)
 
     const handleClose = () => setShow(false);
@@ -56,8 +57,8 @@ export default function Tickets({ tickets, handleEdit }) {
                                     <Dropdown>
                                         <Dropdown.Toggle variant="default"></Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item as="button" onClick={() => handleEdit(ticket)}>Edit</Dropdown.Item>
-                                            <Dropdown.Item as="button" onClick={handleShow}>Delete</Dropdown.Item>
+                                            <Dropdown.Item as="button" className="btn-edit" onClick={() => handleEdit(ticket.id)}>Edit</Dropdown.Item>
+                                            <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Stack>

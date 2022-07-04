@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import OrganizationContext from "../../../context/Organization/Organization";
 import { publishEvent } from "../../../utilities/api";
@@ -27,6 +28,7 @@ export default function EventsTable({ handleTicketShow, type }) {
 
     let sum;
     let selectedEvent;
+    let navigate = useNavigate();
 
     //   useEffect(() => {
     //     setEvents(org.orgs[0]['events'])
@@ -78,7 +80,7 @@ export default function EventsTable({ handleTicketShow, type }) {
 
     return (
         <>
-            <Table hover id="events-table" >
+            <Table hover id="events-table">
                 <thead>
                     <tr>
                         <th colSpan="2">Event</th>
@@ -91,464 +93,73 @@ export default function EventsTable({ handleTicketShow, type }) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">
-                            <Stack direction="horizontal" gap={4}>
-                                <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
-                                <div className="py-1 event-details">
-                                    <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                    <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                    <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
-                                </div>
-                            </Stack>
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>)}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">50/500</Badge>
-                                {type === 'published' && (
-                                    <Stack direction="horizontal">
-                                        <ProgressBar now={20} />
-                                    </Stack>
-                                )}
-                            </Stack>
-                            {/* { calculateSold(event.tickets)} */}
-                        </td>
-                        <td>
-                            <Stack>
-                                <Badge bg='light' className="badge-label">$3,200</Badge>
-                                {type === 'published' && (
-                                    <StatRow
-                                        stat="up" statAmount="55.8" text="this week" />
-                                )}
-                            </Stack>
-                        </td>
-                        <td className="text-body">{getStatus(type)}</td>
-                        <td className="btn-more">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="default"></Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {event && event.status === 'unpublished' &&
-                                        <Dropdown.Item href="#/action-1" onClick={(e) => { handleShow(); setEvent(event) }}>Publish</Dropdown.Item>
-                                    }
-                                    <Dropdown.Item href="#/action-2">Edit</Dropdown.Item>
-                                    <Dropdown.Item href="#2" onClick={(e) => handleTicketShow(event)}>Add Tickets</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
-                    </tr>
+                    {new Array(10).fill(10).map((arr, index) => (
+                        <tr key={index}>
+                            <td colSpan="2">
+                                <Stack direction="horizontal" gap={4}>
+                                    <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
+                                    <div className="py-1 event-details">
+                                        <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
+                                        <p className="text-body fw-bold text-truncate">C.O.D.A</p>
+                                        <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
+                                    </div>
+                                </Stack>
+                            </td>
+                            <td>
+                                <Stack>
+                                    <Badge bg='light' className="badge-label">50/500</Badge>
+                                    {type === 'published' && (
+                                        <Stack direction="horizontal">
+                                            <ProgressBar now={20} />
+                                        </Stack>)}
+                                </Stack>
+                                {/* { calculateSold(event.tickets)} */}
+                            </td>
+                            <td>
+                                <Stack>
+                                    <Badge bg='light' className="badge-label">$3,200</Badge>
+                                    {type === 'published' && (
+                                        <StatRow
+                                            stat="up" statAmount="55.8" text="this week" />
+                                    )}
+                                </Stack>
+                            </td>
+                            <td>
+                                <Stack>
+                                    <Badge bg='light' className="badge-label">50/500</Badge>
+                                    {type === 'published' && (
+                                        <Stack direction="horizontal">
+                                            <ProgressBar now={20} />
+                                        </Stack>
+                                    )}
+                                </Stack>
+                                {/* { calculateSold(event.tickets)} */}
+                            </td>
+                            <td>
+                                <Stack>
+                                    <Badge bg='light' className="badge-label">$3,200</Badge>
+                                    {type === 'published' && (
+                                        <StatRow
+                                            stat="up" statAmount="55.8" text="this week" />
+                                    )}
+                                </Stack>
+                            </td>
+                            <td className="text-body">{getStatus(type)}</td>
+                            <td className="btn-more">
+                                <Dropdown align="right">
+                                    <Dropdown.Toggle variant="default"></Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as="button" onClick={() => navigate("/dashboard/123")}>View</Dropdown.Item>
+                                        <Dropdown.Item as="button" onClick={() => navigate("/create/123")} className="btn-edit">Edit</Dropdown.Item>
+                                        <Dropdown.Item as="button" href="/create-event">Copy URL</Dropdown.Item>
+                                        <Dropdown.Item as="button" href="/create-event" className="btn-delete">Delete</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
-            {/* <PublishEvent show={show} handleClose={handleClose} event={event} publish={publish} /> */}
         </>
     )
 }

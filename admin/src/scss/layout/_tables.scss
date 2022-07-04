@@ -33,6 +33,10 @@
 			text-align: center;
 			vertical-align: middle;
 			width: inherit;
+		}
+
+		th,
+		td:not(.btn-more) {
 			@extend %text-truncate !optional;
 		}
 
