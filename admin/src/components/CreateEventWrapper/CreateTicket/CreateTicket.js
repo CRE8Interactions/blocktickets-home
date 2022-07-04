@@ -143,12 +143,6 @@ export default function CreateTicket({ handleChange, editTicket }) {
                         </Col>
                     </Row>
                 </fieldset>
-                <Form.Group className="form-group" controlId="capacity">
-                    <Form.Label>Capacity</Form.Label>
-                    <Form.Control defaultValue="10.00" disabled
-                        onChange={(e) => handleChange(e)}
-                        required />
-                </Form.Group>
             </Form>
 
             <TicketBreakdownModal show={show} handleClose={handleClose} />

@@ -24,8 +24,8 @@ export default function PublishEvent() {
     return (
         <>
             <Row>
-                <Col>
-                    <Image src={image} rounded alt="Nic Fanciulli">
+                <Col lg={5} className="w-auto">
+                    <Image src={image} rounded alt="Nic Fanciulli" width="291" height="291" className="event-image">
                     </Image>
                     <Stack direction="horizontal" className="mt-4">
                         <Form>
