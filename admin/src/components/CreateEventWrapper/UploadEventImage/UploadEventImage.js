@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { CropperRef, Cropper } from 'react-advanced-cropper';
+import { Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
 
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
 import { Dropzone } from './Dropzone';
@@ -40,7 +38,7 @@ export default function UploadEventImage({ handleChange }) {
     return (
         <>
             <Stack direction="horizontal" gap={2}>
-                <InfoIcon />
+                <InfoIcon size="lg" />
                 <Form.Text>
                     Use a high quality image in 1:1 ratio (eg. 1080 x 1080px).
                 </Form.Text>

@@ -44,6 +44,11 @@
 	}
 
 	margin-bottom: $heading-spacer;
+
+	&-sm {
+		@extend .section-heading !optional;
+		margin-bottom: $heading-spacer-sm;
+	}
 }
 
 h1,

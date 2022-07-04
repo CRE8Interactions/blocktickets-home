@@ -2,6 +2,7 @@
 @use "../../scss/layout/spacing" as *;
 @use "../../scss/layout/buttons" as *;
 @use "../../scss/theme/buttons" as *;
+@use "../../scss/theme/input" as *;
 @use "../../scss/theme/borders" as *;
 @use "../../scss/theme/colors" as *;
 
@@ -14,6 +15,7 @@
 
 	.form-select {
 		min-width: 170px;
+		padding: rem(8) $input-padding-x-sm;
 	}
 	.nav-link {
 		padding: rem(18) rem(16);
