@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
@@ -7,6 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import { TicketPurchaseFooter } from '../TicketPurchaseFooter';
 import { BackButton } from '../../../BackButton';
 import { ticketPrices } from '../../../../utilities/helpers';
+import TicketContext from '../../../../context/Ticket/Ticket';
 
 import './ticketConfirmation.scss';
 
@@ -17,7 +18,8 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 	let sum;
 	let maxQuantity;
 	let ticketFees;
-
+	const ticketContext = useContext(TicketContext);
+	
 	if (listing) {
 		let prices = ticketPrices(ticket, listing);
 		ticketPrice = prices.ticketCost;
@@ -141,7 +143,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 							className="btn--icon ms-0"
 							variant="outline-light"
 							onClick={() => setTicketCount(ticketCount + 1)}
-							disabled={listing ? true : ticketCount >= (ticket.resale ? 1 : ticket.maximum_quantity)}
+							disabled={listing ? true : (ticketCount >= (ticket.resale ? 1 : ticket.maximum_quantity) || ticketCount >= ticketContext.generalAdmissionCount)}
 							aria-disabled={listing ? true : ticket ? ticketCount >= ticket.maximum_quantity : true}>
 							<svg
 								role="img"

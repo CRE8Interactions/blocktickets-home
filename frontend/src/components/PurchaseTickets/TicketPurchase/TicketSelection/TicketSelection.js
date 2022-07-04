@@ -126,6 +126,14 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 		if (listing && !ticket) handleClick('confirmation', null, listing)
 	}
 
+	const disableSelect = (element) => {
+		if (element.value > tickets.generalAdmissionCount) {
+			return true;
+		} else {
+			return false
+		}
+	}
+
 	return (
 		<Fragment>
 			{gaTicketsAvailable && gaTicketsAvailable >= 1 ? ( 
@@ -137,7 +145,7 @@ export default function TicketSelection({ handleClick, setIsFilterOpen, isFilter
 								value={ticketCount}
 								onChange={(e) => setTicketCount(parseInt(e.target.value))}>
 								{ selectOptions().map((o, index) => {
-									return <option value={o.key} key={o.key}>{o.name}</option>
+									return <option value={o.key} key={o.key} disabled={disableSelect(o)}>{o.name}</option>
 								})}
 							</Form.Select>
 							<Button
