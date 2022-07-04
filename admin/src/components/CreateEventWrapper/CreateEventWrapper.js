@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { publishEvent } from "../../utilities/api";
@@ -20,7 +20,7 @@ import { PublishEvent } from './PublishEvent';
 
 import './createEventWrapper.scss';
 
-export default function CreateEventWrapper() {
+export default function CreateEventWrapper({ event }) {
 
     let navigate = useNavigate();
 
@@ -29,16 +29,20 @@ export default function CreateEventWrapper() {
         setStep
     ] = useState(1);
 
-    const [
-        events,
-        setEvents
-    ] = useState();
+    const [editEvent, setEditEvent] = useState()
 
-    const [editTicket, setEditTicket] = useState()
+    const handleEdit = () => {
+        setStep(3);
+        setEditEvent(event)
+    }
+
+
+    const [events, setEvents] = useState()
 
     // for step 4 - this state will come from database 
     const [tickets] = useState([
         {
+            id: 0,
             type: 'General Admission',
             status: 'on_sale',
             desc: 'Ends May 3, 2022 at 12:00 AM',
@@ -46,6 +50,7 @@ export default function CreateEventWrapper() {
             price: 50
         },
         {
+            id: 1,
             type: 'General Admission',
             status: 'scheduled',
             desc: 'Starts April  12, 2022 at 12:00 AM',
@@ -53,6 +58,7 @@ export default function CreateEventWrapper() {
             price: 50
         },
         {
+            id: 2,
             type: 'General Admission',
             status: 'sale_ended',
             ticketsSold: '100/300',
@@ -64,17 +70,12 @@ export default function CreateEventWrapper() {
         setStep(step + 1)
     }
 
-    const handleEdit = (ticket) => {
-        setStep(3);
-        setEditTicket(ticket)
-    }
-
     const publish = (event) => {
         publishEvent(event)
             .then((res) => {
                 let updateEvent = events.find(e => e.id === event.id)
                 updateEvent.status = 'on_sale'
-                navigate('/dashboard')
+                navigate('/dashboard/123')
             })
             .catch((err) => console.error(err))
     }
@@ -152,16 +153,16 @@ export default function CreateEventWrapper() {
                 <div>
                     <section>
                         <div className="section-heading-sm section-heading--secondary">
-                            <h1>{editTicket ? 'Edit ticket' : 'Create a ticket'}</h1>
+                            <h1>{editEvent ? 'Edit ticket' : 'Create a ticket'}</h1>
                         </div>
                         <Card body className="card--light">
-                            <CreateTicket handleChange={handleChange} editTicket={editTicket} />
+                            <CreateTicket handleChange={handleChange} editEvent={editEvent} />
                         </Card>
                     </section>
                     <Stack direction="horizontal" className="justify-content-end btn-group-flex">
                         <>
                             <BackButton handleGoBack={handleGoBack} />
-                            <Button className="btn-next" size="lg" onClick={handleClick}>{editTicket ? 'Save' : 'Create ticket'}</Button>
+                            <Button className="btn-next" size="lg" onClick={handleClick}>{editEvent ? 'Save' : 'Create ticket'}</Button>
                         </>
                     </Stack>
                 </div>

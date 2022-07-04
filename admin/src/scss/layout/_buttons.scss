@@ -143,6 +143,22 @@ button,
 	}
 }
 
+.btn-edit {
+	@extend .icon-button !optional;
+	justify-content: flex-start;
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'edit'));
+	}
+}
+
+.btn-delete {
+	@extend .icon-button !optional;
+	justify-content: flex-start;
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'trash'));
+	}
+}
+
 .btn-next {
 	@extend .icon-button !optional;
 	&::after {
