@@ -96,7 +96,7 @@ export default function CreateTicket({ handleChange, editTicket }) {
                 </fieldset>
                 <fieldset className="form-group">
                     <legend>When are tickets available</legend>
-                    <Row className='mb-3'>
+                    <Row className='pt-1 mb-3'>
                         <Col>
                             <DateInputWrapper label="Sales start" id="sales-start" setDate={setStartDate} selectedDate={startDate} startDate={startDate} endDate={endDate} error={hasError} />
                         </Col>

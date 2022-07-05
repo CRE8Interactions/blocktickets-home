@@ -6,31 +6,8 @@
 @use '../theme/colors' as *;
 
 .card {
-	&-subtitle {
-		margin-top: 0px;
-	}
 	&--light {
 		background-color: $white;
-
-		.card-header,
-		.card-footer {
-			background-color: inherit;
-		}
-	}
-
-	&--dark {
-		background-color: $clr-neutral-3;
-
-		* {
-			color: $clr-white;
-		}
-	}
-
-	.event-details {
-		margin-bottom: rem(16);
-		.event-detail {
-			margin-bottom: rem(10);
-		}
 	}
 
 	& * {
@@ -42,72 +19,15 @@
 		font-family: $font-heading;
 	}
 
-	&-title {
-		font-weight: $fw-medium;
-		color: $body-color;
-	}
+	.card-body-heading {
+		margin-bottom: $text-spacer;
 
-	&-subtitle {
-		font-weight: $fw-bold;
-		font-size: $caption;
-	}
-
-	// used in addons, checkout ticket card
-	&-xs {
-		$padding: em(14) em(16);
-
-		.card-body {
-			padding: $padding;
+		h1 {
+			margin-bottom: 0px;
 		}
 	}
 
-	// used in settings options
-	&-lg {
-		$padding: em(30) em(20);
-
-		.card-body {
-			padding: $padding;
-		}
-	}
-
-	// used in total card
-	&-xl {
-		$m-x: em(39);
-		$pad-y: em(24);
-
-		padding-left: 0px;
-		padding-right: 0px;
-
-		.card-header {
-			padding: $pad-y 0px;
-			margin: 0px $m-x;
-		}
-
-		.card-heading {
-			margin-bottom: $text-spacer-sm;
-		}
-
-		.card-title,
-		.card-heading-title {
-			font-size: $body-1;
-			font-weight: $fw-semi-bold;
-		}
-
-		.card-body {
-			padding: $pad-y 0px;
-			margin: 0px $m-x;
-			display: flex;
-			flex-direction: column;
-
-			&-header {
-				padding-bottom: $pad-y;
-				border-bottom: border();
-			}
-		}
-
-		.card-footer {
-			padding: em(24) 0px;
-			margin: 0px $m-x;
-		}
+	.card-body-title {
+		font-size: $body-1;
 	}
 }

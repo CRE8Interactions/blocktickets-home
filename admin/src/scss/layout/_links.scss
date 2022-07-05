@@ -1,8 +1,9 @@
 @use '../abstracts' as *;
+@use '../theme/borders' as *;
 
 @mixin hover-effect() {
 	background-color: $clr-lightGray;
-	border-radius: $br-sm;
+	border-radius: $border-radius-sm;
 }
 
 $nav-link-padding-y: rem(12);
