@@ -31,6 +31,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::payment-information.payment-information"
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
     }
   }
 }

@@ -64,6 +64,10 @@
       "type": "boolean",
       "default": false,
       "private": true
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
     }
   }
 }

@@ -469,49 +469,49 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
         id: order.userId
       }
     })
-    // try {
-    //   await strapi
-    //     .plugin('email-designer')
-    //     .service('email')
-    //     .sendTemplatedEmail(
-    //       {
-    //         // required
-    //         to: user.email,
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: user.email,
   
-    //         // optional if /config/plugins.js -> email.settings.defaultFrom is set
-    //         from: process.env.MAIN_EMAIL,
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
   
-    //         // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
-    //         replyTo: process.env.MAIN_EMAIL,
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
   
-    //         // optional array of files
-    //         attachments: [],
-    //       },
-    //       {
-    //         // required - Ref ID defined in the template designer (won't change on import)
-    //         templateReferenceId: 3,
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 3,
   
-    //         // If provided here will override the template's subject.
-    //         // Can include variables like `Thank you for your order {{= USER.firstName }}!`
-    //         subject: `You Got Tickets To ${order.event.name}`,
-    //       },
-    //       {
-    //         // this object must include all variables you're using in your email template
-    //         event: order.event,
-    //         venue: order.event.venue,
-    //         address: order.event.venue.address[0],
-    //         tickets: order.tickets,
-    //         user: user,
-    //         total: Number(order.total).toFixed(2),
-    //         count: order.details.ticketCount,
-    //         date: moment(order.event.start).format('ddd, MMM D, YYYY • h:mm'),
-    //         orderId: order.orderId,
-    //         image: order.event.image
-    //       }
-    //     );
-    //     //
-    // } catch (err) {
-    //   strapi.log.debug('📺: ', err);
-    // }
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `You Got Tickets To ${order.event.name}`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            event: order.event,
+            venue: order.event.venue,
+            address: order.event.venue.address[0],
+            tickets: order.tickets,
+            user: user,
+            total: Number(order.total).toFixed(2),
+            count: order.details.ticketCount,
+            date: moment(order.event.start).format('ddd, MMM D, YYYY • h:mm'),
+            orderId: order.orderId,
+            image: order.event.image
+          }
+        );
+        //
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
   }
 }))

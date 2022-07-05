@@ -4,7 +4,8 @@
   "info": {
     "singularName": "history",
     "pluralName": "histories",
-    "displayName": "history"
+    "displayName": "history",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false

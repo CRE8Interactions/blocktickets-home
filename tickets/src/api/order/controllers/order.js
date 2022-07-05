@@ -126,17 +126,41 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
-        let ticketIds = order.tickets.map((ticket) => ticket.id)
+        order.tickets.map(async (ticket) => {
+          let history;
 
-        await strapi.db.query('api::ticket.ticket').updateMany({
-          where: {
-            id: ticketIds,
-          },
-          data: {
-            on_sale_status: 'sold',
-            resale: false
-          },
-        });
+          if (ticket.histories) {
+           history = ticket.histories.push(await strapi.entityService.create('api::history.history', {
+              data: {
+                action: 'ticket purchased',
+                ticket: ticket.id,
+                state: ticket,
+                FromUser: order.userId
+              }
+            }))
+          } else {
+            history = await strapi.entityService.create('api::history.history', {
+              data: {
+                action: 'ticket purchased',
+                ticket: ticket.id,
+                state: ticket,
+                FromUser: order.userId
+              }
+            })
+          }
+          
+          await strapi.db.query('api::ticket.ticket').update({
+            where: {
+              id: ticket.id,
+            },
+            data: {
+              on_sale_status: 'sold',
+              resale: false
+            },
+          });
+        })
+
+        
 
         let originalOrder = await strapi.db.query('api::order.order').update({
           where: { paymentIntentId },
