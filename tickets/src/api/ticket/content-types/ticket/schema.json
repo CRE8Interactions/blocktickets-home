@@ -128,10 +128,6 @@
     "listingAskingPrice": {
       "type": "decimal"
     },
-    "history": {
-      "type": "json",
-      "private": true
-    },
     "histories": {
       "type": "relation",
       "relation": "oneToMany",

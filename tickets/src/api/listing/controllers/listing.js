@@ -25,15 +25,40 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       }
     })
 
-    await strapi.db.query('api::ticket.ticket').updateMany({
-      where: { id: tickets.map(ticket => ticket.id) },
-      data: {
-        resale: true,
-        on_sale_status: 'resaleAvailable',
-        listingId: entity.id,
-        listingAskingPrice: entity.askingPrice
+    tickets.map(async (ticket) => {
+      let history;
+
+      if (ticket.histories) {
+        history = ticket.histories.push(await strapi.entityService.create('api::history.history', {
+          data: {
+            action: 'listed for sale',
+            ticket: ticket.id,
+            state: ticket,
+            FromUser: user.id
+          }
+        }))
+      } else {
+        history = await strapi.entityService.create('api::history.history', {
+          data: {
+            action: 'listed for sale',
+            ticket: ticket.id,
+            state: ticket,
+            FromUser: user.id
+          }
+        })
       }
+
+      await strapi.db.query('api::ticket.ticket').update({
+        where: { id: ticket.id },
+        data: {
+          resale: true,
+          on_sale_status: 'resaleAvailable',
+          listingId: entity.id,
+          listingAskingPrice: entity.askingPrice
+        }
+      })
     })
+
     strapi.service('api::email.email').listingActive(user, tickets, event, serviceFees, payout, quantity, askingPrice)
     return 200
   },
@@ -151,15 +176,40 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       populate: { tickets: true },
     });
 
-    await strapi.db.query('api::ticket.ticket').updateMany({
-      where: { id: entry.tickets.map(ticket => ticket.id) },
-      data: {
-        resale: false,
-        on_sale_status: 'sold',
-        listingId: '',
-        listingAskingPrice: ''
+    entry.tickets.map(async (ticket) => {
+      let history;
+
+      if (ticket.histories) {
+        history = ticket.histories.push(await strapi.entityService.create('api::history.history', {
+          data: {
+            action: 'listing cancelled',
+            ticket: ticket.id,
+            state: ticket,
+            FromUser: user.id
+          }
+        }))
+      } else {
+        history = await strapi.entityService.create('api::history.history', {
+          data: {
+            action: 'listing cancelled',
+            ticket: ticket.id,
+            state: ticket,
+            FromUser: user.id
+          }
+        })
       }
+
+      await strapi.db.query('api::ticket.ticket').update({
+        where: { id: ticket.id },
+        data: {
+          resale: false,
+          on_sale_status: 'sold',
+          listingId: '',
+          listingAskingPrice: ''
+        }
+      })
     })
+
     strapi.service('api::email.email').removeListing(user, listing)
     return 200
   },

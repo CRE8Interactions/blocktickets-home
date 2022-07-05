@@ -50,6 +50,10 @@
     },
     "description": {
       "type": "text"
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
     }
   }
 }

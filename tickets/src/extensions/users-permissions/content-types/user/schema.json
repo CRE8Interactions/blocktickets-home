@@ -92,6 +92,10 @@
     "lastName": {
       "type": "string",
       "required": true
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
     }
   }
 }
