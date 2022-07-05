@@ -56,40 +56,40 @@ export default function PublishEvent() {
                     <h1 className='fs-md mb-3'>Event Info</h1>
                     <ul>
                         <li className="list">
-                            <ul>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                            <Stack as="li" gap={3}>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Presented by</span>
                                     <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
                                 </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Event title</span>
                                     <span className='fw-medium text-end flex-grow-1'>Nic Fanciulli</span>
                                 </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Date</span>
                                     <span className='fw-medium text-end flex-grow-1'>May 2, 2022</span>
                                 </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Venue</span>
                                     <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
                                 </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Location</span>
                                     <span className='fw-medium text-end flex-grow-1'>1135 Botham Jean Blvd, Dallas, TX</span>
                                 </Stack>
-                            </ul>
+                            </Stack>
                         </li>
-                        <li className="list">
-                            <ul>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                        <li className="list pt-2">
+                            <Stack as="ul" gap={3}>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Capacity</span>
                                     <span className='fw-medium text-end flex-grow-1'>10.000</span>
                                 </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row mb-3'>
+                                <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Price range</span>
                                     <span className='fw-medium text-end flex-grow-1'>$40.00-$80.00</span>
                                 </Stack>
-                            </ul>
+                            </Stack>
                         </li>
                     </ul>
                 </Col>

@@ -1,11 +1,6 @@
 @use '../abstracts' as *;
 @use '../theme/colors' as *;
 
-// Banner Spacers
-$banner-spacer-md-top: rem(100);
-$banner-spacer-md-bottom: rem(110);
-$banner-spacer: rem(21);
-
 // Page Spacers
 $spacer-xs: rem(32);
 $spacer-sm: rem(68);
@@ -18,7 +13,7 @@ $gap: rem(14);
 $gap-sm: rem(10);
 $gap-xs: rem(4);
 
-$text-spacer-lg: rem(38);
+$text-spacer-lg: rem(36);
 $text-spacer: rem(32);
 $text-spacer-sm: rem(24);
 $text-spacer-xs: rem(16);
@@ -47,14 +42,6 @@ $text-spacer-xs: rem(16);
 	}
 }
 
-.spacer-lg {
-	padding: $spacer-sm 0px;
-
-	@include breakpoint-min(lg) {
-		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
-	}
-}
-
 section + section {
 	margin-top: $text-spacer;
 }
@@ -63,18 +50,14 @@ section + section {
 	margin-top: rem(36);
 }
 
-.row + .row {
-	margin-top: rem(2);
-
-	@include breakpoint-min(md) {
-		margin-top: rem(4);
-	}
-}
-
 %flex-between {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.row + .row {
+	margin-top: rem(9);
 }
 
 .split-row {

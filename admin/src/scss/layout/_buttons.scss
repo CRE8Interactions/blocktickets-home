@@ -5,11 +5,6 @@
 @use '../theme/colors' as *;
 @use '../theme/borders' as *;
 
-%img-background {
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
 .btn + .btn {
 	margin-left: rem(16);
 }
