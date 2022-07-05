@@ -56,7 +56,7 @@ export default function PublishEvent() {
                     <h1 className='fs-md mb-3'>Event Info</h1>
                     <ul>
                         <li className="list">
-                            <Stack as="li" gap={3}>
+                            <Stack as="ul" gap={3}>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Presented by</span>
                                     <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
