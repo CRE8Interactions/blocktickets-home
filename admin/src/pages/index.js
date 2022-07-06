@@ -1,5 +1,10 @@
 export { HomePage } from './HomePage';
-export { Orders } from './Orders';
-export { Sales } from './Sales';
+export { DashboardPage } from './DashboardPage';
+export { MyEventPage } from './MyEventPage';
 export { EventsPage } from './EventsPage';
 export { CreateEventPage } from './CreateEventPage';
+export { BasicInfoPage } from './BasicInfoPage';
+export { DetailsPage } from './DetailsPage';
+export { PublishPage } from './PublishPage';
+export { Orders } from './Orders';
+export { Sales } from './Sales';

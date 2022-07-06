@@ -32,9 +32,18 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
 
         xAxis: {
             type: 'datetime',
+            tickInterval: 24 * 3600 * 1000,
             labels: {
                 formatter: function () {
-                    return Highcharts.dateFormat('%b %e', this.value)
+                    switch (text) {
+                        case 'Last 24 hrs':
+                            return Highcharts.dateFormat('%H:%M', this.value)
+
+                        case 'All time':
+                            return Highcharts.dateFormat('%H:%M', this.value)
+                        default:
+                            return Highcharts.dateFormat('%b %e', this.value)
+                    }
                 }
             },
         },
@@ -80,11 +89,11 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
         <div id="reports">
             <Stack direction="horizontal" className="split-row mb-4">
                 <Stack>
-                    <h1 className='fs-md'>{title}</h1>
-                    <StatRow bg={true} stat={stat} statAmount={statAmount} text={`vs ${text}`} />
+                    <h1 className='card-body-title'>{title}</h1>
+                    <StatRow bg={true} stat={stat} statAmount={statAmount} text={text} />
                 </Stack>
                 <Stack className='text-end' gap={1}>
-                    <span className='fw-semi-bold fs-md'>{total ? `${formatCurrency(total)}` : `${formatNumber(amount)}`}</span>
+                    <span className='fw-semi-bold card-body-title'>{total ? `${formatCurrency(total)}` : `${formatNumber(amount)}`}</span>
                     <span className="fw-semi-bold text-muted">{sales}</span>
                 </Stack>
             </Stack>

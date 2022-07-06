@@ -5,6 +5,7 @@
 @use "../../scss/theme/input" as *;
 @use "../../scss/theme/borders" as *;
 @use "../../scss/theme/colors" as *;
+@use "../../scss/theme/typography" as *;
 
 #reports {
 	#tabs {
@@ -18,13 +19,14 @@
 		padding: rem(8) $input-padding-x-sm;
 	}
 	.nav-link {
-		padding: rem(18) rem(16);
+		padding: rem(17) rem(16);
 		display: flex;
 		gap: $gap;
-		border: border($border-width: $border-width);
+		border: border();
 		border-radius: $border-radius;
 		background-color: transparent;
 		font-weight: $fw-medium;
+		font-family: $font-family-sans-serif;
 		cursor: pointer;
 		width: 100%;
 		color: $body-color;

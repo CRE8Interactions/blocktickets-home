@@ -2,14 +2,16 @@ import React from 'react';
 
 import { Reports } from '../Reports';
 import { OrdersTable } from '../OrdersTable';
+import { Cards } from './Cards';
 
-export default function HomeWrapper() {
+export default function DashboardWrapper() {
     return (
         <>
-            <Reports />
+            <Reports title="dashboard" />
+            <Cards />
             <section>
                 <div className="section-heading">
-                    <h1>Recent orders</h1>
+                    <h1>Orders</h1>
                 </div>
                 <OrdersTable />
             </section>

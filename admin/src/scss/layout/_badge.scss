@@ -19,6 +19,28 @@
 		font-weight: $fw-normal;
 		border-radius: $br-sm;
 	}
+
+	&-outline {
+		text-transform: uppercase;
+		border-style: solid;
+		border-width: $border-width;
+		background-color: $white !important;
+
+		&--primary {
+			color: $primary;
+			border-color: $primary;
+		}
+
+		&--secondary {
+			color: $secondary;
+			border-color: $secondary;
+		}
+
+		&--success {
+			color: $success;
+			border-color: $success;
+		}
+	}
 }
 
 .vstack {

@@ -12,13 +12,14 @@ import { Chart } from './Chart';
 
 import './reports.scss';
 
-export default function Reports() {
+export default function Reports({ title = "Reports" }) {
 
     const viewsObj = [
         "Last 24 hrs",
         "Last 7 days",
         "Last 14 days",
-        "Last 30 days"
+        "Last 30 days",
+        "All time"
     ];
 
     const salesObj = [
@@ -48,7 +49,7 @@ export default function Reports() {
             <>
                 <Row className="section-heading justify-content-flex-start">
                     <Col className='d-flex align-items-center'>
-                        <h1>Reports</h1>
+                        <h1 className="text-capitalize">{title}</h1>
                         <Form.Select value={view} onChange={(e) => setView(e.target.value)} className='ms-auto w-auto'>
                             {viewsObj.map((view, index) => (
                                 <option key={index} value={index}>{view}</option>
@@ -70,13 +71,13 @@ export default function Reports() {
                                 {sales == '0' ? (
                                     <>
                                         <Nav.Item as="li">
-                                            <Nav.Link as="button" eventKey="net" className='btn'>
-                                                <CustomTab title='Net sales' total="16290.82" stat="up" statAmount="1.6" text={`${handleView(view)}`} />
+                                            <Nav.Link as="button" eventKey="net">
+                                                <CustomTab title='Net sales' total="16290.82" stat="up" statAmount="1.6" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item as="li">
                                             <Nav.Link as="button" eventKey="gross">
-                                                <CustomTab title='Gross sales' total="20589.17" stat="up" statAmount="36" text={`${handleView(view)}`} />
+                                                <CustomTab title='Gross sales' total="20589.17" stat="up" statAmount="36" text={`${handleView(view)} `} sales={`${handleSales(sales)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                     </>
@@ -84,19 +85,19 @@ export default function Reports() {
                                     <>
                                         <Nav.Item as="li" className='royalties'>
                                             <Nav.Link as="button" eventKey="royalties" className='btn'>
-                                                <CustomTab title='Royalties' total="20000.15" stat="up" statAmount="16" text={`${handleView(view)}`} />
+                                                <CustomTab title='Royalties' total="20000.15" stat="up" statAmount="16" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item as="li" className="listed">
                                             <Nav.Link as="button" eventKey="listed">
-                                                <CustomTab title='Tickets listed' amount="1500" stat="up" statAmount="36" text={`${handleView(view)}`} />
+                                                <CustomTab title='Tickets listed' amount="1500" stat="up" statAmount="36" text={`${handleView(view)}`} sales={`${handleSales(sales)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                     </>
                                 )
                                 }
                                 <Nav.Item as="li">
-                                    <Nav.Link as="button" eventKey="tickets">
+                                    <Nav.Link as="button" eventKey="tickets" className='tickets-sold'>
                                         <CustomTab title='Tickets sold' amount="500" stat="up" statAmount="23" text={`${handleView(view)}`} />
                                     </Nav.Link>
                                 </Nav.Item>

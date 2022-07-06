@@ -18,10 +18,6 @@
 		}
 	}
 
-	.container {
-		position: relative;
-	}
-
 	.desktop-btns {
 		@include breakpoint-min(lg) {
 			order: 4;

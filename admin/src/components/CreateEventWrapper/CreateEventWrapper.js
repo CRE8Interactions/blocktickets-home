@@ -9,14 +9,11 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { BackButton } from '../BackButton';
-import { BasicInfo } from './BasicInfo';
-import { DateTime } from './DateTime';
-import { Location } from './Location';
-import { UploadEventImage } from './UploadEventImage';
-import { TextEditor } from './TextEditor';
 import { CreateTicket } from './CreateTicket';
 import { Tickets } from './Tickets';
-import { PublishEvent } from './PublishEvent';
+import { BasicInfoWrapper } from '../BasicInfoWrapper';
+import { DetailsWrapper } from '../DetailsWrapper';
+import { PublishWrapper } from '../PublishWrapper';
 
 import './createEventWrapper.scss';
 
@@ -99,56 +96,17 @@ export default function CreateEventWrapper() {
     return (
         <div className={` ${step !== 4 ? 'wrapper' : ''}`} id="create-event">
             {step === 1 && (
-                <div>
-                    <section>
-                        <div className="section-heading-sm section-heading--secondary">
-                            <h1>Basic info</h1>
-                        </div>
-                        <Card body className="card--light">
-                            <BasicInfo handleChange={handleChange} />
-                        </Card>
-                    </section>
-                    <section>
-                        <div className="section-heading-sm section-heading--secondary">
-                            <h1>Date & Time</h1>
-                        </div>
-                        <Card body className="card--light">
-                            <DateTime handleChange={handleChange} />
-                        </Card>
-                    </section>
-                    <section>
-                        <div className="section-heading-sm section-heading--secondary">
-                            <h1>Location</h1>
-                        </div>
-                        <Card body className="card--light">
-                            <Location handleChange={handleChange} />
-                        </Card>
-                    </section>
+                <>
+                    <BasicInfoWrapper handleChange={handleChange} />
                     <Stack direction="horizontal" className="justify-content-end btn-group-flex">
                         <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
                     </Stack>
-                </div>
+                </>
             )}
 
             {step === 2 && (
                 <div>
-                    <section>
-                        <div className="section-heading-sm section-heading--secondary">
-                            <h1>Main event image</h1>
-                        </div>
-                        <Card body className="card--light">
-                            <UploadEventImage handleChange={handleChange} />
-
-                        </Card>
-                    </section>
-                    <section>
-                        <div className="section-heading-sm section-heading--secondary">
-                            <h1>Event description</h1>
-                        </div>
-                        <Card body className="card--light">
-                            <TextEditor handleChange={handleChange} />
-                        </Card>
-                    </section>
+                    <DetailsWrapper handleChange={handleChange} />
                     <Stack direction="horizontal" className="justify-content-end btn-group-flex">
                         <BackButton handleGoBack={handleGoBack} />
                         <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
@@ -193,24 +151,16 @@ export default function CreateEventWrapper() {
             )}
 
             {step === 5 && (
-                <div>
-                    <section>
-                        <div className="section-heading-sm section-heading--secondary">
-                            <h1>Publish event</h1>
-                        </div>
-                        <Card body className="card--light">
-                            <PublishEvent />
-                        </Card>
-                    </section>
+                <>
+                    <PublishWrapper />
                     <Stack direction="horizontal" className="justify-content-end btn-group-flex">
                         <>
                             <BackButton handleGoBack={handleGoBack} />
                             <Button className="btn-next" size="lg" onClick={publish}>Publish</Button>
                         </>
                     </Stack>
-                </div>
+                </>
             )}
-
         </div>
     );
 }
