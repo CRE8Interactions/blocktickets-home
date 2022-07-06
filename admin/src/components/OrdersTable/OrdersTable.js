@@ -1,16 +1,17 @@
 import React from "react";
 
-import { formatCurrency } from "../../../utilities/helpers";
+import { formatCurrency } from "../../utilities/helpers";
 
+import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 
-export default function Orders() {
+export default function OrdersTable() {
     return (
-        <>
+        <Card body>
             <Table>
                 <thead>
                     <tr>
-                        <th>Order #</th>
+                        <th>Order</th>
                         <th>Event</th>
                         <th>Ticket Buyer</th>
                         <th>Quantity</th>
@@ -23,7 +24,7 @@ export default function Orders() {
 
                     <tr>
                         <td>
-                            3170173179
+                            1933-194233-3743
                         </td>
                         <td>
                             Nic Fanciulli presents
@@ -44,6 +45,6 @@ export default function Orders() {
                     </tr>
                 </tbody>
             </Table>
-        </>
+        </Card>
     )
 }

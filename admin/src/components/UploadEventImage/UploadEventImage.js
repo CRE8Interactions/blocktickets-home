@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
 import { Dropzone } from './Dropzone';
-import { InfoIcon } from '../../InfoIcon';
+import { InfoIcon } from '../InfoIcon';
 
 export default function UploadEventImage({ handleChange }) {
     const [previewImage, setPreviewImage] = useState()
