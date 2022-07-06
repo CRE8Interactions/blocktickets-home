@@ -153,9 +153,9 @@ export default function EventsTable({ handleTicketShow, type }) {
                                 <Dropdown align="right">
                                     <Dropdown.Toggle variant="default"></Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item className="btn-edit" as="button" onClick={() => navigate("/myevent/123")}>View</Dropdown.Item>
-                                        <Dropdown.Item as="button" onClick={() => navigate("/create/123")} className="btn-edit">Edit</Dropdown.Item>
-                                        <Dropdown.Item className="btn-edit" as="button" href="/create-event">Copy URL</Dropdown.Item>
+                                        <Dropdown.Item className="btn-edit" href="/myevent/123">View</Dropdown.Item>
+                                        <Dropdown.Item href="/myevent/123/basic-info" className="btn-edit">Edit</Dropdown.Item>
+                                        <Dropdown.Item className="btn-edit" as="button" href="/">Copy URL</Dropdown.Item>
                                         <Dropdown.Item as="button"
                                             className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
                                     </Dropdown.Menu>
