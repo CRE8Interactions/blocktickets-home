@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { DateInputWrapper } from '../DateInputWrapper';
-import { TimeInputWrapper } from '../TimeInputWrapper';
+import { DateInputWrapper } from '../../DateInputWrapper';
+import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { TicketBreakdownModal } from './TicketBreakdownModal';
 
 export default function CreateTicket({ handleChange, editId }) {
