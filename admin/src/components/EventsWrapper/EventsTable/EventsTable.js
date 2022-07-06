@@ -11,7 +11,8 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Stack from "react-bootstrap/Stack";
 import Badge from "react-bootstrap/Badge";
 
-import StatRow from "./../../StatRow/StatRow";
+import { StatRow } from "./../../StatRow";
+import { DeleteModal } from '../../DeleteModal';
 
 import thumbnail from '../../../assets/profile-thumbnail.png'
 import './eventsTable.scss';
@@ -22,8 +23,11 @@ export default function EventsTable({ handleTicketShow, type }) {
     const [events, setEvents] = useState()
     const [event, setEvent] = useState()
     const [gross, setGross] = useState()
+
     const [show, setShow] = useState(false);
+
     const handleClose = () => setShow(false);
+
     const handleShow = () => setShow(true);
 
     let sum;
@@ -152,7 +156,8 @@ export default function EventsTable({ handleTicketShow, type }) {
                                         <Dropdown.Item className="btn-edit" as="button" onClick={() => navigate("/dashboard/123")}>View</Dropdown.Item>
                                         <Dropdown.Item as="button" onClick={() => navigate("/create/123")} className="btn-edit">Edit</Dropdown.Item>
                                         <Dropdown.Item className="btn-edit" as="button" href="/create-event">Copy URL</Dropdown.Item>
-                                        <Dropdown.Item as="button" href="/create-event" className="btn-delete">Delete</Dropdown.Item>
+                                        <Dropdown.Item as="button"
+                                            className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>
@@ -160,6 +165,8 @@ export default function EventsTable({ handleTicketShow, type }) {
                     ))}
                 </tbody>
             </Table>
+
+            <DeleteModal show={show} handleClose={handleClose}></DeleteModal>
         </>
     )
 }
