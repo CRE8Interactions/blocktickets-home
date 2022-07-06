@@ -5,11 +5,11 @@ import Badge from 'react-bootstrap/Badge';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import { NoDataContainer } from '../../NoDataContainer';
-import { DeleteModal } from './DeleteModal';
+import { DeleteModal } from '../../DeleteModal';
 
 import './tickets.scss';
 
-export default function Tickets({ tickets, handleEdit }) {
+export default function Tickets({ tickets, handleAction }) {
 
     const ticketStatusColors = [
         {
@@ -57,7 +57,7 @@ export default function Tickets({ tickets, handleEdit }) {
                                     <Dropdown>
                                         <Dropdown.Toggle variant="default"></Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item as="button" className="btn-edit" onClick={() => handleEdit(ticket.id)}>Edit</Dropdown.Item>
+                                            <Dropdown.Item as="button" className="btn-edit" onClick={() => handleAction('edit', ticket.id)}>Edit</Dropdown.Item>
                                             <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>

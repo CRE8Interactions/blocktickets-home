@@ -20,7 +20,7 @@ import { PublishEvent } from './PublishEvent';
 
 import './createEventWrapper.scss';
 
-export default function CreateEventWrapper({ event }) {
+export default function CreateEventWrapper() {
 
     let navigate = useNavigate();
 
@@ -29,13 +29,8 @@ export default function CreateEventWrapper({ event }) {
         setStep
     ] = useState(1);
 
-    const [editEvent, setEditEvent] = useState()
-
-    const handleEdit = () => {
-        setStep(3);
-        setEditEvent(event)
-    }
-
+    const [editId, setEditId] = useState()
+    const [action, setAction] = useState()
 
     const [events, setEvents] = useState()
 
@@ -66,8 +61,16 @@ export default function CreateEventWrapper({ event }) {
         }
     ])
 
+    // step processing: add, edit, save each step 
     const handleClick = () => {
+        setAction('')
         setStep(step + 1)
+    }
+
+    const handleAction = (action, id) => {
+        setStep(3);
+        setAction(action)
+        action === 'edit' ? setEditId(id) : setEditId('')
     }
 
     const publish = (event) => {
@@ -81,7 +84,11 @@ export default function CreateEventWrapper({ event }) {
     }
 
     const handleGoBack = () => {
-        setStep(step - 1);
+        if (action === 'edit' || action === 'add') {
+            setStep(step + 1)
+        } else {
+            setStep(step - 1);
+        }
     };
 
     const fullscreen = useState(true);
@@ -153,16 +160,16 @@ export default function CreateEventWrapper({ event }) {
                 <div>
                     <section>
                         <div className="section-heading-sm section-heading--secondary">
-                            <h1>{editEvent ? 'Edit ticket' : 'Create a ticket'}</h1>
+                            <h1>{action === 'edit' ? 'Edit ticket' : 'Create a ticket'}</h1>
                         </div>
                         <Card body className="card--light">
-                            <CreateTicket handleChange={handleChange} editEvent={editEvent} />
+                            <CreateTicket handleChange={handleChange} editId={editId} />
                         </Card>
                     </section>
                     <Stack direction="horizontal" className="justify-content-end btn-group-flex">
                         <>
                             <BackButton handleGoBack={handleGoBack} />
-                            <Button className="btn-next" size="lg" onClick={handleClick}>{editEvent ? 'Save' : 'Create ticket'}</Button>
+                            <Button className="btn-next" size="lg" onClick={handleClick}>{action === 'edit' ? 'Save' : 'Create ticket'}</Button>
                         </>
                     </Stack>
                 </div>
@@ -172,9 +179,9 @@ export default function CreateEventWrapper({ event }) {
                     <section>
                         <div className="section-heading-sm section-heading--secondary">
                             <h1>Tickets</h1>
-                            <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={() => setStep(3)}>Add ticket</Button>
+                            <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={() => handleAction('add')}>Add ticket</Button>
                         </div>
-                        <Tickets tickets={tickets} handleEdit={handleEdit} />
+                        <Tickets tickets={tickets} handleAction={handleAction} />
                     </section>
                     {tickets && tickets.length > 0 && (
                         <Stack direction="horizontal" className="justify-content-end mt-5 btn-group-flex">
