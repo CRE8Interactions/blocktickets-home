@@ -1,0 +1,35 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout/spacing' as *;
+@use '../../../scss/layout/images' as *;
+@use '../../../scss/theme/colors' as *;
+
+.cards {
+	margin: $text-spacer 0px;
+
+	&-container {
+		row-gap: $text-spacer;
+	}
+
+	.card {
+		height: 100%;
+	}
+
+	.small-label--flex {
+		margin-bottom: rem(8);
+	}
+
+	.small-text {
+		font-size: $small;
+		color: $text-muted;
+		font-weight: $fw-semi-bold;
+	}
+
+	.payout {
+		@extend %img-psuedo-icon !optional;
+		&:before {
+			--opac: 0.15;
+			background-image: url('../../../assets/icons/ticket.svg');
+			background-color: rgba($success, var(--opac));
+		}
+	}
+}

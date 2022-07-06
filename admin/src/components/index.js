@@ -1,8 +1,12 @@
 export { Navigation } from './Navigation';
 export { HomeWrapper } from './HomeWrapper';
-export { EventsWrapper } from './EventsWrapper';
-export { CreateEventWrapper } from './CreateEventWrapper';
+export { DashboardWrapper } from './DashboardWrapper';
 export { Sidenav } from './Sidenav';
+export { BasicInfoWrapper } from './BasicInfoWrapper';
+export { DetailsWrapper } from './DetailsWrapper';
+export { PublishWrapper } from './PublishWrapper';
+export { CreateEventWrapper } from './CreateEventWrapper';
+export { EventsWrapper } from './EventsWrapper';
 export { EventsTable } from './EventsWrapper/EventsTable';
 export { CreateOrg } from './Forms/CreateOrg';
 export { CreateEvent } from './Modals/CreateEvent';
