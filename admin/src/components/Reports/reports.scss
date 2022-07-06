@@ -1,6 +1,6 @@
 @use "../../scss/abstracts" as *;
 @use "../../scss/layout/spacing" as *;
-@use "../../scss/layout/buttons" as *;
+@use "../../scss/layout/images" as *;
 @use "../../scss/theme/buttons" as *;
 @use "../../scss/theme/input" as *;
 @use "../../scss/theme/borders" as *;
@@ -36,12 +36,7 @@
 
 	.nav-item {
 		.nav-link:before {
-			content: '';
-			@extend %img-background;
-			border-radius: 50%;
-			width: 48px;
-			height: 48px;
-			--opac: 0.15;
+			@extend %img-psuedo-icon;
 		}
 
 		&:first-of-type {
@@ -54,14 +49,7 @@
 		&:nth-of-type(2) {
 			.nav-link:before {
 				background-image: url('../../assets/icons/gross-sales.svg');
-				background-color: rgba($clr-secondary, var(--opac));
-			}
-		}
-
-		&:nth-of-type(3) {
-			.nav-link:before {
-				background-image: url('../../assets/icons/ticket.svg');
-				background-color: rgba($primary, var(--opac));
+				background-color: rgba($secondary, var(--opac));
 			}
 		}
 
