@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { publishEvent } from "../../utilities/api";
@@ -57,6 +57,11 @@ export default function CreateEventWrapper() {
             price: 50
         }
     ])
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [step])
+
 
     // step processing: add, edit, save each step 
     const handleClick = () => {

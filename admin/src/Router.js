@@ -8,18 +8,20 @@ import { ScrollToTop } from './components';
 
 const Router = () => {
     return (
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/myevent/:id" element={<DashboardPage />}>
-                <Route index element={<MyEventPage />} />
-                <Route path="basic-info" element={<BasicInfoPage />} />
-                <Route path="details" element={<DetailsPage />} />
-                <Route path="publish" element={<PublishPage />} />
-            </Route>
-            <Route path="events" element={<EventsPage />} />
-            <Route path="create" element={<CreateEventPage />} />
-            <Route path="create/:id" element={<CreateEventPage />} />
-        </Routes>
+        <ScrollToTop>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/myevent/:id" element={<DashboardPage />}>
+                    <Route index element={<MyEventPage />} />
+                    <Route path="basic-info" element={<BasicInfoPage />} />
+                    <Route path="details" element={<DetailsPage />} />
+                    <Route path="publish" element={<PublishPage />} />
+                </Route>
+                <Route path="events" element={<EventsPage />} />
+                <Route path="create" element={<CreateEventPage />} />
+                <Route path="create/:id" element={<CreateEventPage />} />
+            </Routes>
+        </ScrollToTop>
     );
 };
 
