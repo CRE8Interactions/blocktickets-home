@@ -115,7 +115,6 @@ export default function SearchBar() {
                 <Form.Control
                     type="text"
                     placeholder="Search for events"
-                    className="me-2"
                     size="sm"
                     value={query}
                     onChange={(e) => showResults(e.target.value)}

@@ -70,6 +70,10 @@ h4,
 	margin-bottom: rem(3);
 }
 
+.caption {
+	font-size: $caption;
+}
+
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;

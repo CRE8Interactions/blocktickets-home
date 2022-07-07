@@ -8,7 +8,7 @@ $br-xs: 4px;
 $border-width: 2px; // btns, inputs
 $border-color: $clr-neutral-6;
 
-@function border($border-width: 1px, $color: $border-color, $border-style: solid) {
+@function border($border-width: $border-width, $color: $border-color, $border-style: solid) {
 	@return $border-width $border-style $color;
 }
 
