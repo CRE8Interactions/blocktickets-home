@@ -20,7 +20,7 @@ export default function Sidenav(props) {
                     <Stack className="sidebar-header">
                         <Badge bg="success" className='mb-3 align-self-start'>On Sale</Badge>
                         <h1 className='fs-md'>Nic Fanciulli</h1>
-                        <div className="caption">
+                        <div className="small">
                             <p>Mar 13 <span className='time'>9:00 PM EST</span></p>
                             <p>CODA <span className='loc'>Toronto, ON</span></p>
                         </div>
@@ -51,7 +51,7 @@ export default function Sidenav(props) {
                     <Stack as="ul" gap={3} className="main-navigation">
                         <Nav.Item as="li">
                             <LinkContainer to="">
-                                <Nav.Link aria-current="page" href="/myevent/123">
+                                <Nav.Link>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fillRule="evenodd" clipRule="evenodd" d="M3 20C1.34315 20 0 18.6568 0 17V9.33607C0 8.48561 0.360964 7.67512 0.993106 7.10619L7.9931 0.80619C9.13402 -0.220633 10.866 -0.220635 12.0069 0.806189L19.0069 7.10619C19.639 7.67512 20 8.48561 20 9.33607V17C20 18.6568 18.6569 20 17 20H3ZM18 9.33607V17C18 17.5523 17.5523 18 17 18H14V13C14 11.3431 12.6569 9.99998 11 9.99998H9C7.34315 9.99998 6 11.3431 6 13V18H3C2.44772 18 2 17.5523 2 17V9.33607C2 9.05258 2.12032 8.78242 2.33104 8.59278L9.33103 2.29278C9.71134 1.9505 10.2887 1.9505 10.669 2.29278L17.669 8.59278C17.8797 8.78242 18 9.05259 18 9.33607ZM8 18V13C8 12.4477 8.44772 12 9 12H11C11.5523 12 12 12.4477 12 13V18H8Z" fill="currentColor" />
                                     </svg>
@@ -73,13 +73,19 @@ export default function Sidenav(props) {
                             <Collapse in={open}>
                                 <ul id="attendees-collapse" className='submenu'>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="orders"><Nav.Link>Orders</Nav.Link></LinkContainer>
+                                        <LinkContainer to="orders">
+                                            <Nav.Link>Orders</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="attendees"><Nav.Link>Attendee list</Nav.Link></LinkContainer>
+                                        <LinkContainer to="attendees">
+                                            <Nav.Link>Attendee list</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="check-in"><Nav.Link>Check in</Nav.Link></LinkContainer>
+                                        <LinkContainer to="check-in">
+                                            <Nav.Link>Check in</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                 </ul>
                             </Collapse>
@@ -99,13 +105,19 @@ export default function Sidenav(props) {
                             <Collapse in={open}>
                                 <ul id="reports-collapse" className='submenu'>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="primary-sales"><Nav.Link>Primary sales</Nav.Link></LinkContainer>
+                                        <LinkContainer to="primary-sales">
+                                            <Nav.Link>Primary sales</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="secondary-sales"><Nav.Link>Secondary sales</Nav.Link></LinkContainer>
+                                        <LinkContainer to="secondary-sales">
+                                            <Nav.Link>Secondary sales</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="reporting"><Nav.Link>Automatic reporting</Nav.Link></LinkContainer>
+                                        <LinkContainer to="reporting">
+                                            <Nav.Link>Automatic reporting</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                 </ul>
                             </Collapse>
@@ -124,7 +136,9 @@ export default function Sidenav(props) {
                             <Collapse in={open}>
                                 <ul id="marketing-collapse" className='submenu'>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="address"><Nav.Link>Contact address</Nav.Link></LinkContainer>
+                                        <LinkContainer to="address">
+                                            <Nav.Link>Contact address</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                 </ul>
                             </Collapse>
