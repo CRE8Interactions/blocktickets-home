@@ -1,4 +1,5 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/container' as *;
 @use '../../scss/layout/spacing' as *;
 @use '../../scss/layout/links' as *;
 @use '../../scss/theme/colors' as *;
@@ -10,7 +11,7 @@
 .sidebar {
 	width: 314px;
 	background-color: $white;
-	padding: rem(24) rem(32);
+	padding: 0px rem(32);
 	position: fixed;
 	top: 81px;
 	left: 0;
@@ -23,15 +24,8 @@
 		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 		display: flex;
 		flex-direction: column;
-
-		& {
-			-ms-overflow-style: none; /* Internet Explorer 10+ */
-			scrollbar-width: none; /* Firefox */
-
-			&::-webkit-scrollbar {
-				display: none; /* Safari and Chrome */
-			}
-		}
+		padding: rem(24) 0px;
+		@include hide-scrollbars();
 
 		.sidebar-header {
 			margin-bottom: $text-spacer;

@@ -12,18 +12,18 @@ $navbar-height: rem(82);
 	max-width: 1130px;
 	margin: 0 auto;
 	@include breakpoint-max(md) {
-		padding: 0px $pad-sm;
+		padding-right: $pad-sm;
+		padding-left: $pad-sm;
 	}
 
 	@include breakpoint-inBetween(md, xl) {
-		padding: 0px $pad-md;
+		padding-right: $pad-md;
+		padding-left: $pad-md;
 	}
 }
 
 .main-content {
 	margin-left: 314px;
-	padding-right: rem(50);
-	padding-left: rem(50);
 }
 
 .sidebar-container {
@@ -39,6 +39,17 @@ $navbar-height: rem(82);
 
 .nav-is-open {
 	overflow: hidden;
+}
+
+@mixin hide-scrollbars() {
+	& {
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
+
+		&::-webkit-scrollbar {
+			display: none; /* Safari and Chrome */
+		}
+	}
 }
 
 @mixin heading-psuedo($color: $primary) {
