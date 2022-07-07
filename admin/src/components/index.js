@@ -1,3 +1,4 @@
+export { ScrollToTop } from './ScrollToTop';
 export { Navigation } from './Navigation';
 export { HomeWrapper } from './HomeWrapper';
 export { DashboardWrapper } from './DashboardWrapper';
