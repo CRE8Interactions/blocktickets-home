@@ -24,20 +24,6 @@ select:-webkit-autofill:focus {
 .form-control {
 	font-weight: $fw-medium;
 
-	&-xs {
-		border-radius: 4px;
-		width: 40%;
-		font-size: $caption;
-		font-weight: $fw-normal;
-		text-align: center;
-		padding: rem(2) rem(8);
-		margin-top: 0px;
-	}
-
-	&--borderless {
-		border: none;
-	}
-
 	&:disabled {
 		opacity: .5;
 	}
@@ -166,28 +152,22 @@ legend {
 }
 
 // search field
-@mixin input-icon-box($radius: theme.$border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
-	display: flex;
+@mixin input-icon-box($radius: theme.$border-radius, $color: $clr-neutral-6, $bg: $white, $padding-x: $input-padding-x) {
 	align-items: center;
 	border-radius: $radius;
 	border: $input-border-width solid $color;
-	padding-right: rem(8);
-	background-color: $gray-300;
-	border-color: transparent;
+	padding-left: $padding-x;
+	background-color: $bg;
 
 	&:focus-within {
 		border-color: $input-focus-border-color;
 	}
 
-	.form-control {
+	.form-control,
+	.form-select {
 		background-color: transparent;
 		border: none;
 		border-radius: 0;
 		min-height: auto;
 	}
-}
-
-// search
-.input-wrapper {
-	@include input-icon-box();
 }

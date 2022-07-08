@@ -1,4 +1,5 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/container' as *;
 @use '../../scss/layout/spacing' as *;
 @use '../../scss/layout/links' as *;
 @use '../../scss/theme/colors' as *;
@@ -10,7 +11,7 @@
 .sidebar {
 	width: 314px;
 	background-color: $white;
-	padding: rem(24) rem(32);
+	padding: 0px rem(32);
 	position: fixed;
 	top: 81px;
 	left: 0;
@@ -23,15 +24,8 @@
 		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 		display: flex;
 		flex-direction: column;
-
-		& {
-			-ms-overflow-style: none; /* Internet Explorer 10+ */
-			scrollbar-width: none; /* Firefox */
-
-			&::-webkit-scrollbar {
-				display: none; /* Safari and Chrome */
-			}
-		}
+		padding: rem(24) 0px;
+		@include hide-scrollbars();
 
 		.sidebar-header {
 			margin-bottom: $text-spacer;
@@ -53,29 +47,19 @@
 		vertical-align: rem(-6);
 	}
 
-	.btn-toggle {
-		display: flex;
-		align-items: center;
-		width: 100%;
-
-		&[aria-expanded="true"] {
-			&::after {
-				transform: rotate(180deg);
-			}
-		}
-
-		&::after {
-			width: 1.25em;
-			line-height: 0;
-			content: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L1.70711 0.292893ZM7 7L6.29289 7.70711C6.68342 8.09763 7.31658 8.09763 7.70711 7.70711L7 7ZM13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976311 12.6834 -0.0976311 12.2929 0.292893L13.7071 1.70711ZM0.292893 1.70711L6.29289 7.70711L7.70711 6.29289L1.70711 0.292893L0.292893 1.70711ZM7.70711 7.70711L13.7071 1.70711L12.2929 0.292893L6.29289 6.29289L7.70711 7.70711Z' fill='%236F767E'/%3E%3C/svg%3E%0A");
-			transition: transform .35s ease;
-			margin-left: auto;
-		}
-	}
-
 	.submenu {
+		position: relative;
 		.nav-item {
 			padding-left: $text-spacer-lg;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			margin-left: rem(27);
+			width: 2px;
+			height: 100%;
+			background-color: $clr-lightGray;
 		}
 	}
 

@@ -70,6 +70,10 @@ h4,
 	margin-bottom: rem(3);
 }
 
+.caption {
+	font-size: $caption;
+}
+
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -124,6 +128,7 @@ h4,
 
 .tickets-sold {
 	&:before {
+		display: inline-block;
 		@extend %img-psuedo-icon !optional;
 		background-image: url('../../assets/icons/ticket.svg');
 		background-color: rgba($primary, var(--opac));

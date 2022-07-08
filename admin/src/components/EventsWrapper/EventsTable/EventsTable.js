@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 import OrganizationContext from "../../../context/Organization/Organization";
 import { publishEvent } from "../../../utilities/api";
@@ -13,6 +14,7 @@ import Badge from "react-bootstrap/Badge";
 
 import { StatRow } from "./../../StatRow";
 import { DeleteModal } from '../../DeleteModal';
+import { MoreIcon } from "../../MoreIcon";
 
 import thumbnail from '../../../assets/profile-thumbnail.png'
 import './eventsTable.scss';
@@ -151,13 +153,29 @@ export default function EventsTable({ handleTicketShow, type }) {
                             <td className="text-body">{getStatus(type)}</td>
                             <td className="btn-more">
                                 <Dropdown align="right">
-                                    <Dropdown.Toggle variant="default"></Dropdown.Toggle>
+                                    <Dropdown.Toggle variant="default">
+                                        <MoreIcon />
+                                    </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item className="btn-edit" href="/myevent/123">View</Dropdown.Item>
-                                        <Dropdown.Item href="/myevent/123/basic-info" className="btn-edit">Edit</Dropdown.Item>
-                                        <Dropdown.Item className="btn-edit" as="button" href="/">Copy URL</Dropdown.Item>
-                                        <Dropdown.Item as="button"
-                                            className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
+                                        <ul>
+                                            <li>
+                                                <LinkContainer to="/myevent/123">
+                                                    <Dropdown.Item className="btn-edit">View</Dropdown.Item>
+                                                </LinkContainer>
+                                            </li>
+                                            <li>
+                                                <LinkContainer to="/myevent/123/basic-info">
+                                                    <Dropdown.Item className="btn-edit">Edit</Dropdown.Item>
+                                                </LinkContainer>
+                                            </li>
+                                            <li>
+                                                <Dropdown.Item className="btn-edit" as="button">Copy URL</Dropdown.Item>
+                                            </li>
+                                            <li>
+                                                <Dropdown.Item as="button"
+                                                    className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
+                                            </li>
+                                        </ul>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </td>

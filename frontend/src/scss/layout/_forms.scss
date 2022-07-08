@@ -4,7 +4,7 @@
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
 @use '../theme/colors' as *;
-@use '../theme/borders' as *;
+@use '../theme/borders' as theme;
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -44,7 +44,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-card {
-	border-radius: $border-radius;
+	border-radius: theme.$border-radius;
 	padding: rem(12) rem(16);
 
 	&-lg {
@@ -110,7 +110,7 @@ select:-webkit-autofill:focus {
 }
 
 // search field
-@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
+@mixin input-icon-box($radius: theme.$border-radius, $color: $light) {
 	display: flex;
 	align-items: center;
 	border-radius: $radius;

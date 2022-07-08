@@ -6,12 +6,16 @@
 .cards {
 	margin: $text-spacer 0px;
 
-	&-container {
-		row-gap: $text-spacer;
+	.row + .row {
+		margin-top: $text-spacer;
 	}
 
 	.card {
 		height: 100%;
+
+		&-body {
+			padding: rem(24) rem(32);
+		}
 	}
 
 	.small-label--flex {
@@ -24,11 +28,33 @@
 		font-weight: $fw-semi-bold;
 	}
 
-	.payout {
-		@extend %img-psuedo-icon !optional;
+	.shareable-link,
+	.payout,
+	.total-sales {
+		&::before {
+			display: inline-block;
+			@extend %img-psuedo-icon;
+		}
+	}
+
+	.shareable-link {
+		&::before {
+			background-image: url('../../../assets/icons/link.svg');
+		}
+	}
+
+	.total-sales {
 		&:before {
-			--opac: 0.15;
-			background-image: url('../../../assets/icons/ticket.svg');
+			margin-right: $gap;
+			background-image: url('../../../assets/icons/growth.svg');
+			background-color: rgba($primary, var(--opac));
+		}
+	}
+
+	.payout {
+		&:before {
+			margin-right: $gap;
+			background-image: url('../../../assets/icons/coin.svg');
 			background-color: rgba($success, var(--opac));
 		}
 	}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { formatCurrency } from "../../utilities/helpers";
+import { formatCurrency, formatOrderId } from "../../utilities/helpers";
 
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
@@ -24,7 +24,7 @@ export default function OrdersTable() {
 
                     <tr>
                         <td>
-                            1933-194233-3743
+                            {formatOrderId(19331942333743)}
                         </td>
                         <td>
                             Nic Fanciulli presents

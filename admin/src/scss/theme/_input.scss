@@ -8,11 +8,15 @@ $input-font-size-sm: rem(12);
 $input-font-size-lg: $input-font-size;
 $input-disabled-bg: transparent;
 
+// orders search input
+$input-padding-y-lg: rem(19);
+$input-padding-x-lg: rem(20);
+
 // input
 $input-padding-y: rem(12);
 $input-padding-x: rem(16);
 
-// search input
+// events search input
 $input-padding-x-sm: rem(16);
 $input-padding-y-sm: rem(10);
 

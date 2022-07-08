@@ -6,7 +6,7 @@ import { publishEvent } from '../../utilities/api';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
-import { SearchBar } from './SearchBar';
+import { SearchBar } from '../SearchBar';
 import { EventsTable } from './EventsTable';
 
 import './eventsWrapper.scss';
@@ -30,6 +30,17 @@ export default function EventsWrapper() {
         setEvent
     ] = useState();
 
+    // search query
+    const [
+        query,
+        setQuery
+    ] = useState('');
+
+    const [
+        queryResults,
+        setQueryResults
+    ] = useState('');
+
     const handleClose = () => setShow(false);
     const handleShow = () => {
         setStep(1);
@@ -45,12 +56,14 @@ export default function EventsWrapper() {
         setEvent(event);
     };
 
+    const handleSearch = (query) => { }
+
     return (
         <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-            <div className="flex-wrap d-flex align-items-center justify-content-between" id="events-header">
+            <div className="flex-wrap d-flex align-items-center justify-content-between" id="events">
                 <div className="section-heading gap-4">
                     <h1>Events</h1>
-                    <SearchBar />
+                    <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="sm" placeholder="Search events" />
                 </div>
 
                 <Nav as="ul" variant="pills" className="ms-auto">
