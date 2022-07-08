@@ -48,8 +48,18 @@
 	}
 
 	.submenu {
+		position: relative;
 		.nav-item {
 			padding-left: $text-spacer-lg;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			margin-left: rem(27);
+			width: 2px;
+			height: 100%;
+			background-color: $clr-lightGray;
 		}
 	}
 

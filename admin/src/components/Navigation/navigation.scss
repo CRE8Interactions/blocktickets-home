@@ -35,7 +35,7 @@
 		&-brand {
 			padding-top: rem(3);
 			@include breakpoint-min(lg) {
-				border-right: border(2px);
+				border-right: border();
 				padding-right: rem(13);
 			}
 
