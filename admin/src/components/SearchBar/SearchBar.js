@@ -1,26 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-import { searchEvents } from '../../../utilities/api';
-import { useOnOutsideClick } from '../../../utilities/hooks';
+import { searchEvents } from '../../utilities/api';
+import { useOnOutsideClick } from '../../utilities/hooks';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import './searchBar.scss';
 
-export default function SearchBar() {
+export default function SearchBar({ query, setQuery, handleSearch, size, placeholder }) {
     const { ref, isComponentVisible, setIsComponentVisible } = useOnOutsideClick(false);
-
-    // search query
-    const [
-        query,
-        setQuery
-    ] = useState('');
-
-    const [
-        queryResults,
-        setQueryResults
-    ] = useState('');
 
     // when no query
     useEffect(
@@ -58,7 +47,7 @@ export default function SearchBar() {
 
     return (
         <Fragment>
-            <Button variant="default" className="btn--icon mobile-tablet-only" id="search-mobile" aria-label="search">
+            <Button variant="default" className="btn--icon mobile-tablet-only search-mobile" aria-label="search">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         fillRule="evenodd"
@@ -68,8 +57,8 @@ export default function SearchBar() {
                     />
                 </svg>
             </Button>
-            <Form onSubmit={handleSubmit} id="search" ref={ref} className="d-none d-lg-flex">
-                <div className="search-icon ms-2">
+            <Form onSubmit={handleSubmit} ref={ref} className="search d-none d-lg-flex">
+                <div className="search-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             fillRule="evenodd"
@@ -81,11 +70,11 @@ export default function SearchBar() {
                 </div>
                 <Form.Control
                     type="text"
-                    placeholder="Search events"
-                    size="sm"
+                    placeholder={placeholder}
+                    size={size}
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    aria-label="Search events"
+                    onChange={(e) => handleSearch(e.target.value)}
+                    aria-label={placeholder}
                 />
             </Form>
         </Fragment>
