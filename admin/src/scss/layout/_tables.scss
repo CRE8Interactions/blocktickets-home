@@ -5,6 +5,7 @@
 
 .table {
 	table-layout: fixed;
+	margin-bottom: 0px;
 	> *,
 	th {
 		font-size: $small;
@@ -27,7 +28,7 @@
 	}
 
 	tbody {
-		border-top: border() !important;
+		border-top: none !important;
 		th,
 		td {
 			text-align: center;

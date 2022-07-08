@@ -128,6 +128,7 @@ h4,
 
 .tickets-sold {
 	&:before {
+		display: inline-block;
 		@extend %img-psuedo-icon !optional;
 		background-image: url('../../assets/icons/ticket.svg');
 		background-color: rgba($primary, var(--opac));

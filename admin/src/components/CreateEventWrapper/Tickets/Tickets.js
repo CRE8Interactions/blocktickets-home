@@ -8,6 +8,7 @@ import { NoDataContainer } from '../../NoDataContainer';
 import { DeleteModal } from '../../DeleteModal';
 
 import './tickets.scss';
+import { MoreIcon } from '../../MoreIcon';
 
 export default function Tickets({ tickets, handleAction }) {
 
@@ -54,11 +55,19 @@ export default function Tickets({ tickets, handleAction }) {
                                     <span>${ticket.price.toFixed(2)}</span>
                                 </Stack>
                                 <Stack>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="default"></Dropdown.Toggle>
+                                    <Dropdown className='btn-more'>
+                                        <Dropdown.Toggle variant="default">
+                                            <MoreIcon />
+                                        </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item as="button" className="btn-edit" onClick={() => handleAction('edit', ticket.id)}>Edit</Dropdown.Item>
-                                            <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
+                                            <ul>
+                                                <li>
+                                                    <Dropdown.Item as="button" className="btn-edit" onClick={() => handleAction('edit', ticket.id)}>Edit</Dropdown.Item>
+                                                </li>
+                                                <li>
+                                                    <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
+                                                </li>
+                                            </ul>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Stack>

@@ -20,7 +20,7 @@
 	}
 
 	.card-body-heading {
-		margin-bottom: $text-spacer;
+		margin-bottom: $text-spacer-xs;
 
 		h1 {
 			margin-bottom: 0px;
@@ -29,5 +29,11 @@
 
 	.card-body-title {
 		font-size: $body-1;
+
+		&--flex {
+			display: flex;
+			align-items: center;
+			gap: $gap;
+		}
 	}
 }
