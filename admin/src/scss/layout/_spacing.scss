@@ -56,7 +56,8 @@ section + section {
 	justify-content: space-between;
 }
 
-.row + .row {
+.row + .row,
+.card .row + .row {
 	margin-top: rem(11);
 }
 
