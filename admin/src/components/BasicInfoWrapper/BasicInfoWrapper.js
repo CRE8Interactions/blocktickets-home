@@ -11,26 +11,26 @@ export default function BasicInfoWrapper({ handleChange }) {
     return (
         <>
             <section>
-                <div className="section-heading-sm section-heading--secondary">
+                <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Basic info</h1>
-                </div>
-                <Card body className="card--light">
+                </header>
+                <Card body className='card--sm'>
                     <BasicInfo handleChange={handleChange} />
                 </Card>
             </section>
             <section>
-                <div className="section-heading-sm section-heading--secondary">
+                <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Date & Time</h1>
-                </div>
-                <Card body className="card--light">
+                </header>
+                <Card body className='card--sm'>
                     <DateTime handleChange={handleChange} />
                 </Card>
             </section>
             <section>
-                <div className="section-heading-sm section-heading--secondary">
+                <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Location</h1>
-                </div>
-                <Card body className="card--light">
+                </header>
+                <Card body className='card--sm'>
                     <Location handleChange={handleChange} />
                 </Card>
             </section>

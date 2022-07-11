@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 
+import { formatString } from '../../../utilities/helpers';
+
+import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import { NoDataContainer } from '../../NoDataContainer';
 import { DeleteModal } from '../../DeleteModal';
+import { MoreIcon } from '../../MoreIcon';
 
 import './tickets.scss';
-import { MoreIcon } from '../../MoreIcon';
 
 export default function Tickets({ tickets, handleAction }) {
 
@@ -27,7 +30,7 @@ export default function Tickets({ tickets, handleAction }) {
     const handleShow = () => setShow(true);
 
     const formatTicketStatus = (status) => {
-        return status.replaceAll('_', " ")
+        return formatString(status)
     }
 
     const getTicketStatusColor = (status) => {
@@ -35,7 +38,7 @@ export default function Tickets({ tickets, handleAction }) {
     }
 
     return (
-        <>
+        <Card body>
             {tickets && tickets.length > 0 ? (
                 <>
                     <Stack gap={2} className="pb-4 tickets">
@@ -88,6 +91,6 @@ export default function Tickets({ tickets, handleAction }) {
             )
 
             }
-        </>
+        </Card>
     );
 }

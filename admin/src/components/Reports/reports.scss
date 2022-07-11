@@ -17,14 +17,14 @@
 	.form-select {
 		min-width: 170px;
 		padding: rem(8) $input-padding-x-sm;
+		background-color: transparent;
 	}
 	.nav-link {
 		padding: rem(17) rem(16);
 		display: flex;
 		gap: $gap;
-		border: border();
 		border-radius: $border-radius;
-		background-color: transparent;
+		background-color: $white;
 		font-weight: $fw-medium;
 		font-family: $font-family-sans-serif;
 		cursor: pointer;

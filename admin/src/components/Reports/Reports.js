@@ -48,7 +48,7 @@ export default function Reports({ title = "Reports" }) {
     return (
         <section id="reports">
             <>
-                <Row className="section-heading justify-content-flex-start">
+                <Row as="header" className="section-header section-heading section-heading--flex justify-content-flex-start">
                     <Col className='d-flex align-items-center'>
                         <h1 className="text-capitalize">{title}</h1>
                         <Form.Select value={view} onChange={(e) => setView(e.target.value)} className='ms-auto w-auto'>

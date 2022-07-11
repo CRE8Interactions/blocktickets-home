@@ -18,7 +18,7 @@ import './cards.scss';
 
 export default function Cards() {
     return (
-        <div className='cards'>
+        <section className='cards'>
             <Row>
                 <Col lg={6}>
                     <Card body>
@@ -106,6 +106,6 @@ export default function Cards() {
                     </Card>
                 </Col>
             </Row>
-        </div >
+        </section>
     );
 }

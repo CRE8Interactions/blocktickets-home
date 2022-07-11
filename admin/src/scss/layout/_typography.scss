@@ -12,6 +12,18 @@
 	font-size: $body-1;
 }
 
+.section-header {
+	margin-bottom: $heading-spacer;
+
+	&-sm {
+		margin-bottom: $heading-spacer-sm;
+	}
+
+	&-desc {
+		padding-left: calc(rem(16) + rem(16));
+	}
+}
+
 .section-heading {
 	@include heading-psuedo();
 
@@ -26,13 +38,6 @@
 
 	&--secondary {
 		@include heading-psuedo($success);
-	}
-
-	margin-bottom: $heading-spacer;
-
-	&-sm {
-		@extend .section-heading !optional;
-		margin-bottom: $heading-spacer-sm;
 	}
 }
 
@@ -67,7 +72,7 @@ h4,
 }
 
 .small-label--flex {
-	margin-bottom: rem(3);
+	margin-bottom: rem(4);
 }
 
 .caption {

@@ -9,13 +9,11 @@
 	> *,
 	th {
 		font-size: $small;
-		font-weight: $fw-normal;
 	}
 
 	thead {
 		th {
 			text-align: center;
-			font-weight: $fw-medium;
 			min-width: 120px;
 			color: $muted;
 			&:first-of-type {
@@ -32,7 +30,6 @@
 		th,
 		td {
 			text-align: center;
-			vertical-align: middle;
 			width: inherit;
 		}
 
