@@ -15,7 +15,7 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
         chart: {
             type: 'spline',
             backgroundColor: 'transparent',
-            height: 283,
+            height: 257,
             style: {
                 "fontFamily": "\"Poppins\", sans-serif",
                 "fontSize": "12px",

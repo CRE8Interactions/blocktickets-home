@@ -26,6 +26,14 @@ export const formatCurrency = (num) => {
     return `$${parseFloat(num).toLocaleString(undefined, { minimumFractionDigits: 2 })}`
 }
 
+const removeHyphens = (string) => {
+    return string.replaceAll('_', " ")
+}
+
+export const formatString = (string) => {
+    return removeHyphens(string).split(" ").map(arr => arr.charAt(0).toUpperCase() + arr.substring(1)).join(' ')
+}
+
 export const formatOrderId = (id) => {
     return id.toString().substring(0, 4) + '-' + id.toString().substring(4, 10) + '-' + id.toString().substring(10)
 }

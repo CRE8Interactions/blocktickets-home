@@ -6,10 +6,11 @@
 @use '../theme/colors' as *;
 
 .card {
-	&--light {
-		background-color: $white;
+	&--sm {
+		.card-body {
+			padding: rem(24);
+		}
 	}
-
 	& * {
 		font-family: $font-body;
 	}

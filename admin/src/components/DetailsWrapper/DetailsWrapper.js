@@ -10,18 +10,18 @@ export default function DetailsWrapper({ handleChange }) {
     return (
         <>
             <section>
-                <div className="section-heading-sm section-heading--secondary">
+                <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Main event image</h1>
-                </div>
-                <Card body className="card--light">
+                </header>
+                <Card body className='card--sm'>
                     <UploadEventImage handleChange={handleChange} />
                 </Card>
             </section>
             <section>
-                <div className="section-heading-sm section-heading--secondary">
+                <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Event description</h1>
-                </div>
-                <Card body className="card--light">
+                </header>
+                <Card body className='card--sm'>
                     <TextEditor handleChange={handleChange} />
                 </Card>
             </section>

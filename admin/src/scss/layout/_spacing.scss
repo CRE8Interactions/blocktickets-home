@@ -67,7 +67,7 @@ section + section {
 }
 
 .heading--flex,
-.section-heading {
+.section-heading--flex {
 	@extend %flex-between !optional;
 }
 

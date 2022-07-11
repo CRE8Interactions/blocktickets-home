@@ -103,62 +103,62 @@ export default function CreateEventWrapper() {
             {step === 1 && (
                 <>
                     <BasicInfoWrapper handleChange={handleChange} />
-                    <Stack direction="horizontal" className="justify-content-end btn-group-flex">
+                    <Stack direction="horizontal" className="btn-group-flex">
                         <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
                     </Stack>
                 </>
             )}
 
             {step === 2 && (
-                <div>
+                <>
                     <DetailsWrapper handleChange={handleChange} />
-                    <Stack direction="horizontal" className="justify-content-end btn-group-flex">
+                    <Stack direction="horizontal" className="btn-group-flex">
                         <BackButton handleGoBack={handleGoBack} />
                         <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
                     </Stack>
-                </div>
+                </>
             )}
 
             {step === 3 && (
-                <div>
+                <>
                     <section>
-                        <div className="section-heading-sm section-heading--secondary">
+                        <header className="section-header-sm section-heading section-heading--secondary">
                             <h1>{action === 'edit' ? 'Edit ticket' : 'Create a ticket'}</h1>
-                        </div>
-                        <Card body className="card--light">
+                        </header>
+                        <Card body className='card--sm'>
                             <CreateTicket handleChange={handleChange} editId={editId} />
                         </Card>
                     </section>
-                    <Stack direction="horizontal" className="justify-content-end btn-group-flex">
+                    <Stack direction="horizontal" className="btn-group-flex">
                         <>
                             <BackButton handleGoBack={handleGoBack} />
                             <Button className="btn-next" size="lg" onClick={handleClick}>{action === 'edit' ? 'Save' : 'Create ticket'}</Button>
                         </>
                     </Stack>
-                </div>
+                </>
             )}
             {step === 4 && (
-                <div>
+                <>
                     <section>
-                        <div className="section-heading-sm section-heading--secondary">
+                        <header className="section-header-sm section-heading--flex section-heading section-heading--secondary">
                             <h1>Tickets</h1>
                             <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={() => handleAction('add')}>Add ticket</Button>
-                        </div>
+                        </header>
                         <Tickets tickets={tickets} handleAction={handleAction} />
                     </section>
                     {tickets && tickets.length > 0 && (
-                        <Stack direction="horizontal" className="justify-content-end mt-5 btn-group-flex">
+                        <Stack direction="horizontal" className="btn-group-flex">
                             <BackButton handleGoBack={handleGoBack} />
                             <Button className="btn-next" size="lg" onClick={handleClick}>Continue</Button>
                         </Stack>
                     )}
-                </div>
+                </>
             )}
 
             {step === 5 && (
                 <>
                     <PublishWrapper />
-                    <Stack direction="horizontal" className="justify-content-end btn-group-flex">
+                    <Stack direction="horizontal" className="btn-group-flex ">
                         <>
                             <BackButton handleGoBack={handleGoBack} />
                             <Button className="btn-next" size="lg" onClick={publish}>Publish</Button>

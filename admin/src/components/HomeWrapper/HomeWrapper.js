@@ -8,9 +8,9 @@ export default function HomeWrapper() {
         <>
             <Reports />
             <section>
-                <div className="section-heading">
+                <header className="section-header section-heading">
                     <h1>Recent orders</h1>
-                </div>
+                </header>
                 <OrdersTable />
             </section>
         </>

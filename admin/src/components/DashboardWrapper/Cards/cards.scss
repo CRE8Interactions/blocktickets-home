@@ -4,8 +4,6 @@
 @use '../../../scss/theme/colors' as *;
 
 .cards {
-	margin: $text-spacer 0px;
-
 	.row + .row {
 		margin-top: $text-spacer;
 	}

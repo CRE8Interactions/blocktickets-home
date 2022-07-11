@@ -3,6 +3,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import OrganizationContext from '../../context/Organization/Organization';
 import { publishEvent } from '../../utilities/api';
 
+import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
@@ -59,43 +60,44 @@ export default function EventsWrapper() {
     const handleSearch = (query) => { }
 
     return (
-        <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-            <div className="flex-wrap d-flex align-items-center justify-content-between" id="events">
-                <div className="section-heading gap-4">
-                    <h1>Events</h1>
-                    <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="sm" placeholder="Search events" />
+        <Card body>
+            <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
+                <div className="flex-wrap d-flex align-items-center justify-content-between" id="events">
+                    <div className="section-header section-heading section-heading--flex gap-4">
+                        <h1>Events</h1>
+                        <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="sm" placeholder="Search events" />
+                    </div>
+                    <Nav as="ul" variant="pills" className="ms-auto">
+                        <Nav.Item as="li">
+                            <Nav.Link as="button" eventKey="published">
+                                Published
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Nav.Link as="button" eventKey="draft">
+                                Draft
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Nav.Link as="button" eventKey="past">
+                                Past
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    <Tab.Content>
+                        <Tab.Pane eventKey="published">
+                            <EventsTable handleTicketShow={addTickets} type={key} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="draft">
+                            <EventsTable handleTicketShow={addTickets} type={key} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="past">
+                            <EventsTable handleTicketShow={addTickets} type={key} />
+                        </Tab.Pane>
+                    </Tab.Content>
                 </div>
-
-                <Nav as="ul" variant="pills" className="ms-auto">
-                    <Nav.Item as="li">
-                        <Nav.Link as="button" eventKey="published">
-                            Published
-                        </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <Nav.Link as="button" eventKey="draft">
-                            Draft
-                        </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <Nav.Link as="button" eventKey="past">
-                            Past
-                        </Nav.Link>
-                    </Nav.Item>
-                </Nav>
-                <Tab.Content>
-                    <Tab.Pane eventKey="published">
-                        <EventsTable handleTicketShow={addTickets} type={key} />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="draft">
-                        <EventsTable handleTicketShow={addTickets} type={key} />
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="past">
-                        <EventsTable handleTicketShow={addTickets} type={key} />
-                    </Tab.Pane>
-                </Tab.Content>
-            </div>
-        </Tab.Container>
+            </Tab.Container>
+        </Card>
 
         //  <CreateEvent
         // 	show={show}

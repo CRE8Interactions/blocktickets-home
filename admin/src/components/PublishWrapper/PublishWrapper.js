@@ -9,10 +9,10 @@ export default function PublishWrapper({ handleChange }) {
     return (
         <>
             <section>
-                <div className="section-heading-sm section-heading--secondary">
+                <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Publish event</h1>
-                </div>
-                <Card body className="card--light">
+                </header>
+                <Card body className="card--sm">
                     <PublishEvent />
                 </Card>
             </section>
