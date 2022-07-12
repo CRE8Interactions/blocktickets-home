@@ -174,7 +174,7 @@ h4,
 
 	& + .list:not(.list.list-group-item) {
 		margin-top: rem(20);
-		border-top: border();
+		border-top: border(1px);
 		padding-top: $text-spacer-sm;
 	}
 }
