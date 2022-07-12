@@ -6,5 +6,6 @@ export { CreateEventPage } from './CreateEventPage';
 export { BasicInfoPage } from './BasicInfoPage';
 export { DetailsPage } from './DetailsPage';
 export { PublishPage } from './PublishPage';
-export { Orders } from './Orders';
-export { Sales } from './Sales';
+export { OrdersPage } from './OrdersPage';
+export { AllOrdersPage } from './AllOrdersPage';
+export { RefundTicketPage } from './RefundTicketPage';

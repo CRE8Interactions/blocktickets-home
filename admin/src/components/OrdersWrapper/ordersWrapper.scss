@@ -1,0 +1,33 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/input' as *;
+@use '../../scss/theme/borders' as theme;
+
+#orders-header {
+	.search {
+		flex: 0 0 60%;
+	}
+
+	#export-group {
+		flex: 1;
+
+		.form-floating {
+			flex: 1;
+		}
+
+		.form-select {
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+			border: none;
+			flex: 1;
+		}
+
+		#download-btn {
+			border-top-right-radius: theme.$border-radius;
+			border-bottom-right-radius: theme.$border-radius;
+			border: none;
+			border-left: border();
+			background-color: $white;
+		}
+	}
+}

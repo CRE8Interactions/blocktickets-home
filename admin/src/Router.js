@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, PublishPage } from './pages';
+import { HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -16,6 +16,10 @@ const Router = () => {
                     <Route path="basic-info" element={<BasicInfoPage />} />
                     <Route path="details" element={<DetailsPage />} />
                     <Route path="publish" element={<PublishPage />} />
+                    <Route path="orders" element={<OrdersPage />}>
+                        <Route index element={<AllOrdersPage />} />
+                        <Route path="refund" element={<RefundTicketPage />} />
+                    </Route>
                 </Route>
                 <Route path="events" element={<EventsPage />} />
                 <Route path="create" element={<CreateEventPage />} />

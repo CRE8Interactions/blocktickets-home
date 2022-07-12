@@ -30,10 +30,19 @@ const removeHyphens = (string) => {
     return string.replaceAll('_', " ")
 }
 
+// remove hyphens and capitalize first letter of each word 
 export const formatString = (string) => {
-    return removeHyphens(string).split(" ").map(arr => arr.charAt(0).toUpperCase() + arr.substring(1)).join(' ')
+    let formattedString = removeHyphens(string);
+    return formattedString = capitalizeString(formattedString)
+
 }
 
+// capitalize first letter of each word
+export const capitalizeString = string => {
+    return string.split(" ").map(arr => arr.charAt(0).toUpperCase() + arr.substring(1)).join(' ')
+}
+
+// put hyphens between the order id 
 export const formatOrderId = (id) => {
     return id.toString().substring(0, 4) + '-' + id.toString().substring(4, 10) + '-' + id.toString().substring(10)
 }
