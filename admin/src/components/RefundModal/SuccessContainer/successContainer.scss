@@ -1,0 +1,11 @@
+#success {
+	.modal-body-heading-title {
+		text-align: center;
+	}
+	&::before {
+		content: '';
+		background-image: url('../../../assets/icons/success.svg');
+		width: 106px;
+		height: 106px;
+	}
+}
