@@ -17,11 +17,11 @@ import { TicketRow } from './TicketRow'
 import './orderSummary.scss';
 
 // could be whole order or single ticket 
-export default function OrderSummary({ ticket, order, showDropdown = true }) {
+export default function OrderSummary({ ticket, order, showDropdown = true, isOpen = false }) {
 
     const { status } = order;
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(isOpen);
 
     let ticketsObj = ticket ? ticket : order.tickets
     // testing
@@ -105,20 +105,20 @@ export default function OrderSummary({ ticket, order, showDropdown = true }) {
                                     <th>Transaction type</th>
                                     <th>Ticket type</th>
                                     <th>Paid</th>
-                                    <th>Action</th>
+                                    {showDropdown && (<th>Action</th>)}
                                 </tr>
                             </thead>
                             <tbody>
                                 {ticket ? (
-                                    <TicketRow orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} />
+                                    <TicketRow orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} show={showDropdown} />
                                 ) : (
                                     order.tickets.map((ticket) => (
-                                        <TicketRow key={order.orderId} orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} />
+                                        <TicketRow key={order.orderId} orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} show={showDropdown} />
                                     ))
                                 )}
                                 <tr className='total-row'>
-                                    <td colSpan={5}>Total</td>
-                                    <td className='text-center'>{formatCurrency(sumOfTickets(ticketsObj))}</td>
+                                    <td colSpan={5} className={`${showDropdown && ''}`}>Total</td>
+                                    <td className={`${showDropdown ? 'text-center' : 'text-end'}`}>{formatCurrency(sumOfTickets(ticketsObj))}</td>
                                 </tr>
                             </tbody>
                         </Table>

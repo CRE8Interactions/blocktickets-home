@@ -1,6 +1,7 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout/spacing' as *;
 @use '../../scss/theme/colors' as *;
+@use '../../scss/theme/tables' as *;
 
 .order-summary-card {
 	.card-body {
@@ -15,7 +16,7 @@
 
 		.btn-toggle {
 			&::after {
-				margin-right: rem(4);
+				margin-right: rem(5);
 			}
 		}
 

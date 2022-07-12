@@ -20,6 +20,8 @@
 	}
 
 	&-desc {
+		color: $text-muted;
+		font-weight: $fw-medium;
 		padding-left: calc(rem(16) + rem(16));
 	}
 }
@@ -174,5 +176,21 @@ h4,
 		margin-top: rem(20);
 		border-top: border();
 		padding-top: $text-spacer-sm;
+	}
+}
+
+.horizontal-list {
+	li {
+		color: $text-muted;
+
+		+ li {
+			margin-left: $text-spacer-xs;
+		}
+
+		span {
+			margin-left: rem(8);
+			color: $body-color;
+			font-weight: $fw-semi-bold;
+		}
 	}
 }

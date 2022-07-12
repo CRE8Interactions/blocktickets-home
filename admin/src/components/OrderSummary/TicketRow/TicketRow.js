@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import { MoreIcon } from '../../MoreIcon';
 
-export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket }) {
+export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket, show = true }) {
 
     return (
         <tr>
@@ -27,31 +27,33 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
             <td>
                 {formatCurrency(45.50)}
             </td>
-            <td className="btn-more">
-                <Dropdown align="right">
-                    <Dropdown.Toggle variant="default">
-                        <MoreIcon />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <ul>
-                            <li>
-                                <LinkContainer to={`refund?order=${orderId}&ticket=${ticket.id}`}>
-                                    <Dropdown.Item className="btn-edit">
-                                        Refund ticket
-                                    </Dropdown.Item>
-                                </LinkContainer>
-                            </li>
-                            <li>
-                                <LinkContainer to={`attendee-report`}>
-                                    <Dropdown.Item className="btn-edit">
-                                        View attendee report
-                                    </Dropdown.Item>
-                                </LinkContainer>
-                            </li>
-                        </ul>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </td>
+            {show && (
+                <td className="btn-more">
+                    <Dropdown align="right">
+                        <Dropdown.Toggle variant="default">
+                            <MoreIcon />
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <ul>
+                                <li>
+                                    <LinkContainer to={`refund?order=${orderId}&ticket=${ticket.id}`}>
+                                        <Dropdown.Item className="btn-edit">
+                                            Refund ticket
+                                        </Dropdown.Item>
+                                    </LinkContainer>
+                                </li>
+                                <li>
+                                    <LinkContainer to={`attendee-report`}>
+                                        <Dropdown.Item className="btn-edit">
+                                            View attendee report
+                                        </Dropdown.Item>
+                                    </LinkContainer>
+                                </li>
+                            </ul>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </td>
+            )}
         </tr>
     );
 }
