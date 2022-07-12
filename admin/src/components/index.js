@@ -8,6 +8,7 @@ export { DetailsWrapper } from './DetailsWrapper';
 export { PublishWrapper } from './PublishWrapper';
 export { CreateEventWrapper } from './CreateEventWrapper';
 export { EventsWrapper } from './EventsWrapper';
-export { EventsTable } from './EventsWrapper/EventsTable';
+export { OrdersWrapper } from './OrdersWrapper';
+export { RefundTicketWrapper } from './RefundTicketWrapper';
 export { CreateOrg } from './Forms/CreateOrg';
 export { CreateEvent } from './Modals/CreateEvent';
