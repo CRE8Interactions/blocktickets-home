@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { formatCurrency, formatNumber } from "./../../utilities/helpers";
+
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -434,7 +436,7 @@ export default function OrdersWrapper() {
                     </div>
                     <div className="d-flex gap-3 align-items-center" id="orders-header">
                         <FloatingLabel controlId="orders" label="Orders">
-                            <Form.Select value={ordersView} onChange={(e) => setOrdersView(e.target.value)}>
+                            <Form.Select value={ordersView} onChange={(e) => setOrdersView(e.target.value)} aria-label="View Orders">
                                 {ordersViewOpt.map(option => (
                                     <option value={option.value}>{option.label}</option>
                                 ))}
@@ -458,8 +460,22 @@ export default function OrdersWrapper() {
                         </InputGroup>
                     </div>
                 </header>
-                <Stack direction="horizontal" className='my-4'>
-                    <Link to="/" className='btn btn-outline-light ms-auto'>Issue multiple refunds</Link>
+                <Stack direction="horizontal" className='my-4 split-row'>
+                    <Stack as="ul" direction="horizontal" className="horizontal-list">
+                        <li>
+                            Gross sales
+                            <span>{formatCurrency(10000)}</span>
+                        </li>
+                        <li>
+                            Orders
+                            <span>{formatNumber(50)}</span>
+                        </li>
+                        <li>
+                            Attendees
+                            <span>{formatNumber(10)}</span>
+                        </li>
+                    </Stack>
+                    <Link to="refund/all" className='btn btn-outline-light'>Issue multiple refunds</Link>
                 </Stack>
                 <Stack as="ul" gap={4}>
                     {ordersObj.map((order, index) => (

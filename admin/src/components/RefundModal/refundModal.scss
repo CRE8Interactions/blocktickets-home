@@ -1,0 +1,18 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+@use '../../scss/layout/modal' as *;
+
+#refund-modal {
+	@extend .modal-xl;
+
+	.split-row {
+		margin-top: $text-spacer-sm;
+		font-size: $body-2;
+		font-weight: $fw-medium;
+
+		.amount {
+			font-size: $body-1;
+			font-weight: $fw-semi-bold;
+		}
+	}
+}

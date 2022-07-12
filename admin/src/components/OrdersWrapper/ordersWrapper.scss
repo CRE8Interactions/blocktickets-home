@@ -4,13 +4,15 @@
 @use '../../scss/theme/borders' as theme;
 
 #orders-header {
+	.form-floating,
+	#export-group {
+		flex: 0 0 24%;
+	}
 	.search {
-		flex: 0 0 60%;
+		flex: 1;
 	}
 
 	#export-group {
-		flex: 1;
-
 		.form-floating {
 			flex: 1;
 		}

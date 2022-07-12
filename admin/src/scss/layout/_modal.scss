@@ -6,21 +6,17 @@
 .modal {
 	line-height: 1.5;
 
-	&-title {
-		font-size: $small;
-	}
-
 	&-body-heading {
-		margin-bottom: $text-spacer-sm;
-
 		&-title {
-			font-size: $body-1;
+			font-size: $h4-font-size;
 			margin-bottom: $text-spacer-sm;
 			font-weight: $fw-semi-bold;
 		}
+	}
 
-		p {
-			font-size: $small;
+	p {
+		+ p {
+			margin-top: $text-spacer-sm;
 		}
 	}
 
@@ -55,11 +51,6 @@
 				display: flex;
 				flex-direction: column;
 			}
-
-			&-footer {
-				padding: em(24) 0px;
-				margin: 0px $m-x;
-			}
 		}
 	}
 
@@ -70,12 +61,10 @@
 		.modal {
 			&-body {
 				padding: $padding;
-				display: flex;
-				flex-direction: column;
 
-				&-heading-title {
-					font-size: $h4-font-size;
-				}
+				// &-heading-title {
+				// 	font-size: $h4-font-size;
+				// }
 			}
 		}
 	}

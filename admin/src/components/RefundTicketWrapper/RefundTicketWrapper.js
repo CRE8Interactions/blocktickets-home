@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 import { OrderSummary } from '../OrderSummary';
+import { RefundModal } from '../RefundModal';
 import { BackButton } from "./../BackButton";
 
 export default function RefundTicketWrapper({ orderId, ticketId }) {
+
+    const [show, setShow] = useState(false);
 
     // demo - same orders array that is built from data from database 
     const ordersObj = [
@@ -364,10 +367,13 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
         }
     ]
 
-
     const order = ordersObj.find(order => order.orderId == orderId)
 
     const ticket = order.tickets.find(ticket => ticket.id == ticketId)
+
+    const handleShow = () => setShow(true)
+
+    const handleClose = () => setShow(false)
 
     return (
         <>
@@ -379,13 +385,15 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
                     <p className='section-header-desc'>Issue an attendee a refund for their original ticket price</p>
                 </header>
                 <Stack as="ul" gap={4}>
-                    <OrderSummary order={order} ticket={ticket} showDropdown={false} />
+                    <OrderSummary order={order} ticket={ticket} showDropdown={false} isOpen={true} />
                 </Stack>
                 <Stack direction='horizontal' className='btn-group-flex'>
                     <BackButton />
-                    <Button size="lg">Refund</Button>
+                    <Button size="lg" onClick={handleShow}>Refund</Button>
                 </Stack>
             </section>
+
+            <RefundModal show={show} handleClose={handleClose} />
         </>
     );
 }

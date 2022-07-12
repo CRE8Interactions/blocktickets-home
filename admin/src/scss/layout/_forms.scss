@@ -67,6 +67,12 @@ select:-webkit-autofill:focus {
 	}
 }
 
+.form-floating {
+	label {
+		font-size: $caption;
+	}
+}
+
 .error-border {
 	border-color: $danger;
 }
