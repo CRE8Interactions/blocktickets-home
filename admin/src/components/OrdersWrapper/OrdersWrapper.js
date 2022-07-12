@@ -426,8 +426,11 @@ export default function OrdersWrapper() {
         <>
             <section>
                 <header>
-                    <div className="section-header section-heading">
-                        <h1>Orders</h1>
+                    <div className="section-header">
+                        <div className="section-heading">
+                            <h1>Orders</h1>
+                        </div>
+                        <p className='section-header-desc'>See all the orders, refunds and transfers for your event, including gross sales with fees</p>
                     </div>
                     <div className="d-flex gap-3 align-items-center" id="orders-header">
                         <FloatingLabel controlId="orders" label="Orders">
