@@ -6,6 +6,10 @@
 .modal {
 	line-height: 1.5;
 
+	&-title {
+		font-size: $small;
+	}
+
 	&-body-heading {
 		&-title {
 			font-size: $h4-font-size;

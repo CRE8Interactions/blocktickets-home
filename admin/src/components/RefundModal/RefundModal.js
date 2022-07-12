@@ -33,7 +33,7 @@ export default function RefundModal({ show, handleClose }) {
     }
 
     return (
-        <Modal id="refund-modal" centered animation={false} fullscreen="md-down" show={show} onHide={handleClose}>
+        <Modal id="refund-modal" centered animation={false} fullscreen="md-down" backdrop='static' show={show} onHide={handleClose}>
             <Modal.Body>
                 {step === 1 && (
                     <>
