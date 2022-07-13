@@ -19,19 +19,16 @@ import './orderSummary.scss';
 // could be whole order or single ticket 
 export default function OrderSummary({ ticket, order, showDropdown = true, isOpen = false }) {
 
-    const { status } = order;
+    const { status, refund } = order;
 
     const [open, setOpen] = useState(isOpen);
 
     let ticketsObj = ticket ? ticket : order.tickets
     // testing
-    // console.log(order.tickets);
-    // Object.values(status).map(status => status.map(stat => console.log(stat)))
+    // console.log(status.key)
+    // status.map(status => console.log(status))
+    // Object.values(status).map(stat => stat.map(entry => console.log(entry)))
     // order.tickets.map(ticket => console.log(ticket));
-
-    const calcTotal = (price, numTickets) => {
-        return price * numTickets
-    }
 
     const sumOfTickets = tickets => {
         if (tickets.length) {
@@ -84,18 +81,21 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                 </Stack>
                 <Collapse in={open}>
                     <div id="order-summary-text">
-                        <div className={`${Object.values(status).length > 1 ? 'progress-line' : ''} ${order.marketType === 'primary' ? 'progress-line--primary' : 'progress-line--secondary'}`}>
-                            {Object.values(status).map(status => status.map((entry, index) => (
-                                <Stack gap={1} key={entry.index} className="transaction">
-                                    <span className='caption status-label'>{entry.key}:</span>
-                                    <div className="transaction-desc">
-                                        <p className='fw-medium'>{entry.name}</p>
-                                        <span className='caption'>{entry.numTickets} tickets</span>
-                                        {entry.price && (<p className='fw-medium'>Total {formatCurrency(calcTotal(entry.price, entry.numTickets))} paid by visa 0578 </p>)}
-                                    </div>
+                        <Stack gap={1} key={order.orderId} className="transaction">
+                            <span className='caption status-label'>{status.key}:</span>
+                            <div className="transaction-desc">
+                                <p className='fw-medium'>{status.name}</p>
+                                <span className='caption'>{order.totalTickets} tickets</span>
+                                {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(sumOfTickets(ticketsObj))} paid by visa 0578 </p>)}
+                            </div>
+                            {refund && (
+                                <Stack gap={1} className='mt-2'>
+                                    <p>Refunded on {refund.date}</p>
+                                    <p>{formatCurrency(sumOfTickets(ticketsObj))} refunded to original payment method</p>
                                 </Stack>
-                            )))}
-                        </div>
+                            )}
+                        </Stack>
+
                         <Table className='mt-4'>
                             <thead>
                                 <tr>

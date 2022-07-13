@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { formatCurrency } from "./../../utilities/helpers";
 
@@ -15,6 +15,19 @@ import './refundModal.scss';
 export default function RefundModal({ show, handleClose }) {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const getText = () => {
+        if (location.search) {
+            if (location.search.indexOf('ticket') !== -1) {
+                return 'this ticket'
+            } else {
+                return 'this order'
+            }
+        } else {
+            return 'selected orders'
+        }
+    }
 
     // 1 - confirmation 
     // 2 - success 
@@ -38,7 +51,7 @@ export default function RefundModal({ show, handleClose }) {
                 {step === 1 && (
                     <>
                         <h1 className="modal-body-heading-title">Are you sure you want to
-                            refund this ticket?</h1>
+                            refund {getText()}?</h1>
                         <p>If this was a mistake cancel request otherwise complete refund.</p>
                         <p>All refunds are final.</p>
                         <Stack direction="horizontal" className='split-row'>
