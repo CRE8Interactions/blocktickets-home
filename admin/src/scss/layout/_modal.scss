@@ -6,6 +6,7 @@
 .modal {
 	line-height: 1.5;
 
+	// upload image modal
 	&-title {
 		font-size: $small;
 	}
@@ -65,10 +66,6 @@
 		.modal {
 			&-body {
 				padding: $padding;
-
-				// &-heading-title {
-				// 	font-size: $h4-font-size;
-				// }
 			}
 		}
 	}
