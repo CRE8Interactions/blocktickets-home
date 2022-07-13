@@ -9,3 +9,4 @@ export { PublishPage } from './PublishPage';
 export { OrdersPage } from './OrdersPage';
 export { AllOrdersPage } from './AllOrdersPage';
 export { RefundTicketPage } from './RefundTicketPage';
+export { RefundOrdersPage } from './RefundOrdersPage';

@@ -10,5 +10,4 @@ export { CreateEventWrapper } from './CreateEventWrapper';
 export { EventsWrapper } from './EventsWrapper';
 export { OrdersWrapper } from './OrdersWrapper';
 export { RefundTicketWrapper } from './RefundTicketWrapper';
-export { CreateOrg } from './Forms/CreateOrg';
-export { CreateEvent } from './Modals/CreateEvent';
+export { RefundOrdersWrapper } from './RefundOrdersWrapper';
