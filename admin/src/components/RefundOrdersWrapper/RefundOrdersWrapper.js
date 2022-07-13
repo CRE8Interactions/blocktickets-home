@@ -248,14 +248,22 @@ export default function RefundOrdersWrapper() {
     const selectRow = {
         mode: 'checkbox',
         clickToSelect: true,
-        bgColor: '#F4F5F6'
-    };
-
-    const rowEvents = {
-        onClick: (e, row, rowIndex) => {
-            setOrderCount(orderCount + 1)
+        bgColor: '#F4F5F6',
+        onSelect: (row, isSelect, rowIndex, e) => {
+            if (isSelect) {
+                setOrderCount(orderCount + 1)
+            } else { setOrderCount(orderCount - 1) }
+        },
+        onSelectAll: (isSelect, rows) => {
+            if (isSelect) {
+                setOrderCount(ordersObj.length)
+            }
+            else {
+                setOrderCount(0)
+            }
         }
-    };
+
+    }
 
     return (
         <>
@@ -295,7 +303,6 @@ export default function RefundOrdersWrapper() {
                             data={orders}
                             columns={columns}
                             selectRow={selectRow}
-                            rowEvents={rowEvents}
                             hover
                             bordered={false}
                         />
