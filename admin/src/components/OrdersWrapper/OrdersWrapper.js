@@ -65,36 +65,31 @@ export default function OrdersWrapper() {
             tickets: [
                 {
                     id: 10001,
-                    status: 'sold',
+                    status: 'standard',
                     price: 45.50
                 },
                 {
                     id: 11111,
-                    status: 'transferred',
+                    status: 'standard',
                     price: 45.50
                 }
             ],
-            status: {
-                purchasedBy: [
-                    {
-                        key: 'Purchased by',
-                        name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 2,
-                        price: 45.50
-
-                    }
-                ],
+            status:
+            {
+                key: 'Purchased by',
+                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
             }
+
         },
         {
             orderId: 19331942333102,
-            marketType: 'secondary',
+            marketType: 'primary',
             ticketBuyer: {
-                firstName: 'harrison',
-                lastName: 'cogan'
+                firstName: 'billy',
+                lastName: 'bob'
             },
-            ticketType: 'general_admission',
             totalTickets: 2,
+            ticketType: 'general_admission',
             tickets: [
                 {
                     id: 10002,
@@ -102,46 +97,32 @@ export default function OrdersWrapper() {
                     price: 45.50
                 },
                 {
-                    id: 11112,
+                    id: 10002,
                     status: 'transferred',
                     price: 45.50
-                }
+                },
             ],
             status: {
-                purchasedBy: [{
-                    key: 'Purchased by',
-                    name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                    numTickets: 2,
-                    price: 45.50
-
-                }],
-                transferredTo: [
-                    {
-                        key: 'Transferred to',
-                        name: 'Chaz Haskins (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        ticketId: 1935454
-                    },
-                    {
-                        key: 'Transferred to',
-                        name: 'Billy Bob (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        ticketId: 1936565
-                    }
-                ],
+                key: 'Transferred by',
+                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
             }
+
         },
         {
             orderId: 19331942333103,
             marketType: 'primary',
             ticketBuyer: {
-                firstName: 'billy',
-                lastName: 'bob'
+                firstName: 'harrison',
+                lastName: 'cogan'
             },
-            totalTickets: 1,
+            totalTickets: 2,
             ticketType: 'general_admission',
-            totalTickets: 1,
             tickets: [
+                {
+                    id: 10003,
+                    status: 'transferred',
+                    price: 45.50
+                },
                 {
                     id: 10003,
                     status: 'transferred',
@@ -149,104 +130,68 @@ export default function OrdersWrapper() {
                 },
             ],
             status: {
-                transferredBy: [
-                    {
-                        key: 'Transferred by',
-                        name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1
-                    }
-                ],
+                key: 'Purchased by',
+                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
+            },
+            refund: {
+                date: 'Feb 12, 2022 at 4:29 PM (EDT)'
             }
+
         },
         {
             orderId: 19331942333104,
             marketType: 'secondary',
             ticketBuyer: {
-                firstName: 'harrison',
-                lastName: 'cogan'
+                firstName: 'chaz',
+                lastName: 'haskins'
             },
             ticketType: 'general_admission',
             totalTickets: 2,
             tickets: [
                 {
                     id: 10004,
-                    status: 'sold',
-                    price: 45.50
+                    status: 'standard',
+                    price: 80
                 },
                 {
                     id: 11114,
-                    status: 'transferred',
-                    price: 45.50
+                    status: 'standard',
+                    price: 80
                 }
             ],
-            status: {
-                purchasedBy: [{
-                    key: 'Purchased by',
-                    name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                    numTickets: 2,
-                    price: 45.50
+            status:
+            {
+                key: 'Sold by',
+                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
 
-                }],
-                transferredTo: [
-                    {
-                        key: 'Transferred to',
-                        name: 'Billy Bob (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 2
-                    }
-                ],
-                soldTo: [
-                    {
-                        key: 'Sold to',
-                        name: 'Chaz Haskins (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 45.50
-                    }
-                ]
             }
         },
         {
             orderId: 19331942333105,
-            marketType: 'primary',
+            marketType: 'secondary',
             ticketBuyer: {
-                firstName: 'harrison',
-                lastName: 'cogan'
+                firstName: 'harry',
+                lastName: 'walkins'
             },
             ticketType: 'general_admission',
             totalTickets: 2,
             tickets: [
                 {
-                    id: 10005,
-                    status: 'sold',
-                    price: 45.50
+                    id: 10004,
+                    status: 'transferred',
+                    price: 80
                 },
                 {
-                    id: 11115,
-                    status: 'sold',
-                    price: 45.50
+                    id: 11114,
+                    status: 'transferred',
+                    price: 80
                 }
             ],
-            status: {
-                purchasedBy: [{
-                    key: 'Purchased by',
-                    name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                    numTickets: 2,
-                    price: 45.50
+            status:
+            {
+                key: 'Transferred by',
+                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
 
-                }],
-                soldTo: [
-                    {
-                        key: 'Sold to',
-                        name: 'Chaz Haskins (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 45.50
-                    },
-                    {
-                        key: 'Sold to',
-                        name: 'Holly Wood (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 45.50
-                    }
-                ]
             }
         },
         {
@@ -256,155 +201,28 @@ export default function OrdersWrapper() {
                 firstName: 'harrison',
                 lastName: 'cogan'
             },
-            ticketType: 'general_admission',
             totalTickets: 2,
+            ticketType: 'general_admission',
             tickets: [
                 {
                     id: 10006,
-                    status: 'sold',
-                    price: 80
+                    status: 'transferred',
+                    price: 45.50
                 },
                 {
-                    id: 11116,
+                    id: 10006,
                     status: 'transferred',
-                    price: 80
-                }
+                    price: 45.50
+                },
             ],
             status: {
-                purchasedBy: [{
-                    key: 'Purchased by',
-                    name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                    numTickets: 2,
-                    price: 45.50
-
-                }],
-                transferredBy: [
-                    {
-                        key: 'Transferred by',
-                        name: 'Billy Bob (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 45.50
-                    }
-                ],
-                soldTo: [
-                    {
-                        key: 'Sold to',
-                        name: 'Chaz Haskins (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 45.50
-                    }
-                ]
+                key: 'Sold by',
+                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
+            },
+            refund: {
+                date: 'Feb 12, 2022 at 4:29 PM (EDT)'
             }
         },
-        {
-            orderId: 19331942333107,
-            marketType: 'primary',
-            ticketBuyer: {
-                firstName: 'robert',
-                lastName: 'cogan'
-            },
-            ticketType: 'general_admission',
-            totalTickets: 8,
-            tickets: [
-                {
-                    id: 10007,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 11117,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 22227,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 33337,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 44447,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 55557,
-                    status: 'sold',
-                    price: 45.50
-                },
-                {
-                    id: 66667,
-                    status: 'sold',
-                    price: 45.50
-                },
-                {
-                    id: 77777,
-                    status: 'sold',
-                    price: 45.50
-                }
-            ],
-            status: {
-                purchasedBy: [{
-                    key: 'Purchased by',
-                    name: 'Robert Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                    numTickets: 8,
-                    price: 800
-
-                }],
-                transferredTo: [
-                    {
-                        key: 'Transferred to',
-                        name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1
-                    },
-                    {
-                        key: 'Transferred to',
-                        name: 'Chaz Haskins (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1
-                    },
-                    {
-                        key: 'Transferred to',
-                        name: 'Jaime Convery (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1
-                    },
-                    {
-                        key: 'Transferred to',
-                        name: 'Spider Man (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1
-                    }
-                ],
-                soldTo: [
-                    {
-                        key: 'Sold to',
-                        name: 'Billy Bob (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 150
-                    },
-                    {
-                        key: 'Sold to',
-                        name: 'Bruce Wayne (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 150
-                    },
-                    {
-                        key: 'Sold to',
-                        name: 'George Farman (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 150
-                    },
-                    {
-                        key: 'Sold to',
-                        name: 'Harry Walker (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)',
-                        numTickets: 1,
-                        price: 150
-                    }
-                ],
-            }
-        }
     ]
 
     const [ordersView, setOrdersView] = useState('completed');
