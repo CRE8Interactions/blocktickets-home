@@ -60,12 +60,12 @@ export default function RefundOrdersWrapper() {
                 {
                     id: 10002,
                     status: 'transferred',
-                    price: 45.50
+                    price: 0
                 },
                 {
                     id: 10002,
                     status: 'transferred',
-                    price: 45.50
+                    price: 0
                 },
             ],
             status: {
@@ -145,12 +145,12 @@ export default function RefundOrdersWrapper() {
                 {
                     id: 10004,
                     status: 'transferred',
-                    price: 80
+                    price: 0
                 },
                 {
                     id: 11114,
                     status: 'transferred',
-                    price: 80
+                    price: 0
                 }
             ],
             status:
@@ -267,8 +267,8 @@ export default function RefundOrdersWrapper() {
 
     return (
         <>
-            <section>
-                <header>
+            <section className='max-width-wrapper'>
+                <header className='section-header'>
                     <div className="section-header">
                         <div className="section-heading">
                             <h1>Multiple refunds</h1>
@@ -276,7 +276,7 @@ export default function RefundOrdersWrapper() {
                         <p className='section-header-desc'>Issue refunds for orders sold through Blocktickets Payment Processing. Blocktickets will refund all fees.
                             You and your attendees will each receive an email for each completed refund.</p>
                     </div>
-                    <div className="d-flex gap-3 align-items-center" id="refund-orders-header">
+                    <div className="actions-group-flex" id="refund-orders-header">
                         <Card body className="card--xs">
                             <span className='caption-label'>Orders selected</span>
                             <span>{orderCount} / {Object.values(ordersObj).length}</span>
@@ -287,11 +287,11 @@ export default function RefundOrdersWrapper() {
                         </Card>
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by Order #, date, buyer" />
                     </div>
+                    <Stack direction="horizontal" gap={3} className="my-4">
+                        <span className='small text-muted fw-medium'>Refund method</span>
+                        <span className='small'>Original payment method</span>
+                    </Stack>
                 </header>
-                <Stack direction="horizontal" gap={3} className="my-4">
-                    <span className='small text-muted fw-medium'>Refund method</span>
-                    <span className='small'>Original payment method</span>
-                </Stack>
                 <section>
                     <Stack direction='horizontal' className='heading--flex mb-4 split-row'>
                         <h1 className='fs-md'>Orders</h1>

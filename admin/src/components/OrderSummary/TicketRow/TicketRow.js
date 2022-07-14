@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import { MoreIcon } from '../../MoreIcon';
 
-export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket, show = true }) {
+export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket, show = true, refund }) {
 
     return (
         <tr>
@@ -25,7 +25,7 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
                 {formatString(type)}
             </td>
             <td>
-                {formatCurrency(45.50)}
+                {formatCurrency(ticket.price)}
             </td>
             {show && (
                 <td className="btn-more">
@@ -35,15 +35,17 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             <ul>
+                                {!refund && (
+                                    <li>
+                                        <LinkContainer to={`refund?order=${orderId}&ticket=${ticket.id}`}>
+                                            <Dropdown.Item className="btn-edit">
+                                                Refund ticket
+                                            </Dropdown.Item>
+                                        </LinkContainer>
+                                    </li>
+                                )}
                                 <li>
-                                    <LinkContainer to={`refund?order=${orderId}&ticket=${ticket.id}`}>
-                                        <Dropdown.Item className="btn-edit">
-                                            Refund ticket
-                                        </Dropdown.Item>
-                                    </LinkContainer>
-                                </li>
-                                <li>
-                                    <LinkContainer to={`attendee-report`}>
+                                    <LinkContainer to={`attendee-report?order=${orderId}&ticket=${ticket.id}`}>
                                         <Dropdown.Item className="btn-edit">
                                             View attendee report
                                         </Dropdown.Item>

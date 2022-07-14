@@ -54,12 +54,12 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
                 {
                     id: 10002,
                     status: 'transferred',
-                    price: 45.50
+                    price: 0
                 },
                 {
                     id: 10002,
                     status: 'transferred',
-                    price: 45.50
+                    price: 0
                 },
             ],
             status: {
@@ -139,12 +139,12 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
                 {
                     id: 10004,
                     status: 'transferred',
-                    price: 80
+                    price: 0
                 },
                 {
                     id: 11114,
                     status: 'transferred',
-                    price: 80
+                    price: 0
                 }
             ],
             status:
@@ -195,7 +195,7 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
 
     return (
         <>
-            <section>
+            <section className='max-width-wrapper'>
                 <header className='section-header'>
                     <div className="section-heading">
                         <h1>Refund {ticket ? 'ticket' : 'order'}</h1>
