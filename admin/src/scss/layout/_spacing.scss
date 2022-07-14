@@ -9,7 +9,7 @@ $spacer-md: rem(80);
 // Text Spacers
 $heading-spacer: rem(32); // page headings
 $heading-spacer-sm: rem(28);
-$gap: rem(14);
+$gap: rem(16);
 $gap-sm: rem(10);
 $gap-xs: rem(4);
 
@@ -76,6 +76,16 @@ section + section {
 	& > *,
 	.btn {
 		margin: 0px !important;
+	}
+}
+
+.actions-group-flex {
+	display: flex;
+	align-items: center;
+	gap: $gap;
+
+	.search {
+		flex: 1;
 	}
 }
 
