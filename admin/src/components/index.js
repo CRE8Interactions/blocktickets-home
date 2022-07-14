@@ -11,3 +11,4 @@ export { EventsWrapper } from './EventsWrapper';
 export { OrdersWrapper } from './OrdersWrapper';
 export { RefundTicketWrapper } from './RefundTicketWrapper';
 export { RefundOrdersWrapper } from './RefundOrdersWrapper';
+export { AttendeeReportWrapper } from './AttendeesReportWrapper'
