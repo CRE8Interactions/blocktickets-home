@@ -212,7 +212,7 @@ export default function RefundOrdersWrapper() {
 
     const orders = ordersObj.map(order => ({
         id: order.orderId,
-        quantity: order.totalTickets,
+        tickets: order.totalTickets,
         paid: order.tickets.reduce((prev, cur) => prev + cur.price, 0)
     }))
 
@@ -221,12 +221,12 @@ export default function RefundOrdersWrapper() {
             dataField: 'id',
             text: 'Order ID',
             formatter: (cell) => {
-                return <><ul className='text-start'><li className='fw-medium mb-1'>Order {formatOrderId(cell)}</li><li className='caption '>Purchased on Jan 22, 2022</li><li className='caption'>Buyer: Cruz Poeppelman</li></ul></>
+                return <><ul className='text-start ps-3'><li className='fw-medium mb-1'>Order {formatOrderId(cell)}</li><li className='caption '>Purchased on Jan 22, 2022</li><li className='caption'>Buyer: Cruz Poeppelman</li></ul></>
             }
         },
         {
-            dataField: 'quantity',
-            text: 'Quantity'
+            dataField: 'tickets',
+            text: 'Tickets Sold'
         },
         {
             dataField: 'paid',
@@ -261,13 +261,19 @@ export default function RefundOrdersWrapper() {
             else {
                 setOrderCount(0)
             }
-        }
-
+        },
+        selectionRenderer: (props) => (
+            <input
+                type={props.mode}
+                checked={props.checked}
+                className="custom-check"
+            />
+        )
     }
 
     return (
         <>
-            <section className='max-width-wrapper'>
+            <section className='max-width-wrapper' id="refund-orders">
                 <header className='section-header'>
                     <div className="section-header">
                         <div className="section-heading">
