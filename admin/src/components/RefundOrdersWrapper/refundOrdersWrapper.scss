@@ -3,12 +3,22 @@
 @use '../../scss/theme/input' as *;
 @use '../../scss/theme/borders' as theme;
 
-#refund-orders-header {
-	.card--xs {
-		flex: 0 0 16%;
+#refund-orders {
+	&-header {
+		.card--xs {
+			flex: 0 0 16%;
 
-		&.amount-card {
-			flex-basis: 20%;
+			&.amount-card {
+				flex-basis: 20%;
+			}
+		}
+	}
+
+	.table {
+		thead {
+			th {
+				min-width: 180px;
+			}
 		}
 	}
 }
