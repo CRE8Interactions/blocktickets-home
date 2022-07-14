@@ -6,7 +6,7 @@ import { Cards } from './Cards';
 
 export default function DashboardWrapper() {
     return (
-        <>
+        <div className='max-width-wrapper'>
             <Reports title="dashboard" />
             <Cards />
             <section>
@@ -15,6 +15,6 @@ export default function DashboardWrapper() {
                 </header>
                 <OrdersTable />
             </section>
-        </>
+        </div>
     );
 }

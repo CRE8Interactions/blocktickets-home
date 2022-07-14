@@ -53,6 +53,7 @@ export default function RefundModal({ show, handleClose }) {
                         <h1 className="modal-body-heading-title">Are you sure you want to
                             refund {getText()}?</h1>
                         <p>If this was a mistake cancel request otherwise complete refund.</p>
+                        <p>We are going to refund 1/17 orders and deduct $66.92 from your payout.</p>
                         <p>All refunds are final.</p>
                         <Stack direction="horizontal" className='split-row'>
                             <span>Amount to be refunded</span>

@@ -25,12 +25,6 @@
 		}
 	}
 
-	&.previewModal {
-		.modal-body {
-			padding: rem(30) 0px;
-		}
-	}
-
 	// used for ticket breakdown
 	&-lg {
 		$m-x: rem(32);
@@ -71,7 +65,7 @@
 	}
 
 	.btn-group-flex {
-		gap: $text-spacer-xs;
+		gap: $gap;
 		margin-top: $text-spacer-sm;
 
 		&.hstack {

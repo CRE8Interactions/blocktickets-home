@@ -1,0 +1,26 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/borders' as theme;
+
+.export-group {
+	flex: 0 0 23%;
+
+	.form-floating {
+		flex: 1;
+	}
+
+	.form-select {
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border: none;
+		flex: 1;
+	}
+
+	#download-btn {
+		border-top-right-radius: theme.$border-radius;
+		border-bottom-right-radius: theme.$border-radius;
+		border: none;
+		border-left: border();
+		background-color: $white;
+	}
+}

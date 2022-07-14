@@ -7,7 +7,7 @@ export default function DashboardPage() {
     return (
         <>
             <Sidenav />
-            <div className='spacer-md right-col'>
+            <div className='spacer-md'>
                 <Outlet />
             </div>
         </>

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 
-import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
+import Table from 'react-bootstrap/Table';
 
-import { OrderSummary } from '../OrderSummary';
-import { RefundModal } from '../RefundModal';
-import { BackButton } from "./../BackButton";
+import { ExportSelect } from '../ExportSelect';
+import { SearchBar } from '../SearchBar'
+import { TicketRow } from './TicketRow'
 
-export default function RefundTicketWrapper({ orderId, ticketId }) {
+import './attendeeReportWrapper.scss';
 
-    const [show, setShow] = useState(false);
+export default function AttendeeReportWrapper({ orderId, ticketId }) {
 
     // demo - same orders array that is built from data from database 
     const ordersObj = [
@@ -54,12 +53,12 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
                 {
                     id: 10002,
                     status: 'transferred',
-                    price: 0
+                    price: 45.50
                 },
                 {
                     id: 10002,
                     status: 'transferred',
-                    price: 0
+                    price: 45.50
                 },
             ],
             status: {
@@ -139,12 +138,12 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
                 {
                     id: 10004,
                     status: 'transferred',
-                    price: 0
+                    price: 80
                 },
                 {
                     id: 11114,
                     status: 'transferred',
-                    price: 0
+                    price: 80
                 }
             ],
             status:
@@ -185,33 +184,77 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
         },
     ]
 
+    // search query
+    const [
+        query,
+        setQuery
+    ] = useState('');
+
+    const [
+        queryResults,
+        setQueryResults
+    ] = useState('');
+
+    const handleSearch = (query) => { }
+
     const order = ordersObj.find(order => order.orderId == orderId)
 
     const ticket = order.tickets.find(ticket => ticket.id == ticketId)
 
-    const handleShow = () => setShow(true)
-
-    const handleClose = () => setShow(false)
+    let ticketArr = ticket ? [ticket] : order.tickets;
 
     return (
         <>
-            <section className='max-width-wrapper'>
-                <header className='section-header'>
-                    <div className="section-heading">
-                        <h1>Refund {ticket ? 'ticket' : 'order'}</h1>
+            <section>
+                <header className='section-header' id="attendee-report-header">
+                    <div className="section-header" >
+                        <div className="section-heading">
+                            <h1>Attendee report</h1>
+                        </div>
+                        <p className='section-header-desc'>View and download your attendees information</p>
                     </div>
-                    <p className='section-header-desc'>Issue an attendee a refund for their original ticket price</p>
+                    <div className="actions-group-flex">
+                        <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by attendee name, email address" />
+                        <ExportSelect />
+                    </div>
                 </header>
-                <Stack as="ul" gap={4}>
-                    <OrderSummary order={order} ticket={ticket} showDropdown={false} isOpen={true} />
-                </Stack>
-                <Stack direction='horizontal' className='btn-group-flex'>
-                    <BackButton />
-                    <Button size="lg" onClick={handleShow}>Refund</Button>
-                </Stack>
+                <div className="table-container">
+                    <Table responsive className='table-lg'>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Order date</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                                <th>Quantity</th>
+                                <th>Transaction type</th>
+                                <th>Ticket type</th>
+                                <th>Market type</th>
+                                <th>Paid</th>
+                                <th>Service fees</th>
+                                <th>Facility fee</th>
+                                <th>Payment processing fee</th>
+                                <th>Tax</th>
+                                <th>Attendee status</th>
+                                <th>Payment method</th>
+                                <th>Last 4 digits</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip code</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ticketArr.map(ticket => (
+                                <TicketRow key={order.orderId} orderId={order.orderId} ticket={ticket} firstName={order.ticketBuyer.firstName} lastName={order.ticketBuyer.lastName} marketType={order.marketType} paid={order.paid} type={order.ticketType} />
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
             </section>
-
-            <RefundModal show={show} handleClose={handleClose} />
         </>
     );
 }

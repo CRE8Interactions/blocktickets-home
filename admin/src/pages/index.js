@@ -10,3 +10,4 @@ export { OrdersPage } from './OrdersPage';
 export { AllOrdersPage } from './AllOrdersPage';
 export { RefundTicketPage } from './RefundTicketPage';
 export { RefundOrdersPage } from './RefundOrdersPage';
+export { AttendeeReportPage } from './AttendeeReportPage';

@@ -1,14 +1,33 @@
 @use '../abstracts' as *;
+@use '../layout/container' as *;
 @use '../layout/spacing' as *;
 @use '../layout/typography' as *;
+@use '../theme/card' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 
+.table-container {
+	border-radius: $border-radius;
+	padding: $card-spacer-y $card-spacer-x;
+	background-color: $white;
+
+	@include full-width();
+}
 .table {
-	table-layout: fixed;
+	// table-layout: fixed;
 	margin-bottom: 0px;
+
 	> *,
 	th {
 		font-size: $small;
+	}
+
+	&.table-lg {
+		thead {
+			th {
+				min-width: 150px;
+			}
+		}
 	}
 
 	thead {

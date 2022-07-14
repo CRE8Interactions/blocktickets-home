@@ -32,7 +32,7 @@ $navbar-height: rem(82);
 	padding-left: rem(32);
 }
 
-.right-col {
+.max-width-wrapper {
 	max-width: 1130px;
 	margin: auto;
 }
@@ -50,6 +50,12 @@ $navbar-height: rem(82);
 			display: none; /* Safari and Chrome */
 		}
 	}
+}
+
+@mixin full-width() {
+	position: relative;
+	width: 80vw;
+	left: 0;
 }
 
 @mixin heading-psuedo($color: $primary) {

@@ -169,11 +169,14 @@ legend {
 		border-color: $input-focus-border-color;
 	}
 
-	.form-control,
-	.form-select {
+	.form-control {
 		background-color: transparent;
 		border: none;
 		border-radius: 0;
 		min-height: auto;
+	}
+
+	.form-control:focus {
+		background-color: transparent;
 	}
 }
