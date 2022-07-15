@@ -32,9 +32,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
     // order.tickets.map(ticket => console.log(ticket));
 
     const sumOfTickets = tickets => {
-
         return tickets.reduce((prev, cur) => prev + cur.price, 0)
-
     }
 
     return (
@@ -112,7 +110,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                     <TicketRow orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} show={showDropdown} refund={refund} />
                                 ))}
                                 <tr className='total-row'>
-                                    <td colSpan={5} className={`${showDropdown && ''}`}>Total</td>
+                                    <td colSpan={5}>Total</td>
                                     <td className={`${showDropdown ? 'text-center' : 'text-end'}`}>{formatCurrency(sumOfTickets(ticketArr))}</td>
                                 </tr>
                             </tbody>
