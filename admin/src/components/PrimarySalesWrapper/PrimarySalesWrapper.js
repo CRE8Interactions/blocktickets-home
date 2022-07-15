@@ -1,28 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { formatCurrency, formatNumber } from '../../utilities/helpers';
 
 import Table from 'react-bootstrap/Table';
 
 import { ExportSelect } from '../ExportSelect';
-import { SearchBar } from '../SearchBar'
 
 import './primarySalesWrapper.scss';
 
 export default function PrimarySalesWrapper() {
-
-    // search query
-    const [
-        query,
-        setQuery
-    ] = useState('');
-
-    const [
-        queryResults,
-        setQueryResults
-    ] = useState('');
-
-    const handleSearch = (query) => { }
 
     return (
         <>
@@ -35,7 +21,6 @@ export default function PrimarySalesWrapper() {
                         <p className='section-header-desc'>Report generated from when sales started</p>
                     </div>
                     <div className="actions-group-flex">
-                        <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by ticket type" />
                         <ExportSelect />
                     </div>
                 </header>
