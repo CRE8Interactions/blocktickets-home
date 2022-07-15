@@ -2,8 +2,6 @@
 @use '../../../scss/theme/colors' as *;
 
 #events-table {
-	table-layout: initial;
-
 	tbody {
 		tr:first-of-type {
 			td {

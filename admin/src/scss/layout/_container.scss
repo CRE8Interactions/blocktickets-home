@@ -37,6 +37,11 @@ $navbar-height: rem(82);
 	margin: auto;
 }
 
+.wrapper {
+	max-width: 736px;
+	margin: auto;
+}
+
 .nav-is-open {
 	overflow: hidden;
 }
@@ -54,7 +59,7 @@ $navbar-height: rem(82);
 
 @mixin full-width() {
 	position: relative;
-	width: 78vw;
+	width: calc(100vw - 25vw);
 	left: 0;
 }
 

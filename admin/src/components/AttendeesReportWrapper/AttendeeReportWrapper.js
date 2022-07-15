@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { formatCurrency, formatNumber } from '../../utilities/helpers';
+
+import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
 import { ExportSelect } from '../ExportSelect';
@@ -217,9 +220,27 @@ export default function AttendeeReportWrapper({ orderId, ticketId }) {
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by attendee name, email address" />
                         <ExportSelect />
                     </div>
+                    <Stack direction="horizontal" className='my-4 split-row'>
+                        <Stack as="ul" direction="horizontal" className="horizontal-list">
+                            <li>
+                                Gross sales
+                                <span>{formatCurrency(10000)}</span>
+                            </li>
+                            <li>
+                                Orders
+                                <span>{formatNumber(50)}</span>
+                            </li>
+                            <li>
+                                Attendees
+                                <span>{formatNumber(10)}</span>
+                            </li>
+                        </Stack>
+                    </Stack>
                 </header>
-                <div className="table-container">
-                    <Table responsive className='table-lg'>
+
+
+                <div className="full-width-table table-container">
+                    <Table className='table-lg'>
                         <thead>
                             <tr>
                                 <th>Order</th>

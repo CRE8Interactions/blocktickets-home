@@ -3,68 +3,92 @@
 @use '../layout/spacing' as *;
 @use '../layout/typography' as *;
 @use '../theme/card' as *;
+@use '../theme/table' as *;
 @use '../theme/colors' as *;
 @use '../theme/borders' as *;
 
 .table-container {
 	border-radius: $border-radius;
-	padding: $card-spacer-y $card-spacer-x;
+	padding: rem(25) rem(34) rem(32);
 	background-color: $white;
+}
 
+.full-width-table {
+	overflow-x: auto;
 	@include full-width();
 }
+
 .table {
-	// table-layout: fixed;
 	margin-bottom: 0px;
 
 	> *,
 	th {
 		font-size: $small;
+		white-space: nowrap;
 	}
 
 	&.table-lg {
 		thead {
 			th {
-				min-width: 150px;
+				min-width: 80px;
 			}
 		}
-	}
 
-	thead {
-		th {
-			text-align: center;
-			min-width: 120px;
-			color: $muted;
-			&:first-of-type {
-				text-align: left;
-			}
-			&:last-of-type {
-				text-align: right;
-			}
-		}
-	}
-
-	tbody {
-		border-top: none !important;
 		th,
 		td {
-			text-align: center;
-			width: inherit;
-		}
-
-		th,
-		td:not(.btn-more) {
-			@extend %text-truncate !optional;
+			padding-right: rem(32);
+			padding-left: rem(32);
 		}
 
 		th:first-of-type,
 		td:first-of-type {
-			text-align: left;
+			padding-left: 0px;
 		}
 
 		th:last-of-type,
 		td:last-of-type {
+			padding-right: 0px;
+		}
+	}
+
+	th {
+		text-align: center;
+		min-width: 120px;
+		color: $muted;
+
+		&:first-of-type {
+			text-align: left;
+		}
+		&:last-of-type {
 			text-align: right;
+		}
+	}
+}
+
+tbody {
+	border-top: none !important;
+	td {
+		text-align: center;
+	}
+
+	td:first-of-type {
+		text-align: left;
+	}
+
+	td:last-of-type {
+		text-align: right;
+	}
+
+	.total-row {
+		&:last-of-type {
+			border-bottom-width: 0px;
+			border-bottom-style: none;
+			border-bottom-color: transparent;
+		}
+
+		td {
+			font-weight: $fw-medium;
+			font-size: $body-2;
 		}
 	}
 }

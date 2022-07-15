@@ -2,12 +2,11 @@ import React from "react";
 
 import { formatCurrency, formatOrderId } from "../../utilities/helpers";
 
-import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 
 export default function OrdersTable() {
     return (
-        <Card body>
+        <div className="table-container">
             <Table>
                 <thead>
                     <tr>
@@ -45,6 +44,6 @@ export default function OrdersTable() {
                     </tr>
                 </tbody>
             </Table>
-        </Card>
+        </div>
     )
 }

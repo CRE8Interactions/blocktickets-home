@@ -33,11 +33,11 @@
 
 		.main-navigation {
 			padding: $text-spacer-lg 0px;
-			border-top: border();
+			border-top: border(1px);
 		}
 	}
 	.secondary-navigation {
-		border-top: border();
+		border-top: border(1px);
 		padding-top: rem(28);
 	}
 
@@ -59,7 +59,7 @@
 			margin-left: rem(27);
 			width: 2px;
 			height: 100%;
-			background-color: $clr-lightGray;
+			background-color: #efefef;
 		}
 	}
 
