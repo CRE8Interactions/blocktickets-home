@@ -14,8 +14,6 @@ import { CreateTicketWrapper } from "../CreateTicketWrapper";
 import { TicketsWrapper } from "../TicketsWrapper";
 import { PublishWrapper } from '../PublishWrapper';
 
-import './createEventWrapper.scss';
-
 export default function CreateEventWrapper() {
 
     const navigate = useNavigate();

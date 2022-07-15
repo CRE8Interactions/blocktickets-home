@@ -11,22 +11,40 @@
 	padding: $card-spacer-y $card-spacer-x;
 	background-color: $white;
 
-	@include full-width();
+	&-lg {
+		@include full-width();
+	}
 }
 .table {
-	// table-layout: fixed;
 	margin-bottom: 0px;
 
 	> *,
 	th {
 		font-size: $small;
+		white-space: nowrap;
 	}
 
 	&.table-lg {
 		thead {
 			th {
-				min-width: 150px;
+				min-width: 80px;
 			}
+		}
+
+		th,
+		td {
+			padding-right: rem(32);
+			padding-left: rem(32);
+		}
+
+		th:first-of-type,
+		td:first-of-type {
+			padding-left: 0px;
+		}
+
+		th:last-of-type,
+		td:last-of-type {
+			padding-right: 0px;
 		}
 	}
 
@@ -50,11 +68,6 @@
 		td {
 			text-align: center;
 			width: inherit;
-		}
-
-		th,
-		td:not(.btn-more) {
-			@extend %text-truncate !optional;
 		}
 
 		th:first-of-type,
