@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { formatString } from '../../../utilities/helpers';
 
@@ -15,6 +16,8 @@ import './tickets.scss';
 
 export default function Tickets({ tickets, handleAction }) {
 
+    const navigate = useNavigate();
+
     const ticketStatusColors = [
         {
             'on_sale': 'success',
@@ -28,6 +31,10 @@ export default function Tickets({ tickets, handleAction }) {
     const handleClose = () => setShow(false);
 
     const handleShow = () => setShow(true);
+
+    const handleEdit = (ticket) => {
+        handleAction ? handleAction('edit', ticket) : navigate(`edit?id=${ticket.id}`)
+    }
 
     const formatTicketStatus = (status) => {
         return formatString(status)
@@ -65,7 +72,7 @@ export default function Tickets({ tickets, handleAction }) {
                                         <Dropdown.Menu>
                                             <ul>
                                                 <li>
-                                                    <Dropdown.Item as="button" className="btn-edit" onClick={() => handleAction('edit', ticket.id)}>Edit</Dropdown.Item>
+                                                    <Dropdown.Item as="button" className="btn-edit" onClick={() => handleEdit(ticket)}>Edit</Dropdown.Item>
                                                 </li>
                                                 <li>
                                                     <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>

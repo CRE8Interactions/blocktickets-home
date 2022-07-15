@@ -5,6 +5,8 @@ export { DashboardWrapper } from './DashboardWrapper';
 export { Sidenav } from './Sidenav';
 export { BasicInfoWrapper } from './BasicInfoWrapper';
 export { DetailsWrapper } from './DetailsWrapper';
+export { CreateTicketWrapper } from './CreateTicketWrapper';
+export { TicketsWrapper } from './TicketsWrapper';
 export { PublishWrapper } from './PublishWrapper';
 export { CreateEventWrapper } from './CreateEventWrapper';
 export { EventsWrapper } from './EventsWrapper';

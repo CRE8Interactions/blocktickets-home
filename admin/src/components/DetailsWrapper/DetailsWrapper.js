@@ -5,10 +5,12 @@ import Card from 'react-bootstrap/Card';
 import { UploadEventImage } from '../UploadEventImage';
 import { TextEditor } from '../TextEditor';
 
-export default function DetailsWrapper({ handleChange }) {
+export default function DetailsWrapper() {
+
+    const handleChange = (e) => { }
 
     return (
-        <>
+        <section className='wrapper'>
             <section>
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Main event image</h1>
@@ -25,6 +27,6 @@ export default function DetailsWrapper({ handleChange }) {
                     <TextEditor handleChange={handleChange} />
                 </Card>
             </section>
-        </>
+        </section>
     );
 }

@@ -1,0 +1,1 @@
+export { default as TicketsWrapper } from './TicketsWrapper'
