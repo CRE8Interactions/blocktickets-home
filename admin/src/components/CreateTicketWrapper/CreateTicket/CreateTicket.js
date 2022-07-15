@@ -11,7 +11,7 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { TicketBreakdownModal } from './TicketBreakdownModal';
 
-export default function CreateTicket({ handleChange, editId }) {
+export default function CreateTicket({ handleChange, ticketId }) {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());

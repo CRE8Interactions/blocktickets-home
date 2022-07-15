@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeeReportPage } from './pages';
+import { HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeeReportPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -15,6 +15,11 @@ const Router = () => {
                     <Route index element={<MyEventPage />} />
                     <Route path="basic-info" element={<BasicInfoPage />} />
                     <Route path="details" element={<DetailsPage />} />
+                    <Route path="tickets" element={<TicketsPage />}>
+                        <Route index element={<ViewTicketsPage />} />
+                        <Route path="create" element={<CreateTicketPage />} />
+                        <Route path='edit' element={<CreateTicketPage />} />
+                    </Route>
                     <Route path="publish" element={<PublishPage />} />
                     <Route path="orders" element={<OrdersPage />}>
                         <Route index element={<AllOrdersPage />} />
@@ -25,7 +30,6 @@ const Router = () => {
                 </Route>
                 <Route path="events" element={<EventsPage />} />
                 <Route path="create" element={<CreateEventPage />} />
-                <Route path="create/:id" element={<CreateEventPage />} />
             </Routes>
         </ScrollToTop>
     );

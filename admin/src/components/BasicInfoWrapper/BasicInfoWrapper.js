@@ -6,10 +6,12 @@ import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 
-export default function BasicInfoWrapper({ handleChange }) {
+export default function BasicInfoWrapper() {
+
+    const handleChange = (e) => { }
 
     return (
-        <>
+        <section className='wrapper'>
             <section>
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Basic info</h1>
@@ -34,6 +36,6 @@ export default function BasicInfoWrapper({ handleChange }) {
                     <Location handleChange={handleChange} />
                 </Card>
             </section>
-        </>
+        </section>
     );
 }
