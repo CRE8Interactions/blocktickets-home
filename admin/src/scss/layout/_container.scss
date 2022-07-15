@@ -59,7 +59,7 @@ $navbar-height: rem(82);
 
 @mixin full-width() {
 	position: relative;
-	width: 73vw;
+	width: calc(100vw - 25vw);
 	left: 0;
 }
 
