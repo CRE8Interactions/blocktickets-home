@@ -32,7 +32,7 @@ export default function Withdraw({ details }) {
         <Stack gap={4}>
             <Card body className="withdraw-card card-md card--dark">
                 <Card.Title as="h5">Available Funds</Card.Title>
-                <span className="total">${parseFloat(funds).toFixed(2)}</span>
+                <span className="total">$0</span>
                 {account && account.hasOwnProperty('id') ? <Button disabled={funds === 0 ? true : false}>Withdraw Funds</Button> : <LinkBankAccountBtn />}
             </Card>
             <Card body className="withdraw-card card-md card--light">
@@ -42,7 +42,7 @@ export default function Withdraw({ details }) {
                     </Card.Title>
                     <OverlayTrigger
                         placement="bottom"
-                        overlay={<Tooltip>Your funds will be released in 5 - 7 business days</Tooltip>}>
+                        overlay={<Tooltip>Funds will be released 24 - 48hrs after day of event</Tooltip>}>
                         <Button variant="link">
                             <InfoIcon />
                         </Button>

@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function DetailsModal({ order }) {
+	console.log(order)
 	return (
 		<Fragment>
 			<Modal.Header closeButton>
