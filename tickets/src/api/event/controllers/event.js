@@ -82,8 +82,10 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
           fields: ['name', 'username', 'email', 'phoneNumber']
         },
         event: {
-          where: {
-            start: { $gte: new Date() }
+          filters: {
+            $and: [
+              { start: { $gte: new Date() } }
+            ]
           },
           populate: {
             venue: {

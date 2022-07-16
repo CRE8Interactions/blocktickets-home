@@ -52,7 +52,7 @@ export default function MyListingsWrapper() {
                 };
 
                 res.data.map((listing) => {
-                    if (listing.status === 'new') types.active.push(listing);
+                    if (listing.status === 'new' && listing.event !== null) types.active.push(listing);
                     if (listing.status === 'complete') types.sold.push(listing);
                     if (listing.status === 'expired') types.expired.push(listing);
                 });

@@ -69,7 +69,6 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
   },
   async find(ctx) {
     const user = ctx.state.user;
-
     const entry = await strapi.entityService.findMany('api::ticket-transfer.ticket-transfer', {
       filters: {
         fromUserId: user.id
@@ -77,6 +76,11 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
       populate: {
         tickets: true,
         event: {
+          filters: {
+            $and: [
+              { start: { $gte: new Date() } }
+            ]
+          },
           populate: {
             image: true,
             venue: {

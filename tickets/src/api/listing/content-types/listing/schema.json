@@ -59,6 +59,10 @@
     "uuid": {
       "type": "string",
       "unique": true
+    },
+    "notified": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
