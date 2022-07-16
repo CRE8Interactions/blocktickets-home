@@ -30,6 +30,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
     };
 
     const event = listing ? listing?.event : order?.event;
+    console.log(listing?.tickets)
 
     useEffect(() => {
     }, [ticketState, ticketStatus])
@@ -63,7 +64,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
                                             <span className='m-0 caption'>Listing price per ticket</span>
                                             <span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
                                         </Stack>
-                                        <p className='caption text-muted'>You will make ${(listing?.askingPrice / listing?.tickets.length).toFixed(2)} per ticket</p>
+                                        <p className='caption text-muted'>You will make ${(listing?.askingPrice / listing?.tickets.length).toFixed(2) - listing?.tickets[0].facilityFee} per ticket</p>
                                     </Stack>
                                 </>
                             )
