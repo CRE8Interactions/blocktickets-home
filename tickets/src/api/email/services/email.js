@@ -513,5 +513,51 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     } catch (err) {
       strapi.log.debug('📺: ', err);
     }
-  }
+  },
+   async notifyListingExpired(listings) {
+    listings.map(async (listing) => {
+      try {
+        await strapi
+          .plugin('email-designer')
+          .service('email')
+          .sendTemplatedEmail(
+            {
+              // required
+              to: listing.users_permissions_user.email,
+    
+              // optional if /config/plugins.js -> email.settings.defaultFrom is set
+              from: process.env.MAIN_EMAIL,
+    
+              // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+              replyTo: process.env.MAIN_EMAIL,
+    
+              // optional array of files
+              attachments: [],
+            },
+            {
+              // required - Ref ID defined in the template designer (won't change on import)
+              templateReferenceId: 11,
+    
+              // If provided here will override the template's subject.
+              // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+              subject: `Your listing has expired!`,
+            },
+            {
+              // this object must include all variables you're using in your email template
+              event: listing.event,
+              venue: listing.event.venue,
+              user: listing.users_permissions_user,
+              address: listing.event.venue.address[0],
+              tickets: listing.tickets,
+              count: listing.tickets.length,
+              date: moment(listing.event.start).format('ddd, MMM D, YYYY • h:mm'),
+              image: listing.event.image
+            }
+          );
+          //
+      } catch (err) {
+        strapi.log.debug('📺: ', err);
+      }
+    })
+   }
 }))

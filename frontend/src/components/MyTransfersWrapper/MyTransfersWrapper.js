@@ -79,14 +79,14 @@ export default function MyTransfersWrapper() {
 				<Tabs defaultActiveKey="pending" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
 					<Tab eventKey="pending" title="Pending">
 						<MyTransfersSlider
-							transfers={transfers.filter((transfer) => transfer.status === 'pending')}
+							transfers={transfers.filter((transfer) => transfer.status === 'pending' && transfer.event !== null)}
 							cancel={handleClick}
 						/>
 					</Tab>
 					<Tab eventKey="completed" title="Completed">
 						<MyTransfersSlider
 							transfers={transfers.filter(
-								(transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled'
+								(transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
 							)}
 						/>
 					</Tab>

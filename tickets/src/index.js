@@ -154,7 +154,9 @@ module.exports = {
     // resetDevelopmentEnv()
 
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information', 'api::update-number.update-number'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization',
+                'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information',
+                'api::update-number.update-number', 'api::listing.listing'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
@@ -483,12 +485,8 @@ module.exports = {
           event.state = event.params;
         }
       },
-      async afterUpdate(event) {
+      async afterUpdateMany(event) {
         const { result, params, state } = event;
-
-        if (event.model.singularName === 'order') {
-          
-        }
       }
     });
   },
