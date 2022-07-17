@@ -6,17 +6,29 @@ import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image'
 
 export default function Tickets({ticket, order, handleClick}) {
+  const eventStart = moment(order.event.start);
+  const today = moment();
+  const showQR = today.isSame(eventStart, 'day');
+
   return (
     <Fragment>
             <Card body className="ticket-card">
+              { showQR &&
                 <QRCodeSVG
                   width="217"
                   height="217"
                   className="mb-3 p-0"
                   value={ticket.checkInCode}
                 />
+              }
+
+              { !showQR &&
+                <Image src="../noqr.png" />
+              }
+                
                 <div className="details d-flex-column">
                     <Card.Title as="h5">{order?.event?.name}</Card.Title>
                     <p className="event-details">
