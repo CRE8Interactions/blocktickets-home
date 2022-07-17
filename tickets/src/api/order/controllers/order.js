@@ -179,8 +179,14 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           where: { id: order.details.listing.id },
           data: {
             status: 'complete'
+          },
+          populate: {
+            tickets: true,
+            users_permissions_user: true
           }
         });
+
+        strapi.service('api::email.email').fundsAvailable(listing)
 
         let fromOrder = await strapi.db.query('api::order.order').findOne({
           where: { id: listing.fromOrder },

@@ -182,6 +182,7 @@ module.exports = createCoreController('api::verify.verify', ({
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 
     ctx.send(tokenData)
+    strapi.service('api::email.email').signupConfirmation(user)
   },
   async create(ctx) {
     const { phoneNumber, email } = ctx.request.body.data;
