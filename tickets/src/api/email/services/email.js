@@ -514,7 +514,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
       strapi.log.debug('📺: ', err);
     }
   },
-   async notifyListingExpired(listings) {
+  async notifyListingExpired(listings) {
     listings.map(async (listing) => {
       try {
         await strapi
@@ -559,5 +559,85 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
         strapi.log.debug('📺: ', err);
       }
     })
-   }
+  },
+  async signupConfirmation(user) {
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: user.email,
+  
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
+  
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
+  
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 2,
+  
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `Welcome to the future of ticketing.`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            user: user,
+          }
+        );
+        //
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
+  },
+  async fundsAvailable(listing) {
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: listing.users_permissions_user.email,
+  
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
+  
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
+  
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 17,
+  
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `Your funds are available!`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            user: listing.users_permissions_user,
+            askingPrice: listing.askingPrice,
+            payout: listing.payout,
+            serviceFees: (listing.serviceFees * listing.tickets),
+            serviceFeesTotal: listing.serviceFees,
+            tickets: listing.tickets,
+            total: (listing.askingPrice * listing.tickets)
+          }
+        );
+        //
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
+  }
 }))
