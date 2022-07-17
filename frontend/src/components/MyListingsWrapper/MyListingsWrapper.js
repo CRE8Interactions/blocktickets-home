@@ -7,7 +7,6 @@ import Tab from 'react-bootstrap/Tab';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyListingsSlider } from './MyListingsSlider';
-import { TicketModal } from '../TicketModal';
 
 import { getMyListings, removeMyListings } from '../../utilities/api';
 
@@ -86,6 +85,8 @@ export default function MyListingsWrapper() {
                         listings={listings.active}
                         removeListing={removeListing}
                         getListings={myListings}
+                        show={show}
+                        setShow={setShow}
                     />
                 </Tab>
                 <Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
@@ -93,6 +94,8 @@ export default function MyListingsWrapper() {
                         ticketStatus={'listed'}
                         ticketState={key}
                         listings={listings.sold}
+                        show={show}
+                        setShow={setShow}
                     />
                 </Tab>
                 <Tab eventKey="expired" title="Expired" key={new Date().getTime() + 2}>
@@ -100,11 +103,11 @@ export default function MyListingsWrapper() {
                         ticketStatus={'listed'}
                         ticketState={key}
                         listings={listings.expired}
+                        show={show}
+                        setShow={setShow}
                     />
                 </Tab>
             </Tabs>
-
-            <TicketModal show={show} setShow={setShow} />
         </section>
     );
 }
