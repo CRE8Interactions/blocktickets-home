@@ -31,6 +31,11 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
 
     const event = listing ? listing?.event : order?.event;
 
+    if (listing) {
+        order = {}
+        order['event'] = listing?.event;
+        order['orderId'] = listing?.uuid;
+    }
     useEffect(() => {
     }, [ticketState, ticketStatus])
 

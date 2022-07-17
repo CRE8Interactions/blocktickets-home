@@ -3,8 +3,9 @@ import { SwiperSlide } from 'swiper/react';
 
 import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
+import { TicketModal } from '../../TicketModal';
 
-export default function MyListingsSlider({ ticketStatus, ticketState, listings, removeListing, getListings }) {
+export default function MyListingsSlider({ ticketStatus, ticketState, listings, removeListing, getListings, show, setShow }) {
 	if (listings && listings.types && ticketState) listings = listings.types[ticketState];
 
 	return (
@@ -27,6 +28,7 @@ export default function MyListingsSlider({ ticketStatus, ticketState, listings, 
 						);
 					})}
 			</Slider>
+			{/* <TicketModal show={show} setShow={setShow} /> */}
 		</div>
 	);
 }
