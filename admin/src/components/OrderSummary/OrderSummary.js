@@ -65,9 +65,9 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                         </LinkContainer>
                                     </li>)}
                                     <li>
-                                        <LinkContainer to={`attendee-report?order=${order.orderId}`}>
+                                        <LinkContainer to={`attendees-report?order=${order.orderId}`}>
                                             <Dropdown.Item className="btn-edit">
-                                                View attendee report
+                                                View attendees report
                                             </Dropdown.Item>
                                         </LinkContainer>
                                     </li>

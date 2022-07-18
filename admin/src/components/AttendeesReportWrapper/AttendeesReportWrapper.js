@@ -9,9 +9,9 @@ import { ExportSelect } from '../ExportSelect';
 import { SearchBar } from '../SearchBar'
 import { TicketRow } from './TicketRow'
 
-import './attendeeReportWrapper.scss';
+import './attendeesReportWrapper.scss';
 
-export default function AttendeeReportWrapper({ orderId, ticketId }) {
+export default function AttendeesReportWrapper({ orderId, ticketId }) {
 
     // demo - same orders array that is built from data from database 
     const ordersObj = [
@@ -209,10 +209,10 @@ export default function AttendeeReportWrapper({ orderId, ticketId }) {
     return (
         <>
             <section>
-                <header className='section-header' id="attendee-report-header">
+                <header className='section-header' id="attendees-report-header">
                     <div className="section-header" >
                         <div className="section-heading">
-                            <h1>Attendee report</h1>
+                            <h1>Attendees report</h1>
                         </div>
                         <p className='section-header-desc'>View and download your attendees information</p>
                     </div>

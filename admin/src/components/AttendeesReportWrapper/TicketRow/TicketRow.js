@@ -1,5 +1,4 @@
 import React from 'react';
-import { LinkContainer } from "react-router-bootstrap";
 
 import { formatOrderId, formatString, formatCurrency } from '../../../utilities/helpers';
 

@@ -1,1 +1,1 @@
-export { default as AttendeeReportWrapper } from './AttendeeReportWrapper'
+export { default as AttendeesReportWrapper } from './AttendeesReportWrapper'

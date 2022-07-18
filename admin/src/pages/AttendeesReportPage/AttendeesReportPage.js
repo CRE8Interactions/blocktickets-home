@@ -1,8 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { AttendeeReportWrapper } from "../../components";
+import { AttendeesReportWrapper } from "../../components";
 
-export default function AttendeeReportPage() {
+export default function AttendeesReportPage() {
 
     // get queries from URL
     const [searchParams] = useSearchParams();
@@ -11,6 +11,6 @@ export default function AttendeeReportPage() {
 
 
     return (
-        <AttendeeReportWrapper orderId={searchParamsObj.order} ticketId={searchParamsObj.ticket} />
+        <AttendeesReportWrapper orderId={searchParamsObj.order} ticketId={searchParamsObj.ticket} />
     )
 }
