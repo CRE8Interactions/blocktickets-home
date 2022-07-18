@@ -45,9 +45,9 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
                                     </li>
                                 )}
                                 <li>
-                                    <LinkContainer to={`attendee-report?order=${orderId}&ticket=${ticket.id}`}>
+                                    <LinkContainer to={`attendees-report?order=${orderId}&ticket=${ticket.id}`}>
                                         <Dropdown.Item className="btn-edit">
-                                            View attendee report
+                                            View attendees report
                                         </Dropdown.Item>
                                     </LinkContainer>
                                 </li>

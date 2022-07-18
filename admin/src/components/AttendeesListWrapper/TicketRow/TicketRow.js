@@ -2,37 +2,37 @@ import React from 'react';
 
 import { formatOrderId, formatString, formatCurrency } from '../../../utilities/helpers';
 
-export default function TicketRow({ orderId, firstName, lastName, marketType, type, ticket, show = true }) {
+export default function TicketRow() {
 
     return (
         <tr>
             <td>
-                {formatOrderId(orderId)}
+                {formatOrderId(19331942333743)}
             </td>
             <td>
                 Feb 12, 2022 at 3:43pm (EST)
             </td>
             <td className='text-capitalize'>
-                {firstName}
+                Harrison
             </td>
             <td className='text-capitalize'>
-                {lastName}
+                Cogan
             </td>
             <td>
                 harrison.cogan@gmail.com
             </td>
             <td>1</td>
             <td className='text-capitalize'>
-                {ticket.status}
+                Transferred
             </td>
             <td className='text-capitalize'>
-                {formatString(type)}
+                {formatString('general_admission')}
             </td>
             <td className='text-capitalize'>
-                {marketType}
+                Primary
             </td>
             <td>
-                {formatCurrency(ticket.price)}
+                {formatCurrency(100)}
             </td>
             <td>
                 {formatCurrency(20)}

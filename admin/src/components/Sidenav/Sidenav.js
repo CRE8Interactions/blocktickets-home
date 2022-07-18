@@ -78,8 +78,8 @@ export default function Sidenav(props) {
                                         </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="attendees">
-                                            <Nav.Link>Attendee list</Nav.Link>
+                                        <LinkContainer to="attendees-list">
+                                            <Nav.Link>Attendees list</Nav.Link>
                                         </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
