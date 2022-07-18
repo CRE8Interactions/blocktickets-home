@@ -13,6 +13,7 @@ export { OrdersPage } from './OrdersPage';
 export { AllOrdersPage } from './AllOrdersPage';
 export { RefundTicketPage } from './RefundTicketPage';
 export { RefundOrdersPage } from './RefundOrdersPage';
-export { AttendeeReportPage } from './AttendeeReportPage';
+export { AttendeesReportPage } from './AttendeesReportPage';
+export { AttendeesListPage } from './AttendeesListPage';
 export { PrimarySalesPage } from './PrimarySalesPage';
 export { SecondarySalesPage } from './SecondarySalesPage';

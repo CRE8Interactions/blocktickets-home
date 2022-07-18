@@ -13,6 +13,7 @@ export { EventsWrapper } from './EventsWrapper';
 export { OrdersWrapper } from './OrdersWrapper';
 export { RefundTicketWrapper } from './RefundTicketWrapper';
 export { RefundOrdersWrapper } from './RefundOrdersWrapper';
-export { AttendeeReportWrapper } from './AttendeesReportWrapper'
+export { AttendeesReportWrapper } from './AttendeesReportWrapper'
+export { AttendeesListWrapper } from './AttendeesListWrapper'
 export { PrimarySalesWrapper } from './PrimarySalesWrapper'
 export { SecondarySalesWrapper } from './SecondarySalesWrapper'
