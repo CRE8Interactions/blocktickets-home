@@ -21,11 +21,6 @@
 		}
 
 		.transaction {
-			position: relative;
-			& + .transaction {
-				margin-top: $text-spacer-xs;
-			}
-
 			&-desc {
 				display: flex;
 				flex-direction: column;

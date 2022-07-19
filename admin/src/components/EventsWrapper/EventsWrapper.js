@@ -51,12 +51,6 @@ export default function EventsWrapper() {
     const fullscreen = useState(true);
     const orgs = useContext(OrganizationContext);
 
-    const addTickets = (event) => {
-        setStep(3);
-        setShow(true);
-        setEvent(event);
-    };
-
     const handleSearch = (query) => { }
 
     return (
@@ -86,26 +80,17 @@ export default function EventsWrapper() {
                     </Nav>
                     <Tab.Content>
                         <Tab.Pane eventKey="published">
-                            <EventsTable handleTicketShow={addTickets} type={key} />
+                            <EventsTable type={key} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="draft">
-                            <EventsTable handleTicketShow={addTickets} type={key} />
+                            <EventsTable type={key} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="past">
-                            <EventsTable handleTicketShow={addTickets} type={key} />
+                            <EventsTable type={key} />
                         </Tab.Pane>
                     </Tab.Content>
                 </div>
             </Tab.Container>
         </Card>
-
-        //  <CreateEvent
-        // 	show={show}
-        // 	handleClose={handleClose}
-        // 	fullscreen={fullscreen}
-        // 	orgs={orgs}
-        // 	step={step}
-        // 	myEvent={event}
-        // />
     );
 }

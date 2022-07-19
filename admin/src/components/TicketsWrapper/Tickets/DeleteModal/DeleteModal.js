@@ -4,8 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import './deleteModal.scss';
-
 export default function DeleteModal({ show, handleClose }) {
 
     const handleDelete = () => {
@@ -20,7 +18,7 @@ export default function DeleteModal({ show, handleClose }) {
                     <Button variant="outline-light" size="lg" className='text-danger' onClick={handleDelete}>
                         Delete ticket
                     </Button>
-                    <Button variant="primary" size="lg" onClick={handleClose}>
+                    <Button size="lg" onClick={handleClose}>
                         Cancel
                     </Button>
                 </Stack>
