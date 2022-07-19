@@ -47,7 +47,7 @@ export default function AutomaticReports() {
                     </div>
 
                 ) : (
-                    <NoDataContainer>
+                    <NoDataContainer style="sm">
                         <p>Nothing is scheduled, click Add recipient to schedule an automatic report.</p>
                     </NoDataContainer>
                 )}

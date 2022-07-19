@@ -42,7 +42,7 @@ export default function Tickets({ tickets, handleAction }) {
 
                         </>
                     ) : (
-                        <NoDataContainer>
+                        <NoDataContainer style="center">
                             <p>You don’t have any tickets, please create at least one to continue on next steps</p>
                         </NoDataContainer>
                     )

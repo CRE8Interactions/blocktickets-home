@@ -1,8 +1,29 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
 
 #no-data {
-	max-width: 432px;
-	margin: auto;
+	display: flex;
+	gap: $gap-sm;
+	align-items: center;
+
+	&.center {
+		max-width: 432px;
+		margin: auto;
+		flex-direction: column;
+		justify-content: center;
+
+		p {
+			text-align: center;
+		}
+	}
+
+	&.sm {
+		&::before {
+			background-image: url('../../assets/icons/info-medium.svg');
+			width: 24px;
+			height: 24px;
+		}
+	}
 
 	&::before {
 		content: '';
@@ -14,7 +35,6 @@
 	}
 
 	p {
-		text-align: center;
 		font-weight: $fw-medium;
 	}
 }
