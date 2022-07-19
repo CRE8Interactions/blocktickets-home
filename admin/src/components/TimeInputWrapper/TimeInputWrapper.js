@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 
 import { TimeInput } from './TimeInput';
 
-export default function TimeInputWrapper({ label, id, setDate, selectedDate }) {
+export default function TimeInputWrapper({ label, id, setDate, selectedDate, size }) {
 
     const filterPassedTime = (time) => {
         const currentDate = new Date();
@@ -16,9 +16,9 @@ export default function TimeInputWrapper({ label, id, setDate, selectedDate }) {
 
     return (
         <Form.Group>
-            <div className="date-picker-card time-picker-card">
+            <div className={`date-picker-card time-picker-card ${size ? `date-picker-card-${size}` : ''}`} >
                 <Stack>
-                    <Form.Label htmlFor={id}>{label}</Form.Label>
+                    {label && (<Form.Label htmlFor={id}>{label}</Form.Label>)}
                     <TimeInput id={id} setDate={setDate} selectedDate={selectedDate} filterPassedTime={filterPassedTime} />
                 </Stack>
             </div>

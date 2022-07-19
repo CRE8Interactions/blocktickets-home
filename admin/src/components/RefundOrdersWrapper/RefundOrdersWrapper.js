@@ -266,6 +266,7 @@ export default function RefundOrdersWrapper() {
             <input
                 type={props.mode}
                 checked={props.checked}
+                onChange={() => console.log('change')}
                 className="custom-check"
             />
         )
@@ -293,16 +294,16 @@ export default function RefundOrdersWrapper() {
                         </Card>
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by Order #, date, buyer" />
                     </div>
-                    <Stack direction="horizontal" gap={3} className="my-4">
+                    <Stack direction="horizontal" gap={3} className="my-3">
                         <span className='small text-muted fw-medium'>Refund method</span>
                         <span className='small'>Original payment method</span>
                     </Stack>
                 </header>
                 <section>
-                    <Stack direction='horizontal' className='heading--flex mb-4 split-row'>
+                    <header className='heading--flex section-header split-row'>
                         <h1 className='fs-md'>Orders</h1>
-                        <Button onClick={handleShow}>Refund selected</Button>
-                    </Stack>
+                        <Button size="lg" onClick={handleShow}>Refund selected</Button>
+                    </header>
                     <Card body>
                         <BootstrapTable
                             keyField='id'

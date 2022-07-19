@@ -220,7 +220,7 @@ export default function AttendeesReportWrapper({ orderId, ticketId }) {
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by attendee name, email address" />
                         <ExportSelect />
                     </div>
-                    <Stack direction="horizontal" className='my-4 split-row'>
+                    <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">
                             <li>
                                 Gross sales

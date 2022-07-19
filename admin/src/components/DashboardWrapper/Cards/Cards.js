@@ -21,12 +21,12 @@ export default function Cards() {
         <section className='cards'>
             <Row>
                 <Col lg={6}>
-                    <Card body>
+                    <Card body id="tickets-sold-card">
                         <div className='heading--flex card-body-heading'>
                             <h1 className='card-body-title card-body-title--flex tickets-sold'>Tickets sold</h1>
                             <Badge className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>
-                        <Row className='mb-5'>
+                        <Row>
                             <Col>
                                 <span><b className="fs-md">72</b> <span className='text-muted'>/ 700</span></span>
                             </Col>
@@ -48,7 +48,7 @@ export default function Cards() {
                     </Card>
                 </Col>
             </Row>
-            <Row>
+            <Row className='mt-5'>
                 <Col lg={6}>
                     <Card body>
                         <div className='heading--flex card-body-heading total-sales mb-4'>
