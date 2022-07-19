@@ -17,3 +17,6 @@ export { AttendeesReportPage } from './AttendeesReportPage';
 export { AttendeesListPage } from './AttendeesListPage';
 export { PrimarySalesPage } from './PrimarySalesPage';
 export { SecondarySalesPage } from './SecondarySalesPage';
+export { AutomaticReportingPage } from './AutomaticReportingPage';
+export { ViewAutomaticReportingPage } from './ViewAutomaticReportingPage';
+export { UserInformationPage } from './UserInformationPage';

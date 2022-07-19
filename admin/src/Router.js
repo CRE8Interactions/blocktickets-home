@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage } from './pages';
+import { HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -30,6 +30,11 @@ const Router = () => {
                     <Route path="attendees-list" element={<AttendeesListPage />} />
                     <Route path="primary-sales" element={<PrimarySalesPage />} />
                     <Route path="secondary-sales" element={<SecondarySalesPage />} />
+                    <Route path="automatic-reporting" element={<AutomaticReportingPage />}>
+                        <Route index element={<ViewAutomaticReportingPage />} />
+                        <Route path="add" element={<UserInformationPage />} />
+                        <Route path="edit" element={<UserInformationPage />} />
+                    </Route>
                 </Route>
                 <Route path="events" element={<EventsPage />} />
                 <Route path="create" element={<CreateEventPage />} />
