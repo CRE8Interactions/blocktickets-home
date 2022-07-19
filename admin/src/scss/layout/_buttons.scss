@@ -134,7 +134,8 @@ button,
 .btn-edit,
 .btn-delete,
 .btn-refund,
-.btn-view {
+.btn-view,
+.btn-copy {
 	@extend .icon-button !optional;
 	justify-content: flex-start;
 }
@@ -160,6 +161,12 @@ button,
 .btn-view {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'clipboard'));
+	}
+}
+
+.btn-copy {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'copy'));
 	}
 }
 
