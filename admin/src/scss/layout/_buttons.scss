@@ -9,7 +9,7 @@
 	margin-top: $text-spacer;
 	align-items: center;
 	justify-content: end;
-	gap: $gap;
+	gap: $gap-sm;
 }
 
 .icon-button {
@@ -58,33 +58,6 @@ button,
 
 	&:disabled {
 		color: inherit;
-	}
-}
-
-.btn-group {
-	column-gap: rem(18);
-
-	@media (max-width: 375px) {
-		column-gap: rem(5);
-	}
-
-	> .btn:not(:first-child) {
-		margin-left: 0px;
-	}
-
-	.btn-check {
-		&:checked,
-		&:focus {
-			& + .btn {
-				box-shadow: none;
-			}
-		}
-		&:checked {
-			& + .btn {
-				background-color: $primary;
-				color: $white;
-			}
-		}
 	}
 }
 
@@ -201,6 +174,38 @@ button,
 		&:after {
 			content: '';
 			display: none;
+		}
+	}
+}
+
+.btn-group {
+	justify-content: space-between;
+	> .btn:not(:first-child) {
+		margin-left: 0px;
+	}
+	> .btn:not(.dropdown-toggle) {
+		border-radius: $border-radius !important;
+		padding: rem(15) rem(9);
+		border: border();
+		background-color: $white;
+		color: $body-color;
+		font-size: $small;
+		flex: 0 0;
+		flex-basis: 43px;
+	}
+
+	.btn-check {
+		&:checked,
+		&:focus {
+			& + .btn {
+				box-shadow: none;
+			}
+		}
+		&:checked {
+			& + .btn {
+				background-color: $primary;
+				color: $white;
+			}
 		}
 	}
 }

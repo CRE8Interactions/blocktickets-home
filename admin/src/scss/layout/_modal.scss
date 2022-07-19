@@ -64,6 +64,10 @@
 		}
 	}
 
+	#delete-modal {
+		@extend .modal-xl !optional;
+	}
+
 	.btn-group-flex {
 		gap: $gap;
 		margin-top: $text-spacer-sm;

@@ -5,12 +5,12 @@ import Form from 'react-bootstrap/Form';
 
 import { DateInput } from './DateInput';
 
-export default function DateInputWrapper({ label, id, setDate, selectedDate, startDate, endDate, error }) {
+export default function DateInputWrapper({ label, id, setDate, selectedDate, startDate, endDate, error, size }) {
     return (
         <Form.Group>
-            <div className={`date-picker-card day-picker-card ${error ? 'error-border' : ''}`}>
+            <div className={`date-picker-card day-picker-card ${size ? `date-picker-card-${size}` : ''} ${error ? 'error-border' : ''}`}>
                 <Stack>
-                    <Form.Label htmlFor={id} className={`${error ? 'error' : ''}`}>{label}</Form.Label>
+                    {label && (<Form.Label htmlFor={id} className={`${error ? 'error' : ''}`}>{label}</Form.Label>)}
                     <DateInput id={id} setDate={setDate} selectedDate={selectedDate} startDate={startDate} endDate={endDate} />
                 </Stack>
             </div>

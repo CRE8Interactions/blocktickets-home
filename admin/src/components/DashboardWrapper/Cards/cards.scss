@@ -4,15 +4,23 @@
 @use '../../../scss/theme/colors' as *;
 
 .cards {
-	.row + .row {
-		margin-top: $text-spacer;
-	}
-
 	.card {
 		height: 100%;
 
 		&-body {
-			padding: rem(24) rem(32);
+			padding-top: rem(24);
+			padding-bottom: rem(24);
+		}
+	}
+
+	#tickets-sold-card {
+		.card-body {
+			display: flex;
+			flex-direction: column;
+
+			.progress {
+				margin-top: auto;
+			}
 		}
 	}
 

@@ -11,7 +11,7 @@ export default function CreateTicketWrapper({ id, ticketId }) {
     return (
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
-                <h1>{id || ticketId ? 'Edit' : 'Create'} ticket</h1>
+                <h1>{id || ticketId ? 'Edit' : 'Create a'} ticket</h1>
             </header>
             <Card body className='card--sm'>
                 <CreateTicket handleChange={handleChange} ticketId={ticketId} />

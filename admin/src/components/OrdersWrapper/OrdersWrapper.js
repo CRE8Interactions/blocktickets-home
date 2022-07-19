@@ -212,7 +212,7 @@ export default function OrdersWrapper() {
         },
     ]
 
-    const [ordersView, setOrdersView] = useState('completed');
+    const [ordersView, setOrdersView] = useState(ordersViewOpt[0].value);
 
     // search query
     const [
@@ -248,7 +248,7 @@ export default function OrdersWrapper() {
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by Order #, name, phone number or email" />
                         <ExportSelect />
                     </div>
-                    <Stack direction="horizontal" className='my-4 split-row'>
+                    <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">
                             <li>
                                 Gross sales

@@ -32,7 +32,7 @@
 		}
 
 		.main-navigation {
-			padding: $text-spacer-lg 0px;
+			padding: rem(38) 0px;
 			border-top: border(1px);
 		}
 	}
@@ -50,7 +50,7 @@
 	.submenu {
 		position: relative;
 		.nav-item {
-			padding-left: $text-spacer-lg;
+			padding-left: rem(38);
 		}
 
 		&::before {

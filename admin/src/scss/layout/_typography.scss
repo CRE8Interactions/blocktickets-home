@@ -194,3 +194,28 @@ h4,
 		}
 	}
 }
+
+.list-table {
+	font-size: $small;
+	font-weight: $fw-medium;
+
+	.row + .row {
+		border-top: border(1px);
+	}
+
+	&-header {
+		border-bottom: border(1px);
+	}
+
+	.btn-more-col {
+		text-align: end;
+	}
+
+	&-col {
+		padding: rem(8);
+
+		&-header {
+			color: $text-muted;
+		}
+	}
+}

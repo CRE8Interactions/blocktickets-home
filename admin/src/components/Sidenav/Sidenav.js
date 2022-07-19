@@ -115,7 +115,7 @@ export default function Sidenav(props) {
                                         </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="reporting">
+                                        <LinkContainer to="automatic-reporting">
                                             <Nav.Link>Automatic reporting</Nav.Link>
                                         </LinkContainer>
                                     </Nav.Item>

@@ -16,7 +16,7 @@ export default function DateTime({ handleChange }) {
     useEffect(() => {
         setHasError(endDate.getTime() < startDate.getTime())
 
-    }, [startDate < endDate])
+    }, [startDate, endDate])
 
 
     return (
@@ -30,7 +30,7 @@ export default function DateTime({ handleChange }) {
                     <Col>
                         <TimeInputWrapper
                             label="Start time"
-                            id="event-start"
+                            id="event-start-time"
                             setDate={setStartDate} selectedDate={startDate}
                         />
                     </Col>
@@ -47,7 +47,7 @@ export default function DateTime({ handleChange }) {
                     <Col>
                         <TimeInputWrapper
                             label="End time"
-                            id="event-end"
+                            id="event-end-time"
                             setDate={setEndDate} selectedDate={endDate}
                         />
                     </Col>

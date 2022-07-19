@@ -23,7 +23,7 @@ export default function CreateTicket({ handleChange, ticketId }) {
     useEffect(() => {
         setHasError(endDate.getTime() < startDate.getTime())
 
-    }, [startDate < endDate])
+    }, [startDate, endDate])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -103,7 +103,7 @@ export default function CreateTicket({ handleChange, ticketId }) {
                         <Col>
                             <TimeInputWrapper
                                 label="Start time"
-                                id="sales-start"
+                                id="sales-start-time"
                                 setDate={setStartDate} selectedDate={startDate}
                             />
                         </Col>
@@ -116,7 +116,7 @@ export default function CreateTicket({ handleChange, ticketId }) {
                         <Col>
                             <TimeInputWrapper
                                 label="End time"
-                                id="sales-start"
+                                id="sales-end-time"
                                 setDate={setEndDate} selectedDate={endDate}
                             />
                         </Col>

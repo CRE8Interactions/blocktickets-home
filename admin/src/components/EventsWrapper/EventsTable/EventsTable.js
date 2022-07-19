@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
 import OrganizationContext from "../../../context/Organization/Organization";
@@ -13,13 +12,14 @@ import Stack from "react-bootstrap/Stack";
 import Badge from "react-bootstrap/Badge";
 
 import { StatRow } from "./../../StatRow";
-import { DeleteModal } from '../../DeleteModal';
+import { DeleteModal } from './DeleteModal';
 import { MoreIcon } from "../../MoreIcon";
 
 import thumbnail from '../../../assets/profile-thumbnail.png'
+
 import './eventsTable.scss';
 
-export default function EventsTable({ handleTicketShow, type }) {
+export default function EventsTable({ type }) {
 
     const org = useContext(OrganizationContext)
     const [events, setEvents] = useState()
@@ -34,7 +34,6 @@ export default function EventsTable({ handleTicketShow, type }) {
 
     let sum;
     let selectedEvent;
-    let navigate = useNavigate();
 
     //   useEffect(() => {
     //     setEvents(org.orgs[0]['events'])

@@ -17,8 +17,10 @@ select:-webkit-autofill:focus {
 	transition: background-color 5000s ease-in-out 0s;
 }
 
-.form-group + .form-group {
-	margin-top: $text-spacer-sm;
+.form-group {
+	& + .form-group {
+		margin-top: $text-spacer-sm;
+	}
 }
 
 .form-control {
@@ -124,8 +126,19 @@ legend {
 	position: relative;
 
 	&::before {
-		margin-left: rem(12);
-		margin-top: rem(15);
+		padding-left: rem(12);
+		padding-top: rem(15);
+	}
+
+	&-sm {
+		&::before {
+			padding-top: rem(12);
+		}
+
+		.date-picker input {
+			padding-top: rem(12);
+			padding-bottom: rem(12);
+		}
 	}
 
 	&.day-picker-card {
@@ -150,8 +163,8 @@ legend {
 
 	.form-label {
 		margin: 0px;
-		position: absolute;
-		padding: $input-padding-y 0px $input-padding-y $input-padding-x;
+		position: relative;
+		padding: $input-padding-y $input-padding-x 0px;
 		font-size: $caption;
 		color: #6f767e;
 	}
