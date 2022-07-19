@@ -159,7 +159,7 @@ export default function EventsTable({ type }) {
                                         <ul>
                                             <li>
                                                 <LinkContainer to="/myevent/123">
-                                                    <Dropdown.Item className="btn-edit">View</Dropdown.Item>
+                                                    <Dropdown.Item className="btn-view">View</Dropdown.Item>
                                                 </LinkContainer>
                                             </li>
                                             <li>
@@ -168,7 +168,7 @@ export default function EventsTable({ type }) {
                                                 </LinkContainer>
                                             </li>
                                             <li>
-                                                <Dropdown.Item className="btn-edit" as="button">Copy URL</Dropdown.Item>
+                                                <Dropdown.Item className="btn-view" as="button">Copy URL</Dropdown.Item>
                                             </li>
                                             <li>
                                                 <Dropdown.Item as="button"
