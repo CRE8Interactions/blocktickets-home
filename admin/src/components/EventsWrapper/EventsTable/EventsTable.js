@@ -168,7 +168,7 @@ export default function EventsTable({ type }) {
                                                 </LinkContainer>
                                             </li>
                                             <li>
-                                                <Dropdown.Item className="btn-view" as="button">Copy URL</Dropdown.Item>
+                                                <Dropdown.Item className="btn-copy" as="button">Copy URL</Dropdown.Item>
                                             </li>
                                             <li>
                                                 <Dropdown.Item as="button"

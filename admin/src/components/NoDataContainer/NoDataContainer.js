@@ -2,9 +2,9 @@ import React from 'react';
 
 import './noDataContainer.scss';
 
-export default function NoDataContainer({ children }) {
+export default function NoDataContainer({ style, children }) {
     return (
-        <div id="no-data" className="d-flex-column justify-content-center align-items-center gap-2">
+        <div id="no-data" className={`${style}`}>
             {children}
         </div>
     );

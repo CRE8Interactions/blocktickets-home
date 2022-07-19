@@ -61,7 +61,6 @@ export default function UserInfo({ handleChange, id }) {
     }, [startDate, endDate])
 
     const handleOption = e => {
-        console.log(e.target.value);
         setOptions({ [e.target.id]: e.target.value })
     }
 
