@@ -9,7 +9,7 @@ import Badge from 'react-bootstrap/Badge';
 
 import './sidenav.scss';
 
-export default function Sidenav(props) {
+export default function Sidenav() {
 
     const [open, setOpen] = useState(true);
 
@@ -136,8 +136,8 @@ export default function Sidenav(props) {
                             <Collapse in={open}>
                                 <ul id="marketing-collapse" className='submenu'>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="address">
-                                            <Nav.Link>Contact address</Nav.Link>
+                                        <LinkContainer to="contact">
+                                            <Nav.Link>Contact attendees</Nav.Link>
                                         </LinkContainer>
                                     </Nav.Item>
                                 </ul>
