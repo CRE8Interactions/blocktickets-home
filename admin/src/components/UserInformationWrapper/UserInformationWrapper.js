@@ -21,7 +21,7 @@ export default function UserInformationWrapper({ id }) {
         <section className='wrapper'>
             <section>
                 <header className="section-header section-heading">
-                    <h1>{id ? 'Edit user' : 'User'}  Information</h1>
+                    <h1>{id ? 'Edit user information' : 'User Information'}</h1>
                 </header>
                 <Card body className='card--sm'>
                     <UserInfo handleChange={handleChange} id={id} />
