@@ -131,19 +131,35 @@ button,
 	}
 }
 
-.btn-edit {
+.btn-edit,
+.btn-delete,
+.btn-refund,
+.btn-view {
 	@extend .icon-button !optional;
 	justify-content: flex-start;
+}
+
+.btn-edit {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'edit'));
 	}
 }
 
 .btn-delete {
-	@extend .icon-button !optional;
-	justify-content: flex-start;
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'trash'));
+	}
+}
+
+.btn-refund {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'refund'));
+	}
+}
+
+.btn-view {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'clipboard'));
 	}
 }
 

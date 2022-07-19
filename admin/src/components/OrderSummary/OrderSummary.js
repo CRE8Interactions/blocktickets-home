@@ -59,14 +59,14 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                 <ul>
                                     {!refund && (<li>
                                         <LinkContainer to={`refund?order=${order.orderId}`}>
-                                            <Dropdown.Item className="btn-edit">
+                                            <Dropdown.Item className="btn-refund">
                                                 Refund order
                                             </Dropdown.Item>
                                         </LinkContainer>
                                     </li>)}
                                     <li>
                                         <LinkContainer to={`attendees-report?order=${order.orderId}`}>
-                                            <Dropdown.Item className="btn-edit">
+                                            <Dropdown.Item className="btn-view">
                                                 View attendees report
                                             </Dropdown.Item>
                                         </LinkContainer>

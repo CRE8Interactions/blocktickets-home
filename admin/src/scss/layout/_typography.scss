@@ -116,23 +116,6 @@ h4,
 	}
 }
 
-.details {
-	.card-title,
-	.event-name,
-	.card-subtitle,
-	.subtitle,
-	.event-detail,
-	.row > .col > * {
-		@extend %text-truncate !optional;
-	}
-	.card-title,
-	.event-name {
-		font-size: $body-1;
-		margin-bottom: rem(13);
-		font-weight: $fw-semi-bold;
-	}
-}
-
 .tickets-sold {
 	&:before {
 		display: inline-block;
@@ -151,16 +134,6 @@ h4,
 		position: relative;
 		margin: 0px rem(3);
 		left: em(-2);
-	}
-}
-
-.num-tickets {
-	font-size: $caption;
-	font-weight: $fw-semi-bold;
-	@extend %icon-text-box !optional;
-	gap: $gap-sm;
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'ticketOutline'));
 	}
 }
 
