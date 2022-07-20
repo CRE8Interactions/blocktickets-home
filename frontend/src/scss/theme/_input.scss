@@ -4,6 +4,7 @@
 @use './borders' as *;
 
 $input-font-size: rem(14);
+$input-font-weight: $fw-medium;
 $input-font-size-sm: rem(12);
 $input-font-size-lg: $input-font-size;
 $input-disabled-bg: transparent;
@@ -25,7 +26,6 @@ $form-select-focus-box-shadow: none;
 $form-select-border-radius: $border-radius;
 $form-select-padding-y: $btn-padding-y-lg;
 $form-select-padding-x: $btn-padding-x-lg;
-$form-select-font-weight: 500;
 $form-select-bg-position: right 1em center;
 
 $form-switch-color: $clr-neutral-4;

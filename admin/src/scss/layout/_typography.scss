@@ -100,7 +100,8 @@ h4,
 	-webkit-line-clamp: $lines;
 }
 
-.nav-link {
+.nav-link,
+.card .nav-link {
 	font-family: $font-heading;
 }
 
