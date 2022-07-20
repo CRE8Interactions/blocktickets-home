@@ -24,8 +24,6 @@ select:-webkit-autofill:focus {
 }
 
 .form-control {
-	font-weight: $fw-medium;
-
 	&:disabled {
 		opacity: .5;
 	}
