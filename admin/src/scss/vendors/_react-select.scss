@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+@use '../theme/custom' as *;
+
+.select {
+	.react-select {
+		&__control {
+			border-width: $input-border-width;
+			border-color: $input-border-color;
+			border-radius: $input-border-radius;
+		}
+
+		&__value-container {
+			padding: rem(7) $input-padding-x-sm;
+		}
+
+		&__placeholder {
+			font-size: $input-font-size;
+			font-weight: $input-font-weight;
+		}
+
+		&__multi-value {
+			background-color: #3e8bf7;
+			border-radius: 7px;
+			padding: rem(4) rem(8);
+			align-items: center;
+
+			&:first-of-type {
+				margin-left: 0px;
+			}
+
+			&__label {
+				color: $white;
+				font-weight: $fw-semi-bold;
+				font-size: $caption;
+				margin-right: rem(8);
+				padding: 0px;
+			}
+
+			&__remove {
+				background-color: $white;
+				color: #3e8bf7;
+				border-radius: 50%;
+				height: 20px;
+				width: 20px;
+
+				&:hover {
+					background-color: #3e8bf7;
+					color: $white;
+				}
+			}
+		}
+	}
+}
