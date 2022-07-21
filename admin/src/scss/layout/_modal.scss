@@ -25,6 +25,16 @@
 		}
 	}
 
+	// used for message preview modal
+	&-dialog-scrollable {
+		.modal-body {
+			display: flex;
+			flex-direction: column;
+			padding-top: 0px !important;
+			@include remove-scrollbar();
+		}
+	}
+
 	// used for ticket breakdown
 	&-lg {
 		$m-x: rem(32);
@@ -53,7 +63,7 @@
 		}
 	}
 
-	// used for delete modal
+	// used for delete, refund, confirmation modal
 	&-xl {
 		$padding: rem(32);
 
