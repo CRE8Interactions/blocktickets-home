@@ -20,3 +20,6 @@ export { SecondarySalesPage } from './SecondarySalesPage';
 export { AutomaticReportingPage } from './AutomaticReportingPage';
 export { ViewAutomaticReportingPage } from './ViewAutomaticReportingPage';
 export { UserInformationPage } from './UserInformationPage';
+export { ContactAttendeesPage } from './ContactAttendeesPage';
+export { ViewContactAttendeesPage } from './ViewContactAttendeesPage';
+export { ContactAttendeePage } from './ContactAttendeePage';

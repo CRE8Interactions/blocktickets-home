@@ -1,0 +1,11 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout/modal' as *;
+
+#confirmation-modal {
+	@extend .modal-xl;
+
+	.modal-body-heading-title {
+		font-size: $body-1;
+		margin-bottom: 0px;
+	}
+}
