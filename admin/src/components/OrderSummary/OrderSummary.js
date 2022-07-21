@@ -106,8 +106,8 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                 </tr>
                             </thead>
                             <tbody>
-                                {ticketArr.map(ticket => (
-                                    <TicketRow orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} show={showDropdown} refund={refund} />
+                                {ticketArr.map((ticket, index) => (
+                                    <TicketRow key={index} orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} show={showDropdown} refund={refund} />
                                 ))}
                                 <tr className='total-row'>
                                     <td colSpan={5}>Total</td>

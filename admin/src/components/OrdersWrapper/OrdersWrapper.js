@@ -240,8 +240,8 @@ export default function OrdersWrapper() {
                     <div className="actions-group-flex">
                         <FloatingLabel controlId="orders" label="Orders" id="orders">
                             <Form.Select value={ordersView} onChange={(e) => setOrdersView(e.target.value)} aria-label="View Orders">
-                                {ordersViewOpt.map(option => (
-                                    <option value={option.value}>{option.label}</option>
+                                {ordersViewOpt.map((option, index) => (
+                                    <option key={index} value={option.value}>{option.label}</option>
                                 ))}
                             </Form.Select>
                         </FloatingLabel>

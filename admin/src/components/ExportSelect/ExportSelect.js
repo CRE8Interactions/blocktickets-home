@@ -27,8 +27,8 @@ export default function ExportSelect() {
         <InputGroup className="export-group">
             <FloatingLabel controlId="export" label="Export">
                 <Form.Select value={exportTo} onChange={(e) => setExportTo(e.target.value)}>
-                    {exportOpt.map(option => (
-                        <option value={option.value}>{option.label}</option>
+                    {exportOpt.map((option, index) => (
+                        <option key={index} value={option.value}>{option.label}</option>
                     ))}
                 </Form.Select>
             </FloatingLabel>
