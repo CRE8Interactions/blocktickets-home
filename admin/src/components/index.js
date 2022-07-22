@@ -1,5 +1,6 @@
 export { ScrollToTop } from './ScrollToTop';
 export { Navigation } from './Navigation';
+export { LoginWrapper } from './LoginWrapper';
 export { HomeWrapper } from './HomeWrapper';
 export { DashboardWrapper } from './DashboardWrapper';
 export { Sidenav } from './Sidenav';
