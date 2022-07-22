@@ -214,6 +214,8 @@ export default function OrdersWrapper() {
 
     const [ordersView, setOrdersView] = useState(ordersViewOpt[0].value);
 
+    const [exportTo, setExportTo] = useState('1')
+
     // search query
     const [
         query,
@@ -225,7 +227,9 @@ export default function OrdersWrapper() {
         setQueryResults
     ] = useState('');
 
-    const handleSearch = (query) => { }
+    const handleSearch = (query) => {
+        setQuery(query)
+    }
 
     return (
         <>
@@ -246,7 +250,7 @@ export default function OrdersWrapper() {
                             </Form.Select>
                         </FloatingLabel>
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by Order #, name, phone number or email" />
-                        <ExportSelect />
+                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
                     </div>
                     <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">

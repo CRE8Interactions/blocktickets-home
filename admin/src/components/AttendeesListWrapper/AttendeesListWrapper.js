@@ -13,6 +13,8 @@ import './attendeesListWrapper.scss';
 
 export default function AttendeesListWrapper() {
 
+    const [exportTo, setExportTo] = useState('1')
+
     // search query
     const [
         query,
@@ -24,8 +26,9 @@ export default function AttendeesListWrapper() {
         setQueryResults
     ] = useState('');
 
-    const handleSearch = (query) => { }
-
+    const handleSearch = (query) => {
+        setQuery(query)
+    }
 
     return (
         <>
@@ -39,7 +42,7 @@ export default function AttendeesListWrapper() {
                     </div>
                     <div className="actions-group-flex">
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by attendee name, email address" />
-                        <ExportSelect />
+                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
                     </div>
                     <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">
