@@ -12,28 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "action": {
-      "type": "string",
-      "required": true
-    },
-    "FromUser": {
+    "order": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
-    "ToUser": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "api::order.order"
     },
     "ticket": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::ticket.ticket",
-      "inversedBy": "histories"
+      "relation": "oneToOne",
+      "target": "api::ticket.ticket"
     },
-    "state": {
-      "type": "json"
+    "trackings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tracking.tracking"
     }
   }
 }

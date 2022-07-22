@@ -22,32 +22,14 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         serviceFees,
         askingPrice,
         fromOrder
+      },
+      populate: {
+        users_permissions_user: true,
+        tickets: true
       }
     })
 
     tickets.map(async (ticket) => {
-      let history;
-
-      if (ticket.histories) {
-        history = ticket.histories.push(await strapi.entityService.create('api::history.history', {
-          data: {
-            action: 'listed for sale',
-            ticket: ticket.id,
-            state: ticket,
-            FromUser: user.id
-          }
-        }))
-      } else {
-        history = await strapi.entityService.create('api::history.history', {
-          data: {
-            action: 'listed for sale',
-            ticket: ticket.id,
-            state: ticket,
-            FromUser: user.id
-          }
-        })
-      }
-
       await strapi.db.query('api::ticket.ticket').update({
         where: { id: ticket.id },
         data: {
@@ -60,6 +42,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     })
 
     strapi.service('api::email.email').listingActive(user, tickets, event, serviceFees, payout, quantity, askingPrice)
+    strapi.service('api::tracking.tracking').createTicketListedTracking(entity);
     return 200
   },
   async myListings(ctx) {
@@ -177,33 +160,11 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     });
 
     entry.tickets.map(async (ticket) => {
-      let history;
-
-      if (ticket.histories) {
-        history = ticket.histories.push(await strapi.entityService.create('api::history.history', {
-          data: {
-            action: 'listing cancelled',
-            ticket: ticket.id,
-            state: ticket,
-            FromUser: user.id
-          }
-        }))
-      } else {
-        history = await strapi.entityService.create('api::history.history', {
-          data: {
-            action: 'listing cancelled',
-            ticket: ticket.id,
-            state: ticket,
-            FromUser: user.id
-          }
-        })
-      }
-
       await strapi.db.query('api::ticket.ticket').update({
         where: { id: ticket.id },
         data: {
           resale: false,
-          on_sale_status: 'sold',
+          on_sale_status: 'available',
           listingId: '',
           listingAskingPrice: ''
         }
@@ -211,6 +172,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
     })
 
     strapi.service('api::email.email').removeListing(user, listing)
+    strapi.service('api::tracking.tracking').removeTicketListedTracking(entry, user);
     return 200
   },
   async availableFunds(ctx) {

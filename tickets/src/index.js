@@ -147,6 +147,14 @@ module.exports = {
           },
         },
       });
+
+      await strapi.db.query('api::tracking.tracking').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
     }
 
     initOrganization()
