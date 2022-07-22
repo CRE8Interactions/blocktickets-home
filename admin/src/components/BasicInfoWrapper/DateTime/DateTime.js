@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -7,17 +7,7 @@ import Col from 'react-bootstrap/Col';
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
-export default function DateTime({ handleChange }) {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-
-    const [hasError, setHasError] = useState(false);
-
-    useEffect(() => {
-        setHasError(endDate.getTime() < startDate.getTime())
-
-    }, [startDate, endDate])
-
+export default function DateTime({ event, handleChange, setStartDate, startDate, setEndDate, endDate, hasError }) {
 
     return (
         <Form>
@@ -53,6 +43,17 @@ export default function DateTime({ handleChange }) {
                     </Col>
                 </Row>
             </fieldset>
+            <div className=" form-group">
+                <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id={`check-display-checkbox`}>
+                    <Form.Check.Input name="displayEndTime" type='checkbox' defaultChecked={event.displayEndTime} onChange={(e) => { handleChange(e, e.target.checked) }} />
+                    <div>
+                        <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Display end time</Form.Check.Label>
+                        <small className='d-block text-muted fw-semi-bold'>
+                            The end time of your event will be displayed to attendees
+                        </small>
+                    </div>
+                </Form.Check>
+            </div>
         </Form>
     );
 }

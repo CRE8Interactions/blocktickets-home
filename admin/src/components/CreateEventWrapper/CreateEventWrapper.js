@@ -137,7 +137,7 @@ export default function CreateEventWrapper() {
 
             {step === 5 && (
                 <>
-                    <PublishWrapper publish={publish} />
+                    <PublishWrapper />
                     <Stack direction="horizontal" className="btn-group-flex ">
                         <>
                             <BackButton handleGoBack={handleGoBack} />
