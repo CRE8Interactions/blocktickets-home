@@ -56,7 +56,7 @@ export default function TicketCard({ id, ticketType, ticketStatus, ticketState, 
                         </span>
                     </p>
 
-                    {!id && (<span className="num-tickets">{listing ? listing.tickets.length : order?.tickets.length} {listing?.tickets.length > 1 || order?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span>
+                    {!id && (<span className="num-tickets">{listing ? listing?.tickets?.length : order?.tickets?.length} {listing?.tickets?.length > 1 || order?.tickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
                     )}
 
                     <>

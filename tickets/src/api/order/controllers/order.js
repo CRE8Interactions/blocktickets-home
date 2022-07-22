@@ -101,7 +101,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let type = data.type;
     if (!type) return
     let paymentIntentId;
-    let order;
     let paymentMethodOptions;
     // Handle the event
     switch (type) {
@@ -113,6 +112,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           where: { paymentIntentId },
           populate: { 
             tickets: true,
+            history: true,
+            users_permissions_user: true,
             event: {
               populate: {
                 image: true,
@@ -126,29 +127,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
-        order.tickets.map(async (ticket) => {
-          let history;
-
-          if (ticket.histories) {
-           history = ticket.histories.push(await strapi.entityService.create('api::history.history', {
-              data: {
-                action: 'ticket purchased',
-                ticket: ticket.id,
-                state: ticket,
-                FromUser: order.userId
-              }
-            }))
-          } else {
-            history = await strapi.entityService.create('api::history.history', {
-              data: {
-                action: 'ticket purchased',
-                ticket: ticket.id,
-                state: ticket,
-                FromUser: order.userId
-              }
-            })
-          }
-          
+        order.tickets.map(async (ticket) => {          
           await strapi.db.query('api::ticket.ticket').update({
             where: {
               id: ticket.id,
@@ -160,18 +139,24 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           });
         })
 
-        
-
         let originalOrder = await strapi.db.query('api::order.order').update({
           where: { paymentIntentId },
           data: {
             status: 'complete',
             intentDetails: paymentMethodOptions,
             emailSent: true
+          },
+          populate: {
+            users_permissions_user: true,
+            tickets: true
           }
         });
 
         strapi.service('api::email.email').orderNotification(order);
+
+        if (!order.details.listing) { 
+          strapi.service('api::tracking.tracking').createOrderTracking(originalOrder);
+        };
 
         if (!order.details.listing) return 200
 
@@ -210,13 +195,18 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           where: { uuid: filteredIds },
         });
 
-        await strapi.db.query('api::order.order').update({
+        let updatedOrder = await strapi.db.query('api::order.order').update({
           where: { id: listing.fromOrder },
           data: {
             tickets: ticketUpdates
+          },
+          populate: {
+            tickets: true,
+            users_permissions_user: true
           }
         });
         strapi.service('api::email.email').listingSold(user, order, listing, ticketUpdates);
+        strapi.service('api::tracking.tracking').purchaseFromListing(originalOrder, listing);
       break;
       case 'payment_intent.payment_failed':
         paymentIntentId = data.data.object.id;

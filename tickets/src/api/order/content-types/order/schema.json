@@ -68,6 +68,9 @@
     "uuid": {
       "type": "string",
       "unique": true
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

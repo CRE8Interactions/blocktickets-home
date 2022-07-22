@@ -40,6 +40,7 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         event: order.event
       },
       populate: {
+        tickets: true,
         event: {
           populate: {
             image: true,
@@ -64,6 +65,7 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     });
 
     strapi.service('api::email.email').pendingTransfer(entry, user, phoneNumber)
+    strapi.service('api::tracking.tracking').pendingTransfer(entry);
 
     return 200
   },
@@ -138,6 +140,7 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     });
 
     strapi.service('api::email.email').cancelTransfer(entry, user, entry)
+    strapi.service('api::tracking.tracking').cancelTransfer(entry, user)
 
     return 200
   },
@@ -251,6 +254,7 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     })
 
     strapi.service('api::email.email').acceptTranser(entry, fromUser, user)
+    strapi.service('api::tracking.tracking').acceptTransfer(entry, fromUser, user)
 
     return 200
   }

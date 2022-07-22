@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trackings",
+  "info": {
+    "singularName": "tracking",
+    "pluralName": "trackings",
+    "displayName": "tracking",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "purchaser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order"
+    },
+    "ticket": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ticket.ticket"
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "purchasee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "state": {
+      "type": "json"
+    }
+  }
+}
