@@ -11,7 +11,6 @@ export default function OrdersTable() {
                 <thead>
                     <tr>
                         <th>Order</th>
-                        <th>Event</th>
                         <th>Ticket Buyer</th>
                         <th>Quantity</th>
                         <th>Price</th>
@@ -20,13 +19,9 @@ export default function OrdersTable() {
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
                         <td>
                             {formatOrderId(19331942333743)}
-                        </td>
-                        <td>
-                            Nic Fanciulli presents
                         </td>
                         <td>
                             Harrison Cogan

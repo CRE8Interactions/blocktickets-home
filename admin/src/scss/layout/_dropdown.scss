@@ -2,6 +2,7 @@
 @use './buttons' as *;
 @use './../theme/colors' as *;
 @use './../theme/borders' as *;
+@use './../theme/dropdown' as *;
 
 .dropdown {
 	&-toggle {
@@ -28,6 +29,12 @@
 
 		& + .dropdown-item {
 			margin-top: rem(10);
+		}
+
+		&:active,
+		&.active {
+			background-color: $dropdown-link-hover-bg;
+			color: $body-color;
 		}
 	}
 }

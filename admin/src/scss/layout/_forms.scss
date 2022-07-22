@@ -191,3 +191,11 @@ textarea.form-control {
 		background-color: transparent;
 	}
 }
+
+// password field
+.input-wrapper {
+	display: flex;
+	@include input-icon-box();
+	padding-right: $input-padding-x;
+	padding-left: 0px;
+}

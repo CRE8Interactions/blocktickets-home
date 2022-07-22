@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { formatCurrency, formatNumber } from '../../utilities/helpers';
 
@@ -9,6 +9,8 @@ import { ExportSelect } from '../ExportSelect';
 import './primarySalesWrapper.scss';
 
 export default function PrimarySalesWrapper() {
+
+    const [exportTo, setExportTo] = useState('1')
 
     return (
         <>
@@ -21,7 +23,7 @@ export default function PrimarySalesWrapper() {
                         <p className='section-header-desc'>Report generated from when sales started</p>
                     </div>
                     <div className="actions-group-flex">
-                        <ExportSelect />
+                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
                     </div>
                 </header>
                 <div className="table-container">
