@@ -40,10 +40,23 @@ export default function Navigation() {
                         </Navbar.Brand>
                     </LinkContainer>
                     <Stack direction="horizontal" className="desktop-btns">
-                        <DropdownButton title="Organization name" variant="info">
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                        <DropdownButton title="Southside Music Hall" variant="info">
+                            <ul>
+                                <li>
+                                    <LinkContainer to="/settings">
+                                        <Dropdown.Item >Settings</Dropdown.Item>
+                                    </LinkContainer>
+                                </li>
+                                <li>
+                                    <Dropdown.Item as="button">Logout</Dropdown.Item>
+                                </li>
+                                <li>
+                                    <LinkContainer to="/login">
+                                        <Dropdown.Item>Login</Dropdown.Item>
+                                    </LinkContainer>
+                                </li>
+                            </ul>
+                            <p className='name fw-medium'>Harrison Cogan</p>
                         </DropdownButton>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
                     </Stack>
