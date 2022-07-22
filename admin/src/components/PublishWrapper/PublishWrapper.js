@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 
 import { PublishEvent } from './PublishEvent';
 
-export default function PublishWrapper({ publish }) {
+export default function PublishWrapper() {
+
+    const [date, setDate] = useState(new Date());
+
+    const [choice, setChoice] = useState('1')
+
+    const handleChoice = (e) => {
+        setChoice(e.target.id)
+    }
 
     return (
         <section className='wrapper'>
@@ -12,7 +20,7 @@ export default function PublishWrapper({ publish }) {
                 <h1>Publish event</h1>
             </header>
             <Card body className="card--sm">
-                <PublishEvent publish={publish} />
+                <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} />
             </Card>
         </section>
     );

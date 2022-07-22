@@ -1,12 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
+import Nav from 'react-bootstrap/Nav';
+import Tab from 'react-bootstrap/Tab';
 
 import { CreateTicket } from './CreateTicket';
 
 export default function CreateTicketWrapper({ id, ticketId }) {
 
-    const handleChange = (e) => { }
+    const [
+        key,
+        setKey
+    ] = useState('paid');
+
+
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+
+    const [hasError, setHasError] = useState(false);
+
+    useEffect(() => {
+        setHasError(endDate.getTime() < startDate.getTime())
+
+    }, [startDate, endDate])
+
+    const [ticket, setTicket] = useState({
+        name: '',
+        description: '',
+        quantity: '',
+        price: '',
+        minResalePrice: '',
+        maxResalePrice: '',
+        minQuantity: '',
+        maxQuantity: '',
+    })
+
+    const handleChange = (e) => {
+        setTicket({ ...ticket, [e.target.name]: e.target.value })
+    }
 
     return (
         <section className='wrapper'>
@@ -14,7 +45,30 @@ export default function CreateTicketWrapper({ id, ticketId }) {
                 <h1>{id || ticketId ? 'Edit' : 'Create a'} ticket</h1>
             </header>
             <Card body className='card--sm'>
-                <CreateTicket handleChange={handleChange} ticketId={ticketId} />
+                <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
+                    <div className='d-flex mb-5 '>
+                        <Nav as="ul" variant="pills" justify>
+                            <Nav.Item as="li">
+                                <Nav.Link as="button" eventKey="paid">
+                                    Paid
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item as="li">
+                                <Nav.Link as="button" eventKey="free">
+                                    Free
+                                </Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </div>
+                    <Tab.Content>
+                        <Tab.Pane eventKey="paid">
+                            <CreateTicket type={key} handleChange={handleChange} ticket={ticket} ticketId={ticketId} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="free">
+                            <CreateTicket type={key} handleChange={handleChange} ticket={ticket} ticketId={ticketId} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
+                        </Tab.Pane>
+                    </Tab.Content>
+                </Tab.Container>
             </Card>
         </section>
     );

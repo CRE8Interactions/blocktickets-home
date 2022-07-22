@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
 
@@ -11,9 +11,9 @@ import Image from 'react-bootstrap/Image';
 import { Dropzone } from './Dropzone';
 import { InfoIcon } from '../InfoIcon';
 
-export default function UploadEventImage({ handleChange }) {
+export default function UploadEventImage({ setSelectedImage, selectedImage }) {
+
     const [previewImage, setPreviewImage] = useState()
-    const [selectedImage, setSelectedImage] = useState()
 
     const [croppedCoordinates, setCroppedCoordinates] = useState()
 
@@ -35,6 +35,14 @@ export default function UploadEventImage({ handleChange }) {
         setCroppedCoordinates(cropper.getCoordinates())
     }
 
+    const handleRemove = () => {
+        setSelectedImage('')
+    }
+
+    const handleReplace = () => {
+        handleRemove()
+    }
+
     return (
         <>
             <Stack direction="horizontal" gap={2}>
@@ -49,9 +57,9 @@ export default function UploadEventImage({ handleChange }) {
                 ) : (
                     <>
                         <Image src={selectedImage} rounded width={croppedCoordinates.width} height={croppedCoordinates.height} />
-                        <Stack direction='horizontal' className='btn-group-flex'>
-                            <Button variant='outline-light' className='text-danger'>Remove</Button>
-                            <Button variant='outline-light'>Replace</Button>
+                        <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
+                            <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
+                            <Button variant='outline-light' onClick={handleReplace}>Replace</Button>
                         </Stack>
                     </>
                 )
@@ -69,7 +77,6 @@ export default function UploadEventImage({ handleChange }) {
                                 onChange={onChange}
                                 className={'cropper'}
                                 autoZoom={false}
-                                onReady={() => console.log('image readddy')}
                                 stencilProps={{
                                     handlers: {},
                                     aspectRatio: 1.5 / 1.5

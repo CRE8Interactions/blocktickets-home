@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 
@@ -8,7 +8,73 @@ import { Location } from './Location';
 
 export default function BasicInfoWrapper() {
 
-    const handleChange = (e) => { }
+    const eventTypeOpt = [
+        {
+            label: 'Concert',
+            value: "concert"
+        },
+        {
+            label: 'Music',
+            value: "music"
+        },
+        {
+            label: 'Event',
+            value: "event"
+        }
+    ]
+
+    const timezoneOpt = [
+        {
+            label: '(GMt-0400) United States (New York) Time',
+            value: "NY"
+        },
+        {
+            label: '(GMt-0400) British Virgin Island Time',
+            value: "BVI"
+        },
+        {
+            label: '(GMt-0400) United States (Chicago) Time',
+            value: "CH"
+        }
+    ]
+
+    const langOpt = [
+        {
+            label: 'English (US)',
+            value: "EN+US"
+        },
+        {
+            label: 'English (UK)',
+            value: "EN+UK"
+        },
+        {
+            label: 'French (France)',
+            value: "FR"
+        }
+    ]
+
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+
+    const [hasError, setHasError] = useState(false);
+
+    useEffect(() => {
+        setHasError(endDate.getTime() < startDate.getTime())
+
+    }, [startDate, endDate])
+
+    const [event, setEvent] = useState({
+        presentedBy: '',
+        title: '',
+        eventType: eventTypeOpt[0].value,
+        timezone: timezoneOpt[0].value,
+        language: langOpt[0].value,
+        displayEndTime: false
+    })
+
+    const handleChange = (e, val = e.target.value) => {
+        setEvent({ ...event, [e.target.name]: val })
+    }
 
     return (
         <section className='wrapper'>
@@ -17,7 +83,7 @@ export default function BasicInfoWrapper() {
                     <h1>Basic info</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} />
+                    <BasicInfo handleChange={handleChange} event={event} eventTypeOpt={eventTypeOpt} />
                 </Card>
             </section>
             <section>
@@ -25,7 +91,7 @@ export default function BasicInfoWrapper() {
                     <h1>Date & Time</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <DateTime handleChange={handleChange} />
+                    <DateTime event={event} handleChange={handleChange} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
                 </Card>
             </section>
             <section>
@@ -33,7 +99,7 @@ export default function BasicInfoWrapper() {
                     <h1>Location</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <Location handleChange={handleChange} />
+                    <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} langOpt={langOpt} />
                 </Card>
             </section>
         </section>

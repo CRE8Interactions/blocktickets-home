@@ -101,8 +101,8 @@ legend {
 .form-check {
 	min-height: 0px;
 
-	&-label {
-		font-size: rem(14);
+	&-label:not(#check-display-checkbox-label) {
+		font-size: $small;
 	}
 
 	&-input:focus {
@@ -110,8 +110,8 @@ legend {
 	}
 }
 
-#custom-switch {
-	height: 26px;
+textarea.form-control {
+	background: $gray-300;
 }
 
 .date-picker-card {

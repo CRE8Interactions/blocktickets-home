@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
@@ -11,15 +11,7 @@ import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 import image from '../../../assets/01.png';
 
-export default function PublishEvent() {
-
-    const [date, setDate] = useState(new Date());
-
-    const [choice, setChoice] = useState()
-
-    const handleChoice = (e) => {
-        setChoice(e.target.id)
-    }
+export default function PublishEvent({ setDate, date, handleChoice, choice }) {
 
     return (
         <>
@@ -35,7 +27,8 @@ export default function PublishEvent() {
                                     label="Publish event"
                                     name="radGroup"
                                     type="radio"
-                                    id='publish'
+                                    id='1'
+                                    defaultChecked={choice === '1'}
                                     className='fw-medium'
                                     onChange={(e) => handleChoice(e)}
                                 />
@@ -44,7 +37,8 @@ export default function PublishEvent() {
                                     label="Schedule for later"
                                     name="radGroup"
                                     type="radio"
-                                    id='schedule'
+                                    id='2'
+                                    defaultChecked={choice === '2'}
                                     className='fw-medium'
                                     onChange={(e) => handleChoice(e)}
                                 />
@@ -94,7 +88,7 @@ export default function PublishEvent() {
                     </ul>
                 </Col>
             </Row>
-            {choice === 'schedule' && (
+            {choice === '2' && (
                 <Row>
                     <Col>
                         <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={new Date()} />
