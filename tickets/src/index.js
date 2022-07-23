@@ -16,7 +16,6 @@ const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const orderId = require('order-id')('blocktickets');
 const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
 // Encrypts user data
 const options = {
   password: process.env.EC_PASSWORD || 'blocktickets',
@@ -73,6 +72,43 @@ module.exports = {
             name: 'BlockTickets'
           }
         })
+      }
+
+      if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "preview") {
+
+        const hasUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            firstName: 'Block',
+            lastName: 'Mafia',
+            email: 'block@blocktickets.xyz',
+          }
+        })
+
+        if (hasUser) return
+
+        const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+          where: {
+            name: 'Organizer'
+          }
+        })
+
+        const userObj = {
+          data: {
+            username: 'Blocktickets',
+            email: 'block@blocktickets.xyz',
+            phoneNumber: '+12024509090',
+            firstName: 'Block',
+            lastName: 'Mafia',
+            gender: 'other',
+            role,
+            confirmed: true,
+            password: 'blocktickets'
+          }
+        }
+
+        let user = await strapi.service('api::verify.verify').createUser(userObj)
+
+        console.log(user)
       }
     }
 
@@ -160,7 +196,7 @@ module.exports = {
     initOrganization()
     initCategories()
     // resetDevelopmentEnv()
-
+    
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization',
                 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information',
@@ -308,14 +344,18 @@ module.exports = {
 
         // Changes on listing model
         if (event.model.singularName === 'listing') {
-          event.params.data.uuid = uuidv4();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
+        // Changes on ticket model
+        if (event.model.singularName === 'ticket') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
           event.params.data.orderId = orderId.generate();
-          event.params.data.uuid = uuidv4();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on Organization model
@@ -326,7 +366,7 @@ module.exports = {
               email: email
             }
           })
-          event.params.data.uuid = Math.floor(Math.random() * 900000000) + 100000000;
+          event.params.data.uuid =  await strapi.service('api::utility.utility').generateUUID();
           event.params.data.creatorId = user.id
           event.params.data.members = [user];
           // Creates web3 wallet for organization
@@ -361,17 +401,17 @@ module.exports = {
 
           event.params.data.venue = venue.id
           event.params.data.categories = [categories]
-          event.params.data.uuid = uuidv4();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on Venue model
         if (event.model.singularName === 'venue') {
-          event.params.data.uuid = uuidv4();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on Category model
         if (event.model.singularName === 'category') {
-          event.params.data.uuid = uuidv4();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on user model
@@ -388,7 +428,7 @@ module.exports = {
           event.params.data.firstName = event.params.data.firstName.toLowerCase()
           event.params.data.lastName = event.params.data.lastName.toLowerCase()
           event.params.data.gender = event.params.data.gender.toLowerCase()
-          event.params.data.uuid = uuidv4()
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID()
         }
 
         // Changes on profile model
@@ -406,7 +446,7 @@ module.exports = {
           })
 
           event.params.data.wallet = myWallet.id
-          event.params.data.uuid = uuidv4();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on updateNumber

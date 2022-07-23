@@ -1,0 +1,14 @@
+{
+  "kind": "collectionType",
+  "collectionName": "utilities",
+  "info": {
+    "singularName": "utility",
+    "pluralName": "utilities",
+    "displayName": "utility"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {}
+}
