@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 
@@ -7,7 +7,14 @@ import { TextEditor } from '../TextEditor';
 
 export default function DetailsWrapper() {
 
-    const handleChange = (e) => { }
+    const [selectedImage, setSelectedImage] = useState()
+
+    const [description, setDescription] = useState('')
+
+    const handleDescription = (e) => {
+        setDescription(e.replace(/(<([^>]+)>)/gi, ""))
+
+    }
 
     return (
         <section className='wrapper'>
@@ -16,7 +23,7 @@ export default function DetailsWrapper() {
                     <h1>Main event image</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <UploadEventImage handleChange={handleChange} />
+                    <UploadEventImage setSelectedImage={setSelectedImage} selectedImage={selectedImage} />
                 </Card>
             </section>
             <section>
@@ -24,7 +31,7 @@ export default function DetailsWrapper() {
                     <h1>Event description</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <TextEditor handleChange={handleChange} />
+                    <TextEditor handleChange={handleDescription} />
                 </Card>
             </section>
         </section>

@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 
 import OrganizationContext from '../../context/Organization/Organization';
-import { publishEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -56,12 +55,12 @@ export default function EventsWrapper() {
     return (
         <Card body>
             <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-                <div className="flex-wrap d-flex align-items-center justify-content-between" id="events">
+                <div className="flex-wrap d-flex align-items-center   justify-content-between" id="events">
                     <div className="section-header section-heading section-heading--flex gap-4">
                         <h1>Events</h1>
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="sm" placeholder="Search events" />
                     </div>
-                    <Nav as="ul" variant="pills" className="ms-auto">
+                    <Nav as="ul" variant="pills" className="ms-auto" justify>
                         <Nav.Item as="li">
                             <Nav.Link as="button" eventKey="published">
                                 Published

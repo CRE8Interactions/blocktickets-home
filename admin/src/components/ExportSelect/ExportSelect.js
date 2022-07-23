@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -7,28 +7,26 @@ import Button from 'react-bootstrap/Button';
 
 import './exportSelect.scss'
 
-export default function ExportSelect() {
+export default function ExportSelect({ setExportTo, exportTo }) {
 
     const exportOpt = [
         {
             label: "Excel",
-            value: 'excel'
+            value: '1'
         },
         {
             label: "CVC",
-            value: 'cvc'
+            value: '2'
         },
 
     ];
-
-    const [exportTo, setExportTo] = useState('excel')
 
     return (
         <InputGroup className="export-group">
             <FloatingLabel controlId="export" label="Export">
                 <Form.Select value={exportTo} onChange={(e) => setExportTo(e.target.value)}>
-                    {exportOpt.map(option => (
-                        <option value={option.value}>{option.label}</option>
+                    {exportOpt.map((option, index) => (
+                        <option key={index} value={option.value}>{option.label}</option>
                     ))}
                 </Form.Select>
             </FloatingLabel>

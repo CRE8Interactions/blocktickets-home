@@ -12,10 +12,10 @@ export default function TextEditor({ handleChange }) {
                 data=""
                 onChange={(event, editor) => {
                     const data = editor.getData();
-                    console.log(data);
+                    handleChange(data)
                 }}
                 onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
+                    console.log('Blur.', editor.getData());
                 }}
                 onFocus={(event, editor) => {
                     console.log('Focus.', editor);

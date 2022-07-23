@@ -1,14 +1,17 @@
 @use '../abstracts' as *;
-@use './spacing' as *;
+@use '../theme/buttons' as *;
+@use '../theme/colors' as *;
 
 .nav-pills {
-	margin-bottom: $text-spacer-sm;
-	gap: rem(8);
+	padding: rem(8);
+	background-color: $gray-400;
+	border-radius: 50px;
+	flex-basis: calc(104px + 104px + 8px + 8px);
+	flex-wrap: nowrap;
 
 	.nav-item {
 		.nav-link {
-			padding: rem(8) rem(16);
-			white-space: nowrap;
+			padding: $btn-padding-y $btn-padding-x;
 		}
 	}
 }

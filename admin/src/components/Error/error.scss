@@ -1,0 +1,12 @@
+@use '../../scss/theme/colors' as *;
+
+.alert {
+	.icon {
+		svg {
+			max-width: initial;
+		}
+	}
+	.body {
+		line-height: 25px;
+	}
+}

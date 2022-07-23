@@ -40,6 +40,11 @@ $navbar-height: rem(82);
 .wrapper {
 	max-width: 736px;
 	margin: auto;
+
+	&-xs {
+		max-width: 500px;
+		margin: auto;
+	}
 }
 
 .nav-is-open {

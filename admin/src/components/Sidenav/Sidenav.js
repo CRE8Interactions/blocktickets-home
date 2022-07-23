@@ -83,6 +83,11 @@ export default function Sidenav() {
                                         </LinkContainer>
                                     </Nav.Item>
                                     <Nav.Item as="li">
+                                        <LinkContainer to="/guest-list">
+                                            <Nav.Link>Guest list</Nav.Link>
+                                        </LinkContainer>
+                                    </Nav.Item>
+                                    <Nav.Item as="li">
                                         <LinkContainer to="check-in">
                                             <Nav.Link>Check in</Nav.Link>
                                         </LinkContainer>
@@ -136,8 +141,13 @@ export default function Sidenav() {
                             <Collapse in={open}>
                                 <ul id="marketing-collapse" className='submenu'>
                                     <Nav.Item as="li">
-                                        <LinkContainer to="contact">
+                                        <LinkContainer to="contact-attendees">
                                             <Nav.Link>Contact attendees</Nav.Link>
+                                        </LinkContainer>
+                                    </Nav.Item>
+                                    <Nav.Item as="li">
+                                        <LinkContainer to="tracking-links">
+                                            <Nav.Link>Tracking links</Nav.Link>
                                         </LinkContainer>
                                     </Nav.Item>
                                 </ul>

@@ -1,5 +1,6 @@
 export { ScrollToTop } from './ScrollToTop';
 export { Navigation } from './Navigation';
+export { LoginWrapper } from './LoginWrapper';
 export { HomeWrapper } from './HomeWrapper';
 export { DashboardWrapper } from './DashboardWrapper';
 export { Sidenav } from './Sidenav';
@@ -19,3 +20,5 @@ export { PrimarySalesWrapper } from './PrimarySalesWrapper'
 export { SecondarySalesWrapper } from './SecondarySalesWrapper'
 export { AutomaticReportingWrapper } from './AutomaticReportingWrapper'
 export { UserInformationWrapper } from './UserInformationWrapper'
+export { ContactAttendeesWrapper } from './ContactAttendeesWrapper'
+export { ContactAttendeeWrapper } from './ContactAttendeeWrapper'

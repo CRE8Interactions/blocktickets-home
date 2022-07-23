@@ -6,6 +6,10 @@
 	gap: $gap-sm;
 	align-items: center;
 
+	p {
+		margin-bottom: 0px;
+	}
+
 	&.center {
 		max-width: 432px;
 		margin: auto;

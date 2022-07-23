@@ -32,10 +32,10 @@ export default function AutomaticReports() {
                 {attendees && attendees.length > 0 ? (
                     <div className="list-table report-list">
                         <Row className="list-table-header">
-                            <Col md={5} className='list-table-col list-table-col-header'>
+                            <Col as="span" md={5} className='list-table-col list-table-col-header'>
                                 Name
                             </Col>
-                            <Col md={6} className="list-table-col list-table-col-header">
+                            <Col md={6} as="span" className="list-table-col list-table-col-header">
                                 Email
                             </Col>
                         </Row>

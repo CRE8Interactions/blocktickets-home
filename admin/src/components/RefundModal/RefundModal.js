@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { SuccessContainer } from './SuccessContainer'
+import { SuccessContainer } from '../SuccessContainer'
 import { SuccessDisclaimer } from './SuccessDisclaimer'
 
 import './refundModal.scss';

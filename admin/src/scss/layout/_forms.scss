@@ -24,8 +24,6 @@ select:-webkit-autofill:focus {
 }
 
 .form-control {
-	font-weight: $fw-medium;
-
 	&:disabled {
 		opacity: .5;
 	}
@@ -103,8 +101,8 @@ legend {
 .form-check {
 	min-height: 0px;
 
-	&-label {
-		font-size: rem(14);
+	&-label:not(#check-display-checkbox-label) {
+		font-size: $small;
 	}
 
 	&-input:focus {
@@ -112,8 +110,8 @@ legend {
 	}
 }
 
-#custom-switch {
-	height: 26px;
+textarea.form-control {
+	background: $gray-300;
 }
 
 .date-picker-card {
@@ -192,4 +190,12 @@ legend {
 	.form-control:focus {
 		background-color: transparent;
 	}
+}
+
+// password field
+.input-wrapper {
+	display: flex;
+	@include input-icon-box();
+	padding-right: $input-padding-x;
+	padding-left: 0px;
 }
