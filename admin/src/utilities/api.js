@@ -21,12 +21,8 @@ instance.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-export const verifyUser = (data) => {
-  return instance.post('/verifies', data)
-}
-
-export const verifiyCode = (data) => {
-  return instance.post('/verifies/byPhone', data)
+export const login = async (data) => {
+  return instance.post('/auth/local', data)
 }
 
 export const getMyOrganizations = async () => {

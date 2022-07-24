@@ -1,7 +1,8 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate } from 'react-router-dom'
 
-import authService from '../../utilities/services/auth.service';
+import AuthService from '../../utilities/services/auth.service';
 import { useWindowSize } from '../../utilities/hooks';
 
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -18,6 +19,7 @@ import './navigation.scss';
 
 export default function Navigation() {
     const windowSize = useWindowSize();
+    const navigate = useNavigate();
 
     const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
@@ -30,6 +32,11 @@ export default function Navigation() {
         }
     };
 
+    const logout = () => {
+       AuthService.logoutUser();
+       navigate("/");
+    }
+
     return (
         <div className="navigation position-sticky">
             <Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
@@ -39,7 +46,9 @@ export default function Navigation() {
                             <img src={logo} alt="blocktickets" />
                         </Navbar.Brand>
                     </LinkContainer>
-                    <Stack direction="horizontal" className="desktop-btns">
+                    { AuthService.isLoggedIn() &&
+                        <>
+                            <Stack direction="horizontal" className="desktop-btns">
                         <DropdownButton title="Southside Music Hall" variant="info">
                             <ul>
                                 <li>
@@ -48,12 +57,7 @@ export default function Navigation() {
                                     </LinkContainer>
                                 </li>
                                 <li>
-                                    <Dropdown.Item as="button">Logout</Dropdown.Item>
-                                </li>
-                                <li>
-                                    <LinkContainer to="/login">
-                                        <Dropdown.Item>Login</Dropdown.Item>
-                                    </LinkContainer>
+                                    <Dropdown.Item as="button" onClick={() => logout()}>Logout</Dropdown.Item>
                                 </li>
                             </ul>
                             <p className='name fw-medium'>Harrison Cogan</p>
@@ -86,6 +90,8 @@ export default function Navigation() {
                             </ul>
                         </Nav>
                     </Navbar.Collapse>
+                        </>
+                    }
                 </Container>
             </Navbar>
         </div>

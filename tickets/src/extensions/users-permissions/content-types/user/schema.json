@@ -81,10 +81,6 @@
       "type": "string",
       "required": true
     },
-    "name": {
-      "type": "string",
-      "required": true
-    },
     "firstName": {
       "type": "string",
       "required": true

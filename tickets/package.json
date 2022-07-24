@@ -21,6 +21,7 @@
     "@strapi/provider-email-sendgrid": "^4.2.0",
     "@strapi/strapi": "4.2.0",
     "axios": "^0.26.1",
+    "bullmq": "^1.86.7",
     "encryption-se": "^1.0.3",
     "order-id": "^2.1.2",
     "pg": "^8.7.3",
