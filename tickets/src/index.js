@@ -78,13 +78,13 @@ module.exports = {
 
         const hasUser = await strapi.db.query('plugin::users-permissions.user').findOne({
           where: {
-            firstName: 'Block',
-            lastName: 'Mafia',
-            email: 'block@blocktickets.xyz',
-          }
+            email: {
+              $eq: 'staff@blocktickets.xyz'
+            },
+          },
         })
 
-        if (hasUser) return
+        if (hasUser) { console.log('Found User'); return }
 
         const role = await strapi.db.query('plugin::users-permissions.role').findOne({
           where: {
@@ -94,8 +94,8 @@ module.exports = {
 
         const userObj = {
           data: {
-            username: 'Blocktickets',
-            email: 'block@blocktickets.xyz',
+            username: 'blocktickets',
+            email: 'staff@blocktickets.xyz',
             phoneNumber: '+12024509090',
             firstName: 'Block',
             lastName: 'Mafia',

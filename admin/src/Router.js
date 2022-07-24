@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { LoginPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage } from './pages';
 import { ScrollToTop } from './components';
+import { RequireAuth } from './context/Auth/Auth';
 
 /**
  * @description Handle all the routes
@@ -10,9 +11,9 @@ const Router = () => {
     return (
         <ScrollToTop>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<RequireAuth><HomePage /></RequireAuth>} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/myevent/:id" element={<DashboardPage />}>
+                <Route path="/myevent/:id" element={<RequireAuth><DashboardPage /></RequireAuth>}>
                     <Route index element={<MyEventPage />} />
                     <Route path="basic-info" element={<BasicInfoPage />} />
                     <Route path="details" element={<DetailsPage />} />
@@ -42,8 +43,8 @@ const Router = () => {
                         <Route path="edit" element={<ContactAttendeePage />} />
                     </Route>
                 </Route>
-                <Route path="events" element={<EventsPage />} />
-                <Route path="create" element={<CreateEventPage />} />
+                <Route path="events" element={<RequireAuth><EventsPage /></RequireAuth>} />
+                <Route path="create" element={<RequireAuth><CreateEventPage /></RequireAuth>} />
             </Routes>
         </ScrollToTop>
     );
