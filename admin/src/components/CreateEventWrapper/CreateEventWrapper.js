@@ -106,7 +106,7 @@ export default function CreateEventWrapper() {
                 <>
                     <DetailsWrapper />
                     <Stack direction="horizontal" className="btn-group-flex">
-                        <BackButton handleGoBack={handleGoBack} />
+                        <BackButton handleGoBack={handleGoBack} size="lg" />
                         <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
                     </Stack>
                 </>
@@ -117,7 +117,7 @@ export default function CreateEventWrapper() {
                     <CreateTicketWrapper ticketId={ticketId} />
                     <Stack direction="horizontal" className="btn-group-flex">
                         <>
-                            <BackButton handleGoBack={handleGoBack} />
+                            <BackButton handleGoBack={handleGoBack} size="lg" />
                             <Button className="btn-next" size="lg" onClick={handleClick}>{action === 'edit' ? 'Save' : 'Create ticket'}</Button>
                         </>
                     </Stack>
@@ -128,7 +128,7 @@ export default function CreateEventWrapper() {
                     <TicketsWrapper handleAction={handleAction} />
                     {tickets && tickets.length > 0 && (
                         <Stack direction="horizontal" className="btn-group-flex">
-                            <BackButton handleGoBack={handleGoBack} />
+                            <BackButton handleGoBack={handleGoBack} size="lg" />
                             <Button className="btn-next" size="lg" onClick={handleClick}>Continue</Button>
                         </Stack>
                     )}
@@ -140,7 +140,7 @@ export default function CreateEventWrapper() {
                     <PublishWrapper />
                     <Stack direction="horizontal" className="btn-group-flex ">
                         <>
-                            <BackButton handleGoBack={handleGoBack} />
+                            <BackButton handleGoBack={handleGoBack} size="lg" />
                             <Button className="btn-next" size="lg" onClick={publish}>Publish</Button>
                         </>
                     </Stack>

@@ -46,3 +46,7 @@ export const capitalizeString = string => {
 export const formatOrderId = (id) => {
     return id.toString().substring(0, 4) + '-' + id.toString().substring(4, 10) + '-' + id.toString().substring(10)
 }
+
+export const isMatching = (input1, input2) => {
+    return input1 === input2
+}

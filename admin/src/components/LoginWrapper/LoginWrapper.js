@@ -89,8 +89,9 @@ export default function LoginWrapper() {
                     {!isValid && (
                         <Error type="login" />
                     )}
-                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={() => submit()}>Login</Button>
+                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>Login</Button>
                 </Form>
+                <div className="text-center mt-4 caption"><span>Don't have an account yet? <Link to="/sign-up">Sign Up</Link></span></div>
             </Card>
         </section>
     )

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+import { isMatching } from '../../utilities/helpers';
+
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -28,7 +30,7 @@ export default function ForgotPasswordWrapper() {
         if (!isValid)
             setIsValid(true)
 
-    }, [credentials.identifier, credentials.password])
+    }, [credentials.password])
 
     const handleCredentials = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -43,7 +45,7 @@ export default function ForgotPasswordWrapper() {
     }
 
     const submit = () => {
-        if (credentials.password !== inputEl.current.value) {
+        if (!isMatching(credentials.password, inputEl.current.value)) {
             setIsValid(false)
         } else {
             setIsSuccess(true)
@@ -85,7 +87,7 @@ export default function ForgotPasswordWrapper() {
                                             className={`${!isValid ? 'error-border' : ''}`}
                                         />
                                     </Form.Group>
-                                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === ''} onClick={() => send()}>Send reset link</Button>
+                                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === ''} onClick={send}>Send reset link</Button>
                                 </>
                             )}
                             {step === 2 && (
@@ -96,7 +98,7 @@ export default function ForgotPasswordWrapper() {
                                     </Form.Group>
                                     <Form.Group className='form-group' controlId="repeatPassword">
                                         <Form.Label>Repeat password</Form.Label>
-                                        <PasswordInput isValid={isValid} reference={inputEl} />
+                                        <PasswordInput placeholder="Confirm password" isValid={isValid} reference={inputEl} />
                                     </Form.Group>
                                     {!isValid && (
                                         <Error type="match" />
