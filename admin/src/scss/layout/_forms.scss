@@ -198,4 +198,8 @@ textarea.form-control {
 	@include input-icon-box();
 	padding-right: $input-padding-x;
 	padding-left: 0px;
+
+	&.input-wrapper-error {
+		@extend .error-border !optional;
+	}
 }

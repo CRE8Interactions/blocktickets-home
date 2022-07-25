@@ -1,6 +1,8 @@
-import React, { useState, useContext } from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import React, { useEffect, useState, useContext } from 'react'
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+
 import AuthService from '../../utilities/services/auth.service'
+import { login } from '../../utilities/api'
 import UserContext from '../../context/User/User'
 
 import Stack from 'react-bootstrap/Stack'
@@ -8,52 +10,54 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import { EyeIcon } from "./../EyeIcon";
-import { EyeIconSlash } from "./../EyeIconSlash";
-import { login } from '../../utilities/api'
+import { PasswordInput } from '../PasswordInput';
+import { Error } from '../Error'
 
 export default function LoginWrapper() {
 
-    const [show, setShow] = useState(false)
+    const { setAuthenticated } = useContext(UserContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const [credentials, setCredentials] = useState({
         identifier: '',
         password: ''
     })
 
-    const [emailExists, setEmailExists] = useState(false)
+    const [isValid, setIsValid] = useState(true)
 
-    const [passwordExists, setPasswordExists] = useState(false)
+    useEffect(() => {
+        if (!isValid)
+            setIsValid(true)
 
-    const handleToggle = (e) => {
-        setShow(!show);
-    }
+    }, [credentials.identifier, credentials.password])
 
     const handleCredentials = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
-
     const submit = () => {
-        login(credentials)
-            .then((res) => {
-                AuthService.setUser(res.data);
-                setAuthenticated(res.data);
-                // Send them back to the page they tried to visit when they were
-                // redirected to the login page. Use { replace: true } so we don't create
-                // another entry in the history stack for the login page.  This means that
-                // when they get to the protected page and click the back button, they
-                // won't end up back on the login page, which is also really nice for the
-                // user experience.
-                navigate(from, { replace: true }); 
-            })
-            .catch((err) => console.error(err))
-        
+        if (isValid) {
+            login(credentials)
+                .then((res) => {
+                    AuthService.setUser(res.data);
+                    setAuthenticated(res.data);
+                    // Send them back to the page they tried to visit when they were
+                    // redirected to the login page. Use { replace: true } so we don't create
+                    // another entry in the history stack for the login page.  This means that
+                    // when they get to the protected page and click the back button, they
+                    // won't end up back on the login page, which is also really nice for the
+                    // user experience.
+                    navigate(from, { replace: true });
+                })
+                .catch((err) => {
+                    setIsValid(false)
+                    console.error(err)
+                })
+        }
     }
-    const { setAuthenticated } = useContext(UserContext);
 
     return (
         <section className='wrapper-xs'>
@@ -68,38 +72,26 @@ export default function LoginWrapper() {
                         <Form.Control
                             type="email"
                             name="identifier"
+                            required
                             placeholder="e.g mail@example.com"
                             value={credentials.identifier}
                             onChange={handleCredentials}
+                            className={`${!isValid ? 'error-border' : ''}`}
                         />
                     </Form.Group>
                     <Form.Group className='form-group' controlId="password">
                         <Form.Label>Password</Form.Label>
-                        <div className='input-wrapper'>
-                            <Form.Control
-                                type={show ? 'text' : 'password'}
-                                name="password"
-                                placeholder="Password"
-                                value={credentials.password}
-                                onChange={handleCredentials}
-                            />
-
-                            <Button variant="link" onClick={handleToggle}>
-
-                                {show ? (
-                                    <EyeIconSlash />
-                                ) : (
-                                    <EyeIcon />
-                                )}
-                            </Button>
-                        </div>
+                        <PasswordInput value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
                         <Stack direction='horizontal'>
-                            <Link to="" className='mt-2 ms-auto caption'>Forgot password?</Link>
+                            <Link to="forgot-password" className='mt-2 ms-auto caption'>Forgot password?</Link>
                         </Stack>
                     </Form.Group>
-                    <Button size="lg" className='mt-4 w-100 btn-next' onClick={() => submit()}>Login</Button>
+                    {!isValid && (
+                        <Error type="login" />
+                    )}
+                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={() => submit()}>Login</Button>
                 </Form>
             </Card>
-        </section >
+        </section>
     )
 }
