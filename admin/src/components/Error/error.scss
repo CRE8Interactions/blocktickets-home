@@ -1,6 +1,11 @@
+@use '../../scss/abstracts' as *;
 @use '../../scss/theme/colors' as *;
 
 .alert {
+	&.alert-danger {
+		background-color: rgba($danger, 0.08);
+		border: none;
+	}
 	.icon {
 		svg {
 			max-width: initial;

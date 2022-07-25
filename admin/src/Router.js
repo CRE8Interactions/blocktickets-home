@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { LoginPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage } from './pages';
+import { LoginPage, ForgotPasswordPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage } from './pages';
 import { ScrollToTop } from './components';
 import { RequireAuth } from './context/Auth/Auth';
 
@@ -13,6 +13,7 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<RequireAuth><HomePage /></RequireAuth>} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/login/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/myevent/:id" element={<RequireAuth><DashboardPage /></RequireAuth>}>
                     <Route index element={<MyEventPage />} />
                     <Route path="basic-info" element={<BasicInfoPage />} />

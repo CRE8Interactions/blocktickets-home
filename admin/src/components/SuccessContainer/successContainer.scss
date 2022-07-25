@@ -1,6 +1,10 @@
+@use '../../scss/abstracts' as *;
+
 #success {
-	.modal-body-heading-title {
+	.modal-body-heading-title,
+	.heading {
 		text-align: center;
+		font-size: $h4-font-size;
 	}
 	&::before {
 		content: '';
