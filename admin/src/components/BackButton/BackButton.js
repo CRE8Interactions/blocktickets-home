@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 
-export default function BackButton({ handleGoBack }) {
+export default function BackButton({ handleGoBack, size = "sm" }) {
     const navigate = useNavigate();
 
     const onClick = () => {
@@ -14,7 +14,7 @@ export default function BackButton({ handleGoBack }) {
             onClick={onClick}
             className='btn-back'
             variant='outline-light'
-            size="lg">
+            size={size}>
             Back
         </Button>
     );
