@@ -1,9 +1,6 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
 
-import Dropdown from 'react-bootstrap/Dropdown';
-
-import { MoreIcon } from '../../../MoreIcon';
+import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
 export default function MessageRow({ contact, handleShow, show }) {
 
@@ -20,23 +17,7 @@ export default function MessageRow({ contact, handleShow, show }) {
             </td>
             {show && (
                 <td className="btn-more">
-                    <Dropdown align="right">
-                        <Dropdown.Toggle variant="default">
-                            <MoreIcon />
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <ul>
-                                <li>
-                                    <LinkContainer to={`edit?id=001`}>
-                                        <Dropdown.Item className="btn-edit">Edit</Dropdown.Item>
-                                    </LinkContainer>
-                                </li>
-                                <li>
-                                    <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
-                                </li>
-                            </ul>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
                 </td>
             )}
         </tr>
