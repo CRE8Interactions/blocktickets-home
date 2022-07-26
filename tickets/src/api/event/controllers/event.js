@@ -79,7 +79,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       },
       populate: {
         users_permissions_user: {
-          fields: ['name', 'username', 'email', 'phoneNumber']
+          fields: ['username', 'email', 'phoneNumber']
         },
         event: {
           filters: {
