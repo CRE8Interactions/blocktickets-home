@@ -22,13 +22,14 @@ $input-padding-x: rem(16);
 $input-padding-x-sm: rem(16);
 $input-padding-y-sm: rem(10);
 
-$input-border-width: $border-width;
+$input-border-width: 2px;
 $input-focus-box-shadow: none;
 $input-focus-border-color: $primary;
 $input-placeholder-color: $clr-neutral-5;
 
 $form-select-focus-box-shadow: none;
 $form-select-bg-position: right 1em center;
+$form-select-disabled-bg: $gray-300;
 
 $form-switch-color: $clr-neutral-4;
 $form-switch-focus-color: $form-switch-color;

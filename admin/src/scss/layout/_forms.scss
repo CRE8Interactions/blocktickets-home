@@ -87,22 +87,23 @@ select:-webkit-autofill:focus {
 
 .form-label,
 .form-label--flex {
-	font-weight: $fw-medium;
-	font-size: $small;
+	font-weight: $fw-bold;
+	font-size: $caption;
 	margin-bottom: rem(12);
-}
-
-legend {
-	font-weight: $fw-medium;
-	font-size: $body-2;
-	margin-bottom: $text-spacer-xs;
+	color: $text-muted;
+	text-transform: uppercase;
 }
 
 .form-check {
 	min-height: 0px;
 
+	&-inline {
+		margin-bottom: 0px;
+	}
+
 	&-label:not(#check-display-checkbox-label) {
 		font-size: $small;
+		font-weight: $fw-medium;
 	}
 
 	&-input:focus {

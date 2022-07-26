@@ -5,14 +5,14 @@ $br-secondary: 90px; // buttons
 $br-md: 10px;
 $br-sm: 6px;
 $br-xs: 4px;
-$border-width: 2px; // btns, inputs
+$border-width: 1px;
 $border-color: $clr-neutral-6;
 
 @function border($border-width: $border-width, $color: $border-color, $border-style: solid) {
 	@return $border-width $border-style $color;
 }
 
-@mixin full-width-border($border-width: 1px, $color: $border-color) {
+@mixin full-width-border($border-width: $border-width, $color: $border-color) {
 	content: '';
 	height: $border-width;
 	position: absolute;
@@ -37,8 +37,6 @@ $border-color: $clr-neutral-6;
 	@extend %rounded;
 }
 
-// add ons and search items
-.br-sm,
-.thumbnail {
-	border-radius: $br-sm;
+.seperator {
+	border-top: border();
 }

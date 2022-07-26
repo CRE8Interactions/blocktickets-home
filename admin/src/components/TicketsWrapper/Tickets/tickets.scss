@@ -5,15 +5,8 @@
 .tickets {
 	border-bottom: border();
 }
+
 .ticket-row {
-	padding: $text-spacer-xs;
-	border-radius: 8px;
-	background-color: $gray-300;
-
-	> * {
-		font-weight: $fw-medium;
-	}
-
 	.vstack {
 		justify-content: center;
 
