@@ -9,7 +9,7 @@ export default function EditDeleteDropdown({ handleShow, link, onClick }) {
 
     return (
         <Dropdown className='btn-more'>
-            <Dropdown.Toggle variant="default">
+            <Dropdown.Toggle variant="default" id="btn-more-toggle">
                 <MoreIcon />
             </Dropdown.Toggle>
             <Dropdown.Menu>

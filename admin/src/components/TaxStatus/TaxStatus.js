@@ -28,11 +28,9 @@ export default function TaxStatus({ step, setStep, getTaxDetails }) {
     }, [])
 
 
-    // update sign up state when state changes 
+    // update parent state when state changes 
     useEffect(() => {
-        if (getTaxDetails) {
-            getTaxDetails({ ...taxDetails, sign_date: date })
-        }
+        getTaxDetails({ ...taxDetails, sign_date: date })
     }, [taxDetails, date])
 
     const handleTaxDetails = (e) => {
