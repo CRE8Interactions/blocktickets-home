@@ -1,0 +1,1 @@
+export { default as SignUpWrapper } from './SignUpWrapper'

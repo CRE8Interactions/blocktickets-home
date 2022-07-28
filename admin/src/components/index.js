@@ -1,6 +1,7 @@
 export { ScrollToTop } from './ScrollToTop';
 export { LoginWrapper } from './LoginWrapper';
 export { ForgotPasswordWrapper } from './ForgotPasswordWrapper';
+export { SignUpWrapper } from './SignUpWrapper';
 export { Navigation } from './Navigation';
 export { HomeWrapper } from './HomeWrapper';
 export { DashboardWrapper } from './DashboardWrapper';

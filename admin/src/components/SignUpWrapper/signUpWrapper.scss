@@ -1,0 +1,108 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+@use '../../scss/theme/colors' as *;
+
+#sign-up-wrapper {
+	.stepper {
+		display: flex;
+		flex-wrap: wrap;
+
+		&-item {
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+
+			&:not(:first-of-type) {
+				flex: 1;
+			}
+
+			&:not(:last-of-type) {
+				flex: 1;
+			}
+
+			&::before {
+				position: relative;
+				z-index: 1;
+				display: flex;
+				display: column;
+				justify-content: center;
+				align-items: center;
+				width: 1.5rem;
+				height: 1.5rem;
+				border-radius: 50%;
+				margin: 1em auto 0px;
+				border: border(1px);
+				color: $gray-200;
+				background-color: $gray-300;
+				font-size: $caption;
+			}
+
+			&:not(:last-child)::after {
+				content: '';
+				height: 2px;
+				background-color: $gray-300;
+				order: -1;
+				position: relative;
+				top: 1.5rem;
+				left: 40%;
+			}
+
+			&:first-of-type {
+				&::before {
+					content: '1';
+				}
+			}
+
+			&:nth-of-type(2) {
+				&::before {
+					content: '2';
+				}
+			}
+
+			&:nth-of-type(3) {
+				&::before {
+					content: '3';
+				}
+			}
+
+			&:nth-of-type(4) {
+				&::before {
+					content: '4';
+				}
+			}
+
+			&:last-of-type {
+				&::before {
+					content: '5';
+				}
+			}
+
+			&.active {
+				&::before {
+					background-color: rgba($primary, 0.05);
+					border-color: $primary;
+					color: $primary;
+					font-weight: $fw-semi-bold;
+				}
+			}
+
+			&.completed {
+				&::before {
+					border-color: $primary;
+					background-color: $primary;
+					color: $white;
+				}
+
+				&::after {
+					background-color: $primary;
+				}
+			}
+		}
+	}
+
+	#teams {
+		padding-top: $text-spacer;
+		margin-top: $text-spacer;
+		border-top: border();
+	}
+}
