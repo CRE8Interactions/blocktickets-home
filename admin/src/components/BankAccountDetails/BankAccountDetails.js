@@ -46,11 +46,9 @@ export default function BankAccountDetails({ getBankAccount, isValid, setIsValid
         }
     )
 
-    // update sign up state when state changes 
+    // update parent state when state changes 
     useEffect(() => {
-        if (getBankAccount) {
-            getBankAccount(bankAccount)
-        }
+        getBankAccount(bankAccount)
     }, [bankAccount])
 
     // reset error when accountNumber input changed
@@ -221,6 +219,9 @@ export default function BankAccountDetails({ getBankAccount, isValid, setIsValid
                     onChange={handleBankDetails}
                 />
             </Form.Group>
+            <div className="d-flex-column mt-3 align-items-center">
+                <ChequeImg />
+            </div>
             <Form.Group className="form-group" controlId="routingNumber">
                 <Form.Label>Routing Number</Form.Label>
                 <Form.Control
@@ -277,10 +278,6 @@ export default function BankAccountDetails({ getBankAccount, isValid, setIsValid
             {!isValid && (
                 <Error type="match" field="account number" />
             )}
-
-            <div className="d-flex-column mt-3 align-items-center">
-                <ChequeImg />
-            </div>
         </>
     )
 }

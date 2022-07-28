@@ -91,22 +91,6 @@ export default function SignUpWrapper() {
 
     }, [credentials.password, bankAccount?.accountNumber])
 
-
-    // get organization information state
-    const getOrgInfo = (state) => {
-        setOrgInfo(state)
-    }
-
-    // get tax state
-    const getTaxDetails = (state) => {
-        setTaxDetails(state)
-    }
-
-    // get bank state
-    const getBankAccount = (state) => {
-        setBankAccount(state)
-    }
-
     const getTitle = () => {
         switch (step) {
             case 1:
@@ -220,12 +204,12 @@ export default function SignUpWrapper() {
         <section id="sign-up-wrapper">
             {!isSuccess && (
                 <Row>
-                    <Col md={3}>
+                    <Col md={4}>
                         {step > 1 && (
                             <BackButton handleGoBack={handleGoBack} />
                         )}
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                         <ol className="stepper mb-5">
                             <li className={`stepper-item ${step === 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`}>
                             </li>
@@ -291,7 +275,7 @@ export default function SignUpWrapper() {
                             </Form>
                         )}
                         {step === 2 && (
-                            <OrganizationInformation getOrgInfo={getOrgInfo} />
+                            <OrganizationInformation getOrgInfo={setOrgInfo} />
                         )}
                         {step === 3 && (
                             <>
@@ -304,14 +288,14 @@ export default function SignUpWrapper() {
                                 <h1 className='normal'>Bank information</h1>
                                 <div className="seperator">
                                     <Form>
-                                        <BankAccountDetails getBankAccount={getBankAccount} isValid={isValid} setIsValid={setIsValid} />
+                                        <BankAccountDetails getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
                                     </Form>
                                 </div>
 
                             </>
                         )}
                         {step === 5 && !isSuccess && (
-                            <TaxStatus step={taxStep} setStep={setTaxStep} getTaxDetails={getTaxDetails} />
+                            <TaxStatus step={taxStep} setStep={setTaxStep} getTaxDetails={setTaxDetails} />
                         )}
 
                         {!isSuccess && (
