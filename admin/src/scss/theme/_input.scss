@@ -8,7 +8,7 @@ $input-font-weight: $fw-medium;
 $input-font-size-sm: rem(12);
 $input-font-size-lg: $input-font-size;
 $input-disabled-bg: transparent;
-$input-bg: $white;
+$input-bg: transparent;
 
 // orders search input
 $input-padding-y-lg: rem(19);
@@ -29,6 +29,7 @@ $input-placeholder-color: $clr-neutral-5;
 
 $form-select-focus-box-shadow: none;
 $form-select-bg-position: right 1em center;
+$form-select-bg: $white;
 $form-select-disabled-bg: $gray-300;
 
 $form-switch-color: $clr-neutral-4;

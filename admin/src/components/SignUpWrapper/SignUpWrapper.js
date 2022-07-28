@@ -6,7 +6,6 @@ import { login } from '../../utilities/api'
 import { isMatching } from '../../utilities/helpers'
 import UserContext from '../../context/User/User'
 
-import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
@@ -111,7 +110,7 @@ export default function SignUpWrapper() {
     const getTitle = () => {
         switch (step) {
             case 1:
-                return 'Sign up as organization'
+                return 'Organizer sign up'
 
             case 2:
                 return 'Organization information'
@@ -219,124 +218,124 @@ export default function SignUpWrapper() {
 
     return (
         <section id="sign-up-wrapper">
-            <Card body>
-                {!isSuccess && (
-                    <Row>
-                        <Col md={4}>
+            {!isSuccess && (
+                <Row>
+                    <Col md={3}>
+                        {step > 1 && (
                             <BackButton handleGoBack={handleGoBack} />
-                        </Col>
-                        <Col md={6}>
-                            <ol className="stepper mb-5">
-                                <li className={`stepper-item ${step === 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`}>
-                                </li>
-                                <li className={`stepper-item ${step === 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`}>
-                                </li>
-                                <li className={`stepper-item ${step === 3 ? 'active' : ''} ${step > 3 ? 'completed' : ''}`}>
-                                </li>
-                                <li className={`stepper-item ${step === 4 ? 'active' : ''} ${step > 4 ? 'completed' : ''}`}>
-                                </li>
-                                <li className={`stepper-item ${step === 5 ? 'active' : ''}`}>
-                                </li>
-                            </ol>
-                            <header className='mb-5'>
-                                <h1 className={`${step !== 1 ? 'text-upper' : 'fs-md'}`}>{getTitle()}</h1>
-                                <h2 className='text-muted normal fw-medium'>{getSubtitle()}</h2>
-                            </header>
-                            {step === 1 && (
-                                <Form>
-                                    <Form.Group className='form-group' controlId="firstName">
-                                        <Form.Label>First name</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="firstName"
-                                            required
-                                            placeholder="e.g John"
-                                            value={credentials.firstName}
-                                            onChange={handleCredentials}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className='form-group' controlId="lastName">
-                                        <Form.Label>Last name</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="lastName"
-                                            required
-                                            placeholder="e.g Doe"
-                                            value={credentials.lastName}
-                                            onChange={handleCredentials}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className='form-group' controlId="identifier">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            name="identifier"
-                                            required
-                                            placeholder="e.g mail@example.com"
-                                            value={credentials.identifier}
-                                            onChange={handleCredentials}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className='form-group' controlId="password">
-                                        <Form.Label>Create a Password</Form.Label>
-                                        <PasswordInputWrapper value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
-                                    </Form.Group>
-                                    <Form.Group className='form-group' controlId="repeatPassword">
-                                        <Form.Label>Repeat password</Form.Label>
-                                        <PasswordInput placeholder="Confirm password" isValid={isValid} reference={inputEl} />
-                                    </Form.Group>
-                                    {!isValid && (
-                                        <Error type="match" />
-                                    )}
-                                </Form>
-                            )}
-                            {step === 2 && (
-                                <OrganizationInformation getOrgInfo={getOrgInfo} />
-                            )}
-                            {step === 3 && (
-                                <>
-                                    <Roles roles={roles} />
-                                    <Team members={members} />
-                                </>
-                            )}
-                            {step === 4 && (
-                                <>
-                                    <h1 className='normal'>Bank information</h1>
-                                    <div className="seperator">
-                                        <Form>
-                                            <BankAccountDetails getBankAccount={getBankAccount} isValid={isValid} setIsValid={setIsValid} />
-                                        </Form>
-                                    </div>
-
-                                </>
-                            )}
-                            {step === 5 && !isSuccess && (
-                                <TaxStatus step={taxStep} setStep={setTaxStep} getTaxDetails={getTaxDetails} />
-                            )}
-
-                            {!isSuccess && (
-                                <Button size="lg" className='mt-4 w-100 btn-next' disabled={!formValid} onClick={handleNext}>{taxStep === 3 ? 'Create' : 'Next'}</Button>
-                            )}
-
-                            {step === 0 && (
-                                <div className="text-center mt-4 caption">
-                                    <span>Already have an account? <Link to="/login">Log in</Link></span>
+                        )}
+                    </Col>
+                    <Col md={6}>
+                        <ol className="stepper mb-5">
+                            <li className={`stepper-item ${step === 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`}>
+                            </li>
+                            <li className={`stepper-item ${step === 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`}>
+                            </li>
+                            <li className={`stepper-item ${step === 3 ? 'active' : ''} ${step > 3 ? 'completed' : ''}`}>
+                            </li>
+                            <li className={`stepper-item ${step === 4 ? 'active' : ''} ${step > 4 ? 'completed' : ''}`}>
+                            </li>
+                            <li className={`stepper-item ${step === 5 ? 'active' : ''}`}>
+                            </li>
+                        </ol>
+                        <header className='mb-5'>
+                            <h1 className={`${step !== 1 ? 'text-upper' : 'fs-md'}`}>{getTitle()}</h1>
+                            <h2 className='text-muted normal fw-medium'>{getSubtitle()}</h2>
+                        </header>
+                        {step === 1 && (
+                            <Form>
+                                <Form.Group className='form-group' controlId="firstName">
+                                    <Form.Label>First name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="firstName"
+                                        required
+                                        placeholder="e.g John"
+                                        value={credentials.firstName}
+                                        onChange={handleCredentials}
+                                    />
+                                </Form.Group>
+                                <Form.Group className='form-group' controlId="lastName">
+                                    <Form.Label>Last name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="lastName"
+                                        required
+                                        placeholder="e.g Doe"
+                                        value={credentials.lastName}
+                                        onChange={handleCredentials}
+                                    />
+                                </Form.Group>
+                                <Form.Group className='form-group' controlId="identifier">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        name="identifier"
+                                        required
+                                        placeholder="e.g mail@example.com"
+                                        value={credentials.identifier}
+                                        onChange={handleCredentials}
+                                    />
+                                </Form.Group>
+                                <Form.Group className='form-group' controlId="password">
+                                    <Form.Label>Create a Password</Form.Label>
+                                    <PasswordInputWrapper value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
+                                </Form.Group>
+                                <Form.Group className='form-group' controlId="repeatPassword">
+                                    <Form.Label>Repeat password</Form.Label>
+                                    <PasswordInput placeholder="Confirm password" isValid={isValid} reference={inputEl} />
+                                </Form.Group>
+                                {!isValid && (
+                                    <Error type="match" />
+                                )}
+                            </Form>
+                        )}
+                        {step === 2 && (
+                            <OrganizationInformation getOrgInfo={getOrgInfo} />
+                        )}
+                        {step === 3 && (
+                            <>
+                                <Roles roles={roles} />
+                                <Team members={members} />
+                            </>
+                        )}
+                        {step === 4 && (
+                            <>
+                                <h1 className='normal'>Bank information</h1>
+                                <div className="seperator">
+                                    <Form>
+                                        <BankAccountDetails getBankAccount={getBankAccount} isValid={isValid} setIsValid={setIsValid} />
+                                    </Form>
                                 </div>
-                            )}
-                        </Col>
-                    </Row>
-                )}
 
-                {isSuccess && (
-                    <div className='wrapper-xs'>
-                        <SuccessContainer>
-                            <h1 className='heading'>Your account has been successfully created!</h1>
-                            <SuccessDisclaimer />
-                            <Link to="/myevent/123" className="btn btn-primary btn-next btn-lg w-100">Go to creator panel</Link>
-                        </SuccessContainer>
-                    </div>
-                )}
-            </Card>
+                            </>
+                        )}
+                        {step === 5 && !isSuccess && (
+                            <TaxStatus step={taxStep} setStep={setTaxStep} getTaxDetails={getTaxDetails} />
+                        )}
+
+                        {!isSuccess && (
+                            <Button size="lg" className='mt-4 w-100 btn-next' disabled={!formValid} onClick={handleNext}>{taxStep === 3 ? 'Create' : 'Next'}</Button>
+                        )}
+
+                        {step === 1 && (
+                            <div className="text-center mt-4 caption">
+                                <span className='text-muted'>Already have an account? <Link to="/login">Log in</Link></span>
+                            </div>
+                        )}
+                    </Col>
+                </Row>
+            )}
+
+            {isSuccess && (
+                <div className='wrapper-xs'>
+                    <SuccessContainer>
+                        <h1 className='heading'>Your account has been successfully created!</h1>
+                        <SuccessDisclaimer />
+                        <Link to="/myevent/123" className="btn btn-primary btn-next btn-lg w-100">Go to creator panel</Link>
+                    </SuccessContainer>
+                </div>
+            )}
         </section>
     )
 }

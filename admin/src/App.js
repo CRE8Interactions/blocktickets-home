@@ -1,5 +1,4 @@
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
 
 import Router from './Router';
@@ -8,7 +7,7 @@ import authService from './utilities/services/auth.service';
 import UserContext from './context/User/User';
 import OrganizationContext from './context/Organization/Organization';
 import { getMyOrganizations, createOrganization } from './utilities/api';
-import { toggleContainer } from './utilities/helpers';
+import { toggleContainer, changeBackground } from './utilities/helpers';
 
 import { Navigation, CreateOrg } from './components';
 
@@ -35,6 +34,7 @@ function App() {
     let location = useLocation();
 
     useLayoutEffect(() => {
+        changeBackground(location.pathname)
         toggleContainer(location.pathname)
 
     }, [location.pathname])
