@@ -24,7 +24,6 @@ const checkUrl = (url) => {
 };
 
 export const changeBackground = url => {
-    console.log(url);
     if (checkUrl(url)) {
         document.body.classList.add('backgroundWhite')
     }
