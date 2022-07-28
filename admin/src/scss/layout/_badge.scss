@@ -24,7 +24,7 @@
 		text-transform: uppercase;
 		border-style: solid;
 		border-width: $border-width;
-		background-color: $white !important;
+		background-color: transparent;
 
 		&--primary {
 			color: $primary;
@@ -39,6 +39,11 @@
 		&--success {
 			color: $success;
 			border-color: $success;
+		}
+
+		&--dark {
+			color: $body-color;
+			border-color: $gray-200;
 		}
 	}
 }

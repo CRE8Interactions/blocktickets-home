@@ -24,7 +24,7 @@ export default function Cards() {
                     <Card body id="tickets-sold-card">
                         <div className='heading--flex card-body-heading'>
                             <h1 className='card-body-title card-body-title--flex tickets-sold'>Tickets sold</h1>
-                            <Badge className='badge-outline badge-outline--primary'>Primary</Badge>
+                            <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>
                         <Row>
                             <Col>
@@ -71,7 +71,7 @@ export default function Cards() {
                                 <span><b>{formatCurrency(42241.22)}</b> <span className="small-text">net sales</span></span>
                             </Col>
                             <Col className='text-end'>
-                                <Badge className='badge-outline badge-outline--primary'>Primary</Badge>
+                                <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                             </Col>
                         </Row>
                         <Row>
@@ -79,7 +79,7 @@ export default function Cards() {
                                 <span><b>{formatCurrency(10222.32)}</b> <span className="small-text">royalties</span></span>
                             </Col>
                             <Col className='text-end'>
-                                <Badge className='badge-outline badge-outline--secondary'>Secondary</Badge>
+                                <Badge bg="default" className='badge-outline badge-outline--secondary'>Secondary</Badge>
                             </Col>
                         </Row>
                     </Card>
@@ -100,7 +100,7 @@ export default function Cards() {
                                 </Stack>
                                 <h1 className='card-body-title'>{formatCurrency(52532.23)}</h1>
                             </Stack>
-                            <Badge className='badge-outline badge-outline--success'>Paid</Badge>
+                            <Badge bg="default" className='badge-outline badge-outline--success'>Paid</Badge>
                         </div>
                         <p className='text-muted'>Your payout will be released on 28 November 2020 to allow for any refunds. Depending on your bank, it may take 4-5 business days to receive your funds.</p>
                     </Card>

@@ -48,7 +48,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                 <Stack direction="horizontal" className='split-row card-body-subtitle--flex'>
                     <Stack direction="horizontal" gap={3}>
                         <p>Order {formatOrderId(order.orderId)}</p>
-                        <Badge className={`badge-outline badge-outline--${order.marketType === 'primary' ? 'primary' : 'secondary'}`}>{order.marketType}</Badge>
+                        <Badge bg="default" className={`badge-outline badge-outline--${order.marketType === 'primary' ? 'primary' : 'secondary'}`}>{order.marketType}</Badge>
                     </Stack>
                     {showDropdown && (
                         <Dropdown className="btn-more" align="right">

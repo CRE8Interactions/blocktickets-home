@@ -1,3 +1,15 @@
+// global state options 
+export const stateOpt = [
+    {
+        label: 'New York',
+        value: 'NY'
+    },
+    {
+        label: 'Texas',
+        value: 'TX'
+    }
+]
+
 // check to see if page should have a container
 const checkUrl = (url) => {
     var expression = /myevent|\/settings/g;

@@ -4,9 +4,8 @@ import { formatString } from '../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
-import Dropdown from 'react-bootstrap/Dropdown';
 
-import { MoreIcon } from '../../MoreIcon';
+import { EditDeleteDropdown } from '../../EditDeleteDropdown';
 
 export default function Ticket({ ticket, handleEdit, handleShow }) {
 
@@ -27,7 +26,7 @@ export default function Ticket({ ticket, handleEdit, handleShow }) {
     }
 
     return (
-        <Stack direction='horizontal' as="li" className='ticket-row'>
+        <Stack direction='horizontal' as="li" className='list-item ticket-row'>
             <Stack>
                 <h2 className='normal'>{ticket.type}</h2>
                 <Stack direction='horizontal' gap={2}>
@@ -41,23 +40,7 @@ export default function Ticket({ ticket, handleEdit, handleShow }) {
             <Stack>
                 <span>${ticket.price.toFixed(2)}</span>
             </Stack>
-            <Stack>
-                <Dropdown className='btn-more'>
-                    <Dropdown.Toggle variant="default">
-                        <MoreIcon />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <ul>
-                            <li>
-                                <Dropdown.Item as="button" className="btn-edit" onClick={() => handleEdit(ticket)}>Edit</Dropdown.Item>
-                            </li>
-                            <li>
-                                <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
-                            </li>
-                        </ul>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </Stack>
+            <EditDeleteDropdown handleShow={handleShow} onClick={() => handleEdit(ticket)} />
         </Stack>
     );
 }

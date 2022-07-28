@@ -1,0 +1,5 @@
+@use '../../../scss/layout/modal' as *;
+
+#add-member {
+	@extend .modal-lg;
+}

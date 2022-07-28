@@ -78,6 +78,13 @@ h4,
 	margin-bottom: rem(4);
 }
 
+.text-upper {
+	text-transform: uppercase;
+	font-weight: $fw-bold;
+	font-family: $font-body;
+	font-size: $body-2;
+}
+
 .caption {
 	font-size: $caption;
 }
@@ -167,6 +174,18 @@ h4,
 			color: $body-color;
 			font-weight: $fw-semi-bold;
 		}
+	}
+}
+
+.list-item {
+	padding: $text-spacer-xs;
+	border-radius: 8px;
+	background-color: $gray-300;
+
+	h1,
+	h2,
+	span:not(.badge) {
+		font-weight: $fw-medium;
 	}
 }
 

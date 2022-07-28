@@ -33,11 +33,11 @@
 
 		.main-navigation {
 			padding: rem(38) 0px;
-			border-top: border(1px);
+			border-top: border();
 		}
 	}
 	.secondary-navigation {
-		border-top: border(1px);
+		border-top: border();
 		padding-top: rem(28);
 	}
 
