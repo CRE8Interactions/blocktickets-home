@@ -5,7 +5,7 @@ export default function SuccessDisclaimer() {
         <>
 
             <small className="d-block disclaimer mt-4">
-                Need help? Email <a href="mailto:help@blocktickets.xyz">help@blocktickets.xyz</a> and we will get back to you shortly!
+                If you need any help, please email <a href="mailto:help@blocktickets.xyz">help@blocktickets.xyz</a> and we will get back to you shortly!
             </small>
         </>
     );
