@@ -88,3 +88,8 @@ section + section {
 	color: $text-muted;
 	font-weight: $fw-semi-bold;
 }
+
+.seperator {
+	padding-top: $text-spacer-sm;
+	margin-top: $text-spacer-sm;
+}
