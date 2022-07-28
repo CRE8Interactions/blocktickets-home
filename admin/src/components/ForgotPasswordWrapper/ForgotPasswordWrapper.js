@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { isMatching } from '../../utilities/helpers';
 
-import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -65,57 +64,55 @@ export default function ForgotPasswordWrapper() {
 
     return (
         <section className='wrapper-xs'>
-            <Card body>
-                {(step == 1 || step == 2 && !isSuccess) && (
-                    <>
-                        <header className='mb-5'>
-                            <h1 className='fs-md'>Password reset</h1>
-                            <h2 className='text-muted normal fw-normal'>{getSubtitle()}</h2>
-                        </header>
-                        <Form>
-                            {step === 1 && (
-                                <>
-                                    <Form.Group className='form-group' controlId="identifier">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            name="identifier"
-                                            placeholder="e.g mail@example.com"
-                                            value={credentials.identifier}
-                                            onChange={handleCredentials}
-                                            required
-                                            className={`${!isValid ? 'error-border' : ''}`}
-                                        />
-                                    </Form.Group>
-                                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === ''} onClick={send}>Send reset link</Button>
-                                </>
-                            )}
-                            {step === 2 && (
-                                <>
-                                    <Form.Group className='form-group' controlId="password">
-                                        <Form.Label>Create a password</Form.Label>
-                                        <PasswordInput value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
-                                    </Form.Group>
-                                    <Form.Group className='form-group' controlId="repeatPassword">
-                                        <Form.Label>Repeat password</Form.Label>
-                                        <PasswordInput placeholder="Confirm password" isValid={isValid} reference={inputEl} />
-                                    </Form.Group>
-                                    {!isValid && (
-                                        <Error type="match" />
-                                    )}
-                                    <Button size="lg" className='mt-4 w-100' disabled={credentials.password === ''} onClick={submit}>Reset password</Button>
-                                </>
-                            )}
-                        </Form>
-                    </>
-                )}
-                {isSuccess && (
-                    <SuccessContainer>
-                        <h1 className='heading'>Password changed successfully!</h1>
-                        <p className='text-muted'>Redirecting you to login...</p>
-                    </SuccessContainer>
-                )}
-            </Card>
-        </section >
+            {(step == 1 || step == 2 && !isSuccess) && (
+                <>
+                    <header className='mb-5'>
+                        <h1 className='fs-md'>Password reset</h1>
+                        <h2 className='text-muted normal fw-normal'>{getSubtitle()}</h2>
+                    </header>
+                    <Form>
+                        {step === 1 && (
+                            <>
+                                <Form.Group className='form-group' controlId="identifier">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        name="identifier"
+                                        placeholder="e.g mail@example.com"
+                                        value={credentials.identifier}
+                                        onChange={handleCredentials}
+                                        required
+                                        className={`${!isValid ? 'error-border' : ''}`}
+                                    />
+                                </Form.Group>
+                                <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === ''} onClick={send}>Send reset link</Button>
+                            </>
+                        )}
+                        {step === 2 && (
+                            <>
+                                <Form.Group className='form-group' controlId="password">
+                                    <Form.Label>Create a password</Form.Label>
+                                    <PasswordInput value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
+                                </Form.Group>
+                                <Form.Group className='form-group' controlId="repeatPassword">
+                                    <Form.Label>Repeat password</Form.Label>
+                                    <PasswordInput placeholder="Confirm password" isValid={isValid} reference={inputEl} />
+                                </Form.Group>
+                                {!isValid && (
+                                    <Error type="match" />
+                                )}
+                                <Button size="lg" className='mt-4 w-100' disabled={credentials.password === ''} onClick={submit}>Reset password</Button>
+                            </>
+                        )}
+                    </Form>
+                </>
+            )}
+            {isSuccess && (
+                <SuccessContainer>
+                    <h1 className='heading'>Password changed successfully!</h1>
+                    <p className='text-muted'>Redirecting you to login...</p>
+                </SuccessContainer>
+            )}
+        </section>
     )
 }
