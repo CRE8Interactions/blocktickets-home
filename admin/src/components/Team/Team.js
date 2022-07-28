@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 import { Member } from './Member'
 import { AddMemberModal } from './AddMemberModal'
+import { DeleteModal } from './DeleteModal'
 
 export default function Team({ members }) {
 
@@ -34,32 +35,45 @@ export default function Team({ members }) {
         role: roleOpt[0].value
     })
 
-    const [show, setShow] = useState(false);
+    const [id, setId] = useState()
+
+    const [showAdd, setShowAdd] = useState(false);
+
+
+    const [showDelete, setShowDelete] = useState(false);
 
     const handleMember = (e) => {
         setMember({ ...member, [e.target.name]: e.target.value })
     }
 
     const handleAdd = () => {
-        handleClose()
+        handleCloseAdd()
     }
 
-    const handleShow = () => setShow(true)
+    const handleShowAdd = (_, id) => {
+        setId(id)
+        setShowAdd(true)
+    }
 
-    const handleClose = () => setShow(false)
+    const handleCloseAdd = () => setShowAdd(false)
+
+    const handleShowDelete = () => setShowDelete(true)
+
+    const handleCloseDelete = () => setShowDelete(false)
 
     return (
         <>
             <div className='heading--flex mb-4' id="teams">
                 <h1 className='normal'>Team</h1>
-                <Button variant='outline-light' className="btn-plus btn-plus--dark" onClick={handleShow}>Invite team member</Button>
+                <Button variant='outline-light' className="btn-plus btn-plus--dark" onClick={handleShowAdd}>Invite team member</Button>
             </div>
             <Stack as="ul" gap={2}>
                 {members.map((member, index) => (
-                    <Member key={index} member={member} />
+                    <Member key={index} member={member} handleShowAdd={handleShowAdd} handleShowDelete={handleShowDelete} />
                 ))}
             </Stack>
-            <AddMemberModal show={show} handleClose={handleClose} roleOpt={roleOpt} member={member} handleMember={handleMember} handleAdd={handleAdd} />
+            <AddMemberModal show={showAdd} handleClose={handleCloseAdd} roleOpt={roleOpt} id={id} member={member} handleMember={handleMember} handleAdd={handleAdd} />
+            <DeleteModal show={showDelete} handleClose={handleCloseDelete} />
         </>
     )
 }

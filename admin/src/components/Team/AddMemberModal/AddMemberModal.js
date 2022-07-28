@@ -7,11 +7,11 @@ import Button from 'react-bootstrap/Button';
 
 import './addMember.scss';
 
-export default function AddMemberModal({ show, handleClose, roleOpt, member, handleMember, handleAdd }) {
+export default function AddMemberModal({ show, handleClose, roleOpt, member, handleMember, handleAdd, id }) {
     return (
         <Modal id="add-member" centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title as="h4">New user</Modal.Title>
+                <Modal.Title as="h4">{id ? 'Edit' : 'New'} user</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -60,7 +60,7 @@ export default function AddMemberModal({ show, handleClose, roleOpt, member, han
                         </Form.Select>
                     </Form.Group>
                 </Form>
-                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleAdd}>Add user</Button></Stack>
+                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleAdd}>{id ? 'Save' : 'Add'} user</Button></Stack>
             </Modal.Body>
         </Modal>
 

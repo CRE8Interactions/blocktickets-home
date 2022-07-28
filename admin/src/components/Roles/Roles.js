@@ -4,15 +4,10 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 import { Role } from "./Role";
-import { AddRoleModal } from './AddRoleModal';
+import { CreateRoleModal } from './CreateRoleModal';
+import { DeleteModal } from './DeleteModal';
 
 export default function Roles({ roles }) {
-
-    const [show, setShow] = useState(false);
-
-    const handleShow = () => setShow(true)
-
-    const handleClose = () => setShow(false)
 
     const permissions = {
         settings: [
@@ -43,6 +38,23 @@ export default function Roles({ roles }) {
 
     const [isCheck, setIsCheck] = useState(['1', '2', '3'])
 
+    const [id, setId] = useState();
+
+    const [showCreate, setShowCreate] = useState(false);
+
+    const [showDelete, setShowDelete] = useState(false);
+
+    const handleShowCreate = (_, id) => {
+        setId(id)
+        setShowCreate(true)
+    }
+
+    const handleCloseCreate = () => setShowCreate(false)
+
+    const handleShowDelete = () => setShowDelete(true)
+
+    const handleCloseDelete = () => setShowDelete(false)
+
     const handleCheck = e => {
         const { id, checked } = e.target;
         setIsCheck([...isCheck, id]);
@@ -52,21 +64,22 @@ export default function Roles({ roles }) {
     };
 
     const handleCreate = () => {
-        handleClose();
+        handleCloseCreate();
     }
 
     return (
         <>
             <div className='heading--flex mb-4'>
                 <h1 className='normal'>Roles</h1>
-                <Button variant='outline-light' className="btn-plus btn-plus--dark" onClick={handleShow}>Create a new role</Button>
+                <Button variant='outline-light' className="btn-plus btn-plus--dark" onClick={handleShowCreate}>Create a new role</Button>
             </div>
             <Stack as="ul" gap={2}>
                 {roles.map((role, index) => (
-                    <Role key={index} role={role} />
+                    <Role key={index} role={role} handleShowCreate={handleShowCreate} handleShowDelete={handleShowDelete} />
                 ))}
             </Stack>
-            <AddRoleModal show={show} handleClose={handleClose} permissions={permissions} role={role} setRole={setRole} isCheck={isCheck} handleCheck={handleCheck} handleCreate={handleCreate} />
+            <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setRole} isCheck={isCheck} handleCheck={handleCheck} handleCreate={handleCreate} />
+            <DeleteModal show={showDelete} handleClose={handleCloseDelete} />
         </>
     )
 }
