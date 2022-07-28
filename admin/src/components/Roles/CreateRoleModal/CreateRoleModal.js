@@ -5,13 +5,13 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import './addRole.scss';
+import './createRole.scss';
 
-export default function AddRoleModal({ show, handleClose, permissions, role, setRole, isCheck, handleCheck, handleCreate }) {
+export default function CreateRoleModal({ show, handleClose, permissions, id, role, setRole, isCheck, handleCheck, handleCreate }) {
     return (
-        <Modal id="add-role" centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
+        <Modal id="create-role" centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title as="h4">New role</Modal.Title>
+                <Modal.Title as="h4">{id ? 'Edit' : 'New'} role</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form.Group className="mb-4" controlId="name">
@@ -49,7 +49,7 @@ export default function AddRoleModal({ show, handleClose, permissions, role, set
                         </ul>
                     </li>
                 </ul>
-                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleCreate}>Save and create role</Button></Stack>
+                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleCreate}>Save {!id && 'and create'} role</Button></Stack>
             </Modal.Body>
         </Modal>
 
