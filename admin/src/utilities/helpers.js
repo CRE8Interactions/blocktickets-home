@@ -11,14 +11,30 @@ export const stateOpt = [
 ]
 
 // check to see if page should have a container
-const checkUrl = (url) => {
+const checkUrlZ = (url) => {
     var expression = /myevent|\/settings/g;
     var regex = new RegExp(expression);
     return regex.test(url);
 };
 
-export const toggleContainer = (url) => {
+const checkUrl = (url) => {
+    var expression = /login|\/signup/g;
+    var regex = new RegExp(expression);
+    return regex.test(url);
+};
+
+export const changeBackground = url => {
+    console.log(url);
     if (checkUrl(url)) {
+        document.body.classList.add('backgroundWhite')
+    }
+    else {
+        document.body.classList.remove('backgroundWhite')
+    }
+}
+
+export const toggleContainer = (url) => {
+    if (checkUrlZ(url)) {
         document.querySelectorAll('#main-container').forEach(el => el.classList.remove('my-container')) // remove container class - shared
         document.querySelectorAll('#main-container').forEach(el => el.classList.add('sidebar-container')) // add sidebar container class - shared
         document.querySelector('.main').classList.add('main-content') // main page content margin-left - only main page content

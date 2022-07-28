@@ -36,10 +36,15 @@ legend {
 }
 
 ul,
+ol,
 dl {
-	list-style: none;
 	margin-bottom: 0;
 	padding: 0;
+}
+
+ul,
+dl {
+	list-style: none;
 }
 
 figure {

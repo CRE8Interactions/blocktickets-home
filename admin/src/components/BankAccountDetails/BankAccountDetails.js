@@ -278,7 +278,7 @@ export default function BankAccountDetails({ getBankAccount, isValid, setIsValid
                 <Error type="match" field="account number" />
             )}
 
-            <div className="d-flex-column mt-3 ">
+            <div className="d-flex-column mt-3 align-items-center">
                 <ChequeImg />
             </div>
         </>

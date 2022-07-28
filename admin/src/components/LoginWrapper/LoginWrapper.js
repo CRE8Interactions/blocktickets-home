@@ -6,7 +6,6 @@ import { login } from '../../utilities/api'
 import UserContext from '../../context/User/User'
 
 import Stack from 'react-bootstrap/Stack'
-import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -61,38 +60,38 @@ export default function LoginWrapper() {
 
     return (
         <section className='wrapper-xs'>
-            <Card body>
-                <header className='mb-5'>
-                    <h1 className='fs-md'>Log in as organization</h1>
-                    <h2 className='text-muted normal fw-medium'>The future of ticketing is here</h2>
-                </header>
-                <Form>
-                    <Form.Group className='form-group' controlId="identifier">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type="email"
-                            name="identifier"
-                            required
-                            placeholder="e.g mail@example.com"
-                            value={credentials.identifier}
-                            onChange={handleCredentials}
-                            className={`${!isValid ? 'error-border' : ''}`}
-                        />
-                    </Form.Group>
-                    <Form.Group className='form-group' controlId="password">
-                        <Form.Label>Password</Form.Label>
-                        <PasswordInput value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
-                        <Stack direction='horizontal'>
-                            <Link to="forgot-password" className='mt-2 ms-auto caption'>Forgot password?</Link>
-                        </Stack>
-                    </Form.Group>
-                    {!isValid && (
-                        <Error type="login" />
-                    )}
-                    <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>Login</Button>
-                </Form>
-                <div className="text-center mt-4 caption"><span>Don't have an account yet? <Link to="/sign-up">Sign Up</Link></span></div>
-            </Card>
+            <header className='mb-5'>
+                <h1 className='fs-md'>Organizer log in</h1>
+                <h2 className='text-muted normal fw-medium'>The future of ticketing is here</h2>
+            </header>
+            <Form>
+                <Form.Group className='form-group' controlId="identifier">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="identifier"
+                        required
+                        placeholder="e.g mail@example.com"
+                        value={credentials.identifier}
+                        onChange={handleCredentials}
+                        className={`${!isValid ? 'error-border' : ''}`}
+                    />
+                </Form.Group>
+                <Form.Group className='form-group' controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <PasswordInput value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
+                    <Stack direction='horizontal'>
+                        <Link to="forgot-password" className='mt-2 ms-auto caption'>Forgot password?</Link>
+                    </Stack>
+                </Form.Group>
+                {!isValid && (
+                    <Error type="login" />
+                )}
+                <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>Login</Button>
+            </Form>
+            <div className="text-center mt-4 caption">
+                <span className='text-muted'>Don't have an account yet? <Link to="/signup">Sign Up</Link></span>
+            </div>
         </section>
     )
 }

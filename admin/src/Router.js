@@ -16,7 +16,7 @@ const Router = () => {
                 <Route path="/" element={<RequireAuth><HomePage /></RequireAuth>} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/login/forgot-password" element={<ForgotPasswordPage />} />
-                <Route path="/sign-up" element={<SignUpPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/myevent/:id" element={<RequireAuth><DashboardPage /></RequireAuth>}>
                     <Route index element={<MyEventPage />} />
                     <Route path="basic-info" element={<BasicInfoPage />} />
