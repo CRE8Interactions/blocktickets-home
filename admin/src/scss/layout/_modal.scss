@@ -25,8 +25,12 @@
 		}
 	}
 
-	// used for message preview modal
+	// used for message preview, bank information modal
 	&-dialog-scrollable {
+		.modal-header {
+			margin-bottom: $text-spacer-xs;
+		}
+
 		.modal-body {
 			display: flex;
 			flex-direction: column;
@@ -35,7 +39,7 @@
 		}
 	}
 
-	// used for ticket breakdown, role, team modals
+	// used for ticket breakdown, role, team, bank information modals
 	&-lg {
 		$m-x: rem(32);
 		$pad-y: rem(24);
