@@ -45,7 +45,11 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
             </fieldset>
             <div className="form-group">
                 <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id={`check-display-checkbox`}>
-                    <Form.Check.Input name="displayEndTime" type='checkbox' defaultChecked={event.displayEndTime} onChange={(e) => { handleChange(e, e.target.checked) }} />
+                    <Form.Check.Input
+                        name="displayEndTime"
+                        type='checkbox'
+                        defaultChecked={event.displayEndTime}
+                        onChange={(e) => { handleChange(e, e.target.checked) }} />
                     <div>
                         <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Display end time</Form.Check.Label>
                         <small className='d-block text-muted fw-semi-bold'>

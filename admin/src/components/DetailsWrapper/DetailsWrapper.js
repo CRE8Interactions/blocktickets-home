@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 import { UploadEventImage } from '../UploadEventImage';
 import { TextEditor } from '../TextEditor';
+import { BackButton } from '../BackButton';
 
-export default function DetailsWrapper() {
+export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
 
     const [selectedImage, setSelectedImage] = useState()
 
@@ -13,8 +16,18 @@ export default function DetailsWrapper() {
 
     const handleDescription = (e) => {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
-
     }
+
+    const handleClick = (e) => {
+        if (handleNext) {
+            handleNext(e, { selected_image: selectedImage, description })
+        } else {
+            // save changes
+            handleSave()
+        }
+    }
+
+    const handleSave = () => { }
 
     return (
         <section className='wrapper'>
@@ -34,6 +47,12 @@ export default function DetailsWrapper() {
                     <TextEditor handleChange={handleDescription} />
                 </Card>
             </section>
+            <Stack direction="horizontal" className="btn-group-flex">
+                {!eventId && (
+                    <BackButton handleGoBack={handleGoBack} size="lg" />
+                )}
+                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+            </Stack>
         </section>
     );
 }

@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 import { CreateTicket } from './CreateTicket';
+import { BackButton } from '../BackButton';
 
-export default function CreateTicketWrapper({ id, ticketId }) {
+export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handleNext }) {
 
     const [
         key,
@@ -39,6 +42,17 @@ export default function CreateTicketWrapper({ id, ticketId }) {
         setTicket({ ...ticket, [e.target.name]: e.target.value })
     }
 
+    const handleClick = (e) => {
+        if (handleNext) {
+            handleNext(e, { ...ticket, sales_start: startDate, sales_end: endDate })
+        } else {
+            // save changes
+            handleSave()
+        }
+    }
+
+    const handleSave = () => { }
+
     return (
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
@@ -70,6 +84,10 @@ export default function CreateTicketWrapper({ id, ticketId }) {
                     </Tab.Content>
                 </Tab.Container>
             </Card>
+            <Stack direction="horizontal" className="btn-group-flex">
+                <BackButton handleGoBack={handleGoBack} size="lg" />
+                <Button className="btn-next" size="lg" onClick={handleClick}>{ticketId || id ? 'Save' : 'Create ticket'}</Button>
+            </Stack>
         </section>
     );
 }

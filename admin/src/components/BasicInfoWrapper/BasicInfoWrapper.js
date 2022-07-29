@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 
-export default function BasicInfoWrapper() {
+export default function BasicInfoWrapper({ eventId, handleNext }) {
 
     const eventTypeOpt = [
         {
@@ -69,12 +71,23 @@ export default function BasicInfoWrapper() {
         eventType: eventTypeOpt[0].value,
         timezone: timezoneOpt[0].value,
         language: langOpt[0].value,
-        displayEndTime: false
+        displayEndTime: true
     })
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
     }
+
+    const handleClick = (e) => {
+        if (handleNext) {
+            handleNext(e, { ...event, start_date: startDate, end_date: endDate })
+        } else {
+            // save changes
+            handleSave()
+        }
+    }
+
+    const handleSave = () => { }
 
     return (
         <section className='wrapper'>
@@ -83,7 +96,7 @@ export default function BasicInfoWrapper() {
                     <h1>Basic info</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} event={event} eventTypeOpt={eventTypeOpt} />
+                    <BasicInfo handleChange={handleChange} handleClick={handleClick} event={event} eventTypeOpt={eventTypeOpt} />
                 </Card>
             </section>
             <section>
@@ -102,6 +115,9 @@ export default function BasicInfoWrapper() {
                     <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} langOpt={langOpt} />
                 </Card>
             </section>
+            <Stack direction="horizontal" className="btn-group-flex">
+                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+            </Stack>
         </section>
     );
 }
