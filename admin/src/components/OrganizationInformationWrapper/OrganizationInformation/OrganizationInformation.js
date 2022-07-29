@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import { stateOpt } from '../../utilities/helpers'
+import { stateOpt } from '../../../utilities/helpers'
 
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
-export default function OrganizationInformation({ getOrgInfo }) {
-
-    const [org, setOrg] = useState({
-        orgName: '',
-        address: '',
-        city: '',
-        zip_code: '',
-        state: stateOpt[0].value
-    })
-
-    // update parent state when state changes 
-    useEffect(() => {
-        getOrgInfo(org)
-    }, [org])
-
-    const handleOrg = (e) => {
-        setOrg({ ...org, [e.target.name]: e.target.value })
-    }
+export default function OrganizationInformation({ org, handleOrg }) {
 
     return (
         <Form>
