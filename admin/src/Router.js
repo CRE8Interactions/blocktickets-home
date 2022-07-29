@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RequireAuth } from './context/Auth/Auth';
 
-import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage } from './pages';
+import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -49,6 +49,14 @@ const Router = () => {
                 </Route>
                 <Route path="events" element={<RequireAuth><EventsPage /></RequireAuth>} />
                 <Route path="create" element={<RequireAuth><CreateEventPage /></RequireAuth>} />
+                <Route path="settings" element={<SettingsPage />}>
+                    <Route path="organization-information" element={<OrganizationInfoPage />} />
+                    <Route path="team-management" element={<TeamManagementPage />} />
+                    <Route path="security" element={<SecurityPage />} />
+                    <Route path="payment-information" element={<PaymentInformationPage />} />
+                    <Route path="payouts" element={<PayoutsPage />} />
+                    <Route path="tax-status" element={<TaxStatusPage />} />
+                </Route>
             </Routes>
         </ScrollToTop>
     );
