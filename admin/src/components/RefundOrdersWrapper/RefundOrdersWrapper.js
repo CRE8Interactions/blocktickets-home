@@ -302,7 +302,7 @@ export default function RefundOrdersWrapper() {
                 <section>
                     <header className='heading--flex section-header split-row'>
                         <h1 className='fs-md'>Orders</h1>
-                        <Button size="lg" onClick={handleShow}>Refund selected</Button>
+                        <Button size="lg" onClick={handleShow} disabled={orderCount.length > 0}>Refund selected</Button>
                     </header>
                     <Card body>
                         <BootstrapTable

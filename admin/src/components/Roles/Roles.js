@@ -44,6 +44,7 @@ export default function Roles({ roles }) {
 
     const [showDelete, setShowDelete] = useState(false);
 
+    // handle create and edit
     const handleShowCreate = (_, id) => {
         setId(id)
         setShowCreate(true)

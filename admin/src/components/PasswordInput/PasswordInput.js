@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import { EyeIcon } from "./EyeIcon";
 import { EyeIconSlash } from "./EyeIconSlash";
 
-export default function PasswordInput({ value, isValid, handlePassword, reference, placeholder = "Password" }) {
+export default function PasswordInput({ name = "password", value, isValid, handlePassword, onBlur, reference, placeholder = "Password" }) {
 
     const [show, setShow] = useState(false)
 
@@ -16,9 +16,10 @@ export default function PasswordInput({ value, isValid, handlePassword, referenc
             <Form.Control
                 ref={reference}
                 type={show ? 'text' : 'password'}
-                name='password'
+                name={name}
                 placeholder={placeholder}
                 value={value}
+                onBlur={onBlur}
                 onChange={handlePassword}
                 required
             ></Form.Control>

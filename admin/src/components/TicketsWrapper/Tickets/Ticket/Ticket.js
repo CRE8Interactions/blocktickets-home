@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { formatString } from '../../../utilities/helpers';
+import { formatString } from '../../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
 
-import { EditDeleteDropdown } from '../../EditDeleteDropdown';
+import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
 export default function Ticket({ ticket, handleEdit, handleShow }) {
 
