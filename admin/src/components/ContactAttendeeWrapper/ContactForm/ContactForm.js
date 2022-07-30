@@ -107,12 +107,12 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
             <Form>
                 <Form.Group className='form-group' controlId='sender'>
                     <Form.Label>{isEmail ? 'Email' : 'Text'} sender</Form.Label>
-                    <Form.Control type="text" defaultValue="South Side Music Hall" readOnly />
+                    <Form.Control type="text" defaultValue="South Side Music Hall" disabled />
                 </Form.Group>
                 {isEmail && (
                     <Form.Group className="form-group" controlId='reply-To'>
                         <Form.Label>Reply-To Email</Form.Label>
-                        <Form.Control type="text" defaultValue="harrison@southsidemusichall.com" readOnly />
+                        <Form.Control type="text" defaultValue="harrison@southsidemusichall.com" disabled />
                     </Form.Group>
                 )}
                 <Form.Group className="form-group" controlId='to'>
@@ -140,7 +140,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                 {isEmail && (
                     <Form.Group className="form-group" controlId='subject'>
                         <Form.Label>Subject</Form.Label>
-                        <Form.Control type="text" defaultValue="Harrison's B-day Party Postponed" readOnly />
+                        <Form.Control type="text" defaultValue="Harrison's B-day Party Postponed" disabled />
                     </Form.Group>
                 )}
                 <Form.Group className="form-group" controlId='message'>

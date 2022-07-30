@@ -50,6 +50,7 @@ export default function Team({ members }) {
         handleCloseAdd()
     }
 
+    // handle add and edit 
     const handleShowAdd = (_, id) => {
         setId(id)
         setShowAdd(true)

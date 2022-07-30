@@ -2,8 +2,6 @@ import React from 'react';
 
 import Alert from 'react-bootstrap/Alert';
 
-import './error.scss';
-
 export default function Error({ type, field = "password" }) {
     const getErrorType = (type) => {
         switch (type) {
@@ -12,6 +10,12 @@ export default function Error({ type, field = "password" }) {
 
             case 'match':
                 return `Your ${field}s do not match. Please try again`;
+
+            case 'sameMatch':
+                return `Your ${field} cannot be the same as your old password!. Please try again`;
+
+            case 'notExist':
+                return `Your ${field} does not match our records. Please try again`;
 
             default:
                 return 'Something went wrong. Please try again';

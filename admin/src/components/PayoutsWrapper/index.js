@@ -1,0 +1,1 @@
+export { default as PayoutsWrapper } from './PayoutsWrapper'

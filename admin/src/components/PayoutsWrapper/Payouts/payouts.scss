@@ -1,0 +1,17 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout/spacing' as *;
+@use '../../../scss/theme/colors' as *;
+
+.payouts {
+	.payout-row {
+		.vstack {
+			justify-content: center;
+			padding: 0px $text-spacer;
+			align-items: center;
+
+			& + .vstack {
+				border-left: border($color: $gray-200);
+			}
+		}
+	}
+}

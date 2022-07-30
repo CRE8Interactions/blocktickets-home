@@ -26,3 +26,10 @@ export { UserInformationPage } from './UserInformationPage';
 export { ContactAttendeesPage } from './ContactAttendeesPage';
 export { ViewContactAttendeesPage } from './ViewContactAttendeesPage';
 export { ContactAttendeePage } from './ContactAttendeePage';
+export { SettingsPage } from './SettingsPage';
+export { OrganizationInfoPage } from './OrganizationInfoPage';
+export { TeamManagementPage } from './TeamManagementPage'
+export { SecurityPage } from './SecurityPage'
+export { PaymentInformationPage } from './PaymentInformationPage'
+export { PayoutsPage } from './PayoutsPage'
+export { TaxStatusPage } from './TaxStatusPage'

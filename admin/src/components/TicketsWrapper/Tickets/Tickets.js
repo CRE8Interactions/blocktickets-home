@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
 import { NoDataContainer } from '../../NoDataContainer';
-import { Ticket } from '../Ticket';
+import { Ticket } from './Ticket';
 import { DeleteModal } from './DeleteModal';
 
 import './tickets.scss';

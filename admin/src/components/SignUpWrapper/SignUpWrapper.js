@@ -15,11 +15,11 @@ import { BackButton } from '../BackButton';
 import { PasswordInput } from '../PasswordInput';
 import { PasswordInputWrapper } from "../PasswordInputWrapper";
 import { Error } from '../Error'
-import { OrganizationInformation } from '../OrganizationInformation';
+import { OrganizationInformationWrapper } from '../OrganizationInformationWrapper';
 import { Roles } from "../Roles";
 import { Team } from "../Team";
-import { BankAccountDetails } from "./../BankAccountDetails";
-import { TaxStatus } from "../TaxStatus";
+import { BankAccountDetailsWrapper } from "./../BankAccountDetailsWrapper";
+import { TaxWrapper } from "../TaxWrapper";
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 
@@ -82,10 +82,9 @@ export default function SignUpWrapper() {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [step])
+    }, [step, taxStep])
 
     useEffect(() => {
-
         if (!isValid)
             setIsValid(true)
 
@@ -275,7 +274,7 @@ export default function SignUpWrapper() {
                             </Form>
                         )}
                         {step === 2 && (
-                            <OrganizationInformation getOrgInfo={setOrgInfo} />
+                            <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
                         )}
                         {step === 3 && (
                             <>
@@ -287,15 +286,12 @@ export default function SignUpWrapper() {
                             <>
                                 <h1 className='normal'>Bank information</h1>
                                 <div className="seperator">
-                                    <Form>
-                                        <BankAccountDetails getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
-                                    </Form>
+                                    <BankAccountDetailsWrapper getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
                                 </div>
-
                             </>
                         )}
                         {step === 5 && !isSuccess && (
-                            <TaxStatus step={taxStep} setStep={setTaxStep} getTaxDetails={setTaxDetails} />
+                            <TaxWrapper step={taxStep} setStep={setTaxStep} getTaxDetails={setTaxDetails} />
                         )}
 
                         {!isSuccess && (

@@ -89,6 +89,11 @@ h4,
 	font-size: $caption;
 }
 
+.subtitle {
+	color: $text-muted;
+	font-size: $small;
+}
+
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;

@@ -1,46 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import { stateOpt } from '../../utilities/helpers'
+import { stateOpt } from '../../../utilities/helpers'
 
 import Form from 'react-bootstrap/Form'
 import Alert from 'react-bootstrap/Alert'
 
-import { DateInputWrapper } from '../DateInputWrapper'
+import { DateInputWrapper } from '../../DateInputWrapper'
 
-// step is controlled from parent component
-export default function TaxStatus({ step, setStep, getTaxDetails }) {
-
-    const [date, setDate] = useState(new Date())
-
-    const [taxDetails, setTaxDetails] = useState({
-        address: '',
-        city: '',
-        city: '',
-        state: stateOpt[0].value,
-        zip_code: '',
-        ein: '',
-        sign_by: 'Harrison Cogan'
-    })
-
-    // set step when component mounts 
-    useEffect(() => {
-        setStep(1)
-    }, [])
-
-
-    // update parent state when state changes 
-    useEffect(() => {
-        getTaxDetails({ ...taxDetails, sign_date: date })
-    }, [taxDetails, date])
-
-    const handleTaxDetails = (e) => {
-        setTaxDetails({ ...taxDetails, [e.target.name]: e.target.value })
-    }
+export default function TaxStatus({ step, taxDetails, date, setDate, handleTaxDetails }) {
 
     return (
         <>
-            <h1 className='fs-md'>IRS Substitute Form W-9</h1>
-            <h2 className='fw-normal small mb-4'>The following form is required by the U.S. Internal Revenue Service and is only available in U.S. English. Please complete in U.S. English.</h2>
             {step === 1 && (
                 <Form>
                     <Form.Group className='form-group' controlId="name">
@@ -163,7 +133,6 @@ export default function TaxStatus({ step, setStep, getTaxDetails }) {
                 <Alert variant="info">
                     <small>Note: The date, time of submission and your computer's IP address will be recorded upon submission.</small></Alert>
             )}
-
         </>
     )
 }

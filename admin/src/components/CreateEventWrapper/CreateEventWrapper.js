@@ -24,9 +24,10 @@ export default function CreateEventWrapper() {
     ] = useState(1);
 
     const [ticketId, setTicketId] = useState()
+
     const [action, setAction] = useState()
 
-    const [events, setEvents] = useState()
+    const [event, setEvent] = useState()
 
     // for step 4 - to make display of buttons work - delete later
     const [tickets] = useState([
@@ -62,16 +63,26 @@ export default function CreateEventWrapper() {
     const publish = (event) => {
         publishEvent(event)
             .then((res) => {
-                let updateEvent = events.find(e => e.id === event.id)
+                let updateEvent = event.find(e => e.id === event.id)
                 updateEvent.status = 'on_sale'
                 navigate('/dashboard/123')
             })
             .catch((err) => console.error(err))
     }
 
-    const handleClick = () => {
-        setAction('')
-        setStep(step + 1)
+    const handleNext = (_, stateObj) => {
+        if (step < 5) {
+            setAction('')
+            setStep(step + 1)
+        }
+        if (stateObj) {
+            setEvent({ ...event, ...stateObj })
+
+            if (step === 5) {
+                publish();
+            }
+        }
+
     }
 
     const handleAction = (action, id) => {
@@ -94,34 +105,15 @@ export default function CreateEventWrapper() {
     return (
         <div className={` ${step !== 4 ? 'wrapper' : ''}`} id="create-event">
             {step === 1 && (
-                <>
-                    <BasicInfoWrapper />
-                    <Stack direction="horizontal" className="btn-group-flex">
-                        <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
-                    </Stack>
-                </>
+                <BasicInfoWrapper handleNext={handleNext} />
             )}
 
             {step === 2 && (
-                <>
-                    <DetailsWrapper />
-                    <Stack direction="horizontal" className="btn-group-flex">
-                        <BackButton handleGoBack={handleGoBack} size="lg" />
-                        <Button className="btn-next" size="lg" onClick={handleClick}>Save and continue</Button>
-                    </Stack>
-                </>
+                <DetailsWrapper handleNext={handleNext} handleGoBack={handleGoBack} />
             )}
 
             {step === 3 && (
-                <>
-                    <CreateTicketWrapper ticketId={ticketId} />
-                    <Stack direction="horizontal" className="btn-group-flex">
-                        <>
-                            <BackButton handleGoBack={handleGoBack} size="lg" />
-                            <Button className="btn-next" size="lg" onClick={handleClick}>{action === 'edit' ? 'Save' : 'Create ticket'}</Button>
-                        </>
-                    </Stack>
-                </>
+                <CreateTicketWrapper ticketId={ticketId} handleGoBack={handleGoBack} handleNext={handleNext} />
             )}
             {step === 4 && (
                 <>
@@ -129,22 +121,14 @@ export default function CreateEventWrapper() {
                     {tickets && tickets.length > 0 && (
                         <Stack direction="horizontal" className="btn-group-flex">
                             <BackButton handleGoBack={handleGoBack} size="lg" />
-                            <Button className="btn-next" size="lg" onClick={handleClick}>Continue</Button>
+                            <Button className="btn-next" size="lg" onClick={handleNext}>Continue</Button>
                         </Stack>
                     )}
                 </>
             )}
 
             {step === 5 && (
-                <>
-                    <PublishWrapper />
-                    <Stack direction="horizontal" className="btn-group-flex ">
-                        <>
-                            <BackButton handleGoBack={handleGoBack} size="lg" />
-                            <Button className="btn-next" size="lg" onClick={publish}>Publish</Button>
-                        </>
-                    </Stack>
-                </>
+                <PublishWrapper handleNext={handleNext} handleGoBack={handleGoBack} />
             )}
         </div>
     );
