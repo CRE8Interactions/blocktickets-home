@@ -13,7 +13,7 @@ export default function TicketBreakdownModal({ show, handleClose }) {
             </Modal.Header>
             <Modal.Body>
                 <ul>
-                    <li className='list'>
+                    <li className='list list-with-seperator'>
                         <p className='heading'>Cost to buyer</p>
                         <ul>
                             <Stack as="li" direction="horizontal" className="split-row">
@@ -42,7 +42,7 @@ export default function TicketBreakdownModal({ show, handleClose }) {
                             </Stack>
                         </ul>
                     </li>
-                    <li className='list'>
+                    <li className='list list-with-seperator'>
                         <p className='heading'>Your payout</p>
                         <ul>
                             <Stack as="li" direction="horizontal" className="split-row">

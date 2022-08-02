@@ -89,11 +89,6 @@ h4,
 	font-size: $caption;
 }
 
-.subtitle {
-	color: $text-muted;
-	font-size: $small;
-}
-
 %text-truncate {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -154,15 +149,21 @@ h4,
 .list {
 	padding-left: 0px;
 	padding-right: 0px;
+
 	.heading {
 		font-weight: $fw-medium;
 		margin-bottom: rem(10);
 	}
 
 	& + .list:not(.list.list-group-item) {
-		margin-top: rem(20);
-		border-top: border(1px);
-		padding-top: $text-spacer-sm;
+		margin-top: $text-spacer-sm;
+	}
+
+	&-with-seperator {
+		& + .list-with-seperator:not(.list.list-group-item) {
+			border-top: border();
+			padding-top: $text-spacer-sm;
+		}
 	}
 }
 
