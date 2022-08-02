@@ -4,13 +4,45 @@
 
 .payouts {
 	.payout-row {
-		.vstack {
-			justify-content: center;
-			padding: 0px $text-spacer;
-			align-items: center;
+		.btn-toggle {
+			.vstack {
+				gap: $gap-sm;
+				align-items: flex-start;
 
-			& + .vstack {
-				border-left: border($color: $gray-200);
+				& + .vstack {
+					border-left: border();
+					padding-left: $text-spacer;
+				}
+
+				&:last-of-type {
+					border-right: border();
+					margin-right: $text-spacer;
+				}
+			}
+		}
+		#payout-desc {
+			border-top: border();
+			@extend .seperator;
+
+			ul {
+				justify-content: space-between;
+			}
+
+			.main-list {
+				+ .main-list {
+					border-left: border();
+					padding-left: $text-spacer;
+				}
+				ul {
+					font-size: $small;
+
+					li {
+						.heading {
+							font-weight: $fw-semi-bold;
+							margin-bottom: rem(3);
+						}
+					}
+				}
 			}
 		}
 	}

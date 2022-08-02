@@ -12,11 +12,11 @@ export default function Tickets({ payouts }) {
 
     return (
         <>
-            <Card body>
+            <Card body className='card--sm'>
                 <>
                     {payouts && payouts.length > 0 ? (
                         <>
-                            <Stack gap={2} as="ul" className="pb-4 payouts">
+                            <Stack gap={2} as="ul" className="payouts">
                                 {(payouts).map((payout, id) => (
                                     <Payout key={id} payout={payout} />
                                 ))}
