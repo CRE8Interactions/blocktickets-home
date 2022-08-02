@@ -12,7 +12,8 @@
 			padding: rem(24);
 		}
 	}
-	& * {
+
+	.btn-toggle {
 		font-family: $font-body;
 	}
 
@@ -31,11 +32,6 @@
 				padding-bottom: rem(3);
 			}
 		}
-	}
-
-	.btn,
-	.btn * {
-		font-family: $font-heading;
 	}
 
 	.card-body-heading {
