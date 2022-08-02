@@ -42,5 +42,10 @@
 	&-info {
 		color: $body-color;
 		background-color: $info;
+		border: border();
+
+		&--light {
+			background-color: $white;
+		}
 	}
 }

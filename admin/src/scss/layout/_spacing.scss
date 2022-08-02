@@ -93,3 +93,9 @@ section + section {
 	padding-top: $text-spacer-sm;
 	margin-top: $text-spacer-sm;
 }
+
+.list-item {
+	padding: $text-spacer-xs $text-spacer-sm;
+	border-radius: 8px;
+	background-color: $gray-300;
+}
