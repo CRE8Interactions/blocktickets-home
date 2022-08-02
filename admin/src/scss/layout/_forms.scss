@@ -80,7 +80,10 @@ legend {
 }
 
 textarea.form-control {
-	background: $gray-300;
+	&,
+	&:focus {
+		background: $gray-300;
+	}
 }
 
 .date-picker-card {

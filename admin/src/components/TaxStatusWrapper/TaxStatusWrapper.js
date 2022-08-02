@@ -48,7 +48,7 @@ export default function TaxStatusWrapper() {
                             {taxStatus ? (
                                 <TaxCard show={setShowForm} />
                             ) : (
-                                <Button size="lg" className="btn-plus w-100" onClick={() => setShowForm(true)}>Fill out W9 form</Button>
+                                <Button size="lg" className="btn-tax w-100" onClick={() => setShowForm(true)}>Fill out W9 form</Button>
                             )}
                         </>
                     ) : (
