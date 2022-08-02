@@ -40,7 +40,7 @@ export default function TeamManagementWrapper() {
     return (
         <section className='wrapper'>
             <header className="section-header">
-                <div className="section-heading">
+                <div className="section-heading section-heading--secondary">
                     <h1>Team management</h1>
                 </div>
                 <p className='section-header-desc'>Manage your team members and their roles</p>

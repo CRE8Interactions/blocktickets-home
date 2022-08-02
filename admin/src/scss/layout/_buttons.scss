@@ -69,6 +69,7 @@ button,
 	vertical-align: baseline;
 
 	&.btn-toggle {
+		color: $body-color;
 		display: flex;
 		align-items: center;
 		width: 100%;
