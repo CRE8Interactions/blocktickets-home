@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
-import Tabs from 'react-bootstrap/Tabs';
+import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
 import { Roles } from "../Roles";
@@ -46,21 +46,30 @@ export default function TeamManagementWrapper() {
                 <p className='section-header-desc'>Manage your team members and their roles</p>
             </header>
             <Card body className='card--sm'>
-                <Tabs
-                    id="controlled-tab-example"
-                    activeKey={key}
-                    variant="pills"
-                    onSelect={(k) => setKey(k)}
-                    className="mb-3"
-                    justify
-                >
-                    <Tab eventKey="roles" title="Roles">
-                        <Roles roles={roles} />
-                    </Tab>
-                    <Tab eventKey="team" title="Team">
-                        <Team members={members} />
-                    </Tab>
-                </Tabs>
+                <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
+                    <div className='d-flex mb-5 '>
+                        <Nav as="ul" variant="pills" justify>
+                            <Nav.Item as="li">
+                                <Nav.Link as="button" eventKey="roles">
+                                    Roles
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item as="li">
+                                <Nav.Link as="button" eventKey="team">
+                                    Team
+                                </Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </div>
+                    <Tab.Content>
+                        <Tab.Pane eventKey="roles">
+                            <Roles roles={roles} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="team">
+                            <Team members={members} />
+                        </Tab.Pane>
+                    </Tab.Content>
+                </Tab.Container>
             </Card>
         </section>
     )

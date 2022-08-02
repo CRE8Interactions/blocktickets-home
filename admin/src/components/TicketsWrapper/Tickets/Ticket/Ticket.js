@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatString } from '../../../../utilities/helpers';
+import { formatString, formatCurrency } from '../../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
@@ -38,7 +38,7 @@ export default function Ticket({ ticket, handleEdit, handleShow }) {
                 <span>{ticket.ticketsSold}</span>
             </Stack>
             <Stack>
-                <span>${ticket.price.toFixed(2)}</span>
+                <span>{formatCurrency(50)}</span>
             </Stack>
             <EditDeleteDropdown handleShow={handleShow} onClick={() => handleEdit(ticket)} />
         </Stack>

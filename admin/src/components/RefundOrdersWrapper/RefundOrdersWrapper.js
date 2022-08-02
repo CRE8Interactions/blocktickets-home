@@ -299,11 +299,11 @@ export default function RefundOrdersWrapper() {
                         <span className='small'>Original payment method</span>
                     </Stack>
                 </header>
-                <section>
-                    <header className='heading--flex section-header split-row'>
+                <div>
+                    <div className='heading--flex section-header split-row'>
                         <h1 className='fs-md'>Orders</h1>
-                        <Button size="lg" onClick={handleShow} disabled={orderCount.length > 0}>Refund selected</Button>
-                    </header>
+                        <Button size="lg" onClick={handleShow} disabled={orderCount == 0}>Refund selected</Button>
+                    </div>
                     <Card body>
                         <BootstrapTable
                             keyField='id'
@@ -314,7 +314,7 @@ export default function RefundOrdersWrapper() {
                             bordered={false}
                         />
                     </Card>
-                </section>
+                </div>
             </section>
 
             <RefundModal show={show} handleClose={handleClose} />

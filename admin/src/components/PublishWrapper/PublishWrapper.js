@@ -37,7 +37,7 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
                 <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} />
             </Card>
             <Stack direction="horizontal" className="btn-group-flex ">
-                {!eventId && (<BackButton handleGoBack={handleGoBack} size="lg" />)}
+                {!eventId && (<BackButton handleGoBack={handleGoBack} />)}
                 <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>{eventId ? 'Save changes' : 'Publish'}</Button>
             </Stack>
         </section>

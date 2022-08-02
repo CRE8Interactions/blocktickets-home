@@ -49,7 +49,7 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
                 {!eventId && (
-                    <BackButton handleGoBack={handleGoBack} size="lg" />
+                    <BackButton handleGoBack={handleGoBack} />
                 )}
                 <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 
-export default function BackButton({ handleGoBack, size = "sm" }) {
+export default function BackButton({ handleGoBack, size = "lg" }) {
     const navigate = useNavigate();
 
     const onClick = () => {

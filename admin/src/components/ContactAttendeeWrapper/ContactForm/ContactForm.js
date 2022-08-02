@@ -47,7 +47,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
 
     const ticketTypeOpt = [
         { value: 'vip', label: 'VIP ticket', chipLabel: "VIP ticket", custom: '16 Attendees' },
-        { value: 'general_admission', label: 'General Admission', chipLabel: "Gerneral Admission", custom: '36 Attendees' },
+        { value: 'general_admission', label: 'General Admission', chipLabel: "General Admission", custom: '36 Attendees' },
         { value: 'standard_admission', label: 'Standard Admission', chipLabel: "Standard Admission", custom: '12 Attendees' },
         { value: 'other', label: 'Other type', chipLabel: "Other type", custom: '745 Attendees' }
     ]
@@ -147,7 +147,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                     <Form.Label>Message</Form.Label>
                     <TextEditor handleChange={handleMessage} value={message} />
                     <Stack direction='horizontal'>
-                        <Button variant='link' className='ms-auto pt-2 btn-preview' onClick={handleShow}>Preview your {type} </Button>
+                        <Button variant='default' className='ms-auto px-0 pb-0 btn-preview' onClick={handleShow}>Preview your {type} </Button>
                     </Stack>
                 </Form.Group>
                 <Row className='form-group'>

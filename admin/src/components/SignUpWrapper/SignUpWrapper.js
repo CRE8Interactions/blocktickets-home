@@ -205,7 +205,7 @@ export default function SignUpWrapper() {
                 <Row>
                     <Col md={4}>
                         {step > 1 && (
-                            <BackButton handleGoBack={handleGoBack} />
+                            <BackButton handleGoBack={handleGoBack} size="sm" />
                         )}
                     </Col>
                     <Col md={4}>

@@ -42,7 +42,7 @@ export default function PreviewModal({ show, handleClose, message, event }) {
                         height="213"
                     />
                     <h4 className="event-name mb-2">Nic Fancuilli Live</h4>
-                    <Stack as="p" gap={1} className="fw-medium small align-items-center">
+                    <Stack as="p" gap={1} className="small align-items-center">
                         <span>Fri Sept 3, 2022 EST <span className='time'>9:00 PM EST</span></span>
                         <span>Southside Music Hall</span>
                         <span className='text-muted'>Dallas, TX</span>
