@@ -120,7 +120,7 @@ export default function CreateEventWrapper() {
                     <TicketsWrapper handleAction={handleAction} />
                     {tickets && tickets.length > 0 && (
                         <Stack direction="horizontal" className="btn-group-flex">
-                            <BackButton handleGoBack={handleGoBack} size="lg" />
+                            <BackButton handleGoBack={handleGoBack} />
                             <Button className="btn-next" size="lg" onClick={handleNext}>Continue</Button>
                         </Stack>
                     )}

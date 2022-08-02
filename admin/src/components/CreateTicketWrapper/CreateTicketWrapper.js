@@ -85,7 +85,7 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
                 </Tab.Container>
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
-                <BackButton handleGoBack={handleGoBack} size="lg" />
+                <BackButton handleGoBack={handleGoBack} />
                 <Button className="btn-next" size="lg" onClick={handleClick}>{ticketId || id ? 'Save' : 'Create ticket'}</Button>
             </Stack>
         </section>
