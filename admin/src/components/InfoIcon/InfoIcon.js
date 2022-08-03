@@ -1,29 +1,9 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React from 'react';
 
-export default function InfoIcon({ variant, size }) {
+import './infoIcon.scss';
 
+export default function InfoIcon({ variant, style }) {
 
-    const [width, setWidth] = useState()
-    const [height, setHeight] = useState()
-
-    useLayoutEffect(() => {
-        getSize()
-
-    }, [])
-
-    const getSize = () => {
-        switch (size) {
-            case 'lg':
-                setWidth(20);
-                setHeight(20);
-                break;
-
-            default:
-                setWidth(16);
-                setHeight(17);
-                break;
-        }
-    }
     const getColor = () => {
         switch (variant) {
             case 'dark':
@@ -34,7 +14,7 @@ export default function InfoIcon({ variant, size }) {
         }
     }
     return (
-        <svg width={width} height={height} viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className={`info-icon ${style} `} width='16' height='17' viewBox='0 0 16 17' fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
