@@ -85,7 +85,7 @@ export default function BankAccountDetails({ bankAccount, routingNumError, accou
                             />
                         </Col>
                         <Col className='ps-0'>
-                            <Form.Select aria-label="State" value={bankAccount.state} onChange={(e) => handleBankDetails(e)} required name="state">
+                            <Form.Select aria-label="State" value={bankAccount.state} onChange={handleBankDetails} name="state">
                                 {stateOpt.map((option, index) => (
                                     <option key={index} value={option.value}>{option.label}</option>
                                 ))}

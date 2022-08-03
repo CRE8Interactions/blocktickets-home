@@ -142,12 +142,10 @@ export default function SignUpWrapper() {
     }
 
     const handleGoBack = () => {
-        if ((taxStep > 1 && taxStep < 3)) {
+        if (taxStep > 1) {
             setTaxStep(taxStep - 1)
         } else {
             setStep(step - 1)
-        }
-        if (taxStep === 1) {
             setTaxStep(undefined)
         }
     }

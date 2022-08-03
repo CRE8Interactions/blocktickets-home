@@ -56,7 +56,7 @@ export default function OrganizationInformation({ org, handleOrg }) {
                             />
                         </Col>
                         <Col className='ps-0'>
-                            <Form.Select aria-label="State" value={org.state} onChange={(e) => handleOrg(e)} required name="state">
+                            <Form.Select aria-label="State" value={org.state} onChange={handleOrg} name="state">
                                 {stateOpt.map((option, index) => (
                                     <option key={index} value={option.value}>{option.label}</option>
                                 ))}
