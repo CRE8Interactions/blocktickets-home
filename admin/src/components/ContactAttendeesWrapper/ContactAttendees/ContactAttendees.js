@@ -7,7 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 import Table from 'react-bootstrap/Table';
 
 import { MessageRow } from './MessageRow'
-import { NoDataContainer } from '../../NoDataContainer';
+import { WarningContainer } from '../../WarningContainer';
 import { DeleteModal } from './DeleteModal';
 
 export default function ContactAttendees() {
@@ -69,9 +69,9 @@ export default function ContactAttendees() {
                     </Table>
                 </div>
             ) : (
-                <NoDataContainer style="sm">
+                <WarningContainer style="sm">
                     <p>Nothing has been {key}, click Contact attendees to schedule or send a text / email.</p>
-                </NoDataContainer>
+                </WarningContainer>
             )}
 
             <DeleteModal show={show} handleClose={handleClose} />

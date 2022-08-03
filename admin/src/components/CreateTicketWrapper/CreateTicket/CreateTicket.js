@@ -64,61 +64,76 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                 </Form.Group>
 
                 {isPaid && (
-                    <Form.Group className="form-group">
-                        <Form.Label htmlFor="price">Price per ticket</Form.Label>
-                        <InputGroup>
-                            <InputGroup.Text id="price-val">$</InputGroup.Text>
-                            <Form.Control
-                                placeholder="Price per ticket"
-                                id="price"
-                                name="price"
-                                aria-describedby="price-val"
-                                value={ticket.price}
-                                onChange={handleChange}
-                                required
-                            />
-                        </InputGroup>
-                    </Form.Group>
-                )}
-                <Stack direction="horizontal" className='my-4'>
-                    <Button variant='outline-light' size="sm" className="btn--info ms-auto" onClick={handleShow}>
-                        View ticket breakdown
-                    </Button>
-                </Stack>
-                {isPaid && (
-                    <fieldset className="form-group">
-                        <legend>Resale price range</legend>
-                        <Row>
-                            <Col>
-                                <Form.Label htmlFor="min">Minimum</Form.Label>
-                                <InputGroup>
-                                    <InputGroup.Text id="min-val">
-                                        $
-                                    </InputGroup.Text>
-                                    <Form.Control placeholder="Minimum Value" id="min" name="minResalePrice"
-                                        aria-describedby="min-val"
-                                        value={ticket.minResalePrice}
-                                        onChange={handleChange}
-                                        required />
-                                </InputGroup>
-                            </Col>
-                            <Col>
-                                <Form.Label htmlFor="max">Maximum</Form.Label>
-                                <InputGroup>
-                                    <InputGroup.Text id="max-val">$</InputGroup.Text>
-                                    <Form.Control
-                                        placeholder="Maximum Value"
-                                        id="max"
-                                        name="maxResalePrice"
-                                        aria-describedby="max-val"
-                                        value={ticket.maxResalePrice}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </InputGroup>
-                            </Col>
-                        </Row>
-                    </fieldset>
+                    <>
+                        <Form.Group className="form-group">
+                            <Form.Label htmlFor="price">Price per ticket</Form.Label>
+                            <InputGroup>
+                                <InputGroup.Text id="price-val">$</InputGroup.Text>
+                                <Form.Control
+                                    placeholder="Price per ticket"
+                                    id="price"
+                                    name="price"
+                                    aria-describedby="price-val"
+                                    value={ticket.price}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </InputGroup>
+                        </Form.Group>
+                        <Form.Group className="form-group">
+                            <Form.Label htmlFor="fee">Facility fee</Form.Label>
+                            <InputGroup>
+                                <InputGroup.Text id="fee-val">$</InputGroup.Text>
+                                <Form.Control
+                                    placeholder="Facility fee"
+                                    id="fee"
+                                    name="fee"
+                                    aria-describedby="fee-val"
+                                    value={ticket.fee}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </InputGroup>
+                        </Form.Group>
+                        <Stack direction="horizontal" className='my-4'>
+                            <Button variant='outline-light' size="sm" className="btn--info ms-auto" onClick={handleShow}>
+                                View ticket breakdown
+                            </Button>
+                        </Stack>
+                        <fieldset className="form-group">
+                            <legend>Resale price range</legend>
+                            <Row>
+                                <Col>
+                                    <Form.Label htmlFor="min">Minimum</Form.Label>
+                                    <InputGroup>
+                                        <InputGroup.Text id="min-val">
+                                            $
+                                        </InputGroup.Text>
+                                        <Form.Control placeholder="Minimum Value" id="min" name="minResalePrice"
+                                            aria-describedby="min-val"
+                                            value={ticket.minResalePrice}
+                                            onChange={handleChange}
+                                            required />
+                                    </InputGroup>
+                                </Col>
+                                <Col>
+                                    <Form.Label htmlFor="max">Maximum</Form.Label>
+                                    <InputGroup>
+                                        <InputGroup.Text id="max-val">$</InputGroup.Text>
+                                        <Form.Control
+                                            placeholder="Maximum Value"
+                                            id="max"
+                                            name="maxResalePrice"
+                                            aria-describedby="max-val"
+                                            value={ticket.maxResalePrice}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                        </fieldset>
+                    </>
                 )}
                 <fieldset className="form-group">
                     <legend>When are tickets available</legend>

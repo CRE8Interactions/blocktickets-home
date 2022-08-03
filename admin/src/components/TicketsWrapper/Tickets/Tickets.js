@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
-import { NoDataContainer } from '../../NoDataContainer';
+import { WarningContainer } from '../../WarningContainer';
 import { Ticket } from './Ticket';
 import { DeleteModal } from './DeleteModal';
 
@@ -42,9 +42,9 @@ export default function Tickets({ tickets, handleAction }) {
 
                         </>
                     ) : (
-                        <NoDataContainer style="center">
+                        <WarningContainer style="center">
                             <p>You don’t have any tickets, please create at least one to continue on next steps</p>
-                        </NoDataContainer>
+                        </WarningContainer>
                     )
                     }
                 </>

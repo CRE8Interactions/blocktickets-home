@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
@@ -13,6 +13,8 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
     const navigate = useNavigate();
 
     const [date, setDate] = useState(new Date());
+
+    const [eventStarted, setEventStarted] = useState(false)
 
     const [choice, setChoice] = useState('1')
 
@@ -33,13 +35,27 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
         navigate('..')
     }
 
+    const checkEventStart = () => {
+        const currentDate = new Date();
+        setEventStarted(date.getTime() < currentDate.getTime())
+    }
+
+    useEffect(() => {
+        checkEventStart()
+    }, [])
+
+    // update state every second
+    setTimeout(() => {
+        checkEventStart()
+    }, 1000);
+
     return (
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
                 <h1>Publish event</h1>
             </header>
             <Card body className="card--sm">
-                <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} />
+                <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} eventStarted={eventId && eventStarted} />
             </Card>
             <Stack direction="horizontal" className="btn-group-flex ">
                 {!eventId && (<BackButton handleGoBack={handleGoBack} />)}

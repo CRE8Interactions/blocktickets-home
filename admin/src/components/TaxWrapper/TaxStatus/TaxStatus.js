@@ -126,7 +126,7 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                         value={taxDetails.sign_by}
                         onChange={handleTaxDetails}
                     />
-                    <small className='text-muted'>Typing your name acts as your signature</small>
+                    <Form.Text>Typing your name acts as your signature</Form.Text>
                     <h4 className='small mt-4 mb-3' id="sign-date">Sign date</h4>
                     <DateInputWrapper id="sign-date" setDate={setDate} selectedDate={date} startDate={new Date} size="sm" />
                 </>

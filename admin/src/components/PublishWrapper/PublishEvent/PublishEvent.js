@@ -8,10 +8,11 @@ import Image from 'react-bootstrap/Image';
 
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
+import { WarningContainer } from "../../WarningContainer";
 
 import image from '../../../assets/01.png';
 
-export default function PublishEvent({ setDate, date, handleChoice, choice }) {
+export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted }) {
 
     return (
         <>
@@ -19,7 +20,56 @@ export default function PublishEvent({ setDate, date, handleChoice, choice }) {
                 <Col lg={5} className="w-auto">
                     <Image src={image} rounded alt="Nic Fanciulli" width="291" height="291" className="event-image">
                     </Image>
-                    <Stack direction="horizontal" className="mt-4">
+                </Col>
+                <Col>
+                    <h1 className='fs-md mb-3'>Event Info</h1>
+                    <ul>
+                        <li className="list list-with-seperator">
+                            <Stack as="ul" gap={3}>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Presented by</span>
+                                    <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
+                                </Stack>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Event title</span>
+                                    <span className='fw-medium text-end flex-grow-1'>Nic Fanciulli</span>
+                                </Stack>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Date</span>
+                                    <span className='fw-medium text-end flex-grow-1'>May 2, 2022</span>
+                                </Stack>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Venue</span>
+                                    <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
+                                </Stack>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Location</span>
+                                    <span className='fw-medium text-end flex-grow-1'>1135 Botham Jean Blvd, Dallas, TX</span>
+                                </Stack>
+                            </Stack>
+                        </li>
+                        <li className="list list-with-seperator pt-2">
+                            <Stack as="ul" gap={3}>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Capacity</span>
+                                    <span className='fw-medium text-end flex-grow-1'>10.000</span>
+                                </Stack>
+                                <Stack as="li" direction='horizontal' className='split-row'>
+                                    <span className='text-muted'>Price range</span>
+                                    <span className='fw-medium text-end flex-grow-1'>$40.00-$80.00</span>
+                                </Stack>
+                            </Stack>
+                        </li>
+                    </ul>
+                </Col>
+            </Row>
+            <div className="pt-4">
+                {eventStarted ? (
+                    <WarningContainer style="sm">
+                        <p>The event has already started, changes are not possible.</p>
+                    </WarningContainer>
+                ) : (
+                    <Stack direction="horizontal" className='mb-3'>
                         <Form>
                             <div key={`inline-radio`} >
                                 <Form.Check
@@ -45,50 +95,9 @@ export default function PublishEvent({ setDate, date, handleChoice, choice }) {
                             </div>
                         </Form>
                     </Stack>
-                </Col>
-                <Col>
-                    <h1 className='fs-md mb-3'>Event Info</h1>
-                    <ul>
-                        <li className="list">
-                            <Stack as="ul" gap={3}>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Presented by</span>
-                                    <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
-                                </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Event title</span>
-                                    <span className='fw-medium text-end flex-grow-1'>Nic Fanciulli</span>
-                                </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Date</span>
-                                    <span className='fw-medium text-end flex-grow-1'>May 2, 2022</span>
-                                </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Venue</span>
-                                    <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
-                                </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Location</span>
-                                    <span className='fw-medium text-end flex-grow-1'>1135 Botham Jean Blvd, Dallas, TX</span>
-                                </Stack>
-                            </Stack>
-                        </li>
-                        <li className="list pt-2">
-                            <Stack as="ul" gap={3}>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Capacity</span>
-                                    <span className='fw-medium text-end flex-grow-1'>10.000</span>
-                                </Stack>
-                                <Stack as="li" direction='horizontal' className='split-row'>
-                                    <span className='text-muted'>Price range</span>
-                                    <span className='fw-medium text-end flex-grow-1'>$40.00-$80.00</span>
-                                </Stack>
-                            </Stack>
-                        </li>
-                    </ul>
-                </Col>
-            </Row>
-            {choice === '2' && (
+                )}
+            </div>
+            {!eventStarted && choice === '2' && (
                 <Row>
                     <Col>
                         <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={new Date()} />

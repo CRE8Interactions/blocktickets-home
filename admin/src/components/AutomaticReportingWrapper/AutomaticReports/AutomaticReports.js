@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { ListItem } from './ListItem'
-import { NoDataContainer } from '../../NoDataContainer';
+import { WarningContainer } from '../../WarningContainer';
 import { DeleteModal } from './DeleteModal';
 
 export default function AutomaticReports() {
@@ -47,9 +47,9 @@ export default function AutomaticReports() {
                     </div>
 
                 ) : (
-                    <NoDataContainer style="sm">
+                    <WarningContainer style="sm">
                         <p>Nothing is scheduled, click Add recipient to schedule an automatic report.</p>
-                    </NoDataContainer>
+                    </WarningContainer>
                 )}
             </Card>
             <DeleteModal show={show} handleClose={handleClose} />
