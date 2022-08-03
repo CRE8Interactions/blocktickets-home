@@ -102,10 +102,10 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
     }, []);
 
     const validInputs = () => {
-        if (bankAccount.routingNumber && !(bankAccount.routingNumber.length >= 9 && /^[0-9]+$/.test(bankAccount.routingNumber))) {
+        if (routingNumber && !(routingNumber.length >= 9 && /^[0-9]+$/.test(routingNumber))) {
             setRoutingNumError(true);
         }
-        if (bankAccount.accountNumber && !(bankAccount.accountNumber.length >= 9 && /^[0-9]+$/.test(bankAccount.accountNumber))) {
+        if (accountNumber && !(accountNumber.length >= 9 && /^[0-9]+$/.test(accountNumber))) {
             setAccountNumError(true);
         }
         if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber)) {
