@@ -96,11 +96,15 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
         </div>
     );
 
-    const MultiValueLabel = props => (
-        <div {...props} className="react-select__multi-value__label">
-            {props.data.chipLabel}
-        </div>
-    );
+    const MultiValueLabel = props => {
+        const { innerProps: { innerRef, ...innerProps } } = props;
+
+        return (
+            <div ref={innerRef} {...innerProps} className="react-select__multi-value__label">
+                {props.data.chipLabel}
+            </div>
+        )
+    };
 
     return (
         <>
@@ -154,7 +158,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                     <Col>
                         <Form.Group controlId='start-date'>
                             <Form.Label>Send test {type}</Form.Label>
-                            <Form.Control type="text" defaultValue={isEmail ? 'harrisoncogan@gmail.com' : '4168095557'} readOnly />
+                            <Form.Control type="text" defaultValue={isEmail ? 'harrisoncogan@gmail.com' : '4168095557'} disabled />
                         </Form.Group>
                     </Col>
                     <Col md={3} className="d-flex justify-content-center align-items-end">
@@ -188,7 +192,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                         </div>
                     </Stack>
                     {choice === '2' && (
-                        <Row>
+                        <Row className='mt-3'>
                             <Col>
                                 <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={new Date()} />
                             </Col>

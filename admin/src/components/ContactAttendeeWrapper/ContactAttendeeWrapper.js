@@ -45,7 +45,7 @@ export default function ContactAttendeeWrapper({ id }) {
 
     const handleClose = () => setShow(false)
 
-    const handleSend = () => {
+    const handleClick = () => {
         if (!sendTo) {
             setSendTo('all')
         }
@@ -89,7 +89,7 @@ export default function ContactAttendeeWrapper({ id }) {
                 </section>
                 <Stack direction="horizontal" className="btn-group-flex">
                     <Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>Cancel</Button>
-                    <Button size="lg" className={`btn-${choice == '1' ? 'send' : 'schedule'} `} onClick={handleSend}>{choice === '1' ? 'Send' : 'Schedule'}</Button>
+                    <Button size="lg" className={`btn-${choice == '1' ? 'send' : 'schedule'} `} onClick={handleClick}>{choice === '1' ? 'Send' : 'Schedule'}</Button>
                 </Stack>
             </section>
 

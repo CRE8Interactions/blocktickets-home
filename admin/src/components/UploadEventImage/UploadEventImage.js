@@ -46,10 +46,10 @@ export default function UploadEventImage({ setSelectedImage, selectedImage }) {
     return (
         <>
             <Stack direction="horizontal" gap={2}>
-                <InfoIcon size="lg" />
-                <Form.Text>
+                <InfoIcon style="lg" />
+                <small className='fw-medium'>
                     Use a high quality image in 1:1 ratio (eg. 1080 x 1080px).
-                </Form.Text>
+                </small>
             </Stack>
             <div className="mt-3">
                 {!selectedImage ? (

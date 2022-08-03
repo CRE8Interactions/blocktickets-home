@@ -34,6 +34,7 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
         description: '',
         quantity: '',
         price: '',
+        fee: '',
         minResalePrice: '',
         maxResalePrice: '',
         minQuantity: '',
