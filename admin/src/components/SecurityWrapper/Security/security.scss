@@ -1,0 +1,11 @@
+@use '../../../scss/abstracts' as *;
+
+#security {
+	legend {
+		margin-bottom: rem(26);
+	}
+
+	.update-btn {
+		min-width: 187px;
+	}
+}

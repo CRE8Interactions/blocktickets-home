@@ -12,14 +12,16 @@ import { PasswordInput } from '../../PasswordInput';
 import { Error } from '../../Error';
 import { Success } from '../../Success';
 
+import './security.scss';
+
 export default function Security({ info, handleInfo, handleUpdate, handleInput, error, success }) {
 
     return (
-        <section>
-            <header className='section-header'>
+        <div id="security">
+            <div className='section-header'>
                 <h1 className='normal'>Personal details</h1>
-                <h2 className='subtitle'>This information is not visible to the public.</h2>
-            </header>
+                <h2 className='small fw-normal text-muted'>This information is not visible to the public.</h2>
+            </div>
             <Form className='form-group'>
                 <Row>
                     <Col>
@@ -49,7 +51,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                         </Form.Group>
                     </Col>
                 </Row>
-                <Button variant="outline-light" size="lg" className="mt-4" disabled={info.firstName === '' || info.lastName === ''} onClick={() => handleUpdate('name')}>Update name</Button>
+                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.firstName === '' || info.lastName === ''} onClick={() => handleUpdate('name')}>Update name</Button>
                 {success.includes('name') && (
                     <Success field='name' />
                 )}
@@ -96,7 +98,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                 {error?.field === 'new email' && (
                     <Error field={error.field} type={error.type} />
                 )}
-                <Button variant="outline-light" size="lg" className="mt-4" disabled={info.curEmail === '' || info.email === ''} onClick={() => handleUpdate('email')}>Update email</Button>
+                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.curEmail === '' || info.email === ''} onClick={() => handleUpdate('email')}>Update email</Button>
                 {success.includes('email') && (
                     <Success field='email' />
                 )}
@@ -148,11 +150,11 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                 {error?.field === 'new password' && (
                     <Error field={error.field} type={error.type} />
                 )}
-                <Button variant="outline-light" size="lg" className="mt-4" disabled={info.curPassword === '' || info.password === ''} onClick={() => handleUpdate('password')}>Update password</Button>
+                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.curPassword === '' || info.password === ''} onClick={() => handleUpdate('password')}>Update password</Button>
             </Form>
             {success.includes('password') && (
                 <Success field='password' />
             )}
-        </section>
+        </div>
     );
 }
