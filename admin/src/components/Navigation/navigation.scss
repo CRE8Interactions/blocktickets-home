@@ -133,10 +133,12 @@
 
 	.dropdown-menu {
 		min-width: 223px;
+		padding: rem(16);
 
 		li {
 			.dropdown-item {
 				@extend %icon-text-box;
+				padding: rem(12);
 			}
 			&:first-of-type {
 				.dropdown-item {
@@ -164,7 +166,8 @@
 		}
 
 		.name {
-			padding: $dropdown-item-padding-y $dropdown-padding-x;
+			margin-top: auto;
+			padding: rem(30) $dropdown-padding-x $dropdown-item-padding-y;
 		}
 	}
 }

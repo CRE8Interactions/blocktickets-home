@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import { MoreIcon } from '../MoreIcon';
@@ -13,7 +14,7 @@ export default function EditDeleteDropdown({ handleShow, link, onClick }) {
                 <MoreIcon />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-                <ul>
+                <Stack as="ul" gap={2}>
                     {link && (
                         <li>
                             <LinkContainer to={link}>
@@ -29,7 +30,7 @@ export default function EditDeleteDropdown({ handleShow, link, onClick }) {
                     <li>
                         <Dropdown.Item as="button" className="btn-delete" onClick={handleShow}>Delete</Dropdown.Item>
                     </li>
-                </ul>
+                </Stack>
             </Dropdown.Menu>
         </Dropdown>
     );
