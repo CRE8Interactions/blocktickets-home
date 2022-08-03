@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -11,11 +12,12 @@ import { BackButton } from '../BackButton';
 
 export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handleNext }) {
 
+    const navigate = useNavigate();
+
     const [
         key,
         setKey
     ] = useState('paid');
-
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -51,7 +53,10 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
         }
     }
 
-    const handleSave = () => { }
+    const handleSave = () => {
+        // save state
+        navigate('..')
+    }
 
     return (
         <section className='wrapper'>

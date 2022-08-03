@@ -28,7 +28,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
             <Form>
                 <Form.Group className="form-group" controlId="ticketType">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" name="name" placeholder="Type of ticket" value={ticket.name} onChange={(e) => handleChange(e)} required />
+                    <Form.Control type="text" name="name" placeholder="Type of ticket" value={ticket.name} onChange={handleChange} required />
                 </Form.Group>
 
                 <Form.Group className="form-group" controlId="description">
@@ -45,7 +45,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                     <Form.Control
                         as="textarea" rows={3}
                         name="description"
-                        value={ticket.description} onChange={(e) => handleChange(e)}
+                        value={ticket.description} onChange={handleChange}
                         required
                     />
                 </Form.Group>
@@ -58,7 +58,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                         pattern="[0-9]*"
                         placeholder="Number of tickets available"
                         value={ticket.quantity}
-                        onChange={(e) => handleChange(e)}
+                        onChange={handleChange}
                         required
                     />
                 </Form.Group>
@@ -74,7 +74,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                 name="price"
                                 aria-describedby="price-val"
                                 value={ticket.price}
-                                onChange={(e) => handleChange(e)}
+                                onChange={handleChange}
                                 required
                             />
                         </InputGroup>
@@ -98,7 +98,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                     <Form.Control placeholder="Minimum Value" id="min" name="minResalePrice"
                                         aria-describedby="min-val"
                                         value={ticket.minResalePrice}
-                                        onChange={(e) => handleChange(e)}
+                                        onChange={handleChange}
                                         required />
                                 </InputGroup>
                             </Col>
@@ -112,7 +112,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                         name="maxResalePrice"
                                         aria-describedby="max-val"
                                         value={ticket.maxResalePrice}
-                                        onChange={(e) => handleChange(e)}
+                                        onChange={handleChange}
                                         required
                                     />
                                 </InputGroup>
@@ -169,7 +169,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                     pattern="[0-9]*"
                                     value={ticket.maxQuantity}
                                     name="maxQuantity"
-                                    onChange={(e) => handleChange(e)}
+                                    onChange={handleChange}
                                     required />
                             </Form.Group>
                         </Col>
