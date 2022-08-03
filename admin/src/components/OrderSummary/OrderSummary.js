@@ -56,14 +56,16 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                 <MoreIcon />
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <ul>
-                                    {!refund && (<li>
-                                        <LinkContainer to={`refund?order=${order.orderId}`}>
-                                            <Dropdown.Item className="btn-refund">
-                                                Refund order
-                                            </Dropdown.Item>
-                                        </LinkContainer>
-                                    </li>)}
+                                <Stack as="ul" gap={2}>
+                                    {!refund && (
+                                        <li>
+                                            <LinkContainer to={`refund?order=${order.orderId}`}>
+                                                <Dropdown.Item className="btn-refund">
+                                                    Refund order
+                                                </Dropdown.Item>
+                                            </LinkContainer>
+                                        </li>
+                                    )}
                                     <li>
                                         <LinkContainer to={`attendees-report?order=${order.orderId}`}>
                                             <Dropdown.Item className="btn-view">
@@ -71,7 +73,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                             </Dropdown.Item>
                                         </LinkContainer>
                                     </li>
-                                </ul>
+                                </Stack>
                             </Dropdown.Menu>
                         </Dropdown>
                     )}

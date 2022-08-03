@@ -42,7 +42,7 @@ export default function DashboardMenu({ open, setOpen }) {
                     </LinkContainer>
                 </Nav.Item>
             </Stack>
-            <Stack as="ul" gap={3} className="main-navigation">
+            <Stack as="ul" gap={2} className="main-navigation">
                 <Nav.Item as="li">
                     <LinkContainer to="">
                         <Nav.Link>

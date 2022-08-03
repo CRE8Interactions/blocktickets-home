@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 export default function SettingsMenu() {
 
     return (
-        <Stack as="ul" gap={3} id="settings-menu" className='mt-5 mb-3'>
+        <Stack as="ul" gap={2} id="settings-menu" className='mt-5 mb-3'>
             <Nav.Item as="li">
                 <LinkContainer to="organization-information">
                     <Nav.Link>

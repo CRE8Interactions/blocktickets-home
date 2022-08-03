@@ -139,6 +139,7 @@ button,
 .btn-copy {
 	@extend .icon-button !optional;
 	justify-content: flex-start;
+	gap: $gap-sm;
 }
 
 .btn-edit {

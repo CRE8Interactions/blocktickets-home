@@ -49,6 +49,9 @@
 
 	.submenu {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: $gap-xs;
 		.nav-item {
 			padding-left: rem(38);
 		}
