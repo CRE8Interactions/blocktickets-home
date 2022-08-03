@@ -3,11 +3,14 @@ import React from 'react'
 import { stateOpt } from '../../../utilities/helpers'
 
 import Form from 'react-bootstrap/Form'
+import Stack from 'react-bootstrap/Stack'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Alert from 'react-bootstrap/Alert'
 
 import { DateInputWrapper } from '../../DateInputWrapper'
 
-export default function TaxStatus({ step, taxDetails, date, setDate, handleTaxDetails }) {
+export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate, handleTaxDetails }) {
 
     return (
         <>
@@ -33,54 +36,57 @@ export default function TaxStatus({ step, taxDetails, date, setDate, handleTaxDe
                     <Form.Group className='form-group' controlId="code">
                         <Form.Label>Description code</Form.Label>
                         <Form.Select
-                            defaultValue="Exempt payee code (if any)"
-                            disabled
-                        >
-                            <option value="payee">Exempt payee code (if any)</option>
+                            value={taxDetails.taxCode} onChange={handleTaxDetails} name="taxCode">
+                            <optgroup className="text-muted" label="Exempt payee code (if any)">
+                                {taxCodeOpt.map((option, index) => (
+                                    <option key={index} value={option.value}>{option.label}</option>
+                                ))}
+                            </optgroup>
                         </Form.Select>
                     </Form.Group>
-                    <Form.Group className='form-group' controlId="address">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="address"
-                            placeholder='Enter address'
-                            required
-                            value={taxDetails.address}
-                            onChange={handleTaxDetails}
-                        />
-                    </Form.Group>
-                    <Form.Group className='form-group' controlId="city">
-                        <Form.Label>City</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="city"
-                            placeholder='Enter city'
-                            required
-                            value={taxDetails.city}
-                            onChange={handleTaxDetails}
-                        />
-                    </Form.Group>
-                    <Form.Group className='form-group' controlId="state">
-                        <Form.Label>State</Form.Label>
-                        <Form.Select
-                            value={taxDetails.state} onChange={(e) => handleTaxDetails(e)} required name="state">
-                            {stateOpt.map((option, index) => (
-                                <option key={index} value={option.value}>{option.label}</option>
-                            ))}
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group className='form-group' controlId="zip_code">
-                        <Form.Label>Zip Code</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="zip_code"
-                            placeholder='Enter zip code'
-                            required
-                            value={taxDetails.zip_code}
-                            onChange={handleTaxDetails}
-                        />
-                    </Form.Group>
+                    <fieldset className='form-group'>
+                        <legend className="form-label">Address</legend>
+                        <Stack gap={2}>
+                            <Form.Control
+                                type="text"
+                                name="address"
+                                aria-label="Address"
+                                required
+                                placeholder="Address"
+                                value={taxDetails.address}
+                                onChange={handleTaxDetails}
+                            />
+                            <Form.Control
+                                type="text"
+                                name="city"
+                                aria-label="City"
+                                required
+                                placeholder="City"
+                                value={taxDetails.city}
+                                onChange={handleTaxDetails}
+                            />
+                            <Row>
+                                <Col md={4}>
+                                    <Form.Control
+                                        type="text"
+                                        name="zip_code"
+                                        aria-label="Zip Code"
+                                        required
+                                        placeholder="Zip code"
+                                        value={taxDetails.zip_code}
+                                        onChange={handleTaxDetails}
+                                    />
+                                </Col>
+                                <Col className='ps-0'>
+                                    <Form.Select aria-label="State" value={taxDetails.state} onChange={handleTaxDetails} name="state">
+                                        {stateOpt.map((option, index) => (
+                                            <option key={index} value={option.value}>{option.label}</option>
+                                        ))}
+                                    </Form.Select>
+                                </Col>
+                            </Row>
+                        </Stack>
+                    </fieldset>
                 </Form>
             )}
             {step === 2 && (

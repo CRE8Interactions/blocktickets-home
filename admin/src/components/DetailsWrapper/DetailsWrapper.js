@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -9,6 +10,8 @@ import { TextEditor } from '../TextEditor';
 import { BackButton } from '../BackButton';
 
 export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
+
+    const navigate = useNavigate();
 
     const [selectedImage, setSelectedImage] = useState()
 
@@ -27,7 +30,10 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
         }
     }
 
-    const handleSave = () => { }
+    const handleSave = () => {
+        // save state
+        navigate('..')
+    }
 
     return (
         <section className='wrapper'>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -8,6 +9,8 @@ import { PublishEvent } from './PublishEvent';
 import { BackButton } from '../BackButton';
 
 export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
+
+    const navigate = useNavigate();
 
     const [date, setDate] = useState(new Date());
 
@@ -26,7 +29,9 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
         }
     }
 
-    const handleSave = () => { }
+    const handleSave = () => {
+        navigate('..')
+    }
 
     return (
         <section className='wrapper'>
@@ -38,7 +43,7 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
             </Card>
             <Stack direction="horizontal" className="btn-group-flex ">
                 {!eventId && (<BackButton handleGoBack={handleGoBack} />)}
-                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>{eventId ? 'Save changes' : 'Publish'}</Button>
+                <Button className={`${!eventId ? `btn-${choice == '1' ? 'send' : 'schedule'}` : ''} `} size="lg" onClick={handleClick}>{eventId ? 'Save changes' : `${choice == '1' ? 'Publish' : 'Schedule'}`}</Button>
             </Stack>
         </section>
     );

@@ -21,7 +21,7 @@ export default function Location({ event, handleChange, timezoneOpt, langOpt }) 
 
             <Form.Group className="form-group" controlId="timezone">
                 <Form.Label>Timezone</Form.Label>
-                <Form.Select name="timezone" value={event.timezone} onChange={(e) => handleChange(e)} required>
+                <Form.Select name="timezone" value={event.timezone} onChange={handleChange}>
                     {timezoneOpt.map((option, index) => (
                         <option key={index} value={option.value}>{option.label}</option>
                     ))}
@@ -30,7 +30,7 @@ export default function Location({ event, handleChange, timezoneOpt, langOpt }) 
 
             <Form.Group className="form-group" controlId="language">
                 <Form.Label>Event page language</Form.Label>
-                <Form.Select value={event.language} name="language" onChange={(e) => handleChange(e)} required>
+                <Form.Select value={event.language} name="language" onChange={handleChange}>
                     {langOpt.map((option, index) => (
                         <option key={index} value={option.value}>{option.label}</option>
                     ))}

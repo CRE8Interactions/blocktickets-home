@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -9,6 +10,8 @@ import { DateTime } from './DateTime';
 import { Location } from './Location';
 
 export default function BasicInfoWrapper({ eventId, handleNext }) {
+
+    const navigate = useNavigate();
 
     const eventTypeOpt = [
         {
@@ -87,7 +90,9 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
         }
     }
 
-    const handleSave = () => { }
+    const handleSave = () => {
+        navigate('..')
+    }
 
     return (
         <section className='wrapper'>
