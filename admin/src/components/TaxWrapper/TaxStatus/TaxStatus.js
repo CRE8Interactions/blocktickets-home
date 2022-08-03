@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert'
 
 import { DateInputWrapper } from '../../DateInputWrapper'
 
-export default function TaxStatus({ step, taxDetails, date, setDate, handleTaxDetails }) {
+export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate, handleTaxDetails }) {
 
     return (
         <>
@@ -33,10 +33,12 @@ export default function TaxStatus({ step, taxDetails, date, setDate, handleTaxDe
                     <Form.Group className='form-group' controlId="code">
                         <Form.Label>Description code</Form.Label>
                         <Form.Select
-                            defaultValue="Exempt payee code (if any)"
-                            disabled
-                        >
-                            <option value="payee">Exempt payee code (if any)</option>
+                            value={taxDetails.taxCode} onChange={handleTaxDetails} name="taxCode">
+                            <optgroup className="text-muted" label="Exempt payee code (if any)">
+                                {taxCodeOpt.map((option, index) => (
+                                    <option key={index} value={option.value}>{option.label}</option>
+                                ))}
+                            </optgroup>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className='form-group' controlId="address">
@@ -64,7 +66,7 @@ export default function TaxStatus({ step, taxDetails, date, setDate, handleTaxDe
                     <Form.Group className='form-group' controlId="state">
                         <Form.Label>State</Form.Label>
                         <Form.Select
-                            value={taxDetails.state} onChange={(e) => handleTaxDetails(e)} required name="state">
+                            value={taxDetails.state} onChange={handleTaxDetails} name="state">
                             {stateOpt.map((option, index) => (
                                 <option key={index} value={option.value}>{option.label}</option>
                             ))}
