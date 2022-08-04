@@ -3,7 +3,7 @@
 
 @mixin hover-effect() {
 	background-color: $clr-lightGray;
-	border-radius: $border-radius-sm;
+	border-radius: $border-radius;
 }
 
 $nav-link-padding-y: rem(12);
