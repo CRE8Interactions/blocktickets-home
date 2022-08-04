@@ -1,0 +1,24 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/theme/colors' as *;
+
+#tax-card {
+	.badge-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		@include breakpoint-max(md) {
+			order: -1;
+
+			.badge {
+				width: 100%;
+			}
+		}
+	}
+	.block {
+		&::before {
+			content: '%';
+			color: $muted;
+			transform: scale(3);
+		}
+	}
+}

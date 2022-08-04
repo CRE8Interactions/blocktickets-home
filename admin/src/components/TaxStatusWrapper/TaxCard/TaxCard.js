@@ -6,13 +6,15 @@ import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 
+import './taxCard.scss';
+
 export default function TaxCard({ show }) {
 
     return (
         <>
-            <Row>
-                <Col>
-                    <div></div>
+            <Row className="d-column d-md-row" id="tax-card">
+                <Col md={3} className="order-first">
+                    <div className='block bg-info'></div>
                 </Col>
                 <Col>
                     <Stack gap={3}>
@@ -27,13 +29,9 @@ export default function TaxCard({ show }) {
                         </Stack>
                     </Stack>
                 </Col>
-                <Col>
-                    <Stack className='h-100 justify-content-center align-items-center'>
-                        <Badge bg="dark" className='ms-auto'>W-9</Badge>
-                    </Stack>
-
+                <Col className='badge-container'>
+                    <Badge bg="info" className='rounded-1 py-3 px-5 fw-semi-bold text-dark ms-auto'>W-9</Badge>
                 </Col>
-
             </Row>
         </>
     );

@@ -1,5 +1,6 @@
 @use '../abstracts' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 @use './spacing' as *;
 
 $pad-sm: rem(32);
@@ -95,6 +96,20 @@ $navbar-height: rem(82);
 	&::before,
 	&::after {
 		line-height: 0;
+	}
+}
+
+.block {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 145px;
+	border-radius: $border-radius-sm;
+
+	@include breakpoint-min(md) {
+		flex-basis: 145px;
 	}
 }
 

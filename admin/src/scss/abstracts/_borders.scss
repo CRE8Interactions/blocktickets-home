@@ -3,7 +3,7 @@
 $br-primary: 12px; // inputs
 $br-secondary: 90px; // buttons
 $br-md: 10px;
-$br-sm: 6px;
+$br-sm: 8px;
 $br-xs: 4px;
 $border-width: 1px;
 $border-color: $clr-neutral-6;
@@ -33,6 +33,7 @@ $border-color: $clr-neutral-6;
 .event-image-lg {
 	border-radius: $br-primary;
 }
+
 .event-image {
 	@extend %rounded;
 }
