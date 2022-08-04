@@ -136,7 +136,6 @@ export default function Roles({ roles }) {
 
     const handleCheck = e => {
         const { id, checked } = e.target;
-        console.log(e.target);
         setIsCheck([...isCheck, id]);
         if (!checked) {
             setIsCheck(isCheck.filter(item => item !== id));
