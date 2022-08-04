@@ -9,7 +9,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
-export default function UserInfo({ frequencyOpt, timezoneOpt, formatOpt, startDate, setStartDate, endDate, setEndDate, hasError, user, handleChange, }) {
+export default function UserInfo({ frequencyOpt, timezoneOpt, formatOpt, startDate, setStartDate, endDate, setEndDate, hasError, user, handleChange }) {
 
     return (
         <Form>
@@ -68,7 +68,7 @@ export default function UserInfo({ frequencyOpt, timezoneOpt, formatOpt, startDa
             <Row className='form-group'>
                 <Col>
                     <Form.Group controlId='start-time'>
-                        <Form.Label>Start time</Form.Label>
+                        <Form.Label>Send time</Form.Label>
                         <TimeInputWrapper
                             id="event-start-time"
                             setDate={setStartDate} selectedDate={startDate}
