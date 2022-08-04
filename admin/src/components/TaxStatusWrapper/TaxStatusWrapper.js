@@ -40,7 +40,7 @@ export default function TaxStatusWrapper() {
                     <div className="section-heading section-heading--secondary">
                         <h1>Tax status</h1>
                     </div>
-                    <p className='section-header-desc'>Fill out a W-9 form in order to receive your funds.</p>
+                    <p className='section-header-desc'>Fill out a W-9 form in order to receive your funds</p>
                 </header>
                 <Card body className='card--sm'>
                     {!showForm ? (

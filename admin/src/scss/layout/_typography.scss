@@ -188,15 +188,20 @@ h4,
 	font-weight: $table-th-font-weight;
 
 	.row + .row {
-		border-top: border(1px);
+		border-top: border();
 	}
 
 	&-header {
-		border-bottom: border(1px);
+		border-bottom: border();
+		display: flex;
 	}
 
 	.btn-more-col {
 		text-align: end;
+	}
+
+	.flex-row {
+		display: flex;
 	}
 
 	&-col {
@@ -206,4 +211,19 @@ h4,
 			color: $text-muted;
 		}
 	}
+
+	&.five-col {
+		.list-table-col {
+			width: calc(100% / 5);
+		}
+	}
+}
+
+#bank-card,
+#tax-card {
+	h1 {
+		font-size: rem(20);
+		font-weight: $fw-bold;
+	}
+	line-height: 24px;
 }

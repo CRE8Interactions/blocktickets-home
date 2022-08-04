@@ -24,14 +24,14 @@ export default function BankCard({ handleShow }) {
                     <div className='block bg-info'></div>
                 </Col>
                 <Col>
-                    <Stack gap={3}>
-                        <h1 className='normal'>Bank information</h1>
+                    <Stack className="info">
+                        <h1>Bank information</h1>
                         <ul className='text-muted small'>
                             <li>Comerica Bank</li>
                             <li>Checking TPG USA XXXXXX674232</li>
                             <li>US. Dollars, United States</li>
                         </ul>
-                        <Stack direction='horizontal' gap={3}>
+                        <Stack direction='horizontal' gap={3} className="mt-3">
                             <Button variant="link" onClick={handleShow}>Edit</Button>
                             <Button variant="link" className='text-danger' onClick={handleShowDelete}>Delete</Button>
                         </Stack>

@@ -75,7 +75,7 @@ export default function SecurityWrapper() {
                 <div className="section-heading section-heading--secondary">
                     <h1>Security</h1>
                 </div>
-                <p className='section-header-desc'>To update your name, email address or password associated with this account, please fill in the following fields.         </p>
+                <p className='section-header-desc'>To update your name, email address or password associated with this account, please fill in the following fields</p>
             </header>
             <Card body className='card--sm'>
                 <Security info={info} handleInfo={handleInfo} handleUpdate={handleUpdate} handleInput={handleInput} error={error} success={success} />

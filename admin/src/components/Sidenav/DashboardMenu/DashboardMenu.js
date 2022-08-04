@@ -20,7 +20,7 @@ export default function DashboardMenu({ open, setOpen }) {
                 </div>
                 <Button variant='outline-light' className='mt-4'>Preview your event</Button>
             </Stack>
-            <Stack as="ul" className='mb-3'>
+            <Stack as="ul" gap={1} className='mb-3'>
                 <Nav.Item as="li">
                     <LinkContainer to="basic-info">
                         <Nav.Link>Basic Info</Nav.Link>
