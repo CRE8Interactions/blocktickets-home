@@ -107,4 +107,10 @@ section + section {
 	@include breakpoint-min(md) {
 		gap: $gap-sm;
 	}
+
+	.info {
+		h1 {
+			margin-bottom: $text-spacer-xs;
+		}
+	}
 }

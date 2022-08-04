@@ -168,7 +168,7 @@ button,
 
 .btn-copy {
 	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'copy'));
+		content: url($data-svg-prefix + map-get($icons, 'link'));
 	}
 }
 

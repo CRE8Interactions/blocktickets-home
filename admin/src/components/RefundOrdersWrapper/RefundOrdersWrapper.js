@@ -281,7 +281,7 @@ export default function RefundOrdersWrapper() {
                             <h1>Multiple refunds</h1>
                         </div>
                         <p className='section-header-desc'>Issue refunds for orders sold through Blocktickets Payment Processing. Blocktickets will refund all fees.
-                            You and your attendees will each receive an email for each completed refund.</p>
+                            You and your attendees will each receive an email for each completed refund</p>
                     </div>
                     <div className="actions-group-flex" id="refund-orders-header">
                         <Card body className="card--xs">

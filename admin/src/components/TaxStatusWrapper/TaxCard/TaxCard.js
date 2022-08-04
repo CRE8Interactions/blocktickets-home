@@ -17,14 +17,14 @@ export default function TaxCard({ show }) {
                     <div className='block bg-info'></div>
                 </Col>
                 <Col>
-                    <Stack gap={3}>
-                        <h1 className='normal'>Tax information</h1>
+                    <Stack className='info'>
+                        <h1>Tax information</h1>
                         <ul className='text-muted small'>
                             <li>Party Group LLC.</li>
                             <li>Taxpayer ID: XX-XXXBOB87</li>
                             <li>Updated on Fec 28, 2022</li>
                         </ul>
-                        <Stack direction='horizontal' gap={3}>
+                        <Stack direction='horizontal' gap={3} className="mt-3">
                             <Button variant="link" onClick={() => show(true)}>Edit</Button>
                         </Stack>
                     </Stack>
