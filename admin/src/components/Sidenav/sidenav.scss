@@ -32,7 +32,7 @@
 		}
 
 		.main-navigation {
-			padding: rem(38) 0px;
+			padding: rem(28) 0px;
 			border-top: border();
 		}
 	}
@@ -72,6 +72,7 @@
 		padding: $nav-link-padding-y $nav-link-padding-x;
 		font-weight: $fw-medium;
 		color: $body-color;
+		line-height: 24px;
 
 		&:hover,
 		&.active {
