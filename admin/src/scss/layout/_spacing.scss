@@ -99,3 +99,12 @@ section + section {
 	border-radius: 8px;
 	background-color: $gray-300;
 }
+
+#bank-card,
+#tax-card {
+	gap: rem(24);
+
+	@include breakpoint-min(md) {
+		gap: $gap-sm;
+	}
+}

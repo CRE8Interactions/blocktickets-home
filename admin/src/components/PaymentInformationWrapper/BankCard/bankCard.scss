@@ -1,0 +1,15 @@
+@use '../../../scss/layout/images' as *;
+
+#bank-card {
+	.block {
+		&::before {
+			@extend %img-background;
+			content: '';
+			background-image: url('../../../assets/icons/bank.svg');
+			display: block;
+			transform: scale(2);
+			width: 44px;
+			height: 44px;
+		}
+	}
+}

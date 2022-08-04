@@ -122,7 +122,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                 <Form.Group className="form-group" controlId='to'>
                     <Form.Label>To</Form.Label>
                     <Stack gap={2}>
-                        <Form.Select onChange={(e) => handleToOption(e)} value={toOption}>
+                        <Form.Select onChange={handleToOption} value={toOption}>
                             {toOpt.map((option, index) => (
                                 <option key={index} value={option.value}>{option.label}</option>
                             ))}
@@ -177,7 +177,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                                 id='1'
                                 defaultChecked={choice == '1'}
                                 className='fw-medium'
-                                onChange={(e) => handleChoice(e)}
+                                onChange={handleChoice}
                             />
                             <Form.Check
                                 inline
@@ -187,7 +187,7 @@ export default function ContactForm({ type, id, handleSendTo, handleMessage, mes
                                 id='2'
                                 defaultChecked={choice == '2'}
                                 className='fw-medium'
-                                onChange={(e) => handleChoice(e)}
+                                onChange={handleChoice}
                             />
                         </div>
                     </Stack>

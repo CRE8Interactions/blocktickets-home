@@ -34,7 +34,7 @@ export default function PaymentInformationWrapper() {
                     </div>
                     <p className='section-header-desc'>The money you make from your events will be issued to the bank account associated with this account</p>
                 </header>
-                <Card body>
+                <Card body className='card--sm'>
                     {bankAccount ? (
                         <BankCard handleShow={handleShow} />
                     ) : (

@@ -17,7 +17,7 @@ export default function BankAccountDetailsModal({ show, handleClose, getBankAcco
             </Modal.Header>
             <Modal.Body>
                 <BankAccountDetailsWrapper getBankAccount={getBankAccount} isValid={isValid} setIsValid={setIsValid} />
-                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleClose}>{id ? 'Update' : 'Link'} bank account</Button></Stack>
+                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleClose}>{id ? 'Update' : 'Save'} bank account</Button></Stack>
             </Modal.Body>
         </Modal>
 

@@ -44,7 +44,7 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                 </Row>
             </fieldset>
             <div className="form-group">
-                <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id={`check-display-checkbox`}>
+                <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id="check-display-checkbox">
                     <Form.Check.Input
                         name="displayEndTime"
                         type='checkbox'
