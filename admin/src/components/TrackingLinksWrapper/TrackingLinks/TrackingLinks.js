@@ -73,7 +73,7 @@ export default function TrackingLinks() {
 
                 ) : (
                     <WarningContainer style="sm">
-                        <p>There are no events to track, create a   new event to track its link.</p>
+                        <p>There are no events to track, create a new event to track its link.</p>
                     </WarningContainer>
                 )}
             </Card>

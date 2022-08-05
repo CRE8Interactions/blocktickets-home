@@ -34,6 +34,7 @@ export default function TrackingLinkForm({ link, handleChange, isValid, validInp
                         </InputGroup.Text>
                         <Form.Control
                             id="url"
+                            className='text-truncate'
                             aria-describedby="url-val"
                             defaultValue={link.url}
                             readOnly
