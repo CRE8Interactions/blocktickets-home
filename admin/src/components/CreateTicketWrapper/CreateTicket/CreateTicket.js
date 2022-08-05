@@ -55,10 +55,10 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                     <Form.Control
                         type="text"
                         name="quantity"
-                        pattern="[0-9]*"
+                        pattern="^[0-9]*$"
                         placeholder="Number of tickets available"
                         value={ticket.quantity}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.quantity)}
                         required
                     />
                 </Form.Group>
@@ -74,8 +74,9 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                     id="price"
                                     name="price"
                                     aria-describedby="price-val"
+                                    pattern="^[0-9]*$"
                                     value={ticket.price}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.price)}
                                     required
                                 />
                             </InputGroup>
@@ -89,8 +90,9 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                     id="fee"
                                     name="fee"
                                     aria-describedby="fee-val"
+                                    pattern="^[0-9.]*$"
                                     value={ticket.fee}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.fee)}
                                     required
                                 />
                             </InputGroup>
@@ -112,7 +114,8 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                         <Form.Control placeholder="Minimum Value" id="min" name="minResalePrice"
                                             aria-describedby="min-val"
                                             value={ticket.minResalePrice}
-                                            onChange={handleChange}
+                                            pattern="^[0-9.]*$"
+                                            onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.minResalePrice)}
                                             required />
                                     </InputGroup>
                                 </Col>
@@ -125,8 +128,9 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                                             id="max"
                                             name="maxResalePrice"
                                             aria-describedby="max-val"
+                                            pattern="^[0-9.]*$"
                                             value={ticket.maxResalePrice}
-                                            onChange={handleChange}
+                                            onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.maxResalePrice)}
                                             required
                                         />
                                     </InputGroup>
@@ -170,9 +174,9 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                             <Form.Group controlId="minQuantity">
                                 <Form.Label>Minimum quantity</Form.Label>
                                 <Form.Control placeholder="Minimum quantity"
-                                    pattern="[0-9]*"
+                                    pattern="^[0-9]*$"
                                     name="minQuantity"
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.minQuantity)}
                                     value={ticket.minQuantity}
                                     required />
                             </Form.Group>
@@ -181,10 +185,10 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                             <Form.Group controlId="maxQuantity">
                                 <Form.Label>Maximum quantity</Form.Label>
                                 <Form.Control placeholder="Maximum quantity"
-                                    pattern="[0-9]*"
+                                    pattern="^[0-9]*$"
                                     value={ticket.maxQuantity}
                                     name="maxQuantity"
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.maxQuantity)}
                                     required />
                             </Form.Group>
                         </Col>

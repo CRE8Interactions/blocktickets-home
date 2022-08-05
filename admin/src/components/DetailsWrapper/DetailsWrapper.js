@@ -32,7 +32,7 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
 
     const handleSave = () => {
         // save state
-        navigate('..')
+        navigate(-1)
     }
 
     return (
@@ -57,7 +57,7 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
                 {!eventId && (
                     <BackButton handleGoBack={handleGoBack} />
                 )}
-                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" disabled={!selectedImage || !description} onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

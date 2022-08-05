@@ -7,13 +7,13 @@ import Button from 'react-bootstrap/Button';
 
 import { InfoIcon } from '../../InfoIcon';
 
-export default function BasicInfo({ handleChange, event, eventTypeOpt }) {
+export default function BasicInfo({ handleChange, event }) {
 
     return (
         <Form>
             <Form.Group className="form-group" controlId="presentedBy">
-                <Form.Label>Presented By</Form.Label>
-                <Form.Control type="text" name="presentedBy" value={event.presentedBy} placeholder="Presented By" onChange={handleChange} required />
+                <Form.Label>Presented By <strong className='text-dark text-lowercase'>(optional)</strong></Form.Label>
+                <Form.Control type="text" name="presentedBy" value={event.presentedBy} placeholder="Presented By" onChange={handleChange} />
             </Form.Group>
             <Form.Group className="form-group" controlId="title">
                 <div className="form-label--flex">
@@ -27,14 +27,6 @@ export default function BasicInfo({ handleChange, event, eventTypeOpt }) {
                     </OverlayTrigger>
                 </div>
                 <Form.Control type="text" name="title" placeholder="Event title" value={event.title} onChange={handleChange} required />
-            </Form.Group>
-            <Form.Group className="form-group" controlId="eventType">
-                <Form.Label>Type of event</Form.Label>
-                <Form.Select value={event.eventType} onChange={handleChange} name="eventType">
-                    {eventTypeOpt.map((option, index) => (
-                        <option key={index} value={option.value}>{option.label}</option>
-                    ))}
-                </Form.Select>
             </Form.Group>
         </Form>
     );

@@ -13,18 +13,10 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
 
     const navigate = useNavigate();
 
-    const eventTypeOpt = [
+    const venueOpt = [
         {
-            label: 'Concert',
-            value: "concert"
-        },
-        {
-            label: 'Music',
-            value: "music"
-        },
-        {
-            label: 'Event',
-            value: "event"
+            label: 'Southside Music Hall - 1135 Botham Jean Blvd, Dallas, TX',
+            value: "southside music hall"
         }
     ]
 
@@ -43,21 +35,6 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
         }
     ]
 
-    const langOpt = [
-        {
-            label: 'English (US)',
-            value: "EN+US"
-        },
-        {
-            label: 'English (UK)',
-            value: "EN+UK"
-        },
-        {
-            label: 'French (France)',
-            value: "FR"
-        }
-    ]
-
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
@@ -71,9 +48,8 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
     const [event, setEvent] = useState({
         presentedBy: '',
         title: '',
-        eventType: eventTypeOpt[0].value,
+        venue: '',
         timezone: timezoneOpt[0].value,
-        language: langOpt[0].value,
         displayEndTime: true
     })
 
@@ -91,7 +67,7 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
     }
 
     const handleSave = () => {
-        navigate('..')
+        navigate(-1)
     }
 
     return (
@@ -101,7 +77,7 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
                     <h1>Basic info</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} handleClick={handleClick} event={event} eventTypeOpt={eventTypeOpt} />
+                    <BasicInfo handleChange={handleChange} handleClick={handleClick} event={event} />
                 </Card>
             </section>
             <section>
@@ -117,11 +93,11 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
                     <h1>Location</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} langOpt={langOpt} />
+                    <Location event={event} handleChange={handleChange} venueOpt={venueOpt} timezoneOpt={timezoneOpt} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" disabled={!event.title || !event.venue} onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

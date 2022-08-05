@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { TrackingLink } from './TrackingLink';
+import { TrackingLinkForm } from './TrackingLinkForm';
 
 export default function TrackingLinkWrapper({ id }) {
 
@@ -45,7 +45,7 @@ export default function TrackingLinkWrapper({ id }) {
                     <h1>{id ? 'Edit' : 'Create a new'} tracking link</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <TrackingLink link={link} handleChange={handleChange} isValid={isValid} validInputs={validInputs} />
+                    <TrackingLinkForm link={link} handleChange={handleChange} isValid={isValid} validInputs={validInputs} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
