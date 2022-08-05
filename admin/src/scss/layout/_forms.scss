@@ -40,10 +40,6 @@ select:-webkit-autofill:focus {
 	border-color: $danger;
 }
 
-.error {
-	color: $danger;
-}
-
 legend {
 	font-weight: $fw-semi-bold;
 }
@@ -148,6 +144,10 @@ textarea.form-control {
 		border-color: $input-focus-border-color;
 	}
 
+	.input-group {
+		border: none;
+	}
+
 	.form-control {
 		background-color: transparent;
 		border: none;
@@ -160,7 +160,7 @@ textarea.form-control {
 	}
 }
 
-// password field
+// password, tracking link url field
 .input-wrapper {
 	display: flex;
 	@include input-icon-box();
