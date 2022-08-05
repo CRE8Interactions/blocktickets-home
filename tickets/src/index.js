@@ -220,7 +220,7 @@ module.exports = {
 
           await client.messages
             .create({
-              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}on BlockTicket.xyz`,
+              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name} on BlockTicket.xyz`,
               messagingServiceSid: notificationsServiceSid,
               to: params.data.phoneNumberToUser,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
