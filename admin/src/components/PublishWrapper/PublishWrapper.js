@@ -32,7 +32,7 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
     }
 
     const handleSave = () => {
-        navigate('..')
+        navigate(-1)
     }
 
     const checkEventStart = () => {
