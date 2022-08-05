@@ -2,6 +2,7 @@
 @use './buttons' as *;
 @use './colors' as *;
 @use './borders' as *;
+@use '../layout/spacing' as *;
 
 $input-font-size: rem(14);
 $input-font-weight: $fw-medium;
@@ -43,3 +44,4 @@ $form-check-input-focus-box-shadow: none;
 $form-check-margin-bottom: rem(16);
 
 $form-text-font-weight: $fw-medium;
+$form-text-margin-top: rem(12);

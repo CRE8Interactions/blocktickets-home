@@ -18,6 +18,8 @@ export { RefundTicketWrapper } from './RefundTicketWrapper';
 export { RefundOrdersWrapper } from './RefundOrdersWrapper';
 export { AttendeesReportWrapper } from './AttendeesReportWrapper'
 export { AttendeesListWrapper } from './AttendeesListWrapper'
+export { GuestListWrapper } from './GuestListWrapper'
+export { GuestInformationWrapper } from './GuestInformationWrapper'
 export { PrimarySalesWrapper } from './PrimarySalesWrapper'
 export { SecondarySalesWrapper } from './SecondarySalesWrapper'
 export { AutomaticReportingWrapper } from './AutomaticReportingWrapper'

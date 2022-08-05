@@ -204,6 +204,9 @@ h4,
 
 	&-col {
 		padding: rem(8);
+		// &:last-of-type {
+		// 	text-align: right;
+		// }
 
 		&.lg {
 			flex: 1;
@@ -222,6 +225,12 @@ h4,
 	&.five-col {
 		.list-table-col:not(.btn-more-col) {
 			width: calc(100% / 8);
+		}
+	}
+
+	&.four-col {
+		.list-table-col:not(.btn-more-col) {
+			width: calc(100% / 5);
 		}
 	}
 }
