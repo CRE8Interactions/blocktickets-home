@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { CopyButton } from '../../../CopyButton';
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
 export default function TrackingLink({ link, handleShow }) {
@@ -9,9 +10,10 @@ export default function TrackingLink({ link, handleShow }) {
             <div className='list-table-col lg' role="cell">
                 <span>{link.name}</span>
             </div>
-            <div className="list-table-col lg-2" role="cell">
+            <div className="list-table-col lg-2 text-truncate" role="cell">
                 <span>{link.url}</span>
             </div>
+            <CopyButton link={link.url} />
             <div className="list-table-col" role="cell">
                 <span>{link.views}</span>
             </div>

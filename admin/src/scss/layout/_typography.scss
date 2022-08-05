@@ -185,7 +185,6 @@ h4,
 
 .list-table {
 	font-size: $small;
-	font-weight: $table-th-font-weight;
 	position: relative;
 
 	.btn-more-col {
@@ -196,6 +195,7 @@ h4,
 	.flex-row {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 
 		& + .flex-row {
 			border-top: border();
@@ -214,6 +214,7 @@ h4,
 		}
 
 		&-header {
+			font-weight: $table-th-font-weight;
 			color: $text-muted;
 		}
 	}
