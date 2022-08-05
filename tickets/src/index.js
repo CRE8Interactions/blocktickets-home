@@ -318,7 +318,7 @@ module.exports = {
           await client.messages
             .create({
               body: message,
-              messagingServiceSid: messagingServiceSid,
+              messagingServiceSid: notificationsServiceSid,
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
@@ -458,7 +458,7 @@ module.exports = {
           await client.messages
             .create({
               body: `Use code ${code} to update your phone number to ${event.params.data.toNumber} `,
-              messagingServiceSid: messagingServiceSid,
+              messagingServiceSid: notificationsServiceSid,
               to: event.params.data.toNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
@@ -501,7 +501,7 @@ module.exports = {
             await client.messages
             .create({
               body: `${code} is your temporary verification code to login at BlockTickets.xyz`,
-              messagingServiceSid: messagingServiceSid,
+              messagingServiceSid: notificationsServiceSid,
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
