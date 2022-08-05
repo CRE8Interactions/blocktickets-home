@@ -77,7 +77,7 @@ export default function UserInformationWrapper({ id }) {
         <section className='wrapper'>
             <section>
                 <header className="section-header section-heading">
-                    <h1>{id ? 'Edit user information' : 'User Information'}</h1>
+                    <h1>{id ? 'Edit user' : 'User'} information</h1>
                 </header>
                 <Card body className='card--sm'>
                     <UserInfo frequencyOpt={frequencyOpt} timezoneOpt={timezoneOpt} formatOpt={formatOpt} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} hasError={hasError} user={user} handleChange={handleChange} />

@@ -77,7 +77,7 @@ export default function DashboardMenu({ open, setOpen }) {
                                 </LinkContainer>
                             </Nav.Item>
                             <Nav.Item as="li">
-                                <LinkContainer to="/guest-list">
+                                <LinkContainer to="guest-list">
                                     <Nav.Link>Guest list</Nav.Link>
                                 </LinkContainer>
                             </Nav.Item>

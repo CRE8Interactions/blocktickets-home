@@ -142,35 +142,33 @@ export default function BankAccountDetails({ bankAccount, routingNumError, accou
                     pattern="[0-9]*"
                     maxLength="9"
                     name="routingNumber"
-                    onChange={handleBankDetails}
+                    onChange={(e) => handleBankDetails(e.target.value === '' || e.target.validity.valid ? e : bankAccount.routingNumber)}
                     onBlur={validInputs}
-                    className={bankAccount.routingNumber && routingNumError ? 'error-border' : ''}
+                    className={routingNumError ? 'error-border' : ''}
                 />
-                {bankAccount.routingNumber &&
-                    routingNumError && (
-                        <Form.Text className="text-danger">Routing Number must be 9 digits</Form.Text>
-                    )}
+                {routingNumError && (
+                    <Form.Text className="text-danger">Routing Number must be 9 digits</Form.Text>
+                )}
             </Form.Group>
             <Form.Group className="form-group" controlId="accountNumber">
                 <Form.Label>Account Number</Form.Label>
                 <Form.Control
                     type="text"
-                    value={bankAccount.accoutNumber}
-                    placeholder="XXXXXXXXX"
                     required
+                    value={bankAccount.accountNumber}
+                    placeholder="XXXXXXXX"
                     pattern="[0-9]*"
                     maxLength="9"
                     name="accountNumber"
-                    onChange={handleBankDetails}
+                    onChange={(e) => handleBankDetails(e.target.value === '' || e.target.validity.valid ? e : bankAccount.accountNumber)}
                     onBlur={validInputs}
-                    className={(bankAccount.accountNumber && accountNumError) || (bankAccount.accountNumber && inputEl.current.value && !isValid) ? 'error-border' : ''}
+                    className={accountNumError ? 'error-border' : ''}
                 />
-                {bankAccount.accountNumber &&
-                    accountNumError && (
-                        <Form.Text className="text-danger">
-                            Account Number must be 9 digits
-                        </Form.Text>
-                    )}
+                {accountNumError && (
+                    <Form.Text className="text-danger">
+                        Account Number must be 9 digits
+                    </Form.Text>
+                )}
             </Form.Group>
             <Form.Group className="form-group" controlId="repeatAccountNumber">
                 <Form.Label>Re-enter Account Number</Form.Label>

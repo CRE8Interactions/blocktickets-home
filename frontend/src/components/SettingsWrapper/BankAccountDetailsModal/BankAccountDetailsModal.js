@@ -102,10 +102,10 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
     }, []);
 
     const validInputs = () => {
-        if (routingNumber && !(routingNumber.length >= 9 && /^[0-9]+$/.test(routingNumber))) {
+        if (routingNumber && !(routingNumber.length >= 9)) {
             setRoutingNumError(true);
         }
-        if (accountNumber && !(accountNumber.length >= 9 && /^[0-9]+$/.test(accountNumber))) {
+        if (accountNumber && !(accountNumber.length >= 9)) {
             setAccountNumError(true);
         }
         if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber)) {
@@ -230,7 +230,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                 type="text"
                                 placeholder="Enter account number"
                                 required
-                                defaultValue={account?.accountNumber}
+                                value={account?.accountNumber}
                                 pattern="[0-9]*"
                                 name="accountNumber"
                                 onChange={(e) =>
