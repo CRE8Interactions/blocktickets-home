@@ -186,26 +186,32 @@ h4,
 .list-table {
 	font-size: $small;
 	font-weight: $table-th-font-weight;
-
-	.row + .row {
-		border-top: border();
-	}
-
-	&-header {
-		border-bottom: border();
-		display: flex;
-	}
+	position: relative;
 
 	.btn-more-col {
-		text-align: end;
+		position: absolute;
+		right: 0;
 	}
 
 	.flex-row {
 		display: flex;
+		flex-wrap: wrap;
+
+		& + .flex-row {
+			border-top: border();
+		}
 	}
 
 	&-col {
 		padding: rem(8);
+
+		&.lg {
+			flex: 1;
+
+			&-2 {
+				flex: 2;
+			}
+		}
 
 		&-header {
 			color: $text-muted;
@@ -213,10 +219,15 @@ h4,
 	}
 
 	&.five-col {
-		.list-table-col {
-			width: calc(100% / 5);
+		.list-table-col:not(.btn-more-col) {
+			width: calc(100% / 8);
 		}
 	}
+}
+
+.total-row {
+	font-weight: $fw-medium;
+	font-size: $body-2;
 }
 
 #bank-card,

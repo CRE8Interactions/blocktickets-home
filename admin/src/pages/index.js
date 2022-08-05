@@ -26,6 +26,9 @@ export { UserInformationPage } from './UserInformationPage';
 export { ContactAttendeesPage } from './ContactAttendeesPage';
 export { ViewContactAttendeesPage } from './ViewContactAttendeesPage';
 export { ContactAttendeePage } from './ContactAttendeePage';
+export { TrackingLinksPage } from './TrackingLinksPage';
+export { ViewTrackingLinksPage } from './ViewTrackingLinksPage';
+export { TrackingLinkPage } from './TrackingLinkPage';
 export { SettingsPage } from './SettingsPage';
 export { OrganizationInfoPage } from './OrganizationInfoPage';
 export { TeamManagementPage } from './TeamManagementPage'

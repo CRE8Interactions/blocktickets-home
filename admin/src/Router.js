@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RequireAuth } from './context/Auth/Auth';
 
-import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage } from './pages';
+import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -45,6 +45,11 @@ const Router = () => {
                         <Route index element={<ViewContactAttendeesPage />} />
                         <Route path="add" element={<ContactAttendeePage />} />
                         <Route path="edit" element={<ContactAttendeePage />} />
+                    </Route>
+                    <Route path="tracking-links" element={<TrackingLinksPage />} >
+                        <Route index element={<ViewTrackingLinksPage />} />
+                        <Route path="add" element={<TrackingLinkPage />} />
+                        <Route path="edit" element={<TrackingLinkPage />} />
                     </Route>
                 </Route>
                 <Route path="events" element={<RequireAuth><EventsPage /></RequireAuth>} />

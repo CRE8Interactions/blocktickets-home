@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-import { ListItem } from './ListItem'
+import { Recipient } from './Recipient'
 import { WarningContainer } from '../../WarningContainer';
 import { DeleteModal } from './DeleteModal';
 
@@ -30,20 +28,18 @@ export default function AutomaticReports() {
             </Stack>
             <Card body>
                 {attendees && attendees.length > 0 ? (
-                    <div className="list-table report-list">
-                        <Row className="list-table-header">
-                            <Col as="span" md={5} className='list-table-col list-table-col-header'>
-                                Name
-                            </Col>
-                            <Col md={6} as="span" className="list-table-col list-table-col-header">
-                                Email
-                            </Col>
-                        </Row>
-                        <Stack as="ul">
-                            {attendees.map((attendee, index) => (
-                                <ListItem key={index} attendee={attendee} handleShow={handleShow} />
-                            ))}
-                        </Stack>
+                    <div className="list-table">
+                        <div className="flex-row list-table-header" role="rowgroup">
+                            <div className='list-table-col list-table-col-header lg' role="columnheader">
+                                <span>Name</span>
+                            </div>
+                            <div className="list-table-col list-table-col-header lg" role="columnheader">
+                                <span>Email</span>
+                            </div>
+                        </div>
+                        {attendees.map((attendee, index) => (
+                            <Recipient key={index} attendee={attendee} handleShow={handleShow} />
+                        ))}
                     </div>
 
                 ) : (
