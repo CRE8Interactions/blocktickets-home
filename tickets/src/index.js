@@ -493,14 +493,15 @@ module.exports = {
           if (process.env.NODE_ENV === 'test') return;
 
           if (process.env.NODE_ENV === 'development') {
-            console.log(`Blocktickets: ${code} is your security code. Don't share your code`);
+            console.log(`Blocktickets: ${code} is your security code. Don't share your code.`);
             return
           }
           
           if (event.params.data.phoneNumber) {
             await client.messages
             .create({
-              body: `Blocktickets: ${code} is your security code. Don't share your code`,
+              body: `Blocktickets: ${code} is your security code. 
+                     Don't share your code.`,
               messagingServiceSid: notificationsServiceSid,
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
