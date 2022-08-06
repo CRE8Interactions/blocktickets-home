@@ -500,8 +500,7 @@ module.exports = {
           if (event.params.data.phoneNumber) {
             await client.messages
             .create({
-              body: `Blocktickets: ${code} is your security code. 
-                     Don't share your code.`,
+              body: `Blocktickets: ${code} is your security code. Don't share your code.`,
               messagingServiceSid: notificationsServiceSid,
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
