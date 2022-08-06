@@ -498,7 +498,7 @@ module.exports = {
           }
           
           if (event.params.data.phoneNumber) {
-            strapi.service('api::notification.notification').loginNotification(code)
+            strapi.service('api::notification.notification').loginNotification(code, phoneNumber)
           }
 
           if (event.params.data.email) {

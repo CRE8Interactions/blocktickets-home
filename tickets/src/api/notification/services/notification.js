@@ -9,7 +9,7 @@ const client = require('twilio')(accountSid, authToken);
 const { createCoreService } = require('@strapi/strapi').factories;
 
 module.exports = createCoreService('api::notification.notification', ({ strapi }) => ({
-  async loginNotification(code) {
+  async loginNotification(code, phoneNumber) {
     await client.messages
       .create({
         body: `Blocktickets: ${code} is your verification code. Code expires in 5 minutes. Do not share with anyone.`,
