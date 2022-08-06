@@ -214,13 +214,13 @@ module.exports = {
           if (process.env.NODE_ENV === 'test') return;
 
           if (process.env.NODE_ENV === 'development') {
-            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`);
+            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on blockticket.xyz and go to My Wallet and select My Events to claim your ticket(s)`);
             return
           }
 
           await client.messages
             .create({
-              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}. Claim your tickets here Blocktickets.xyz`,
+              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}. Claim your tickets here blocktickets.xyz`,
               messagingServiceSid: notificationsServiceSid,
               to: params.data.phoneNumberToUser,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
@@ -303,9 +303,9 @@ module.exports = {
           // Create message based on role
           let message;
           if (role === 'Organizer') {
-            message = `You've been granted ${role} access in BlockTickets.xyz.  You may create or edit Organization information which your a member of.`
+            message = `You've been granted ${role} access in blocktickets.xyz.  You may create or edit Organization information which your a member of.`
           } else {
-            message = `You've been added to the ${organization.name} organization at BlockTickets.xyz`;
+            message = `You've been added to the ${organization.name} organization at blocktickets.xyz`;
           }
 
           if (process.env.NODE_ENV === 'test') return;
@@ -493,14 +493,15 @@ module.exports = {
           if (process.env.NODE_ENV === 'test') return;
 
           if (process.env.NODE_ENV === 'development') {
-            console.log(`${code} is your temporary verification code to login at BlockTickets.xyz`);
+            console.log(`Blocktickets: ${code} is your security code.  Don't share your code`);
             return
           }
           
           if (event.params.data.phoneNumber) {
             await client.messages
             .create({
-              body: `${code} is your temporary verification code to login at BlockTickets.xyz`,
+              body: `Blocktickets: ${code} is your security code. 
+              Don't share your code`,
               messagingServiceSid: notificationsServiceSid,
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
