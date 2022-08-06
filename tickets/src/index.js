@@ -214,7 +214,7 @@ module.exports = {
           if (process.env.NODE_ENV === 'test') return;
 
           if (process.env.NODE_ENV === 'development') {
-            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on blockticket.xyz and go to My Wallet and select My Events to claim your ticket(s)`);
+            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}. Claim your tickets here blocktickets.xyz`);
             return
           }
 
@@ -493,25 +493,16 @@ module.exports = {
           if (process.env.NODE_ENV === 'test') return;
 
           if (process.env.NODE_ENV === 'development') {
-            console.log(`Blocktickets: ${code} is your security code. Don't share your code.`);
+            console.log(`Blocktickets: ${code} is your verification code. Code expires in 5 minutes. Do not share with anyone.`);
             return
           }
           
           if (event.params.data.phoneNumber) {
-            await client.messages
-            .create({
-              body: `Blocktickets: ${code} is your security code. Don't share your code.`,
-              messagingServiceSid: notificationsServiceSid,
-              to: phoneNumber,
-              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
-            })
-            .then(message => console.log(message.body))
-            .catch(error => console.log('Twilio Verification Error ', error))
-            .done()
+            strapi.service('api::notification.notification').loginNotification(code)
           }
 
           if (event.params.data.email) {
-            strapi.service('api::email.email').sendAccessCode(event, code);
+            if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendAccessCode(event, code);
           }
         }
       },

@@ -152,7 +152,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           }
         });
 
-        strapi.service('api::email.email').orderNotification(order);
+        if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').orderNotification(order);
 
         if (!order.details.listing) { 
           strapi.service('api::tracking.tracking').createOrderTracking(originalOrder);
@@ -171,7 +171,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           }
         });
 
-        strapi.service('api::email.email').fundsAvailable(listing)
+        if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').fundsAvailable(listing)
 
         let fromOrder = await strapi.db.query('api::order.order').findOne({
           where: { id: listing.fromOrder },
@@ -205,7 +205,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
             users_permissions_user: true
           }
         });
-        strapi.service('api::email.email').listingSold(user, order, listing, ticketUpdates);
+        if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').listingSold(user, order, listing, ticketUpdates);
         strapi.service('api::tracking.tracking').purchaseFromListing(originalOrder, listing);
       break;
       case 'payment_intent.payment_failed':

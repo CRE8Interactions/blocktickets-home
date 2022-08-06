@@ -41,7 +41,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       })
     })
 
-    strapi.service('api::email.email').listingActive(user, tickets, event, serviceFees, payout, quantity, askingPrice)
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').listingActive(user, tickets, event, serviceFees, payout, quantity, askingPrice)
     strapi.service('api::tracking.tracking').createTicketListedTracking(entity);
     return 200
   },
@@ -171,7 +171,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
       })
     })
 
-    strapi.service('api::email.email').removeListing(user, listing)
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').removeListing(user, listing)
     strapi.service('api::tracking.tracking').removeTicketListedTracking(entry, user);
     return 200
   },

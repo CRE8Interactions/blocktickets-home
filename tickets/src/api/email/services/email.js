@@ -17,7 +17,7 @@ const { createCoreService } = require('@strapi/strapi').factories;
 
 module.exports = createCoreService('api::email.email', ({ strapi }) => ({
   async cancelTransfer(order, user, transfer) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -59,7 +59,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async pendingTransfer(order, user, phoneNumber) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -101,7 +101,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async acceptTranser(order, fromUser, user) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -143,7 +143,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async removeListing(user, listing) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -183,7 +183,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async listingSold(user, order, listing, ticketUpdates) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -228,7 +228,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async listingActive(user, tickets, event, serviceFees, payout, quantity, askingPrice) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -273,7 +273,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async personalDetailsUpdate(user) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -310,7 +310,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async phoneUpdate(phone, user) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -348,7 +348,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async updatePaymentAccount(data, user) {
-    return;
+    
     let accountNumber = await encryption
       .decrypt(data.accountNumber);
     
@@ -393,7 +393,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
       }
   },
   async sendPaymentAccount(data, user) {
-    return;
+    
     let accountNumber = await encryption
       .decrypt(data.payment_information.accountNumber);
     
@@ -438,7 +438,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
       }
   },
   async sendAccessCode(event, code) {
-    return;
+    
     try {
       await strapi
         .plugin('email-designer')
@@ -475,8 +475,6 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async orderNotification(order) {
-    return;
-    console.log('Sending Email')
     const user = await strapi.db.query('plugin::users-permissions.user').findOne({
       where: {
         id: order.userId
@@ -528,7 +526,6 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async notifyListingExpired(listings) {
-    return;
     listings.map(async (listing) => {
       try {
         await strapi
@@ -575,7 +572,6 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     })
   },
   async signupConfirmation(user) {
-    return;
     try {
       await strapi
         .plugin('email-designer')
@@ -613,7 +609,6 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async fundsAvailable(listing) {
-    return;
     try {
       await strapi
         .plugin('email-designer')
