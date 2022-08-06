@@ -63,7 +63,7 @@ module.exports = createCoreController('api::payment-information.payment-informat
           })
         }
       })
-      strapi.service('api::email.email').sendPaymentAccount(res, user)
+      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendPaymentAccount(res, user)
     } else {
       res = await strapi.db.query('api::payment-information.payment-information').update({
         where: {
@@ -79,7 +79,7 @@ module.exports = createCoreController('api::payment-information.payment-informat
           accountType
         }
       })
-      strapi.service('api::email.email').updatePaymentAccount(res, user)
+      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').updatePaymentAccount(res, user)
     }
     return res
   },

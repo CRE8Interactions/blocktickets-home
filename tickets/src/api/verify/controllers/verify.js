@@ -182,7 +182,7 @@ module.exports = createCoreController('api::verify.verify', ({
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 
     ctx.send(tokenData)
-    strapi.service('api::email.email').signupConfirmation(user)
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').signupConfirmation(user)
   },
   async create(ctx) {
     const { phoneNumber, email } = ctx.request.body.data;
@@ -229,7 +229,7 @@ module.exports = createCoreController('api::verify.verify', ({
       }
     })
 
-    strapi.service('api::email.email').personalDetailsUpdate(user)
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').personalDetailsUpdate(user)
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
     ctx.send(tokenData)
@@ -291,7 +291,7 @@ module.exports = createCoreController('api::verify.verify', ({
       }
     });
 
-    strapi.service('api::email.email').phoneUpdate(entry.toNumber, user)
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').phoneUpdate(entry.toNumber, user)
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 

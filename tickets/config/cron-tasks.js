@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   /**
   * Cron job with timezone example.
@@ -15,10 +17,11 @@ module.exports = {
   //  │    └──────────────────── minute (0 - 59)
   //  └───────────────────────── second (0 - 59, OPTIONAL)
 
- 
-myJob: {
+  
+  listingJob: {
     task: async ({ strapi }) => {
       // Gets new listings
+      console.log('Task Ran');
       const listings = await strapi.entityService.findMany('api::listing.listing', {
         filters: {
           $and: [
@@ -59,11 +62,39 @@ myJob: {
         },
       });
 
-      strapi.service('api::email.email').notifyListingExpired(expiredListings);
+      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').notifyListingExpired(expiredListings);
     },
     options: {
        rule: '0 1 * * * *',
        tz: 'America/New_York',
     },
   },
+  verifyJob: {
+    task: async ({ strapi }) => {
+      // Clears unclaimed verification codes over 5 minutes old
+      const verifications = await strapi.entityService.findMany('api::verify.verify', {
+        fields: ['id'],
+        filters: {
+          addedAt: {
+            $lte: moment().subtract(5, 'minutes').format() 
+          }
+        },
+      });
+
+      if (verifications.legnth === 0) return;
+
+      await strapi.db.query('api::verify.verify').deleteMany({
+        where: {
+          id: {
+            $in: verifications.map(verifcation => verifcation.id),
+          },
+        },
+      });
+
+    },
+    options: {
+      rule: '* * * * *',
+      tz: 'America/New_York',
+   },
+  }
 };
