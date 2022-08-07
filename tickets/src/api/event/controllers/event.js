@@ -132,5 +132,10 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     })
 
     return events
+  },
+  async refreshAll(ctx) {
+   if (process.env.NODE_ENV === 'production') return;
+    await strapi.service('api::utility.utility').refreshDB();
+   return 200;
   }
 }));
