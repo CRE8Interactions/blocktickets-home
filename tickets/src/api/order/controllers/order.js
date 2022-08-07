@@ -127,6 +127,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
+        if (!order) return;
+
         order.tickets.map(async (ticket) => {          
           await strapi.db.query('api::ticket.ticket').update({
             where: {
