@@ -45,5 +45,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
 
     return organizations
+  },
+  async addMember(ctx) {
+    // future code
   }
 }));

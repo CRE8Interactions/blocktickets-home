@@ -35,5 +35,10 @@ module.exports = {
       path: '/verifies/phone-unique',
       handler: 'verify.uniquePhone'
     },
+    {
+      method: 'POST',
+      path: '/verifies/admin-signup',
+      handler: 'verify.adminSignUp'
+    },
   ]
 }

@@ -109,6 +109,20 @@ module.exports = {
         let user = await strapi.service('api::verify.verify').createUser(userObj)
 
         console.log(user)
+
+        const org = await strapi.db.query('api::organization.organization').findOne({
+          where: { name: 'BlockTickets' },
+          populate: { members: true },
+        });
+
+        if (org.members.length === 0) {
+          await strapi.db.query('api::organization.organization').update({
+            where: { name: 'BlockTickets' },
+            data: {
+              members: [user],
+            },
+          });
+        }
       }
     }
 
@@ -214,20 +228,11 @@ module.exports = {
           if (process.env.NODE_ENV === 'test') return;
 
           if (process.env.NODE_ENV === 'development') {
-            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}. Claim your tickets here blocktickets.xyz`);
+            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} is sending you ticket(s) to ${params.data.event.name}. To Accept: https://blocktickets.xyz`);
             return
           }
 
-          await client.messages
-            .create({
-              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}. Claim your tickets here blocktickets.xyz`,
-              messagingServiceSid: notificationsServiceSid,
-              to: params.data.phoneNumberToUser,
-              from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
-            })
-            .then(message => console.log(message.body))
-            .catch(error => console.log('Twilio Transfer Notification Error ', error))
-            .done()
+          strapi.service('api::notification.notification').transferTickets(params);
         }
 
         // Changes on Order model
