@@ -21,7 +21,6 @@ module.exports = {
   listingJob: {
     task: async ({ strapi }) => {
       // Gets new listings
-      console.log('Task Ran');
       const listings = await strapi.entityService.findMany('api::listing.listing', {
         filters: {
           $and: [

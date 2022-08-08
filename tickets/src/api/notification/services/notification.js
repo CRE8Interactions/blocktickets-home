@@ -21,7 +21,7 @@ module.exports = createCoreService('api::notification.notification', ({ strapi }
       .catch(error => console.log('Twilio Verification Error ', error))
       .done()
   },
-  async acceptTransferNotification(entry, fromUser, user) {
+  async acceptTransferNotification(user) {
     await client.messages
       .create({
         body: `Blocktickets: Great News!!!, ${user.firstName} has accepted your transfer`,
@@ -31,6 +31,22 @@ module.exports = createCoreService('api::notification.notification', ({ strapi }
       })
       .then(message => console.log(message.body))
       .catch(error => console.log('Twilio Verification Error ', error))
+      .done()
+  },
+  async transferTickets(params) {
+    let url;
+    if (process.env.NODE_ENV === 'preview') url = 'https://preview.blocktickets.xyz';
+    if (process.env.NODE_ENV === 'production') url = 'https://blocktickets.xyz';
+
+    await client.messages
+      .create({
+        body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} is sending you ticket(s) to ${params.data.event.name}. To Accept: ${url}`,
+        messagingServiceSid: notificationsServiceSid,
+        to: params.data.phoneNumberToUser,
+        from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
+      })
+      .then(message => console.log(message.body))
+      .catch(error => console.log('Twilio Transfer Notification Error ', error))
       .done()
   }
 }))
