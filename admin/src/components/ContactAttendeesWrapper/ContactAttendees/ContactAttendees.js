@@ -48,7 +48,7 @@ export default function ContactAttendees() {
                         </Nav.Item>
                     </Nav>
                 </Tab.Container>
-                <Link to='add' className="btn btn-lg btn-primary ms-auto">Contact attendees</Link>
+                <Link to='add' className="btn btn-lg btn-primary ms-auto">Contact attendee</Link>
             </Stack>
             {contacts && contacts.length > 0 ? (
                 <div className="table-container">

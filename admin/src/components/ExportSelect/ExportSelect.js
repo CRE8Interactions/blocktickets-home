@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -18,13 +18,18 @@ export default function ExportSelect({ setExportTo, exportTo }) {
             label: "CVC",
             value: '2'
         },
-
     ];
+
+    useEffect(() => {
+        setExportTo('1')
+
+    }, [])
+
 
     return (
         <InputGroup className="export-group">
             <FloatingLabel controlId="export" label="Export">
-                <Form.Select value={exportTo} onChange={(e) => setExportTo(e.target.value)}>
+                <Form.Select value={exportTo} onChange={setExportTo}>
                     {exportOpt.map((option, index) => (
                         <option key={index} value={option.value}>{option.label}</option>
                     ))}

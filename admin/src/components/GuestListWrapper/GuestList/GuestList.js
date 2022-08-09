@@ -28,7 +28,7 @@ export default function GuestList() {
     return (
         <>
             <Stack direction='horizontal' className='mb-5'>
-                <Link to='add' className="btn btn-outline-light btn-lg btn-plus btn-plus--dark ms-auto">Add guests</Link>
+                <Link to='add' className="btn btn-outline-light btn-lg btn-plus btn-plus--dark ms-auto">Add guest</Link>
             </Stack>
             <Card body>
                 {guests && guests.length > 0 ? (

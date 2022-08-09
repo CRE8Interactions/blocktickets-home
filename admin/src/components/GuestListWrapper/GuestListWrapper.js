@@ -2,7 +2,6 @@ import React from 'react';
 
 import { GuestList } from './GuestList'
 
-
 export default function GuestListWrapper() {
 
     return (
