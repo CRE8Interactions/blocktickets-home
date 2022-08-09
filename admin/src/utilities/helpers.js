@@ -10,7 +10,7 @@ export const stateOpt = [
     }
 ]
 
-// // check to see if page should have a container
+// check to see if page should have a container
 const checkUrlZ = (url) => {
     var expression = /myevent|\/settings/g;
     var regex = new RegExp(expression);
