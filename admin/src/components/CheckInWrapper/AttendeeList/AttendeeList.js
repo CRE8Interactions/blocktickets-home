@@ -156,7 +156,7 @@ export default function AttendeeList() {
 
     return (
         <>
-            <div className="section-header" id="check-in-attendee-list">
+            <header className="section-header">
                 <Row className='align-items-center actions-group-flex'>
                     <Col className="pe-0" lg={3} xl={2}>
                         <h3 className='fs-md m-0'>Attendee list</h3>
@@ -181,9 +181,8 @@ export default function AttendeeList() {
                     </Col>
 
                 </Row>
-            </div>
+            </header>
             <AttendeeTable attendees={attendees} />
-
         </>
 
     );
