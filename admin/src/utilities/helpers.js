@@ -10,7 +10,7 @@ export const stateOpt = [
     }
 ]
 
-// check to see if page should have a container
+// // check to see if page should have a container
 const checkUrlZ = (url) => {
     var expression = /myevent|\/settings/g;
     var regex = new RegExp(expression);
@@ -72,6 +72,11 @@ export const capitalizeString = string => {
 // put hyphens between the order id 
 export const formatOrderId = (id) => {
     return id.toString().substring(0, 4) + '-' + id.toString().substring(4, 10) + '-' + id.toString().substring(10)
+}
+
+// put dots between the phone number
+export const formatPhoneNumber = (number) => {
+    return number.toString().substring(0, 3) + '.' + number.toString().substring(3, 6) + '.' + number.toString().substring(6)
 }
 
 export const isMatching = (input1, input2) => {
