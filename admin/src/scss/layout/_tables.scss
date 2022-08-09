@@ -1,5 +1,4 @@
 @use '../abstracts' as *;
-@use '../layout/container' as *;
 @use '../layout/spacing' as *;
 @use '../layout/typography' as *;
 @use '../theme/card' as *;
@@ -15,7 +14,11 @@
 
 .full-width-table {
 	overflow-x: auto;
-	@include full-width();
+	@include breakpoint-max(xl) {
+		position: relative;
+		width: calc(100vw - 33.78vw);
+		left: 0;
+	}
 }
 
 .table {
