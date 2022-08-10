@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 
 import { ExportSelect } from '../ExportSelect';
 import { SearchBar } from '../SearchBar'
-import { TicketRow } from './TicketRow'
+import { AttendeeRow } from './AttendeeRow'
 
 import './attendeesReportWrapper.scss';
 
@@ -274,7 +274,7 @@ export default function AttendeesReportWrapper({ orderId, ticketId }) {
                         </thead>
                         <tbody>
                             {ticketArr.map(ticket => (
-                                <TicketRow key={order.orderId} orderId={order.orderId} ticket={ticket} firstName={order.ticketBuyer.firstName} lastName={order.ticketBuyer.lastName} marketType={order.marketType} paid={order.paid} type={order.ticketType} />
+                                <AttendeeRow key={order.orderId} orderId={order.orderId} ticket={ticket} firstName={order.ticketBuyer.firstName} lastName={order.ticketBuyer.lastName} marketType={order.marketType} paid={order.paid} type={order.ticketType} />
                             ))}
                         </tbody>
                     </Table>

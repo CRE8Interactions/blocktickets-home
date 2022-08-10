@@ -19,12 +19,6 @@
 		}
 	}
 
-	.desktop-btns {
-		@include breakpoint-min(lg) {
-			order: 4;
-		}
-	}
-
 	.navbar {
 		background-color: $clr-white;
 
@@ -77,40 +71,23 @@
 					}
 				}
 
-				&::before {
-					@extend %nav-mobile-headings;
-				}
 				& + ul {
 					margin-top: rem(16);
 					@media screen and (min-device-height: 812px) {
 						margin-top: rem(48);
 					}
-
-					&:nth-of-type(2) {
-						&::before {
-							@include breakpoint-max(lg) {
-								content: 'My Wallet';
-							}
-						}
-					}
 				}
 			}
 			#main {
-				&::before {
-					@include breakpoint-max(lg) {
-						content: 'Home';
-					}
-				}
-
 				.nav-link {
 					@include breakpoint-max(lg) {
 						font-size: $body-2;
 						padding: $nav-link-padding-y $nav-link-padding-x;
 						margin: $nav-link-margin;
 
-						&:hover,
-						&:focus,
-						&.active {
+						&:hover:not(#logout),
+						&:focus:not(#logout),
+						&.active:not(#logout) {
 							@include hover-effect();
 						}
 					}
@@ -132,8 +109,15 @@
 	}
 
 	.dropdown-menu {
-		min-width: 223px;
+		min-width: 203px;
 		padding: rem(16);
+		background-color: #FFFF;
+		transform: translate(0px, 22px);
+		border-top: 0;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+		box-shadow: 0px 40px 64px -12px rgba(0, 0, 0, 0.08), 0px 0px 14px -4px rgba(0, 0, 0, 0.05),
+			0px 32px 48px -8px rgba(0, 0, 0, 0.1);
 
 		li {
 			.dropdown-item {
@@ -148,26 +132,14 @@
 				}
 			}
 
-			&:nth-of-type(2) {
-				.dropdown-item {
-					&::before {
-						content: url($data-svg-prefix + map-get($icons, 'logout'));
-					}
+			&:last-of-type {
+				border-top: border();
+				padding-top: $text-spacer-xs;
+
+				.btn:hover {
+					background-color: transparent;
 				}
 			}
-
-			&:nth-of-type(3) {
-				.dropdown-item {
-					&::before {
-						content: url($data-svg-prefix + map-get($icons, 'logout'));
-					}
-				}
-			}
-		}
-
-		.name {
-			margin-top: auto;
-			padding: rem(30) $dropdown-padding-x $dropdown-item-padding-y;
 		}
 	}
 }

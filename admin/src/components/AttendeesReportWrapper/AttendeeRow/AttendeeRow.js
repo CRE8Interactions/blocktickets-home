@@ -2,7 +2,7 @@ import React from 'react';
 
 import { formatOrderId, formatString, formatCurrency } from '../../../utilities/helpers';
 
-export default function TicketRow({ orderId, firstName, lastName, marketType, type, ticket, show = true }) {
+export default function AttendeeRow({ orderId, firstName, lastName, marketType, type, ticket }) {
 
     return (
         <tr>
@@ -57,8 +57,6 @@ export default function TicketRow({ orderId, firstName, lastName, marketType, ty
             <td>75057</td>
             <td>Male</td>
             <td>24</td>
-
-
         </tr>
     );
 }

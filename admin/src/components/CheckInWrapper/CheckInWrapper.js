@@ -18,7 +18,7 @@ export default function CheckInWrapper() {
                 </div>
                 <p className='fw-medium mb-5'>Check in attendees with your mobile device: <span className='text-primary'>iPhone</span> or <span className='text-primary'>Android</span></p>
                 <Card body>
-                    <div className='heading--flex mb-2'>
+                    <div className='heading--flex mb-3'>
                         <h4>Attendees checked in</h4>
                         <span className='text-muted fw-medium'><span className='text-dark fs-md fw-bold'>72</span> / 1000</span>
                     </div>
