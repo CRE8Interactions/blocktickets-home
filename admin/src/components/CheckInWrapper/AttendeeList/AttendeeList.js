@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import { SearchBar } from '../../SearchBar';
-import { AttendeeTable } from './AttendeeTable';
 import { ExportSelect } from "../../ExportSelect";
+import { Attendees } from './Attendees';
 
 export default function AttendeeList() {
 
@@ -182,7 +182,7 @@ export default function AttendeeList() {
 
                 </Row>
             </header>
-            <AttendeeTable attendees={attendees} />
+            <Attendees attendees={attendees} />
         </>
 
     );

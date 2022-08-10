@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import { formatCurrency, formatNumber } from '../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
-import Table from 'react-bootstrap/Table';
 
 import { ExportSelect } from '../ExportSelect';
 import { SearchBar } from '../SearchBar'
-import { TicketRow } from './TicketRow'
+import { Attendees } from './Attendees'
 
 import './attendeesListWrapper.scss';
 
@@ -61,45 +60,7 @@ export default function AttendeesListWrapper() {
                         </Stack>
                     </Stack>
                 </header>
-
-
-                <div className="full-width-table table-container">
-                    <Table className='table-lg'>
-                        <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Order date</th>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Email</th>
-                                <th>Quantity</th>
-                                <th>Transaction type</th>
-                                <th>Ticket type</th>
-                                <th>Market type</th>
-                                <th>Paid</th>
-                                <th>Service fees</th>
-                                <th>Facility fee</th>
-                                <th>Payment processing fee</th>
-                                <th>Tax</th>
-                                <th>Attendee status</th>
-                                <th>Payment method</th>
-                                <th>Last 4 digits</th>
-                                <th>Country</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>Zip code</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <TicketRow />
-                            <TicketRow />
-                            <TicketRow />
-                            <TicketRow />
-                        </tbody>
-                    </Table>
-                </div>
+                <Attendees />
             </section>
         </>
     );
