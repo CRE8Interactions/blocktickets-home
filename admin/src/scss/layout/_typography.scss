@@ -1,9 +1,18 @@
 @use '../abstracts' as *;
 @use 'spacing' as *;
 @use 'images' as *;
-@use 'container' as *;
 @use './../theme/colors' as *;
 @use './../theme/table' as *;
+
+@mixin heading-psuedo($color: $primary) {
+	h1::before {
+		content: '';
+		width: 16px;
+		margin-right: $text-spacer-xs;
+		background-color: $color;
+		border-radius: $br-xs;
+	}
+}
 
 .normal {
 	font-size: $body-2;
@@ -89,40 +98,9 @@ h4,
 	font-size: $caption;
 }
 
-%text-truncate {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-%multi-line-truncate {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	-webkit-line-clamp: 2;
-	text-overflow: ellipsis;
-}
-
-@mixin multi-line-truncate($lines: 2) {
-	@extend %multi-line-truncate;
-	-webkit-line-clamp: $lines;
-}
-
 .nav-link,
 .card .nav-link {
 	font-family: $font-heading;
-}
-
-%nav-mobile-headings {
-	@include breakpoint-max(lg) {
-		display: block;
-		margin-bottom: $text-spacer-xs;
-		font-size: $caption;
-		color: $text-muted;
-		text-transform: uppercase;
-		font-weight: $fw-bold;
-		font-family: $font-body;
-	}
 }
 
 .tickets-sold {
@@ -181,6 +159,11 @@ h4,
 			font-weight: $fw-semi-bold;
 		}
 	}
+}
+
+li .heading {
+	font-weight: $fw-semi-bold;
+	margin-bottom: rem(3);
 }
 
 .list-table {

@@ -74,6 +74,11 @@ export const formatOrderId = (id) => {
     return id.toString().substring(0, 4) + '-' + id.toString().substring(4, 10) + '-' + id.toString().substring(10)
 }
 
+// put dots between the phone number
+export const formatPhoneNumber = (number) => {
+    return number.toString().substring(0, 3) + '.' + number.toString().substring(3, 6) + '.' + number.toString().substring(6)
+}
+
 export const isMatching = (input1, input2) => {
     return input1 === input2
 }

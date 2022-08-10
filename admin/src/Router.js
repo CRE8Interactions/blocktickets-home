@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RequireAuth } from './context/Auth/Auth';
 
-import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage } from './pages';
+import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage } from './pages';
 import { ScrollToTop } from './components';
 
 /**
@@ -39,6 +39,7 @@ const Router = () => {
                         <Route path="add" element={<GuestInformationPage />} />
                         <Route path="edit" element={<GuestInformationPage />} />
                     </Route>
+                    <Route path="check-in" element={<CheckInPage />} />
                     <Route path="primary-sales" element={<PrimarySalesPage />} />
                     <Route path="secondary-sales" element={<SecondarySalesPage />} />
                     <Route path="automatic-reporting" element={<AutomaticReportingPage />}>

@@ -40,7 +40,7 @@ export default function Navigation() {
     return (
         <div className="navigation position-sticky">
             <Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
-                <Container className="my-container" id="main-container">
+                <Container>
                     <LinkContainer to="/" id="logo-link">
                         <Navbar.Brand>
                             <img src={logo} alt="blocktickets" />
@@ -48,22 +48,7 @@ export default function Navigation() {
                     </LinkContainer>
                     {AuthService.isLoggedIn() &&
                         <>
-                            <Stack direction="horizontal" className="desktop-btns">
-                                <DropdownButton title="Southside Music Hall" variant="info" id="org-dropdown">
-                                    <Stack as="ul" gap={2}>
-                                        <li>
-                                            <LinkContainer to="/settings">
-                                                <Dropdown.Item >Settings</Dropdown.Item>
-                                            </LinkContainer>
-                                        </li>
-                                        <li>
-                                            <Dropdown.Item as="button" onClick={() => logout()}>Logout</Dropdown.Item>
-                                        </li>
-                                    </Stack>
-                                    <p className='name fw-medium'>Harrison Cogan</p>
-                                </DropdownButton>
-                                <Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
-                            </Stack>
+                            <Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
                             <Navbar.Collapse id="responsive-navbar-nav align-items-center">
                                 <Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
                                     <ul
@@ -90,9 +75,21 @@ export default function Navigation() {
                                     </ul>
                                 </Nav>
                             </Navbar.Collapse>
+                            <DropdownButton title="Southside Music Hall" variant="info" id="org-dropdown">
+                                <Stack as="ul" gap={2}>
+                                    <li>
+                                        <LinkContainer to="/settings">
+                                            <Dropdown.Item >Settings</Dropdown.Item>
+                                        </LinkContainer>
+                                    </li>
+                                    <li>
+                                        <Dropdown.Item as="button" onClick={() => logout()}>Logout</Dropdown.Item>
+                                    </li>
+                                </Stack>
+                                <p className='name fw-medium'>Harrison Cogan</p>
+                            </DropdownButton>
                         </>
                     }
-
                 </Container>
             </Navbar>
         </div>

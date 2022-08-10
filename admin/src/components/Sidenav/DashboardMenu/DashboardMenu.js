@@ -11,7 +11,7 @@ export default function DashboardMenu({ open, setOpen }) {
 
     return (
         <>
-            <Stack className="sidebar-header">
+            <Stack as="header" className="sidebar-header">
                 <Badge bg="success" className='mb-3 align-self-start'>On Sale</Badge>
                 <h1 className='fs-md'>Nic Fanciulli</h1>
                 <div className="small">

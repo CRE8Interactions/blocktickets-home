@@ -24,8 +24,9 @@
 		min-width: 130px;
 	}
 	&-item {
-		border-radius: 8px;
+		border-radius: $border-radius-sm;
 		font-size: $small;
+		font-weight: $fw-medium;
 
 		& + .dropdown-item {
 			margin-top: rem(10);

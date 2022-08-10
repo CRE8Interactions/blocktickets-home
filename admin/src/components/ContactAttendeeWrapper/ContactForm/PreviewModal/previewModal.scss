@@ -17,7 +17,6 @@
 	.event-name {
 		font-size: rem(18);
 		font-weight: $fw-semi-bold;
-		@extend %text-truncate;
 	}
 
 	.event-image {

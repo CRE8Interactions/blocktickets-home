@@ -19,12 +19,6 @@
 		}
 	}
 
-	.desktop-btns {
-		@include breakpoint-min(lg) {
-			order: 4;
-		}
-	}
-
 	.navbar {
 		background-color: $clr-white;
 
@@ -68,7 +62,7 @@
 				height: calc(100vh - 88px);
 			}
 
-			ul {
+			#main {
 				li + li {
 					padding-top: rem(8);
 					@include breakpoint-min(lg) {
@@ -76,32 +70,6 @@
 						padding-left: $text-spacer;
 					}
 				}
-
-				&::before {
-					@extend %nav-mobile-headings;
-				}
-				& + ul {
-					margin-top: rem(16);
-					@media screen and (min-device-height: 812px) {
-						margin-top: rem(48);
-					}
-
-					&:nth-of-type(2) {
-						&::before {
-							@include breakpoint-max(lg) {
-								content: 'My Wallet';
-							}
-						}
-					}
-				}
-			}
-			#main {
-				&::before {
-					@include breakpoint-max(lg) {
-						content: 'Home';
-					}
-				}
-
 				.nav-link {
 					@include breakpoint-max(lg) {
 						font-size: $body-2;
@@ -131,9 +99,20 @@
 		border-radius: $border-radius-sm !important;
 	}
 
+	#org-dropdown {
+		padding-right: rem(23);
+	}
+
 	.dropdown-menu {
-		min-width: 223px;
+		min-width: 233px;
 		padding: rem(16);
+		background-color: #FFFF;
+		transform: translate(-22px, 22px);
+		border-top: 0;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+		box-shadow: 0px 40px 64px -12px rgba(0, 0, 0, 0.08), 0px 0px 14px -4px rgba(0, 0, 0, 0.05),
+			0px 32px 48px -8px rgba(0, 0, 0, 0.1);
 
 		li {
 			.dropdown-item {
@@ -148,15 +127,7 @@
 				}
 			}
 
-			&:nth-of-type(2) {
-				.dropdown-item {
-					&::before {
-						content: url($data-svg-prefix + map-get($icons, 'logout'));
-					}
-				}
-			}
-
-			&:nth-of-type(3) {
+			&:last-of-type {
 				.dropdown-item {
 					&::before {
 						content: url($data-svg-prefix + map-get($icons, 'logout'));
@@ -166,8 +137,8 @@
 		}
 
 		.name {
-			margin-top: auto;
-			padding: rem(30) $dropdown-padding-x $dropdown-item-padding-y;
+			@extend .seperator;
+			padding: $text-spacer-sm $text-spacer-xs $text-spacer-xs;
 		}
 	}
 }
