@@ -313,21 +313,57 @@ module.exports = createCoreController('api::verify.verify', ({
         name: 'Organizer'
       }
     })
-    return 200;
+
+    const userObj = {
+      data: {
+        username: identifier,
+        email: identifier,
+        firstName,
+        lastName,
+        gender: 'other',
+        role,
+        confirmed: true,
+        password
+      }
+    }
+
+    let user = await strapi.service('api::verify.verify').createUser(userObj)
+
+    user = await strapi.db.query("plugin::users-permissions.user").findOne({
+      where: { id: user.id },
+      populate: ["role"],
+    });
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+
+    return tokenData;
   },
   async adminCreateOrg(ctx) {
     const user = ctx.state.user;
-    const {
-      name,
-    } = ctx.request.body.name;
 
-    let organization = await strapi.entityService.create('api::organization.organization', {
+    const {
+      orgName,
+      address,
+      city,
+      state,
+      zip_code
+    } = ctx.request.body.data;
+
+    let org = await strapi.entityService.create('api::organization.organization', {
       data: {
-        name,
-        creatorId: user.uuid
+        name: orgName,
+        creatorId: user.uuid,
+        members: [user],
+        address: {
+          address_1: address,
+          city,
+          state,
+          zipcode: zip_code,
+          country: 'US'
+        }
       }
     })
 
-    return organization;
+    return org;
   }
 }));

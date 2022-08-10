@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
@@ -7,114 +7,13 @@ import { Role } from "./Role";
 import { CreateRoleModal } from './CreateRoleModal';
 import { DeleteModal } from './DeleteModal';
 
-export default function Roles({ roles }) {
-
-    const permissions = {
-        settings: [
-            {
-                id: "1",
-                name: "Edit organization info"
-            },
-            {
-                id: "2",
-                name: "Edit roles"
-            },
-            {
-                id: "3",
-                name: "Add team members"
-            },
-            {
-                id: "4",
-                name: "Edit payment information"
-            },
-            {
-                id: "5",
-                name: "View payouts"
-            },
-            {
-                id: "6",
-                name: "Edit tax status"
-            }
-        ],
-        events: [
-            {
-                id: "7",
-                name: "View events"
-            }
-        ],
-        management: [
-            {
-                id: "8",
-                name: "Create an event"
-            },
-            {
-                id: "9",
-                name: "Edit basic info"
-            },
-            {
-                id: "10",
-                name: "Edit details"
-            },
-            {
-                id: "11",
-                name: "Edit & add tickets"
-            },
-            {
-                id: "12",
-                name: "Edit event status (on sale / draft / delete)"
-            },
-            {
-                id: "13",
-                name: "View dashboard"
-            },
-            {
-                id: "14",
-                name: "View orders"
-            },
-            {
-                id: "15",
-                name: "View attendees list"
-            },
-            {
-                id: "16",
-                name: "Issue refunds"
-            },
-            {
-                id: "17",
-                name: "Edit & add guests"
-            },
-            {
-                id: "18",
-                name: "Check in"
-            },
-            {
-                id: "19",
-                name: "View primary sales"
-            },
-            {
-                id: "20",
-                name: "View secondary sales"
-            },
-            {
-                id: "21",
-                name: "Add recipients for automatic reporting"
-            },
-            {
-                id: "22",
-                name: "Contact attendees"
-            },
-            {
-                id: "23",
-                name: "Edit & add tracking links"
-            }
-        ],
-    }
-
+export default function Roles({ roles, permissions, createRoles }) {
+  
     const [role, setRole] = useState('')
 
     const [isCheckAll, setIsCheckAll] = useState(false);
 
-    const [isCheck, setIsCheck] = useState(['1', '2', '3'])
+    const [isCheck, setIsCheck] = useState([])
 
     const [id, setId] = useState();
 
@@ -122,10 +21,13 @@ export default function Roles({ roles }) {
 
     const [showDelete, setShowDelete] = useState(false);
 
+    const [createRole, setCreateRole] = useState()
+
     // handle create and edit
     const handleShowCreate = (_, id) => {
         setId(id)
         setShowCreate(true)
+        setRole(id)
     }
 
     const handleCloseCreate = () => setShowCreate(false)
@@ -136,9 +38,9 @@ export default function Roles({ roles }) {
 
     const handleCheck = e => {
         const { id, checked } = e.target;
-        setIsCheck([...isCheck, id]);
+        setIsCheck([...isCheck, Number(id)]);
         if (!checked) {
-            setIsCheck(isCheck.filter(item => item !== id));
+            setIsCheck(isCheck.filter(item => item !== Number(id)));
         }
     };
 
@@ -164,6 +66,7 @@ export default function Roles({ roles }) {
     };
 
     const handleCreate = () => {
+        createRoles({roleName: createRole, permissions: isCheck})
         handleCloseCreate();
     }
 
@@ -178,7 +81,9 @@ export default function Roles({ roles }) {
                     <Role key={index} role={role} handleShowCreate={handleShowCreate} handleShowDelete={handleShowDelete} />
                 ))}
             </Stack>
-            <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setRole} isCheck={isCheck} handleSelectAll={handleSelectAll} handleCheck={handleCheck} handleCreate={handleCreate} />
+
+            <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setCreateRole} isCheck={isCheck} handleSelectAll={handleSelectAll} handleCheck={handleCheck} handleCreate={handleCreate} />
+            
             <DeleteModal show={showDelete} handleClose={handleCloseDelete} />
         </>
     )

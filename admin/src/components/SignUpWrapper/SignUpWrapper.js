@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
-import { login } from '../../utilities/api'
+import { login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions, createOrEditRole } from '../../utilities/api'
 import { isMatching } from '../../utilities/helpers'
 import UserContext from '../../context/User/User'
 
@@ -35,7 +35,7 @@ export default function SignUpWrapper() {
     const from = location.state?.from?.pathname || "/";
 
     // demo purposes: will come from database - delete later
-    const roles = ['master_admin', 'admin', 'marketer', 'viewer']
+    // const roles = ['master_admin', 'admin', 'marketer', 'viewer']
 
     // demo purposes: will come from database - delete later 
     const members = [
@@ -70,7 +70,7 @@ export default function SignUpWrapper() {
 
     const [bankAccount, setBankAccount] = useState()
 
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(3)
 
     const [taxStep, setTaxStep] = useState()
 
@@ -79,6 +79,38 @@ export default function SignUpWrapper() {
     const [formValid, setFormValid] = useState(true)
 
     const [isSuccess, setIsSuccess] = useState(false)
+
+    const [roles, setRoles] = useState([])
+    const [permissions, setPermissions] = useState([])
+
+
+    const formatPermissions = (permissions) => {
+        return permissions.reduce(function (r, a) {
+            r[a.attributes.key] = r[a.attributes.key] || [];
+            r[a.attributes.key].push({
+                id: a.id,
+                name: a.attributes.name
+            });
+            return r;
+        }, Object.create(null));
+    }
+
+    const createRoles = (data) => {
+        console.log('Role Data ', data)
+        createOrEditRole({data})
+            .then((res) => getOrganizationRoles())
+            .catch((err) => console.error(err))
+    }
+
+    useEffect(() => {
+        getOrganizationRoles()
+            .then((res) => {console.log(res); setRoles(res.data)})
+            .catch((err) => console.error(err))
+        
+        getOrganizationPermissions()
+            .then((res) => setPermissions(formatPermissions(res.data.data)))
+            .catch((err) => console.error(err))
+    }, [])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -153,6 +185,7 @@ export default function SignUpWrapper() {
     const handleNext = () => {
         let curStep;
         let setter;
+        console.log('Step ', step)
         if (taxStep >= 1 && taxStep < 3) {
             curStep = taxStep;
             setter = setTaxStep;
@@ -165,8 +198,16 @@ export default function SignUpWrapper() {
             if (!isMatching(credentials.password, inputEl.current.value)) {
                 setIsValid(false)
             } else {
-                handleStep(curStep, setter)
+                signUp({data: credentials})
+                    .then((res) => { AuthService.setSignUpToken(res.data?.jwt); handleStep(curStep, setter) })
+                    .catch((err) => console.error(err))
             }
+        }
+        if (step === 2) {
+            console.log('Org Info ', orgInfo)
+            createOrganization({data: orgInfo})
+                .then((res) => handleStep(curStep, setter))
+                .catch((err) => console.error(err))
         }
         else if (step === 5 && taxStep === 3) {
             setIsSuccess(true)
@@ -272,11 +313,11 @@ export default function SignUpWrapper() {
                             </Form>
                         )}
                         {step === 2 && (
-                            <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
+                            <OrganizationInformationWrapper setOrgInfo={setOrgInfo} />
                         )}
                         {step === 3 && (
                             <>
-                                <Roles roles={roles} />
+                                <Roles roles={roles} permissions={permissions} createRoles={createRoles} />
                                 <Team members={members} />
                             </>
                         )}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_roles",
+  "info": {
+    "singularName": "organization-role",
+    "pluralName": "organization-roles",
+    "displayName": "organizationRole",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "organization_permissions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::organization-permission.organization-permission"
+    }
+  }
+}

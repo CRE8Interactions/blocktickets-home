@@ -74,6 +74,114 @@ module.exports = {
         })
       }
 
+      const orgPermissionCount = await strapi.db.query('api::organization-permission.organization-permission').count()
+
+      if (orgPermissionCount === 0) {
+        const permissions = [
+          {
+              key: "settings",
+              name: "Edit organization info"
+          },
+          {
+            key: "settings",
+              name: "Edit roles"
+          },
+          {
+            key: "settings",
+              name: "Add team members"
+          },
+          {
+              key: "settings",
+              name: "Edit payment information"
+          },
+          {
+              key: "settings",
+              name: "View payouts"
+          },
+          {
+              key: "settings",
+              name: "Edit tax status"
+          },
+          {
+              key: "events",
+              name: "View events"
+          },
+          {
+              key: "management",
+              name: "Create an event"
+          },
+          {
+              key: "management",
+              name: "Edit basic info"
+          },
+          {
+            key: "management",
+              name: "Edit details"
+          },
+          {
+            key: "management",
+              name: "Edit & add tickets"
+          },
+          {
+            key: "management",
+              name: "Edit event status (on sale / draft / delete)"
+          },
+          {
+            key: "management",
+              name: "View dashboard"
+          },
+          {
+            key: "management",
+              name: "View orders"
+          },
+          {
+            key: "management",
+              name: "View attendees list"
+          },
+          {
+            key: "management",
+              name: "Issue refunds"
+          },
+          {
+            key: "management",
+              name: "Edit & add guests"
+          },
+          {
+            key: "management",
+              name: "Check in"
+          },
+          {
+            key: "management",
+              name: "View primary sales"
+          },
+          {
+            key: "management",
+              name: "View secondary sales"
+          },
+          {
+            key: "management",
+              name: "Add recipients for automatic reporting"
+          },
+          {
+            key: "management",
+              name: "Contact attendees"
+          },
+          {
+            key: "management",
+              name: "Edit & add tracking links"
+          }
+        ];
+
+        permissions.map(async (permission) => {
+          await strapi.db.query('api::organization-permission.organization-permission').create({
+            data: {
+              name: permission.name,
+              key: permission.key
+            }
+          })
+        })
+      }
+
       if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "preview") {
 
         const hasUser = await strapi.db.query('plugin::users-permissions.user').findOne({
@@ -365,15 +473,7 @@ module.exports = {
 
         // Changes on Organization model
         if (event.model.singularName === 'organization') {
-          let email = event.params.data.creatorId;
-          const user = await strapi.db.query('plugin::users-permissions.user').findOne({
-            where: {
-              email: email
-            }
-          })
           event.params.data.uuid =  await strapi.service('api::utility.utility').generateUUID();
-          event.params.data.creatorId = user.id
-          event.params.data.members = [user];
           // Creates web3 wallet for organization
           const web3 = await new Web3API(new Web3API.providers.HttpProvider(blockchain));
           const account = await web3.eth.accounts.create(web3.utils.randomHex(32));

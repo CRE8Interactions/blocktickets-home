@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
-import { login } from '../../utilities/api'
+import { login, getMyOrganizations } from '../../utilities/api'
 import UserContext from '../../context/User/User'
 
 import Stack from 'react-bootstrap/Stack'
@@ -51,6 +51,19 @@ export default function LoginWrapper() {
                     // user experience.
                     navigate(from, { replace: true });
                 })
+                .then(() => {
+                    getMyOrganizations()
+                        .then((res) => {
+                            if (res.data.length > 0) {
+                                AuthService.setOrg(res.data)
+                                
+                            } else {
+                                // navigate('/signup', { replace: true })
+                                console.error('No Org Present')
+                            }
+                        })
+                        .catch((err) => console.error(err))
+                })
                 .catch((err) => {
                     setIsValid(false)
                     console.error(err)
@@ -89,9 +102,9 @@ export default function LoginWrapper() {
                 )}
                 <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>Login</Button>
             </Form>
-            <div className="text-center mt-4 caption">
+            {/* <div className="text-center mt-4 caption">
                 <span className='text-muted'>Don't have an account yet? <Link to="/signup">Sign Up</Link></span>
-            </div>
+            </div> */}
         </section>
     )
 }

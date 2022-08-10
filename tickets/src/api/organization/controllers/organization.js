@@ -48,5 +48,10 @@ module.exports = createCoreController('api::organization.organization', ({ strap
   },
   async addMember(ctx) {
     // future code
+  },
+  async getRoles(ctx) {
+    const roles = await strapi.db.query('plugin::users-permissions.role').findMany()
+
+    return roles
   }
 }));

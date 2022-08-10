@@ -48,6 +48,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::wallet.wallet"
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
     }
   }
 }

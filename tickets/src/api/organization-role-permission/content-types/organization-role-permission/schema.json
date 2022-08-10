@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_role_permissions",
+  "info": {
+    "singularName": "organization-role-permission",
+    "pluralName": "organization-role-permissions",
+    "displayName": "organizationRolePermission",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "group": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "selectedPermissionIds": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

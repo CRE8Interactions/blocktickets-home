@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import './createRole.scss';
 
 export default function CreateRoleModal({ show, handleClose, permissions, id, role, setRole, isCheck, handleSelectAll, handleCheck, handleCreate }) {
+    if (permissions.length === 0) return (<div />);
     return (
         <Modal id="create-role" scrollable centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -18,10 +19,10 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                     <Form.Label>Role name</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Enter name"
+                        placeholder={role ? role?.name : 'Enter Name'}
                         required
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
+                        defaultValue={''}
+                        onBlur={(e) => setRole(e.target.value)}
                     />
                 </Form.Group>
                 <div className="mb-2">

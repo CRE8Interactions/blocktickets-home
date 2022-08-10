@@ -40,5 +40,10 @@ module.exports = {
       path: '/verifies/admin-signup',
       handler: 'verify.adminSignUp'
     },
+    {
+      method: 'POST',
+      path: '/verifies/admin-create-org',
+      handler: 'verify.adminCreateOrg'
+    },
   ]
 }

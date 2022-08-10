@@ -8,7 +8,6 @@ import { Roles } from "../Roles";
 import { Team } from "../Team";
 
 export default function TeamManagementWrapper() {
-
     // demo purposes: will come from database - delete later
     const roles = ['master_admin', 'admin', 'marketer', 'viewer']
 
