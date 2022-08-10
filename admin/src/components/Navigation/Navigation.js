@@ -40,7 +40,7 @@ export default function Navigation() {
     return (
         <div className="navigation position-sticky">
             <Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
-                <Container className="container">
+                <Container>
                     <LinkContainer to="/" id="logo-link">
                         <Navbar.Brand>
                             <img src={logo} alt="blocktickets" />
@@ -75,20 +75,19 @@ export default function Navigation() {
                                     </ul>
                                 </Nav>
                             </Navbar.Collapse>
-                            <Stack direction="horizontal" className="desktop-only">
-                                <DropdownButton title="Southside Music Hall" variant="info" id="org-dropdown">
-                                    <Stack as="ul" gap={2}>
-                                        <li>
-                                            <LinkContainer to="/settings">
-                                                <Dropdown.Item >Settings</Dropdown.Item>
-                                            </LinkContainer>
-                                        </li>
-                                        <li>
-                                            <Dropdown.Item as="button" id="logout" onClick={() => logout()}>Logout</Dropdown.Item>
-                                        </li>
-                                    </Stack>
-                                </DropdownButton>
-                            </Stack>
+                            <DropdownButton title="Southside Music Hall" variant="info" id="org-dropdown">
+                                <Stack as="ul" gap={2}>
+                                    <li>
+                                        <LinkContainer to="/settings">
+                                            <Dropdown.Item >Settings</Dropdown.Item>
+                                        </LinkContainer>
+                                    </li>
+                                    <li>
+                                        <Dropdown.Item as="button" onClick={() => logout()}>Logout</Dropdown.Item>
+                                    </li>
+                                </Stack>
+                                <p className='name fw-medium'>Harrison Cogan</p>
+                            </DropdownButton>
                         </>
                     }
                 </Container>

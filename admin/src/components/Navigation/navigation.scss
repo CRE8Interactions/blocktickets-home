@@ -62,7 +62,7 @@
 				height: calc(100vh - 88px);
 			}
 
-			ul {
+			#main {
 				li + li {
 					padding-top: rem(8);
 					@include breakpoint-min(lg) {
@@ -70,24 +70,15 @@
 						padding-left: $text-spacer;
 					}
 				}
-
-				& + ul {
-					margin-top: rem(16);
-					@media screen and (min-device-height: 812px) {
-						margin-top: rem(48);
-					}
-				}
-			}
-			#main {
 				.nav-link {
 					@include breakpoint-max(lg) {
 						font-size: $body-2;
 						padding: $nav-link-padding-y $nav-link-padding-x;
 						margin: $nav-link-margin;
 
-						&:hover:not(#logout),
-						&:focus:not(#logout),
-						&.active:not(#logout) {
+						&:hover,
+						&:focus,
+						&.active {
 							@include hover-effect();
 						}
 					}
@@ -108,11 +99,15 @@
 		border-radius: $border-radius-sm !important;
 	}
 
+	#org-dropdown {
+		padding-right: rem(23);
+	}
+
 	.dropdown-menu {
-		min-width: 203px;
+		min-width: 233px;
 		padding: rem(16);
 		background-color: #FFFF;
-		transform: translate(0px, 22px);
+		transform: translate(-22px, 22px);
 		border-top: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
@@ -133,13 +128,17 @@
 			}
 
 			&:last-of-type {
-				border-top: border();
-				padding-top: $text-spacer-xs;
-
-				.dropdown-item:hover {
-					background-color: transparent;
+				.dropdown-item {
+					&::before {
+						content: url($data-svg-prefix + map-get($icons, 'logout'));
+					}
 				}
 			}
+		}
+
+		.name {
+			@extend .seperator;
+			padding: $text-spacer-sm $text-spacer-xs $text-spacer-xs;
 		}
 	}
 }
