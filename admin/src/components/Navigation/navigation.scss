@@ -107,7 +107,7 @@
 		min-width: 233px;
 		padding: rem(16);
 		background-color: #FFFF;
-		transform: translate(-22px, 22px);
+		transform: translate(-22px, 21px);
 		border-top: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
@@ -137,8 +137,9 @@
 		}
 
 		.name {
-			@extend .seperator;
-			padding: $text-spacer-sm $text-spacer-xs $text-spacer-xs;
+			border-top: border();
+			margin: rem(2);
+			padding: $text-spacer-sm $text-spacer-xs rem(12);
 		}
 	}
 }
