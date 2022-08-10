@@ -57,7 +57,7 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
                 {!eventId && (
                     <BackButton handleGoBack={handleGoBack} />
                 )}
-                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" disabled={!selectedImage || !description} onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" disabled={!selectedImage} onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );
