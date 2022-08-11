@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { Tickets } from './Tickets';
+import { BackButton } from '../BackButton';
 
-export default function TicketsWrapper({ handleAction }) {
+export default function TicketsWrapper({ handleAction, handleGoBack, handleNext }) {
 
     const navigate = useNavigate();
 
@@ -45,6 +47,12 @@ export default function TicketsWrapper({ handleAction }) {
                 <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={handleAdd}>Add ticket</Button>
             </header>
             <Tickets tickets={tickets} handleAction={handleAction} />
+            {tickets && tickets.length > 0 && (
+                <Stack direction="horizontal" className="btn-group-flex">
+                    <BackButton handleGoBack={handleGoBack} />
+                    <Button className="btn-next" size="lg" onClick={handleNext}>Continue</Button>
+                </Stack>
+            )}
         </section>
     );
 }
