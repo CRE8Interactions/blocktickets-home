@@ -142,8 +142,8 @@
 
 		.name {
 			border-top: border();
-			margin: rem(2);
-			padding: $text-spacer-sm $text-spacer-xs rem(12);
+			margin-top: $text-spacer-xs;
+			padding: $text-spacer-sm $text-spacer-xs rem(10);
 		}
 	}
 }
