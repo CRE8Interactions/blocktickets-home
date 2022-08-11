@@ -28,7 +28,7 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
             <Form>
                 <Form.Group className="form-group" controlId="ticketType">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" name="name" placeholder="Type of ticket" value={ticket.name} onChange={handleChange} required />
+                    <Form.Control type="text" name="name" placeholder="Name of ticket" value={ticket.name} onChange={handleChange} required />
                 </Form.Group>
 
                 <Form.Group className="form-group" controlId="description">
@@ -46,7 +46,6 @@ export default function CreateTicket({ type, handleChange, ticket, ticketId, set
                         as="textarea" rows={3}
                         name="description"
                         value={ticket.description} onChange={handleChange}
-                        required
                     />
                 </Form.Group>
 

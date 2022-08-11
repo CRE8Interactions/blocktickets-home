@@ -10,22 +10,22 @@ import Stack from "react-bootstrap/Stack";
 import { StatRow } from "../../StatRow";
 import { InfoIcon } from "../../InfoIcon";
 
-export default function CustomTab({ title, total, amount, stat, statAmount, text, sales }) {
+export default function CustomTab({ title, total, amount, stat, statAmount, view, sales }) {
 
     const [tooltip, setTooltip] = useState('')
 
     useEffect(() => {
         switch (title) {
             case 'Net sales':
-                setTooltip('Sales across  all your events after fees have been paid out')
+                setTooltip('Sales across all your events after fees have been paid')
                 break;
 
             case 'Gross sales':
-                setTooltip('Sales across all your events before fees have been paid ')
+                setTooltip('Sales across all your events before fees have been paid')
                 break
 
             case 'Tickets sold':
-                setTooltip(`The total ${sales == 'primary sales' ? 'primary' : 'secondary'} tickets sold across all your events on sale`)
+                setTooltip(`Total ${sales == 'Primary sales' ? 'primary' : 'secondary'} tickets sold across all your events on sale`)
                 break
 
             case 'Page views':
@@ -41,7 +41,7 @@ export default function CustomTab({ title, total, amount, stat, statAmount, text
                 break;
         }
 
-    }, [title, sales])
+    }, [sales])
 
     return (
         <Stack className="justify-content-between align-items-start">
@@ -49,14 +49,13 @@ export default function CustomTab({ title, total, amount, stat, statAmount, text
                 <Stack direction="horizontal" gap={2}>
                     <span className="small-label">{title}</span>
                     <OverlayTrigger
-                        placement="right"
                         overlay={<Tooltip>{tooltip}</Tooltip>}>
                         <Button variant="link">
                             <InfoIcon variant="dark" />
                         </Button>
                     </OverlayTrigger>
                 </Stack>
-                <StatRow stat={stat} statAmount={statAmount} text={text} />
+                <StatRow stat={stat} statAmount={statAmount} text={view} />
             </Stack>
             <span className="fs-md fw-semi-bold">{total ? `${formatCurrency(total)}` : `${formatNumber(amount)}`}</span>
         </Stack>

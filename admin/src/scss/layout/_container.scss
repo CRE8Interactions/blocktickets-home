@@ -3,38 +3,27 @@
 @use '../theme/borders' as *;
 @use './spacing' as *;
 
-$pad-sm: rem(32);
-$pad-md: rem(81);
+$pad: rem(32);
 
 $navbar-height-sm: rem(88);
 $navbar-height: rem(82);
 
-.my-container {
-	max-width: 1130px;
+.container {
+	max-width: 1440px;
 	margin: 0 auto;
-	@include breakpoint-max(md) {
-		padding-right: $pad-sm;
-		padding-left: $pad-sm;
-	}
-
-	@include breakpoint-inBetween(md, xl) {
-		padding-right: $pad-md;
-		padding-left: $pad-md;
-	}
+	padding-right: $pad;
+	padding-left: $pad;
 }
 
 .backgroundWhite {
 	background-color: #ffffff;
 }
 
-.main-content {
-	margin-left: 314px;
-}
-
 .sidebar-container {
+	margin-left: 314px;
 	max-width: 100%;
-	padding-right: rem(32);
-	padding-left: rem(32);
+	padding-right: $pad;
+	padding-left: $pad;
 }
 
 .max-width-wrapper {
