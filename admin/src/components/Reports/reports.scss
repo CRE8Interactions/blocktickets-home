@@ -12,6 +12,10 @@
 		@include breakpoint-min(lg) {
 			order: 2;
 		}
+
+		ul {
+			gap: rem(15);
+		}
 	}
 
 	.form-select {
@@ -19,9 +23,9 @@
 		padding: rem(8) $input-padding-x-sm;
 		background-color: transparent;
 	}
+
 	.nav-link {
-		padding: rem(19) rem(16);
-		padding-bottom: rem(10);
+		padding: rem(16);
 		display: flex;
 		gap: $gap;
 		border-radius: $border-radius;
@@ -39,8 +43,10 @@
 	}
 
 	.nav-item {
-		.nav-link:before {
-			@extend %img-psuedo-icon;
+		.nav-link {
+			&::before {
+				@extend %img-psuedo-icon;
+			}
 		}
 
 		&:first-of-type {
