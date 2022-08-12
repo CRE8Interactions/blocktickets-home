@@ -31,40 +31,42 @@ export default function DetailsModal({ order }) {
                                 <p className="heading">Ticket Info</p>
                                 <ul>
                                     {order?.event?.presentedBy &&
-                                        <span>{order?.event?.presentedBy}</span>
+                                        <li>{order?.event?.presentedBy}</li>
                                     }
-                                    <span>{order?.event?.name}</span>
-                                    <span>Doors Open at {moment(order?.event?.doorsOpen).format('h:mm A')}</span>
-                                    <span>{moment(order?.event?.start).format('ddd MMM D YYYY h:mm A')}</span>
+                                    <li>{order?.event?.name}</li>
+                                    <li>Doors Open at {moment(order?.event?.doorsOpen).format('h:mm A')}</li>
+                                    <li>{moment(order?.event?.start).format('ddd MMM D YYYY h:mm A')}</li>
                                 </ul>
                             </li>
                         </ul>
+                    </ListGroup.Item>
+                    <ListGroup.Item as="li" className="list">
                         <p className="heading">Location</p>
-                        <p>{order?.event?.venue?.name} {order?.event?.venue?.address[0]?.city} {order?.event?.venue?.address[0]?.state} {order?.event?.venue?.address[0]?.country}</p>
+                        <span>{order?.event?.venue?.name} {order?.event?.venue?.address[0]?.city} {order?.event?.venue?.address[0]?.state} {order?.event?.venue?.address[0]?.country}</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Order Number</p>
-                        <p>{order?.orderId}</p>
+                        <span>{order?.orderId}</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Purchase Date</p>
-                        <p>{moment(order?.createdAt).format('ddd, MMM D YYYY - h:mmA')}</p>
+                        <span>{moment(order?.createdAt).format('ddd, MMM D YYYY - h:mmA')}</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Contact Address</p>
-                        <p className="text-secondary">Oxa7d8…..d270</p>
+                        <span className="text-secondary">Oxa7d8…..d270</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Token ID</p>
-                        <p className="text-secondary">23000121</p>
+                        <span className="text-secondary">23000121</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Token Standard</p>
-                        <p className="text-secondary">ERC - 721</p>
+                        <span className="text-secondary">ERC - 721</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Blockchain</p>
-                        <p className="text-secondary">Ethereum</p>
+                        <span className="text-secondary">Ethereum</span>
                     </ListGroup.Item>
                 </ListGroup>
             </Modal.Body>
