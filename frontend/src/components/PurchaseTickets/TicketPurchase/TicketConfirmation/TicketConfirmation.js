@@ -108,67 +108,69 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
             </div>
 
             <div className="ticket-counter">
-                <h2 className="caption--uppercase text-muted mb-2">Number of Tickets</h2>
-                <Stack direction="horizontal" className="justify-content-between">
-                    <div className="flex-grow-1">
-                        <p className="fw-semi-bold caption">
-                            {listing && 'Resale Ticket'}
-                        </p>
-                        <Button variant="link" onClick={handleShow}>{listing ? listing.tickets[0].name : ticket.name}</Button>
-                        <p className="fw-bold">
-                            ${totalTicketPrice} ea
-                            <br />
+                <>
+                    <h2 className="caption--uppercase text-muted mb-2">Number of Tickets</h2>
+                    <Stack direction="horizontal" className="justify-content-between">
+                        <Stack gap={1}>
+                            {listing && (
+                                <span className="fw-semi-bold caption text-muted">
+                                    Resale Ticket
+                                </span>
+                            )}
+                            <Button variant="link" onClick={handleShow}>{listing ? listing.tickets[0].name : ticket.name}</Button>
+                            <span className="fw-bold">
+                                ${totalTicketPrice} ea</span>
                             <span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} + ${ticketFees} Fees</span>
-                        </p>
-                    </div>
-                    <Stack direction="horizontal" className="counter fw-bolder">
-                        <Button
-                            title="decrease quantity of tickets"
-                            className="btn--icon"
-                            variant="outline-light"
-                            onClick={() => setTicketCount(ticketCount - 1)}
-                            disabled={listing ? true : ticket ? ticketCount === ticket.minimum_quantity : false}
-                            aria-disabled={ticket ? ticketCount === ticket.minimum_quantity : 'true'}>
-                            <svg
-                                role="img"
-                                width="25"
-                                height="24"
-                                viewBox="0 0 25 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M6.875 12C6.875 11.4477 7.32272 11 7.875 11H17.875C18.4273 11 18.875 11.4477 18.875 12C18.875 12.5523 18.4273 13 17.875 13H7.875C7.32272 13 6.875 12.5523 6.875 12Z"
-                                    fill="#777E91"
-                                />
-                            </svg>
-                        </Button>
-                        <span className="flex-grow-1 text-center">{listing ? listing.tickets.length : ticketCount}</span>
-                        <Button
-                            title="increase quantity of tickets"
-                            className="btn--icon ms-0"
-                            variant="outline-light"
-                            onClick={() => setTicketCount(ticketCount + 1)}
-                            disabled={listing ? true : (ticketCount >= (ticket.resale ? 1 : ticket.maximum_quantity) || ticketCount >= ticketContext.generalAdmissionCount)}
-                            aria-disabled={listing ? true : ticket ? ticketCount >= ticket.maximum_quantity : true}>
-                            <svg
-                                role="img"
-                                width="25"
-                                height="24"
-                                viewBox="0 0 25 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M13.95 7C13.95 6.44772 13.5022 6 12.95 6C12.3977 6 11.95 6.44772 11.95 7V11H7.94995C7.39767 11 6.94995 11.4477 6.94995 12C6.94995 12.5523 7.39767 13 7.94995 13H11.95V17C11.95 17.5523 12.3977 18 12.95 18C13.5022 18 13.95 17.5523 13.95 17V13H17.95C18.5022 13 18.95 12.5523 18.95 12C18.95 11.4477 18.5022 11 17.95 11H13.95V7Z"
-                                    fill="#777E91"
-                                />
-                            </svg>
-                        </Button>
+                        </Stack>
+                        <Stack direction="horizontal" className="counter fw-bolder">
+                            <Button
+                                title="decrease quantity of tickets"
+                                className="btn--icon"
+                                variant="outline-light"
+                                onClick={() => setTicketCount(ticketCount - 1)}
+                                disabled={listing ? true : ticket ? ticketCount === ticket.minimum_quantity : false}
+                                aria-disabled={ticket ? ticketCount === ticket.minimum_quantity : 'true'}>
+                                <svg
+                                    role="img"
+                                    width="25"
+                                    height="24"
+                                    viewBox="0 0 25 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d="M6.875 12C6.875 11.4477 7.32272 11 7.875 11H17.875C18.4273 11 18.875 11.4477 18.875 12C18.875 12.5523 18.4273 13 17.875 13H7.875C7.32272 13 6.875 12.5523 6.875 12Z"
+                                        fill="#777E91"
+                                    />
+                                </svg>
+                            </Button>
+                            <span className="flex-grow-1 text-center">{listing ? listing.tickets.length : ticketCount}</span>
+                            <Button
+                                title="increase quantity of tickets"
+                                className="btn--icon ms-0"
+                                variant="outline-light"
+                                onClick={() => setTicketCount(ticketCount + 1)}
+                                disabled={listing ? true : (ticketCount >= (ticket.resale ? 1 : ticket.maximum_quantity) || ticketCount >= ticketContext.generalAdmissionCount)}
+                                aria-disabled={listing ? true : ticket ? ticketCount >= ticket.maximum_quantity : true}>
+                                <svg
+                                    role="img"
+                                    width="25"
+                                    height="24"
+                                    viewBox="0 0 25 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d="M13.95 7C13.95 6.44772 13.5022 6 12.95 6C12.3977 6 11.95 6.44772 11.95 7V11H7.94995C7.39767 11 6.94995 11.4477 6.94995 12C6.94995 12.5523 7.39767 13 7.94995 13H11.95V17C11.95 17.5523 12.3977 18 12.95 18C13.5022 18 13.95 17.5523 13.95 17V13H17.95C18.5022 13 18.95 12.5523 18.95 12C18.95 11.4477 18.5022 11 17.95 11H13.95V7Z"
+                                        fill="#777E91"
+                                    />
+                                </svg>
+                            </Button>
+                        </Stack>
                     </Stack>
-                </Stack>
+                </>
             </div>
             <TicketPurchaseFooter>
                 <Link to={'/checkout/1'} className="btn w-100 btn-primary btn-lg">
@@ -177,6 +179,6 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
             </TicketPurchaseFooter>
 
             <TicketDescriptionModal show={show} handleClose={handleClose} name={listing ? listing.tickets[0].name : ticket.name} />
-        </Fragment>
+        </Fragment >
     );
 }
