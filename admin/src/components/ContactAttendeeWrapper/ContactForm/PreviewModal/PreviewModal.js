@@ -41,12 +41,16 @@ export default function PreviewModal({ show, handleClose, message, event }) {
                         width="212"
                         height="213"
                     />
-                    <h4 className="event-name mb-2">Nic Fancuilli Live</h4>
-                    <Stack as="p" gap={1} className="small align-items-center">
-                        <span>Fri Sept 3, 2022 EST <span className='time'>9:00 PM EST</span></span>
-                        <span>Southside Music Hall</span>
-                        <span className='text-muted'>Dallas, TX</span>
-                    </Stack>
+                    <ul>
+                        <li>
+                            <h4 className="event-name mb-2">Nic Fancuilli Live</h4>
+                            <Stack as="ul" gap={1} className="small align-items-center">
+                                <li>Fri Sept 3, 2022 EST <span className='time'>9:00 PM EST</span></li>
+                                <li>Southside Music Hall</li>
+                                <li className='text-muted'>Dallas, TX</li>
+                            </Stack>
+                        </li>
+                    </ul>
                     <Button className='mt-4'>Buy tickets</Button>
                 </Card>
                 <div className="footer">

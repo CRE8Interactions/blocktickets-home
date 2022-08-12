@@ -2,7 +2,11 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RequireAuth } from './context/Auth/Auth';
 
-import { LoginPage, ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage } from './pages';
+import {
+    LoginPage,
+    ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage
+} from './pages';
+
 import { ScrollToTop } from './components';
 
 /**
