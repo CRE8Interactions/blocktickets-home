@@ -7,6 +7,12 @@
 .modal {
 	line-height: 1.5;
 
+	p {
+		+ p {
+			margin-top: $text-spacer-sm;
+		}
+	}
+
 	&--popup {
 		@include breakpoint-max(md) {
 			box-shadow: $box-shadow-popupCard;
