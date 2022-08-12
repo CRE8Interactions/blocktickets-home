@@ -109,11 +109,11 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
 
             <div className="ticket-counter">
                 <>
-                    <h2 className="caption--uppercase text-muted mb-2">Number of Tickets</h2>
+                    <h2 className="caption--uppercase text-muted mb-3">Number of Tickets</h2>
                     <Stack direction="horizontal" className="justify-content-between">
-                        <Stack gap={1}>
+                        <Stack className="align-items-start" gap={1}>
                             {listing && (
-                                <span className="fw-semi-bold caption text-muted">
+                                <span className="fw-semi-bold caption m- 0 text-muted">
                                     Resale Ticket
                                 </span>
                             )}
