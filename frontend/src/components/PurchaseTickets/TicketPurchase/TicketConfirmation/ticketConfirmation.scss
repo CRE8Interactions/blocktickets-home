@@ -6,6 +6,12 @@
 		padding: em(23) 0px;
 	}
 
+	.btn-link {
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
 	.ticket-details {
 		h1 {
 			margin-bottom: rem(6);
