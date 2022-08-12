@@ -108,7 +108,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
             </div>
 
             <div className="ticket-counter">
-                <h2 className="caption--uppercase text-muted mb-3">Number of Tickets</h2>
+                <h2 className="caption--uppercase text-muted mb-2">Number of Tickets</h2>
                 <Stack direction="horizontal" className="justify-content-between">
                     <div className="flex-grow-1">
                         <p className="fw-semi-bold caption">
