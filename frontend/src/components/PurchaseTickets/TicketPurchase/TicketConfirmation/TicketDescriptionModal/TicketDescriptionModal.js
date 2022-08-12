@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import './ticketDescriptionModal.scss';
 
-export default function TicketDescriptionModal({ show, handleClose, name, description }) {
+export default function TicketDescriptionModal({ show, handleClose, name }) {
     return (
         <Modal id="ticket-description" scrollable centered animation={false} fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton className='mb-0'>

@@ -176,7 +176,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
                 </Link>
             </TicketPurchaseFooter>
 
-            <TicketDescriptionModal show={show} handleClose={handleClose} name={listing ? listing.tickets[0].name : ticket.name} description={ticket.description} />
+            <TicketDescriptionModal show={show} handleClose={handleClose} name={listing ? listing.tickets[0].name : ticket.name} />
         </Fragment>
     );
 }
