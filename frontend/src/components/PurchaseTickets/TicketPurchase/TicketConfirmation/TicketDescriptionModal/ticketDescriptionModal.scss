@@ -1,0 +1,15 @@
+@use '../../../../../scss/theme/modal' as *;
+@use '../../../../../scss/abstracts' as *;
+
+#ticket-description {
+	.modal-content {
+		@include breakpoint-min(lg) {
+			max-width: 569px;
+		}
+	}
+	.title {
+		padding: $modal-inner-padding;
+		padding-top: em(15);
+		padding-bottom: 0px;
+	}
+}
