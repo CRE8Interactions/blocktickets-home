@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom'
+import { formatString } from '../../utilities/helpers';
 
 import AuthService from '../../utilities/services/auth.service';
 import { useWindowSize } from '../../utilities/hooks';
@@ -17,7 +18,7 @@ import desktopLogo from '../../assets/logo.svg';
 
 import './navigation.scss';
 
-export default function Navigation() {
+export default function Navigation({orgs, user}) {
     const windowSize = useWindowSize();
     const navigate = useNavigate();
 
@@ -36,6 +37,10 @@ export default function Navigation() {
         AuthService.logoutUser();
         navigate("/");
     }
+
+    const displayName = (user) => {
+        if (user?.user) return formatString(`${user?.user?.firstName} ${user?.user?.lastName}`);
+    }   
 
     return (
         <div className="navigation position-sticky">
@@ -75,7 +80,7 @@ export default function Navigation() {
                                     </ul>
                                 </Nav>
                             </Navbar.Collapse>
-                            <DropdownButton title="Southside Music Hall" variant="info" id="org-dropdown">
+                            <DropdownButton title={orgs && orgs?.length === 1 ? orgs[0]?.name : 'Default'} variant="info" id="org-dropdown">
                                 <Stack as="ul" gap={2}>
                                     <li>
                                         <LinkContainer to="/settings">
@@ -86,7 +91,7 @@ export default function Navigation() {
                                         <Dropdown.Item as="button" onClick={() => logout()}>Logout</Dropdown.Item>
                                     </li>
                                 </Stack>
-                                <p className='name fw-medium'>Harrison Cogan</p>
+                                <p className='name fw-medium'>{displayName(user)}</p>
                             </DropdownButton>
                         </>
                     }

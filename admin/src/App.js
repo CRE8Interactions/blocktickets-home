@@ -27,9 +27,9 @@ function App() {
     ] = useState(false);
     const myOrgs = useContext(OrganizationContext);
 
-    // useEffect(() => {
-    // 	if (user) getOrg();
-    // }, []);
+    useEffect(() => {
+    	if (user) getOrg();
+    }, []);
 
     let location = useLocation();
 
@@ -49,14 +49,10 @@ function App() {
             .catch((err) => console.error(err));
     };
 
-    const createOrg = async (data) => {
-        await createOrganization(data).then((res) => getOrg()).catch((err) => console.error(err));
-    };
-
     return (
         <div className="App">
             <UserContext.Provider value={{ authenticated, setAuthenticated, user }}>
-                <Navigation />
+                <Navigation orgs={orgs} user={user} />
                 <div className="container" id="main-container">
                     <Router />
                 </div>
