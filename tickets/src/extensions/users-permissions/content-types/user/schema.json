@@ -70,7 +70,7 @@
     },
     "phoneNumber": {
       "type": "string",
-      "required": true,
+      "required": false,
       "unique": true
     },
     "dob": {
@@ -92,6 +92,11 @@
     "uuid": {
       "type": "string",
       "unique": true
+    },
+    "organization_role": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization-role.organization-role"
     }
   }
 }

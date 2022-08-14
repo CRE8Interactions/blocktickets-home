@@ -10,8 +10,11 @@ import Alert from 'react-bootstrap/Alert'
 
 import { DateInputWrapper } from '../../DateInputWrapper'
 
-export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate, handleTaxDetails }) {
-
+export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate, handleTaxDetails, company }) {
+    const classifications = [
+        'Individual/sole proprietor or single-member LLC', 'C Corporation', 'S Corporation', 'Partnership',
+        'Trust/estate', 'Limited liability company'
+    ]
     return (
         <>
             {step === 1 && (
@@ -21,20 +24,23 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                         <Form.Control
                             name="name"
                             type="text"
-                            defaultValue="The Party Group LLC"
+                            defaultValue={company?.companyName}
                             disabled
                         />
                     </Form.Group>
                     <Form.Group className='form-group' controlId="corporation">
                         <Form.Label>Corporation</Form.Label>
-                        <Form.Control
-                            type="text"
-                            defaultValue="C Corporation"
-                            disabled
-                        />
+                        <Form.Select
+                            value={taxDetails.corporation} onChange={handleTaxDetails} name="corporation">
+                            <optgroup className="text-muted" label="Federal tax classification">
+                                {classifications.map((option, index) => (
+                                    <option key={index} value={option}>{option}</option>
+                                ))}
+                            </optgroup>
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group className='form-group' controlId="code">
-                        <Form.Label>Description code</Form.Label>
+                        <Form.Label>Exemption code</Form.Label>
                         <Form.Select
                             value={taxDetails.taxCode} onChange={handleTaxDetails} name="taxCode">
                             <optgroup className="text-muted" label="Exempt payee code (if any)">
@@ -80,7 +86,7 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                                 <Col className='ps-0'>
                                     <Form.Select aria-label="State" value={taxDetails.state} onChange={handleTaxDetails} name="state">
                                         {stateOpt.map((option, index) => (
-                                            <option key={index} value={option.value}>{option.label}</option>
+                                            <option key={index} value={option.value}>{option.name}</option>
                                         ))}
                                     </Form.Select>
                                 </Col>

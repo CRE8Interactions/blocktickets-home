@@ -18,82 +18,82 @@ module.exports = {
   //  └───────────────────────── second (0 - 59, OPTIONAL)
 
   
-  listingJob: {
-    task: async ({ strapi }) => {
-      // Gets new listings
-      const listings = await strapi.entityService.findMany('api::listing.listing', {
-        filters: {
-          $and: [
-            { status: 'new' }
-          ]
-        },
-        populate: { 
-          tickets: true,
-          event: {
-            filters: {
-              $and: [
-                { start: { $lte: new Date() } }
-              ]
-            },
-            populate: {
-              image: true,
-              venue: {
-                populate: {
-                  address: true
-                }
-              }
-            }
-          },
-          users_permissions_user: true
-        },
-      });
-      // Filter listings where events are null due to being in the past
-      const expiredListings = listings.filter((listing) => listing.event != null);
-      // Change state to expired for listings
-      const expiredListingIds = expiredListings.map((listing) => listing.id)
+  // listingJob: {
+  //   task: async ({ strapi }) => {
+  //     // Gets new listings
+  //     const listings = await strapi.entityService.findMany('api::listing.listing', {
+  //       filters: {
+  //         $and: [
+  //           { status: 'new' }
+  //         ]
+  //       },
+  //       populate: { 
+  //         tickets: true,
+  //         event: {
+  //           filters: {
+  //             $and: [
+  //               { start: { $lte: new Date() } }
+  //             ]
+  //           },
+  //           populate: {
+  //             image: true,
+  //             venue: {
+  //               populate: {
+  //                 address: true
+  //               }
+  //             }
+  //           }
+  //         },
+  //         users_permissions_user: true
+  //       },
+  //     });
+  //     // Filter listings where events are null due to being in the past
+  //     const expiredListings = listings.filter((listing) => listing.event != null);
+  //     // Change state to expired for listings
+  //     const expiredListingIds = expiredListings.map((listing) => listing.id)
 
-      await strapi.db.query('api::listing.listing').updateMany({
-        where: {
-          id: expiredListingIds,
-        },
-        data: {
-          status: 'expired',
-        },
-      });
+  //     await strapi.db.query('api::listing.listing').updateMany({
+  //       where: {
+  //         id: expiredListingIds,
+  //       },
+  //       data: {
+  //         status: 'expired',
+  //       },
+  //     });
 
-      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').notifyListingExpired(expiredListings);
-    },
-    options: {
-       rule: '0 1 * * * *',
-       tz: 'America/New_York',
-    },
-  },
-  verifyJob: {
-    task: async ({ strapi }) => {
-      // Clears unclaimed verification codes over 5 minutes old
-      const verifications = await strapi.entityService.findMany('api::verify.verify', {
-        fields: ['id'],
-        filters: {
-          addedAt: {
-            $lte: moment().subtract(5, 'minutes').format() 
-          }
-        },
-      });
+  //     if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').notifyListingExpired(expiredListings);
+  //   },
+  //   options: {
+  //      rule: '0 1 * * * *',
+  //      tz: 'America/New_York',
+  //   },
+  // },
+  // verifyJob: {
+  //   task: async ({ strapi }) => {
+  //     // Clears unclaimed verification codes over 5 minutes old
+  //     const verifications = await strapi.entityService.findMany('api::verify.verify', {
+  //       fields: ['id'],
+  //       filters: {
+  //         addedAt: {
+  //           $lte: moment().subtract(5, 'minutes').format() 
+  //         }
+  //       },
+  //     });
 
-      if (verifications.legnth === 0) return;
+  //     if (verifications.legnth === 0) return;
 
-      await strapi.db.query('api::verify.verify').deleteMany({
-        where: {
-          id: {
-            $in: verifications.map(verifcation => verifcation.id),
-          },
-        },
-      });
+  //     await strapi.db.query('api::verify.verify').deleteMany({
+  //       where: {
+  //         id: {
+  //           $in: verifications.map(verifcation => verifcation.id),
+  //         },
+  //       },
+  //     });
 
-    },
-    options: {
-      rule: '* * * * *',
-      tz: 'America/New_York',
-   },
-  }
+  //   },
+  //   options: {
+  //     rule: '* * * * *',
+  //     tz: 'America/New_York',
+  //  },
+  // }
 };

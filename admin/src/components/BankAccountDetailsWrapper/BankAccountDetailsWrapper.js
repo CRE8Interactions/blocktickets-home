@@ -4,7 +4,7 @@ import { isMatching, stateOpt } from '../../utilities/helpers';
 
 import { BankAccountDetails } from './BankAccountDetails'
 
-export default function BankAccountDetailsWrapper({ getBankAccount, isValid, setIsValid }) {
+export default function BankAccountDetailsWrapper({ getBankAccount, isValid, setIsValid, submitBankAccount }) {
 
     const inputEl = useRef();
 
@@ -42,7 +42,8 @@ export default function BankAccountDetailsWrapper({ getBankAccount, isValid, set
 
     // update parent state when state changes 
     useEffect(() => {
-        getBankAccount(bankAccount)
+        // getBankAccount(bankAccount)
+        submitBankAccount(bankAccount)
     }, [bankAccount])
 
     // reset error when accountNumber input changed

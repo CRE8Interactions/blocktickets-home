@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "w9s",
+  "info": {
+    "singularName": "w9",
+    "pluralName": "w9s",
+    "displayName": "w9",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "taxClassification": {
+      "type": "string",
+      "required": true
+    },
+    "exemptionCodes": {
+      "type": "string"
+    },
+    "ein": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    },
+    "signed": {
+      "type": "datetime"
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "signedBy": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

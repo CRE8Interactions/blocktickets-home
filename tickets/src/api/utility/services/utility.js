@@ -12,6 +12,9 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
   async generateUUID() {
     return uuidv4();
   },
+  async generateCode() {
+    return Math.floor(1000 + Math.random() * 9000)
+  },
   async refreshDB() {
     await strapi.db.query('api::ticket.ticket').updateMany({
       where: {
