@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { publishEvent } from "../../utilities/api";
 import OrganizationContext from '../../context/Organization/Organization';
 
-import Stack from 'react-bootstrap/Stack';
-import Button from 'react-bootstrap/Button';
-
-import { BackButton } from '../BackButton';
 import { BasicInfoWrapper } from '../BasicInfoWrapper';
 import { DetailsWrapper } from '../DetailsWrapper';
 import { CreateTicketWrapper } from "../CreateTicketWrapper";
@@ -28,33 +24,6 @@ export default function CreateEventWrapper() {
     const [action, setAction] = useState()
 
     const [event, setEvent] = useState()
-
-    // for step 4 - to make display of buttons work - delete later
-    const [tickets] = useState([
-        {
-            id: 0,
-            type: 'General Admission',
-            status: 'on_sale',
-            desc: 'Ends May 3, 2022 at 12:00 AM',
-            ticketsSold: '100/300',
-            price: 50
-        },
-        {
-            id: 1,
-            type: 'General Admission',
-            status: 'scheduled',
-            desc: 'Starts April  12, 2022 at 12:00 AM',
-            ticketsSold: '100/300',
-            price: 50
-        },
-        {
-            id: 2,
-            type: 'General Admission',
-            status: 'sale_ended',
-            ticketsSold: '100/300',
-            price: 50
-        }
-    ])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -103,7 +72,7 @@ export default function CreateEventWrapper() {
     const orgs = useContext(OrganizationContext);
 
     return (
-        <div className={` ${step !== 4 ? 'wrapper' : ''}`} id="create-event">
+        <div id="create-event">
             {step === 1 && (
                 <BasicInfoWrapper handleNext={handleNext} />
             )}
@@ -116,15 +85,7 @@ export default function CreateEventWrapper() {
                 <CreateTicketWrapper ticketId={ticketId} handleGoBack={handleGoBack} handleNext={handleNext} />
             )}
             {step === 4 && (
-                <>
-                    <TicketsWrapper handleAction={handleAction} />
-                    {tickets && tickets.length > 0 && (
-                        <Stack direction="horizontal" className="btn-group-flex">
-                            <BackButton handleGoBack={handleGoBack} />
-                            <Button className="btn-next" size="lg" onClick={handleNext}>Continue</Button>
-                        </Stack>
-                    )}
-                </>
+                <TicketsWrapper handleAction={handleAction} handleNext={handleNext} handleGoBack={handleGoBack} />
             )}
 
             {step === 5 && (

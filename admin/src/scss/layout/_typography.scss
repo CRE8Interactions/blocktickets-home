@@ -139,8 +139,7 @@ h4,
 
 	&-with-seperator {
 		& + .list-with-seperator:not(.list.list-group-item) {
-			border-top: border();
-			padding-top: $text-spacer-sm;
+			@extend .seperator;
 		}
 	}
 }

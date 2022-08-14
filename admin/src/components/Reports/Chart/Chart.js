@@ -9,7 +9,7 @@ import Stack from 'react-bootstrap/Stack';
 
 import { StatRow } from '../../StatRow';
 
-export default function Chart({ title, total, amount, stat, statAmount, text, sales }) {
+export default function Chart({ title, total, amount, stat, statAmount, view, sales }) {
 
     const options = {
         chart: {
@@ -35,7 +35,7 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
             tickInterval: 24 * 3600 * 1000,
             labels: {
                 formatter: function () {
-                    switch (text) {
+                    switch (view) {
                         case 'Last 24 hrs':
                             return Highcharts.dateFormat('%H:%M', this.value)
 
@@ -90,7 +90,7 @@ export default function Chart({ title, total, amount, stat, statAmount, text, sa
             <Stack direction="horizontal" className="split-row mb-4">
                 <Stack>
                     <h1 className='card-body-title'>{title}</h1>
-                    <StatRow bg={true} stat={stat} statAmount={statAmount} text={text} />
+                    <StatRow bg={true} stat={stat} statAmount={statAmount} text={view} />
                 </Stack>
                 <Stack className='text-end' gap={1}>
                     <span className='fw-semi-bold card-body-title'>{total ? `${formatCurrency(total)}` : `${formatNumber(amount)}`}</span>

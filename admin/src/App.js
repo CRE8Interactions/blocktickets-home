@@ -57,7 +57,7 @@ function App() {
         <div className="App">
             <UserContext.Provider value={{ authenticated, setAuthenticated, user }}>
                 <Navigation />
-                <div className="main my-container" id="main-container">
+                <div className="container" id="main-container">
                     <Router />
                 </div>
             </UserContext.Provider>

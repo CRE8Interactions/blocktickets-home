@@ -92,7 +92,7 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
                 <BackButton handleGoBack={handleGoBack} />
-                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.description || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleClick}>{ticketId || id ? 'Save' : 'Create ticket'}</Button>
+                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleClick}>{ticketId || id ? 'Save' : 'Create ticket'}</Button>
             </Stack>
         </section>
     );
