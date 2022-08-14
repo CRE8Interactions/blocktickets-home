@@ -62,6 +62,10 @@ const logoutUser = () => {
   sessionStorage.removeItem('user')
 }
 
+const removeSignup = () => {
+  sessionStorage.removeItem('signup-token')
+}
+
 const isOrganizer = () => {
   const jwt = getUser()
   if (!jwt) return false
@@ -76,6 +80,7 @@ const atts = {
   getSignUpToken,
   getOrg,
   isLoggedIn,
+  removeSignup,
   logoutUser,
   token,
   isOrganizer

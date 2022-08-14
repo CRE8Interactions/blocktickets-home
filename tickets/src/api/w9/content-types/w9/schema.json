@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "taxClassification": {
       "type": "string",
       "required": true
@@ -38,6 +33,15 @@
     },
     "ipAddress": {
       "type": "string"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "signedBy": {
+      "type": "string",
+      "required": true
     }
   }
 }

@@ -650,5 +650,44 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     } catch (err) {
       strapi.log.debug('📺: ', err);
     }
+  },
+  async sendMemberInvite(params) {
+    const org = await strapi.entityService.findOne('api::organization.organization', params.data.organization);
+    try {
+      await strapi
+        .plugin('email-designer')
+        .service('email')
+        .sendTemplatedEmail(
+          {
+            // required
+            to: params.data.email,
+  
+            // optional if /config/plugins.js -> email.settings.defaultFrom is set
+            from: process.env.MAIN_EMAIL,
+  
+            // optional if /config/plugins.js -> email.settings.defaultReplyTo is set
+            replyTo: process.env.MAIN_EMAIL,
+  
+            // optional array of files
+            attachments: [],
+          },
+          {
+            // required - Ref ID defined in the template designer (won't change on import)
+            templateReferenceId: 100,
+  
+            // If provided here will override the template's subject.
+            // Can include variables like `Thank you for your order {{= USER.firstName }}!`
+            subject: `You've been added`,
+          },
+          {
+            // this object must include all variables you're using in your email template
+            user: params.data.firstName,
+            code: params.data.inviteCode,
+            organization: org
+          }
+        );
+    } catch (err) {
+      strapi.log.debug('📺: ', err);
+    }
   }
 }))

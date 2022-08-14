@@ -21,7 +21,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                         type="text"
                         placeholder={role ? role?.name : 'Enter Name'}
                         required
-                        defaultValue={''}
+                        defaultValue={role ? role?.name : ''}
                         onBlur={(e) => setRole(e.target.value)}
                     />
                 </Form.Group>

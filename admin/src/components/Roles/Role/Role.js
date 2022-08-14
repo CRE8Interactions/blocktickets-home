@@ -12,7 +12,7 @@ export default function Role({ role, handleShowCreate, handleShowDelete }) {
         <Stack direction="horizontal" as="li" className='list-item split-row'>
             <h2 className='normal m-0'>{formatString(role?.name)}</h2>
             {role !== 'master_admin' && (
-                <EditDeleteDropdown onClick={(e) => handleShowCreate(e, role)} handleShow={handleShowDelete} role={role} />
+                <EditDeleteDropdown onClick={(e) => handleShowCreate(e, role)} handleShow={() => handleShowDelete(role)} />
             )}
         </Stack>
     )

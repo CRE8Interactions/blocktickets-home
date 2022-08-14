@@ -5,7 +5,7 @@ import { stateOpt } from '../../utilities/helpers'
 import { TaxStatus } from './TaxStatus'
 
 // step is controlled from parent component
-export default function TaxWrapper({ step, setStep, getTaxDetails }) {
+export default function TaxWrapper({ step, setStep, getTaxDetails, company }) {
 
     const taxCodeOpt = [
         {
@@ -75,7 +75,8 @@ export default function TaxWrapper({ step, setStep, getTaxDetails }) {
         state: stateOpt[0].value,
         zip_code: '',
         ein: '',
-        sign_by: 'Harrison Cogan'
+        sign_by: '',
+        corporation: ''
     })
 
     // set step when component mounts 
@@ -91,13 +92,14 @@ export default function TaxWrapper({ step, setStep, getTaxDetails }) {
 
     const handleTaxDetails = (e) => {
         setTaxDetails({ ...taxDetails, [e.target.name]: e.target.value })
+        getTaxDetails(taxDetails)
     }
 
     return (
         <>
             <h1 className='fs-md'>IRS Substitute Form W-9</h1>
             <h2 className='fw-normal small mb-4'>The following form is required by the U.S. Internal Revenue Service and is only available in U.S. English. Please complete in U.S. English.</h2>
-            <TaxStatus step={step} taxDetails={taxDetails} taxCodeOpt={taxCodeOpt} date={date} setDate={setDate} handleTaxDetails={handleTaxDetails} />
+            <TaxStatus step={step} taxDetails={taxDetails} taxCodeOpt={taxCodeOpt} date={date} setDate={setDate} handleTaxDetails={handleTaxDetails} company={company} />
         </>
     )
 }

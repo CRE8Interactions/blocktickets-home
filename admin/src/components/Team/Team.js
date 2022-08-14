@@ -7,33 +7,15 @@ import { Member } from './Member'
 import { AddMemberModal } from './AddMemberModal'
 import { DeleteModal } from './DeleteModal'
 
-export default function Team({ members }) {
-
-    const roleOpt = [
-        {
-            label: 'Master Admin',
-            value: 'master_admin'
-        },
-        {
-            label: 'Admin',
-            value: 'admin'
-        },
-        {
-            label: 'Marketer',
-            value: 'marketer'
-        },
-        {
-            label: 'Viewer',
-            value: 'viewer'
-        },
-    ]
-
+export default function Team({ members, roles, inviteMember }) {
     const [member, setMember] = useState({
         firstName: '',
         lastName: '',
         email: '',
-        role: roleOpt[0].value
+        role: ''
     })
+
+    const [role, setRole] = useState()
 
     const [id, setId] = useState()
 
@@ -43,10 +25,13 @@ export default function Team({ members }) {
     const [showDelete, setShowDelete] = useState(false);
 
     const handleMember = (e) => {
+        const role = document.getElementById('role').value;
+        setRole(role)
         setMember({ ...member, [e.target.name]: e.target.value })
     }
 
     const handleAdd = () => {
+        inviteMember({...member, role})
         handleCloseAdd()
     }
 
@@ -54,6 +39,7 @@ export default function Team({ members }) {
     const handleShowAdd = (_, id) => {
         setId(id)
         setShowAdd(true)
+        setMember(id)
     }
 
     const handleCloseAdd = () => setShowAdd(false)
@@ -73,7 +59,7 @@ export default function Team({ members }) {
                     <Member key={index} member={member} handleShowAdd={handleShowAdd} handleShowDelete={handleShowDelete} />
                 ))}
             </Stack>
-            <AddMemberModal show={showAdd} handleClose={handleCloseAdd} roleOpt={roleOpt} id={id} member={member} handleMember={handleMember} handleAdd={handleAdd} />
+            <AddMemberModal show={showAdd} handleClose={handleCloseAdd} roles={roles} id={id} member={member} handleMember={handleMember} handleAdd={handleAdd} />
             <DeleteModal show={showDelete} handleClose={handleCloseDelete} />
         </>
     )

@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
-import { login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions, createOrEditRole } from '../../utilities/api'
-import { isMatching } from '../../utilities/helpers'
+import { login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
+    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9 } from '../../utilities/api'
+import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
 import UserContext from '../../context/User/User'
 
 import Row from 'react-bootstrap/Row'
@@ -34,29 +35,6 @@ export default function SignUpWrapper() {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    // demo purposes: will come from database - delete later
-    // const roles = ['master_admin', 'admin', 'marketer', 'viewer']
-
-    // demo purposes: will come from database - delete later 
-    const members = [
-        {
-            name: 'harrison_cogan',
-            role: 'master_admin',
-        },
-        {
-            name: 'chaz_haskins',
-            role: 'viewer',
-        },
-        {
-            name: 'florenc_sinanaj',
-            role: 'marketer',
-        },
-        {
-            name: 'jaime_convery',
-            role: 'admin',
-        }
-    ]
-
     const [credentials, setCredentials] = useState({
         firstName: '',
         lastName: '',
@@ -68,9 +46,9 @@ export default function SignUpWrapper() {
 
     const [taxDetails, setTaxDetails] = useState()
 
-    const [bankAccount, setBankAccount] = useState()
+    const [bankAccount, setBankAccount] = useState({})
 
-    const [step, setStep] = useState(3)
+    const [step, setStep] = useState(1)
 
     const [taxStep, setTaxStep] = useState()
 
@@ -82,39 +60,21 @@ export default function SignUpWrapper() {
 
     const [roles, setRoles] = useState([])
     const [permissions, setPermissions] = useState([])
-
-
-    const formatPermissions = (permissions) => {
-        return permissions.reduce(function (r, a) {
-            r[a.attributes.key] = r[a.attributes.key] || [];
-            r[a.attributes.key].push({
-                id: a.id,
-                name: a.attributes.name
-            });
-            return r;
-        }, Object.create(null));
-    }
+    const [members, setMembers] = useState([])
+    const [company, setCompany] = useState()
 
     const createRoles = (data) => {
-        console.log('Role Data ', data)
         createOrEditRole({data})
-            .then((res) => getOrganizationRoles())
+            .then((res) => setRoles(res.data))
             .catch((err) => console.error(err))
     }
-
-    useEffect(() => {
-        getOrganizationRoles()
-            .then((res) => {console.log(res); setRoles(res.data)})
-            .catch((err) => console.error(err))
-        
-        getOrganizationPermissions()
-            .then((res) => setPermissions(formatPermissions(res.data.data)))
-            .catch((err) => console.error(err))
-    }, [])
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        // Get Roles and Permissions if refresh browser on step 3
+        if (step === 3 && roles.length === 0) getRolesAndPermissions()
     }, [step, taxStep])
+    
 
     useEffect(() => {
         if (!isValid)
@@ -165,6 +125,26 @@ export default function SignUpWrapper() {
         }
     }
 
+    const getRolesAndPermissions = () => {
+        getOrganizationRoles()
+            .then((res) => { setRoles(res.data) })
+            .catch((err) => console.error(err))
+        
+        getOrganizationPermissions()
+            .then((res) => setPermissions(formatPermissions(res.data.data)))
+            .catch((err) => console.error(err))
+        
+        getTeam()
+            .then((res) => setMembers(formatMembers(res.data?.members)))
+            .catch((err) => console.error(err))
+    }
+
+    const inviteMember = (member) => {
+        createOrEditMember({member})
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err))
+    }
+
     const handleCredentials = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
@@ -185,7 +165,7 @@ export default function SignUpWrapper() {
     const handleNext = () => {
         let curStep;
         let setter;
-        console.log('Step ', step)
+
         if (taxStep >= 1 && taxStep < 3) {
             curStep = taxStep;
             setter = setTaxStep;
@@ -203,17 +183,26 @@ export default function SignUpWrapper() {
                     .catch((err) => console.error(err))
             }
         }
-        if (step === 2) {
-            console.log('Org Info ', orgInfo)
+        else if (step === 2) {
             createOrganization({data: orgInfo})
-                .then((res) => handleStep(curStep, setter))
+                .then((res) => { handleStep(curStep, setter); getRolesAndPermissions() })
+                .catch((err) => console.error(err))  
+        }
+        else if (step === 4) {
+            createPaymentInfo({data: bankAccount})
+                .then((res) => { setCompany(res.data); handleStep(curStep, setter)})
                 .catch((err) => console.error(err))
         }
-        else if (step === 5 && taxStep === 3) {
-            setIsSuccess(true)
+        else if (step === 5 && taxStep === 4) {
+            // setIsSuccess(true)
         }
         else {
             handleStep(curStep, setter);
+        }
+        if (taxStep === 3) {
+            createW9({data: taxDetails})
+                .then((res) => {AuthService.removeSignup(); setIsSuccess(true) })
+                .catch((err) => console.error(err))
         }
     }
 
@@ -317,20 +306,20 @@ export default function SignUpWrapper() {
                         )}
                         {step === 3 && (
                             <>
-                                <Roles roles={roles} permissions={permissions} createRoles={createRoles} />
-                                <Team members={members} />
+                                <Roles roles={roles} permissions={permissions} createRoles={createRoles} setRoles={setRoles} />
+                                <Team members={members} roles={roles} inviteMember={inviteMember} />
                             </>
                         )}
                         {step === 4 && (
                             <>
                                 <h1 className='normal'>Bank information</h1>
                                 <div className="seperator">
-                                    <BankAccountDetailsWrapper getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
+                                    <BankAccountDetailsWrapper getBankAccount={bankAccount} isValid={isValid} setIsValid={setIsValid} submitBankAccount={setBankAccount} />
                                 </div>
                             </>
                         )}
                         {step === 5 && !isSuccess && (
-                            <TaxWrapper step={taxStep} setStep={setTaxStep} getTaxDetails={setTaxDetails} />
+                            <TaxWrapper step={taxStep} setStep={setTaxStep} getTaxDetails={setTaxDetails} company={company} />
                         )}
 
                         {!isSuccess && (

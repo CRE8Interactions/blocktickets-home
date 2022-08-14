@@ -216,8 +216,6 @@ module.exports = {
 
         let user = await strapi.service('api::verify.verify').createUser(userObj)
 
-        console.log(user)
-
         const org = await strapi.db.query('api::organization.organization').findOne({
           where: { name: 'BlockTickets' },
           populate: { members: true },
@@ -322,13 +320,44 @@ module.exports = {
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization',
                 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information',
-                'api::update-number.update-number', 'api::listing.listing'],
+                'api::update-number.update-number', 'api::listing.listing', 'api::invite-team-member.invite-team-member'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
           result,
           params
         } = event;
+
+        // Changes on Invite
+        if (event.model.singularName === 'invite-team-member') {
+          if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendMemberInvite(params);
+        }
+
+        // Changes on Organization
+        if (event.model.singularName === 'organization') {
+          let orgPermissions = await strapi.entityService.findMany('api::organization-permission.organization-permission');
+
+          let role = await strapi.db.query('api::organization-role.organization-role').create({
+            data: {
+              name: 'Admin',
+              organization: result.id,
+              organization_permissions: [...orgPermissions]
+            }
+          })
+
+          const org = await strapi.entityService.findOne('api::organization.organization', result.id, {
+            populate: { members: true },
+          }); 
+
+          if (org.members.length === 1) {
+            let admin = org.members[0]
+            await strapi.entityService.update('plugin::users-permissions.user', admin.id, {
+              data: {
+                organization_role: role.id,
+              },
+            }); 
+          }
+        }
 
         // Changes on ticket transer
         if (event.model.singularName === 'ticket-transfer') {
@@ -443,6 +472,12 @@ module.exports = {
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
 
+        // Changes on Invite
+        if (event.model.singularName === 'invite-team-member') {
+          let code = await strapi.service('api::utility.utility').generateCode();
+          event.params.data.inviteCode = code
+        }
+
         // Changes on payment-formation model
         if (event.model.singularName === 'payment-information') {
           await encryption
@@ -556,7 +591,7 @@ module.exports = {
 
         // Changes on updateNumber
         if (event.model.singularName === 'update-number') {
-          let code = Math.floor(1000 + Math.random() * 9000)
+          let code = await strapi.service('api::utility.utility').generateCode();
           event.params.data.code = code;
           console.log(`Use code ${code} to update your phone number to ${event.params.data.toNumber} `)
           if (process.env.NODE_ENV === 'development') return;

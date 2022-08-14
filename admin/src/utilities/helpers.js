@@ -1,14 +1,59 @@
 // global state options 
 export const stateOpt = [
-    {
-        label: 'New York',
-        value: 'NY'
-    },
-    {
-        label: 'Texas',
-        value: 'TX'
-    }
-]
+    { value: 'AK', name: 'Alaska'},
+    { value: 'TX', name: 'Texas'},
+    { value: 'AL', name: 'Alabama'},
+    { value: 'AR', name: 'Arkansas'},
+    { value: 'AZ', name: 'Arizona'},
+    { value: 'CA', name: 'California'},
+    { value: 'CO', name: 'Colorado'},
+    { value: 'CT', name: 'Connecticut'},
+    { value: 'DC', name: 'District Of Columbia'},
+    { value: 'DE', name: 'Delaware'},
+    { value: 'FL', name: 'Florida'},
+    { value: 'GA', name: 'Georgia'},
+    { value: 'HI', name: 'Hawaii'},
+    { value: 'IA', name: 'Iowa'},
+    { value: 'ID', name: 'Idaho'},
+    { value: 'IL', name: 'Illinois'},
+    { value: 'IN', name: 'Indiana'},
+    { value: 'KS', name: 'Kansas'},
+    { value: 'KY', name: 'Kentucky'},
+    { value: 'LA', name: 'Louisiana'},
+    { value: 'MA', name: 'Massachusetts'},
+    { value: 'MD', name: 'Maryland'},
+    { value: 'ME', name: 'Maine'},
+    { value: 'MI', name: 'Michigan'},
+    { value: 'MN', name: 'Minnesota'},
+    { value: 'MO', name: 'Missouri'},
+    { value: 'MS', name: 'Mississippi'},
+    { value: 'MT', name: 'Montana'},
+    { value: 'NC', name: 'North Carolina'},
+    { value: 'ND', name: 'North Dakota'},
+    { value: 'NE', name: 'Nebraska'},
+    { value: 'NH', name: 'New Hampshire'},
+    { value: 'NJ', name: 'New Jersey'},
+    { value: 'NM', name: 'New Mexico'},
+    { value: 'NV', name: 'Nevada'},
+    { value: 'NY', name: 'New York'},
+    { value: 'OH', name: 'Ohio'},
+    { value: 'OK', name: 'Oklahoma'},
+    { value: 'OR', name: 'Oregon'},
+    { value: 'PA', name: 'Pennsylvania'},
+    { value: 'RI', name: 'Rhode Island'},
+    { value: 'SC', name: 'South Carolina'},
+    { value: 'SD', name: 'South Dakota'},
+    { value: 'TN', name: 'Tennessee'},
+    { value: 'TX', name: 'Texas'},
+    { value: 'UT', name: 'Utah'},
+    { value: 'VA', name: 'Virginia'},
+    { value: 'VT', name: 'Vermont'},
+    { value: 'WA', name: 'Washington'},
+    { value: 'WI', name: 'Wisconsin'},
+    { value: 'WV', name: 'West Virginia'},
+    { value: 'WY', name: 'Wyoming'}
+    ];
+
 
 // check to see if page should have a container
 const checkUrlZ = (url) => {
@@ -66,7 +111,7 @@ export const formatString = (string) => {
 
 // capitalize first letter of each word
 export const capitalizeString = string => {
-    return string.split(" ").map(arr => arr.charAt(0).toUpperCase() + arr.substring(1)).join(' ')
+    return string ? string.split(" ").map(arr => arr.charAt(0).toUpperCase() + arr.substring(1)).join(' ') : ''
 }
 
 // put hyphens between the order id 
@@ -81,4 +126,21 @@ export const formatPhoneNumber = (number) => {
 
 export const isMatching = (input1, input2) => {
     return input1 === input2
+}
+
+export const formatPermissions = (permissions) => {
+    return permissions.reduce(function (r, a) {
+        r[a.attributes.key] = r[a.attributes.key] || [];
+        r[a.attributes.key].push({
+            id: a.id,
+            name: a.attributes.name
+        });
+        return r;
+    }, Object.create(null));
+}
+
+export const formatMembers = (members) => {
+    let arr = [];
+    members.map(member => arr.push({name: `${member?.firstName} ${member?.lastName}`, role: member?.organization_role, email: member?.email, uuid: member?.uuid}))
+    return arr
 }

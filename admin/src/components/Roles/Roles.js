@@ -7,7 +7,7 @@ import { Role } from "./Role";
 import { CreateRoleModal } from './CreateRoleModal';
 import { DeleteModal } from './DeleteModal';
 
-export default function Roles({ roles, permissions, createRoles }) {
+export default function Roles({ roles, permissions, createRoles, setRoles }) {
   
     const [role, setRole] = useState('')
 
@@ -30,9 +30,9 @@ export default function Roles({ roles, permissions, createRoles }) {
         setRole(id)
     }
 
-    const handleCloseCreate = () => setShowCreate(false)
+    const handleCloseCreate = () => { setShowCreate(false); setIsCheck([]) }
 
-    const handleShowDelete = () => setShowDelete(true)
+    const handleShowDelete = (role) => { setShowDelete(true); setRole(role)}
 
     const handleCloseDelete = () => setShowDelete(false)
 
@@ -44,9 +44,14 @@ export default function Roles({ roles, permissions, createRoles }) {
         }
     };
 
+    useEffect(() => {
+        if (!role) setIsCheck([]);
+        if (role) setIsCheck([...isCheck, ...role?.organization_permissions.map(item => item.id)])
+    }, [role])
+
     const handleSelectAll = e => {
         const { name } = e.target;
-        console.log(name);
+
         const obj = name ? permissions[`${name}`] : permissions;
 
         let curIsCheckAll = isCheckAll;
@@ -60,13 +65,12 @@ export default function Roles({ roles, permissions, createRoles }) {
         }
 
         if (isCheckAll) {
-            console.log(curIsCheckAll);
             setIsCheck(isCheck.filter(item => item.id !== obj.id))
         }
     };
 
     const handleCreate = () => {
-        createRoles({roleName: createRole, permissions: isCheck})
+        createRoles({roleName: createRole, permissions: isCheck, currentRole: role})
         handleCloseCreate();
     }
 
@@ -84,7 +88,7 @@ export default function Roles({ roles, permissions, createRoles }) {
 
             <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setCreateRole} isCheck={isCheck} handleSelectAll={handleSelectAll} handleCheck={handleCheck} handleCreate={handleCreate} />
             
-            <DeleteModal show={showDelete} handleClose={handleCloseDelete} />
+            <DeleteModal show={showDelete} handleClose={handleCloseDelete} role={role} setRoles={setRoles} />
         </>
     )
 }

@@ -34,6 +34,10 @@ export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }
 
+export const getTeam = async () => {
+  return instance.get('/organizations/team')
+}
+
 export const createOrganization = async (data) => {
   return instance.post('/verifies/admin-create-org', data)
 }
@@ -48,6 +52,22 @@ export const getOrganizationPermissions = async () => {
 
 export const createOrEditRole = async (data) => {
   return instance.post('/organization-roles/create', data)
+}
+
+export const createPaymentInfo = async (data) => {
+  return instance.post('/organizations/create-payment-info', data)
+}
+
+export const createW9 = async (data) => {
+  return instance.post('/organizations/create-w9', data)
+}
+
+export const createOrEditMember = async (data) => {
+  return instance.post('/organizations/invite-member', data)
+}
+
+export const removeRoles = async (data) => {
+  return instance.post('/organization-roles/remove', data)
 }
 
 export const getCategories = async () => {

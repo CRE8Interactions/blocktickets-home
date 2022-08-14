@@ -8,12 +8,11 @@ import Badge from 'react-bootstrap/Badge'
 import { EditDeleteDropdown } from '../../EditDeleteDropdown';
 
 export default function Member({ member, handleShowAdd, handleShowDelete }) {
-
     return (
         <Stack direction="horizontal" as="li" className='list-item split-row'>
-            <h2 className='normal m-0'>{formatString(member.name)}</h2>
+            <h2 className='normal m-0'>{formatString(member?.name)}</h2>
             <Stack direction='horizontal' gap={2}>
-                <Badge bg={`${member.role === 'master_admin' ? 'success' : 'default'}`} className={`text-uppercase ${member.role !== 'master_admin' ? 'badge-outline badge-outline--dark' : ''}`}>{formatString(member.role)}</Badge>
+                <Badge bg={`${member?.role?.name === 'Admin' ? 'success' : 'default'}`} className={`text-uppercase ${member?.role?.name !== 'Admin' ? 'badge-outline badge-outline--dark' : ''}`}>{formatString(member?.role?.name)}</Badge>
                 {member.role !== 'master_admin' && (
                     <EditDeleteDropdown onClick={(e) => handleShowAdd(e, member)} handleShow={handleShowDelete} />
                 )}
