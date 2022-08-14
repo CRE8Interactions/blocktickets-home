@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
 import { login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
-    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9 } from '../../utilities/api'
+    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register } from '../../utilities/api'
 import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
 import UserContext from '../../context/User/User'
 
@@ -38,7 +38,7 @@ export default function SignUpWrapper() {
     const [credentials, setCredentials] = useState({
         firstName: '',
         lastName: '',
-        identifier: '',
+        email: '',
         password: ''
     })
 
@@ -81,6 +81,10 @@ export default function SignUpWrapper() {
             setIsValid(true)
 
     }, [credentials.password, bankAccount?.accountNumber])
+
+    useEffect(() => {
+        if (step === 1) AuthService.removeSignup()
+    }, [])
 
     const getTitle = () => {
         switch (step) {
@@ -178,7 +182,13 @@ export default function SignUpWrapper() {
             if (!isMatching(credentials.password, inputEl.current.value)) {
                 setIsValid(false)
             } else {
-                signUp({data: credentials})
+                credentials['username'] = credentials.email;
+                credentials['gender'] = 'other';
+                const today = new Date()
+                const days = 86400000 //number of milliseconds in a day
+                const hundredDaysAgo = new Date(today - (100*days))
+                credentials['dob'] = hundredDaysAgo;
+                register(credentials)
                     .then((res) => { AuthService.setSignUpToken(res.data?.jwt); handleStep(curStep, setter) })
                     .catch((err) => console.error(err))
             }
@@ -277,14 +287,14 @@ export default function SignUpWrapper() {
                                         onChange={handleCredentials}
                                     />
                                 </Form.Group>
-                                <Form.Group className='form-group' controlId="identifier">
+                                <Form.Group className='form-group' controlId="email">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
-                                        name="identifier"
+                                        name="email"
                                         required
                                         placeholder="e.g mail@example.com"
-                                        value={credentials.identifier}
+                                        value={credentials.email}
                                         onChange={handleCredentials}
                                     />
                                 </Form.Group>

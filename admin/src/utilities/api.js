@@ -22,6 +22,10 @@ instance.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
+export const register = async (data) => {
+  return axios.post(`${process.env.REACT_APP_AUTH}/api/auth/local/register`, data)
+}
+
 export const signUp = async (data) => {
   return instance.post('/verifies/admin-signup', data)
 }

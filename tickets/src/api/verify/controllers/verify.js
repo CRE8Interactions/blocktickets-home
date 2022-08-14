@@ -318,6 +318,7 @@ module.exports = createCoreController('api::verify.verify', ({
       data: {
         username: identifier,
         email: identifier,
+        phoneNumber: '+12024005000',
         firstName,
         lastName,
         gender: 'other',
@@ -339,7 +340,13 @@ module.exports = createCoreController('api::verify.verify', ({
     return tokenData;
   },
   async adminCreateOrg(ctx) {
-    const user = ctx.state.user;
+    let user = ctx.state.user;
+
+    const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: {
+        name: 'Organizer'
+      }
+    })
 
     const {
       orgName,
@@ -348,6 +355,13 @@ module.exports = createCoreController('api::verify.verify', ({
       state,
       zip_code
     } = ctx.request.body.data;
+
+    user = await strapi.db.query('plugin::users-permissions.user').update({
+      where: {id: user.id },
+      data: {
+        role: role
+      }
+    });
 
     let org = await strapi.entityService.create('api::organization.organization', {
       data: {
