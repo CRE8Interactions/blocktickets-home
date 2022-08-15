@@ -48,7 +48,7 @@ export default function EventModal({ show, handleClose, event }) {
                     height="225"
                     className="event-image mb-3"
                 />
-                <h4 className="normal mb-2">Additional Info</h4>
+                <h4 className="normal mb-2">Additional info</h4>
                 <p>
                     {event?.summary}
                 </p>
