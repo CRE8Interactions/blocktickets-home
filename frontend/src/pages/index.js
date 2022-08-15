@@ -14,6 +14,7 @@ export { SettingsOptionsPage } from './SettingsPage/SettingsOptionsPage';
 export { PersonalDetailsPage } from './SettingsPage/PersonalDetailsPage';
 export { LoginSecurityPage } from './SettingsPage/LoginSecurityPage';
 export { WithdrawInvoicesPage } from './SettingsPage/WithdrawInvoicesPage';
+export { InvoicePage } from './SettingsPage/WithdrawInvoicesPage/InvoicePage';
 export { PaymentInformationPage } from './SettingsPage/PaymentInformationPage';
 export { PrivacyPolicyPage } from './PrivacyPolicyPage';
 export { TermsConditionsPage } from './TermsConditionsPage';
