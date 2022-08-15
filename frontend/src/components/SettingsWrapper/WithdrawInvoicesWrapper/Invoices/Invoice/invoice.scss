@@ -1,0 +1,46 @@
+@use '../../../../../scss/abstracts' as *;
+@use '../../../../../scss/layout' as *;
+@use '../../../../../scss/theme/colors' as *;
+
+#invoice {
+	.tiny {
+		font-size: rem(10);
+	}
+	.ticket-details {
+		@extend .d-flex-column;
+		gap: $gap;
+
+		@include breakpoint-min(md) {
+			flex-direction: row;
+			gap: rem(24);
+		}
+
+		li {
+			display: flex;
+			align-items: center;
+			font-weight: $fw-medium;
+			gap: $gap-sm;
+
+			span {
+				@extend .caption--uppercase;
+				color: $muted;
+				font-weight: $fw-normal;
+				margin: 0px;
+			}
+		}
+	}
+	.list-group-item {
+		padding: rem(15) 0px;
+
+		.list-item {
+			color: $muted;
+			font-size: $caption;
+		}
+	}
+
+	.total-row {
+		font-size: $body-2;
+		padding: rem(15) 0;
+		font-weight: $fw-semi-bold;
+	}
+}
