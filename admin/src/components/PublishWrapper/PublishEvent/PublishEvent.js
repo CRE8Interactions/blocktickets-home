@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import moment from 'moment';
 
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
@@ -12,7 +13,7 @@ import { WarningContainer } from "../../WarningContainer";
 
 import image from '../../../assets/01.png';
 
-export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted }) {
+export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted, event }) {
 
     return (
         <>
@@ -32,11 +33,11 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Event title</span>
-                                    <span className='fw-medium text-end flex-grow-1'>Nic Fanciulli</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.attributes?.name}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Date</span>
-                                    <span className='fw-medium text-end flex-grow-1'>May 2, 2022</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{moment(event?.attributes?.start).format('MMM DD, yyyy')}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Venue</span>

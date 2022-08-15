@@ -90,6 +90,14 @@ export const getEvents = async () => {
   return instance.get('/organizations/events')
 }
 
+export const getEvent = async (uuid) => {
+  return instance.get(`/organizations/event?uuid=${uuid}`)
+}
+
+export const getOrders = async (uuid) => {
+  return instance.get(`organizations/event-orders?uuid=${uuid}`)
+}
+
 export const publishEvent = async (data) => {
   return instance.post('/events/publish', data)
 }

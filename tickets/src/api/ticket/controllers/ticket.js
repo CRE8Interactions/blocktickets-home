@@ -49,10 +49,13 @@ module.exports = createCoreController('api::ticket.ticket', ({
       where: { id: data.eventId },
       data: {
         tickets: tickets
+      },
+      populate: {
+        tickets: true
       }
     })
 
-    return ticketArr
+    return event.tickets
   },
   async find(ctx) {
     // some logic here

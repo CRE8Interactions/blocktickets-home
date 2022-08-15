@@ -12,8 +12,7 @@ import { Chart } from './Chart';
 
 import './reports.scss';
 
-export default function Reports({ title = "Reports" }) {
-
+export default function Reports({ title = "Reports", event, orders }) {
     const viewsOpt = [
         {
             label: "Last 24 hrs",
@@ -57,6 +56,14 @@ export default function Reports({ title = "Reports" }) {
         key,
         setKey
     ] = useState();
+
+    let ticketsSold = orders?.map((order) => order?.details?.ticketCount);
+    ticketsSold = ticketsSold?.reduce((a, b) => a + b, 0);
+    let grossSales = orders?.map((order) => order?.details?.ticket?.cost * order?.details?.ticketCount);
+    grossSales = grossSales?.reduce((a, b) => a + b, 0);
+    let netSales = orders?.map((order) => (order?.details?.ticket?.cost) - (order?.details?.ticket?.fee + order?.details?.ticket?.facilityFee));
+    netSales = netSales?.reduce((a, b) => a + b, 0);
+    console.log('TS ', netSales)
 
     // set tab key when sales option changes
     useEffect(() => {
@@ -102,12 +109,12 @@ export default function Reports({ title = "Reports" }) {
                                     <>
                                         <Nav.Item as="li">
                                             <Nav.Link eventKey="net">
-                                                <CustomTab title='Net sales' total="16290.82" stat="up" statAmount="1.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                                <CustomTab title='Net sales' total={netSales} stat="up" statAmount="1.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item as="li">
                                             <Nav.Link eventKey="gross">
-                                                <CustomTab title='Gross sales' total="20589.17" stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)} `} sales={`${handleText(options.sales, salesOpt)}`} />
+                                                <CustomTab title='Gross sales' total={parseFloat(grossSales)} stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)} `} sales={`${handleText(options.sales, salesOpt)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                     </>
@@ -128,12 +135,12 @@ export default function Reports({ title = "Reports" }) {
                                 }
                                 <Nav.Item as="li">
                                     <Nav.Link eventKey="tickets" className='tickets-sold'>
-                                        <CustomTab title='Tickets sold' amount="500" stat="up" statAmount="23" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <CustomTab title='Tickets sold' amount={ticketsSold} stat="up" statAmount="23" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
                                     <Nav.Link eventKey="views">
-                                        <CustomTab title='Page views' amount="400000" stat="down" statAmount="0.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <CustomTab title='Page views' amount={event ? Number(event?.page_views.length) : 0} stat="down" statAmount="0.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>
@@ -142,12 +149,12 @@ export default function Reports({ title = "Reports" }) {
                             <Tab.Content>
                                 <Tab.Pane eventKey="net">
                                     <Card body>
-                                        <Chart title='Net sales' total="16290.82" stat="up" statAmount="1.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <Chart title='Net sales' total={netSales} stat="up" statAmount="1.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Card>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="gross">
                                     <Card body>
-                                        <Chart title='Gross sales' total="20589.17" stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <Chart title='Gross sales' total={grossSales} stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Card>
                                 </Tab.Pane>
 
@@ -165,12 +172,12 @@ export default function Reports({ title = "Reports" }) {
 
                                 <Tab.Pane eventKey="tickets">
                                     <Card body>
-                                        <Chart title='Tickets sold' amount="500" stat="up" statAmount="23" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <Chart title='Tickets sold' amount={ticketsSold} stat="up" statAmount="23" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Card>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="views">
                                     <Card body>
-                                        <Chart title='Page views' amount="500000" stat="down" statAmount="0.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <Chart title='Page views' amount={event ? Number(event?.page_views.length) : 0} stat="down" statAmount="0.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Card>
                                 </Tab.Pane>
                             </Tab.Content>

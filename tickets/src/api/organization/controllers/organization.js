@@ -262,5 +262,37 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     let organization = organizations.find(org => org.members.length >= 1)
 
     return organization?.events;
+  },
+  async getEvent(ctx) {
+    const user = ctx.state.user;
+
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const event = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: uuid },
+      populate: {
+        tickets: true,
+        page_views: true
+      }
+    });
+
+    return event;
+
+  },
+  async getOrdersByEvent(ctx) {
+    const user = ctx.state.user;
+
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const orders = await strapi.db.query('api::order.order').findMany({
+      where: { eventUuid: uuid }
+    });
+
+    return orders
+
   }
 }));
