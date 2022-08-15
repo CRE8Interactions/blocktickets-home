@@ -6,6 +6,12 @@
 	.tiny {
 		font-size: rem(10);
 	}
+
+	.invoice-header {
+		@include breakpoint-min(md) {
+			display: flex;
+		}
+	}
 	.ticket-details {
 		@extend .d-flex-column;
 		gap: $gap;
@@ -42,5 +48,26 @@
 		font-size: $body-2;
 		padding: rem(15) 0;
 		font-weight: $fw-semi-bold;
+	}
+}
+
+@media print {
+	@page {
+		size: A4;
+		margin: 0mm;
+		margin-top: 20mm;
+	}
+
+	.navigation {
+		display: none;
+	}
+
+	.invoice-header {
+		display: flex;
+		column-count: 2;
+	}
+
+	.ticket-details {
+		display: flex;
 	}
 }

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -13,25 +11,25 @@ import './invoice.scss';
 
 export default function Invoice() {
     return (
-        <div id="invoice">
-            <Row as="header">
-                <Col md={6}>
+        <div id="invoice" className='docs-container'>
+            <header className="d-flex">
+                <div className='col'>
                     <Image
                         src={logo}
                         className="mb-4"
                         alt="blocktickets"
                     />
-                </Col>
-                <Col md={6}>
+                </div>
+                <div className='col'>
                     <Stack className="align-items-end fw-semi-bold">
                         <small className='text-uppercase d-block'>Invoice</small>
                         <small className='text-muted tiny fw-normal'>This is not a ticket. This cannot be used for entry.</small>
                     </Stack>
-                </Col>
-            </Row>
+                </div>
+            </header>
             <div className="mt-4">
-                <Row className="mb-4">
-                    <Col md={6} className="mb-4">
+                <div className="mb-4 invoice-header">
+                    <div className="col mb-4">
                         <h2 className='text-muted mb-2 caption'>Event</h2>
                         <ul>
                             <li>
@@ -43,8 +41,8 @@ export default function Invoice() {
                                 </ul>
                             </li>
                         </ul>
-                    </Col>
-                    <Col md={6}>
+                    </div>
+                    <div className="col">
                         <h2 className='text-muted mb-2 caption'>Attendee</h2>
                         <ul>
                             <li>
@@ -56,8 +54,8 @@ export default function Invoice() {
                                 </ul>
                             </li>
                         </ul>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
                 <div className='caption mb-4'>
                     <p><span className='fw-semi-bold'>Order No.: 1933-133924-6690</span></p>
                     <p><span className='fw-semi-bold'>Order Date: Aug 12th, 2022</span></p>
