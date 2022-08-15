@@ -231,5 +231,36 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     });
 
     return w9
+  },
+  async getEvents(ctx) {
+    const user = ctx.state.user;
+
+    // Get Organizations member belongs to
+    let organizations = await strapi.entityService.findMany('api::organization.organization', {
+      populate: {
+        members: {
+          filters: {
+            id: {
+              $eq: user.id
+            }
+          }
+        },
+        events: {
+          populate: {
+            tickets: true,
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
+    })
+    // Returns organizations which user is a member of
+    let organization = organizations.find(org => org.members.length >= 1)
+
+    return organization?.events;
   }
 }));

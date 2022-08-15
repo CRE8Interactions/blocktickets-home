@@ -19,10 +19,11 @@ import thumbnail from '../../../assets/profile-thumbnail.png'
 
 import './eventsTable.scss';
 
-export default function EventsTable({ type }) {
+import moment from 'moment';
+
+export default function EventsTable({ type, events }) {
 
     const org = useContext(OrganizationContext)
-    const [events, setEvents] = useState()
     const [event, setEvent] = useState()
     const [gross, setGross] = useState()
 
@@ -34,11 +35,10 @@ export default function EventsTable({ type }) {
 
     let sum;
     let selectedEvent;
-
-    //   useEffect(() => {
-    //     setEvents(org.orgs[0]['events'])
-    //     console.log(org.orgs[0]['events'])
-    //   }, [org.orgs])
+    
+    if (events && type === 'published') events = events.filter((event) => event?.status === 'published')
+    if (events && type === 'draft') events = events.filter((event) => event?.status === 'unpublished')
+    if (events && type === 'past') events = events.filter((event) => moment(event?.start) < moment())
 
     const calculateSold = (tickets) => {
         let availableTickets = tickets
@@ -98,21 +98,21 @@ export default function EventsTable({ type }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {new Array(10).fill(10).map((arr, index) => (
+                    {events?.map((event, index) => (
                         <tr key={index}>
                             <td colSpan="2">
                                 <Stack direction="horizontal" gap={4}>
-                                    <Image src={thumbnail} alt={event?.name} rounded width="80" height="80" />
+                                    <Image src={event?.image?.url} alt={event?.name} rounded width="80" height="80" />
                                     <div className="py-1 event-details">
-                                        <p className="normal text-body fw-bold text-truncate">Nic Fanciulli</p>
-                                        <p className="text-body fw-bold text-truncate">C.O.D.A</p>
-                                        <p className="text-muted fw-medium mt-1 text-truncate">Mar 19, 2022</p>
+                                        <p className="normal text-body fw-bold text-truncate">{event?.name}</p>
+                                        <p className="text-body fw-bold text-truncate">{event?.venue?.name}</p>
+                                        <p className="text-muted fw-medium mt-1 text-truncate">{moment(event?.start).format('MMM DD, yyyy')}</p>
                                     </div>
                                 </Stack>
                             </td>
                             <td>
                                 <Stack>
-                                    <Badge bg='light' className="badge-label">50/500</Badge>
+                                    <Badge bg='light' className="badge-label">{calculateSold(event?.tickets)}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
                                             <ProgressBar now={20} />
@@ -131,7 +131,7 @@ export default function EventsTable({ type }) {
                             </td>
                             <td>
                                 <Stack>
-                                    <Badge bg='light' className="badge-label">50/500</Badge>
+                                    <Badge bg='light' className="badge-label">{calculateSold(event?.tickets)}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
                                             <ProgressBar now={20} />
@@ -158,12 +158,12 @@ export default function EventsTable({ type }) {
                                     <Dropdown.Menu>
                                         <ul>
                                             <li>
-                                                <LinkContainer to="/myevent/123">
+                                                <LinkContainer to={`/myevent/${event?.uuid}`}>
                                                     <Dropdown.Item className="btn-view">View</Dropdown.Item>
                                                 </LinkContainer>
                                             </li>
                                             <li>
-                                                <LinkContainer to="/myevent/123/basic-info">
+                                                <LinkContainer to={`/myevent/${event?.uuid}/basic-info`}>
                                                     <Dropdown.Item className="btn-edit">Edit</Dropdown.Item>
                                                 </LinkContainer>
                                             </li>

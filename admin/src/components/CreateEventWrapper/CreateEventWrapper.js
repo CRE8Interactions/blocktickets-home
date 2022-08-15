@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { publishEvent } from "../../utilities/api";
 import OrganizationContext from '../../context/Organization/Organization';
+import UserContext from '../../context/User/User';
+import { getCategories, getVenues, createEvent, createTickets } from '../../utilities/api';
 
 import { BasicInfoWrapper } from '../BasicInfoWrapper';
 import { DetailsWrapper } from '../DetailsWrapper';
@@ -10,9 +12,13 @@ import { CreateTicketWrapper } from "../CreateTicketWrapper";
 import { TicketsWrapper } from "../TicketsWrapper";
 import { PublishWrapper } from '../PublishWrapper';
 
+import moment from 'moment';
+
 export default function CreateEventWrapper() {
 
     const navigate = useNavigate();
+
+    const user = useContext(UserContext)
 
     const [
         step,
@@ -25,9 +31,31 @@ export default function CreateEventWrapper() {
 
     const [event, setEvent] = useState()
 
+    const [eventImg, setEventImg] = useState()
+
+    const [info, setInfo] = useState()
+
+    const [categories, setCategories] = useState()
+
+    const [venues, setVenues] = useState()
+
+    const [description, setDescription] = useState()
+
+    const organization = user?.orgs[0];
+
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [step])
+
+    useEffect(() => {
+        getCategories()
+            .then((res) => {setCategories(res?.data?.data)})
+            .catch((err) => console.error(err))
+        
+        getVenues()
+            .then((res) => {setVenues(res?.data)})
+            .catch((err) => console.error(err))
+    }, [])
 
     const publish = (event) => {
         publishEvent(event)
@@ -39,11 +67,58 @@ export default function CreateEventWrapper() {
             .catch((err) => console.error(err))
     }
 
+    const buildTickets = (ticket, start, end) => {
+        console.log('Event ', event)
+        console.log('Tickets ', ticket)
+        const data = {};
+        data['name'] = ticket.name;
+        data['description'] = ticket.description;
+        data['cost'] = parseFloat(ticket.price);
+        data['fee'] = parseFloat(ticket.fee);
+        data['minimum_quantity'] = Number(ticket.minQuantity);
+        data['maximum_quantity'] = Number(ticket.maxQuantity);
+        data['minResalePrice'] = parseFloat(ticket.minResalePrice);
+        data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
+        data['eventId'] = event.id;
+        data['free'] = ticket.price > 0 ? false : true;
+        data['generalAdmission'] = ticket.name.match(/general admission/i) ? true : false;
+        data['quantity'] = ticket.quantity;
+        data['sales_start'] = moment(start).format();
+        data['sales_end'] = moment(end).format();
+
+        createTickets({data})
+            .then((res) => {setStep(step + 1)})
+            .catch((err) => console.error(err))
+    }
+
     const handleNext = (_, stateObj) => {
-        if (step < 5) {
-            setAction('')
+        if (step === 2) {
+            // Creates Event img
+            const data = {};
+            const formData = new FormData();
+            formData.append(`files.image`, eventImg, eventImg.name);
+            // formats data for api
+            data['name'] = event.title;
+            data['summary'] = description;
+            data['presentedBy'] = event.presentedBy;
+            data['start'] = moment(event.start).format();
+            data['end'] = moment(event.end).format();
+            data['venue'] = (Number(event.venue))
+            data['categories'] = [Number(event.category)]
+            data['status'] = 'unpublished';
+            data['currency'] = 'usd';
+            data['online_event'] = false;
+            data['organizationId'] = organization?.id;
+            // Send formData
+            formData.append('data', JSON.stringify(data));
+            createEvent(formData)
+                .then((res) => { setEvent(res?.data?.data); setStep(step + 1)})
+                .catch((err) => console.error(err))
+        }
+        if (step <= 2) {
             setStep(step + 1)
         }
+        
         if (stateObj) {
             setEvent({ ...event, ...stateObj })
 
@@ -74,15 +149,15 @@ export default function CreateEventWrapper() {
     return (
         <div id="create-event">
             {step === 1 && (
-                <BasicInfoWrapper handleNext={handleNext} />
+                <BasicInfoWrapper handleNext={handleNext} categories={categories} venues={venues} createEvent={createEvent} />
             )}
 
             {step === 2 && (
-                <DetailsWrapper handleNext={handleNext} handleGoBack={handleGoBack} />
+                <DetailsWrapper handleNext={handleNext} handleGoBack={handleGoBack} setEventImg={setEventImg} setDescription={setDescription} />
             )}
 
             {step === 3 && (
-                <CreateTicketWrapper ticketId={ticketId} handleGoBack={handleGoBack} handleNext={handleNext} />
+                <CreateTicketWrapper ticketId={ticketId} handleGoBack={handleGoBack} handleNext={handleNext} buildTickets={buildTickets} />
             )}
             {step === 4 && (
                 <TicketsWrapper handleAction={handleAction} handleNext={handleNext} handleGoBack={handleGoBack} />

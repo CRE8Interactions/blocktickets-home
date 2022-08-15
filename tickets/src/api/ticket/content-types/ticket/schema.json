@@ -127,6 +127,12 @@
     },
     "listingAskingPrice": {
       "type": "decimal"
+    },
+    "minResalePrice": {
+      "type": "decimal"
+    },
+    "maxResalePrice": {
+      "type": "decimal"
     }
   }
 }

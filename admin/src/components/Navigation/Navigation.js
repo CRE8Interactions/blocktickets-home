@@ -80,7 +80,7 @@ export default function Navigation({orgs, user}) {
                                     </ul>
                                 </Nav>
                             </Navbar.Collapse>
-                            <DropdownButton title={orgs && orgs?.length === 1 ? orgs[0]?.name : 'Default'} variant="info" id="org-dropdown">
+                            <DropdownButton title={orgs ? orgs[0]?.name : ''} variant="info" id="org-dropdown">
                                 <Stack as="ul" gap={2}>
                                     <li>
                                         <LinkContainer to="/settings">

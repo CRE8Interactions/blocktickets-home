@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { CreateTicket } from './CreateTicket';
 import { BackButton } from '../BackButton';
 
-export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handleNext }) {
+export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handleNext, buildTickets }) {
 
     const navigate = useNavigate();
 
@@ -43,15 +43,18 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
 
     const handleChange = (e) => {
         setTicket({ ...ticket, [e.target.name]: e.target.value })
+        console.log('Ticket Data ', ticket)
     }
 
     const handleClick = (e) => {
-        if (handleNext) {
-            handleNext(e, { ...ticket, sales_start: startDate, sales_end: endDate })
-        } else {
-            // save changes
-            handleSave()
-        }
+        console.log('Saving')
+        buildTickets(ticket, startDate, endDate)
+        // if (handleNext) {
+        //     handleNext(e, { ...ticket, sales_start: startDate, sales_end: endDate })
+        // } else {
+        //     // save changes
+        //     handleSave()
+        // }
     }
 
     const handleSave = () => {

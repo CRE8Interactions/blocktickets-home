@@ -11,7 +11,7 @@ import { EventsTable } from './EventsTable';
 
 import './eventsWrapper.scss';
 
-export default function EventsWrapper() {
+export default function EventsWrapper({events}) {
     const [
         key,
         setKey
@@ -79,13 +79,13 @@ export default function EventsWrapper() {
                     </Nav>
                     <Tab.Content>
                         <Tab.Pane eventKey="published">
-                            <EventsTable type={key} />
+                            <EventsTable type={key} events={events} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="draft">
-                            <EventsTable type={key} />
+                            <EventsTable type={key} events={events} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="past">
-                            <EventsTable type={key} />
+                            <EventsTable type={key} events={events} />
                         </Tab.Pane>
                     </Tab.Content>
                 </div>
