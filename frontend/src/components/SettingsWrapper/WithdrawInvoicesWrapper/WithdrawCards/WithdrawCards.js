@@ -11,9 +11,9 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { InfoIcon } from '../../../InfoIcon';
 import { LinkBankAccountBtn } from '../../LinkBankAccountBtn';
 
-import './withdraw.scss';
+import './withdrawCards.scss';
 
-export default function Withdraw({ details }) {
+export default function WithdrawCards() {
 
     const [account, setAccount] = useState();
     const [funds, setAvailableFunds] = useState();
