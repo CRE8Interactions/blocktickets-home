@@ -45,24 +45,25 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     let path = ctx.request.path
     let id = path.split('/')[3];
 
-    const event = await strapi.entityService.findOne('api::event.event', id, {
+    const pageView = await strapi.entityService.create('api::page-view.page-view', {
+      data: {
+        seen: new Date(),
+        event: Number(id)
+      },
+    });
+    
+    let event = await strapi.entityService.findOne('api::event.event', id, {
       fields: ['id', 'name', 'start', 'summary', 'end', 'presentedBy, views'],
       populate: {
         image: true,
         categories: true,
+        page_views: true,
         venue: {
           populate: {
             address: true
           }
         }
       }
-    });
-    
-   const updatedEvent = await strapi.db.query('api::event.event').update({
-      where: { id: event.id },
-      data: {
-        views: parseInt(event.views) + 1,
-      },
     });
 
     return event

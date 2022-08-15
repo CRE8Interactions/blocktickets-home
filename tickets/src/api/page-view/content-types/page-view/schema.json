@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_views",
+  "info": {
+    "singularName": "page-view",
+    "pluralName": "page-views",
+    "displayName": "pageView"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "seen": {
+      "type": "datetime"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "page_views"
+    }
+  }
+}

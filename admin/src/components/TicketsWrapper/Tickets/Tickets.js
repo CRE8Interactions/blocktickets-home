@@ -37,7 +37,7 @@ export default function Tickets({ tickets, handleAction }) {
                             </Stack>
                             <Stack direction='horizontal' className='pt-3 split-row'>
                                 <span className='fw-medium normal'>Event capacity</span>
-                                <span className='fw-medium normal'>112/400</span>
+                                <span className='fw-medium normal'>112/{tickets?.length}</span>
                             </Stack>
 
                         </>

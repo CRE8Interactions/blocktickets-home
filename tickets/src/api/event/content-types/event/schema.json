@@ -120,6 +120,19 @@
     },
     "uuid": {
       "type": "string"
+    },
+    "page_views": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page-view.page-view",
+      "mappedBy": "event"
+    },
+    "scheduled": {
+      "type": "boolean",
+      "default": false
+    },
+    "scheduledTime": {
+      "type": "datetime"
     }
   }
 }

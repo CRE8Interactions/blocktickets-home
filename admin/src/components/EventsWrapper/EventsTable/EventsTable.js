@@ -38,7 +38,7 @@ export default function EventsTable({ type, events }) {
     
     if (events && type === 'published') events = events.filter((event) => event?.status === 'published')
     if (events && type === 'draft') events = events.filter((event) => event?.status === 'unpublished')
-    if (events && type === 'past') events = events.filter((event) => moment(event?.start) < moment())
+    if (events && type === 'past') events = events.filter((event) => event?.status === 'published' && moment(event?.start) < moment())
 
     const calculateSold = (tickets) => {
         let availableTickets = tickets

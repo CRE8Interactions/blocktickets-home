@@ -41,11 +41,15 @@ export default function CreateEventWrapper() {
 
     const [description, setDescription] = useState()
 
+    const [tickets, setTickets] = useState()
+
     const organization = user?.orgs[0];
+
+    const [publishType, setPublishType] = useState()
 
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [step])
+    }, [step, publishType])
 
     useEffect(() => {
         getCategories()
@@ -57,19 +61,16 @@ export default function CreateEventWrapper() {
             .catch((err) => console.error(err))
     }, [])
 
-    const publish = (event) => {
-        publishEvent(event)
-            .then((res) => {
-                let updateEvent = event.find(e => e.id === event.id)
-                updateEvent.status = 'on_sale'
-                navigate('/dashboard/123')
-            })
-            .catch((err) => console.error(err))
+    const publish = () => {
+        console.log('Event ', event)
+        // publishEvent(event)
+        //     .then((res) => {
+        //         navigate('/dashboard/123')
+        //     })
+        //     .catch((err) => console.error(err))
     }
 
     const buildTickets = (ticket, start, end) => {
-        console.log('Event ', event)
-        console.log('Tickets ', ticket)
         const data = {};
         data['name'] = ticket.name;
         data['description'] = ticket.description;
@@ -87,7 +88,7 @@ export default function CreateEventWrapper() {
         data['sales_end'] = moment(end).format();
 
         createTickets({data})
-            .then((res) => {setStep(step + 1)})
+            .then((res) => {setStep(step + 1); setTickets(res.data); console.log('Tickets ', res.data)})
             .catch((err) => console.error(err))
     }
 
@@ -118,11 +119,16 @@ export default function CreateEventWrapper() {
         if (step <= 2) {
             setStep(step + 1)
         }
+
+        if (step === 4) {
+            setStep(step + 1)
+        }
         
         if (stateObj) {
             setEvent({ ...event, ...stateObj })
 
             if (step === 5) {
+                console.log(publishType)
                 publish();
             }
         }
@@ -160,11 +166,11 @@ export default function CreateEventWrapper() {
                 <CreateTicketWrapper ticketId={ticketId} handleGoBack={handleGoBack} handleNext={handleNext} buildTickets={buildTickets} />
             )}
             {step === 4 && (
-                <TicketsWrapper handleAction={handleAction} handleNext={handleNext} handleGoBack={handleGoBack} />
+                <TicketsWrapper handleAction={handleAction} handleNext={handleNext} handleGoBack={handleGoBack} tickets={tickets} />
             )}
 
             {step === 5 && (
-                <PublishWrapper handleNext={handleNext} handleGoBack={handleGoBack} />
+                <PublishWrapper handleNext={handleNext} handleGoBack={handleGoBack} event={event} setPublishType={setPublishType} />
             )}
         </div>
     );

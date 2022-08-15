@@ -21,6 +21,16 @@ module.exports = {
       handler: 'organization.getEvents'
     },
     {
+      method: 'GET',
+      path: '/organizations/event',
+      handler: 'organization.getEvent'
+    },
+    {
+      method: 'GET',
+      path: '/organizations/event-orders',
+      handler: 'organization.getOrdersByEvent'
+    },
+    {
       method: 'POST',
       path: '/organizations/invite-member',
       handler: 'organization.createOrEditMember'

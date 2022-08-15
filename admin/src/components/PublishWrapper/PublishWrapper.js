@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { PublishEvent } from './PublishEvent';
 import { BackButton } from '../BackButton';
 
-export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
+export default function PublishWrapper({ eventId, handleNext, handleGoBack, event, setPublishType }) {
 
     const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
 
     const handleChoice = (e) => {
         setChoice(e.target.id)
+        setPublishType(choice)
     }
 
     const handleClick = (e) => {
@@ -55,7 +56,7 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack }) {
                 <h1>Publish event</h1>
             </header>
             <Card body className="card--sm">
-                <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} eventStarted={eventId && eventStarted} />
+                <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} eventStarted={eventId && eventStarted} event={event} />
             </Card>
             <Stack direction="horizontal" className="btn-group-flex ">
                 {!eventId && (<BackButton handleGoBack={handleGoBack} />)}
