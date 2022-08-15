@@ -9,16 +9,9 @@ import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 
-export default function BasicInfoWrapper({ eventId, handleNext }) {
+export default function BasicInfoWrapper({ eventId, handleNext, categories, venues }) {
 
     const navigate = useNavigate();
-
-    const venueOpt = [
-        {
-            label: 'Southside Music Hall - 1135 Botham Jean Blvd, Dallas, TX',
-            value: "southside music hall"
-        }
-    ]
 
     const timezoneOpt = [
         {
@@ -49,6 +42,7 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
         presentedBy: '',
         title: '',
         venue: '',
+        category: '',
         timezone: timezoneOpt[0].value,
         displayEndTime: true
     })
@@ -64,6 +58,7 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
             // save changes
             handleSave()
         }
+        
     }
 
     const handleSave = () => {
@@ -77,7 +72,7 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
                     <h1>Basic info</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} handleClick={handleClick} event={event} />
+                    <BasicInfo handleChange={handleChange} handleClick={handleClick} event={event} categories={categories} />
                 </Card>
             </section>
             <section>
@@ -93,7 +88,7 @@ export default function BasicInfoWrapper({ eventId, handleNext }) {
                     <h1>Location</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <Location event={event} handleChange={handleChange} venueOpt={venueOpt} timezoneOpt={timezoneOpt} />
+                    <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} venues={venues} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
@@ -9,13 +9,15 @@ import { UploadEventImage } from '../UploadEventImage';
 import { TextEditor } from '../TextEditor';
 import { BackButton } from '../BackButton';
 
-export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
+export default function DetailsWrapper({ eventId, handleNext, handleGoBack, setEventImg, setDescription }) {
 
     const navigate = useNavigate();
 
     const [selectedImage, setSelectedImage] = useState()
 
-    const [description, setDescription] = useState('')
+    useEffect(() => {
+        setEventImg(selectedImage)
+    }, [selectedImage])
 
     const handleDescription = (e) => {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
@@ -23,7 +25,7 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack }) {
 
     const handleClick = (e) => {
         if (handleNext) {
-            handleNext(e, { selected_image: selectedImage, description })
+            handleNext(e, { selected_image: selectedImage })
         } else {
             // save changes
             handleSave()

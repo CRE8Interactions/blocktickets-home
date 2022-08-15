@@ -39,6 +39,7 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                             label="End time"
                             id="event-end-time"
                             setDate={setEndDate} selectedDate={endDate}
+                            onChange={handleChange}
                         />
                     </Col>
                 </Row>

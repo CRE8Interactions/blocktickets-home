@@ -22,13 +22,14 @@ export default function UploadEventImage({ setSelectedImage, selectedImage }) {
     const handleClose = () => setShow(false)
 
     const handleSave = () => {
-        setSelectedImage(previewImage[0].preview);
+        setSelectedImage(previewImage[0]);
         handleClose();
     }
 
     const handleUpload = (img) => {
         setPreviewImage(img);
-        setShow(true)
+        console.log('IM ', img)
+        setShow(true);
     }
 
     const onChange = (cropper) => {
@@ -56,7 +57,7 @@ export default function UploadEventImage({ setSelectedImage, selectedImage }) {
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        <Image src={selectedImage} rounded width={croppedCoordinates.width} height={croppedCoordinates.height} />
+                        <Image src={selectedImage.preview} rounded width={croppedCoordinates.width} height={croppedCoordinates.height} />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleReplace}>Replace</Button>
