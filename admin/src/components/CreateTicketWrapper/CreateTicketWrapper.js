@@ -43,11 +43,9 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
 
     const handleChange = (e) => {
         setTicket({ ...ticket, [e.target.name]: e.target.value })
-        console.log('Ticket Data ', ticket)
     }
 
     const handleClick = (e) => {
-        console.log('Saving')
         buildTickets(ticket, startDate, endDate)
         // if (handleNext) {
         //     handleNext(e, { ...ticket, sales_start: startDate, sales_end: endDate })

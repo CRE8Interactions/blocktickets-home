@@ -6,7 +6,7 @@ export default function EventsPage() {
 	const [events, setEvents] = useState()
 	useEffect(() => {
 		getEvents()
-			.then((res) => setEvents(res.data))
+			.then((res) => {setEvents(res.data)})
 			.catch((err) => console.error(err))
 	}, [])
 	return (

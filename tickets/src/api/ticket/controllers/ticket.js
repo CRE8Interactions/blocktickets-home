@@ -51,11 +51,17 @@ module.exports = createCoreController('api::ticket.ticket', ({
         tickets: tickets
       },
       populate: {
-        tickets: true
+        tickets: true,
+        image: true,
+        venue: {
+          populate: {
+            address: true
+          }
+        }
       }
     })
 
-    return event.tickets
+    return event
   },
   async find(ctx) {
     // some logic here
