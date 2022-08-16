@@ -260,7 +260,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
     // Returns organizations which user is a member of
     let organization = organizations.find(org => org.members.length >= 1)
-
+    console.log(organization)
     return organization?.events;
   },
   async getEvent(ctx) {

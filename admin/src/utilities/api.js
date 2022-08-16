@@ -3,7 +3,7 @@ import authService from './services/auth.service';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API,
-  timeout: 3000,
+  timeout: 10000,
   withCredentials: false
 })
 

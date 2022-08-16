@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { PublishEvent } from './PublishEvent';
 import { BackButton } from '../BackButton';
 
-export default function PublishWrapper({ eventId, handleNext, handleGoBack, event, setPublishType }) {
+export default function PublishWrapper({ eventId, handleNext, handleGoBack, event, setPublishType, setPublishDate }) {
 
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack, even
 
     const handleChoice = (e) => {
         setChoice(e.target.id)
-        setPublishType(choice)
+        setPublishType(e.target.id)
     }
 
     const handleClick = (e) => {
@@ -40,6 +40,10 @@ export default function PublishWrapper({ eventId, handleNext, handleGoBack, even
         const currentDate = new Date();
         setEventStarted(date.getTime() < currentDate.getTime())
     }
+
+    useEffect(() => {
+        setPublishDate(date)
+    }, [date])
 
     useEffect(() => {
         checkEventStart()

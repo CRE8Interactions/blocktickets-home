@@ -8,15 +8,34 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::event.event', ({ strapi}) => ({
   async publish(ctx) {
-    const eventId = ctx.request.body.id;
-    let event = await strapi.db.query('api::event.event').update({
-      where: { id: eventId },
-      data: {
-        status: 'on_sale'
-      }
-    });
 
-    return 200;
+    const {
+      publishType,
+      publishDate,
+      event
+    } = ctx.request.body.data;
+
+    let entry;
+
+    if (Number(publishType) === 1) {
+      entry = await strapi.db.query('api::event.event').update({
+        where: { id: event.id },
+        data: {
+          status: 'on_sale'
+        }
+      });
+    } else {
+      entry = await strapi.db.query('api::event.event').update({
+        where: { id: event.id },
+        data: {
+          status: 'scheduled',
+          scheduled: true,
+          scheduledTime: publishDate
+        }
+      });
+    }
+
+    return entry;
   },
   async find(ctx) {
     let events = await strapi.db.query('api::event.event').findMany({

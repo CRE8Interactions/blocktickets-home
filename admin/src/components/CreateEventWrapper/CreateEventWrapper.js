@@ -47,9 +47,11 @@ export default function CreateEventWrapper() {
 
     const [publishType, setPublishType] = useState()
 
+    const [publishDate, setPublishDate] = useState()
+
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [step, publishType])
+    }, [step, publishType, publishDate, event])
 
     useEffect(() => {
         getCategories()
@@ -62,12 +64,17 @@ export default function CreateEventWrapper() {
     }, [])
 
     const publish = () => {
-        console.log('Event ', event)
-        // publishEvent(event)
-        //     .then((res) => {
-        //         navigate('/dashboard/123')
-        //     })
-        //     .catch((err) => console.error(err))
+        let data = {};
+        data['publishType'] = publishType ? publishType : 1;
+        data['publishDate'] = moment(publishDate).format();
+        data['event'] = event;
+
+        publishEvent({data})
+            .then((res) => {
+                navigate('/events')
+            })
+            .catch((err) => console.error(err))
+        
     }
 
     const buildTickets = (ticket, start, end) => {
@@ -88,7 +95,7 @@ export default function CreateEventWrapper() {
         data['sales_end'] = moment(end).format();
 
         createTickets({data})
-            .then((res) => {setStep(step + 1); setTickets(res.data); console.log('Tickets ', res.data)})
+            .then((res) => {setStep(step + 1); setEvent(res.data)})
             .catch((err) => console.error(err))
     }
 
@@ -113,7 +120,7 @@ export default function CreateEventWrapper() {
             // Send formData
             formData.append('data', JSON.stringify(data));
             createEvent(formData)
-                .then((res) => { setEvent(res?.data?.data); setStep(step + 1)})
+                .then((res) => { setEvent(res?.data?.data); setStep(step + 1); console.log(res?.data)})
                 .catch((err) => console.error(err))
         }
         if (step <= 2) {
@@ -126,9 +133,7 @@ export default function CreateEventWrapper() {
         
         if (stateObj) {
             setEvent({ ...event, ...stateObj })
-
             if (step === 5) {
-                console.log(publishType)
                 publish();
             }
         }
@@ -166,11 +171,11 @@ export default function CreateEventWrapper() {
                 <CreateTicketWrapper ticketId={ticketId} handleGoBack={handleGoBack} handleNext={handleNext} buildTickets={buildTickets} />
             )}
             {step === 4 && (
-                <TicketsWrapper handleAction={handleAction} handleNext={handleNext} handleGoBack={handleGoBack} tickets={tickets} />
+                <TicketsWrapper handleAction={handleAction} handleNext={handleNext} handleGoBack={handleGoBack} tickets={event?.tickets} />
             )}
 
             {step === 5 && (
-                <PublishWrapper handleNext={handleNext} handleGoBack={handleGoBack} event={event} setPublishType={setPublishType} />
+                <PublishWrapper handleNext={handleNext} handleGoBack={handleGoBack} event={event} setPublishType={setPublishType} setPublishDate={setPublishDate} />
             )}
         </div>
     );

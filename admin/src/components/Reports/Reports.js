@@ -63,7 +63,6 @@ export default function Reports({ title = "Reports", event, orders }) {
     grossSales = grossSales?.reduce((a, b) => a + b, 0);
     let netSales = orders?.map((order) => (order?.details?.ticket?.cost) - (order?.details?.ticket?.fee + order?.details?.ticket?.facilityFee));
     netSales = netSales?.reduce((a, b) => a + b, 0);
-    console.log('TS ', netSales)
 
     // set tab key when sales option changes
     useEffect(() => {

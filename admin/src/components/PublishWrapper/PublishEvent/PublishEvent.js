@@ -14,7 +14,7 @@ import { WarningContainer } from "../../WarningContainer";
 import image from '../../../assets/01.png';
 
 export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted, event }) {
-
+    console.log(event)
     return (
         <>
             <Row>
@@ -29,23 +29,23 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
                             <Stack as="ul" gap={3}>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Presented by</span>
-                                    <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.presentedBy}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Event title</span>
-                                    <span className='fw-medium text-end flex-grow-1'>{event?.attributes?.name}</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.name}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Date</span>
-                                    <span className='fw-medium text-end flex-grow-1'>{moment(event?.attributes?.start).format('MMM DD, yyyy')}</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{moment(event?.start).format('MMM DD, yyyy')}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Venue</span>
-                                    <span className='fw-medium text-end flex-grow-1'>Southside Music Hall</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.venue?.name}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Location</span>
-                                    <span className='fw-medium text-end flex-grow-1'>1135 Botham Jean Blvd, Dallas, TX</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.venue?.address[0]?.address_1}, {event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state}</span>
                                 </Stack>
                             </Stack>
                         </li>
@@ -53,7 +53,7 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
                             <Stack as="ul" gap={3}>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Capacity</span>
-                                    <span className='fw-medium text-end flex-grow-1'>10.000</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.tickets?.length}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Price range</span>
