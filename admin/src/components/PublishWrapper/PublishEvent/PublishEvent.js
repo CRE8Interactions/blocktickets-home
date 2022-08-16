@@ -19,7 +19,7 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
         <>
             <Row>
                 <Col lg={5} className="w-auto">
-                    <Image src={image} rounded alt="Nic Fanciulli" width="291" height="291" className="event-image">
+                    <Image src={event?.image?.url} rounded alt="Nic Fanciulli" width="291" height="291" className="event-image">
                     </Image>
                 </Col>
                 <Col>
