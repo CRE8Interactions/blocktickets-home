@@ -51,6 +51,7 @@ export default function CreateEventWrapper() {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        console.log('Publish Date ', publishDate);
     }, [step, publishType, publishDate, event])
 
     useEffect(() => {
