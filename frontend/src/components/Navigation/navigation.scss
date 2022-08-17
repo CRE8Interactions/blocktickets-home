@@ -37,14 +37,14 @@
 
 		&-brand {
 			padding-top: rem(3);
+
 			@include breakpoint-min(lg) {
-				border-right: border(2px);
 				padding-right: rem(13);
 			}
 
 			@include breakpoint-min(xl) {
-				padding-right: rem(47);
-				margin-right: $text-spacer-sm;
+				// padding-right: rem(47);
+				// margin-right: $text-spacer-sm;
 			}
 		}
 
@@ -98,6 +98,15 @@
 				}
 			}
 			#main {
+				@include breakpoint-min(lg) {
+					border-left: border(2px);
+					padding-left: rem(13);
+				}
+
+				@include breakpoint-min(xl) {
+					padding-left: $text-spacer-sm;
+				}
+
 				&::before {
 					@include breakpoint-max(lg) {
 						content: 'Home';
@@ -121,12 +130,57 @@
 		}
 	}
 
+	.search {
+		width: 452px;
+	}
+
+	.search-container,
+	#search-mobile {
+		margin-right: rem(6);
+
+		@include breakpoint-min(lg) {
+			margin-right: rem(20);
+		}
+	}
+
 	.btn {
 		margin-top: 0px;
 		&-secondary,
 		&-outline-light {
 			min-width: 102px;
 			padding: rem(11) $btn-padding-x;
+		}
+	}
+
+	&.home-nav {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 999;
+
+		&::after {
+			display: none;
+		}
+
+		.navbar {
+			background-color: transparent;
+
+			&-toggler-icon {
+				filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(215deg)
+					brightness(108%) contrast(104%);
+			}
+		}
+
+		&.nav-scrolled {
+			.navbar {
+				background-color: #FFFF;
+				color: #0000;
+
+				&-toggler-icon {
+					filter: none;
+				}
+			}
 		}
 	}
 }

@@ -1,14 +1,13 @@
 @use '../abstracts' as *;
 
 // Banner Spacers
-$banner-spacer-md-top: rem(100);
-$banner-spacer-md-bottom: rem(110);
-$banner-spacer: rem(21);
 
 // Page Spacers
 $spacer-xs: rem(32);
 $spacer-sm: rem(64);
 $spacer-md: rem(80);
+$spacer-xl-top: rem(100);
+$spacer-xl-bottom: rem(110);
 
 // Text Spacers
 $heading-spacer: rem(64); // page headings
@@ -50,7 +49,7 @@ $text-spacer-xs: rem(16);
 	padding: $spacer-sm 0px;
 
 	@include breakpoint-min(lg) {
-		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
+		padding: $spacer-xl-top 0px $spacer-xl-bottom;
 	}
 }
 

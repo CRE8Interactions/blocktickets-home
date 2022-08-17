@@ -111,6 +111,7 @@ select:-webkit-autofill:focus {
 @mixin input-icon-box($radius: theme.$border-radius, $color: $light) {
 	display: flex;
 	align-items: center;
+	background-color: $white;
 	border-radius: $radius;
 	border: $input-border-width solid $color;
 	padding-right: rem(8);
@@ -119,7 +120,8 @@ select:-webkit-autofill:focus {
 		border-color: $input-focus-border-color;
 	}
 
-	.form-control {
+	.form-control,
+	.form-control:focus {
 		background-color: transparent;
 		border: none;
 		border-radius: 0;

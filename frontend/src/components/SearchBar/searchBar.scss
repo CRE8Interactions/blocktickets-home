@@ -1,0 +1,18 @@
+@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/borders' as *;
+@use '../../scss/layout/forms' as *;
+
+.search-container {
+	position: relative;
+
+	.search {
+		position: relative;
+		@include input-icon-box($border-radius-sm);
+	}
+
+	.search-btn {
+		border-radius: 0;
+		border-top-right-radius: $border-radius-sm;
+		border-bottom-right-radius: $border-radius-sm;
+	}
+}
