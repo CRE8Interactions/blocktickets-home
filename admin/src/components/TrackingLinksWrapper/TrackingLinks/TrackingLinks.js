@@ -72,7 +72,7 @@ export default function TrackingLinks() {
                     </div>
 
                 ) : (
-                    <WarningContainer style="sm">
+                    <WarningContainer>
                         <p>There are no events to track, create a new event to track its link.</p>
                     </WarningContainer>
                 )}

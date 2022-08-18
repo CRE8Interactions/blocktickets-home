@@ -27,7 +27,7 @@ export default function SecondarySalesWrapper() {
                     </div>
                 </header>
                 <div className="table-container">
-                    <Table className=''>
+                    <Table>
                         <thead>
                             <tr>
                                 <th>Ticket type</th>

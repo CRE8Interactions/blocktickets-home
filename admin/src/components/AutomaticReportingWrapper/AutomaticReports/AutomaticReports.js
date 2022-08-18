@@ -43,7 +43,7 @@ export default function AutomaticReports() {
                     </div>
 
                 ) : (
-                    <WarningContainer style="sm">
+                    <WarningContainer>
                         <p>Nothing is scheduled, click Add recipient to schedule an automatic report.</p>
                     </WarningContainer>
                 )}

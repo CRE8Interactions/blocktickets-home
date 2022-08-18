@@ -98,7 +98,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                 {error?.field === 'new email' && (
                     <Error field={error.field} type={error.type} />
                 )}
-                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.curEmail === '' || info.email === ''} onClick={() => handleUpdate('email')}>Update email</Button>
+                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.curEmail === '' || info.email === '' || error?.field === "new email"} onClick={() => handleUpdate('email')}>Update email</Button>
                 {success.includes('email') && (
                     <Success field='email' />
                 )}
@@ -150,7 +150,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                 {error?.field === 'new password' && (
                     <Error field={error.field} type={error.type} />
                 )}
-                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.curPassword === '' || info.password === ''} onClick={() => handleUpdate('password')}>Update password</Button>
+                <Button variant="outline-light" size="lg" className="update-btn mt-4" disabled={info.curPassword === '' || info.password === '' || error?.field === "new password"} onClick={() => handleUpdate('password')}>Update password</Button>
             </Form>
             {success.includes('password') && (
                 <Success field='password' />

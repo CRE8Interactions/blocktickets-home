@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
@@ -69,9 +70,11 @@ export default function ContactAttendees() {
                     </Table>
                 </div>
             ) : (
-                <WarningContainer style="sm">
-                    <p>Nothing has been {key}, click Contact attendees to schedule or send a text / email.</p>
-                </WarningContainer>
+                <Card body>
+                    <WarningContainer>
+                        <p>Nothing has been {key}, click Contact attendees to schedule or send a text / email.</p>
+                    </WarningContainer>
+                </Card>
             )}
 
             <DeleteModal show={show} handleClose={handleClose} />
