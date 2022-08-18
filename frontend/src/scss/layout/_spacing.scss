@@ -31,18 +31,6 @@ $text-spacer-xs: rem(16);
 
 .spacer {
 	padding: $spacer-sm 0px;
-
-	@include breakpoint-min(md) {
-		padding: $spacer-md 0px;
-	}
-}
-
-.spacer-md {
-	padding: $spacer-md 0px;
-
-	@include breakpoint-min(md) {
-		padding: $spacer-sm 0px;
-	}
 }
 
 .spacer-lg {
