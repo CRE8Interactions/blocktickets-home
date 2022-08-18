@@ -33,6 +33,14 @@ $text-spacer-xs: rem(16);
 	padding: $spacer-sm 0px;
 }
 
+.spacer-md {
+	padding: $spacer-md 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-sm 0px;
+	}
+}
+
 .spacer-lg {
 	padding: $spacer-sm 0px;
 
