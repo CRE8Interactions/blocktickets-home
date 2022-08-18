@@ -13,7 +13,7 @@ import { SearchDropdown } from './SearchDropdown';
 
 import './searchBar.scss';
 
-export default function SearchBar({ size, showMobile = true, open, setSearchQuery, showBtn }) {
+export default function SearchBar({ size, showMobile = true, open, setSearchQuery, showBtn, placeholder = "Search for events" }) {
     const { ref, isComponentVisible, setIsComponentVisible } = useOnOutsideClick(false);
 
     const navigate = useNavigate()
@@ -122,6 +122,7 @@ export default function SearchBar({ size, showMobile = true, open, setSearchQuer
                 setShow={setShow}
                 setQuery={setQuery}
                 query={query}
+                placeholder={placeholder}
                 showResults={showResults}
                 results={queryResults}
                 handleSubmit={handleSubmit}
@@ -132,7 +133,7 @@ export default function SearchBar({ size, showMobile = true, open, setSearchQuer
                         <div className="search">
                             <Form.Control
                                 type="text"
-                                placeholder="Search for events"
+                                placeholder={placeholder}
                                 size={size}
                                 value={query}
                                 onChange={(e) => showResults(e.target.value)}

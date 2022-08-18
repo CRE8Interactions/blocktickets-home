@@ -10,7 +10,7 @@ import { SearchResultsContainer } from '../SearchResultsContainer';
 
 import './searchModal.scss';
 
-export default function SearchModal({ show, setShow, query, setQuery, showResults, results, handleSubmit }) {
+export default function SearchModal({ show, setShow, query, setQuery, placeholder, showResults, results, handleSubmit }) {
     const location = useLocation();
 
     const [
@@ -80,8 +80,8 @@ export default function SearchModal({ show, setShow, query, setQuery, showResult
                     <Form onSubmit={handleSubmit} className="flex-grow-1">
                         <Form.Control
                             type="text"
-                            placeholder="Search for events"
-                            aria-label="Search for events"
+                            placeholder={placeholder}
+                            aria-label={placeholder}
                             className="form-control--borderless pb-2"
                             value={query}
                             onChange={(e) => showResults(e.target.value, setIsSearching)}
