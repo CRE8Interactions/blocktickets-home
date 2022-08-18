@@ -26,20 +26,20 @@ export default function HomePage() {
             .catch((err) => console.log(err))
     }, [])
 
-    useLayoutEffect(() => {
-        const nav = document.querySelector('.navigation')
-        const logo = document.querySelector('.navbar-brand img')
+    // useLayoutEffect(() => {
+    //     const nav = document.querySelector('.navigation')
+    //     const logo = document.querySelector('.navbar-brand img')
 
-        if (sectionInView) {
-            nav.classList.add('nav-scrolled')
-            logo.src = desktopLogo;
-        }
+    //     if (sectionInView) {
+    //         nav.classList.add('nav-scrolled')
+    //         logo.src = desktopLogo;
+    //     }
 
-        return () => {
-            nav.classList.remove('nav-scrolled')
-            logo.src = logoLight
-        };
-    }, [sectionInView])
+    //     return () => {
+    //         nav.classList.remove('nav-scrolled')
+    //         logo.src = logoLight
+    //     };
+    // }, [sectionInView])
 
     return (
         <Fragment>
