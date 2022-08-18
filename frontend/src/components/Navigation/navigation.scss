@@ -1,6 +1,7 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout' as *;
 @use '../../scss/theme/buttons' as *;
+@use '../../scss/theme/colors' as *;
 
 .navigation {
 	&.position-sticky {
@@ -40,11 +41,6 @@
 
 			@include breakpoint-min(lg) {
 				padding-right: rem(13);
-			}
-
-			@include breakpoint-min(xl) {
-				// padding-right: rem(47);
-				// margin-right: $text-spacer-sm;
 			}
 		}
 
@@ -170,6 +166,10 @@
 				filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(215deg)
 					brightness(108%) contrast(104%);
 			}
+
+			.btn-outline-light {
+				background: $white;
+			}
 		}
 
 		&.nav-scrolled {
@@ -179,6 +179,10 @@
 
 				&-toggler-icon {
 					filter: none;
+				}
+
+				.btn-outline-light {
+					color: initial;
 				}
 			}
 		}

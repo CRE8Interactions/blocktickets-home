@@ -15,6 +15,11 @@ header {
 		background-size: cover;
 		@include full-width();
 
+		@include breakpoint-min(lg) {
+			padding-top: 23vh;
+			padding-bottom: 29vh;
+		}
+
 		.display-1,
 		.subtitle {
 			color: $white;
@@ -42,6 +47,10 @@ header {
 
 			@include breakpoint-max(lg) {
 				width: 35ch;
+			}
+
+			@include breakpoint-min(md) {
+				font-size: $body-2;
 			}
 		}
 

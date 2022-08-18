@@ -62,8 +62,25 @@ export default function Navigation() {
         }
     };
 
+    const handleHoverEffect = ({ type } = e) => {
+        if (isHome) {
+            console.log(type)
+            const nav = document.querySelector('.navigation')
+            const logo = document.querySelector('.navbar-brand img')
+
+            if (type == "mouseenter") {
+                nav.classList.add('nav-scrolled')
+                logo.src = desktopLogo;
+            }
+            else {
+                nav.classList.remove('nav-scrolled')
+                logo.src = logoLight;
+            }
+        }
+    }
+
     return (
-        <div className="navigation position-sticky">
+        <div className="navigation position-sticky" onMouseEnter={handleHoverEffect} onMouseLeave={handleHoverEffect}>
             <Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
                 <Container>
                     <LinkContainer to="/" id="logo-link">

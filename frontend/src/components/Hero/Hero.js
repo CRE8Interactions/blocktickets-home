@@ -26,8 +26,8 @@ export default function Hero({ events }) {
                 <h2 className='subtitle'>Get your NFT tickets for live events and discover unforgettable moments from your favourite artists</h2>
             </div>
             <div className="hero-search" onClick={handleClick}>
-                <SearchBar size="lg" showMobile={false} open={show} showBtn={true} />
+                <SearchBar size="lg" showMobile={false} open={show} showBtn={true} placeholder="Search for events near you" />
             </div>
-        </header >
+        </header>
     );
 }
