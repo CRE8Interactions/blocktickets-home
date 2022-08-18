@@ -83,14 +83,6 @@
 					@media screen and (min-device-height: 812px) {
 						margin-top: rem(48);
 					}
-
-					&:nth-of-type(2) {
-						&::before {
-							@include breakpoint-max(lg) {
-								content: 'My Wallet';
-							}
-						}
-					}
 				}
 			}
 			#main {
@@ -120,6 +112,14 @@
 						&.active {
 							@include hover-effect();
 						}
+					}
+				}
+			}
+
+			#my-wallet {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'My Wallet';
 					}
 				}
 			}
@@ -172,7 +172,7 @@
 			}
 		}
 
-		&.nav-scrolled {
+		&.nav-scrolled:not(#wallet) {
 			.navbar {
 				background-color: #FFFF;
 				color: #0000;

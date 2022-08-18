@@ -34,22 +34,22 @@ export default function Navigation() {
         const nav = document.querySelector('.navigation')
         const logo = document.querySelector('.navbar-brand img')
 
-        if (isHome) {
-            nav.classList.remove('position-sticky')
-            nav.classList.add('home-nav')
-            logo.src = logoLight
-        }
-        else {
-            nav.classList.add('position-sticky')
-            nav.classList.remove('home-nav');
-            logo.src = desktopLogo
+        // if (isHome) {
+        // nav.classList.remove('position-sticky')
+        // nav.classList.add('home-nav')
+        // logo.src = logoLight
+        // }
+        // else {
+        //     nav.classList.add('position-sticky')
+        //     nav.classList.remove('home-nav');
+        //     logo.src = desktopLogo
 
-            if (windowSize < 768) {
-                logo.src = mobileLogo
-            } else {
-                logo.src = desktopLogo
-            }
+        if (windowSize < 768) {
+            logo.src = mobileLogo
+        } else {
+            logo.src = desktopLogo
         }
+        // }
 
     }, [location.pathname, windowSize])
 
@@ -62,25 +62,25 @@ export default function Navigation() {
         }
     };
 
-    const handleHoverEffect = ({ type } = e) => {
-        if (isHome) {
-            console.log(type)
-            const nav = document.querySelector('.navigation')
-            const logo = document.querySelector('.navbar-brand img')
+    // const handleHoverEffect = ({ type } = e) => {
+    //     if (isHome) {
+    //         console.log(type)
+    //         const nav = document.querySelector('.navigation')
+    //         const logo = document.querySelector('.navbar-brand img')
 
-            if (type == "mouseenter") {
-                nav.classList.add('nav-scrolled')
-                logo.src = desktopLogo;
-            }
-            else {
-                nav.classList.remove('nav-scrolled')
-                logo.src = logoLight;
-            }
-        }
-    }
+    //         if (type == "mouseenter") {
+    //             nav.classList.add('nav-scrolled')
+    //             logo.src = desktopLogo;
+    //         }
+    //         else {
+    //             nav.classList.remove('nav-scrolled')
+    //             logo.src = logoLight;
+    //         }
+    //     }
+    // }
 
     return (
-        <div className="navigation position-sticky" onMouseEnter={handleHoverEffect} onMouseLeave={handleHoverEffect}>
+        <div className="navigation position-sticky">
             <Navbar collapseOnSelect expand="lg" onToggle={(expanded) => toggleOverflow(expanded)}>
                 <Container>
                     <LinkContainer to="/" id="logo-link">
@@ -111,7 +111,7 @@ export default function Navigation() {
                                 </ul>
                             )}
                             {authService.isLoggedIn() && (
-                                <ul className="mobile-tablet-only" role="wallet-navigation">
+                                <ul id="my-wallet" className="mobile-tablet-only" role="wallet-navigation">
                                     <li className="mt-4">
                                         <MyWallet />
                                     </li>
