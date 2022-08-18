@@ -1,13 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { formatString, formatCurrency } from '../../../../utilities/helpers';
+import { removeHyphens, formatCurrency } from '../../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 import Badge from 'react-bootstrap/Badge';
 
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
-export default function Ticket({ ticket, handleEdit, handleShow }) {
+export default function Ticket({ ticket, handleShow }) {
+
+    const navigate = useNavigate();
 
     const ticketStatusColors = [
         {
@@ -18,7 +21,7 @@ export default function Ticket({ ticket, handleEdit, handleShow }) {
     ]
 
     const formatTicketStatus = (status) => {
-        return formatString(status)
+        return removeHyphens(status)
     }
 
     const getTicketStatusColor = (status) => {
@@ -40,7 +43,7 @@ export default function Ticket({ ticket, handleEdit, handleShow }) {
             <Stack>
                 <span>{formatCurrency(50)}</span>
             </Stack>
-            <EditDeleteDropdown handleShow={handleShow} onClick={() => handleEdit(ticket)} />
+            <EditDeleteDropdown handleShow={handleShow} onClick={() => navigate(`edit?id=${ticket.id}`)} />
         </Stack>
     );
 }

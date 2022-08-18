@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment'
+
+import { createTickets } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -8,9 +11,8 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { CreateTicket } from './CreateTicket';
-import { BackButton } from '../BackButton';
 
-export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handleNext, buildTickets }) {
+export default function CreateTicketWrapper({ id }) {
 
     const navigate = useNavigate();
 
@@ -19,7 +21,10 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
         setKey
     ] = useState('paid');
 
+    const [event, setEvent] = useState()
+
     const [startDate, setStartDate] = useState(new Date());
+
     const [endDate, setEndDate] = useState(new Date());
 
     const [hasError, setHasError] = useState(false);
@@ -45,25 +50,39 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
         setTicket({ ...ticket, [e.target.name]: e.target.value })
     }
 
-    const handleClick = (e) => {
-        buildTickets(ticket, startDate, endDate)
-        // if (handleNext) {
-        //     handleNext(e, { ...ticket, sales_start: startDate, sales_end: endDate })
-        // } else {
-        //     // save changes
-        //     handleSave()
-        // }
+    const handleSave = () => {
+        // buildTickets(ticket, startDate, endDate)
+        navigate(-1)
+
     }
 
-    const handleSave = () => {
-        // save state
-        navigate(-1)
+    const buildTickets = (ticket, start, end) => {
+        const data = {};
+        data['name'] = ticket.name;
+        data['description'] = ticket.description;
+        data['cost'] = parseFloat(ticket.price);
+        data['fee'] = parseFloat(ticket.fee);
+        data['minimum_quantity'] = Number(ticket.minQuantity);
+        data['maximum_quantity'] = Number(ticket.maxQuantity);
+        data['minResalePrice'] = parseFloat(ticket.minResalePrice);
+        data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
+        data['eventId'] = event.id;
+        data['free'] = ticket.price > 0 ? false : true;
+        data['generalAdmission'] = ticket.name.match(/general admission/i) ? true : false;
+        data['quantity'] = ticket.quantity;
+        data['sales_start'] = moment(start).format();
+        data['sales_end'] = moment(end).format();
+
+        createTickets({ data })
+            .then((res) => { setEvent(res.data) })
+            .catch((err) => console.error(err))
     }
+
 
     return (
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
-                <h1>{id || ticketId ? 'Edit' : 'Create a'} ticket</h1>
+                <h1>{id ? 'Edit' : 'Create a'} ticket</h1>
             </header>
             <Card body className='card--sm'>
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
@@ -83,17 +102,16 @@ export default function CreateTicketWrapper({ id, ticketId, handleGoBack, handle
                     </div>
                     <Tab.Content>
                         <Tab.Pane eventKey="paid">
-                            <CreateTicket type={key} handleChange={handleChange} ticket={ticket} ticketId={ticketId} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
+                            <CreateTicket type={key} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="free">
-                            <CreateTicket type={key} handleChange={handleChange} ticket={ticket} ticketId={ticketId} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
+                            <CreateTicket type={key} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
-                <BackButton handleGoBack={handleGoBack} />
-                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleClick}>{ticketId || id ? 'Save' : 'Create ticket'}</Button>
+                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleSave}>{id ? 'Save' : 'Create ticket'}</Button>
             </Stack>
         </section>
     );

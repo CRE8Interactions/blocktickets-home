@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getCategories, getVenues } from '../../utilities/api';
+
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
@@ -9,7 +11,7 @@ import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 
-export default function BasicInfoWrapper({ eventId, handleNext, categories, venues }) {
+export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
 
@@ -29,6 +31,7 @@ export default function BasicInfoWrapper({ eventId, handleNext, categories, venu
     ]
 
     const [startDate, setStartDate] = useState(new Date());
+
     const [endDate, setEndDate] = useState(new Date());
 
     const [hasError, setHasError] = useState(false);
@@ -37,6 +40,10 @@ export default function BasicInfoWrapper({ eventId, handleNext, categories, venu
         setHasError(endDate.getTime() < startDate.getTime())
 
     }, [startDate, endDate])
+
+    const [categories, setCategories] = useState()
+
+    const [venues, setVenues] = useState()
 
     const [event, setEvent] = useState({
         presentedBy: '',
@@ -47,22 +54,27 @@ export default function BasicInfoWrapper({ eventId, handleNext, categories, venu
         displayEndTime: true
     })
 
+    useEffect(() => {
+        getCategories()
+            .then((res) => { setCategories(res?.data?.data) })
+            .catch((err) => console.error(err))
+
+        getVenues()
+            .then((res) => { setVenues(res?.data) })
+            .catch((err) => console.error(err))
+    }, [])
+
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
     }
 
-    const handleClick = (e) => {
-        if (handleNext) {
-            handleNext(e, { ...event, start_date: startDate, end_date: endDate })
-        } else {
-            // save changes
-            handleSave()
-        }
-        
-    }
-
     const handleSave = () => {
-        navigate(-1)
+        // create event 
+
+        // if no eventId, go to dashboard
+        if (!eventId) {
+            navigate('/myevent/12/details')
+        }
     }
 
     return (
@@ -72,7 +84,7 @@ export default function BasicInfoWrapper({ eventId, handleNext, categories, venu
                     <h1>Basic info</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} handleClick={handleClick} event={event} categories={categories} />
+                    <BasicInfo handleChange={handleChange} event={event} categories={categories} />
                 </Card>
             </section>
             <section>
@@ -92,7 +104,7 @@ export default function BasicInfoWrapper({ eventId, handleNext, categories, venu
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" disabled={!event.title || !event.venue} onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button size="lg" onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

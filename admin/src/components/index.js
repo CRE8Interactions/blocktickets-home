@@ -11,7 +11,6 @@ export { DetailsWrapper } from './DetailsWrapper';
 export { CreateTicketWrapper } from './CreateTicketWrapper';
 export { TicketsWrapper } from './TicketsWrapper';
 export { PublishWrapper } from './PublishWrapper';
-export { CreateEventWrapper } from './CreateEventWrapper';
 export { EventsWrapper } from './EventsWrapper';
 export { OrdersWrapper } from './OrdersWrapper';
 export { RefundTicketWrapper } from './RefundTicketWrapper';

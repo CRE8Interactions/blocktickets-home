@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -10,19 +9,13 @@ import { DeleteModal } from './DeleteModal';
 
 import './tickets.scss';
 
-export default function Tickets({ tickets, handleAction }) {
-
-    const navigate = useNavigate();
+export default function Tickets({ tickets }) {
 
     const [show, setShow] = useState(false)
 
     const handleClose = () => setShow(false);
 
     const handleShow = () => setShow(true);
-
-    const handleEdit = (ticket) => {
-        handleAction ? handleAction('edit', ticket) : navigate(`edit?id=${ticket.id}`)
-    }
 
     return (
         <>
@@ -32,7 +25,7 @@ export default function Tickets({ tickets, handleAction }) {
                         <>
                             <Stack gap={2} as="ul" className="pb-4 tickets">
                                 {(tickets).map((ticket, id) => (
-                                    <Ticket key={id} ticket={ticket} handleEdit={handleEdit} handleShow={handleShow} />
+                                    <Ticket key={id} ticket={ticket} handleShow={handleShow} />
                                 ))}
                             </Stack>
                             <Stack direction='horizontal' className='pt-3 split-row'>
@@ -42,8 +35,8 @@ export default function Tickets({ tickets, handleAction }) {
 
                         </>
                     ) : (
-                        <WarningContainer style="center">
-                            <p>You don’t have any tickets, please create at least one to continue on next steps</p>
+                        <WarningContainer style="center lg">
+                            <p>You don’t have any tickets, please create at least one to publish event</p>
                         </WarningContainer>
                     )
                     }

@@ -4,11 +4,11 @@ import { DetailsWrapper } from "../../components";
 
 export default function DetailsPage() {
 
-    const { id } = useParams()
+    const { uuid } = useParams()
 
     return (
         <>
-            <DetailsWrapper eventId={id} />
+            <DetailsWrapper eventId={uuid} />
         </>
     )
 }
