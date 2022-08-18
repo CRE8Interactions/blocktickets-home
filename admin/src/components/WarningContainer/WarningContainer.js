@@ -4,7 +4,7 @@ import './warningContainer.scss';
 
 export default function WarningContainer({ style, children }) {
     return (
-        <div id="warning" className={`${style}`}>
+        <div className={`warning ${style}`}>
             {children}
         </div>
     );

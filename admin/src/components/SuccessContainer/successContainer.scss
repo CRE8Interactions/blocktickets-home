@@ -1,6 +1,6 @@
 @use '../../scss/abstracts' as *;
 
-#success {
+.success {
 	.modal-body-heading-title,
 	.heading {
 		text-align: center;
@@ -8,6 +8,8 @@
 	}
 	&::before {
 		content: '';
+		background-repeat: no-repeat;
+		background-position: center;
 		background-image: url('../../assets/icons/success.svg');
 		width: 106px;
 		height: 106px;

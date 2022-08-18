@@ -53,7 +53,7 @@ export default function GuestList() {
                     </div>
 
                 ) : (
-                    <WarningContainer style="sm">
+                    <WarningContainer>
                         <p>There are no guests, create a guest to add them to the guest list.</p>
                     </WarningContainer>
                 )}

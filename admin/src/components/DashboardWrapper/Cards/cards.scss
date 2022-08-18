@@ -46,6 +46,7 @@
 	.shareable-link {
 		&::before {
 			background-image: url('../../../assets/icons/link.svg');
+			transform: scale(2);
 		}
 	}
 

@@ -1,13 +1,15 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout/spacing' as *;
 
-#warning {
+.warning {
 	display: flex;
 	gap: $gap-sm;
 	align-items: center;
 
 	p {
 		margin-bottom: 0px;
+		font-size: $small;
+		font-weight: $fw-medium;
 	}
 
 	&.center {
@@ -21,24 +23,23 @@
 		}
 	}
 
-	&.sm {
-		&::before {
-			background-image: url('../../assets/icons/info-medium.svg');
-			width: 24px;
-			height: 24px;
-		}
-	}
-
 	&::before {
 		content: '';
 		background-repeat: no-repeat;
 		background-position: center;
-		background-image: url('../../assets/icons/info-large.svg');
-		width: 32px;
-		height: 32px;
+		background-image: url('../../assets/icons/info.svg');
+		width: 24px;
+		height: 24px;
 	}
 
-	p {
-		font-weight: $fw-medium;
+	&.lg {
+		&::before {
+			transform: scale(1.4);
+			width: 32px;
+			height: 32px;
+		}
+		p {
+			font-size: $body-2;
+		}
 	}
 }
