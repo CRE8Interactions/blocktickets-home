@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -18,7 +18,6 @@ import { Timer } from './Timer';
 
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
-import logoLight from '../../assets/logo-light.svg';
 
 import './navigation.scss';
 
@@ -28,30 +27,7 @@ export default function Navigation() {
 
     const isHome = /\/$/.test(location.pathname)
 
-    let logo;
-
-    useLayoutEffect(() => {
-        const nav = document.querySelector('.navigation')
-        const logo = document.querySelector('.navbar-brand img')
-
-        // if (isHome) {
-        // nav.classList.remove('position-sticky')
-        // nav.classList.add('home-nav')
-        // logo.src = logoLight
-        // }
-        // else {
-        //     nav.classList.add('position-sticky')
-        //     nav.classList.remove('home-nav');
-        //     logo.src = desktopLogo
-
-        if (windowSize < 768) {
-            logo.src = mobileLogo
-        } else {
-            logo.src = desktopLogo
-        }
-        // }
-
-    }, [location.pathname, windowSize])
+    const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
     const toggleOverflow = (expanded) => {
         if (expanded) {
@@ -61,23 +37,6 @@ export default function Navigation() {
             document.body.classList.remove('nav-is-open');
         }
     };
-
-    // const handleHoverEffect = ({ type } = e) => {
-    //     if (isHome) {
-    //         console.log(type)
-    //         const nav = document.querySelector('.navigation')
-    //         const logo = document.querySelector('.navbar-brand img')
-
-    //         if (type == "mouseenter") {
-    //             nav.classList.add('nav-scrolled')
-    //             logo.src = desktopLogo;
-    //         }
-    //         else {
-    //             nav.classList.remove('nav-scrolled')
-    //             logo.src = logoLight;
-    //         }
-    //     }
-    // }
 
     return (
         <div className="navigation position-sticky">
