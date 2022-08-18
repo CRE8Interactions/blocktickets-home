@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+
+import { createEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -7,13 +9,17 @@ import Button from 'react-bootstrap/Button';
 
 import { UploadEventImage } from '../UploadEventImage';
 import { TextEditor } from '../TextEditor';
-import { BackButton } from '../BackButton';
 
-export default function DetailsWrapper({ eventId, handleNext, handleGoBack, setEventImg, setDescription }) {
+export default function DetailsWrapper({ eventId }) {
 
-    const navigate = useNavigate();
 
     const [selectedImage, setSelectedImage] = useState()
+
+    const [eventImg, setEventImg] = useState()
+
+    const [description, setDescription] = useState()
+
+    const [event, setEvent] = useState()
 
     useEffect(() => {
         setEventImg(selectedImage)
@@ -23,18 +29,19 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack, setE
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
     }
 
-    const handleClick = (e) => {
-        if (handleNext) {
-            handleNext(e, { selected_image: selectedImage })
-        } else {
-            // save changes
-            handleSave()
-        }
-    }
-
     const handleSave = () => {
         // save state
-        navigate(-1)
+        // Creates Event img
+        const data = {};
+        const formData = new FormData();
+        formData.append(`files.image`, eventImg, eventImg.name);
+        // formats data for api
+
+        // Send formData
+        formData.append('data', JSON.stringify(data));
+        createEvent(formData)
+            .then((res) => { setEvent(res?.data?.data); console.log(res?.data) })
+            .catch((err) => console.error(err))
     }
 
     return (
@@ -56,10 +63,7 @@ export default function DetailsWrapper({ eventId, handleNext, handleGoBack, setE
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                {!eventId && (
-                    <BackButton handleGoBack={handleGoBack} />
-                )}
-                <Button className={`${!eventId ? 'btn-next' : ''} `} size="lg" disabled={!selectedImage} onClick={handleClick}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button size="lg" disabled={!selectedImage} onClick={handleSave}>Save and continue</Button>
             </Stack>
         </section>
     );

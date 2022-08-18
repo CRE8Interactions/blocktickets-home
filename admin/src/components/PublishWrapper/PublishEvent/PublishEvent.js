@@ -11,8 +11,6 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { WarningContainer } from "../../WarningContainer";
 
-import image from '../../../assets/01.png';
-
 export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted, event }) {
     console.log(event)
     return (
@@ -66,7 +64,7 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
             </Row>
             <div className="pt-4">
                 {eventStarted ? (
-                    <WarningContainer style="sm">
+                    <WarningContainer>
                         <p>The event has already started, changes are not possible.</p>
                     </WarningContainer>
                 ) : (

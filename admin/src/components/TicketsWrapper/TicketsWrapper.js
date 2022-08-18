@@ -1,70 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
-import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { Tickets } from './Tickets';
-import { BackButton } from '../BackButton';
 
-export default function TicketsWrapper({ handleAction, handleGoBack, handleNext, tickets }) {
+export default function TicketsWrapper() {
 
     const navigate = useNavigate();
 
-    const handleAdd = () => {
-        handleAction ? handleAction('add') : navigate('create')
+    // event tickets delete later
+    let eventTickets = [];
+
+    if (eventTickets.length > 0) {
+        let onSaleTickets = eventTickets?.filter((ticket) => ticket.on_sale_status === 'available');
+        let soldTickets = eventTickets?.filter((ticket) => ticket.on_sale_status === 'sold');
+        let scheduled = eventTickets?.filter((ticket) => moment(ticket?.sales_start) > moment());
+        let salesEnded = eventTickets?.filter((ticket) => moment(ticket?.sales_ended) < moment());
+        let salesEndedSold = eventTickets?.filter((ticket) => moment(ticket?.sales_ended) < moment() && ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'resale');
+        // eventTickets = [
+        //     {
+        //         id: 0,
+        //         type: `${onSaleTickets ? onSaleTickets[0]?.name : 'General Admission'}`,
+        //         status: 'on_sale',
+        //         desc: `Ends ${moment(tickets ? tickets[0]?.sales_end : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_end : '').format('hh:mm A')}`,
+        //         ticketsSold: `${soldTickets?.length}/${onSaleTickets?.length}`,
+        //         price: parseFloat(onSaleTickets ? onSaleTickets[0]?.cost : 0)
+        //     },
+        //     {
+        //         id: 1,
+        //         type: `${scheduled && scheduled?.length >= 1 ? scheduled[0]?.name : 'General Admission'}`,
+        //         status: 'scheduled',
+        //         desc: `Starts ${moment(tickets ? tickets[0]?.sales_start : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_start : '').format('hh:mm A')}`,
+        //         ticketsSold: `0/${scheduled?.length}`,
+        //         price: parseFloat(scheduled ? scheduled[0]?.cost : 0)
+        //     },
+        //     {
+        //         id: 2,
+        //         type: `${salesEndedSold && salesEndedSold?.length >= 1 ? salesEndedSold[0]?.name : 'General Admission'}`,
+        //         status: 'sale_ended',
+        //         ticketsSold: `${salesEndedSold ? salesEndedSold?.length : 0}/${salesEndedSold ? salesEndedSold.length : 0}`,
+        //         price: 50
+        //     }
+        // ]
     }
 
-    useEffect(() => {
-        console.log(tickets)
-    }, [tickets])
-    console.log(tickets)
-    // for step 4 - this state will come from database 
-    let onSaleTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'available');
-    let soldTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'sold');
-    let scheduled = tickets?.filter((ticket) => moment(ticket?.sales_start) > moment());
-    let salesEnded = tickets?.filter((ticket) => moment(ticket?.sales_ended) < moment());
-    let salesEndedSold = tickets?.filter((ticket) => moment(ticket?.sales_ended) < moment() && ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'resale');
-    let eventTickets = [
-        {
-            id: 0,
-            type: `${onSaleTickets ? onSaleTickets[0]?.name : 'General Admission'}`,
-            status: 'on_sale',
-            desc: `Ends ${moment(tickets ? tickets[0]?.sales_end : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_end : '').format('hh:mm A')}`,
-            ticketsSold: `${soldTickets?.length}/${onSaleTickets?.length}`,
-            price: parseFloat(onSaleTickets ? onSaleTickets[0]?.cost : 0)
-        },
-        {
-            id: 1,
-            type: `${scheduled && scheduled?.length >= 1 ? scheduled[0]?.name : 'General Admission'}`,
-            status: 'scheduled',
-            desc: `Starts ${moment(tickets ? tickets[0]?.sales_start : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_start : '').format('hh:mm A')}`,
-            ticketsSold: `0/${scheduled?.length}`,
-            price: parseFloat(scheduled ? scheduled[0]?.cost : 0)
-        },
-        {
-            id: 2,
-            type: `${salesEndedSold && salesEndedSold?.length >= 1 ? salesEndedSold[0]?.name : 'General Admission'}`,
-            status: 'sale_ended',
-            ticketsSold: `${salesEndedSold ? salesEndedSold?.length : 0}/${salesEndedSold ? salesEndedSold.length : 0}`,
-            price: 50
-        }
-    ]
-    
     return (
         <section className='max-width-wrapper'>
             <header className="section-header-sm section-heading--flex section-heading section-heading--secondary">
                 <h1>Tickets</h1>
-                <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={handleAdd}>Add ticket</Button>
+                <Button variant="outline-light" className='btn-plus btn-plus--dark' onClick={() => navigate('create')}>Add ticket</Button>
             </header>
-            <Tickets tickets={eventTickets} handleAction={handleAction} />
-            {tickets && tickets.length > 0 && (
-                <Stack direction="horizontal" className="btn-group-flex">
-                    <BackButton handleGoBack={handleGoBack} />
-                    <Button className="btn-next" size="lg" onClick={handleNext}>Continue</Button>
-                </Stack>
-            )}
+            <Tickets tickets={eventTickets} />
         </section>
     );
 }

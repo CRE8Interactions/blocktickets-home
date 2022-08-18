@@ -4,11 +4,11 @@ import { BasicInfoWrapper } from "../../components";
 
 export default function BasicInfoPage() {
 
-    const { id } = useParams()
+    const { uuid } = useParams()
 
     return (
         <>
-            <BasicInfoWrapper eventId={id} />
+            <BasicInfoWrapper eventId={uuid} />
         </>
     )
 }

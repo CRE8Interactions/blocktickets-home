@@ -4,11 +4,11 @@ import { PublishWrapper } from "../../components";
 
 export default function PublishPage() {
 
-    const { id } = useParams()
+    const { uuid } = useParams()
 
     return (
         <>
-            <PublishWrapper eventId={id} />
+            <PublishWrapper eventId={uuid} />
         </>
     )
 }
