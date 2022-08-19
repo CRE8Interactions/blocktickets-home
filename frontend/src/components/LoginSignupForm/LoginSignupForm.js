@@ -223,7 +223,7 @@ export default function LoginSignupForm() {
                 {step === 0 && (
                     <Fragment>
                         <div className="heading">
-                            <h1 className="fs-md">Log in</h1>
+                            <h1 className="fs-md">Login</h1>
                             <h2 className="normal text-muted fw-normal m-0">
                                 The future of ticketing is here
                             </h2>
@@ -249,7 +249,7 @@ export default function LoginSignupForm() {
                                     onClick={(e) => submit()}>
                                     Validate
                                 </Button>
-                                <Form.Text><p>Don't have access to your phone?</p> <p><Button variant="link" onClick={() => setChoice('email')}>Click here</Button> to use your email to log in.</p></Form.Text>
+                                <Form.Text><p>Don't have access to your phone?</p> <p><Button variant="link" onClick={() => setChoice('email')}>Click here</Button> to use your email to login.</p></Form.Text>
                             </>
                         ) : (
                             <>
@@ -342,7 +342,7 @@ export default function LoginSignupForm() {
                         </Form.Group>
                         {hasError && <Error type="code" />}
                         <Form.Text>
-                            Did not recieve code? <Button variant="link">Resend Code</Button>
+                            Did not receive code? <Button variant="link">Resend Code</Button>
                         </Form.Text>
                     </Fragment>
                 )}

@@ -59,7 +59,7 @@ export default function Footer() {
                                 </LinkContainer>
                             </li>
                             <li>
-                                <LinkContainer to="https://admin.blocktickets.xyz/login">
+                                <LinkContainer to={{ pathname: "https://admin.blocktickets.xyz" }}>
                                     <Nav.Link>Creator Login</Nav.Link>
                                 </LinkContainer>
                             </li>
