@@ -1,9 +1,0 @@
-@use '../../../scss/abstracts' as *;
-@use '../../../scss/layout' as *;
-@use '../../../scss/theme/colors' as *;
-
-#checkout-wrapper {
-	.page-heading {
-		margin-bottom: $heading-spacer-sm;
-	}
-}
