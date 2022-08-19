@@ -23,8 +23,8 @@ export default function MyTickets({ order, handleClick, ticketStatus }) {
                 <div className="flex-1">
                     <p className="fw-medium">Your phone is your ticket</p>
                     <p className="caption">
-                        Log in to Blocktickets on your phone and go to My Events and then click
-                        Event details
+                        Log in to Blocktickets on your phone and go to My events and then click
+                        Event details.
                     </p>
                 </div>
             </Alert>
