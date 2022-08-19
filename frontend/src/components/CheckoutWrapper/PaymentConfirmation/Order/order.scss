@@ -2,19 +2,21 @@
 
 #checkout-wrapper {
 	.order {
-		padding-bottom: rem(24);
-		border-bottom: border();
-	}
-}
+		@include breakpoint-max(md) {
+			padding-bottom: rem(24);
+			border-bottom: border();
+		}
 
-#myEventsBtn {
-	min-width: 160px;
-	margin-top: rem(24);
+		#myEventsBtn {
+			min-width: 160px;
+			margin-top: rem(24);
 
-	@include breakpoint-min(md) {
-		position: absolute;
-		top: -12px;
-		right: 0;
-		margin-top: 0px;
+			@include breakpoint-min(md) {
+				position: absolute;
+				top: -12px;
+				right: 0;
+				margin-top: 0px;
+			}
+		}
 	}
 }

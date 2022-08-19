@@ -26,7 +26,7 @@ export default function OrderCard({ order }) {
                         </span>
                     </p>
                     <p className="tickets">
-                        <span>{order.tickets.length > 1 ? 'Tickets' : 'Ticket'}</span>
+                        <span>{order.tickets.length} {order.tickets.length > 1 ? 'Tickets' : 'Ticket'}</span>
                         <span className='ticket-type'>{order.tickets[0]?.resale ? `Resale • General Admission` : `General Admission`}</span>
                     </p>
                 </Stack>
