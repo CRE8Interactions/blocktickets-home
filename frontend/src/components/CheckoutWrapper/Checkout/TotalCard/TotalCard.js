@@ -160,7 +160,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                                 </Stack>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Facility fee: ${parseFloat(facilityFee).toFixed(2)} x {ticketCount}
+                                        Facility Fee: ${parseFloat(facilityFee).toFixed(2)} x {ticketCount}
                                     </span>
                                     <span className="text-end">
                                         ${(parseFloat(facilityFee).toFixed(2) * ticketCount).toFixed(2)}

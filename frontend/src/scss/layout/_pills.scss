@@ -2,7 +2,7 @@
 @use './spacing' as *;
 
 .nav-pills {
-	margin-bottom: $text-spacer-sm;
+	margin-bottom: $text-spacer;
 	gap: rem(8);
 
 	.nav-item {
