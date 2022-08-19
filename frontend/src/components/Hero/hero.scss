@@ -28,12 +28,12 @@ header {
 
 		.display-1 {
 			font-size: $h4-font-size;
+			font-weight: $fw-semi-bold;
 			margin-bottom: rem(8);
-			line-height: 1;
+			line-height: 1.2;
 
 			@include breakpoint-max(lg) {
 				width: 15ch;
-				line-height: 1.5;
 			}
 
 			@include breakpoint-min(md) {
