@@ -78,9 +78,7 @@
 		}
 
 		.details {
-			margin-top: rem(2);
-			gap: rem(2);
-			flex-grow: 1;
+			justify-content: space-evenly;
 			min-width: 0;
 
 			*:not(.event-name) {

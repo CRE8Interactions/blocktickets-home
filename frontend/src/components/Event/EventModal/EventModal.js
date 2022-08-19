@@ -26,7 +26,7 @@ export default function EventModal({ show, handleClose, event }) {
                     </Col>
                 </Row>
                 <div className="mb-2">
-                    <sapn className="time-caption">Time</sapn>
+                    <span className="time-caption">Time</span>
                     <span className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
                 </div>
                 <div className="mb-2">
