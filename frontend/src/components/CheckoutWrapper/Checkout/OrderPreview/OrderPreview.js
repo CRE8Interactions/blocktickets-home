@@ -37,7 +37,7 @@ export default function OrderPreview() {
                 <Stack className="details">
                     <h1 className="event-name fw-bold">{data?.name}</h1>
                     <p>
-                        {moment(data?.start).format('MMM DD')}<span className="time">{moment(data?.start).format('h:mm A')} EST</span>
+                        {moment(data?.start).format('ddd, MMM DD YYYY')}<span className="time">{moment(data?.start).format('h:mm A')} EST</span>
                     </p>
                     <p>
                         {data?.venue?.name}<span className="loc">
