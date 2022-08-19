@@ -15,8 +15,7 @@ export default function DashboardMenu({ open, setOpen }) {
                 <Badge bg="success" className='mb-3 align-self-start'>On Sale</Badge>
                 <h1 className='fs-md'>Nic Fanciulli</h1>
                 <div className="small">
-                    <p>Mar 13 <span className='time'>9:00 PM EST</span></p>
-                    <p>CODA <span className='loc'>Toronto, ON</span></p>
+                    <p>Fri, Oct 23, 2022 7:00 PM EST</p>
                 </div>
                 <Button variant='outline-light' className='mt-4'>Preview your event</Button>
             </Stack>

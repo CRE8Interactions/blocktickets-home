@@ -43,9 +43,9 @@ export default function Event(props) {
                                 <span className="time-caption">Time</span>
                             </Col>
                             <Col>
-                                <span className="small">
+                                <p className="small">
                                     <span className='date'>{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')}</span><span className="time">{moment(event?.start).format('h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
-                                </span>
+                                </p>
                             </Col>
                         </Row>
                         <Row>
@@ -53,11 +53,11 @@ export default function Event(props) {
                                 <span className="venue-caption">Venue</span>
                             </Col>
                             <Col>
-                                <span className="small">
+                                <p className="small">
                                     {event?.venue?.name}<span className="loc mobile-only">
                                         {event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state}
                                     </span>
-                                </span>
+                                </p>
                             </Col>
                         </Row>
                         <Row className="tablet-desktop-only">
@@ -65,9 +65,9 @@ export default function Event(props) {
                                 <span className="location-caption location">Location</span>
                             </Col>
                             <Col>
-                                <span className="small">
+                                <p className="small">
                                     {event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state}
-                                </span>
+                                </p>
                             </Col>
                         </Row>
                     </Col>
