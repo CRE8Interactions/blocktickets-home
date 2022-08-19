@@ -18,7 +18,7 @@ export default function OrderCard({ order }) {
                 <Stack className="details">
                     <h1 className="event-name fw-bold">{order?.event?.name}</h1>
                     <p>
-                        {moment(order?.event?.start).format('MMM DD')} <span className="time">{moment(order?.event?.start).format('h:mm A')} EST</span>
+                        {moment(order?.event?.start).format('ddd, MMM DD YYYY')} <span className="time">{moment(order?.event?.start).format('h:mm A')} EST</span>
                     </p>
                     <p>
                         {order?.event?.venue?.name}<span className="loc">
