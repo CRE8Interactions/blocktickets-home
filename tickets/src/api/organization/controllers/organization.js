@@ -260,7 +260,6 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
     // Returns organizations which user is a member of
     let organization = organizations.find(org => org.members.length >= 1)
-    console.log(organization)
     return organization?.events;
   },
   async getEvent(ctx) {
@@ -274,7 +273,13 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       where: { uuid: uuid },
       populate: {
         tickets: true,
-        page_views: true
+        page_views: true,
+        image: true,
+        venue: {
+          populate: {
+            address: true
+          }
+        }
       }
     });
 
@@ -294,5 +299,24 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     return orders
 
+  },
+  async addEventDetails(ctx) {
+    const user = ctx.state.user;
+    const { eventUUID, description, image } = ctx.request.body.data;
+
+    console.log(ctx.request)
+
+    const event = await strapi.db.query('api::event.event').update({
+      where: { uuid: eventUUID },
+      data: {
+        summary: description,
+        image: image
+      },
+      populate: {
+        image: true
+      }
+    });
+
+    return event
   }
 }));

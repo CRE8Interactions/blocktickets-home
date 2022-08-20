@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../context/User/User';
 
-import { getCategories, getVenues } from '../../utilities/api';
+import { getCategories, getVenues, createEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -11,9 +12,13 @@ import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 
+import moment from 'moment';
+
 export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
+    const user = useContext(UserContext);
+    const organization = user?.orgs[0];
 
     const timezoneOpt = [
         {
@@ -70,11 +75,22 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const handleSave = () => {
         // create event 
+        const data = {};
+        data['name'] = event.title;
+        // data['summary'] = description;
+        data['presentedBy'] = event.presentedBy;
+        data['start'] = moment(event.startDate).format();
+        data['end'] = moment(event.endDate).format();
+        data['venue'] = (Number(event.venue));
+        data['categories'] = [Number(event.category)];
+        data['status'] = 'unpublished';
+        data['currency'] = 'usd';
+        data['online_event'] = false;
+        data['organizationId'] = organization?.id;
 
-        // if no eventId, go to dashboard
-        if (!eventId) {
-            navigate('/myevent/12/details')
-        }
+        createEvent({data})
+            .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
+            .catch((err) => console.error(err))
     }
 
     return (

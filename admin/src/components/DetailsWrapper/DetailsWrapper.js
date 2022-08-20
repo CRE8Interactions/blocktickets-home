@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
-import { createEvent } from '../../utilities/api';
+import { addDetailsToEvent, upload } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -21,6 +22,8 @@ export default function DetailsWrapper({ eventId }) {
 
     const [event, setEvent] = useState()
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         setEventImg(selectedImage)
     }, [selectedImage])
@@ -30,17 +33,23 @@ export default function DetailsWrapper({ eventId }) {
     }
 
     const handleSave = () => {
-        // save state
-        // Creates Event img
         const data = {};
         const formData = new FormData();
-        formData.append(`files.image`, eventImg, eventImg.name);
-        // formats data for api
-
+        
+        formData.append(`files`, eventImg);
         // Send formData
         formData.append('data', JSON.stringify(data));
-        createEvent(formData)
-            .then((res) => { setEvent(res?.data?.data); console.log(res?.data) })
+        
+        upload(formData)
+            .then((res) => {
+                let data = {};
+                data['description'] = description;
+                data['eventUUID'] = eventId;
+                data['image'] = res?.data[0].id;
+                addDetailsToEvent({data})
+                    .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
+                    .catch((err) => console.error(err))
+            })
             .catch((err) => console.error(err))
     }
 

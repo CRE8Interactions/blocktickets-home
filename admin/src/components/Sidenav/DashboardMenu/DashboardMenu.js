@@ -6,17 +6,24 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import Nav from 'react-bootstrap/Nav';
 import Badge from 'react-bootstrap/Badge';
+import moment from 'moment';
 
-export default function DashboardMenu({ open, setOpen }) {
-
+export default function DashboardMenu({ open, setOpen, event }) {
+    const badgeStatus = (event) => {
+        if (event?.status === 'unpublished') {
+            return <Badge bg="warning" className='mb-3 align-self-start'>Unpublished</Badge>
+        } else if (event?.status === 'on_sale') {
+            return <Badge bg="success" className='mb-3 align-self-start'>On Sale</Badge>
+        }
+    }
     return (
         <>
             <Stack as="header" className="sidebar-header">
-                <Badge bg="success" className='mb-3 align-self-start'>On Sale</Badge>
-                <h1 className='fs-md'>Nic Fanciulli</h1>
+                {badgeStatus(event)}
+                <h1 className='fs-md'>{event?.name}</h1>
                 <div className="small">
-                    <p>Mar 13 <span className='time'>9:00 PM EST</span></p>
-                    <p>CODA <span className='loc'>Toronto, ON</span></p>
+                    <p>{moment(event?.start).format('MMM DD')} <span className='time'>{moment(event?.start).format('h:mm A')} EST</span></p>
+                    <p>{event?.venue?.name} <span className='loc'>{event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state}</span></p>
                 </div>
                 <Button variant='outline-light' className='mt-4'>Preview your event</Button>
             </Stack>

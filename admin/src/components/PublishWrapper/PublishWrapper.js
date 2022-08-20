@@ -31,7 +31,7 @@ export default function PublishWrapper({ eventId, event }) {
 
     const checkEventStart = () => {
         const currentDate = new Date();
-        setEventStarted(date.getTime() < currentDate.getTime())
+        setEventStarted(moment(event?.start) < currentDate.getTime())
     }
 
     const publish = () => {

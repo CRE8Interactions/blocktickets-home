@@ -45,5 +45,10 @@ module.exports = {
       path: '/organizations/create-w9',
       handler: 'organization.createW9'
     },
+    {
+      method: 'POST',
+      path: '/organizations/add-details',
+      handler: 'organization.addEventDetails'
+    },
   ]
 }

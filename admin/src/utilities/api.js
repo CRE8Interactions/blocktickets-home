@@ -86,6 +86,10 @@ export const createEvent = async (data) => {
   return instance.post('/events', data)
 }
 
+export const addDetailsToEvent = async (data) => {
+  return instance.post('/organizations/add-details', data)
+}
+
 export const getEvents = async () => {
   return instance.get('/organizations/events')
 }
@@ -104,4 +108,8 @@ export const publishEvent = async (data) => {
 
 export const createTickets = async (data) => {
   return instance.post('/tickets', data)
+}
+
+export const upload = async (data) => {
+  return instance.post('/upload/', data)
 }

@@ -5,7 +5,8 @@ const OrganizationContext = createContext({
   orgs: [],
   getOrgs: () => {
     return getMyOrganizations()
-  }
+  },
+  selectedEvent: ''
 });
 
 export default OrganizationContext;
