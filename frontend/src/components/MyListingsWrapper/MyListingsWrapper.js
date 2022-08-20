@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 
+import { getMyListings, removeMyListings } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import Tabs from 'react-bootstrap/Tabs';
@@ -8,20 +9,17 @@ import Tab from 'react-bootstrap/Tab';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyListingsSlider } from './MyListingsSlider';
 
-import { getMyListings, removeMyListings } from '../../utilities/api';
-
 import './myListingsWrapper.scss';
 
 export default function MyListingsWrapper() {
+
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null)
+
     const [
         key,
         setKey
     ] = useState('active');
-
-    const [
-        show,
-        setShow
-    ] = useState(false);
 
     const [
         listings,
@@ -74,28 +72,26 @@ export default function MyListingsWrapper() {
             <div className="section-heading-sm">
                 <h1>My Listings</h1>
                 <div className="tablet-desktop-only">
-                    <SwiperNavigationButtons />
+                    <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
                 </div>
             </div>
             <Tabs defaultActiveKey="active" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="active" title="Active" key={new Date().getTime()}>
                     <MyListingsSlider
+                        navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
                         ticketStatus={'listed'}
                         ticketState={key}
                         listings={listings.active}
                         removeListing={removeListing}
                         getListings={myListings}
-                        show={show}
-                        setShow={setShow}
                     />
                 </Tab>
                 <Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
                     <MyListingsSlider
+                        navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
                         ticketStatus={'listed'}
                         ticketState={key}
                         listings={listings.sold}
-                        show={show}
-                        setShow={setShow}
                     />
                 </Tab>
                 <Tab eventKey="expired" title="Expired" key={new Date().getTime() + 2}>
@@ -103,8 +99,6 @@ export default function MyListingsWrapper() {
                         ticketStatus={'listed'}
                         ticketState={key}
                         listings={listings.expired}
-                        show={show}
-                        setShow={setShow}
                     />
                 </Tab>
             </Tabs>
