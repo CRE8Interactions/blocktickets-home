@@ -70,7 +70,7 @@ export default function MyListingsWrapper() {
     return (
         <section className="spacer-xs" id="my-listings-wrapper">
             <div className="section-heading-sm">
-                <h1>My Listings</h1>
+                <h1>My listings</h1>
                 <div className="tablet-desktop-only">
                     <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
                 </div>
