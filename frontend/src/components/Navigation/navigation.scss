@@ -30,8 +30,10 @@
 
 	.navbar {
 		background-color: $clr-white;
+		height: $navbar-height-sm;
 
 		@include breakpoint-min(lg) {
+			height: $navbar-height;
 			padding-top: rem(21);
 			padding-bottom: rem(21);
 		}
