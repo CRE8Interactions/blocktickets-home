@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
 import { addDetailsToEvent, upload } from '../../utilities/api';
@@ -13,14 +12,11 @@ import { TextEditor } from '../TextEditor';
 
 export default function DetailsWrapper({ eventId }) {
 
-
     const [selectedImage, setSelectedImage] = useState()
 
     const [eventImg, setEventImg] = useState()
 
     const [description, setDescription] = useState()
-
-    const [event, setEvent] = useState()
 
     const navigate = useNavigate();
 
@@ -35,18 +31,18 @@ export default function DetailsWrapper({ eventId }) {
     const handleSave = () => {
         const data = {};
         const formData = new FormData();
-        
+
         formData.append(`files`, eventImg);
         // Send formData
         formData.append('data', JSON.stringify(data));
-        
+
         upload(formData)
             .then((res) => {
                 let data = {};
                 data['description'] = description;
                 data['eventUUID'] = eventId;
                 data['image'] = res?.data[0].id;
-                addDetailsToEvent({data})
+                addDetailsToEvent({ data })
                     .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
                     .catch((err) => console.error(err))
             })

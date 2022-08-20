@@ -7,8 +7,6 @@ export default function DetailsPage() {
     const { uuid } = useParams()
 
     return (
-        <>
-            <DetailsWrapper eventId={uuid} />
-        </>
+        <DetailsWrapper eventId={uuid} />
     )
 }
