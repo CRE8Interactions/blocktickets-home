@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 
 import { PublishEvent } from './PublishEvent';
 
-export default function PublishWrapper({ eventId, event }) {
+export default function PublishWrapper({ event }) {
 
     const navigate = useNavigate();
 
@@ -69,10 +69,11 @@ export default function PublishWrapper({ eventId, event }) {
             <Card body className="card--sm">
                 <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} eventStarted={eventStarted} event={event} />
             </Card>
-            <Stack direction="horizontal" className="btn-group-flex ">
-
-                <Button className={`${!eventId ? `btn-${choice == '1' ? 'send' : 'schedule'}` : ''} `} size="lg" onClick={publish}>{eventId ? 'Save changes' : `${choice == '1' ? 'Publish' : 'Schedule'}`}</Button>
-            </Stack>
+            {!eventStarted && (
+                <Stack direction="horizontal" className="btn-group-flex ">
+                    <Button className={`btn-${choice == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{choice == '1' ? 'Publish' : 'Schedule'}</Button>
+                </Stack>
+            )}
         </section>
     );
 }
