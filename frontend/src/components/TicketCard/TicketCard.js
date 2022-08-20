@@ -11,7 +11,7 @@ import { TicketModal } from '../TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketType, ticketStatus, ticketState, order, tickets, listing, removeListing, getListings }) {
+export default function TicketCard({ id, ticketStatus, ticketState, order, listing, removeListing, getListings }) {
     const [
         ticketAction,
         setTicketAction
