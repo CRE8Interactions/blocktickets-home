@@ -120,7 +120,7 @@ export default function BasicInfoWrapper({ eventId }) {
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button size="lg" disabled={!event.title || !event.category || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

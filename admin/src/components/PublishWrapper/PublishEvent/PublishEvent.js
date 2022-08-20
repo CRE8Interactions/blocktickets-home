@@ -1,11 +1,11 @@
 import React from 'react';
+import moment from 'moment';
 
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import moment from 'moment';
 
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';

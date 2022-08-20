@@ -17,6 +17,6 @@ export default function PublishPage() {
     }, [uuid])
 
     return (
-        <PublishWrapper eventId={uuid} event={event} />
+        <PublishWrapper event={event} />
     )
 }

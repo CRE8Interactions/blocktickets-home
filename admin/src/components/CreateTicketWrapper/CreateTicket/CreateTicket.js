@@ -14,7 +14,7 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { TicketBreakdownModal } from './TicketBreakdownModal';
 
-export default function CreateTicket({ type, handleChange, ticket, ticketId, setStartDate, startDate, setEndDate, endDate, hasError }) {
+export default function CreateTicket({ type, handleChange, ticket, setStartDate, startDate, setEndDate, endDate, hasError }) {
 
     const isPaid = type === 'paid'
 
