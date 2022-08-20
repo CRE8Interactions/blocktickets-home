@@ -29,7 +29,7 @@ export const removeFullHeightContainer = (el) => {
 };
 
 export const toggleNavContent = (show, ...rest) => {
-    rest.forEach((el) => (el.style.visibility = show ? 'flex' : 'hidden'));
+    rest.forEach((el) => (el.style.visibility = show ? 'visible' : 'hidden'));
 };
 
 export const toggleElement = (el, show) => {
