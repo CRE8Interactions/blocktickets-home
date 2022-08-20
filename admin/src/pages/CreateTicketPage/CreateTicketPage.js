@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 
 import { CreateTicketWrapper } from "../../components";
 
@@ -9,9 +9,9 @@ export default function CreateTicketPage() {
 
     const searchParamObj = Object.fromEntries([...searchParam]);
 
+    const { uuid } = useParams()
+
     return (
-        <>
-            <CreateTicketWrapper id={searchParamObj.id} />
-        </>
+        <CreateTicketWrapper eventId={uuid} id={searchParamObj.id} />
     )
 }

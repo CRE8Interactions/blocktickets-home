@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Stack from 'react-bootstrap/Stack';
@@ -6,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import Nav from 'react-bootstrap/Nav';
 import Badge from 'react-bootstrap/Badge';
-import moment from 'moment';
 
 export default function DashboardMenu({ open, setOpen, event }) {
     const badgeStatus = (event) => {

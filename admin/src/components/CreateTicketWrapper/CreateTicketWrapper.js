@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
 
 import { createTickets } from '../../utilities/api';
@@ -12,18 +12,14 @@ import Button from 'react-bootstrap/Button';
 
 import { CreateTicket } from './CreateTicket';
 
-export default function CreateTicketWrapper({ id }) {
+export default function CreateTicketWrapper({ eventId, id }) {
 
     const navigate = useNavigate();
-
-    const { uuid } = useParams()
 
     const [
         key,
         setKey
     ] = useState('paid');
-
-    const [event, setEvent] = useState()
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -66,13 +62,13 @@ export default function CreateTicketWrapper({ id }) {
         data['maximum_quantity'] = Number(ticket.maxQuantity);
         data['minResalePrice'] = parseFloat(ticket.minResalePrice);
         data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
-        data['eventId'] = uuid;
+        data['eventId'] = eventId;
         data['free'] = ticket.price > 0 ? false : true;
         data['generalAdmission'] = ticket.name.match(/general admission/i) ? true : false;
         data['quantity'] = ticket.quantity;
         data['sales_start'] = moment(start).format();
         data['sales_end'] = moment(end).format();
-        
+
         createTickets({ data })
             .then((res) => { navigate(-1) })
             .catch((err) => console.error(err))

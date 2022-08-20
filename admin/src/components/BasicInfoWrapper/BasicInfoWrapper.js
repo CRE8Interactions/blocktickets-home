@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../../context/User/User';
 
+import UserContext from '../../context/User/User';
 import { getCategories, getVenues, createEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
@@ -88,7 +88,7 @@ export default function BasicInfoWrapper({ eventId }) {
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
 
-        createEvent({data})
+        createEvent({ data })
             .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
             .catch((err) => console.error(err))
     }

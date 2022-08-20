@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from 'react-router-dom';
+
 import { getEvent } from '../../utilities/api';
 
 import { Sidenav } from '../../components';

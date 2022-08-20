@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { TicketsWrapper } from "../../components";
-import { getEvent } from '../../utilities/api';
 import { useParams } from 'react-router-dom';
+
+import { getEvent } from '../../utilities/api';
+
+import { TicketsWrapper } from "../../components";
 
 export default function ViewTicketsPage() {
     const { uuid } = useParams()
@@ -13,8 +15,6 @@ export default function ViewTicketsPage() {
             .catch((err) => console.error(err))
     }, [])
     return (
-        <>
-            <TicketsWrapper tickets={tickets} />
-        </>
+        <TicketsWrapper tickets={tickets} />
     )
 }
