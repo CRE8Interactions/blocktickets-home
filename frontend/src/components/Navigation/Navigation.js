@@ -79,7 +79,7 @@ export default function Navigation() {
                             <LoginButton styles="mobile-tablet-only" />
                         </Nav>
                     </Navbar.Collapse>
-                    <Timer className="d-block" />
+                    <Timer />
                 </Container>
             </Navbar>
         </div>
