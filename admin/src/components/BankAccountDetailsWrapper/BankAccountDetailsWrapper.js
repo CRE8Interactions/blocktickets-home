@@ -83,13 +83,16 @@ export default function BankAccountDetailsWrapper({ getBankAccount, isValid, set
         if (bankAccount.accountNumber && !(bankAccount.accountNumber.length >= 9)) {
             setAccountNumError(true);
         }
-        //     if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber)) {
-        //         setFormValid(true);
-        //     }
-        //     else {
-        //         setFormValid(false);
-        //     }
     };
+
+    // const checkValid = () => {
+    //     if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber) && !routingNumError && !accountNumError) {
+    //         setFormValid(true);
+    //     }
+    //     else {
+    //         setFormValid(false);
+    //     }
+    // }
 
     const handleBankDetails = (e) => {
         setBankAccount({ ...bankAccount, [e.target.name]: e.target.value })
