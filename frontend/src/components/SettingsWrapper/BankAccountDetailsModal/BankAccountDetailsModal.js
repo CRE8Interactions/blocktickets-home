@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, createElement } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { createBankAccount } from '../../../utilities/api';
 
 import Alert from 'react-bootstrap/Alert';
@@ -37,27 +37,27 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
     const [
         accountName,
         setAccountName
-    ] = useState(account?.accountName);
+    ] = useState(account?.accountName || '');
 
     const [
         firstName,
         setFirstName
-    ] = useState(account?.firstName);
+    ] = useState(account?.firstName || '');
 
     const [
         lastName,
         setLastName
-    ] = useState(account?.lastName);
+    ] = useState(account?.lastName || '');
 
     const [
         accountNumber,
         setAccountNumber
-    ] = useState(account?.accountNumber);
+    ] = useState(account?.accountNumber || '');
 
     const [
         routingNumber,
         setRoutingNumber
-    ] = useState(account?.routingNumber);
+    ] = useState(account?.routingNumber || '');
 
     const [showAlert, setShowAlert] = useState(false);
 
@@ -68,12 +68,25 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
             validInputs();
         },
         [
+            accountNumber,
+            routingNumber
+        ]
+    );
+
+    // reset error when state are changed
+    useEffect(
+        () => {
+            checkValid();
+        },
+        [
             accountType,
             firstName,
             lastName,
             accountNumber,
             routingNumber,
-            accountName
+            accountName,
+            routingNumError,
+            accountNumError
         ]
     );
 
@@ -97,10 +110,6 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
         ]
     );
 
-    useEffect(() => {
-        validInputs();
-    }, []);
-
     const validInputs = () => {
         if (routingNumber && !(routingNumber.length >= 9)) {
             setRoutingNumError(true);
@@ -108,13 +117,16 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
         if (accountNumber && !(accountNumber.length >= 9)) {
             setAccountNumError(true);
         }
-        if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber)) {
+    }
+
+    const checkValid = () => {
+        if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber) && !routingNumError && !accountNumError) {
             setFormValid(true);
         }
         else {
             setFormValid(false);
         }
-    };
+    }
 
     const notificationModal = () => {
         if (showAlert) {
@@ -162,7 +174,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                 placeholder="Enter name of bank"
                                 required
                                 name="accountName"
-                                defaultValue={account?.accountName}
+                                value={accountName}
                                 onChange={(e) => setAccountName(e.target.value)}
                             />
                         </Form.Group>
@@ -170,7 +182,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                             <Form.Label>Payout Type</Form.Label>
                             <Form.Select
                                 name="account"
-                                defaultValue={account?.accountType}
+                                value={accountType}
                                 onChange={(e) => setAccountType(e.target.value)}
                                 required>
                                 <option value="checking">Checking</option>
@@ -184,7 +196,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                 placeholder="Enter your first name"
                                 required
                                 name="firstName"
-                                defaultValue={account?.firstName}
+                                value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                         </Form.Group>
@@ -195,7 +207,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                 placeholder="Enter your last name"
                                 required
                                 name="lastName"
-                                defaultValue={account?.lastName}
+                                value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
                         </Form.Group>
@@ -206,16 +218,16 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                             <Form.Label>Routing Number</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter routing number"
                                 required
-                                value={account?.routingNumber}
+                                value={routingNumber}
                                 pattern="[0-9]*"
+                                placeholder="XXXXXXXX"
                                 maxLength="9"
                                 name="routingNumber"
+                                onBlur={validInputs}
                                 onChange={(e) =>
-                                    setRoutingNumber(
-                                        (routing) =>
-                                            e.target.validity.valid || e.target.value === '' ? e.target.value : routing
+                                    setRoutingNumber((routing) =>
+                                        e.target.validity.valid || e.target.value === '' ? e.target.value : routing
                                     )}
                                 className={routingNumber && routingNumError ? 'error-border' : ''}
                             />
@@ -228,11 +240,13 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                             <Form.Label>Account Number</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter account number"
                                 required
-                                value={account?.accountNumber}
+                                value={accountNumber}
                                 pattern="[0-9]*"
+                                placeholder="XXXXXXXX"
+                                maxLength="9"
                                 name="accountNumber"
+                                onBlur={validInputs}
                                 onChange={(e) =>
                                     setAccountNumber(
                                         (acc) =>
@@ -243,13 +257,13 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                             {accountNumber &&
                                 accountNumError && (
                                     <Form.Text className="text-danger">
-                                        Account Number is invalid. Please try again
+                                        Account Number must be 9 digits
                                     </Form.Text>
                                 )}
                         </Form.Group>
 
-                        <Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
-                            Save Bank details
+                        <Button disabled={!formValid} size="lg" onClick={submitForm}>
+                            Link bank account
                         </Button>
                     </Form>
                 </Modal.Body>
