@@ -33,6 +33,16 @@
 				}
 			}
 
+			.time-caption,
+			.venue-caption,
+			.location-caption {
+				margin: 0px;
+			}
+
+			.row {
+				align-items: center;
+			}
+
 			.time {
 				@include breakpoint-min(md) {
 					&::before {

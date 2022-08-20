@@ -66,10 +66,10 @@ $text-spacer-xs: rem(16);
 }
 
 .row + .row {
-	margin-top: rem(2);
+	margin-top: rem(3);
 
 	@include breakpoint-min(md) {
-		margin-top: rem(4);
+		margin-top: rem(7);
 	}
 }
 
