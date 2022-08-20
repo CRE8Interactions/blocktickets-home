@@ -44,7 +44,7 @@ export default function MyEventsWrapper() {
     return (
         <section className="spacer-xs">
             <div className="section-heading-sm">
-                <h1>My Events</h1>
+                <h1>My events</h1>
                 <div className="tablet-desktop-only">
                     <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
                 </div>
