@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment'
 
 import { createTickets } from '../../utilities/api';
@@ -15,6 +15,8 @@ import { CreateTicket } from './CreateTicket';
 export default function CreateTicketWrapper({ id }) {
 
     const navigate = useNavigate();
+
+    const { uuid } = useParams()
 
     const [
         key,
@@ -51,9 +53,7 @@ export default function CreateTicketWrapper({ id }) {
     }
 
     const handleSave = () => {
-        // buildTickets(ticket, startDate, endDate)
-        navigate(-1)
-
+        buildTickets(ticket, startDate, endDate)
     }
 
     const buildTickets = (ticket, start, end) => {
@@ -66,15 +66,15 @@ export default function CreateTicketWrapper({ id }) {
         data['maximum_quantity'] = Number(ticket.maxQuantity);
         data['minResalePrice'] = parseFloat(ticket.minResalePrice);
         data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
-        data['eventId'] = event.id;
+        data['eventId'] = uuid;
         data['free'] = ticket.price > 0 ? false : true;
         data['generalAdmission'] = ticket.name.match(/general admission/i) ? true : false;
         data['quantity'] = ticket.quantity;
         data['sales_start'] = moment(start).format();
         data['sales_end'] = moment(end).format();
-
+        
         createTickets({ data })
-            .then((res) => { setEvent(res.data) })
+            .then((res) => { navigate(-1) })
             .catch((err) => console.error(err))
     }
 

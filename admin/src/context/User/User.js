@@ -4,7 +4,8 @@ const UserContext = createContext({
   authenticated: false,
   setAuthenticated: (auth) => {},
   user: '',
-  orgs: []
+  orgs: [],
+  selectedEvent: ''
 });
 
 export default UserContext;

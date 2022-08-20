@@ -10,7 +10,7 @@ export default function MyEventsPage() {
 
     useEffect(() => {
         getEvent(uuid)
-        .then((res) => setEvent(res.data))
+        .then((res) => {setEvent(res.data); console .log('Got Event ', res.data)})
         .catch(err => console.error(err))
 
         getOrders(uuid)

@@ -12,7 +12,6 @@ import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { WarningContainer } from "../../WarningContainer";
 
 export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted, event }) {
-    console.log(event)
     return (
         <>
             <Row>

@@ -7,7 +7,7 @@ import { SettingsMenu } from './SettingsMenu';
 
 import './sidenav.scss';
 
-export default function Sidenav() {
+export default function Sidenav({ event }) {
 
     const [open, setOpen] = useState(true);
 
@@ -18,7 +18,7 @@ export default function Sidenav() {
             <div className="sidebar-wrapper">
                 <Nav as="nav" className="position-sticky" activeKey={window.location.pathname}>
                     {isDashboard ? (
-                        <DashboardMenu open={open} setOpen={setOpen} />
+                        <DashboardMenu open={open} setOpen={setOpen} event={event} />
                     ) : (
                         <SettingsMenu />
                     )}
