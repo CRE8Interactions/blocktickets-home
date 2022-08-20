@@ -149,12 +149,12 @@ export default function CheckoutWrapper() {
 
     if (status === 'successful') {
         const timer = document.getElementById('timer-container');
-
         const btns = document.querySelector('.desktop-btns');
         const nav = document.querySelector('.navbar-nav');
 
         toggleNavContent(show, btns, nav);
         toggleElement(timer, !show);
+        document.getElementById('logo-link').style.pointerEvents = 'auto';
         document.getElementById('checkout-wrapper').classList.add('confirmation-padding');
     }
 
