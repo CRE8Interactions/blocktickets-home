@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { EventsSlider } from './EventsSlider';
 
-import './events.scss';
+export default function Events({ events }) {
 
-export default function Events(props) {
-	const { events } = props;
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null)
 
-	return (
-		<section className="spacer">
-			<div className="section-heading">
-				<h1>Trending Events</h1>
-				<SwiperNavigationButtons />
-			</div>
-			<div>
-				<EventsSlider events={events} />
-			</div>
-		</section>
-	);
+    return (
+        <section className="spacer">
+            <div className="section-heading">
+                <h1>Trending events</h1>
+                <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
+            </div>
+            <div>
+                <EventsSlider events={events} navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
+            </div>
+        </section>
+    );
 }
