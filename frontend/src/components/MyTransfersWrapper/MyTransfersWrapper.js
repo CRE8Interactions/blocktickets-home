@@ -83,7 +83,7 @@ export default function MyTransfersWrapper() {
             <div className="d-flex-column position-relative">
                 <Tabs defaultActiveKey="pending" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
                     <Tab eventKey="pending" title="Pending">
-                        {transfers.length > 0 ? (
+                        {transfers.map(transfer => transfer.status === 'pending' && transfer.event !== null).length > 0 ? (
                             <MyTransfersSlider
                                 navigationPrevRef={navigationPrevRef}
                                 navigationNextRef={navigationNextRef}
@@ -97,7 +97,9 @@ export default function MyTransfersWrapper() {
                         )}
                     </Tab>
                     <Tab eventKey="completed" title="Completed">
-                        {transfers.length > 0 ? (
+                        {transfers.map(
+                            (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
+                        ).length > 0 ? (
                             <MyTransfersSlider
                                 navigationPrevRef={navigationPrevRef}
                                 navigationNextRef={navigationNextRef}
