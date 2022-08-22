@@ -25,7 +25,7 @@ export default function MyListingsWrapper() {
     const [
         listings,
         setListings
-    ] = useState({});
+    ] = useState();
 
     useLayoutEffect(() => {
         const el = document.querySelector('#main-container');
@@ -78,7 +78,7 @@ export default function MyListingsWrapper() {
             </div>
             <Tabs defaultActiveKey="active" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="active" title="Active" key={new Date().getTime()}>
-                    {listings.length > 0 ? (
+                    {listings?.active.length > 0 ? (
                         <MyListingsSlider
                             navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
                             ticketStatus={'listed'}
@@ -95,7 +95,7 @@ export default function MyListingsWrapper() {
                     )}
                 </Tab>
                 <Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
-                    {listings.length > 0 ? (
+                    {listings?.sold.length > 0 ? (
                         <MyListingsSlider
                             navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
                             ticketStatus={'listed'}
@@ -110,7 +110,7 @@ export default function MyListingsWrapper() {
                     )}
                 </Tab>
                 <Tab eventKey="expired" title="Expired" key={new Date().getTime() + 2}>
-                    {listings.length > 0 ? (
+                    {listings?.expired.length > 0 ? (
                         <MyListingsSlider
                             ticketStatus={'listed'}
                             ticketState={key}
