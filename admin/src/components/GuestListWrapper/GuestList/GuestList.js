@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 
 import { Guest } from './Guest'
-import { WarningContainer } from '../../WarningContainer';
+import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
 
 export default function GuestList() {
@@ -53,9 +53,9 @@ export default function GuestList() {
                     </div>
 
                 ) : (
-                    <WarningContainer>
+                    <EmptyContainer>
                         <p>There are no guests, create a guest to add them to the guest list.</p>
-                    </WarningContainer>
+                    </EmptyContainer>
                 )}
             </Card>
             <DeleteModal show={show} handleClose={handleClose} />

@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 
 import { TrackingLink } from './TrackingLink'
-import { WarningContainer } from '../../WarningContainer';
+import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
 
 export default function TrackingLinks() {
@@ -72,9 +72,9 @@ export default function TrackingLinks() {
                     </div>
 
                 ) : (
-                    <WarningContainer>
+                    <EmptyContainer>
                         <p>There are no events to track, create a new event to track its link.</p>
-                    </WarningContainer>
+                    </EmptyContainer>
                 )}
             </Card>
             <DeleteModal show={show} handleClose={handleClose} />
