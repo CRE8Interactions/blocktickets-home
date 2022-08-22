@@ -2,7 +2,7 @@
 @use '../../scss/layout/spacing' as *;
 @use '../../scss/theme/colors' as *;
 
-.no-data {
+.empty {
 	> * {
 		margin: 0px;
 	}
