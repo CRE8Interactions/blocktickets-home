@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AutomaticReports } from './AutomaticReports'
 
-
 export default function AutomaticReportingWrapper() {
 
     return (

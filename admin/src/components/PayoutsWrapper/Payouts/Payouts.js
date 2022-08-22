@@ -3,7 +3,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
-import { WarningContainer } from '../../WarningContainer';
+import { EmptyContainer } from '../../EmptyContainer';
 import { Payout } from './Payout';
 
 import './payouts.scss';
@@ -23,9 +23,9 @@ export default function Tickets({ payouts }) {
                             </Stack>
                         </>
                     ) : (
-                        <WarningContainer style="center">
+                        <EmptyContainer style="center">
                             <p>You don’t have any payouts. Check back in later</p>
-                        </WarningContainer>
+                        </EmptyContainer>
                     )
                     }
                 </>

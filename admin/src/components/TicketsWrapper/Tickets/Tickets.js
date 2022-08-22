@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
-import { WarningContainer } from '../../WarningContainer';
+import { EmptyContainer } from '../../EmptyContainer';
 import { Ticket } from './Ticket';
 import { DeleteModal } from './DeleteModal';
 
@@ -35,9 +35,9 @@ export default function Tickets({ tickets }) {
 
                         </>
                     ) : (
-                        <WarningContainer style="center lg">
+                        <EmptyContainer style="center lg">
                             <p>You don’t have any tickets, please create at least one to publish event</p>
-                        </WarningContainer>
+                        </EmptyContainer>
                     )
                     }
                 </>
