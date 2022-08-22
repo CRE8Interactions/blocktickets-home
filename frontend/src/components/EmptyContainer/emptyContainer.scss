@@ -1,0 +1,29 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+@use '../../scss/theme/colors' as *;
+
+.empty {
+	> * {
+		margin: 0px;
+	}
+	h1 {
+		margin-top: $text-spacer-xs;
+		font-size: $body-1;
+	}
+
+	.subtitle {
+		font-size: $body-2;
+		color: $muted;
+		font-weight: $fw-normal;
+	}
+	&::before {
+		content: '';
+		background-image: url('../../assets/icons/tickets.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		border-radius: 50%;
+		background-color: rgba(62, 169, 247, 0.05);
+		width: 162px;
+		height: 162px;
+	}
+}
