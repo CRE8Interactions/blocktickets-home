@@ -1,8 +1,5 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-
-import OrganizationContext from "../../../context/Organization/Organization";
-import { publishEvent } from "../../../utilities/api";
 
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
@@ -11,21 +8,15 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Stack from "react-bootstrap/Stack";
 import Badge from "react-bootstrap/Badge";
 
-import { StatRow } from "./../../StatRow";
+import { StatRow } from "../../StatRow";
 import { DeleteModal } from './DeleteModal';
 import { MoreIcon } from "../../MoreIcon";
-
-import thumbnail from '../../../assets/profile-thumbnail.png'
 
 import './eventsTable.scss';
 
 import moment from 'moment';
 
 export default function EventsTable({ type, events }) {
-
-    const org = useContext(OrganizationContext)
-    const [event, setEvent] = useState()
-    const [gross, setGross] = useState()
 
     const [show, setShow] = useState(false);
 
@@ -34,8 +25,7 @@ export default function EventsTable({ type, events }) {
     const handleShow = () => setShow(true);
 
     let sum;
-    let selectedEvent;
-    
+
     if (events && type === 'published') events = events.filter((event) => event?.status === 'on_sale')
     if (events && type === 'draft') events = events.filter((event) => event?.status === 'unpublished')
     if (events && type === 'past') events = events.filter((event) => event?.status === 'published' && moment(event?.start) < moment())
@@ -73,16 +63,6 @@ export default function EventsTable({ type, events }) {
         }
     }
 
-    const publish = (event) => {
-        publishEvent(event)
-            .then((res) => {
-                let updateEvent = events.find(e => e.id === event.id)
-                updateEvent.status = 'on_sale'
-                handleClose()
-            })
-            .catch((err) => console.error(err))
-    }
-
     return (
         <>
             <Table hover id="events-table">
@@ -118,7 +98,6 @@ export default function EventsTable({ type, events }) {
                                             <ProgressBar now={20} />
                                         </Stack>)}
                                 </Stack>
-                                {/* { calculateSold(event.tickets)} */}
                             </td>
                             <td>
                                 <Stack>
@@ -138,7 +117,6 @@ export default function EventsTable({ type, events }) {
                                         </Stack>
                                     )}
                                 </Stack>
-                                {/* { calculateSold(event.tickets)} */}
                             </td>
                             <td>
                                 <Stack>
