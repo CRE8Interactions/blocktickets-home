@@ -4,7 +4,7 @@ import { RequireAuth } from './context/Auth/Auth';
 
 import {
     LoginPage,
-    ForgotPasswordPage, SignUpPage, HomePage, DashboardPage, MyEventPage, EventsPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage
+    ForgotPasswordPage, SignUpPage, HomePage, ReportsPage, DashboardPage, MyEventPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage
 } from './pages';
 
 import { ScrollToTop } from './components';
@@ -62,7 +62,7 @@ const Router = () => {
                         <Route path="edit" element={<TrackingLinkPage />} />
                     </Route>
                 </Route>
-                <Route path="events" element={<RequireAuth><EventsPage /></RequireAuth>} />
+                <Route path="reports" element={<RequireAuth><ReportsPage /></RequireAuth>} />
                 <Route path="create" element={<RequireAuth><CreateEventPage /></RequireAuth>} />
                 <Route path="settings" element={<SettingsPage />}>
                     <Route path="organization-information" element={<OrganizationInfoPage />} />
