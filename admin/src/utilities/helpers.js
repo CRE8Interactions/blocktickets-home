@@ -89,7 +89,7 @@ export const formatCurrency = (num) => {
 }
 
 export const removeHyphens = (string) => {
-    return string.replaceAll('_', ' ');
+    return string?.replaceAll('_', ' ');
 }
 
 // remove hyphens and capitalize first letter of each word 
