@@ -32,9 +32,11 @@ export default function Navigation() {
     const toggleOverflow = (expanded) => {
         if (expanded) {
             document.body.classList.add('nav-is-open');
+            // document.body.classList.remove('full-height')
         }
         else {
             document.body.classList.remove('nav-is-open');
+            // document.body.classList.add('full-height')
         }
     };
 
