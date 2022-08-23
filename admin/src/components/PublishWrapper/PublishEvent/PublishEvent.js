@@ -6,10 +6,10 @@ import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import Alert from 'react-bootstrap/Alert';
 
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
-import { WarningContainer } from "../../WarningContainer";
 
 export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted, event }) {
     return (
@@ -63,9 +63,9 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
             </Row>
             <div className="pt-4">
                 {eventStarted ? (
-                    <WarningContainer>
+                    <Alert bg="default" className='alert-info alert-info--light'>
                         <p>The event has already started, changes are not possible.</p>
-                    </WarningContainer>
+                    </Alert>
                 ) : (
                     <Stack direction="horizontal" className='mb-3'>
                         <Form>

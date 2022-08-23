@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import { getMyEvents, getIncomingTransfers, acceptIncomingTransfers } from '../../utilities/api';
 
+import { EmptyContainer } from '../EmptyContainer';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyEventsSlider } from './MyEventsSlider';
 
@@ -49,7 +50,13 @@ export default function MyEventsWrapper() {
                     <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
                 </div>
             </div>
-            <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} />
+            {orders.length > 0 ? (
+                <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} />
+            ) : (
+                <EmptyContainer>
+                    <h1>You do not have any events</h1>
+                </EmptyContainer>
+            )}
         </section>
     );
 }

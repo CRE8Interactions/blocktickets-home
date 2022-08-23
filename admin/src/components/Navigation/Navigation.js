@@ -18,7 +18,7 @@ import desktopLogo from '../../assets/logo.svg';
 
 import './navigation.scss';
 
-export default function Navigation({orgs, user}) {
+export default function Navigation({ orgs, user }) {
     const windowSize = useWindowSize();
     const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export default function Navigation({orgs, user}) {
 
     const displayName = (user) => {
         if (user?.user) return formatString(`${user?.user?.firstName} ${user?.user?.lastName}`);
-    }   
+    }
 
     return (
         <div className="navigation position-sticky">
@@ -68,13 +68,8 @@ export default function Navigation({orgs, user}) {
                                             </LinkContainer>
                                         </li>
                                         <li>
-                                            <LinkContainer to="/events">
-                                                <Nav.Link>Events</Nav.Link>
-                                            </LinkContainer>
-                                        </li>
-                                        <li>
                                             <LinkContainer to="/">
-                                                <Nav.Link>Reports</Nav.Link>
+                                                <Nav.Link>Events</Nav.Link>
                                             </LinkContainer>
                                         </li>
                                     </ul>

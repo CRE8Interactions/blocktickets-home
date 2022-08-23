@@ -42,7 +42,7 @@ export default function PublishWrapper({ event }) {
 
         publishEvent({ data })
             .then((res) => {
-                navigate('/events')
+                navigate('/')
             })
             .catch((err) => console.error(err))
 

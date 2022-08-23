@@ -8,7 +8,7 @@ import { CreateRoleModal } from './CreateRoleModal';
 import { DeleteModal } from './DeleteModal';
 
 export default function Roles({ roles, permissions, createRoles, setRoles }) {
-  
+
     const [role, setRole] = useState('')
 
     const [isCheckAll, setIsCheckAll] = useState(false);
@@ -32,7 +32,7 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
 
     const handleCloseCreate = () => { setShowCreate(false); setIsCheck([]) }
 
-    const handleShowDelete = (role) => { setShowDelete(true); setRole(role)}
+    const handleShowDelete = (role) => { setShowDelete(true); setRole(role) }
 
     const handleCloseDelete = () => setShowDelete(false)
 
@@ -54,7 +54,6 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
 
         const obj = name ? permissions[`${name}`] : permissions;
 
-        let curIsCheckAll = isCheckAll;
         setIsCheckAll(!isCheckAll)
 
         if (name) {
@@ -70,7 +69,7 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
     };
 
     const handleCreate = () => {
-        createRoles({roleName: createRole, permissions: isCheck, currentRole: role})
+        createRoles({ roleName: createRole, permissions: isCheck, currentRole: role })
         handleCloseCreate();
     }
 
@@ -87,7 +86,7 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
             </Stack>
 
             <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setCreateRole} isCheck={isCheck} handleSelectAll={handleSelectAll} handleCheck={handleCheck} handleCreate={handleCreate} />
-            
+
             <DeleteModal show={showDelete} handleClose={handleCloseDelete} role={role} setRoles={setRoles} />
         </>
     )

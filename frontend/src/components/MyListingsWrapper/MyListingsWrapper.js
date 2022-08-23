@@ -6,6 +6,7 @@ import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+import { EmptyContainer } from "./../EmptyContainer";
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyListingsSlider } from './MyListingsSlider';
 
@@ -24,7 +25,7 @@ export default function MyListingsWrapper() {
     const [
         listings,
         setListings
-    ] = useState({});
+    ] = useState();
 
     useLayoutEffect(() => {
         const el = document.querySelector('#main-container');
@@ -77,29 +78,50 @@ export default function MyListingsWrapper() {
             </div>
             <Tabs defaultActiveKey="active" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="active" title="Active" key={new Date().getTime()}>
-                    <MyListingsSlider
-                        navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
-                        ticketStatus={'listed'}
-                        ticketState={key}
-                        listings={listings.active}
-                        removeListing={removeListing}
-                        getListings={myListings}
-                    />
+                    {listings?.active.length > 0 ? (
+                        <MyListingsSlider
+                            navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
+                            ticketStatus={'listed'}
+                            ticketState={key}
+                            listings={listings.active}
+                            removeListing={removeListing}
+                            getListings={myListings}
+                        />
+                    ) : (
+                        <EmptyContainer>
+                            <h1>You do not have any {key} listings</h1>
+                            <h2 className="subtitle">Once your ticket listing is {key}, your details will be available here</h2>
+                        </EmptyContainer>
+                    )}
                 </Tab>
                 <Tab eventKey="sold" title="Sold" key={new Date().getTime() + 1}>
-                    <MyListingsSlider
-                        navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
-                        ticketStatus={'listed'}
-                        ticketState={key}
-                        listings={listings.sold}
-                    />
+                    {listings?.sold.length > 0 ? (
+                        <MyListingsSlider
+                            navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}
+                            ticketStatus={'listed'}
+                            ticketState={key}
+                            listings={listings.sold}
+                        />
+                    ) : (
+                        <EmptyContainer>
+                            <h1>You do not have any {key} listings</h1>
+                            <h2 className="subtitle">Once your ticket listing is {key}, your details will be available here</h2>
+                        </EmptyContainer>
+                    )}
                 </Tab>
                 <Tab eventKey="expired" title="Expired" key={new Date().getTime() + 2}>
-                    <MyListingsSlider
-                        ticketStatus={'listed'}
-                        ticketState={key}
-                        listings={listings.expired}
-                    />
+                    {listings?.expired.length > 0 ? (
+                        <MyListingsSlider
+                            ticketStatus={'listed'}
+                            ticketState={key}
+                            listings={listings.expired}
+                        />
+                    ) : (
+                        <EmptyContainer>
+                            <h1>You do not have any {key} listings</h1>
+                            <h2 className="subtitle">Once your ticket listing is {key}, your details will be available here</h2>
+                        </EmptyContainer>
+                    )}
                 </Tab>
             </Tabs>
         </section>

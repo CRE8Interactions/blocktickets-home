@@ -6,6 +6,7 @@ import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+import { EmptyContainer } from '../EmptyContainer';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyTransfersSlider } from './MyTransfersSlider';
 import { TicketModal } from '../TicketModal';
@@ -82,21 +83,35 @@ export default function MyTransfersWrapper() {
             <div className="d-flex-column position-relative">
                 <Tabs defaultActiveKey="pending" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
                     <Tab eventKey="pending" title="Pending">
-                        <MyTransfersSlider
-                            navigationPrevRef={navigationPrevRef}
-                            navigationNextRef={navigationNextRef}
-                            transfers={transfers.filter((transfer) => transfer.status === 'pending' && transfer.event !== null)}
-                            cancel={handleClick}
-                        />
+                        {transfers.map(transfer => transfer.status === 'pending' && transfer.event !== null).length > 0 ? (
+                            <MyTransfersSlider
+                                navigationPrevRef={navigationPrevRef}
+                                navigationNextRef={navigationNextRef}
+                                transfers={transfers.filter((transfer) => transfer.status === 'pending' && transfer.event !== null)}
+                                cancel={handleClick}
+                            />
+                        ) : (
+                            <EmptyContainer>
+                                <h1>You do not have any {key} transfers</h1>
+                            </EmptyContainer>
+                        )}
                     </Tab>
                     <Tab eventKey="completed" title="Completed">
-                        <MyTransfersSlider
-                            navigationPrevRef={navigationPrevRef}
-                            navigationNextRef={navigationNextRef}
-                            transfers={transfers.filter(
-                                (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
-                            )}
-                        />
+                        {transfers.map(
+                            (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
+                        ).length > 0 ? (
+                            <MyTransfersSlider
+                                navigationPrevRef={navigationPrevRef}
+                                navigationNextRef={navigationNextRef}
+                                transfers={transfers.filter(
+                                    (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
+                                )}
+                            />
+                        ) : (
+                            <EmptyContainer>
+                                <h1>You do not have any {key} transfers</h1>
+                            </EmptyContainer>
+                        )}
                     </Tab>
                 </Tabs>
             </div>

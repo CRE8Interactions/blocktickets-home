@@ -8,7 +8,7 @@ import Tab from 'react-bootstrap/Tab';
 import Table from 'react-bootstrap/Table';
 
 import { MessageRow } from './MessageRow'
-import { WarningContainer } from '../../WarningContainer';
+import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
 
 export default function ContactAttendees() {
@@ -71,9 +71,9 @@ export default function ContactAttendees() {
                 </div>
             ) : (
                 <Card body>
-                    <WarningContainer>
+                    <EmptyContainer>
                         <p>Nothing has been {key}, click Contact attendees to schedule or send a text / email.</p>
-                    </WarningContainer>
+                    </EmptyContainer>
                 </Card>
             )}
 

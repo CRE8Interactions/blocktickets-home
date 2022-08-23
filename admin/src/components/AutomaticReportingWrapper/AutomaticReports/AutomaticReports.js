@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 
 import { Recipient } from './Recipient'
-import { WarningContainer } from '../../WarningContainer';
+import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
 
 export default function AutomaticReports() {
@@ -43,9 +43,9 @@ export default function AutomaticReports() {
                     </div>
 
                 ) : (
-                    <WarningContainer>
+                    <EmptyContainer>
                         <p>Nothing is scheduled, click Add recipient to schedule an automatic report.</p>
-                    </WarningContainer>
+                    </EmptyContainer>
                 )}
             </Card>
             <DeleteModal show={show} handleClose={handleClose} />
