@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import UserContext from '../../context/User/User';
-import { getCategories, getVenues, createEvent } from '../../utilities/api';
+import { getCategories, getVenues, createEvent, getEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -19,6 +19,7 @@ export default function BasicInfoWrapper({ eventId }) {
     const navigate = useNavigate();
     const user = useContext(UserContext);
     const organization = user?.orgs[0];
+    const { uuid } = useParams()
 
     const timezoneOpt = [
         {
@@ -43,7 +44,6 @@ export default function BasicInfoWrapper({ eventId }) {
 
     useEffect(() => {
         setHasError(endDate.getTime() < startDate.getTime())
-
     }, [startDate, endDate])
 
     const [categories, setCategories] = useState()
@@ -54,7 +54,6 @@ export default function BasicInfoWrapper({ eventId }) {
         presentedBy: '',
         title: '',
         venue: '',
-        category: '',
         timezone: timezoneOpt[0].value,
         displayEndTime: true
     })
@@ -66,6 +65,16 @@ export default function BasicInfoWrapper({ eventId }) {
 
         getVenues()
             .then((res) => { setVenues(res?.data) })
+            .catch((err) => console.error(err))
+        
+        if (!uuid) return;
+
+        getEvent(uuid)
+            .then((res) => {
+                setEvent(res?.data)
+                setStartDate(moment(res?.data?.start).toDate())
+                setEndDate(moment(res?.data?.end).toDate())
+            })
             .catch((err) => console.error(err))
     }, [])
 
@@ -79,8 +88,8 @@ export default function BasicInfoWrapper({ eventId }) {
         data['name'] = event.title;
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
-        data['start'] = moment(event.startDate).format();
-        data['end'] = moment(event.endDate).format();
+        data['start'] = moment(startDate).format();
+        data['end'] = moment(endDate).format();
         data['venue'] = (Number(event.venue));
         data['categories'] = [Number(event.category)];
         data['status'] = 'unpublished';
@@ -120,7 +129,7 @@ export default function BasicInfoWrapper({ eventId }) {
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={!event.title || !event.category || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button size="lg" disabled={!event.title || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
 
@@ -11,13 +11,27 @@ import Image from 'react-bootstrap/Image';
 import { Dropzone } from './Dropzone';
 import { InfoIcon } from '../InfoIcon';
 
-export default function UploadEventImage({ setSelectedImage, selectedImage }) {
+export default function UploadEventImage({ setSelectedImage, selectedImage, event }) {
 
     const [previewImage, setPreviewImage] = useState()
 
     const [croppedCoordinates, setCroppedCoordinates] = useState()
 
     const [show, setShow] = useState(false)
+
+    const [showPreview, setShowPreview] = useState(true)
+
+    const [imageUrl, setImageUrl] = useState()
+
+    useEffect(() => {
+        if (previewImage) {
+            console.log('Setting Preview Image ', previewImage[0].preview)
+            setImageUrl(previewImage[0].preview);
+        } else {
+            console.log('Setting Event Img ', event?.image?.url)
+            setImageUrl(event?.image?.url)
+        }
+    }, [show, event])
 
     const handleClose = () => setShow(false)
 
@@ -28,7 +42,6 @@ export default function UploadEventImage({ setSelectedImage, selectedImage }) {
 
     const handleUpload = (img) => {
         setPreviewImage(img);
-        console.log('IM ', img)
         setShow(true);
     }
 
@@ -38,6 +51,8 @@ export default function UploadEventImage({ setSelectedImage, selectedImage }) {
 
     const handleRemove = () => {
         setSelectedImage('')
+        setImageUrl('')
+        setShowPreview(false)
     }
 
     const handleReplace = () => {
@@ -53,11 +68,11 @@ export default function UploadEventImage({ setSelectedImage, selectedImage }) {
                 </small>
             </Stack>
             <div className="mt-3">
-                {!selectedImage ? (
+                {!imageUrl ? (
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        <Image src={selectedImage.preview} rounded width={croppedCoordinates.width} height={croppedCoordinates.height} />
+                        <Image src={imageUrl} rounded width={!event && !showPreview ? croppedCoordinates.width: ''} height={!event && !showPreview  ? croppedCoordinates.height : ''} />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleReplace}>Replace</Button>
