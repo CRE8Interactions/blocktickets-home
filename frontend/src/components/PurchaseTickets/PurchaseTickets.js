@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useMedia } from './../../utilities/hooks';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { SeatingMap } from './SeatingMap';
@@ -58,24 +57,17 @@ export default function PurchaseTickets() {
         setListing
     ] = useState();
 
-    const mediaQuery = useMedia('(max-width: 768px');
+    useLayoutEffect(
+        () => {
+            const el = document.querySelector('#main-container');
+            fullHeightContainer(el)
 
-    // remove full height layout only on ticket selection step, is below tablet size and filter menu is open to allow scrolling on mobile when filter menu is open and for mobile menu to display properly
-    // useLayoutEffect(
-    //     () => {
-    //         const el = document.querySelector('#main-container');
-
-    //         if ((step === 'selection' && isFilterOpen)) {
-    //             removeFullHeightContainer(el);
-    //         } else {
-    //             fullHeightContainer(el)
-    //         }
-    //     },
-    //     [
-    //         step,
-    //         isFilterOpen
-    //     ]
-    // );
+            return () => {
+                removeFullHeightContainer(el)
+            }
+        },
+        []
+    );
 
     const handleClick = (step, ticket, listing) => {
         // find key
