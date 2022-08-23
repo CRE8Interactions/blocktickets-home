@@ -12,7 +12,7 @@ export default function BasicInfo({ handleChange, event, categories }) {
         <Form>
             <Form.Group className="form-group" controlId="presentedBy">
                 <Form.Label>Presented By <strong className='text-dark text-lowercase'>(optional)</strong></Form.Label>
-                <Form.Control type="text" name="presentedBy" value={event.presentedBy} placeholder="Presented By" onChange={handleChange} />
+                <Form.Control type="text" name="presentedBy" value={event ? event?.presentedBy : ''} placeholder="Presented By" onChange={handleChange} />
             </Form.Group>
             <Form.Group className="form-group" controlId="title">
                 <div className="form-label--flex">
@@ -25,17 +25,7 @@ export default function BasicInfo({ handleChange, event, categories }) {
                         </Button>
                     </OverlayTrigger>
                 </div>
-                <Form.Control type="text" name="title" placeholder="Event title" value={event.title} onChange={handleChange} required />
-            </Form.Group>
-            <Form.Group className="form-group" controlId="category">
-                <Form.Label>Event Category</Form.Label>
-                <Form.Select aria-label="event type" onChange={handleChange} name="category" required>
-                    <option>Select Category</option>
-                    { categories && categories.map((category, index) => (
-                        <option value={category?.id} key={index}>{category?.attributes?.name}</option>
-                    ))
-                    }
-                </Form.Select>
+                <Form.Control type="text" name="title" placeholder="Event title" value={event ? event?.name : ''} onChange={handleChange} required />
             </Form.Group>
         </Form>
     );

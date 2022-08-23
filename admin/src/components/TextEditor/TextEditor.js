@@ -4,12 +4,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import './textEditor.scss';
 
-export default function TextEditor({ handleChange }) {
+export default function TextEditor({ handleChange, event }) {
     return (
         <div className="App">
             <CKEditor
                 editor={ClassicEditor}
-                data=""
+                data={event && event?.summary ? event?.summary : ''}
                 onChange={(event, editor) => {
                     const data = editor.getData();
                     handleChange(data)

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -8,7 +9,6 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 export default function DateTime({ event, handleChange, setStartDate, startDate, setEndDate, endDate, hasError }) {
-
     return (
         <Form>
             <fieldset className='form-group'>

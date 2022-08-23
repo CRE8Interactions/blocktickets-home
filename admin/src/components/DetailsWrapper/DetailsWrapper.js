@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getEvent } from '../../utilities/api';
 
 import { addDetailsToEvent, upload } from '../../utilities/api';
 
@@ -14,11 +15,23 @@ export default function DetailsWrapper({ eventId }) {
 
     const [selectedImage, setSelectedImage] = useState()
 
+    const [event, setEvent] = useState()
+
     const [eventImg, setEventImg] = useState()
 
     const [description, setDescription] = useState()
 
     const navigate = useNavigate();
+
+    const { uuid } = useParams()
+
+    useEffect(() => {
+        getEvent(uuid)
+            .then((res) => {
+                if (res.data) setEvent(res.data);
+            })
+            .catch((err) => console.error(err))
+    }, [uuid])
 
     useEffect(() => {
         setEventImg(selectedImage)
@@ -56,7 +69,7 @@ export default function DetailsWrapper({ eventId }) {
                     <h1>Main event image</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <UploadEventImage setSelectedImage={setSelectedImage} selectedImage={selectedImage} />
+                    <UploadEventImage setSelectedImage={setSelectedImage} selectedImage={selectedImage} event={event} />
                 </Card>
             </section>
             <section>
@@ -64,7 +77,7 @@ export default function DetailsWrapper({ eventId }) {
                     <h1>Event description</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <TextEditor handleChange={handleDescription} />
+                    <TextEditor handleChange={handleDescription} event={event} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">

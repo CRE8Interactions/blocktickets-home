@@ -10,7 +10,7 @@ export default function Location({ event, handleChange, timezoneOpt, venues }) {
                 <Form.Select name="venue" value={event?.venue} onChange={handleChange}>
                     <option disabled value="" hidden>Select venue</option>
                     {venues && venues.map((option, index) => (
-                        <option key={index} value={option.id}>{option?.name}</option>
+                        <option key={index} value={option.id}>{option?.name} - {option?.address[0]?.address_1} {option?.address[0]?.city}, {option?.address[0]?.state}</option>
                     ))}
                 </Form.Select>
             </Form.Group>
