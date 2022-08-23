@@ -1,0 +1,9 @@
+@use '../../../scss/abstracts' as *;
+
+.action-btns.btn-group-flex {
+	flex: 0 0 294px;
+
+	@include breakpoint-min(md) {
+		flex: 0 0 342px;
+	}
+}
