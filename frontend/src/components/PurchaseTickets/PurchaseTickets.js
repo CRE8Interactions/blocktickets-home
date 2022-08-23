@@ -58,19 +58,17 @@ export default function PurchaseTickets() {
         setListing
     ] = useState();
 
-    const mediaQuery = useMedia('(min-width: 768px');
+    const mediaQuery = useMedia('(max-width: 768px');
 
-    // layout change to full height only in tablet size or if on ticket selection step and filter menu is closed to allow scrolling on mobile and for mobile menu to display properly
+    // remove full height layout only on ticket selection step, is below tablet size and filter menu is open to allow scrolling on mobile when filter menu is open and for mobile menu to display properly
     useLayoutEffect(
         () => {
-            if (mediaQuery || (step === 'selection' && !isFilterOpen)) {
-                const el = document.querySelector('#main-container');
+            const el = document.querySelector('#main-container');
 
-                fullHeightContainer(el);
-
-                return () => {
-                    removeFullHeightContainer(el);
-                };
+            if ((step === 'selection' && mediaQuery && isFilterOpen)) {
+                removeFullHeightContainer(el);
+            } else {
+                fullHeightContainer(el)
             }
         },
         [
