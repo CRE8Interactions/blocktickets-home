@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
@@ -18,26 +17,10 @@ export default function PurchaseTickets() {
         presale: 3
     };
 
-    const { search } = useLocation();
-
-    let query = new URLSearchParams(search, [
-        search
-    ]);
-
-    const [
-        param
-    ] = useState(query.get('type'));
-
     const [
         step,
         setStep
     ] = useState('selection');
-
-    // state when filter menu is open for layout change
-    const [
-        isFilterOpen,
-        setIsFilterOpen
-    ] = useState(false);
 
     // better way? - only on seated map
     const [
@@ -69,6 +52,9 @@ export default function PurchaseTickets() {
         []
     );
 
+    // demo purposes: will come from database 
+    const eventType = "genAdmission";
+
     const handleClick = (step, ticket, listing) => {
         // find key
         setStep(Object.keys(steps).find((key) => key === step));
@@ -90,18 +76,16 @@ export default function PurchaseTickets() {
         <div className="pt-md-3 flex d-flex flex-column flex-md-row">
             <SeatingMap
                 styles={(step === 'confirmation' || step === 'presale') && 'tablet-desktop-only'}
-                type={param}
                 setIsZoomed={setIsZoomed}
+                eventType={eventType}
             />
 
             <TicketPurchase
                 handleClick={handleClick}
                 handleGoBack={handleGoBack}
-                setIsFilterOpen={setIsFilterOpen}
-                isFilterOpen={isFilterOpen}
                 step={step}
-                type={param}
                 isZoomed={isZoomed}
+                eventType={eventType}
                 ticket={ticket}
                 listing={listing}
             />

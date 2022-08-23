@@ -14,7 +14,7 @@ export default function EventsSlider({ events, navigationNextRef, navigationPrev
                     events.map((event, index) => {
                         return (
                             <SwiperSlide key={index} className="swiper-lazy">
-                                <MyCard prefix={prefix} type="genAdmission" event={event} />
+                                <MyCard prefix={prefix} event={event} />
                             </SwiperSlide>
                         );
                     })}
