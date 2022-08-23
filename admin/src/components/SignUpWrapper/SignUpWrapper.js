@@ -91,7 +91,7 @@ export default function SignUpWrapper() {
     const getTitle = () => {
         switch (step) {
             case 1:
-                return 'Organizer sign up'
+                return 'Organizer signup'
 
             case 2:
                 return 'Organization information'
@@ -103,7 +103,7 @@ export default function SignUpWrapper() {
                 return 'Payment information'
 
             case 5:
-                return 'Tax Status'
+                return 'Tax status'
 
             default:
                 return;
@@ -340,7 +340,7 @@ export default function SignUpWrapper() {
 
                         {step === 1 && (
                             <div className="text-center mt-4 caption">
-                                <span className='text-muted'>Already have an account? <Link to="/login">Log in</Link></span>
+                                <span className='text-muted'>Already have an account? <Link to="/login">Login</Link></span>
                             </div>
                         )}
                     </Col>

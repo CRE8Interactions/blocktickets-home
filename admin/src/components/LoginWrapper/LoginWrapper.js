@@ -56,7 +56,7 @@ export default function LoginWrapper() {
                         .then((res) => {
                             if (res.data.length > 0) {
                                 AuthService.setOrg(res.data)
-                                
+
                             } else {
                                 // navigate('/signup', { replace: true })
                                 console.error('No Org Present')
@@ -74,7 +74,7 @@ export default function LoginWrapper() {
     return (
         <section className='wrapper-xs'>
             <header className='mb-5'>
-                <h1 className='fs-md'>Organizer log in</h1>
+                <h1 className='fs-md'>Organizer login</h1>
                 <h2 className='text-muted normal fw-medium'>The future of ticketing is here</h2>
             </header>
             <Form>
@@ -102,9 +102,9 @@ export default function LoginWrapper() {
                 )}
                 <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>Login</Button>
             </Form>
-            {/* <div className="text-center mt-4 caption">
-                <span className='text-muted'>Don't have an account yet? <Link to="/signup">Sign Up</Link></span>
-            </div> */}
+            <div className="text-center mt-4 caption">
+                <span className='text-muted'>Don't have an account yet? <Link to="/signup">Signup</Link></span>
+            </div>
         </section>
     )
 }
