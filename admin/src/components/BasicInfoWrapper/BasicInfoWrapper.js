@@ -98,15 +98,18 @@ export default function BasicInfoWrapper({ eventId }) {
         if (uuid) {
             data['uuid'] = uuid;
             data['venue'] = (Number(event.venue?.id));
+            console.log(data)
             editEvent({ data })
                 .then((res) => console.log(res.data))
                 .catch((err) => console.error(err))
             
         } else {
+        console.log(data)
         createEvent({ data })
             .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
             .catch((err) => console.error(err))
         }
+        console.log(data)
     }
 
     return (
@@ -136,7 +139,7 @@ export default function BasicInfoWrapper({ eventId }) {
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={!event.name || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button size="lg" disabled={false} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

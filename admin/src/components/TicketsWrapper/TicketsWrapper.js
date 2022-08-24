@@ -11,10 +11,23 @@ export default function TicketsWrapper({tickets}) {
 
     const navigate = useNavigate();
 
+    const groupByName = tickets?.reduce((group, ticket) => {
+    const { name } = ticket;
+    group[name] = ticket[name] ?? [];
+    group[name].push(ticket);
+    return group;
+    }, {});
+
     // event tickets delete later
     let eventTickets = [];
+    let ticketNames = [];
     if (tickets?.length > 0) {
+        // Get Ticket Names
+        tickets?.map((ticket) => {
+            if (!ticketNames.includes(ticket.name)) ticketNames.push(ticket.name)
+        })
         let onSaleTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'available');
+        console.log('Ticket Names ', groupByName)
         let soldTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'sold');
         let scheduled = tickets?.filter((ticket) => moment(ticket?.sales_start) > moment());
         let salesEnded = tickets?.filter((ticket) => moment(ticket?.sales_ended) < moment());
@@ -25,7 +38,7 @@ export default function TicketsWrapper({tickets}) {
                 type: `${onSaleTickets ? onSaleTickets[0]?.name : 'General Admission'}`,
                 status: 'on_sale',
                 desc: `Ends ${moment(tickets ? tickets[0]?.sales_end : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_end : '').format('hh:mm A')}`,
-                ticketsSold: `${soldTickets?.length}/${onSaleTickets?.length}`,
+                ticketsSold: `${soldTickets?.length}/${tickets?.length}`,
                 price: parseFloat(onSaleTickets ? onSaleTickets[0]?.cost : 0),
                 show: onSaleTickets?.length > 0 ? true : false
             },
