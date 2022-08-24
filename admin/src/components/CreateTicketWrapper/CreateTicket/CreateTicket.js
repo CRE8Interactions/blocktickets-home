@@ -73,7 +73,7 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                                     id="price"
                                     name="price"
                                     aria-describedby="price-val"
-                                    pattern="^[0-9]*$"
+                                    pattern="^[0-9.]*$"
                                     value={ticket.price}
                                     onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.price)}
                                     required

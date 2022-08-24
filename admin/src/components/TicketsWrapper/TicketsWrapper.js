@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button';
 
 import { Tickets } from './Tickets';
 
-
 export default function TicketsWrapper({ tickets }) {
 
     const navigate = useNavigate();
