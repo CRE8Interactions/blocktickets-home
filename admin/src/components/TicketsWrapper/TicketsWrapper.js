@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
@@ -7,20 +7,22 @@ import Button from 'react-bootstrap/Button';
 import { Tickets } from './Tickets';
 
 
-export default function TicketsWrapper({tickets}) {
+export default function TicketsWrapper({ tickets }) {
 
     const navigate = useNavigate();
 
     const groupByName = tickets?.reduce((group, ticket) => {
-    const { name } = ticket;
-    group[name] = ticket[name] ?? [];
-    group[name].push(ticket);
-    return group;
+        const { name } = ticket;
+        group[name] = ticket[name] ?? [];
+        group[name].push(ticket);
+        return group;
     }, {});
 
-    // event tickets delete later
+    // event tickets
     let eventTickets = [];
+
     let ticketNames = [];
+
     if (tickets?.length > 0) {
         // Get Ticket Names
         tickets?.map((ticket) => {
