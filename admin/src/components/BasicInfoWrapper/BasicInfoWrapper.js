@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import UserContext from '../../context/User/User';
 import { getCategories, getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
@@ -12,14 +13,11 @@ import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 
-import moment from 'moment';
-
 export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
     const user = useContext(UserContext);
     const organization = user?.orgs[0];
-    const { uuid } = useParams()
 
     const timezoneOpt = [
         {
@@ -66,10 +64,10 @@ export default function BasicInfoWrapper({ eventId }) {
         getVenues()
             .then((res) => { setVenues(res?.data) })
             .catch((err) => console.error(err))
-        
-        if (!uuid) return;
 
-        getEvent(uuid)
+        if (!eventId) return;
+
+        getEvent(eventId)
             .then((res) => {
                 setEvent(res?.data)
                 setStartDate(moment(res?.data?.start).toDate())
@@ -95,19 +93,19 @@ export default function BasicInfoWrapper({ eventId }) {
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
-        if (uuid) {
-            data['uuid'] = uuid;
+        if (eventId) {
+            data['uuid'] = eventId;
             data['venue'] = (Number(event.venue?.id));
             console.log(data)
             editEvent({ data })
                 .then((res) => console.log(res.data))
                 .catch((err) => console.error(err))
-            
+
         } else {
-        console.log(data)
-        createEvent({ data })
-            .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
-            .catch((err) => console.error(err))
+            console.log(data)
+            createEvent({ data })
+                .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
+                .catch((err) => console.error(err))
         }
         console.log(data)
     }
