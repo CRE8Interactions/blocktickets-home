@@ -86,6 +86,10 @@ export const createEvent = async (data) => {
   return instance.post('/events', data)
 }
 
+export const editEvent = async (data) => {
+  return instance.put('/events/update-event', data)
+}
+
 export const addDetailsToEvent = async (data) => {
   return instance.post('/organizations/add-details', data)
 }

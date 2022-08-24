@@ -9,7 +9,7 @@ import Badge from 'react-bootstrap/Badge';
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
 export default function Ticket({ ticket, handleShow }) {
-
+    // console.log('Ticket ', ticket)
     const navigate = useNavigate();
 
     const ticketStatusColors = [
@@ -41,7 +41,7 @@ export default function Ticket({ ticket, handleShow }) {
                 <span>{ticket.ticketsSold}</span>
             </Stack>
             <Stack>
-                <span>{formatCurrency(50)}</span>
+                <span>{formatCurrency(ticket?.price)}</span>
             </Stack>
             <EditDeleteDropdown handleShow={handleShow} onClick={() => navigate(`edit?id=${ticket.id}`)} />
         </Stack>

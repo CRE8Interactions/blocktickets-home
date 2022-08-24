@@ -17,6 +17,8 @@ export default function Tickets({ tickets }) {
 
     const handleShow = () => setShow(true);
 
+    console.log('Tickets ', tickets)
+
     return (
         <>
             <Card body>
@@ -24,9 +26,10 @@ export default function Tickets({ tickets }) {
                     {tickets && tickets.length > 0 ? (
                         <>
                             <Stack gap={2} as="ul" className="pb-4 tickets">
-                                {(tickets).map((ticket, id) => (
-                                    <Ticket key={id} ticket={ticket} handleShow={handleShow} />
-                                ))}
+                                {(tickets).map((ticket, id) => {
+                                    if (ticket.show) return <Ticket key={id} ticket={ticket} handleShow={handleShow} />
+                                    }
+                                )}
                             </Stack>
                             <Stack direction='horizontal' className='pt-3 split-row'>
                                 <span className='fw-medium normal'>Event capacity</span>

@@ -14,7 +14,7 @@ export default function BasicInfo({ handleChange, event, categories }) {
                 <Form.Label>Presented By <strong className='text-dark text-lowercase'>(optional)</strong></Form.Label>
                 <Form.Control type="text" name="presentedBy" value={event ? event?.presentedBy : ''} placeholder="Presented By" onChange={handleChange} />
             </Form.Group>
-            <Form.Group className="form-group" controlId="title">
+            <Form.Group className="form-group" controlId="name">
                 <div className="form-label--flex">
                     <Form.Label>Event Title</Form.Label>
                     <OverlayTrigger
@@ -25,7 +25,7 @@ export default function BasicInfo({ handleChange, event, categories }) {
                         </Button>
                     </OverlayTrigger>
                 </div>
-                <Form.Control type="text" name="title" placeholder="Event title" value={event ? event?.name : ''} onChange={handleChange} required />
+                <Form.Control type="text" name="name" placeholder="Event title" value={event ? event?.name : ''} onChange={handleChange} required />
             </Form.Group>
         </Form>
     );

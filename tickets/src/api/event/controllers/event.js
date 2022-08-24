@@ -157,5 +157,28 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
    if (process.env.NODE_ENV === 'production') return;
     await strapi.service('api::utility.utility').refreshDB();
    return 200;
+  },
+  async updateEvent(ctx) {
+    const { 
+      uuid,
+      presentedBy,
+      name,
+      start,
+      end,
+      venue
+     } = ctx.request.body.data;
+
+    const entry = await strapi.db.query('api::event.event').update({
+      where: { uuid: uuid },
+      data: {
+        presentedBy,
+        name,
+        start,
+        end,
+        venue
+      },
+    });
+
+    return entry
   }
 }));

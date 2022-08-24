@@ -13,7 +13,6 @@ export default function TicketsWrapper({tickets}) {
 
     // event tickets delete later
     let eventTickets = [];
-
     if (tickets?.length > 0) {
         let onSaleTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'available');
         let soldTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'sold');
@@ -27,7 +26,8 @@ export default function TicketsWrapper({tickets}) {
                 status: 'on_sale',
                 desc: `Ends ${moment(tickets ? tickets[0]?.sales_end : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_end : '').format('hh:mm A')}`,
                 ticketsSold: `${soldTickets?.length}/${onSaleTickets?.length}`,
-                price: parseFloat(onSaleTickets ? onSaleTickets[0]?.cost : 0)
+                price: parseFloat(onSaleTickets ? onSaleTickets[0]?.cost : 0),
+                show: onSaleTickets?.length > 0 ? true : false
             },
             {
                 id: 1,
@@ -35,14 +35,16 @@ export default function TicketsWrapper({tickets}) {
                 status: 'scheduled',
                 desc: `Starts ${moment(tickets ? tickets[0]?.sales_start : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_start : '').format('hh:mm A')}`,
                 ticketsSold: `0/${scheduled?.length}`,
-                price: parseFloat(scheduled ? scheduled[0]?.cost : 0)
+                price: parseFloat(scheduled ? scheduled[0]?.cost : 0),
+                show: scheduled?.length > 0 ? true : false
             },
             {
                 id: 2,
                 type: `${salesEndedSold && salesEndedSold?.length >= 1 ? salesEndedSold[0]?.name : 'General Admission'}`,
                 status: 'sale_ended',
                 ticketsSold: `${salesEndedSold ? salesEndedSold?.length : 0}/${salesEndedSold ? salesEndedSold.length : 0}`,
-                price: 50
+                price: parseFloat(salesEndedSold ? salesEndedSold[0]?.cost : 0),
+                show: salesEndedSold?.length > 0 ? true : false
             }
         ];
     }
