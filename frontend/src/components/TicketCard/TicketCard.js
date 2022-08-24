@@ -82,7 +82,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                             (
                                 <>
                                     <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-                                        <Button onClick={(e) => handleClick('remove')}>Remove listing</Button>
+                                        <Button onClick={(e) => handleClick('remove')}>Remove</Button>
                                         <Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
                                     </Stack>
                                 </>
