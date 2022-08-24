@@ -166,9 +166,11 @@ h4,
 	.card-subtitle,
 	.subtitle,
 	.event-detail,
-	.row > .col > * {
+	.row > .col > *,
+	* {
 		@extend %text-truncate !optional;
 	}
+
 	.card-title,
 	.event-name {
 		font-size: $body-1;

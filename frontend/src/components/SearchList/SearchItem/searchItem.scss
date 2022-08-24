@@ -14,12 +14,13 @@
 		flex: 1;
 		min-width: 0;
 
+		* {
+			@extend %text-truncate;
+		}
+
 		&-event-name {
 			color: $body-color;
 			font-weight: $fw-medium;
-		}
-		p {
-			@extend %text-truncate;
 		}
 	}
 }

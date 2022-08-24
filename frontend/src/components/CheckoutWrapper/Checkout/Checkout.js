@@ -54,7 +54,7 @@ export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
         let paymentButtonDisabled = document.getElementById('payment-btn-disabled');
 
         if (e && e.complete) {
-            paymentButton.classList.add('d-block');
+            paymentButton.classList.add('d-flex');
             paymentButton.classList.remove('d-none');
             paymentButtonDisabled.classList.add('d-none');
         }

@@ -2,8 +2,10 @@ import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
-import { login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
-    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register } from '../../utilities/api'
+import {
+    login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
+    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register
+} from '../../utilities/api'
 import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
 import UserContext from '../../context/User/User'
 
@@ -64,7 +66,7 @@ export default function SignUpWrapper() {
     const [company, setCompany] = useState()
 
     const createRoles = (data) => {
-        createOrEditRole({data})
+        createOrEditRole({ data })
             .then((res) => setRoles(res.data))
             .catch((err) => console.error(err))
     }
@@ -74,7 +76,7 @@ export default function SignUpWrapper() {
         // Get Roles and Permissions if refresh browser on step 3
         if (step === 3 && roles.length === 0) getRolesAndPermissions()
     }, [step, taxStep])
-    
+
 
     useEffect(() => {
         if (!isValid)
@@ -89,7 +91,7 @@ export default function SignUpWrapper() {
     const getTitle = () => {
         switch (step) {
             case 1:
-                return 'Organizer sign up'
+                return 'Organizer signup'
 
             case 2:
                 return 'Organization information'
@@ -101,7 +103,7 @@ export default function SignUpWrapper() {
                 return 'Payment information'
 
             case 5:
-                return 'Tax Status'
+                return 'Tax status'
 
             default:
                 return;
@@ -133,18 +135,18 @@ export default function SignUpWrapper() {
         getOrganizationRoles()
             .then((res) => { setRoles(res.data) })
             .catch((err) => console.error(err))
-        
+
         getOrganizationPermissions()
             .then((res) => setPermissions(formatPermissions(res.data.data)))
             .catch((err) => console.error(err))
-        
+
         getTeam()
             .then((res) => setMembers(formatMembers(res.data?.members)))
             .catch((err) => console.error(err))
     }
 
     const inviteMember = (member) => {
-        createOrEditMember({member})
+        createOrEditMember({ member })
             .then((res) => console.log(res))
             .catch((err) => console.error(err))
     }
@@ -186,7 +188,7 @@ export default function SignUpWrapper() {
                 credentials['gender'] = 'other';
                 const today = new Date()
                 const days = 86400000 //number of milliseconds in a day
-                const hundredDaysAgo = new Date(today - (100*days))
+                const hundredDaysAgo = new Date(today - (100 * days))
                 credentials['dob'] = hundredDaysAgo;
                 register(credentials)
                     .then((res) => { AuthService.setSignUpToken(res.data?.jwt); handleStep(curStep, setter) })
@@ -194,13 +196,13 @@ export default function SignUpWrapper() {
             }
         }
         else if (step === 2) {
-            createOrganization({data: orgInfo})
+            createOrganization({ data: orgInfo })
                 .then((res) => { handleStep(curStep, setter); getRolesAndPermissions() })
-                .catch((err) => console.error(err))  
+                .catch((err) => console.error(err))
         }
         else if (step === 4) {
-            createPaymentInfo({data: bankAccount})
-                .then((res) => { setCompany(res.data); handleStep(curStep, setter)})
+            createPaymentInfo({ data: bankAccount })
+                .then((res) => { setCompany(res.data); handleStep(curStep, setter) })
                 .catch((err) => console.error(err))
         }
         else if (step === 5 && taxStep === 4) {
@@ -210,8 +212,8 @@ export default function SignUpWrapper() {
             handleStep(curStep, setter);
         }
         if (taxStep === 3) {
-            createW9({data: taxDetails})
-                .then((res) => {AuthService.removeSignup(); setIsSuccess(true) })
+            createW9({ data: taxDetails })
+                .then((res) => { AuthService.removeSignup(); setIsSuccess(true) })
                 .catch((err) => console.error(err))
         }
     }
@@ -312,7 +314,7 @@ export default function SignUpWrapper() {
                             </Form>
                         )}
                         {step === 2 && (
-                            <OrganizationInformationWrapper setOrgInfo={setOrgInfo} />
+                            <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
                         )}
                         {step === 3 && (
                             <>
@@ -338,7 +340,7 @@ export default function SignUpWrapper() {
 
                         {step === 1 && (
                             <div className="text-center mt-4 caption">
-                                <span className='text-muted'>Already have an account? <Link to="/login">Log in</Link></span>
+                                <span className='text-muted'>Already have an account? <Link to="/login">Login</Link></span>
                             </div>
                         )}
                     </Col>

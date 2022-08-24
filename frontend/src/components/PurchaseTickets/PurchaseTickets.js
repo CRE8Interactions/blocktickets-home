@@ -1,7 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
-import { useMedia } from './../../utilities/hooks';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { SeatingMap } from './SeatingMap';
@@ -19,26 +17,10 @@ export default function PurchaseTickets() {
         presale: 3
     };
 
-    const { search } = useLocation();
-
-    let query = new URLSearchParams(search, [
-        search
-    ]);
-
-    const [
-        param
-    ] = useState(query.get('type'));
-
     const [
         step,
         setStep
     ] = useState('selection');
-
-    // state when filter menu is open for layout change
-    const [
-        isFilterOpen,
-        setIsFilterOpen
-    ] = useState(false);
 
     // better way? - only on seated map
     const [
@@ -58,27 +40,20 @@ export default function PurchaseTickets() {
         setListing
     ] = useState();
 
-    const mediaQuery = useMedia('(min-width: 768px');
-
-    // layout change to full height only in tablet size or if on ticket selection step and filter menu is closed to allow scrolling on mobile and for mobile menu to display properly
     useLayoutEffect(
         () => {
-            if (mediaQuery || (step === 'selection' && !isFilterOpen)) {
-                const el = document.querySelector('#main-container');
+            const el = document.querySelector('#main-container');
+            fullHeightContainer(el)
 
-                fullHeightContainer(el);
-
-                return () => {
-                    removeFullHeightContainer(el);
-                };
+            return () => {
+                removeFullHeightContainer(el)
             }
         },
-        [
-            mediaQuery,
-            step,
-            isFilterOpen
-        ]
+        []
     );
+
+    // demo purposes: will come from database 
+    const eventType = "genAdmission";
 
     const handleClick = (step, ticket, listing) => {
         // find key
@@ -101,18 +76,16 @@ export default function PurchaseTickets() {
         <div className="pt-md-3 flex d-flex flex-column flex-md-row">
             <SeatingMap
                 styles={(step === 'confirmation' || step === 'presale') && 'tablet-desktop-only'}
-                type={param}
                 setIsZoomed={setIsZoomed}
+                eventType={eventType}
             />
 
             <TicketPurchase
                 handleClick={handleClick}
                 handleGoBack={handleGoBack}
-                setIsFilterOpen={setIsFilterOpen}
-                isFilterOpen={isFilterOpen}
                 step={step}
-                type={param}
                 isZoomed={isZoomed}
+                eventType={eventType}
                 ticket={ticket}
                 listing={listing}
             />

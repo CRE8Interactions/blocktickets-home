@@ -214,7 +214,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                         variant="primary"
                         size="lg"
                         className="icon-button w-100 d-none"
-                        onClick={(e) => completePurchase()}>
+                        onClick={completePurchase}>
                         {purchasing ? (
                             <Fragment>
                                 <Spinner variant="light" size="sm" />
@@ -226,7 +226,6 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                     </Button>
                 </div>
 
-                {/* why is this duplicated from the button above? */}
                 <div id="payment-request-button">
                     {/* Need to rethink how payment element and totalCard manage state */}
                     <Button

@@ -12,7 +12,7 @@ import { BackButton } from '../../../BackButton';
 import { TicketDescriptionModal } from './TicketDescriptionModal'
 import './ticketConfirmation.scss';
 
-export default function TicketConfirmation({ handleGoBack, type, ticket, listing, setTicketCount, ticketCount }) {
+export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount }) {
     let ticketPrice;
     let totalTicketPrice;
     let section;
@@ -78,7 +78,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
             </header>
             <div className="ticket-details d-flex flex-column">
                 <h1 className="normal--uppercase">Section {section}</h1>
-                {!type && (
+                {eventType === 'seating' && (
                     <div className="seat caption text-muted fw-bold d-flex justify-content-between align-items-center">
                         <div>
                             <img
@@ -173,7 +173,7 @@ export default function TicketConfirmation({ handleGoBack, type, ticket, listing
                 </>
             </div>
             <TicketPurchaseFooter>
-                <Link to={'/checkout/1'} className="btn w-100 btn-primary btn-lg">
+                <Link to={'/checkout'} className="btn w-100 btn-primary btn-lg">
                     Checkout
                 </Link>
             </TicketPurchaseFooter>

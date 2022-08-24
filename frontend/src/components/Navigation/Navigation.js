@@ -29,12 +29,14 @@ export default function Navigation() {
 
     const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
+    // remove full height when opened because mobile nav wasn't working properly with full height pages 
     const toggleOverflow = (expanded) => {
         if (expanded) {
-            document.body.classList.add('nav-is-open');
+            document.body.classList.remove('full-height')
         }
         else {
-            document.body.classList.remove('nav-is-open');
+
+            document.body.classList.add('full-height')
         }
     };
 

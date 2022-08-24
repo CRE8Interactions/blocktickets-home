@@ -38,18 +38,15 @@ const Router = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="login" element={<LoginPage />} />
-
                 <Route path="tickets/:id" element={<TicketsPage />} />
-
                 <Route
-                    path="checkout/1"
+                    path="checkout"
                     element={
                         <RequireAuth>
                             <CheckoutPage />
                         </RequireAuth>
                     }
                 />
-
                 <Route path="venue/:id" element={<VenuePage />} />
                 <Route path="my-events" element={<MyEventsPage />} />
                 <Route path="event-details/:orderId" element={<EventDetailsPage />} />
@@ -69,7 +66,6 @@ const Router = () => {
                 <Route path="purchase-policy" element={<PurchasePolicyPage />} />
                 <Route path="cookies-policy" element={<CookiesPolicyPage />} />
                 <Route path="disclaimer" element={<DisclaimerPage />} />
-                {/* Add a NotFound route */}
             </Routes>
         </ScrollToTop>
     );
