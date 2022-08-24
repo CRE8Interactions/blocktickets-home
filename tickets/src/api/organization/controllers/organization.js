@@ -286,6 +286,35 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     return event;
 
   },
+  async createEvent(ctx) {
+    const {
+      name,
+      presentedBy,
+      start,
+      end,
+      venue,
+      status,
+      currency,
+      online_event,
+      organizationId,
+    } = ctx.request.body.data;
+
+    const entry = await strapi.db.query('api::event.event').create({
+      data: {
+        name,
+        presentedBy,
+        start,
+        end,
+        venue,
+        status,
+        currency,
+        online_event,
+        organizationId,
+      },
+    });
+
+    return entry
+  },
   async getOrdersByEvent(ctx) {
     const user = ctx.state.user;
 

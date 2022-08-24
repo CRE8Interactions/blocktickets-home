@@ -428,6 +428,7 @@ module.exports = {
               events: [...org.events, result]
             }
           })
+          console.log('Organization ', organization)
         }
 
         // Changes on Invite Model
@@ -527,12 +528,6 @@ module.exports = {
 
         // Changes on event model
         if (event.model.singularName === 'event') {
-          const categories = await strapi.db.query('api::category.category').findOne({
-            where: {
-              id: event.params.data.categories
-            }
-          })
-
           const venue = await strapi.db.query('api::venue.venue').findOne({
             where: {
               id: event.params.data.venue
@@ -540,7 +535,6 @@ module.exports = {
           })
 
           event.params.data.venue = venue.id
-          event.params.data.categories = [categories]
           event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 

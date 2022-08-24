@@ -50,5 +50,10 @@ module.exports = {
       path: '/organizations/add-details',
       handler: 'organization.addEventDetails'
     },
+    {
+      method: 'POST',
+      path: '/organizations/create-event',
+      handler: 'organization.createEvent'
+    },
   ]
 }
