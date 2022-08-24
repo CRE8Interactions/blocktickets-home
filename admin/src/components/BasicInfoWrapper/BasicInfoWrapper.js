@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import UserContext from '../../context/User/User';
-import { getCategories, getVenues, createEvent, getEvent } from '../../utilities/api';
+import { getCategories, getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -52,7 +52,7 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const [event, setEvent] = useState({
         presentedBy: '',
-        title: '',
+        name: '',
         venue: '',
         timezone: timezoneOpt[0].value,
         displayEndTime: true
@@ -85,21 +85,28 @@ export default function BasicInfoWrapper({ eventId }) {
     const handleSave = () => {
         // create event 
         const data = {};
-        data['name'] = event.title;
+        data['name'] = event.name;
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
         data['start'] = moment(startDate).format();
         data['end'] = moment(endDate).format();
         data['venue'] = (Number(event.venue));
-        data['categories'] = [Number(event.category)];
         data['status'] = 'unpublished';
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
-
+        if (uuid) {
+            data['uuid'] = uuid;
+            data['venue'] = (Number(event.venue?.id));
+            editEvent({ data })
+                .then((res) => console.log(res.data))
+                .catch((err) => console.error(err))
+            
+        } else {
         createEvent({ data })
             .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
             .catch((err) => console.error(err))
+        }
     }
 
     return (
@@ -129,7 +136,7 @@ export default function BasicInfoWrapper({ eventId }) {
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={!event.title || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
+                <Button size="lg" disabled={!event.name || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
             </Stack>
         </section>
     );

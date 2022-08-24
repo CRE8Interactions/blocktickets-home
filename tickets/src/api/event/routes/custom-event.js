@@ -20,5 +20,10 @@ module.exports = {
       path: '/events/clear-all',
       handler: 'event.refreshAll'
     },
+    {
+      method: 'PUT',
+      path: '/events/update-event',
+      handler: 'event.updateEvent'
+    },
   ]
 }
