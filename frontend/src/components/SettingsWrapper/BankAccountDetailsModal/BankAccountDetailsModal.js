@@ -32,34 +32,46 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
     const [
         accountType,
         setAccountType
-    ] = useState(account ? account?.accountType : 'checking');
+    ] = useState('checking');
 
     const [
         accountName,
         setAccountName
-    ] = useState(account?.accountName || '');
+    ] = useState('');
 
     const [
         firstName,
         setFirstName
-    ] = useState(account?.firstName || '');
+    ] = useState('');
 
     const [
         lastName,
         setLastName
-    ] = useState(account?.lastName || '');
+    ] = useState('');
 
     const [
         accountNumber,
         setAccountNumber
-    ] = useState(account?.accountNumber || '');
+    ] = useState('');
 
     const [
         routingNumber,
         setRoutingNumber
-    ] = useState(account?.routingNumber || '');
+    ] = useState('');
 
     const [showAlert, setShowAlert] = useState(false);
+
+    // update state when there is an account 
+    useEffect(() => {
+        if (account) {
+            setAccountName(account?.accountName);
+            setAccountType(account?.accountType);
+            setFirstName(account?.firstName);
+            setLastName(account?.lastName);
+            setRoutingNumber(account?.routingNumber);
+            setAccountNumber(account?.accountNumber);
+        }
+    }, [account])
 
 
     // reset error when inputs are changed

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { EventModal } from './EventModal';
 import * as moment from 'moment';
 
 import Row from 'react-bootstrap/Row';
@@ -7,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import { InfoIcon } from '../InfoIcon';
+import { EventModal } from './EventModal';
 
 import './event.scss';
 

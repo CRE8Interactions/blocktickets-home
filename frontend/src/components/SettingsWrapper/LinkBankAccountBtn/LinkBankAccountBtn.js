@@ -18,7 +18,8 @@ export default function LinkBankAccountBtn({ marginTop }) {
         <Fragment>
             <Button
                 onClick={handleShow}
-                className={`icon-button btn-add--white ${marginTop && `m-${marginTop}`}`}
+                size="lg"
+                className={`icon-button btn-plus ${marginTop && `m-${marginTop}`}`}
             >
                 Link bank account
             </Button>
