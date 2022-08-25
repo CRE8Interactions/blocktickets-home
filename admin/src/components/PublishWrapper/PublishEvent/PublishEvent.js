@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
-export default function PublishEvent({ setDate, date, handleChoice, choice, eventStarted, event }) {
+export default function PublishEvent({ setDate, date, setPublishType, publishType, eventStarted, eventStatus, event }) {
     return (
         <>
             <Row>
@@ -62,9 +62,9 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
                 </Col>
             </Row>
             <div className="pt-4">
-                {eventStarted ? (
+                {eventStarted || eventStatus === "on_sale" ? (
                     <Alert bg="default" className='alert-info alert-info--light'>
-                        <p>The event has already started, changes are not possible.</p>
+                        <p>The event {eventStarted ? 'has already started' : 'is already published'}, changes are not possible.</p>
                     </Alert>
                 ) : (
                     <Stack direction="horizontal" className='mb-3'>
@@ -76,9 +76,9 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
                                     name="radGroup"
                                     type="radio"
                                     id='1'
-                                    defaultChecked={choice === '1'}
+                                    defaultChecked={publishType === '1'}
                                     className='fw-medium'
-                                    onChange={(e) => handleChoice(e)}
+                                    onChange={(e) => setPublishType(e.target.id)}
                                 />
                                 <Form.Check
                                     inline
@@ -86,16 +86,16 @@ export default function PublishEvent({ setDate, date, handleChoice, choice, even
                                     name="radGroup"
                                     type="radio"
                                     id='2'
-                                    defaultChecked={choice === '2'}
+                                    defaultChecked={publishType === '2'}
                                     className='fw-medium'
-                                    onChange={(e) => handleChoice(e)}
+                                    onChange={(e) => setPublishType(e.target.id)}
                                 />
                             </div>
                         </Form>
                     </Stack>
                 )}
             </div>
-            {!eventStarted && choice === '2' && (
+            {!eventStarted && publishType === '2' && (
                 <Row>
                     <Col>
                         <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={new Date()} />
