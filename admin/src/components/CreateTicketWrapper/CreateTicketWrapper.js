@@ -56,7 +56,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
     }, [startDate, endDate])
 
     const [ticket, setTicket] = useState({
-        name: '',
+        name: 'General Admission',
         description: '',
         quantity: '',
         price: '',
@@ -103,6 +103,14 @@ export default function CreateTicketWrapper({ eventId, type }) {
         }
     }
 
+    const checkDisabled = () => {
+        if (key === 'paid') {
+            return !ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity
+        } else {
+            return !ticket.name || !ticket.quantity || !ticket.minQuantity || !ticket.maxQuantity
+        }
+    }
+
     return (
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
@@ -135,7 +143,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 </Tab.Container>
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleSave}>{type ? 'Save' : 'Create ticket'}</Button>
+                <Button className="btn-next" size="lg" disabled={checkDisabled()} onClick={handleSave}>{type ? 'Save' : 'Create ticket'}</Button>
             </Stack>
         </section>
     );
