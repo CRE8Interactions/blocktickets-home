@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import moment from 'moment'
 
-import { createTickets } from '../../utilities/api';
+import { createTickets, getEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -15,6 +15,33 @@ import { CreateTicket } from './CreateTicket';
 export default function CreateTicketWrapper({ eventId, id }) {
 
     const navigate = useNavigate();
+    const { uuid } = useParams();
+
+    let [searchParams, setSearchParams] = useSearchParams();
+    const type = searchParams.get("type")
+
+    useEffect(() => {
+        if (type) {
+            getEvent(uuid)
+                .then((res) => {
+                    const ticket = res.data?.tickets.find((ticket) => ticket.name === type);
+                    setTicket({
+                        name: ticket?.name,
+                        description: ticket?.description,
+                        quantity: res.data?.tickets?.map((ticket) => ticket.name === type).length,
+                        price: ticket?.cost,
+                        fee: ticket?.fee,
+                        minResalePrice: ticket?.minResalePrice,
+                        maxResalePrice: ticket?.maxResalePrice,
+                        minQuantity: ticket?.minimum_quantity,
+                        maxQuantity: ticket?.maximum_quantity
+                    })
+                    setStartDate(new Date(ticket?.sales_start))
+                    setEndDate(new Date(ticket?.sales_end))
+                })
+                .catch((err) => console.error(err))
+        }
+    }, [type])
 
     const [
         key,
@@ -68,10 +95,14 @@ export default function CreateTicketWrapper({ eventId, id }) {
         data['quantity'] = ticket.quantity;
         data['sales_start'] = moment(start).format();
         data['sales_end'] = moment(end).format();
+        if (!type) {
+            createTickets({ data })
+                .then((res) => navigate(`/myevent/${eventId}/tickets`))
+                .catch((err) => console.error(err))
+        } else {
 
-        createTickets({ data })
-            .then((res) => navigate(`/myevent/${eventId}/tickets`))
-            .catch((err) => console.error(err))
+        }
+        
     }
 
 
