@@ -105,9 +105,9 @@ export default function CreateTicketWrapper({ eventId, type }) {
 
     const checkDisabled = () => {
         if (key === 'paid') {
-            return !ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity
+            return hasError || !ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity
         } else {
-            return !ticket.name || !ticket.quantity || !ticket.minQuantity || !ticket.maxQuantity
+            return hasError || !ticket.name || !ticket.quantity || !ticket.minQuantity || !ticket.maxQuantity
         }
     }
 

@@ -14,20 +14,11 @@ export default function PublishWrapper({ event }) {
 
     const navigate = useNavigate();
 
-    const [date, setDate] = useState(new Date());
+    const [publishDate, setPublishDate] = useState(new Date());
 
     const [eventStarted, setEventStarted] = useState(false)
 
-    const [publishType, setPublishType] = useState()
-
-    const [publishDate, setPublishDate] = useState()
-
-    const [choice, setChoice] = useState('1')
-
-    const handleChoice = (e) => {
-        setChoice(e.target.id)
-        setPublishType(e.target.id)
-    }
+    const [publishType, setPublishType] = useState('1')
 
     const checkEventStart = () => {
         const currentDate = new Date();
@@ -49,10 +40,6 @@ export default function PublishWrapper({ event }) {
     }
 
     useEffect(() => {
-        setPublishDate(date)
-    }, [date])
-
-    useEffect(() => {
         checkEventStart()
     }, [])
 
@@ -67,11 +54,11 @@ export default function PublishWrapper({ event }) {
                 <h1>Publish event</h1>
             </header>
             <Card body className="card--sm">
-                <PublishEvent setDate={setDate} date={date} handleChoice={handleChoice} choice={choice} eventStarted={eventStarted} event={event} />
+                <PublishEvent setDate={setPublishDate} date={publishDate} setPublishType={setPublishType} publishType={publishType} eventStatus={event?.status} eventStarted={eventStarted} event={event} />
             </Card>
-            {!eventStarted && (
+            {!eventStarted && event?.status !== "on_sale" && (
                 <Stack direction="horizontal" className="btn-group-flex ">
-                    <Button className={`btn-${choice == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{choice == '1' ? 'Publish' : 'Schedule'}</Button>
+                    <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
                 </Stack>
             )}
         </section>
