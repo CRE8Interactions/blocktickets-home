@@ -41,13 +41,9 @@ export default function DetailsWrapper({ eventId }) {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
     }
 
-    const handleSave = () => {
-        const data = {};
+    const handleSave = () => {;
         const formData = new FormData();
-
         formData.append(`files`, eventImg);
-        // Send formData
-        formData.append('data', JSON.stringify(data));
 
         upload(formData)
             .then((res) => {

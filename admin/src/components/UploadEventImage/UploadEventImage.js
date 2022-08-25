@@ -25,10 +25,9 @@ export default function UploadEventImage({ setSelectedImage, selectedImage, even
 
     useEffect(() => {
         if (previewImage) {
-            setSelectedImage(previewImage[0].preview);
-            
+            setImageUrl(previewImage[0].preview);
         } else {
-            setSelectedImage(event?.image?.url)
+            setImageUrl(event?.image?.url)
         }
     }, [show, event])
 
@@ -51,6 +50,7 @@ export default function UploadEventImage({ setSelectedImage, selectedImage, even
     const handleRemove = () => {
         setSelectedImage('')
         setShowPreview(false)
+        setImageUrl('')
     }
 
     const handleReplace = () => {
@@ -66,11 +66,11 @@ export default function UploadEventImage({ setSelectedImage, selectedImage, even
                 </small>
             </Stack>
             <div className="mt-3">
-                {!selectedImage ? (
+                {!imageUrl ? (
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        <Image src={selectedImage} rounded width={!event && !showPreview ? croppedCoordinates.width: ''} height={!event && !showPreview  ? croppedCoordinates.height : ''} />
+                        <Image src={imageUrl} rounded width={!event && !showPreview ? croppedCoordinates.width: ''} height={!event && !showPreview  ? croppedCoordinates.height : ''} />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleReplace}>Replace</Button>

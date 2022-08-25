@@ -11,55 +11,68 @@ export default function TicketsWrapper({tickets}) {
 
     const navigate = useNavigate();
 
+    const getDescription = (ticket) => {
+        if (moment(ticket?.sales_start) < moment()) {
+            return `Ends ${moment(ticket?.sales_end).format('MMM DD, yyyy')} at ${moment(ticket?.sales_end).format('h:mm A')}`
+        } else if (moment(ticket?.sales_start) > moment()) {
+            return `Starts ${moment(ticket?.sales_start).format('MMM DD, yyyy')} at ${moment(ticket?.sales_start).format('h:mm A')}`
+        } else if (moment(ticket?.sales_end) >= moment()) {
+            return ''
+        }
+    }
+
+    const getStatus = (ticket) => {
+        if (moment(ticket.sales_start) > moment()) {
+            return 'scheduled'
+        } else if (moment(ticket?.sales_start) < moment()) {
+            return 'on_sale'
+        } else if (moment(ticket?.sales_end) >= moment()) {
+            return 'sale_ended'
+        }
+    }
+    // Group tickets by name
     const groupByName = tickets?.reduce((group, ticket) => {
     const { name } = ticket;
-    group[name] = ticket[name] ?? [];
-    group[name].push(ticket);
+    group[name] = ticket[name] = [];
+    group[name].push({
+        count: tickets.filter((ticket) => ticket.name === name).length,
+        sold: tickets.filter((ticket) => ticket.name === name && ticket.on_sale_status === 'sold').length,
+        price: tickets.find((ticket) => ticket.name === name).cost,
+        salesStart: tickets.find((ticket) => ticket.name === name).sales_start,
+        salesEnd: tickets.find((ticket) => ticket.name === name).sales_end,
+        eventId: tickets.find((ticket) => ticket.name === name).eventId,
+        type: tickets.find((ticket) => ticket.name === name).name,
+        status: getStatus(tickets.find((ticket) => ticket.name === name)),
+        desc: getDescription(tickets.find((ticket) => ticket.name === name)),
+        details: tickets.find((ticket) => ticket.name === name),
+        capacity: tickets?.length,
+        totalSold: tickets?.filter((ticket) => ticket.on_sale_status === 'sold').length
+    });
     return group;
     }, {});
 
-    // event tickets delete later
-    let eventTickets = [];
     let ticketNames = [];
+    let eventTickets = [];
+
     if (tickets?.length > 0) {
         // Get Ticket Names
         tickets?.map((ticket) => {
             if (!ticketNames.includes(ticket.name)) ticketNames.push(ticket.name)
         })
-        let onSaleTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'available');
-        console.log('Ticket Names ', groupByName)
-        let soldTickets = tickets?.filter((ticket) => ticket.on_sale_status === 'sold');
-        let scheduled = tickets?.filter((ticket) => moment(ticket?.sales_start) > moment());
-        let salesEnded = tickets?.filter((ticket) => moment(ticket?.sales_ended) < moment());
-        let salesEndedSold = tickets?.filter((ticket) => moment(ticket?.sales_ended) < moment() && ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'resale');
-        eventTickets = [
-            {
-                id: 0,
-                type: `${onSaleTickets ? onSaleTickets[0]?.name : 'General Admission'}`,
-                status: 'on_sale',
-                desc: `Ends ${moment(tickets ? tickets[0]?.sales_end : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_end : '').format('hh:mm A')}`,
-                ticketsSold: `${soldTickets?.length}/${tickets?.length}`,
-                price: parseFloat(onSaleTickets ? onSaleTickets[0]?.cost : 0),
-                show: onSaleTickets?.length > 0 ? true : false
-            },
-            {
-                id: 1,
-                type: `${scheduled && scheduled?.length >= 1 ? scheduled[0]?.name : 'General Admission'}`,
-                status: 'scheduled',
-                desc: `Starts ${moment(tickets ? tickets[0]?.sales_start : '').format('MMM DD, yyyy')} at ${moment(tickets ? tickets[0]?.sales_start : '').format('hh:mm A')}`,
-                ticketsSold: `0/${scheduled?.length}`,
-                price: parseFloat(scheduled ? scheduled[0]?.cost : 0),
-                show: scheduled?.length > 0 ? true : false
-            },
-            {
-                id: 2,
-                type: `${salesEndedSold && salesEndedSold?.length >= 1 ? salesEndedSold[0]?.name : 'General Admission'}`,
-                status: 'sale_ended',
-                ticketsSold: `${salesEndedSold ? salesEndedSold?.length : 0}/${salesEndedSold ? salesEndedSold.length : 0}`,
-                price: parseFloat(salesEndedSold ? salesEndedSold[0]?.cost : 0),
-                show: salesEndedSold?.length > 0 ? true : false
-            }
-        ];
+        // Parse tickets for component
+        ticketNames.map((name, index) => {
+            eventTickets.push({
+                id: index,
+                type: groupByName[name][0]?.type,
+                status: groupByName[name][0]?.status,
+                desc: groupByName[name][0]?.desc,
+                price: groupByName[name][0]?.price,
+                ticketsSold: `${groupByName[name][0]?.sold}/${groupByName[name][0]?.count}`,
+                show: true,
+                capacity: groupByName[name][0]?.capacity,
+                totalSold: groupByName[name][0]?.totalSold
+            })
+        })
     }
 
     return (

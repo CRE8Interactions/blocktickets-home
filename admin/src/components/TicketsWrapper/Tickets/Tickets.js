@@ -17,8 +17,6 @@ export default function Tickets({ tickets }) {
 
     const handleShow = () => setShow(true);
 
-    console.log('Tickets ', tickets)
-
     return (
         <>
             <Card body>
@@ -33,7 +31,7 @@ export default function Tickets({ tickets }) {
                             </Stack>
                             <Stack direction='horizontal' className='pt-3 split-row'>
                                 <span className='fw-medium normal'>Event capacity</span>
-                                <span className='fw-medium normal'>112/{tickets?.length}</span>
+                                <span className='fw-medium normal'>{tickets[0]?.totalSold}/{tickets[0]?.capacity}</span>
                             </Stack>
 
                         </>
