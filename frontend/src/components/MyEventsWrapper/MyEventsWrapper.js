@@ -50,7 +50,7 @@ export default function MyEventsWrapper() {
                     <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
                 </div>
             </div>
-            {orders.length > 0 ? (
+            {orders?.filter(order => order.event !== null).length > 0 ? (
                 <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} />
             ) : (
                 <EmptyContainer>
