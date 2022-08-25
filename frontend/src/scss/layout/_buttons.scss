@@ -172,6 +172,14 @@ button,
 	@extend .icon-button !optional;
 }
 
+.btn-plus {
+	@extend .icon-button !optional;
+	gap: $gap-sm;
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'plus'));
+	}
+}
+
 .btn-tickets {
 	&--plain {
 		&::before {

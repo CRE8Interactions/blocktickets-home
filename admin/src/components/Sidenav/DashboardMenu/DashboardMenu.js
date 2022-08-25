@@ -22,7 +22,7 @@ export default function DashboardMenu({ open, setOpen, event }) {
                 {badgeStatus(event)}
                 <h1 className='fs-md'>{event?.name}</h1>
                 <div className="small">
-                    <p>{moment(event?.start).format('ddd, MMM, DD')} {moment(event?.start).format('h:mm A')} EST</p>
+                    <p>{moment(event?.start).format('ddd, MMM DD, YYYY')} {moment(event?.start).format('h:mm A')} EST</p>
                 </div>
                 <Button variant='outline-light' className='mt-4'>Preview your event</Button>
             </Stack>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
 
 import { createTickets } from '../../utilities/api';
@@ -15,7 +15,6 @@ import { CreateTicket } from './CreateTicket';
 export default function CreateTicketWrapper({ eventId, id }) {
 
     const navigate = useNavigate();
-    const { uuid } = useParams();
 
     const [
         key,
@@ -71,7 +70,7 @@ export default function CreateTicketWrapper({ eventId, id }) {
         data['sales_end'] = moment(end).format();
 
         createTickets({ data })
-            .then((res) => navigate(`/myevent/${uuid}/tickets`))
+            .then((res) => navigate(`/myevent/${eventId}/tickets`))
             .catch((err) => console.error(err))
     }
 

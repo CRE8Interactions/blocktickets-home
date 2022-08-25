@@ -6,7 +6,7 @@ import seatingMap from '../../../assets/map-seating.svg';
 
 export default function SeatingMap({ styles, eventType, setIsZoomed }) {
     const onClick = () => {
-        if (eventType === 'genAdmission') {
+        if (eventType !== 'genAdmission') {
             return setIsZoomed(true);
         }
         else return;

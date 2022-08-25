@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
@@ -6,8 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Tickets } from './Tickets';
 
-
-export default function TicketsWrapper({tickets}) {
+export default function TicketsWrapper({ tickets }) {
 
     const navigate = useNavigate();
 
@@ -51,8 +50,9 @@ export default function TicketsWrapper({tickets}) {
     return group;
     }, {});
 
-    let ticketNames = [];
+    // event tickets
     let eventTickets = [];
+    let ticketNames = [];
 
     if (tickets?.length > 0) {
         // Get Ticket Names
