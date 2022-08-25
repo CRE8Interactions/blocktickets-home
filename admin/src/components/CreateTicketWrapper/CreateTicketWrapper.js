@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import moment from 'moment'
 
-import { createTickets, getEvent } from '../../utilities/api';
+import { createTickets, updateTickets, getEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -28,7 +28,7 @@ export default function CreateTicketWrapper({ eventId, id }) {
                     setTicket({
                         name: ticket?.name,
                         description: ticket?.description,
-                        quantity: res.data?.tickets?.map((ticket) => ticket.name === type).length,
+                        quantity: res.data?.tickets?.filter((ticket) => ticket.name === type).length,
                         price: ticket?.cost,
                         fee: ticket?.fee,
                         minResalePrice: ticket?.minResalePrice,
@@ -100,7 +100,10 @@ export default function CreateTicketWrapper({ eventId, id }) {
                 .then((res) => navigate(`/myevent/${eventId}/tickets`))
                 .catch((err) => console.error(err))
         } else {
-
+            data['type'] = type
+            updateTickets({ data })
+                .then((res) => navigate(`/myevent/${eventId}/tickets`))
+                .catch((err) => console.error(err))
         }
         
     }
@@ -138,7 +141,7 @@ export default function CreateTicketWrapper({ eventId, id }) {
                 </Tab.Container>
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleSave}>{id ? 'Save' : 'Create ticket'}</Button>
+                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleSave}>{type ? 'Save' : 'Create ticket'}</Button>
             </Stack>
         </section>
     );

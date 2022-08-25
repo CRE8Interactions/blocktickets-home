@@ -75,5 +75,36 @@ module.exports = createCoreController('api::ticket.ticket', ({
       delete r.attributes.uuid
     })
     return response;
+  },
+  async updateAll(ctx) {
+    let data = ctx.request.body.data;
+
+    let myEvent = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: data.eventId },
+      populate: {
+        tickets: true
+      }
+    });
+
+    let ticketIds = myEvent.tickets.filter((ticket) => ticket.name === data.type)
+    ticketIds = ticketIds.map((ticket) => ticket.id)
+
+    await strapi.db.query('api::ticket.ticket').updateMany({
+      where: {
+        id: {
+          $in: ticketIds
+        }
+      },
+      data
+    });
+
+    myEvent = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: data.eventId },
+      populate: {
+        tickets: true
+      }
+    });
+
+    return myEvent
   }
 }));
