@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getEvent } from '../../utilities/api';
 
 import { addDetailsToEvent, upload } from '../../utilities/api';
@@ -23,15 +23,13 @@ export default function DetailsWrapper({ eventId }) {
 
     const navigate = useNavigate();
 
-    const { uuid } = useParams()
-
     useEffect(() => {
-        getEvent(uuid)
+        getEvent(eventId)
             .then((res) => {
                 if (res.data) setEvent(res.data);
             })
             .catch((err) => console.error(err))
-    }, [uuid])
+    }, [eventId])
 
     useEffect(() => {
         setEventImg(selectedImage)
@@ -41,7 +39,7 @@ export default function DetailsWrapper({ eventId }) {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
     }
 
-    const handleSave = () => {;
+    const handleSave = () => {
         const formData = new FormData();
         formData.append(`files`, eventImg);
 
@@ -65,7 +63,7 @@ export default function DetailsWrapper({ eventId }) {
                     <h1>Main event image</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <UploadEventImage setSelectedImage={setSelectedImage} selectedImage={selectedImage} event={event} />
+                    <UploadEventImage setSelectedImage={setSelectedImage} event={event} />
                 </Card>
             </section>
             <section>
