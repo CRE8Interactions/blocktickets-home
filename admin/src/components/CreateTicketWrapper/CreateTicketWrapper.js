@@ -101,9 +101,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 .then((res) => navigate(`/myevent/${eventId}/tickets`))
                 .catch((err) => console.error(err))
         }
-
     }
-
 
     return (
         <section className='wrapper'>
