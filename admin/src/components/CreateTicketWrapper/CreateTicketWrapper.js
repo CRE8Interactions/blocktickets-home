@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
 
-import { createTickets, getEvent } from '../../utilities/api';
+import { createTickets, updateTickets, getEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -24,7 +24,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                     setTicket({
                         name: ticket?.name,
                         description: ticket?.description,
-                        quantity: res.data?.tickets?.map((ticket) => ticket.name === type).length,
+                        quantity: res.data?.tickets?.filter((ticket) => ticket.name === type).length,
                         price: ticket?.cost,
                         fee: ticket?.fee,
                         minResalePrice: ticket?.minResalePrice,
@@ -96,7 +96,10 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 .then((res) => navigate(`/myevent/${eventId}/tickets`))
                 .catch((err) => console.error(err))
         } else {
-
+            data['type'] = type
+            updateTickets({ data })
+                .then((res) => navigate(`/myevent/${eventId}/tickets`))
+                .catch((err) => console.error(err))
         }
 
     }
