@@ -18,6 +18,7 @@ services:
     build:
       context: ./tickets
       dockerfile: Dockerfile.preview
+    restart: always # because it is routing traffic to our entire app
     volumes:
       - ./tickets:/usr/src/app/tickets
       - /usr/src/app/tickets/node_modules
