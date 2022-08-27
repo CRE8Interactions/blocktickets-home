@@ -1,5 +1,6 @@
 import axios from "axios";
 import authService from './services/auth.service';
+import moment from 'moment';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API,
@@ -88,7 +89,8 @@ export const getEvent = async (id) => {
 }
 
 export const getEventTickets = async (id) => {
-  return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available`)
+  let date = moment().toISOString();
+  return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available&filters[sales_start][$lte]=${date}&filters[sales_end][$gte]=${date}`)
 }
 
 export const createTicketTransfer = (data) => {

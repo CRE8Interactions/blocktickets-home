@@ -16,26 +16,19 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
     return Math.floor(1000 + Math.random() * 9000)
   },
   async refreshDB() {
-    await strapi.db.query('api::ticket.ticket').updateMany({
+    await strapi.db.query('api::ticket.ticket').deleteMany({
       where: {
-        $or: [
-          {
-            on_sale_status: { $notIn: 'available'}
-          },
-          {
-            transferred: true,
-          },
-          {
-            resale: true,
-          }
-        ]
+        createdAt: {
+          $lte: new Date()
+        },
       },
-      data: {
-        on_sale_status: 'available',
-        trasferred: false,
-        resale: false,
-        listingAskingPrice: null,
-        listingId: null
+    });
+
+    await strapi.db.query('organization.organization').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
       },
     });
 
@@ -88,6 +81,70 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
     });
 
     await strapi.db.query('api::tracking.tracking').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::wallet.wallet').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::profile.profile').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::user.user').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::page-view.page-view').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::organization-role.organization-role').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::w9.w9').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::invite-team-member.invite-team-member').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::event.event').deleteMany({
       where: {
         createdAt: {
           $lte: new Date()
