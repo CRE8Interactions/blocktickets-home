@@ -96,4 +96,29 @@ module.exports = {
   //     tz: 'America/New_York',
   //  },
   // }
+  publishEvents: {
+    task: async ({ strapi }) => {
+      try {
+        const events = await strapi.db.query('api::event.event').updateMany({
+          where: {
+            $and: [
+              { scheduled: true},
+              { status: 'scheduled'},
+              { scheduledTime: {$lte: new Date()}}
+            ],
+          },
+          data: {
+            scheduled: false,
+            status: 'on_sale'
+          },
+        });
+      } catch (err) {
+        console.log('Schedule Event Error ', err)
+      }
+    },
+    options: {
+      rule: '* * * * * ',
+      tz: 'America/New_York',
+    }
+  }
 };

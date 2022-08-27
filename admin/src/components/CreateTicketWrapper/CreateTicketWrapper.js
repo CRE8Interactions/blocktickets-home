@@ -91,7 +91,7 @@ export default function CreateTicketWrapper({ eventId, id }) {
         data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
         data['eventId'] = eventId;
         data['free'] = ticket.price > 0 ? false : true;
-        data['generalAdmission'] = ticket.name.match(/general admission/i) ? true : false;
+        data['generalAdmission'] = true;
         data['quantity'] = ticket.quantity;
         data['sales_start'] = moment(start).format();
         data['sales_end'] = moment(end).format();
