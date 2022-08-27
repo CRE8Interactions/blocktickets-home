@@ -118,6 +118,10 @@ export const updateTickets = async (data) => {
   return instance.post('/tickets/update-all', data)
 }
 
+export const inactivateTickets = async (data) => {
+  return instance.post('/tickets/inactivate', data)
+}
+
 export const upload = async (data) => {
   return instance.post('/upload/', data)
 }

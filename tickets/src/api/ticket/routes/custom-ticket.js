@@ -9,6 +9,11 @@ module.exports = {
     method: 'POST',
     path: '/tickets/update-all',
     handler: 'ticket.updateAll'
+  },
+  {
+    method: 'POST',
+    path: '/tickets/inactivate',
+    handler: 'ticket.makeInactive'
   }
 ]
 }

@@ -133,6 +133,10 @@
     },
     "maxResalePrice": {
       "type": "decimal"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
