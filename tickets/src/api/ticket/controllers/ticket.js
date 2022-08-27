@@ -106,5 +106,24 @@ module.exports = createCoreController('api::ticket.ticket', ({
     });
 
     return myEvent
+  },
+  async makeInactive(ctx) {
+    let data = ctx.request.body.data;
+
+    let myEvent = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: data.eventId },
+      populate: {
+        tickets: {
+          where: {
+            $and: [
+              { on_sale_status: { $in: 'available' }},
+              { isActive: { $eq: true }}
+            ]
+          }
+        }
+      }
+    });
+
+    console.log('Tickets ', myEvent.tickets)
   }
 }));
