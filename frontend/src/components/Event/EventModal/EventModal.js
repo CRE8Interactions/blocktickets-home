@@ -27,7 +27,16 @@ export default function EventModal({ show, handleClose, event }) {
                 </Row>
                 <div className="mb-2">
                     <span className="time-caption">Time</span>
-                    <span className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
+                    {event?.hide_end_date &&
+                        <>
+                            <span className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')}</span>
+                        </>
+                    }
+                    {!event?.hide_end_date &&
+                        <>
+                            <span className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
+                        </>
+                    }
                 </div>
                 <div className="mb-2">
                     <span className="venue-caption">Venue</span>

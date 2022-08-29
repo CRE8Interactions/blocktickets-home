@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 
 import './ticketBreakdown.scss';
 
-export default function TicketBreakdownModal({ show, handleClose }) {
+export default function TicketBreakdownModal({ show, handleClose, ticket }) {
+    const [totals, setTotals] = useState();
+
+    useEffect(() => {
+        setTotals(parseFloat(ticket?.price) + parseFloat(ticket?.fee) + 2 + 3 + 5)
+    }, [ticket])
     return (
         <Modal id="ticket-breakdown" centered animation={false} fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -18,7 +23,7 @@ export default function TicketBreakdownModal({ show, handleClose }) {
                         <ul>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Ticket price</span>
-                                <span>$40.00</span>
+                                <span>${parseFloat(ticket?.price).toFixed(2)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Service Fee</span>
@@ -26,7 +31,7 @@ export default function TicketBreakdownModal({ show, handleClose }) {
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Facility Fee</span>
-                                <span>$3.00</span>
+                                <span>${parseFloat(ticket?.fee).toFixed(2)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Processing Fee</span>
@@ -38,7 +43,7 @@ export default function TicketBreakdownModal({ show, handleClose }) {
                             </Stack>
                             <Stack as="li" direction="horizontal" className="mt-2 split-row">
                                 <span className='fw-medium'>Total</span>
-                                <span className='fw-medium'>$57.00</span>
+                                <span className='fw-medium'>${parseFloat(totals).toFixed(2)}</span>
                             </Stack>
                         </ul>
                     </li>
@@ -47,15 +52,15 @@ export default function TicketBreakdownModal({ show, handleClose }) {
                         <ul>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Ticket revenue</span>
-                                <span>$40.00</span>
+                                <span>${parseFloat(ticket?.price).toFixed(2)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Facility Fee</span>
-                                <span>$2.00</span>
+                                <span>${parseFloat(ticket?.fee).toFixed(2)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="mt-2 split-row">
                                 <span className='fw-medium'>Total</span>
-                                <span className='fw-medium'>$43.00</span>
+                                <span className='fw-medium'>${(parseFloat(ticket?.price) + parseFloat(ticket?.fee)).toFixed(2)}</span>
                             </Stack>
                         </ul>
                     </li>

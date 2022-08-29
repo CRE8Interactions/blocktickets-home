@@ -72,7 +72,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     });
     
     let event = await strapi.entityService.findOne('api::event.event', id, {
-      fields: ['id', 'name', 'start', 'summary', 'end', 'presentedBy, views'],
+      fields: ['id', 'name', 'start', 'summary', 'end', 'presentedBy, views', 'hide_end_date'],
       populate: {
         image: true,
         categories: true,
@@ -165,7 +165,8 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       name,
       start,
       end,
-      venue
+      venue,
+      hide_end_date
      } = ctx.request.body.data;
 
     const entry = await strapi.db.query('api::event.event').update({
@@ -175,7 +176,8 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         name,
         start,
         end,
-        venue
+        venue,
+        hide_end_date
       },
     });
 

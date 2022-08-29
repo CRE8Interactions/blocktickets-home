@@ -42,7 +42,8 @@ export default function DetailsWrapper({ eventId }) {
     }
 
     const handleSave = () => {;
-        const formData = new FormData();
+        if (eventImg) {
+            const formData = new FormData();
         formData.append(`files`, eventImg);
 
         upload(formData)
@@ -56,6 +57,14 @@ export default function DetailsWrapper({ eventId }) {
                     .catch((err) => console.error(err))
             })
             .catch((err) => console.error(err))
+        } else {
+            let data = {};
+            data['description'] = description;
+            data['eventUUID'] = eventId;
+            addDetailsToEvent({ data })
+            .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
+            .catch((err) => console.error(err))
+        }
     }
 
     return (
@@ -77,7 +86,7 @@ export default function DetailsWrapper({ eventId }) {
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={!selectedImage} onClick={handleSave}>Save and continue</Button>
+                <Button size="lg" disabled={!event && !selectedImage} onClick={handleSave}>Save and continue</Button>
             </Stack>
         </section>
     );

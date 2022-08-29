@@ -49,7 +49,7 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                     <Form.Check.Input
                         name="displayEndTime"
                         type='checkbox'
-                        defaultChecked={event.displayEndTime}
+                        defaultChecked={!event?.hide_end_date}
                         onChange={(e) => { handleChange(e, e.target.checked) }} />
                     <div>
                         <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Display end time</Form.Check.Label>

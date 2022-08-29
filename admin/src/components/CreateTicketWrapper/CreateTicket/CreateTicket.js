@@ -195,7 +195,7 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                 </fieldset>
             </Form>
 
-            <TicketBreakdownModal show={show} handleClose={handleClose} />
+            <TicketBreakdownModal show={show} handleClose={handleClose} ticket={ticket} />
         </>
     );
 }
