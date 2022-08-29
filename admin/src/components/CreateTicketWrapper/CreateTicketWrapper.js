@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
 
 import { createTickets, updateTickets, getEvent } from '../../utilities/api';
@@ -12,17 +12,13 @@ import Button from 'react-bootstrap/Button';
 
 import { CreateTicket } from './CreateTicket';
 
-export default function CreateTicketWrapper({ eventId, id }) {
+export default function CreateTicketWrapper({ eventId, type }) {
 
     const navigate = useNavigate();
-    const { uuid } = useParams();
-
-    let [searchParams, setSearchParams] = useSearchParams();
-    const type = searchParams.get("type")
 
     useEffect(() => {
         if (type) {
-            getEvent(uuid)
+            getEvent(eventId)
                 .then((res) => {
                     const ticket = res.data?.tickets.find((ticket) => ticket.name === type);
                     setTicket({
@@ -60,7 +56,7 @@ export default function CreateTicketWrapper({ eventId, id }) {
     }, [startDate, endDate])
 
     const [ticket, setTicket] = useState({
-        name: '',
+        name: 'General Admission',
         description: '',
         quantity: '',
         price: '',
@@ -105,14 +101,20 @@ export default function CreateTicketWrapper({ eventId, id }) {
                 .then((res) => navigate(`/myevent/${eventId}/tickets`))
                 .catch((err) => console.error(err))
         }
-        
     }
 
+    const checkDisabled = () => {
+        if (key === 'paid') {
+            return hasError || !ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity
+        } else {
+            return hasError || !ticket.name || !ticket.quantity || !ticket.minQuantity || !ticket.maxQuantity
+        }
+    }
 
     return (
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
-                <h1>{id ? 'Edit' : 'Create a'} ticket</h1>
+                <h1>{type ? 'Edit' : 'Create a'} ticket</h1>
             </header>
             <Card body className='card--sm'>
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
@@ -141,7 +143,7 @@ export default function CreateTicketWrapper({ eventId, id }) {
                 </Tab.Container>
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button className="btn-next" size="lg" disabled={!ticket.name || !ticket.quantity || !ticket.price || !ticket.fee || !ticket.minResalePrice || !ticket.maxResalePrice || !ticket.minQuantity || !ticket.maxQuantity} onClick={handleSave}>{type ? 'Save' : 'Create ticket'}</Button>
+                <Button className="btn-next" size="lg" disabled={checkDisabled()} onClick={handleSave}>{type ? 'Save' : 'Create ticket'}</Button>
             </Stack>
         </section>
     );

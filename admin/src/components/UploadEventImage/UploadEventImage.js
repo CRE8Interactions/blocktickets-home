@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Cropper } from 'react-advanced-cropper';
 import 'react-advanced-cropper/dist/style.css'
 
-import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -11,7 +10,7 @@ import Image from 'react-bootstrap/Image';
 import { Dropzone } from './Dropzone';
 import { InfoIcon } from '../InfoIcon';
 
-export default function UploadEventImage({ setSelectedImage, selectedImage, event }) {
+export default function UploadEventImage({ setSelectedImage, event }) {
 
     const [previewImage, setPreviewImage] = useState()
 
@@ -70,7 +69,7 @@ export default function UploadEventImage({ setSelectedImage, selectedImage, even
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        <Image src={imageUrl} rounded width={!event && !showPreview ? croppedCoordinates.width: ''} height={!event && !showPreview  ? croppedCoordinates.height : ''} />
+                        <Image src={imageUrl} rounded width={!event && !showPreview ? croppedCoordinates.width : ''} height={!event && !showPreview ? croppedCoordinates.height : ''} />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleReplace}>Replace</Button>

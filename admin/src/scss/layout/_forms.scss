@@ -55,6 +55,10 @@ legend {
 
 .form-text {
 	display: block;
+
+	&.error {
+		color: $danger;
+	}
 }
 
 .form-check {

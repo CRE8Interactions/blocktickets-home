@@ -76,7 +76,7 @@ export default function EventDetailsWrapper({ orderId }) {
             <div>
                 {deviceType && deviceType === 'Mobile' ? (
                     <>
-                        <MyTicketsSlider order={order} id={orderId} handleClick={handleClick} />
+                        <MyTicketsSlider order={order} handleClick={handleClick} />
                         <ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
                     </>
                 ) : (

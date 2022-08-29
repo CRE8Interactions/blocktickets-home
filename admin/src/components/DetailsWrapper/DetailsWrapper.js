@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getEvent } from '../../utilities/api';
 
 import { addDetailsToEvent, upload } from '../../utilities/api';
@@ -23,15 +23,13 @@ export default function DetailsWrapper({ eventId }) {
 
     const navigate = useNavigate();
 
-    const { uuid } = useParams()
-
     useEffect(() => {
-        getEvent(uuid)
+        getEvent(eventId)
             .then((res) => {
                 if (res.data) setEvent(res.data);
             })
             .catch((err) => console.error(err))
-    }, [uuid])
+    }, [eventId])
 
     useEffect(() => {
         setEventImg(selectedImage)
@@ -44,26 +42,28 @@ export default function DetailsWrapper({ eventId }) {
     const handleSave = () => {;
         if (eventImg) {
             const formData = new FormData();
-        formData.append(`files`, eventImg);
+            formData.append(`files`, eventImg);
 
-        upload(formData)
-            .then((res) => {
-                let data = {};
-                data['description'] = description;
-                data['eventUUID'] = eventId;
-                data['image'] = res?.data[0].id;
-                addDetailsToEvent({ data })
-                    .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
-                    .catch((err) => console.error(err))
-            })
-            .catch((err) => console.error(err))
+            upload(formData)
+                .then((res) => {
+                    let data = {};
+                    data['description'] = description;
+                    data['eventUUID'] = eventId;
+                    data['image'] = res?.data[0].id;
+
+                    addDetailsToEvent({ data })
+                        .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
+                        .catch((err) => console.error(err))
+                })
+                .catch((err) => console.error(err))
         } else {
             let data = {};
             data['description'] = description;
             data['eventUUID'] = eventId;
+
             addDetailsToEvent({ data })
-            .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
-            .catch((err) => console.error(err))
+                .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
+                .catch((err) => console.error(err))
         }
     }
 
@@ -74,7 +74,7 @@ export default function DetailsWrapper({ eventId }) {
                     <h1>Main event image</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <UploadEventImage setSelectedImage={setSelectedImage} selectedImage={selectedImage} event={event} />
+                    <UploadEventImage setSelectedImage={setSelectedImage} event={event} />
                 </Card>
             </section>
             <section>

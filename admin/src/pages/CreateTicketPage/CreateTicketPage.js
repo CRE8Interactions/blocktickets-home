@@ -4,14 +4,13 @@ import { CreateTicketWrapper } from "../../components";
 
 export default function CreateTicketPage() {
 
-    // get queries from URL
-    const [searchParam] = useSearchParams();
-
-    const searchParamObj = Object.fromEntries([...searchParam]);
+    // get type query from URL
+    const [searchParams] = useSearchParams();
+    const type = searchParams.get("type")
 
     const { uuid } = useParams()
 
     return (
-        <CreateTicketWrapper eventId={uuid} id={searchParamObj.id} />
+        <CreateTicketWrapper eventId={uuid} type={type} />
     )
 }

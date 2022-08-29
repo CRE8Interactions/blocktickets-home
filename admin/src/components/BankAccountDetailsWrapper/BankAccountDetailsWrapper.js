@@ -70,6 +70,18 @@ export default function BankAccountDetailsWrapper({ getBankAccount, isValid, set
         ]
     );
 
+    // update state when there is an account 
+    // useEffect(() => {
+    //     if (account) {
+    //         setAccountName(account?.accountName);
+    //         setAccountType(account?.accountType);
+    //         setFirstName(account?.firstName);
+    //         setLastName(account?.lastName);
+    //         setRoutingNumber(account?.routingNumber);
+    //         setAccountNumber(account?.accountNumber);
+    //     }
+    // }, [account])
+
     const handleIsMatching = () => {
         if (!isMatching(bankAccount.accountNumber, inputEl.current.value)) {
             setIsValid(false)
