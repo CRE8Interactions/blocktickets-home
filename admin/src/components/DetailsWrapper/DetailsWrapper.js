@@ -39,21 +39,32 @@ export default function DetailsWrapper({ eventId }) {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
     }
 
-    const handleSave = () => {
-        const formData = new FormData();
-        formData.append(`files`, eventImg);
+    const handleSave = () => {;
+        if (eventImg) {
+            const formData = new FormData();
+            formData.append(`files`, eventImg);
 
-        upload(formData)
-            .then((res) => {
-                let data = {};
-                data['description'] = description;
-                data['eventUUID'] = eventId;
-                data['image'] = res?.data[0].id;
-                addDetailsToEvent({ data })
-                    .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
-                    .catch((err) => console.error(err))
-            })
-            .catch((err) => console.error(err))
+            upload(formData)
+                .then((res) => {
+                    let data = {};
+                    data['description'] = description;
+                    data['eventUUID'] = eventId;
+                    data['image'] = res?.data[0].id;
+
+                    addDetailsToEvent({ data })
+                        .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
+                        .catch((err) => console.error(err))
+                })
+                .catch((err) => console.error(err))
+        } else {
+            let data = {};
+            data['description'] = description;
+            data['eventUUID'] = eventId;
+
+            addDetailsToEvent({ data })
+                .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
+                .catch((err) => console.error(err))
+        }
     }
 
     return (
@@ -75,7 +86,7 @@ export default function DetailsWrapper({ eventId }) {
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={!selectedImage} onClick={handleSave}>Save and continue</Button>
+                <Button size="lg" disabled={!event && !selectedImage} onClick={handleSave}>Save and continue</Button>
             </Stack>
         </section>
     );

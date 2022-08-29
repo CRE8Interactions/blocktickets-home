@@ -93,21 +93,19 @@ export default function BasicInfoWrapper({ eventId }) {
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
+        data['hide_end_date'] = !event?.displayEndTime;
         if (eventId) {
             data['uuid'] = eventId;
             data['venue'] = (Number(event.venue?.id));
-            console.log(data)
             editEvent({ data })
                 .then((res) => console.log(res.data))
                 .catch((err) => console.error(err))
 
         } else {
-            console.log(data)
             createEvent({ data })
                 .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
                 .catch((err) => console.error(err))
         }
-        console.log(data)
     }
 
     return (

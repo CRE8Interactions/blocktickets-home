@@ -297,6 +297,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       currency,
       online_event,
       organizationId,
+      hide_end_date,
     } = ctx.request.body.data;
 
     const entry = await strapi.db.query('api::event.event').create({
@@ -310,6 +311,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         currency,
         online_event,
         organizationId,
+        hide_end_date
       },
     });
 
@@ -332,8 +334,6 @@ module.exports = createCoreController('api::organization.organization', ({ strap
   async addEventDetails(ctx) {
     const user = ctx.state.user;
     const { eventUUID, description, image } = ctx.request.body.data;
-
-    console.log(ctx.request)
 
     const event = await strapi.db.query('api::event.event').update({
       where: { uuid: eventUUID },
