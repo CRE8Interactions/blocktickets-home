@@ -6,8 +6,6 @@ import Table from 'react-bootstrap/Table';
 
 import { ExportSelect } from '../ExportSelect';
 
-import './secondarySalesWrapper.scss';
-
 export default function SecondarySalesWrapper() {
 
     const [exportTo, setExportTo] = useState('1')
@@ -15,7 +13,7 @@ export default function SecondarySalesWrapper() {
     return (
         <>
             <section className='max-width-wrapper'>
-                <header className='section-header' id="secondary-sales-header">
+                <header className='section-header'>
                     <div className="section-header" >
                         <div className="section-heading">
                             <h1>Sales Summary: Secondary Tickets</h1>

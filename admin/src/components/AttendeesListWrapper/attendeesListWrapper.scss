@@ -1,7 +1,11 @@
+@use '../../scss/abstracts' as *;
+
 #attendees-list-header {
 	.actions-group-flex {
 		.search {
-			flex: 0 0 583px;
+			@include breakpoint-min(xl) {
+				flex: 0 0 583px;
+			}
 		}
 	}
 }

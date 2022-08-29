@@ -157,14 +157,14 @@ export default function AttendeeList() {
     return (
         <>
             <header className="section-header">
-                <Row className='align-items-center actions-group-flex'>
+                <Row className='heading--flex'>
                     <Col className="pe-0" lg={3} xl={2}>
                         <h3 className='fs-md m-0'>Attendee list</h3>
                     </Col>
-                    <Col lg={9} xl={5}>
+                    <Col lg={8} xl={4} className="px-xl-0 flex-grow-1">
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} placeholder="Search by name, phone number or email" />
                     </Col>
-                    <Col>
+                    <Col className="px-0">
                         <FloatingLabel controlId="list-status" label="List status">
                             <Form.Select value={filter} onChange={setFilter}>
                                 {listOpt.map((option, index) => (
@@ -176,7 +176,7 @@ export default function AttendeeList() {
                         </FloatingLabel>
                     </Col>
 
-                    <Col>
+                    <Col className="ps-0">
                         <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
                     </Col>
 
