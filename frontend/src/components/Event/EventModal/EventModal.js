@@ -51,7 +51,7 @@ export default function EventModal({ show, handleClose, event }) {
             </div>
             <Modal.Body>
                 <img
-                    src={event?.image?.formats?.small?.url}
+                    src={event?.image?.url}
                     alt={event?.name}
                     width="225"
                     height="225"

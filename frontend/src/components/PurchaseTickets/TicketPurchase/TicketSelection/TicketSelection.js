@@ -57,6 +57,11 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     ] = useState({})
 
     const [
+        availableTickets,
+        setAvailableTickets
+    ] = useState({})
+
+    const [
         resaleTickets,
         setResaleTickets
     ] = useState({})
@@ -69,19 +74,27 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     const [showGa, setShowGa] = useState(true);
 
     useEffect(() => {
-        setGaTicketsAvailable(tickets?.generalAdmissionCount)
+        let count = []
+        tickets?.tickets?.map((ticket) => count.push(ticket.availableCount))
+        setGaTicketsAvailable(count.reduce((a,v) => a + v ,0))
+        setAvailableTickets(tickets?.tickets)
+
         setGaTicket(tickets?.generalAdmissionTicket);
         setResaleTickets(tickets?.reSaleTickets)
         setListings(tickets.listings);
-        if (!tickets) return;
+        
+        if (!tickets?.tickets) return;
 
-        let higestResalePrice;
+        // let higestResalePrice;
 
-        if (tickets?.listings && tickets?.listings.length > 0) {
-            higestResalePrice = tickets?.listings?.map(listing => listing.askingPrice + listing.tickets[0].fee).reduce((a, b) => Math.max(a, b))
-        }
-        let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice : tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
-        let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
+        // if (tickets?.listings && tickets?.listings.length > 0) {
+        //     higestResalePrice = tickets?.listings?.map(listing => listing.askingPrice + listing.tickets[0].fee).reduce((a, b) => Math.max(a, b))
+        // }
+        // let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice : tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
+        // let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
+        let lowestPrice = Math.min.apply(Math, tickets?.tickets.map(function(o) { return o.cost; }));
+        let higestPrice  = Math.max.apply(Math, tickets?.tickets.map(function(o) { return o.cost; }));
+
         setSliderValues([lowestPrice, higestPrice])
         setOriginalValues([lowestPrice, higestPrice])
     }, [tickets]);
@@ -114,7 +127,7 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
     const selectOptions = () => {
         let options = [];
-        for (let i = 1; i <= tickets?.generalAdmissionTicket?.attributes?.maximum_quantity; i++) {
+        for (let i = 1; i <= tickets?.tickets[0]?.maximum_quantity; i++) {
             options.push({ key: i, value: i, name: i === 1 ? `${i} Ticket` : `${i} Tickets` })
         }
         return options;
@@ -122,7 +135,7 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
     const handleNext = (ticket, listing = {}) => {
         if (ticket && ticket.on_sale_status === 'available') handleClick('confirmation', ticket, null)
-        if (listing && !ticket) handleClick('confirmation', null, listing)
+        // if (listing && !ticket) handleClick('confirmation', null, listing)
     }
 
     const disableSelect = (element) => {
@@ -181,14 +194,18 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                                             <div className="tickets--scrollable">
                                                 {!isZoomed ? (
                                                     <ListGroup as="ul">
-                                                        {showGa && ticketFilters.standard && (<Ticket ticket={gaTicket} handleNext={handleNext} ticketFilters={ticketFilters} />)}
+                                                        {/* {showGa && ticketFilters.standard && (<Ticket ticket={gaTicket} handleNext={handleNext} ticketFilters={ticketFilters} />)}
 
                                                         {ticketFilters.resale && (
                                                             <>
                                                                 {listings && listings.map((listing, index) => <Ticket key={index} handleNext={handleNext} ticketFilters={ticketFilters} listing={listing} />)
                                                                 }
                                                             </>
-                                                        )}
+                                                        )} */}
+                                                        { availableTickets && availableTickets?.map((ticket, index) => {
+                                                           return <Ticket ticket={ticket} handleNext={handleNext} ticketFilters={ticketFilters} key={index} />
+                                                          })
+                                                        }
                                                     </ListGroup>
                                                 ) : (
                                                     <MyTickets />

@@ -26,8 +26,12 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
       tickets = await strapi.db.query('api::ticket.ticket').findMany({
         where: {
-          eventId: cart.ticket.eventId,
-          on_sale_status: "available"
+          $and: [
+             { eventId: { $eq: cart.ticket.eventId}},
+             { on_sale_status: { $eq: "available" }},
+             { name: { $eq: cart.ticket.name }}
+
+          ]
         },
         limit: cart.ticketCount
       })

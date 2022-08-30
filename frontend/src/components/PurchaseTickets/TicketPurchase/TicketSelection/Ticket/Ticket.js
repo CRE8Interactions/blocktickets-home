@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import { ticketPrices } from '../../../../../utilities/helpers';
@@ -9,6 +9,10 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 	let ticketName;
 	let ticketType;
 	let ticketFee;
+
+	useEffect(() => {
+		// Some actions
+	}, [ticket])
 
 	const ticketTypes = (ticket) => {
 		if (!ticket?.resale && ticket?.on_sale_status === 'available') return 'Standard Ticket';
@@ -26,17 +30,17 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 	}
 
 	if (listing) {
-		let prices = ticketPrices(ticket, listing);
-		ticketPrice = `${prices.ticketCost} ea`;
-		ticketName = prices.ticketName;
-		ticketType = `Resale ${listing.tickets.length} Tickets`;
-		ticketFee = prices.totalFees;
-		ticketPriceWithFees = prices.ticketCostWithFees;
+		// let prices = ticketPrices(ticket, listing);
+		// ticketPrice = `${prices.ticketCost} ea`;
+		// ticketName = prices.ticketName;
+		// ticketType = `Resale ${listing.tickets.length} Tickets`;
+		// ticketFee = prices.totalFees;
+		// ticketPriceWithFees = prices.ticketCostWithFees;
 	}
 
 	return (
 		<ListGroup.Item
-			onClick={() => handleNext(ticket ? ticket.attributes : null, listing ? listing : null)}
+			onClick={() => handleNext(ticket ? ticket : null, listing ? listing : null)}
 			action
 			as="li"
 			className="d-flex justify-content-between align-items-center">
