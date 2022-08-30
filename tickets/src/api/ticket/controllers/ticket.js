@@ -125,5 +125,53 @@ module.exports = createCoreController('api::ticket.ticket', ({
     });
 
     console.log('Tickets ', myEvent.tickets)
+  },
+  async availableTickets(ctx) {
+    const { eventUUID } = ctx.request.query;
+
+    let event = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: eventUUID },
+      populate: {
+        venue: {
+          populate: {
+            address: true
+          }
+        },
+        image: true,
+        tickets: {
+          where: {
+            $and: [
+              { on_sale_status: { $in: 'available' }},
+              { isActive: { $eq: true }}
+            ]
+          }
+        }
+      }
+    });
+
+    let ticketTypes = [];
+
+    event?.tickets?.map((ticket) => {
+      const t = ticketTypes.find(element => {
+        if (element.name === ticket?.name) {
+          return true;
+        }
+      
+        return false;
+      });
+
+      if (t === undefined) {
+        delete ticket?.checkInCode
+        ticket['availableCount'] = event.tickets?.filter((t) => t.name === ticket?.name).length;
+        ticketTypes.push(ticket)
+      }
+    })
+
+    let data = {}
+    delete event?.tickets;
+    data['event'] = event;
+    data['tickets'] = ticketTypes;
+
+    return data
   }
 }));

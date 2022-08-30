@@ -14,6 +14,11 @@ module.exports = {
     method: 'POST',
     path: '/tickets/inactivate',
     handler: 'ticket.makeInactive'
+  },
+  {
+    method: 'GET',
+    path: '/tickets/available',
+    handler: 'ticket.availableTickets'
   }
 ]
 }

@@ -23,7 +23,7 @@ export default function EventCardBody({ event }) {
             <IconButton
                 variant="outline-light"
                 styles="text-primary"
-                link={`tickets/${event?.id}`}
+                link={`tickets/${event?.uuid}`}
                 btn="tickets--primary">
                 Get Tickets
             </IconButton>

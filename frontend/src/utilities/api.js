@@ -93,6 +93,10 @@ export const getEventTickets = async (id) => {
   return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available&filters[sales_start][$lte]=${date}&filters[sales_end][$gte]=${date}`)
 }
 
+export const getAllEventTickets = async (id) => {
+  return instance.get(`/tickets/available?eventUUID=${id}`)
+}
+
 export const createTicketTransfer = (data) => {
   return instance.post('/ticket-transfers', data)
 }
