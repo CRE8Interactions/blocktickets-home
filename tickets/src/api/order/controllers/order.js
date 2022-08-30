@@ -23,7 +23,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       fees = Number(parseFloat((cart.ticket.fee * cart.ticketCount) + (cart.ticket.facilityFee * cart.ticketCount) + 5.00).toFixed(2))
       total = (totalTicketPrices + fees).toFixed(2)
       eventId = cart.ticket.eventId
-
       tickets = await strapi.db.query('api::ticket.ticket').findMany({
         where: {
           $and: [
@@ -64,11 +63,15 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       }
     })
     // Creates Order with details
+
+    let orderEvent = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: eventId }
+    })
     
 
     let order = await strapi.db.query('api::order.order').create({
       data: {
-        event: eventId,
+        event: orderEvent.id,
         users_permissions_user: user,
         userId: user.id,
         tickets,

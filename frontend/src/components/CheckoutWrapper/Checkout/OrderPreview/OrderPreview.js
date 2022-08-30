@@ -19,7 +19,7 @@ export default function OrderPreview() {
     if (cart.ticket) { eventId = cart.ticket.eventId; ticketCount = cart?.ticketCount; ticketType = cart.ticket?.resale ? 'Resale • General Admission' : 'General Admission' }
 
     useEffect(() => {
-        getEvent(Number(eventId))
+        getEvent(eventId)
             .then((res) => setData(res.data))
             .catch((err) => console.error(err))
     }, [])
