@@ -56,15 +56,15 @@ export default function TicketBreakdownModal({ show, handleClose, ticket }) {
                         <ul>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Ticket revenue</span>
-                                <span>${parseFloat(ticket?.price).toFixed(2)}</span>
+                                <span>{formatCurrency(ticket?.price)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Facility Fee</span>
-                                <span>${parseFloat(ticket?.fee).toFixed(2)}</span>
+                                <span>{formatCurrency(ticket?.fee)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="mt-2 split-row">
                                 <span className='fw-medium'>Total</span>
-                                <span className='fw-medium'>${(parseFloat(ticket?.price) + parseFloat(ticket?.fee)).toFixed(2)}</span>
+                                <span className='fw-medium'>${formatCurrency((ticket?.price) + parseFloat(ticket?.fee))}</span>
                             </Stack>
                         </ul>
                     </li>
