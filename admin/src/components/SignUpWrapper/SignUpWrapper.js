@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
 import {
-    login, signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
+    signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
     createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register
 } from '../../utilities/api'
 import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
@@ -56,6 +56,8 @@ export default function SignUpWrapper() {
 
     const [isValid, setIsValid] = useState(true)
 
+    const [error, setError] = useState({})
+
     const [formValid, setFormValid] = useState(true)
 
     const [isSuccess, setIsSuccess] = useState(false)
@@ -79,10 +81,9 @@ export default function SignUpWrapper() {
 
 
     useEffect(() => {
-        if (!isValid)
-            setIsValid(true)
-
-    }, [credentials.password, bankAccount?.accountNumber])
+        setError({})
+        setIsValid(true)
+    }, [credentials.email, credentials.password, bankAccount?.accountNumber])
 
     useEffect(() => {
         if (step === 1) AuthService.removeSignup()
@@ -155,6 +156,12 @@ export default function SignUpWrapper() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
+    const handleMatching = () => {
+        if (!isMatching(credentials.password, inputEl.current.value)) {
+            setError({ type: 'match' })
+        }
+    }
+
     const handleStep = (curStep, setter) => {
         setter(curStep + 1)
     }
@@ -181,9 +188,7 @@ export default function SignUpWrapper() {
         }
 
         if (step === 1) {
-            if (!isMatching(credentials.password, inputEl.current.value)) {
-                setIsValid(false)
-            } else {
+            if (!error.type) {
                 credentials['username'] = credentials.email;
                 credentials['gender'] = 'other';
                 const today = new Date()
@@ -191,8 +196,14 @@ export default function SignUpWrapper() {
                 const hundredDaysAgo = new Date(today - (100 * days))
                 credentials['dob'] = hundredDaysAgo;
                 register(credentials)
-                    .then((res) => { AuthService.setSignUpToken(res.data?.jwt); handleStep(curStep, setter) })
-                    .catch((err) => console.error(err))
+                    .then((res) => {
+                        AuthService.setSignUpToken(res.data?.jwt);
+                        handleStep(curStep, setter)
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        setError({ type: 'alreadyExist' })
+                    })
             }
         }
         else if (step === 2) {
@@ -218,25 +229,10 @@ export default function SignUpWrapper() {
         }
     }
 
-    const submit = () => {
-        if (isValid) {
-            login(credentials)
-                .then((res) => {
-                    AuthService.setUser(res.data);
-                    setAuthenticated(res.data);
-                    // Send them back to the page they tried to visit when they were
-                    // redirected to the login page. Use { replace: true } so we don't create
-                    // another entry in the history stack for the login page.  This means that
-                    // when they get to the protected page and click the back button, they
-                    // won't end up back on the login page, which is also really nice for the
-                    // user experience.
-                    navigate(from, { replace: true });
-                })
-                .catch((err) => {
-                    setIsValid(false)
-                    console.error(err)
-                })
-        }
+    const checkDisabled = () => {
+        const { firstName, lastName, email, password } = credentials;
+
+        return !firstName || !lastName || !email || !password || !isValid || error.type
     }
 
     return (
@@ -302,14 +298,17 @@ export default function SignUpWrapper() {
                                 </Form.Group>
                                 <Form.Group className='form-group' controlId="password">
                                     <Form.Label>Create a Password</Form.Label>
-                                    <PasswordInputWrapper value={credentials.password} isValid={isValid} handlePassword={handleCredentials} />
+                                    <PasswordInputWrapper value={credentials.password} isValid={error?.type !== 'match'} onBlur={handleMatching} handlePassword={handleCredentials} />
                                 </Form.Group>
                                 <Form.Group className='form-group' controlId="repeatPassword">
                                     <Form.Label>Repeat password</Form.Label>
-                                    <PasswordInput placeholder="Confirm password" isValid={isValid} reference={inputEl} />
+                                    <PasswordInput placeholder="Confirm password" isValid={error?.type !== 'match'} onBlur={handleMatching} reference={inputEl} />
                                 </Form.Group>
-                                {!isValid && (
+                                {error?.type === 'match' && (
                                     <Error type="match" />
+                                )}
+                                {error?.type === 'alreadyExist' && (
+                                    <Error type="alreadyExist" />
                                 )}
                             </Form>
                         )}
@@ -335,7 +334,7 @@ export default function SignUpWrapper() {
                         )}
 
                         {!isSuccess && (
-                            <Button size="lg" className='mt-4 w-100 btn-next' disabled={!formValid} onClick={handleNext}>{taxStep === 3 ? 'Create' : 'Next'}</Button>
+                            <Button size="lg" className='mt-4 w-100 btn-next' disabled={checkDisabled()} onClick={handleNext}>{taxStep === 3 ? 'Create' : 'Next'}</Button>
                         )}
 
                         {step === 1 && (

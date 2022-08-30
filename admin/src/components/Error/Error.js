@@ -12,7 +12,10 @@ export default function Error({ type, field = "password" }) {
                 return `Your ${field}s do not match. Please try again`;
 
             case 'sameMatch':
-                return `Your ${field} cannot be the same as your old password!. Please try again`;
+                return `Your ${field} cannot be the same as your old ${field.substring(field.indexOf(' '))}! Please try again`;
+
+            case 'alreadyExist':
+                return `Your email already exists or is taken. Please try again`;
 
             case 'notExist':
                 return `Your ${field} does not match our records. Please try again`;
