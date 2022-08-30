@@ -29,10 +29,11 @@ export default function EventsTable({ type, events }) {
     if (events && type === 'published') events = events.filter((event) => event?.status === 'on_sale')
     if (events && (type === 'draft')) events = events.filter((event) => (event?.status === 'unpublished' || event?.status === 'scheduled'))
     if (events && type === 'past') events = events.filter((event) => event?.status === 'published' && moment(event?.start) < moment())
-
-    const calculateSold = (tickets) => {
-        let availableTickets = tickets
-        let soldTickets = tickets.filter((ticket) => ticket.on_sale_status === 'sold')
+    
+    const calculateSold = (tickets, type) => {
+        let isResale = type === 'secondary' ? true : false
+        let availableTickets = tickets.filter((ticket) => ticket.resale === isResale);
+        let soldTickets = tickets.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === isResale)
         let availableCount = availableTickets.length
         let soldCount = soldTickets.length
         let percentage = (soldCount / availableCount) * 100
@@ -42,7 +43,34 @@ export default function EventsTable({ type, events }) {
         return (
             <>
                 <p> {soldCount} / {availableCount} </p>
+            </>
+        )
+    }
+
+    const calculatePercentage = (tickets, type) => {
+        let isResale = type === 'secondary' ? true : false
+        let availableTickets = tickets.filter((ticket) => ticket.resale === isResale);
+        let soldTickets = tickets.filter((ticket) => ticket.on_sale_status === 'sold')
+        let availableCount = availableTickets.length
+        let soldCount = soldTickets.length
+        let percentage = (soldCount / availableCount) * 100
+
+        return (
+            <>
                 <ProgressBar now={percentage} />
+            </>
+        )
+    }
+
+    const getGross = (tickets, type) => {
+        let isResale = type === 'secondary' ? true : false
+        let availableTickets = tickets.filter((ticket) => ticket.resale === isResale);
+        let soldTickets = tickets.filter((ticket) => ticket.on_sale_status === 'sold')
+        let soldTotals = soldTickets.map((ticket) => (ticket.cost + ticket.fee))
+        let sum = soldTotals.reduce((a,b) => a + b, 0)
+        return (
+            <>
+                <Badge bg='light' className="badge-label">${parseFloat(sum).toFixed(2)}</Badge>
             </>
         )
     }
@@ -92,16 +120,16 @@ export default function EventsTable({ type, events }) {
                             </td>
                             <td>
                                 <Stack>
-                                    <Badge bg='light' className="badge-label">{calculateSold(event?.tickets)}</Badge>
+                                    <Badge bg='light' className="badge-label">{calculateSold(event?.tickets, 'primary')}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
-                                            <ProgressBar now={20} />
+                                            { calculatePercentage(event?.tickets, 'primary') }
                                         </Stack>)}
                                 </Stack>
                             </td>
                             <td>
                                 <Stack>
-                                    <Badge bg='light' className="badge-label">$3,200</Badge>
+                                { getGross(event?.tickets, 'primary') }
                                     {type === 'published' && (
                                         <StatRow
                                             stat="up" statAmount="55.8" text="this week" />
@@ -110,17 +138,17 @@ export default function EventsTable({ type, events }) {
                             </td>
                             <td>
                                 <Stack>
-                                    <Badge bg='light' className="badge-label">{calculateSold(event?.tickets)}</Badge>
+                                    <Badge bg='light' className="badge-label">{calculateSold(event?.tickets, 'secondary')}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
-                                            <ProgressBar now={20} />
+                                            { calculatePercentage(event?.tickets, 'secondary') }
                                         </Stack>
                                     )}
                                 </Stack>
                             </td>
                             <td>
                                 <Stack>
-                                    <Badge bg='light' className="badge-label">$3,200</Badge>
+                                    { getGross(event?.tickets, 'secondary') }
                                     {type === 'published' && (
                                         <StatRow
                                             stat="up" statAmount="55.8" text="this week" />
