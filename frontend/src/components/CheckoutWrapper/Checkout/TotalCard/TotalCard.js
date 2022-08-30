@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 
 import { Disclaimer } from './Disclaimer';
 import { Spinner } from '../../../SpinnerContainer/Spinner';
+import { Error } from '../../../Error';
 
 import './totalCard.scss';
 
@@ -22,6 +23,11 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
     const [
         purchasing,
         setPurchasing
+    ] = useState(false);
+
+    const [
+        hasError,
+        setHasError
     ] = useState(false);
 
     let cart = sessionStorage.getItem('cart');
@@ -73,8 +79,12 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                 sessionStorage.setItem('order', JSON.stringify(res.data));
                 sendPayment();
             })
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => {
+                console.error(err);
+                setPurchasing(false);
+                setHasError(true)
+            })
+    }
 
     const sendPayment = async () => {
         if (!stripe || !elements) {
@@ -237,6 +247,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                         <span>Complete Purchase</span>
                     </Button>
                 </div>
+
+                {hasError && (
+                    <Error />
+                )}
             </Card.Footer>
         </Card >
     );
