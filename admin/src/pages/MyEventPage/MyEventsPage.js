@@ -11,7 +11,6 @@ export default function MyEventsPage() {
     useEffect(() => {
         getEvent(uuid)
         .then((res) => {
-            console.log(res.data)
             setEvent(res.data)
         })
         .catch(err => console.error(err))
