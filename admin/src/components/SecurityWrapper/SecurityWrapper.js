@@ -35,7 +35,7 @@ export default function SecurityWrapper() {
     }, [info.curEmail, info.email, info.curPassword, info.password])
 
 
-    // validate if curEmail is correct, newEmail is correct, curPassword is correct, newPassword is correct and patteren match ?
+    // validate if curEmail is correct, newEmail is correct, curPassword is correct, newPassword is correct and pattern match ?
     const handleInput = (e) => {
         const { name } = e.target;
 

@@ -5,7 +5,6 @@ import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import { MoreIcon } from '../MoreIcon';
-import moment from 'moment';
 
 export default function EditDeleteDropdown({ handleShow, link, onClick, ticket }) {
     return (

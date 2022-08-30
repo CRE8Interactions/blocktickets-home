@@ -7,9 +7,9 @@ export default function GuestInformationPage() {
     // get query from URL
     const [searchParam] = useSearchParams();
 
-    const searchParamObj = Object.fromEntries([...searchParam]);
+    const id = searchParam.id;
 
     return (
-        <GuestInformationWrapper id={searchParamObj.id} />
+        <GuestInformationWrapper id={id} />
     )
 }

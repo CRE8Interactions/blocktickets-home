@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 import { CopyButton } from '../../CopyButton'
 
-export default function TrackingLinkForm({ link, handleChange, isValid, validInputs }) {
+export default function TrackingLink({ link, handleChange, isValid, validInputs }) {
 
     return (
         <Form>

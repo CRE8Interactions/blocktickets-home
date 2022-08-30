@@ -125,7 +125,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                                 <div className="form-label--flex">
                                     <Form.Label>New password</Form.Label>
                                     <OverlayTrigger
-                                        placement="right"
+                                        placement="top"
                                         overlay={<Tooltip>Minimum 8 characters, one upper and lower case & one symbol</Tooltip>}>
                                         <Button variant="link">
                                             <InfoIcon />
