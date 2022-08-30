@@ -7,9 +7,9 @@ export default function ContactAttendeePage() {
     // get query from URL
     const [searchParam] = useSearchParams();
 
-    const searchParamObj = Object.fromEntries([...searchParam]);
+    const id = searchParam.get("id");
 
     return (
-        <ContactAttendeeWrapper id={searchParamObj.id} />
+        <ContactAttendeeWrapper id={id} />
     )
 }

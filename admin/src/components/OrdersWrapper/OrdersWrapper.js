@@ -11,7 +11,6 @@ import { SearchBar } from '../SearchBar';
 import { ExportSelect } from "../ExportSelect";
 import { OrderSummary } from '../OrderSummary';
 
-import './ordersWrapper.scss'
 
 export default function OrdersWrapper() {
 
@@ -234,7 +233,7 @@ export default function OrdersWrapper() {
     return (
         <>
             <section className='max-width-wrapper'>
-                <header className='section-header' id="orders-header">
+                <header className='section-header'>
                     <div className="section-header">
                         <div className="section-heading">
                             <h1>Orders</h1>
@@ -242,7 +241,7 @@ export default function OrdersWrapper() {
                         <p className='section-header-desc'>See all the orders, refunds and transfers for your event, including gross sales with fees</p>
                     </div>
                     <div className="actions-group-flex">
-                        <FloatingLabel controlId="orders" label="Orders" id="orders">
+                        <FloatingLabel controlId="orders" label="Orders">
                             <Form.Select value={ordersView} onChange={(e) => setOrdersView(e.target.value)} aria-label="View Orders">
                                 {ordersViewOpt.map((option, index) => (
                                     <option key={index} value={option.value}>{option.label}</option>

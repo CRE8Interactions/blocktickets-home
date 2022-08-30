@@ -7,9 +7,9 @@ export default function TrackingLinkPage() {
     // get query from URL
     const [searchParam] = useSearchParams();
 
-    const searchParamObj = Object.fromEntries([...searchParam]);
+    const id = searchParam.get("id")
 
     return (
-        <TrackingLinkWrapper id={searchParamObj.id} />
+        <TrackingLinkWrapper id={id} />
     )
 }

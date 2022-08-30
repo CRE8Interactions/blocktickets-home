@@ -22,13 +22,12 @@ export default function ExportSelect({ setExportTo, exportTo }) {
 
     useEffect(() => {
         setExportTo('1')
-
     }, [])
 
 
     return (
         <InputGroup className="export-group">
-            <FloatingLabel controlId="export" label="Export">
+            <FloatingLabel controlId="export" label="Export" className='export-form-floating'>
                 <Form.Select value={exportTo} onChange={setExportTo}>
                     {exportOpt.map((option, index) => (
                         <option key={index} value={option.value}>{option.label}</option>

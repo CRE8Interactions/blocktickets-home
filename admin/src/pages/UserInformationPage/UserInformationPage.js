@@ -7,9 +7,9 @@ export default function UserInformationPage() {
     // get query from URL
     const [searchParam] = useSearchParams();
 
-    const searchParamObj = Object.fromEntries([...searchParam]);
+    const id = searchParam.id;
 
     return (
-        <UserInformationWrapper id={searchParamObj.id} />
+        <UserInformationWrapper id={id} />
     )
 }
