@@ -31,7 +31,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
           ticketArr.push(
             {name: data.name, cost: data.cost, description: data.description, minimum_quantity: data.minimum_quantity, 
               maximum_quantity: data.maximum_quantity, status: 'available', minResalePrice: data.minResalePrice, maxResalePrice: data.maxResalePrice,
-              sales_start: data.sales_start, sales_end: data.sales_end, fee: data.fee, royalty: data.royalty, eventId: myEvent.id,
+              sales_start: data.sales_start, sales_end: data.sales_end, fee: data.fee, royalty: data.royalty, eventId: data.eventId,
               checkInCode: `${letter}-${Math.floor(100000 + Math.random() * 900000)}`, uuid: uuidv4(), generalAdmission: data.generalAdmission
             }
           )
@@ -46,11 +46,11 @@ module.exports = createCoreController('api::ticket.ticket', ({
     })
     // Queries for newly created tickets as bulk creation doesn't allow for relation creation
     let tickets = await strapi.db.query('api::ticket.ticket').findMany({
-      where: { eventId: myEvent.id, on_sale_status: 'available' }
+      where: { eventId: data.eventId, on_sale_status: 'available' }
     })
     // Creates relation to event 
     let event = await strapi.db.query('api::event.event').update({
-      where: { id: myEvent.id },
+      where: { uuid: data.eventId },
       data: {
         tickets: tickets
       },
@@ -137,21 +137,23 @@ module.exports = createCoreController('api::ticket.ticket', ({
             address: true
           }
         },
-        image: true,
-        tickets: {
-          where: {
-            $and: [
-              { on_sale_status: { $in: 'available' }},
-              { isActive: { $eq: true }}
-            ]
-          }
-        }
+        image: true
+      }
+    });
+
+    let eventTickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: {
+        $and: [
+          { eventId: eventUUID },
+          { on_sale_status: { $in: 'available' }},
+          { isActive: { $eq: true }}
+        ]
       }
     });
 
     let ticketTypes = [];
 
-    event?.tickets?.map((ticket) => {
+    eventTickets?.map((ticket) => {
       const t = ticketTypes.find(element => {
         if (element.name === ticket?.name) {
           return true;
@@ -162,7 +164,8 @@ module.exports = createCoreController('api::ticket.ticket', ({
 
       if (t === undefined) {
         delete ticket?.checkInCode
-        ticket['availableCount'] = event.tickets?.filter((t) => t.name === ticket?.name).length;
+        ticket['availableCount'] = eventTickets?.filter((t) => t.name === ticket?.name).length;
+        ticket['availableCount'] = eventTickets?.filter((t) => t.name === ticket?.name).length;
         ticketTypes.push(ticket)
       }
     })

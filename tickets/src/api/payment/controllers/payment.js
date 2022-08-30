@@ -40,7 +40,6 @@ module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
       let fees = Number(parseFloat((ticket.attributes ? ticket.attributes.fee : ticket.fee  * ticketCount) + (ticket.attributes ?  ticket.attributes.facilityFee : ticket.facilityFee * ticketCount) + 4.35 + 2.50).toFixed(2))
       let total = (totalTicketPrices + fees)
       let stripePriceConversion = (total * 100).toFixed()
-
       paymentIntent = await stripe.paymentIntents.create({
         amount: stripePriceConversion,
         currency: 'usd',

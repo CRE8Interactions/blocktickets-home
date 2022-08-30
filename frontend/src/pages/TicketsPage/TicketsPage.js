@@ -67,7 +67,6 @@ export default function TicketsPage() {
 	useEffect(() => {
 		getAllEventTickets(id)
 			.then((res) => {
-				// console.log('TicketPage Data ', res.data)
 				setTickets(res.data?.tickets)
 				setEvent(res.data?.event)
 			})

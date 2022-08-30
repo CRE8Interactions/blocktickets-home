@@ -82,7 +82,6 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
         setGaTicket(tickets?.generalAdmissionTicket);
         setResaleTickets(tickets?.reSaleTickets)
         setListings(tickets.listings);
-        
         if (!tickets?.tickets) return;
 
         // let higestResalePrice;
@@ -127,7 +126,7 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
     const selectOptions = () => {
         let options = [];
-        for (let i = 1; i <= tickets?.tickets[0]?.maximum_quantity; i++) {
+        for (let i = 1; i <= 8; i++) {
             options.push({ key: i, value: i, name: i === 1 ? `${i} Ticket` : `${i} Tickets` })
         }
         return options;

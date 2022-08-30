@@ -103,9 +103,6 @@
     "uuid": {
       "type": "uid"
     },
-    "eventId": {
-      "type": "string"
-    },
     "resale": {
       "type": "boolean",
       "default": false
@@ -137,6 +134,9 @@
     "isActive": {
       "type": "boolean",
       "default": true
+    },
+    "eventId": {
+      "type": "string"
     }
   }
 }
