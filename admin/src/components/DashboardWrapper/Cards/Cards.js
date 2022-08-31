@@ -17,7 +17,6 @@ import { InfoIcon } from '../../InfoIcon';
 import './cards.scss';
 
 export default function Cards({ stats }) {
-    console.log(stats)
     return (
         <section className='cards'>
             <Row>

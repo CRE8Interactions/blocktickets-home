@@ -1,5 +1,7 @@
 'use strict';
 const { v4: uuidv4 } = require('uuid');
+const moment = require('moment');
+
 /**
  *  ticket controller
  */
@@ -139,6 +141,13 @@ module.exports = createCoreController('api::ticket.ticket', ({
       }
     });
 
+    await strapi.entityService.create('api::page-view.page-view', {
+      data: {
+        seen: new Date(),
+        event: event.id
+      },
+    });
+
     let eventTickets = await strapi.db.query('api::ticket.ticket').findMany({
       where: {
         $and: [
@@ -163,7 +172,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
       if (t === undefined) {
         delete ticket?.checkInCode
         ticket['availableCount'] = eventTickets?.filter((t) => t.name === ticket?.name).length;
-        ticket['availableCount'] = eventTickets?.filter((t) => t.name === ticket?.name).length;
+        if (moment(ticket?.sales_start) >= moment()) return
         ticketTypes.push(ticket)
       }
     })
@@ -172,6 +181,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
     delete event?.tickets;
     data['event'] = event;
     data['tickets'] = ticketTypes;
+    data['scheduledCount'] = eventTickets?.filter((t) => moment(t?.sales_start) >= moment()).length;
 
     return data
   }
