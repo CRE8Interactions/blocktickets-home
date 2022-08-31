@@ -16,10 +16,10 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.2.0",
-    "@strapi/plugin-users-permissions": "4.2.0",
-    "@strapi/provider-email-sendgrid": "^4.2.0",
-    "@strapi/strapi": "4.2.0",
+    "@strapi/plugin-i18n": "4.2.2",
+    "@strapi/plugin-users-permissions": "4.2.2",
+    "@strapi/provider-email-sendgrid": "^4.2.2",
+    "@strapi/strapi": "4.2.2",
     "axios": "^0.26.1",
     "bullmq": "^1.86.7",
     "encryption-se": "^1.0.3",
