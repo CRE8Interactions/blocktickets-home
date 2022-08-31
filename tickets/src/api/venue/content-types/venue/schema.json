@@ -54,6 +54,19 @@
     "uuid": {
       "type": "string",
       "unique": true
+    },
+    "banner": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "website": {
+      "type": "string"
     }
   }
 }
