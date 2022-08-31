@@ -12,20 +12,19 @@ import facebook from '../../../assets/icons/facebook.svg';
 import './venueCard.scss';
 
 export default function VenueCard({ venue }) {
-
     return (
         <Card body className="card--light text-center d-flex flex-column">
             {venue && (
                 <>
-                    <Card.Img className="rounded-circle" width="160" height="160" src={venue[0]?.image[0]?.url} />
+                    <Card.Img className="rounded-circle" width="160" height="160" src={venue?.image[0]?.url} />
                     <Card.Title as="h5" className="fs-md">
-                        {venue[0]?.name}
+                        {venue?.name}
                     </Card.Title>
                     <Card.Subtitle as="h4" className="fs-md">
-                        {venue[0]?.address[0]?.address_1}, {venue[0]?.address[0]?.city} {venue[0]?.address[0]?.state} {venue[0]?.address[0]?.country}
+                        {venue?.address[0]?.address_1}, {venue?.address[0]?.city} {venue?.address[0]?.state} {venue?.address[0]?.country}
                     </Card.Subtitle>
                     <Card.Text className="caption text-muted">
-                        {venue[0]?.description}
+                        {venue?.description}
                     </Card.Text>
                     <Stack
                         direction="horizontal"
@@ -102,7 +101,7 @@ export default function VenueCard({ venue }) {
                         </li>
                     </Stack>
                     <Card.Footer className="pt-4 pt-md-5">
-                        <span className="caption text-muted">{venue[0]?.allEvents?.length} Events</span>
+                        <span className="caption text-muted">{venue?.allEvents?.length} Events</span>
                     </Card.Footer>
                 </>
             )}

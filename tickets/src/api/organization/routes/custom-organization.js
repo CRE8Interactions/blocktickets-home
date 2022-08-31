@@ -55,5 +55,10 @@ module.exports = {
       path: '/organizations/create-event',
       handler: 'organization.createEvent'
     },
+    {
+      method: 'GET',
+      path: '/organizations/event-stats',
+      handler: 'organization.getEventStats'
+    },
   ]
 }

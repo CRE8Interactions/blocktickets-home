@@ -123,8 +123,6 @@ module.exports = createCoreController('api::ticket.ticket', ({
         }
       }
     });
-
-    console.log('Tickets ', myEvent.tickets)
   },
   async availableTickets(ctx) {
     const { eventUUID } = ctx.request.query;

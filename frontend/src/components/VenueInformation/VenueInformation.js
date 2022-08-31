@@ -22,7 +22,7 @@ export default function VenueInformation({ venue }) {
 			{venue && (
 			<>
 			<header>
-				<VenueBanner />
+				<VenueBanner venue={venue} />
 			</header>
 			<section className="spacer-xs">
 				<Row className="gap-5 gap-md-3">

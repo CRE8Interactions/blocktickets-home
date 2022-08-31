@@ -14,7 +14,8 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "summary": {
       "type": "text"
@@ -133,6 +134,10 @@
     },
     "scheduledTime": {
       "type": "datetime"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }
