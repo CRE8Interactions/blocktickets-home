@@ -7,8 +7,13 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import { MoreIcon } from '../../MoreIcon';
 
-export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket, show = true, refund }) {
-
+export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket, show = true, refund, order }) {
+    const ticketType = (ticket) => {
+        return ticket?.generalAdmission ? 'General Admission' : 'Seated';
+    }
+    const orderType = (order) => {
+        return 'Standard'
+    }
     return (
         <tr>
             <td>
@@ -20,12 +25,12 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
             <td className='text-capitalize'>
                 {marketType}
             </td>
-            <td className='text-capitalize'>{ticket.status}</td>
+            <td className='text-capitalize'>{orderType(order)}</td>
             <td>
-                {formatString(type)}
+                {formatString(ticketType(ticket))}
             </td>
             <td>
-                {formatCurrency(ticket.price)}
+                {formatCurrency((order?.total / order?.details?.ticketCount))}
             </td>
             {show && (
                 <td className="btn-more">

@@ -5,7 +5,6 @@ import { OrdersTable } from '../OrdersTable';
 import { Cards } from './Cards';
 
 export default function DashboardWrapper({event, orders, stats}) {
-    console.log(stats)
     return (
         <div className='max-width-wrapper'>
             <Reports title="dashboard" event={event} orders={orders} stats={stats} />

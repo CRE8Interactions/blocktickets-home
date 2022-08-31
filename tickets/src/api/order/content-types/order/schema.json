@@ -74,6 +74,9 @@
     },
     "eventUuid": {
       "type": "string"
+    },
+    "gross": {
+      "type": "decimal"
     }
   }
 }

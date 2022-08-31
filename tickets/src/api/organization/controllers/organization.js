@@ -325,10 +325,29 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     } = ctx.request.query;
 
     const orders = await strapi.db.query('api::order.order').findMany({
-      where: { eventUuid: uuid }
+      where: {
+        $and: [
+          { eventUuid: {$eq: uuid} }
+        ]
+      },
+      populate: {
+        users_permissions_user: {
+          select: ['firstName', 'lastName', 'phoneNumber', 'email']
+        }
+      }
     });
 
-    return orders
+    let data = {};
+    data['grossSales'] = parseFloat(orders?.reduce((accumulator, object) => {
+      return accumulator + object.gross;
+    }, 0)).toFixed(2);
+    data['count'] = orders?.length;
+    data['attendeesCount'] = orders?.reduce((accumulator, object) => {
+      return accumulator + object.details.ticketCount;
+    }, 0)
+    data['orders'] = orders;
+
+    return data
 
   },
   async addEventDetails(ctx) {
@@ -372,16 +391,16 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     data['secondaryTicketsSold'] = secondaryTicketsSold?.length;
     data['totalTickets'] = event?.tickets?.length;
     data['primaryGrossSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + object.cost;
+      return accumulator + (object.cost + object.fee);
     }, 0)).toFixed(2);
     data['secondaryGrossSales'] = parseFloat(secondaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + object.cost;
+      return accumulator + (object.cost + object.fee);
     }, 0)).toFixed(2);
     data['primaryNetSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + (object.cost + object.fee);
+      return accumulator + object.cost;
     }, 0)).toFixed(2);
     data['secondaryNetSales'] = parseFloat(secondaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + (object.cost + object.fee);
+      return accumulator + object.cost;
     }, 0)).toFixed(2);
     data['pageViews'] = event?.page_views?.length;
     data['totalSoldPercentage'] = (data?.allTicketsSold / data?.totalTickets) * 100;

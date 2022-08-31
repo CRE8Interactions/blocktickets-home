@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { getOrders } from '../../utilities/api';
 
 import { formatCurrency, formatNumber } from "./../../utilities/helpers";
 
@@ -13,6 +14,19 @@ import { OrderSummary } from '../OrderSummary';
 
 
 export default function OrdersWrapper() {
+    const { uuid } = useParams()
+    const [details, setDetails] = useState({
+        grossSales: 0,
+        attendeesCount: 0,
+        count: 0,
+        orders: []
+    })
+
+    useEffect(() => {
+        getOrders(uuid)
+            .then((res) => setDetails(res.data))
+            .catch((err) => console.error(err))
+    }, [uuid]);
 
     const ordersViewOpt = [
         {
@@ -255,22 +269,22 @@ export default function OrdersWrapper() {
                         <Stack as="ul" direction="horizontal" className="horizontal-list">
                             <li>
                                 Gross sales
-                                <span>{formatCurrency(10000)}</span>
+                                <span>{formatCurrency(details.grossSales)}</span>
                             </li>
                             <li>
                                 Orders
-                                <span>{formatNumber(50)}</span>
+                                <span>{formatNumber(details.count)}</span>
                             </li>
                             <li>
                                 Attendees
-                                <span>{formatNumber(10)}</span>
+                                <span>{formatNumber(details.attendeesCount)}</span>
                             </li>
                         </Stack>
                         <Link to="refund/all" className='btn btn-outline-light'>Issue multiple refunds</Link>
                     </Stack>
                 </header>
                 <Stack as="ul" gap={4}>
-                    {ordersObj.map((order, index) => (
+                    {details.orders && details.orders.map((order, index) => (
                         <OrderSummary key={index} order={order} />
                     ))}
                 </Stack>
