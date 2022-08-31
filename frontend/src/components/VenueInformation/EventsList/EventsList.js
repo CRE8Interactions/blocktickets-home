@@ -11,7 +11,7 @@ import './eventsList.scss';
 export default function EventsList({ venue }) {
     return (
         <Stack as="ul">
-            {venue[0] && venue[0].allEvents.map((event, index) => {
+            {venue && venue.allEvents.map((event, index) => {
                 return (
                     <Stack as="li" direction="horizontal" className="item" gap={3} key={index}>
                         <img

@@ -11,6 +11,7 @@ module.exports = createCoreController('api::venue.venue', ({ strapi }) => ({
     const venues = await strapi.db.query('api::venue.venue').findMany({
       populate: { 
         image: true,
+        banner: true,
         address: true,
         allEvents: {
           orderBy: { start: 'asc' },

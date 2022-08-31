@@ -16,7 +16,7 @@ import { InfoIcon } from '../../InfoIcon';
 
 import './cards.scss';
 
-export default function Cards() {
+export default function Cards({ stats }) {
     return (
         <section className='cards'>
             <Row>
@@ -28,13 +28,13 @@ export default function Cards() {
                         </div>
                         <Row>
                             <Col>
-                                <span><b className="fs-md">72</b> <span className='text-muted'>/ 700</span></span>
+                                <span><b className="fs-md">{stats?.allTicketsSold}</b> <span className='text-muted'>/ {stats?.totalTickets}</span></span>
                             </Col>
                             <Col className='text-end'>
-                                <span className='fw-medium'>7%</span>
+                                <span className='fw-medium'>{stats?.totalSoldPercentage}%</span>
                             </Col>
                         </Row>
-                        <ProgressBar now={7} />
+                        <ProgressBar now={stats?.totalSoldPercentage} />
                     </Card>
                 </Col>
                 <Col lg={6}>
@@ -44,7 +44,7 @@ export default function Cards() {
                             <Button variant="outline-light">Copy URL</Button>
                         </div>
                         <p className='mb-4 fw-bold'>Your event URL</p>
-                        <p className='text-muted'>https://www.blocktickets.xyz/o/lenoxx-entertainment-40700955203</p>
+                        <p className='text-muted'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>
                     </Card>
                 </Col>
             </Row>
@@ -63,12 +63,12 @@ export default function Cards() {
                                         </Button>
                                     </OverlayTrigger>
                                 </Stack>
-                                <h1 className='card-body-title'>{formatCurrency(52532.23)}</h1>
+                                <h1 className='card-body-title'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
                             </Stack>
                         </div>
                         <Row>
                             <Col>
-                                <span><b>{formatCurrency(42241.22)}</b> <span className="small-text">net sales</span></span>
+                                <span><b>${parseFloat(stats?.primaryNetSales).toFixed(2)}</b> <span className="small-text">net sales</span></span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
@@ -76,7 +76,7 @@ export default function Cards() {
                         </Row>
                         <Row>
                             <Col>
-                                <span><b>{formatCurrency(10222.32)}</b> <span className="small-text">royalties</span></span>
+                                <span><b>{formatCurrency(0)}</b> <span className="small-text">royalties</span></span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--secondary'>Secondary</Badge>
@@ -98,7 +98,7 @@ export default function Cards() {
                                         </Button>
                                     </OverlayTrigger>
                                 </Stack>
-                                <h1 className='card-body-title'>{formatCurrency(52532.23)}</h1>
+                                <h1 className='card-body-title'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
                             </Stack>
                             <Badge bg="default" className='badge-outline badge-outline--success'>Paid</Badge>
                         </div>

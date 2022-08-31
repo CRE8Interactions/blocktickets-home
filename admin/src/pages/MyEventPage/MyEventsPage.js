@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { DashboardWrapper } from "../../components";
-import { getEvent, getOrders } from "../../utilities/api";
+import { getEvent, getOrders, getEventStats } from "../../utilities/api";
 import { Routes, Route, useParams } from 'react-router-dom';
 
 export default function MyEventsPage() {
     let { uuid } = useParams();
     const [event, setEvent] = useState()
     const [orders, setOrders] = useState()
+    const [stats, setStats] = useState()
 
     useEffect(() => {
         getEvent(uuid)
         .then((res) => {
-            console.log(res.data)
             setEvent(res.data)
         })
         .catch(err => console.error(err))
@@ -19,8 +19,12 @@ export default function MyEventsPage() {
         getOrders(uuid)
             .then((res) => setOrders(res.data))
             .catch((err) => console.error(err))
+
+        getEventStats(uuid)
+            .then((res) => setStats(res.data))
+            .catch((err) => console.error(err))
     }, [])
     return (
-        <DashboardWrapper event={event} orders={orders} />
+        <DashboardWrapper event={event} orders={orders} stats={stats} />
     )
 }

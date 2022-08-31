@@ -15,24 +15,32 @@ import { MoreIcon } from '../MoreIcon';
 import { TicketRow } from './TicketRow'
 
 import './orderSummary.scss';
+import moment from 'moment';
 
 // could be whole order or single ticket 
 export default function OrderSummary({ ticket, order, showDropdown = true, isOpen = false }) {
-
     const { status, refund } = order;
 
     const [open, setOpen] = useState(isOpen);
 
     let ticketArr = ticket ? [ticket] : order.tickets;
 
-    // testing
-    // console.log(status.key)
-    // status.map(status => console.log(status))
-    // Object.values(status).map(stat => stat.map(entry => console.log(entry)))
-    // order.tickets.map(ticket => console.log(ticket));
-
     const sumOfTickets = tickets => {
-        return tickets.reduce((prev, cur) => prev + cur.price, 0)
+        return tickets?.reduce((prev, cur) => prev + cur.price, 0)
+    }
+
+    const orderType = (order) => {
+        let type = order?.type === 'resale' ?  'secondary' : 'primary';
+        return type
+    }
+
+    const purchaseType = (order) => {
+        let type = order?.type === 'resale' ?  'secondary' : 'primary';
+        return 'Purchased By'
+    }
+
+    const purchaser = (order) => {
+        return `${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName} on ${moment(order?.processedAt).format('MMM DD, YYYY')} at ${moment(order?.processedAt).format('h:mma')} EST`
     }
 
     return (
@@ -43,12 +51,12 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                     aria-controls="order-summary-text"
                     aria-expanded={open}
                 >
-                    <h1 className='card-body-title'>{formatCurrency(sumOfTickets(ticketArr))}</h1>
+                    <h1 className='card-body-title'>{formatCurrency(order?.total)}</h1>
                 </Button>
                 <Stack direction="horizontal" className='split-row card-body-subtitle--flex'>
                     <Stack direction="horizontal" gap={3}>
-                        <p>Order {formatOrderId(order.orderId)}</p>
-                        <Badge bg="default" className={`badge-outline badge-outline--${order.marketType === 'primary' ? 'primary' : 'secondary'}`}>{order.marketType}</Badge>
+                        <p>Order {formatOrderId(order?.uuid)}</p>
+                        <Badge bg="default" className={`badge-outline badge-outline--${orderType(order)}`}>{orderType(order)}</Badge>
                     </Stack>
                     {showDropdown && (
                         <Dropdown className="btn-more" align="right">
@@ -59,7 +67,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                 <Stack as="ul" gap={2}>
                                     {!refund && (
                                         <li>
-                                            <LinkContainer to={`refund?order=${order.orderId}`}>
+                                            <LinkContainer to={`refund?order=${order?.uuid}`}>
                                                 <Dropdown.Item className="btn-refund">
                                                     Refund order
                                                 </Dropdown.Item>
@@ -67,7 +75,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                         </li>
                                     )}
                                     <li>
-                                        <LinkContainer to={`attendees-report?order=${order.orderId}`}>
+                                        <LinkContainer to={`attendees-report?order=${order?.uuid}`}>
                                             <Dropdown.Item className="btn-view">
                                                 View attendees report
                                             </Dropdown.Item>
@@ -81,16 +89,16 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                 <Collapse in={open}>
                     <div id="order-summary-text">
                         <Stack gap={1} key={order.orderId} className="transaction">
-                            <span className='caption status-label'>{status.key}:</span>
+                            <span className='caption status-label'>{purchaseType(order)}:</span>
                             <div className="transaction-desc">
-                                <p className='fw-medium'>{status.name}</p>
-                                <span className='caption'>{order.totalTickets} tickets</span>
-                                {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(sumOfTickets(ticketArr))} paid by visa 0578 </p>)}
+                                <p className='fw-medium'>{purchaser(order)}</p>
+                                <span className='caption'>{order?.details?.ticketCount} tickets</span>
+                                {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(order?.total / order?.details?.ticketCount)} paid by {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand} {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4} </p>)}
                             </div>
                             {refund && (
                                 <Stack gap={1} className='mt-2'>
                                     <p>Refunded on {refund.date}</p>
-                                    <p>{formatCurrency(sumOfTickets(ticketArr))} refunded to original payment method</p>
+                                    <p>{formatCurrency(order?.total)} refunded to original payment method</p>
                                 </Stack>
                             )}
                         </Stack>
@@ -108,12 +116,12 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                 </tr>
                             </thead>
                             <tbody>
-                                {ticketArr.map((ticket, index) => (
-                                    <TicketRow key={index} orderId={order.orderId} ticket={ticket} ticketBuyer={`${order.ticketBuyer.firstName} ${order.ticketBuyer.lastName}`} marketType={order.marketType} type={order.ticketType} show={showDropdown} refund={refund} />
-                                ))}
+                                {[...Array(order?.details?.ticketCount)].map((x, i) => {
+                                        return <TicketRow key={i} orderId={order.uuid} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} type={order?.type} show={showDropdown} refund={refund} order={order} />
+                                })}
                                 <tr className='total-row'>
                                     <td colSpan={5}>Total</td>
-                                    <td className={`${showDropdown ? 'text-center' : 'text-end'}`}>{formatCurrency(sumOfTickets(ticketArr))}</td>
+                                    <td className={`${showDropdown ? 'text-center' : 'text-end'}`}>{formatCurrency(order?.total)}</td>
                                 </tr>
                             </tbody>
                         </Table>
