@@ -12,14 +12,12 @@ export default function VenuePage() {
 		setVenue
 	] = useState();
 
-	useEffect(
-		() => {
-			getVenue(id).then((res) => setVenue(res.data)).catch((err) => console.error(err));
-		},
-		[
-			id
-		]
-	);
+	useEffect(() => {
+			getVenue(Number(id))
+			.then((res) => {
+				setVenue(res.data?.find((venue) => venue.id == Number(id)))}
+			).catch((err) => console.error(err));
+	},[id]);
 
 	return (
 		<Fragment>
