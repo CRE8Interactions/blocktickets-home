@@ -20,7 +20,8 @@ export default function CreateTicketWrapper({ eventId, type }) {
         if (type) {
             getEvent(eventId)
                 .then((res) => {
-                    const ticket = res.data?.tickets.find((ticket) => ticket.name === type);
+                    const ticket = res.data?.tickets.find((ticket) => ticket?.name == type);
+                    if (!ticket) return 
                     setTicket({
                         name: ticket?.name,
                         description: ticket?.description,

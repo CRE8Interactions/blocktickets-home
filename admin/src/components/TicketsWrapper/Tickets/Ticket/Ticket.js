@@ -42,7 +42,7 @@ export default function Ticket({ ticket, handleShow }) {
             <Stack>
                 <span>{formatCurrency(ticket?.price)}</span>
             </Stack>
-            <EditDeleteDropdown handleShow={handleShow} ticket={ticket} onClick={() => navigate(`edit?type=${ticket.type}`)} />
+            <EditDeleteDropdown handleShow={handleShow} ticket={ticket} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket.type))}`)} />
         </Stack>
     );
 }

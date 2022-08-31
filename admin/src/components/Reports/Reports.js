@@ -73,8 +73,6 @@ export default function Reports({ title = "Reports", stats }) {
         setOptions({ ...options, [e.target.name]: e.target.value })
     }
 
-    console.log(stats)
-
     return (
         <section id="reports">
             <>
