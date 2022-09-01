@@ -61,7 +61,7 @@ export default function DetailsWrapper({ eventId }) {
 
                     addDetailsToEvent({ data })
                         .then((res) => { 
-                            navigate(`/myevent/${eventId}/details`) 
+                            navigate(`/myevent/${eventId}/tickets`) 
                             setAlert({
                                 show: true,
                                 varient: 'success',
