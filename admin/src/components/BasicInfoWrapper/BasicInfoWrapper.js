@@ -10,6 +10,7 @@ import { getCategories, getVenues, createEvent, getEvent, editEvent } from '../.
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
@@ -58,6 +59,13 @@ export default function BasicInfoWrapper({ eventId }) {
         displayEndTime: true
     })
 
+    const [alert, setAlert] = useState({
+        show: false,
+        variant: '',
+        message: ''
+
+    })
+
     useEffect(() => {
         getCategories()
             .then((res) => { setCategories(res?.data?.data) })
@@ -100,13 +108,36 @@ export default function BasicInfoWrapper({ eventId }) {
             data['uuid'] = eventId;
             data['venue'] = (Number(event.venue?.id));
             editEvent({ data })
-                .then((res) => console.log(res.data))
-                .catch((err) => console.error(err))
+                .then((res) => {
+                    navigate(`/myevent/${eventId}/basic-info`)
+                    setAlert({
+                        show: true,
+                        varient: 'success',
+                        message: 'Your info has been updated.'
+                    })
+                })
+                .catch((err) => {
+                    console.error(err)
+                    navigate(`/myevent/${eventId}/basic-info`)
+                    setAlert({
+                        show: true,
+                        varient: 'error',
+                        message: 'Unable to save info please try again.'
+                    })
+                })
 
         } else {
             createEvent({ data })
                 .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
-                .catch((err) => console.error(err))
+                .catch((err) => {
+                    console.error(err)
+                    navigate(`/myevent/${eventId}/basic-info`)
+                    setAlert({
+                        show: true,
+                        varient: 'error',
+                        message: 'Unable to save info please try again.'
+                    })
+                })
         }
     }
 
@@ -115,6 +146,13 @@ export default function BasicInfoWrapper({ eventId }) {
             <section>
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Basic info</h1>
+                    { alert.show && 
+                        <>
+                            <Alert variant={alert.varient} onClose={() => setAlert({show: false, variant: '', message: ''})} dismissible>
+                                {alert.message}
+                            </Alert>
+                        </>
+                    }
                 </header>
                 <Card body className='card--sm'>
                     <BasicInfo handleChange={handleChange} event={event} categories={categories} />
