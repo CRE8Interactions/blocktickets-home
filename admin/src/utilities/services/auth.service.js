@@ -60,6 +60,7 @@ const isLoggedIn = () => {
 
 const logoutUser = () => {
   sessionStorage.removeItem('user')
+  sessionStorage.removeItem('org')
 }
 
 const removeSignup = () => {

@@ -420,6 +420,7 @@ module.exports = {
 
         // Changes on Event Model
         if (event.model.singularName === 'event') {
+          console.log('Event Params ', params)
           let org = await strapi.entityService.findOne('api::organization.organization', params.data.organizationId, {
             populate: { events: true}
           });

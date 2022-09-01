@@ -382,11 +382,20 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       }
     })
 
+    const testTickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: {
+        $and: [
+          { eventId: { $eq: uuid }},
+          { on_sale_status: { $eq: 'sold' }}
+        ]
+       }
+    })
+
     let primaryTicketsSold = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === false);
     let secondaryTicketsSold = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === true);
 
     let data = {};
-    data['allTicketsSold'] = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold')?.length;
+    data['allTicketsSold'] = testTickets.length;
     data['primaryTicketsSold'] = primaryTicketsSold?.length;
     data['secondaryTicketsSold'] = secondaryTicketsSold?.length;
     data['totalTickets'] = event?.tickets?.length;
@@ -403,11 +412,10 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       return accumulator + object.cost;
     }, 0)).toFixed(2);
     data['pageViews'] = event?.page_views?.length;
-    data['totalSoldPercentage'] = (data?.allTicketsSold / data?.totalTickets) * 100;
-    data['royalties'] = 
+    data['totalSoldPercentage'] = ((data?.allTicketsSold / data?.totalTickets) * 100).toFixed(2);
     data['eventUUID'] = event?.uuid;
     data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales) + parseFloat(data.secondaryGrossSales)).toFixed(2);
-
+    console.log(data)
     return data
   }
 }));

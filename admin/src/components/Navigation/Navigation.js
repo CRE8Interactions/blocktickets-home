@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import { formatString } from '../../utilities/helpers';
@@ -18,9 +18,19 @@ import desktopLogo from '../../assets/logo.svg';
 
 import './navigation.scss';
 
-export default function Navigation({ orgs, user }) {
+export default function Navigation({ user, me }) {
     const windowSize = useWindowSize();
     const navigate = useNavigate();
+    const [org, setOrg] = useState()
+
+    useEffect(() => {
+        if (user) {
+            let org = sessionStorage.getItem('org');
+            if (org) setOrg(JSON.parse(org)[0])
+        } else {
+            setOrg('')
+        }
+    }, [user])
 
     const logo = windowSize < 992 ? mobileLogo : desktopLogo;
 
@@ -51,7 +61,7 @@ export default function Navigation({ orgs, user }) {
                             <img src={logo} alt="blocktickets" />
                         </Navbar.Brand>
                     </LinkContainer>
-                    {AuthService.isLoggedIn() &&
+                    {AuthService.isLoggedIn() && org &&
                         <>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
                             <Navbar.Collapse id="responsive-navbar-nav align-items-center">
@@ -75,7 +85,7 @@ export default function Navigation({ orgs, user }) {
                                     </ul>
                                 </Nav>
                             </Navbar.Collapse>
-                            <DropdownButton title={orgs ? orgs[0]?.name : ''} variant="info" id="org-dropdown">
+                            <DropdownButton title={org?.name} variant="info" id="org-dropdown">
                                 <Stack as="ul" gap={2}>
                                     <li>
                                         <LinkContainer to="/settings">
