@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 import UserContext from '../../context/User/User';
+import AuthService from '../../utilities/services/auth.service';
+
 import { getCategories, getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
@@ -17,7 +19,7 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
     const user = useContext(UserContext);
-    const organization = user?.orgs[0];
+    const organization = AuthService.getOrg()[0];
 
     const timezoneOpt = [
         {

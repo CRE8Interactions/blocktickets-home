@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
 import { login, getMyOrganizations } from '../../utilities/api'
-import UserContext from '../../context/User/User'
+import UserContext from '../../context/User/User';
 
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
@@ -14,7 +14,7 @@ import { Error } from '../Error'
 
 export default function LoginWrapper() {
 
-    const { setAuthenticated } = useContext(UserContext);
+    const { setAuthenticated, setOrganization } = useContext(UserContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -43,20 +43,13 @@ export default function LoginWrapper() {
                 .then((res) => {
                     AuthService.setUser(res.data);
                     setAuthenticated(res.data);
-                    // Send them back to the page they tried to visit when they were
-                    // redirected to the login page. Use { replace: true } so we don't create
-                    // another entry in the history stack for the login page.  This means that
-                    // when they get to the protected page and click the back button, they
-                    // won't end up back on the login page, which is also really nice for the
-                    // user experience.
-                    navigate(from, { replace: true });
                 })
                 .then(() => {
                     getMyOrganizations()
                         .then((res) => {
                             if (res.data.length > 0) {
                                 AuthService.setOrg(res.data)
-
+                                setOrganization(res.data)
                             } else {
                                 // navigate('/signup', { replace: true })
                                 console.error('No Org Present')
@@ -64,6 +57,15 @@ export default function LoginWrapper() {
                         })
                         .catch((err) => console.error(err))
                 })
+                .then(() => {
+                    // Send them back to the page they tried to visit when they were
+                    // redirected to the login page. Use { replace: true } so we don't create
+                    // another entry in the history stack for the login page.  This means that
+                    // when they get to the protected page and click the back button, they
+                    // won't end up back on the login page, which is also really nice for the
+                    // user experience.
+                    navigate(from, { replace: true });
+                }, [])
                 .catch((err) => {
                     setIsValid(false)
                     console.error(err)
