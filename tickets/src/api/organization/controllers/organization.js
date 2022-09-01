@@ -415,7 +415,6 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     data['totalSoldPercentage'] = ((data?.allTicketsSold / data?.totalTickets) * 100).toFixed(2);
     data['eventUUID'] = event?.uuid;
     data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales) + parseFloat(data.secondaryGrossSales)).toFixed(2);
-    console.log(data)
     return data
   }
 }));
