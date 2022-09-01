@@ -416,5 +416,87 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     data['eventUUID'] = event?.uuid;
     data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales) + parseFloat(data.secondaryGrossSales)).toFixed(2);
     return data
+  },
+  async allEventStats(ctx) {
+    const user = ctx.state.user;
+
+    // Get Organizations member belongs to
+    let organizations = await strapi.entityService.findMany('api::organization.organization', {
+      populate: {
+        members: {
+          filters: {
+            id: {
+              $eq: user.id
+            }
+          }
+        },
+        events: {
+          populate: {
+            image: true,
+            tickets: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
+    })
+    // Returns organizations which user is a member of
+    let organization = organizations.find(org => org.members.length >= 1)
+
+    let eventsData = [];
+
+    await new Promise((resolve, reject) => {
+      organization.events.map(async (event, index) => {
+        let data = {}
+        const tickets = await strapi.db.query('api::ticket.ticket').findMany({
+          where: {
+            $and: [
+              { eventId: { $eq: event?.uuid }}
+            ]
+           }
+        })
+
+        const primaryGross = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
+          return accumulator + (Number(object.cost) + Number(object.fee));
+        }, 0)).toFixed(2);
+
+        const secondaryGross = parseFloat(tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
+          return accumulator + (object.cost + object.fee);
+        }, 0)).toFixed(2);
+
+        const primaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
+          return accumulator + (object.fee);
+        }, 0)).toFixed(2);
+
+        const secondaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
+          return accumulator + (object.fee);
+        }, 0)).toFixed(2);
+  
+        data['eventName'] = event.name;
+        data['eventImage'] = event?.image?.url;
+        data['eventUUID'] = event?.uuid;
+        data['venueName'] = event?.venue?.name;
+        data['eventDate'] = event?.start;
+        data['status'] = event?.status;
+        data['primaryAvailable'] = tickets.filter((ticket) => ticket.resale == false).length;
+        data['primarySold'] = tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold').length;
+        data['primarySoldPercentage'] = data.primarySold > 0 ? ((data.primarySold / data.primaryAvailable) * 100) : 0;
+        data['primaryGross'] = Number(primaryGross).toFixed(2);
+        data['secondaryGross'] = secondaryGross;
+        data['secondaryAvailable'] = tickets.filter((ticket) => ticket.resale == true).length;
+        data['secondarySold'] = tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold').length;
+        data['secondarySoldPercentage'] = data.secondarySold > 0 ? Number((data.secondarySold / data.secondaryAvailable) * 100).toFixed(2) : 0;
+        data['royalties'] = (Number(primaryRoyalties) + Number(secondaryRoyalties)).toFixed(2)
+        eventsData.push(data)
+        if ( (index + 1 ) == organization.events.length) {
+          resolve(eventsData)
+        }
+      })
+    })
+
+    return eventsData
   }
 }));
