@@ -36,9 +36,9 @@ export default function BasicInfoWrapper({ eventId }) {
         }
     ]
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
 
     const [hasError, setHasError] = useState(false);
 

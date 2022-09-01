@@ -39,7 +39,7 @@ export default function DetailsWrapper({ eventId }) {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
     }
 
-    const handleSave = () => {;
+    const handleSave = () => {
         if (eventImg) {
             const formData = new FormData();
             formData.append(`files`, eventImg);
@@ -60,6 +60,7 @@ export default function DetailsWrapper({ eventId }) {
             let data = {};
             data['description'] = description;
             data['eventUUID'] = eventId;
+            data['image'] = event?.image?.id;
 
             addDetailsToEvent({ data })
                 .then((res) => { navigate(`/myevent/${eventId}/tickets`) })
