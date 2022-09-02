@@ -49,8 +49,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
     ] = useState([]);
 
     useEffect(() => {
-        if (price > 0 && (price < (ticketsTotalPrice / selectedTickets.length) || price > (ticketsTotalPrice / selectedTickets.length) * 100)) {
-            setLabel(`Enter amount between $${ticketsTotalPrice / selectedTickets.length} - ${(ticketsTotalPrice / selectedTickets.length) * 100}`);
+        if (price > 0 && (price < (selectedTickets[0].minResalePrice) || price > (selectedTickets[0].maxResalePrice))) {
+            setLabel(`Enter amount between $${selectedTickets[0].minResalePrice.toFixed(2)} - $${selectedTickets[0].maxResalePrice.toFixed(2)}`);
             setPriceValid(false)
         } else {
             setLabel("Price per ticket")

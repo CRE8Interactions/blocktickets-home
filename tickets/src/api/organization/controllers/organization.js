@@ -377,28 +377,26 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     const event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: uuid },
       populate: {
-        tickets: true,
         page_views: true
       }
     })
 
-    const testTickets = await strapi.db.query('api::ticket.ticket').findMany({
+    const allTickets = await strapi.db.query('api::ticket.ticket').findMany({
       where: {
         $and: [
-          { eventId: { $eq: uuid }},
-          { on_sale_status: { $eq: 'sold' }}
+          { eventId: { $eq: uuid }}
         ]
        }
     })
 
-    let primaryTicketsSold = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === false);
-    let secondaryTicketsSold = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === true);
+    let primaryTicketsSold = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === false);
+    let secondaryTicketsSold = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === true);
 
     let data = {};
-    data['allTicketsSold'] = testTickets.length;
+    data['allTicketsSold'] = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold').length;
     data['primaryTicketsSold'] = primaryTicketsSold?.length;
     data['secondaryTicketsSold'] = secondaryTicketsSold?.length;
-    data['totalTickets'] = event?.tickets?.length;
+    data['totalTickets'] = allTickets?.length;
     data['primaryGrossSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
       return accumulator + (object.cost + object.fee);
     }, 0)).toFixed(2);
@@ -448,39 +446,24 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     let eventsData = [];
 
-    await new Promise((resolve, reject) => {
-      organization.events.map(async (event, index) => {
-        let data = {}
-        const tickets = await strapi.db.query('api::ticket.ticket').findMany({
-          where: {
-            $and: [
-              { eventId: { $eq: event?.uuid }}
-            ]
-           }
-        })
-
+    const getStats = (data, tickets) => {
+      new Promise(resolve => {
         const primaryGross = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
           return accumulator + (Number(object.cost) + Number(object.fee));
         }, 0)).toFixed(2);
-
+  
         const secondaryGross = parseFloat(tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
           return accumulator + (object.cost + object.fee);
         }, 0)).toFixed(2);
-
+  
         const primaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
           return accumulator + (object.fee);
         }, 0)).toFixed(2);
-
+  
         const secondaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
           return accumulator + (object.fee);
         }, 0)).toFixed(2);
   
-        data['eventName'] = event.name;
-        data['eventImage'] = event?.image?.url;
-        data['eventUUID'] = event?.uuid;
-        data['venueName'] = event?.venue?.name;
-        data['eventDate'] = event?.start;
-        data['status'] = event?.status;
         data['primaryAvailable'] = tickets.filter((ticket) => ticket.resale == false).length;
         data['primarySold'] = tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold').length;
         data['primarySoldPercentage'] = data.primarySold > 0 ? ((data.primarySold / data.primaryAvailable) * 100) : 0;
@@ -491,12 +474,88 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         data['secondarySoldPercentage'] = data.secondarySold > 0 ? Number((data.secondarySold / data.secondaryAvailable) * 100).toFixed(2) : 0;
         data['royalties'] = (Number(primaryRoyalties) + Number(secondaryRoyalties)).toFixed(2)
         eventsData.push(data)
-        if ( (index + 1 ) == organization.events.length) {
-          resolve(eventsData)
+        resolve(data)
+      })
+      return eventsData
+    }
+      
+
+    for (let event of organization.events) {
+      let data = {}
+      data['eventName'] = event.name;
+      data['eventImage'] = event?.image?.url;
+      data['eventUUID'] = event?.uuid;
+      data['venueName'] = event?.venue?.name;
+      data['eventDate'] = event?.start;
+      data['status'] = event?.status;
+
+      let tickets = await strapi.db.query('api::ticket.ticket').findMany({
+        where: {
+          $and: [
+            { eventId: { $eq: event?.uuid }}
+          ]
         }
       })
-    })
+
+      let info = await getStats(data, tickets);
+    }
 
     return eventsData
+  },
+  async getTicketDetails(ctx) {
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const tickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: {
+        $and: [
+          { eventId: { $eq: uuid }}
+        ]
+       }
+    })
+
+    const getDescription = (ticket) => {
+      if (moment(ticket?.sales_start) < moment()) {
+          return `Ends ${moment(ticket?.sales_end).format('MMM DD, yyyy')} at ${moment(ticket?.sales_end).format('h:mm A')}`
+      } else if (moment(ticket?.sales_start) > moment()) {
+          return `Starts ${moment(ticket?.sales_start).format('MMM DD, yyyy')} at ${moment(ticket?.sales_start).format('h:mm A')}`
+      } else if (moment(ticket?.sales_end) >= moment()) {
+          return ''
+      }
+    }
+
+    const getStatus = (ticket) => {
+        if (moment(ticket.sales_start) > moment()) {
+            return 'scheduled'
+        } else if (moment(ticket?.sales_start) < moment()) {
+            return 'on_sale'
+        } else if (moment(ticket?.sales_end) >= moment()) {
+            return 'sale_ended'
+        }
+    }
+
+    let ticketGroups = []
+
+    tickets.map(t => {
+      let index = ticketGroups.findIndex((e) => e.name === t.name);
+      if (index > -1) return;
+      ticketGroups.push({
+        name: t.name,
+        count: tickets.filter((ticket) => ticket.name === t.name).length,
+        sold: tickets.filter((ticket) => ticket.name === t.name && ticket.on_sale_status === 'sold').length,
+        price: tickets.find((ticket) => ticket.name === t.name).cost,
+        salesStart: tickets.find((ticket) => ticket.name === t.name).sales_start,
+        salesEnd: tickets.find((ticket) => ticket.name === t.name).sales_end,
+        eventId: tickets.find((ticket) => ticket.name === t.name).eventId,
+        type: tickets.find((ticket) => ticket.name === t.name).name,
+        status: getStatus(tickets.find((ticket) => ticket.name === t.name)),
+        desc: getDescription(tickets.find((ticket) => ticket.name === t.name)),
+        totalTicketsSold: tickets?.filter((ticket) => ticket.on_sale_status === 'sold').length,
+        totalTickets: tickets?.length
+      })    
+    })
+
+    return ticketGroups
   }
 }));
