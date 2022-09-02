@@ -133,3 +133,7 @@ export const inactivateTickets = async (data) => {
 export const upload = async (data) => {
   return instance.post('/upload/', data)
 }
+
+export const getTicketDetails = async (uuid) => {
+  return instance.get(`organizations/all-ticket-details?uuid=${uuid}`)
+}

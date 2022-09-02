@@ -24,14 +24,13 @@ export default function Tickets({ tickets }) {
                     {tickets && tickets.length > 0 ? (
                         <>
                             <Stack gap={2} as="ul" className="pb-4 tickets">
-                                {(tickets).map((ticket, id) => {
-                                    if (ticket.show) return <Ticket key={id} ticket={ticket} handleShow={handleShow} />
-                                    }
+                                {(tickets).map((ticket, id) => 
+                                    <Ticket key={id} ticket={ticket} handleShow={handleShow} />
                                 )}
                             </Stack>
                             <Stack direction='horizontal' className='pt-3 split-row'>
                                 <span className='fw-medium normal'>Event capacity</span>
-                                <span className='fw-medium normal'>{tickets[0]?.totalSold}/{tickets[0]?.capacity}</span>
+                                <span className='fw-medium normal'>{tickets[0]?.totalTicketsSold}/{tickets[0]?.totalTickets}</span>
                             </Stack>
 
                         </>

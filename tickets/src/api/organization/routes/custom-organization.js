@@ -65,5 +65,10 @@ module.exports = {
       path: '/organizations/all-event-stats',
       handler: 'organization.allEventStats'
     },
+    {
+      method: 'GET',
+      path: '/organizations/all-ticket-details',
+      handler: 'organization.getTicketDetails'
+    },
   ]
 }

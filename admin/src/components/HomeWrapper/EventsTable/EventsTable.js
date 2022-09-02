@@ -24,8 +24,6 @@ export default function EventsTable({ type, events }) {
 
     const handleShow = () => setShow(true);
 
-    let sum;
-
     if (events && type === 'published') events = events.filter((event) => event?.status === 'on_sale')
     if (events && (type === 'draft')) events = events.filter((event) => (event?.status === 'unpublished' || event?.status === 'scheduled'))
     if (events && type === 'past') events = events.filter((event) => event?.status === 'published' && moment(event?.start) < moment())

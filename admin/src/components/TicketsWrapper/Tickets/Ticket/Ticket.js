@@ -30,19 +30,19 @@ export default function Ticket({ ticket, handleShow }) {
     return (
         <Stack direction='horizontal' as="li" className='list-item ticket-row'>
             <Stack>
-                <h2 className='normal'>{ticket.type}</h2>
+                <h2 className='normal'>{ticket?.name}</h2>
                 <Stack direction='horizontal' gap={2}>
-                    <Badge bg={getTicketStatusColor(ticket.status)} className='text-uppercase'>{formatTicketStatus(ticket.status)}</Badge>
-                    <span className='text-muted small'>{ticket.desc}</span>
+                    <Badge bg={getTicketStatusColor(ticket?.status)} className='text-uppercase'>{formatTicketStatus(ticket?.status)}</Badge>
+                    <span className='text-muted small'>{ticket?.desc}</span>
                 </Stack>
             </Stack>
             <Stack>
-                <span>{ticket.ticketsSold}</span>
+                <span>{ticket?.sold}/{ticket?.count}</span>
             </Stack>
             <Stack>
                 <span>{formatCurrency(ticket?.price)}</span>
             </Stack>
-            <EditDeleteDropdown handleShow={handleShow} ticket={ticket} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket.type))}`)} />
+            <EditDeleteDropdown handleShow={handleShow} ticket={ticket} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket?.name))}`)} />
         </Stack>
     );
 }

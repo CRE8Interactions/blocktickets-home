@@ -7,7 +7,7 @@ export default function HomePage() {
     const [eventStatus, setEventStatus] = useState()
     useEffect(() => {
         getAllEventStats()
-            .then((res) => { setEventStatus(res.data) })
+            .then((res) => { setEventStatus(res.data); console.log(res.data) })
             .catch((err) => console.error(err))
     }, [])
     return (

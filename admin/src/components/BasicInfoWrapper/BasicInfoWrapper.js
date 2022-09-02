@@ -86,6 +86,10 @@ export default function BasicInfoWrapper({ eventId }) {
             .catch((err) => console.error(err))
     }, [])
 
+    useEffect(() => {
+        // Future event
+    }, [event])
+
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
     }
@@ -106,7 +110,7 @@ export default function BasicInfoWrapper({ eventId }) {
         data['hide_end_date'] = !event?.displayEndTime;
         if (eventId) {
             data['uuid'] = eventId;
-            data['venue'] = (Number(event.venue?.id));
+            data['venue'] = (Number(event.venue));
             editEvent({ data })
                 .then((res) => {
                     navigate(`/myevent/${eventId}/basic-info`)
@@ -123,8 +127,8 @@ export default function BasicInfoWrapper({ eventId }) {
                         show: true,
                         varient: 'error',
                         message: 'Unable to save info please try again.'
-                    })
                 })
+            })
 
         } else {
             createEvent({ data })
