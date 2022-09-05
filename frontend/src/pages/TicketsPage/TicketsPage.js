@@ -40,6 +40,7 @@ export default function TicketsPage() {
 			.then((res) => {
 				setTickets(res.data?.tickets)
 				setEvent(res.data?.event)
+                setListings(res.data?.listings)
 			})
 			.catch((err) => console.error(err))
 	}, [id])

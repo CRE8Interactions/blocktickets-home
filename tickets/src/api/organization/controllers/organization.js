@@ -339,7 +339,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     let data = {};
     data['grossSales'] = parseFloat(orders?.reduce((accumulator, object) => {
-      return accumulator + object.gross;
+      return accumulator + object.total;
     }, 0)).toFixed(2);
     data['count'] = orders?.length;
     data['attendeesCount'] = orders?.reduce((accumulator, object) => {
@@ -369,10 +369,32 @@ module.exports = createCoreController('api::organization.organization', ({ strap
   },
   async getEventStats(ctx) {
     const user = ctx.state.user;
+    let dateFrom;
 
     const {
-      uuid
+      uuid,
+      range
     } = ctx.request.query;
+
+    switch(range) {
+      case '24_hrs':
+        dateFrom = moment().subtract(1, 'd').format()
+        break;
+      case '7_days':
+        dateFrom = moment().subtract(7, 'd').format()
+        break;
+      case '14_days':
+        dateFrom = moment().subtract(14, 'd').format()
+        break;
+      case '30_days':
+        dateFrom = moment().subtract(30, 'd').format()
+        break;
+      case 'all':
+        dateFrom = moment().subtract(1, 'y').format()
+        break;
+      default:
+        dateFrom = moment().subtract(1, 'd').format()
+    }
 
     const event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: uuid },
@@ -389,30 +411,95 @@ module.exports = createCoreController('api::organization.organization', ({ strap
        }
     })
 
+    const orders = await strapi.db.query('api::order.order').findMany({
+      where: {
+        $and: [
+          { event: event.id }
+        ]
+       },
+       populate: {
+        tickets: true
+       }
+    })
+
+    const last24HrOrders = orders.filter(order => moment(order.processedAt).format() >= moment().subtract(1, 'd').format())
+
+    const last24HrPageViews = event.page_views.filter(view => moment(view.seen).format() >= moment().subtract(1, 'd').format()).length
+
+    const last24HrGrossSales = parseFloat(last24HrOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.total);
+    }, 0)).toFixed(2);
+
+    const last24HrTicketsSold = parseFloat(last24HrOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.tickets);
+    }, 0)).toFixed(2);
+
+    const getPercentage = (v1, v2) => {
+      let change = v2 - v1;
+      let percentage = change / v1;
+      return (percentage * 100).toFixed(0);
+    }
+
+    const queryOrders = orders.filter(order => moment(order.processedAt).format() >= dateFrom && order.status === 'complete')
+
+    const queryOrdersGross = parseInt(queryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.total;
+    }, 0));
+
+    const queryTicketLength = parseInt(queryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.tickets.length;
+    }, 0));
+
+    const listings = await strapi.db.query('api::listing.listing').findMany({
+      where: {
+        $and: [
+          { event: event.id },
+          { status: { $eq: 'new' } }
+        ]
+       },
+       populate: {
+        tickets: true
+       }
+    })
+
+    let primaryOrders = orders.filter(order => order.type !== 'resale')
+    let secondaryOrders = orders.filter(order => order.type === 'resale')
+
     let primaryTicketsSold = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === false);
     let secondaryTicketsSold = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === true);
 
     let data = {};
     data['allTicketsSold'] = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold').length;
+    data['ticketSoldByRange'] = parseInt(queryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.tickets.length;
+    }, 0));
+    data['ticketSoldByRangeChange'] = getPercentage(Number(data.ticketSoldByRange),  Number(last24HrTicketsSold.length));
     data['primaryTicketsSold'] = primaryTicketsSold?.length;
     data['secondaryTicketsSold'] = secondaryTicketsSold?.length;
     data['totalTickets'] = allTickets?.length;
-    data['primaryGrossSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + (object.cost + object.fee);
+    data['primaryGrossSales'] = parseFloat(primaryOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.total);
     }, 0)).toFixed(2);
-    data['secondaryGrossSales'] = parseFloat(secondaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + (object.cost + object.fee);
+    data['primaryGrossSalesRangeChange'] = getPercentage(parseFloat(data.primaryGrossSales), parseFloat(queryOrdersGross))
+    data['secondaryGrossSales'] = parseFloat(secondaryOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.total);
     }, 0)).toFixed(2);
-    data['primaryNetSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + object.cost;
+    data['primaryNetSales'] = parseFloat(primaryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.total;
     }, 0)).toFixed(2);
-    data['secondaryNetSales'] = parseFloat(secondaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + object.cost;
+    data['secondaryNetSales'] = parseFloat(secondaryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.total;
     }, 0)).toFixed(2);
     data['pageViews'] = event?.page_views?.length;
+    data['pageViewsRangeChange'] = getPercentage(event?.page_views?.length, last24HrPageViews);
     data['totalSoldPercentage'] = ((data?.allTicketsSold / data?.totalTickets) * 100).toFixed(2);
+    data['totalSoldQueryPercentage'] = getPercentage(data?.allTicketsSold, queryTicketLength);
     data['eventUUID'] = event?.uuid;
-    data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales) + parseFloat(data.secondaryGrossSales)).toFixed(2);
+    data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales)).toFixed(2);
+    data['ticketsListed'] = parseInt(listings?.reduce((accumulator, object) => {
+      return accumulator + object.tickets.length;
+    }, 0));
+
     return data
   },
   async allEventStats(ctx) {
@@ -446,14 +533,18 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     let eventsData = [];
 
-    const getStats = (data, tickets) => {
+    const getStats = (data, tickets, orders) => {
+
+      let primaryOrders = orders.filter(order => order.type !== 'resale')
+      let secondaryOrders = orders.filter(order => order.type === 'resale')
+
       new Promise(resolve => {
-        const primaryGross = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
-          return accumulator + (Number(object.cost) + Number(object.fee));
+        const primaryGross = parseFloat(primaryOrders?.reduce((accumulator, object) => {
+          return accumulator + (object.total);
         }, 0)).toFixed(2);
   
-        const secondaryGross = parseFloat(tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
-          return accumulator + (object.cost + object.fee);
+        const secondaryGross = parseFloat(secondaryOrders?.reduce((accumulator, object) => {
+          return accumulator + (object.total);
         }, 0)).toFixed(2);
   
         const primaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
@@ -489,6 +580,14 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       data['eventDate'] = event?.start;
       data['status'] = event?.status;
 
+      const orders = await strapi.db.query('api::order.order').findMany({
+        where: {
+          $and: [
+            { event: event.id }
+          ]
+         }
+      })
+  
       let tickets = await strapi.db.query('api::ticket.ticket').findMany({
         where: {
           $and: [
@@ -497,7 +596,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         }
       })
 
-      let info = await getStats(data, tickets);
+      let info = await getStats(data, tickets, orders);
     }
 
     return eventsData

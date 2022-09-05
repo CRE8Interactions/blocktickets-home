@@ -20,7 +20,7 @@ module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
     if (listing) {
       let totalTicketPrices = listing.askingPrice + listing.tickets.map(ticket => ticket.fee).reduce((a, b) => a + b) + listing.tickets.map(ticket => ticket.facilityFee).reduce((a, b) => a + b) + 2.5 + 4.35;
       let stripePriceConversion = (totalTicketPrices * 100).toFixed()
-
+      console.log(listing)
       paymentIntent = await stripe.paymentIntents.create({
         amount: stripePriceConversion,
         currency: 'usd',

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { formatCurrency, formatNumber } from '../../utilities/helpers';
+import { getOrders } from '../../utilities/api';
+import { useParams } from 'react-router-dom';
 
 import Stack from 'react-bootstrap/Stack';
 
@@ -13,6 +15,8 @@ import './attendeesListWrapper.scss';
 export default function AttendeesListWrapper() {
 
     const [exportTo, setExportTo] = useState('1')
+
+    const { uuid } = useParams()
 
     // search query
     const [
@@ -28,6 +32,19 @@ export default function AttendeesListWrapper() {
     const handleSearch = (query) => {
         setQuery(query)
     }
+
+    const [attendees, setAttendees] = useState({
+        attendeesCount: 0,
+        count: 0,
+        grossSales: 0,
+        orders: []
+    })
+
+    useEffect(() => {
+        getOrders(uuid)
+            .then((res) => setAttendees(res.data))
+            .catch((err) => console.error(err))
+    }, [])
 
     return (
         <>
@@ -47,20 +64,20 @@ export default function AttendeesListWrapper() {
                         <Stack as="ul" direction="horizontal" className="horizontal-list">
                             <li>
                                 Gross sales
-                                <span>{formatCurrency(10000)}</span>
+                                <span>{formatCurrency(attendees.grossSales)}</span>
                             </li>
                             <li>
                                 Orders
-                                <span>{formatNumber(50)}</span>
+                                <span>{formatNumber(attendees.count)}</span>
                             </li>
                             <li>
                                 Attendees
-                                <span>{formatNumber(10)}</span>
+                                <span>{formatNumber(attendees.attendeesCount)}</span>
                             </li>
                         </Stack>
                     </Stack>
                 </header>
-                <Attendees />
+                <Attendees attendees={attendees.orders} />
             </section>
         </>
     );

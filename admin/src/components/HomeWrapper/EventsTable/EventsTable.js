@@ -44,7 +44,10 @@ export default function EventsTable({ type, events }) {
         }
     }
 
-    const calculatePercentage = (number) => {
+    const calculatePercentage = (event, type) => {
+        let number = 0;
+        if (type === 'primary') { number = event?.primarySoldPercentage.toFixed(2) }
+        if (type === 'secondary') { number = event?.secondarySoldPercentage }
         return (
             <>
                 <ProgressBar now={number} />
@@ -84,7 +87,7 @@ export default function EventsTable({ type, events }) {
                                     <Badge bg='light' className="badge-label">{event?.primarySold} / {event?.primaryAvailable}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
-                                            { calculatePercentage(event?.primarySoldPercentage.toFixed(2)) }
+                                            { calculatePercentage(event, 'primary') }
                                         </Stack>)}
                                 </Stack>
                             </td>
@@ -102,7 +105,7 @@ export default function EventsTable({ type, events }) {
                                     <Badge bg='light' className="badge-label">{event?.secondarySold} / {event?.secondaryAvailable}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
-                                            { calculatePercentage(event?.secondarySoldPercentage.toFixed(2)) }
+                                            { calculatePercentage(event, 'secondary') }
                                         </Stack>
                                     )}
                                 </Stack>

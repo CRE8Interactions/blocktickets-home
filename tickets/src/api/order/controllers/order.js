@@ -45,7 +45,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       fees = Number(parseFloat((cart.listing.tickets[0].fee * cart.listing.tickets.length) + 5.00).toFixed(2))
       total = (totalTicketPrices + fees).toFixed(2)
       gross = totalTicketPrices
-      eventId = cart.listing.event.id
+      eventId = cart.listing.event.uuid
 
       tickets = await strapi.db.query('api::ticket.ticket').findMany({
         where: {
@@ -70,7 +70,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let orderEvent = await strapi.db.query('api::event.event').findOne({
       where: { uuid: eventId }
     })
-    
 
     let order = await strapi.db.query('api::order.order').create({
       data: {
@@ -85,7 +84,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         total,
         gross,
         details: cart,
-        paymentIntentId
+        paymentIntentId,
+        type: cart?.listing ? 'resale' : 'primary'
       },
     });
 
@@ -147,8 +147,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
               id: ticket.id,
             },
             data: {
-              on_sale_status: 'sold',
-              resale: false
+              on_sale_status: 'sold'
             },
           });
         })

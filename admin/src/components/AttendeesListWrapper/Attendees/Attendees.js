@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { formatOrderId, formatString, formatCurrency } from '../../../utilities/helpers';
+import moment from 'moment';
 
 import Table from 'react-bootstrap/Table'
 
-export default function Attendees() {
+export default function Attendees({attendees}) {
 
     return (
         <div className="full-width-table table-container">
@@ -37,34 +38,36 @@ export default function Attendees() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {attendees && attendees?.map((attendee, index) => {
+                        return (
+                            <tr key={index}>
                         <td>
-                            {formatOrderId(19331942333743)}
-                        </td>
-                        <td>
-                            Feb 12, 2022 at 3:43pm (EST)
-                        </td>
-                        <td className='text-capitalize'>
-                            Harrison
-                        </td>
-                        <td className='text-capitalize'>
-                            Cogan
+                            {attendee.orderId}
                         </td>
                         <td>
-                            harrison.cogan@gmail.com
+                            {moment(attendee.processedAt).format('MMM DD, YYYY')} at {moment(attendee.processedAt).format('h:mma')} (EST)
                         </td>
-                        <td>1</td>
                         <td className='text-capitalize'>
-                            Transferred
+                            {attendee.users_permissions_user.firstName}
+                        </td>
+                        <td className='text-capitalize'>
+                        {attendee.users_permissions_user.lastName}
+                        </td>
+                        <td>
+                        {attendee.users_permissions_user.email}
+                        </td>
+                        <td>{attendee.details.ticketCount}</td>
+                        <td className='text-capitalize'>
+                            {attendee.type === 'resale' ? 'Transfer' : 'Purchase'}
                         </td>
                         <td className='text-capitalize'>
                             {formatString('general_admission')}
                         </td>
                         <td className='text-capitalize'>
-                            Primary
+                        {attendee.type === 'resale' ? 'Secondary' : 'Primary'}
                         </td>
                         <td>
-                            {formatCurrency(100)}
+                            {formatCurrency(attendee.total)}
                         </td>
                         <td>
                             {formatCurrency(20)}
@@ -81,8 +84,8 @@ export default function Attendees() {
                         <td>
                             Attending
                         </td>
-                        <td>Visa</td>
-                        <td>1245</td>
+                        <td>{attendee?.intentDetails?.charges.data[0]?.payment_method_details.card.brand}</td>
+                        <td>{attendee?.intentDetails?.charges.data[0]?.payment_method_details.card.last4}</td>
                         <td>United States</td>
                         <td>Lewisville</td>
                         <td>Texas</td>
@@ -90,6 +93,8 @@ export default function Attendees() {
                         <td>Male</td>
                         <td>24</td>
                     </tr>
+                        )
+                    })}
                 </tbody>
             </Table>
         </div>
