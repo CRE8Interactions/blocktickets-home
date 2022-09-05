@@ -52,8 +52,8 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     ] = useState(0)
 
     const [
-        gaTicket,
-        setGaTicket
+        gaTickets,
+        setGaTickets
     ] = useState({})
 
     const [
@@ -74,12 +74,15 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     const [showGa, setShowGa] = useState(true);
 
     useEffect(() => {
-        let count = []
-        tickets?.tickets?.map((ticket) => count.push(ticket.availableCount))
-        setGaTicketsAvailable(count.reduce((a,v) => a + v ,0))
-        setAvailableTickets(tickets?.tickets)
+        const availableCountGA = parseInt(tickets?.tickets?.filter((ticket) => ticket.generalAdmission === true)?.reduce((accumulator, object) => {
+            return accumulator + (object.availableCount);
+        }, 0));
 
-        setGaTicket(tickets?.generalAdmissionTicket);
+        const gaTickets = tickets?.tickets?.filter((ticket) => ticket.generalAdmission === true)
+
+        setGaTicketsAvailable(availableCountGA)
+        setGaTickets(gaTickets)
+        setAvailableTickets(tickets?.tickets)
         setResaleTickets(tickets?.reSaleTickets)
         setListings(tickets.listings);
         if (!tickets?.tickets) return;
@@ -96,24 +99,28 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
         setSliderValues([lowestPrice, higestPrice])
         setOriginalValues([lowestPrice, higestPrice])
-    }, [tickets]);
+    }, [tickets, gaTicketsAvailable]);
 
     useEffect(
         () => {
             // if no ticket type is selected, display filter message 
             if (!tickets || !tickets.listings) return;
+            // console.log('Filtered ', tickets)
+            // console.log('SV0 ', sliderValues[0])
+            // console.log('SV1 ', sliderValues[1])
+            // console.log('GA Tickets ', gaTickets)
             let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && (listing.askingPrice + listing.tickets[0].fee) >= sliderValues[0] && (listing.askingPrice + listing.tickets[0].fee) <= sliderValues[1]);
             setListings(filteredlisting);
-            if (tickets.generalAdmissionTicket && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) >= sliderValues[0] && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) <= sliderValues[1] && ticketFilters.standard) {
-                setShowGa(true)
-                setFilteredTicketCount(1)
-            } else if (tickets.listings && ticketFilters.resale) {
-                setShowGa(false)
-                if (filteredlisting.length === 0) setFilteredTicketCount(0)
-                if (filteredlisting.length > 0) setFilteredTicketCount(1)
-            } else if (!ticketFilters.standard && !ticketFilters.resale) {
-                setFilteredTicketCount(0)
-            }
+            // if (tickets.generalAdmissionTicket && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) >= sliderValues[0] && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) <= sliderValues[1] && ticketFilters.standard) {
+            //     setShowGa(true)
+            //     setFilteredTicketCount(1)
+            // } else if (tickets.listings && ticketFilters.resale) {
+            //     setShowGa(false)
+            //     if (filteredlisting.length === 0) setFilteredTicketCount(0)
+            //     if (filteredlisting.length > 0) setFilteredTicketCount(1)
+            // } else if (!ticketFilters.standard && !ticketFilters.resale) {
+            //     setFilteredTicketCount(0)
+            // }
         },
         [
             sliderValues, ticketCount, ticketFilters
@@ -134,7 +141,7 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
     const handleNext = (ticket, listing = {}) => {
         if (ticket && ticket.on_sale_status === 'available') handleClick('confirmation', ticket, null)
-        // if (listing && !ticket) handleClick('confirmation', null, listing)
+        if (listing && !ticket) handleClick('confirmation', null, listing)
     }
 
     const disableSelect = (element) => {
@@ -205,6 +212,10 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                                                            return <Ticket ticket={ticket} handleNext={handleNext} ticketFilters={ticketFilters} key={index} />
                                                           })
                                                         }
+                                                        <>
+                                                            {listings && listings.map((listing, index) => <Ticket key={index} handleNext={handleNext} ticketFilters={ticketFilters} listing={listing} />)
+                                                            }
+                                                        </>
                                                     </ListGroup>
                                                 ) : (
                                                     <MyTickets />

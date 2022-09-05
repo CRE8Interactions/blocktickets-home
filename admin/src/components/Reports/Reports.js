@@ -12,7 +12,7 @@ import { Chart } from './Chart';
 
 import './reports.scss';
 
-export default function Reports({ title = "Reports", stats }) {
+export default function Reports({ title = "Reports", stats, setRange }) {
     const viewsOpt = [
         {
             label: "Last 24 hrs",
@@ -57,6 +57,13 @@ export default function Reports({ title = "Reports", stats }) {
         setKey
     ] = useState();
 
+    useEffect(() => {
+        setRange({
+            timePeriod: options.view,
+            type: options.sales
+        })
+    }, [options])
+
     // set tab key when sales option changes
     useEffect(() => {
         const initialState = options.sales == "primary" ? 'net' : 'royalties';
@@ -71,6 +78,11 @@ export default function Reports({ title = "Reports", stats }) {
 
     const handleOption = e => {
         setOptions({ ...options, [e.target.name]: e.target.value })
+    }
+
+    const getDirection = (value) => {
+        if (Math.sign(value) === 1) return 'up' 
+        return 'down'
     }
 
     return (
@@ -101,12 +113,12 @@ export default function Reports({ title = "Reports", stats }) {
                                     <>
                                         <Nav.Item as="li">
                                             <Nav.Link eventKey="net">
-                                                <CustomTab title='Net sales' total={stats?.primaryNetSales} stat="up" statAmount="1.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                                <CustomTab title='Net sales' total={stats?.primaryNetSales} stat={getDirection(stats?.primaryGrossSalesRangeChange)} statAmount={stats?.primaryGrossSalesRangeChange} view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item as="li">
                                             <Nav.Link eventKey="gross">
-                                                <CustomTab title='Gross sales' total={stats?.primaryGrossSales} stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)} `} sales={`${handleText(options.sales, salesOpt)}`} />
+                                                <CustomTab title='Gross sales' total={stats?.primaryGrossSales} stat={getDirection(stats?.primaryGrossSalesRangeChange)} statAmount={stats?.primaryGrossSalesRangeChange} view={`${handleText(options.view, viewsOpt)} `} sales={`${handleText(options.sales, salesOpt)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                     </>
@@ -119,7 +131,7 @@ export default function Reports({ title = "Reports", stats }) {
                                         </Nav.Item>
                                         <Nav.Item as="li" className="listed">
                                             <Nav.Link eventKey="listed">
-                                                <CustomTab title='Tickets listed' amount="0" stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                                <CustomTab title='Tickets listed' amount={stats?.ticketsListed} stat="up" statAmount="36" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                             </Nav.Link>
                                         </Nav.Item>
                                     </>
@@ -127,12 +139,12 @@ export default function Reports({ title = "Reports", stats }) {
                                 }
                                 <Nav.Item as="li">
                                     <Nav.Link eventKey="tickets" className='tickets-sold'>
-                                        <CustomTab title='Tickets sold' amount={stats?.primaryTicketsSold} stat="up" statAmount="23" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <CustomTab title='Tickets sold' amount={stats?.primaryTicketsSold} stat={getDirection(stats?.totalSoldQueryPercentage)} statAmount={stats?.totalSoldQueryPercentage} view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
                                     <Nav.Link eventKey="views">
-                                        <CustomTab title='Page views' amount={stats?.pageViews} stat="down" statAmount="0.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <CustomTab title='Page views' amount={stats?.pageViews} stat={getDirection(stats?.pageViewsRangeChange)} statAmount={stats?.pageViewsRangeChange} view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>
@@ -141,7 +153,7 @@ export default function Reports({ title = "Reports", stats }) {
                             <Tab.Content>
                                 <Tab.Pane eventKey="net">
                                     <Card body>
-                                        <Chart title='Net sales' total={stats?.primaryNetSales} stat="up" statAmount="1.6" view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
+                                        <Chart title='Net sales' total={stats?.primaryNetSales} stat={getDirection(stats?.primaryGrossSalesRangeChange)} statAmount={stats?.primaryGrossSalesRangeChange} view={`${handleText(options.view, viewsOpt)}`} sales={`${handleText(options.sales, salesOpt)}`} />
                                     </Card>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="gross">

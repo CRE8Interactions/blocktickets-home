@@ -15,7 +15,7 @@ export default function OrderPreview() {
     let ticketCount;
     let ticketType;
 
-    if (cart.listing) { eventId = cart.listing.event.id; ticketCount = cart.listing.tickets.length; ticketType = 'Resale • General Admission' };
+    if (cart.listing) { eventId = cart.listing.event.uuid; ticketCount = cart.listing.tickets.length; ticketType = 'Resale • General Admission' };
     if (cart.ticket) { eventId = cart.ticket.eventId; ticketCount = cart?.ticketCount; ticketType = cart.ticket?.resale ? 'Resale • General Admission' : 'General Admission' }
 
     useEffect(() => {

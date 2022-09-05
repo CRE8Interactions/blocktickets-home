@@ -5,26 +5,19 @@ import { Routes, Route, useParams } from 'react-router-dom';
 
 export default function MyEventsPage() {
     let { uuid } = useParams();
-    const [event, setEvent] = useState()
-    const [orders, setOrders] = useState()
     const [stats, setStats] = useState()
+    const [range, setRange] = useState({
+        timePeriod: '24_hrs',
+        type: 'primary'
+    })
 
     useEffect(() => {
-        getEvent(uuid)
-        .then((res) => {
-            setEvent(res.data)
-        })
-        .catch(err => console.error(err))
-
-        getOrders(uuid)
-            .then((res) => setOrders(res.data))
-            .catch((err) => console.error(err))
-
-        getEventStats(uuid)
+        getEventStats(uuid, range.timePeriod)
             .then((res) => setStats(res.data))
             .catch((err) => console.error(err))
-    }, [])
+    }, [range])
+
     return (
-        <DashboardWrapper event={event} orders={orders} stats={stats} />
+        <DashboardWrapper stats={stats} setRange={setRange} />
     )
 }

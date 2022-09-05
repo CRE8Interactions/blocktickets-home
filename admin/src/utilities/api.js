@@ -102,8 +102,8 @@ export const getEvent = async (uuid) => {
   return instance.get(`/organizations/event?uuid=${uuid}`)
 }
 
-export const getEventStats = async (uuid) => {
-  return instance.get(`/organizations/event-stats?uuid=${uuid}`)
+export const getEventStats = async (uuid, range = '') => {
+  return instance.get(`/organizations/event-stats?uuid=${uuid}&range=${range}`)
 }
 
 export const getAllEventStats = async (uuid) => {
