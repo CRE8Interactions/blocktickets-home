@@ -10,9 +10,11 @@ import './ticketBreakdown.scss';
 export default function TicketBreakdownModal({ show, handleClose, ticket }) {
 
     const [totals, setTotals] = useState();
+    const [yourTotals, setYourTotals] = useState();
 
     useEffect(() => {
         setTotals(parseFloat(ticket?.price) + parseFloat(ticket?.fee) + 2 + 3 + 5)
+        setYourTotals(parseFloat(ticket?.price) + 3)
     }, [ticket])
 
     return (
@@ -64,7 +66,7 @@ export default function TicketBreakdownModal({ show, handleClose, ticket }) {
                             </Stack>
                             <Stack as="li" direction="horizontal" className="mt-2 split-row">
                                 <span className='fw-medium'>Total</span>
-                                <span className='fw-medium'>${formatCurrency((ticket?.price) + parseFloat(ticket?.fee))}</span>
+                                <span className='fw-medium'>{formatCurrency(yourTotals)}</span>
                             </Stack>
                         </ul>
                     </li>

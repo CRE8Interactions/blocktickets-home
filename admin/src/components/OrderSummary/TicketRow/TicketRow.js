@@ -42,7 +42,7 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
                             <ul>
                                 {!refund && (
                                     <li>
-                                        <LinkContainer to={`refund?order=${orderId}&ticket=${ticket.id}`}>
+                                        <LinkContainer to={`refund?order=${orderId}&ticket=${ticket?.id}`}>
                                             <Dropdown.Item className="btn-refund">
                                                 Refund ticket
                                             </Dropdown.Item>
@@ -50,7 +50,7 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
                                     </li>
                                 )}
                                 <li>
-                                    <LinkContainer to={`attendees-report?order=${orderId}&ticket=${ticket.id}`}>
+                                    <LinkContainer to={`attendees-report?order=${orderId}&ticket=${ticket?.id}`}>
                                         <Dropdown.Item className="btn-view">
                                             View attendees report
                                         </Dropdown.Item>

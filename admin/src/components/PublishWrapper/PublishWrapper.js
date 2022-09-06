@@ -29,6 +29,8 @@ export default function PublishWrapper({ event }) {
         let data = {};
         data['publishType'] = publishType ? publishType : 1;
         data['publishDate'] = moment(publishDate).format();
+        // Remove tickets so payload isn't to large
+        delete event?.tickets;
         data['event'] = event;
 
         publishEvent({ data })

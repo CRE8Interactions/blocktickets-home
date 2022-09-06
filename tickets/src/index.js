@@ -428,7 +428,6 @@ module.exports = {
               events: [...org.events, result]
             }
           })
-          console.log('Organization ', organization)
         }
 
         // Changes on Invite Model

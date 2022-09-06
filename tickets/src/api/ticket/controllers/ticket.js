@@ -152,9 +152,23 @@ module.exports = createCoreController('api::ticket.ticket', ({
       where: {
         $and: [
           { eventId: eventUUID },
-          { on_sale_status: { $in: 'available' }},
-          { isActive: { $eq: true }}
+          { on_sale_status: { $in: ['available'] }},
+          { isActive: { $eq: true }},
+          { sales_end: { $gte: new Date()}}
         ]
+      }
+    });
+
+    let listings = await strapi.db.query('api::listing.listing').findMany({
+      where: {
+        $and: [
+          { event: event.id },
+          { status: { $eq: 'new' }}
+        ]
+      },
+      populate: {
+        tickets: true,
+        event: true
       }
     });
 
@@ -182,6 +196,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
     data['event'] = event;
     data['tickets'] = ticketTypes;
     data['scheduledCount'] = eventTickets?.filter((t) => moment(t?.sales_start) >= moment()).length;
+    data['listings'] = listings;
 
     return data
   }

@@ -351,7 +351,7 @@ export default function SignUpWrapper() {
                     <SuccessContainer>
                         <h1 className='heading'>Your account has been successfully created!</h1>
                         <SuccessDisclaimer />
-                        <Link to="/myevent/123" className="btn btn-primary btn-next btn-lg w-100">Go to creator panel</Link>
+                        <Link to="/" className="btn btn-primary btn-next btn-lg w-100">Go to creator panel</Link>
                     </SuccessContainer>
                 </div>
             )}

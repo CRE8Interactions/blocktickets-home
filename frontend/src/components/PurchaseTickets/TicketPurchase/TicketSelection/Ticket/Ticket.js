@@ -31,12 +31,12 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
     }
 
     if (listing) {
-        // let prices = ticketPrices(ticket, listing);
-        // ticketPrice = `${prices.ticketCost} ea`;
-        // ticketName = prices.ticketName;
-        // ticketType = `Resale ${listing.tickets.length} Tickets`;
-        // ticketFee = prices.totalFees;
-        // ticketPriceWithFees = prices.ticketCostWithFees;
+        let prices = ticketPrices(ticket, listing);
+        ticketPrice = `${prices.ticketCost} ea`;
+        ticketName = prices.ticketName;
+        ticketType = `Resale ${listing.tickets.length} Tickets`;
+        ticketFee = prices.totalFees;
+        ticketPriceWithFees = prices.ticketCostWithFees;
     }
 
     return (

@@ -339,7 +339,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     let data = {};
     data['grossSales'] = parseFloat(orders?.reduce((accumulator, object) => {
-      return accumulator + object.gross;
+      return accumulator + object.total;
     }, 0)).toFixed(2);
     data['count'] = orders?.length;
     data['attendeesCount'] = orders?.reduce((accumulator, object) => {
@@ -369,45 +369,292 @@ module.exports = createCoreController('api::organization.organization', ({ strap
   },
   async getEventStats(ctx) {
     const user = ctx.state.user;
+    let dateFrom;
 
     const {
-      uuid
+      uuid,
+      range
     } = ctx.request.query;
+
+    switch(range) {
+      case '24_hrs':
+        dateFrom = moment().subtract(1, 'd').format()
+        break;
+      case '7_days':
+        dateFrom = moment().subtract(7, 'd').format()
+        break;
+      case '14_days':
+        dateFrom = moment().subtract(14, 'd').format()
+        break;
+      case '30_days':
+        dateFrom = moment().subtract(30, 'd').format()
+        break;
+      case 'all':
+        dateFrom = moment().subtract(1, 'y').format()
+        break;
+      default:
+        dateFrom = moment().subtract(1, 'd').format()
+    }
 
     const event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: uuid },
       populate: {
-        tickets: true,
         page_views: true
       }
     })
 
-    let primaryTicketsSold = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === false);
-    let secondaryTicketsSold = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === true);
+    const allTickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: {
+        $and: [
+          { eventId: { $eq: uuid }}
+        ]
+       }
+    })
+
+    const orders = await strapi.db.query('api::order.order').findMany({
+      where: {
+        $and: [
+          { event: event.id }
+        ]
+       },
+       populate: {
+        tickets: true
+       }
+    })
+
+    const last24HrOrders = orders.filter(order => moment(order.processedAt).format() >= moment().subtract(1, 'd').format())
+
+    const last24HrPageViews = event.page_views.filter(view => moment(view.seen).format() >= moment().subtract(1, 'd').format()).length
+
+    const last24HrGrossSales = parseFloat(last24HrOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.total);
+    }, 0)).toFixed(2);
+
+    const last24HrTicketsSold = parseFloat(last24HrOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.tickets);
+    }, 0)).toFixed(2);
+
+    const getPercentage = (v1, v2) => {
+      let change = v2 - v1;
+      let percentage = change / v1;
+      return (percentage * 100).toFixed(0);
+    }
+
+    const queryOrders = orders.filter(order => moment(order.processedAt).format() >= dateFrom && order.status === 'complete')
+
+    const queryOrdersGross = parseInt(queryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.total;
+    }, 0));
+
+    const queryTicketLength = parseInt(queryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.tickets.length;
+    }, 0));
+
+    const listings = await strapi.db.query('api::listing.listing').findMany({
+      where: {
+        $and: [
+          { event: event.id },
+          { status: { $eq: 'new' } }
+        ]
+       },
+       populate: {
+        tickets: true
+       }
+    })
+
+    let primaryOrders = orders.filter(order => order.type !== 'resale')
+    let secondaryOrders = orders.filter(order => order.type === 'resale')
+
+    let primaryTicketsSold = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === false);
+    let secondaryTicketsSold = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold' && ticket.resale === true);
 
     let data = {};
-    data['allTicketsSold'] = event?.tickets?.filter((ticket) => ticket.on_sale_status === 'sold')?.length;
+    data['allTicketsSold'] = allTickets?.filter((ticket) => ticket.on_sale_status === 'sold').length;
+    data['ticketSoldByRange'] = parseInt(queryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.tickets.length;
+    }, 0));
+    data['ticketSoldByRangeChange'] = getPercentage(Number(data.ticketSoldByRange),  Number(last24HrTicketsSold.length));
     data['primaryTicketsSold'] = primaryTicketsSold?.length;
     data['secondaryTicketsSold'] = secondaryTicketsSold?.length;
-    data['totalTickets'] = event?.tickets?.length;
-    data['primaryGrossSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + (object.cost + object.fee);
+    data['totalTickets'] = allTickets?.length;
+    data['primaryGrossSales'] = parseFloat(primaryOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.total);
     }, 0)).toFixed(2);
-    data['secondaryGrossSales'] = parseFloat(secondaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + (object.cost + object.fee);
+    data['primaryGrossSalesRangeChange'] = getPercentage(parseFloat(data.primaryGrossSales), parseFloat(queryOrdersGross))
+    data['secondaryGrossSales'] = parseFloat(secondaryOrders?.reduce((accumulator, object) => {
+      return accumulator + (object.total);
     }, 0)).toFixed(2);
-    data['primaryNetSales'] = parseFloat(primaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + object.cost;
+    data['primaryNetSales'] = parseFloat(primaryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.total;
     }, 0)).toFixed(2);
-    data['secondaryNetSales'] = parseFloat(secondaryTicketsSold?.reduce((accumulator, object) => {
-      return accumulator + object.cost;
+    data['secondaryNetSales'] = parseFloat(secondaryOrders?.reduce((accumulator, object) => {
+      return accumulator + object.total;
     }, 0)).toFixed(2);
     data['pageViews'] = event?.page_views?.length;
-    data['totalSoldPercentage'] = (data?.allTicketsSold / data?.totalTickets) * 100;
-    data['royalties'] = 
+    data['pageViewsRangeChange'] = getPercentage(event?.page_views?.length, last24HrPageViews);
+    data['totalSoldPercentage'] = ((data?.allTicketsSold / data?.totalTickets) * 100).toFixed(2);
+    data['totalSoldQueryPercentage'] = getPercentage(data?.allTicketsSold, queryTicketLength);
     data['eventUUID'] = event?.uuid;
-    data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales) + parseFloat(data.secondaryGrossSales)).toFixed(2);
+    data['allTicketsSoldAmount'] = (parseFloat(data.primaryGrossSales)).toFixed(2);
+    data['ticketsListed'] = parseInt(listings?.reduce((accumulator, object) => {
+      return accumulator + object.tickets.length;
+    }, 0));
 
     return data
+  },
+  async allEventStats(ctx) {
+    const user = ctx.state.user;
+
+    // Get Organizations member belongs to
+    let organizations = await strapi.entityService.findMany('api::organization.organization', {
+      populate: {
+        members: {
+          filters: {
+            id: {
+              $eq: user.id
+            }
+          }
+        },
+        events: {
+          populate: {
+            image: true,
+            tickets: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
+    })
+    // Returns organizations which user is a member of
+    let organization = organizations.find(org => org.members.length >= 1)
+
+    let eventsData = [];
+
+    const getStats = (data, tickets, orders) => {
+
+      let primaryOrders = orders.filter(order => order.type !== 'resale')
+      let secondaryOrders = orders.filter(order => order.type === 'resale')
+
+      new Promise(resolve => {
+        const primaryGross = parseFloat(primaryOrders?.reduce((accumulator, object) => {
+          return accumulator + (object.total);
+        }, 0)).toFixed(2);
+  
+        const secondaryGross = parseFloat(secondaryOrders?.reduce((accumulator, object) => {
+          return accumulator + (object.total);
+        }, 0)).toFixed(2);
+  
+        const primaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
+          return accumulator + (object.fee);
+        }, 0)).toFixed(2);
+  
+        const secondaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold')?.reduce((accumulator, object) => {
+          return accumulator + (object.fee);
+        }, 0)).toFixed(2);
+  
+        data['primaryAvailable'] = tickets.filter((ticket) => ticket.resale == false).length;
+        data['primarySold'] = tickets.filter((ticket) => ticket.resale == false && ticket.on_sale_status === 'sold').length;
+        data['primarySoldPercentage'] = data.primarySold > 0 ? ((data.primarySold / data.primaryAvailable) * 100) : 0;
+        data['primaryGross'] = Number(primaryGross).toFixed(2);
+        data['secondaryGross'] = secondaryGross;
+        data['secondaryAvailable'] = tickets.filter((ticket) => ticket.resale == true).length;
+        data['secondarySold'] = tickets.filter((ticket) => ticket.resale == true && ticket.on_sale_status === 'sold').length;
+        data['secondarySoldPercentage'] = data.secondarySold > 0 ? Number((data.secondarySold / data.secondaryAvailable) * 100).toFixed(2) : 0;
+        data['royalties'] = (Number(primaryRoyalties) + Number(secondaryRoyalties)).toFixed(2)
+        eventsData.push(data)
+        resolve(data)
+      })
+      return eventsData
+    }
+      
+
+    for (let event of organization.events) {
+      let data = {}
+      data['eventName'] = event.name;
+      data['eventImage'] = event?.image?.url;
+      data['eventUUID'] = event?.uuid;
+      data['venueName'] = event?.venue?.name;
+      data['eventDate'] = event?.start;
+      data['status'] = event?.status;
+
+      const orders = await strapi.db.query('api::order.order').findMany({
+        where: {
+          $and: [
+            { event: event.id }
+          ]
+         }
+      })
+  
+      let tickets = await strapi.db.query('api::ticket.ticket').findMany({
+        where: {
+          $and: [
+            { eventId: { $eq: event?.uuid }}
+          ]
+        }
+      })
+
+      let info = await getStats(data, tickets, orders);
+    }
+
+    return eventsData
+  },
+  async getTicketDetails(ctx) {
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const tickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: {
+        $and: [
+          { eventId: { $eq: uuid }}
+        ]
+       }
+    })
+
+    const getDescription = (ticket) => {
+      if (moment(ticket?.sales_start) < moment()) {
+          return `Ends ${moment(ticket?.sales_end).format('MMM DD, yyyy')} at ${moment(ticket?.sales_end).format('h:mm A')}`
+      } else if (moment(ticket?.sales_start) > moment()) {
+          return `Starts ${moment(ticket?.sales_start).format('MMM DD, yyyy')} at ${moment(ticket?.sales_start).format('h:mm A')}`
+      } else if (moment(ticket?.sales_end) >= moment()) {
+          return ''
+      }
+    }
+
+    const getStatus = (ticket) => {
+        if (moment(ticket.sales_start) > moment()) {
+            return 'scheduled'
+        } else if (moment(ticket?.sales_start) < moment()) {
+            return 'on_sale'
+        } else if (moment(ticket?.sales_end) >= moment()) {
+            return 'sale_ended'
+        }
+    }
+
+    let ticketGroups = []
+
+    tickets.map(t => {
+      let index = ticketGroups.findIndex((e) => e.name === t.name);
+      if (index > -1) return;
+      ticketGroups.push({
+        name: t.name,
+        count: tickets.filter((ticket) => ticket.name === t.name).length,
+        sold: tickets.filter((ticket) => ticket.name === t.name && ticket.on_sale_status === 'sold').length,
+        price: tickets.find((ticket) => ticket.name === t.name).cost,
+        salesStart: tickets.find((ticket) => ticket.name === t.name).sales_start,
+        salesEnd: tickets.find((ticket) => ticket.name === t.name).sales_end,
+        eventId: tickets.find((ticket) => ticket.name === t.name).eventId,
+        type: tickets.find((ticket) => ticket.name === t.name).name,
+        status: getStatus(tickets.find((ticket) => ticket.name === t.name)),
+        desc: getDescription(tickets.find((ticket) => ticket.name === t.name)),
+        totalTicketsSold: tickets?.filter((ticket) => ticket.on_sale_status === 'sold').length,
+        totalTickets: tickets?.length
+      })    
+    })
+
+    return ticketGroups
   }
 }));

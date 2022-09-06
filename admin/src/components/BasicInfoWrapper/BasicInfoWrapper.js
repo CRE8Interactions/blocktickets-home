@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 import UserContext from '../../context/User/User';
+import AuthService from '../../utilities/services/auth.service';
+
 import { getCategories, getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
@@ -17,7 +20,7 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
     const user = useContext(UserContext);
-    const organization = user?.orgs[0];
+    const organization = AuthService.getOrg()[0];
 
     const timezoneOpt = [
         {
@@ -34,9 +37,9 @@ export default function BasicInfoWrapper({ eventId }) {
         }
     ]
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
 
     const [hasError, setHasError] = useState(false);
 
@@ -54,6 +57,13 @@ export default function BasicInfoWrapper({ eventId }) {
         venue: '',
         timezone: timezoneOpt[0].value,
         displayEndTime: true
+    })
+
+    const [alert, setAlert] = useState({
+        show: false,
+        variant: '',
+        message: ''
+
     })
 
     useEffect(() => {
@@ -76,6 +86,10 @@ export default function BasicInfoWrapper({ eventId }) {
             .catch((err) => console.error(err))
     }, [])
 
+    useEffect(() => {
+        // Future event
+    }, [event])
+
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
     }
@@ -96,15 +110,38 @@ export default function BasicInfoWrapper({ eventId }) {
         data['hide_end_date'] = !event?.displayEndTime;
         if (eventId) {
             data['uuid'] = eventId;
-            data['venue'] = (Number(event.venue?.id));
+            data['venue'] = (Number(event.venue));
             editEvent({ data })
-                .then((res) => console.log(res.data))
-                .catch((err) => console.error(err))
+                .then((res) => {
+                    navigate(`/myevent/${eventId}/basic-info`)
+                    setAlert({
+                        show: true,
+                        varient: 'success',
+                        message: 'Your info has been updated.'
+                    })
+                })
+                .catch((err) => {
+                    console.error(err)
+                    navigate(`/myevent/${eventId}/basic-info`)
+                    setAlert({
+                        show: true,
+                        varient: 'error',
+                        message: 'Unable to save info please try again.'
+                })
+            })
 
         } else {
             createEvent({ data })
                 .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
-                .catch((err) => console.error(err))
+                .catch((err) => {
+                    console.error(err)
+                    navigate(`/myevent/${eventId}/basic-info`)
+                    setAlert({
+                        show: true,
+                        varient: 'error',
+                        message: 'Unable to save info please try again.'
+                    })
+                })
         }
     }
 
@@ -113,6 +150,13 @@ export default function BasicInfoWrapper({ eventId }) {
             <section>
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Basic info</h1>
+                    { alert.show && 
+                        <>
+                            <Alert variant={alert.varient} onClose={() => setAlert({show: false, variant: '', message: ''})} dismissible>
+                                {alert.message}
+                            </Alert>
+                        </>
+                    }
                 </header>
                 <Card body className='card--sm'>
                     <BasicInfo handleChange={handleChange} event={event} categories={categories} />

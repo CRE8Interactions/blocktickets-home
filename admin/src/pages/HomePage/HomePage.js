@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { getEvents } from '../../utilities/api';
+import { getAllEventStats } from '../../utilities/api';
 
 import { HomeWrapper } from '../../components';
 
 export default function HomePage() {
-    const [events, setEvents] = useState()
+    const [eventStatus, setEventStatus] = useState()
     useEffect(() => {
-        getEvents()
-            .then((res) => { setEvents(res.data) })
+        getAllEventStats()
+            .then((res) => { setEventStatus(res.data) })
             .catch((err) => console.error(err))
     }, [])
     return (
         <div className="spacer-md">
-            <HomeWrapper events={events} />
+            <HomeWrapper events={eventStatus} />
         </div>
     );
 }

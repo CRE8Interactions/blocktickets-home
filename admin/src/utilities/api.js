@@ -102,8 +102,12 @@ export const getEvent = async (uuid) => {
   return instance.get(`/organizations/event?uuid=${uuid}`)
 }
 
-export const getEventStats = async (uuid) => {
-  return instance.get(`/organizations/event-stats?uuid=${uuid}`)
+export const getEventStats = async (uuid, range = '') => {
+  return instance.get(`/organizations/event-stats?uuid=${uuid}&range=${range}`)
+}
+
+export const getAllEventStats = async (uuid) => {
+  return instance.get(`/organizations/all-event-stats`)
 }
 
 export const getOrders = async (uuid) => {
@@ -128,4 +132,8 @@ export const inactivateTickets = async (data) => {
 
 export const upload = async (data) => {
   return instance.post('/upload/', data)
+}
+
+export const getTicketDetails = async (uuid) => {
+  return instance.get(`organizations/all-ticket-details?uuid=${uuid}`)
 }
