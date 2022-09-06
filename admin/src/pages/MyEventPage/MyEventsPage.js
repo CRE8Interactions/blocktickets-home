@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+
+import { getEventStats } from "../../utilities/api";
+
 import { DashboardWrapper } from "../../components";
-import { getEvent, getOrders, getEventStats } from "../../utilities/api";
-import { Routes, Route, useParams } from 'react-router-dom';
 
 export default function MyEventsPage() {
     let { uuid } = useParams();
+
     const [stats, setStats] = useState()
     const [range, setRange] = useState({
         timePeriod: '24_hrs',

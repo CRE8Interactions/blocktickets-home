@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
 
 import Button from 'react-bootstrap/Button';
 
