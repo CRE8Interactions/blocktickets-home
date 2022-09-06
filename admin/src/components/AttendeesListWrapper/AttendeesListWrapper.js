@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import { formatCurrency, formatNumber } from '../../utilities/helpers';
+
 import { getOrders } from '../../utilities/api';
-import { useParams } from 'react-router-dom';
 
 import Stack from 'react-bootstrap/Stack';
 
@@ -12,11 +12,9 @@ import { Attendees } from './Attendees'
 
 import './attendeesListWrapper.scss';
 
-export default function AttendeesListWrapper() {
+export default function AttendeesListWrapper({ eventId }) {
 
     const [exportTo, setExportTo] = useState('1')
-
-    const { uuid } = useParams()
 
     // search query
     const [
@@ -41,7 +39,7 @@ export default function AttendeesListWrapper() {
     })
 
     useEffect(() => {
-        getOrders(uuid)
+        getOrders(eventId)
             .then((res) => setAttendees(res.data))
             .catch((err) => console.error(err))
     }, [])

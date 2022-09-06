@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { LinkContainer } from "react-router-bootstrap";
+import moment from 'moment';
 
-import { formatOrderId, formatCurrency } from '../../utilities/helpers';
+import { capitalizeString, formatOrderId, formatCurrency } from '../../utilities/helpers';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
@@ -15,7 +16,6 @@ import { MoreIcon } from '../MoreIcon';
 import { TicketRow } from './TicketRow'
 
 import './orderSummary.scss';
-import moment from 'moment';
 
 // could be whole order or single ticket 
 export default function OrderSummary({ ticket, order, showDropdown = true, isOpen = false }) {
@@ -30,12 +30,12 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
     }
 
     const orderType = (order) => {
-        let type = order?.type === 'resale' ?  'secondary' : 'primary';
+        let type = order?.type === 'resale' ? 'secondary' : 'primary';
         return type
     }
 
     const purchaseType = (order) => {
-        let type = order?.type === 'resale' ?  'secondary' : 'primary';
+        let type = order?.type === 'resale' ? 'secondary' : 'primary';
         return 'Purchased By'
     }
 
@@ -91,7 +91,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                         <Stack gap={1} key={order.orderId} className="transaction">
                             <span className='caption status-label'>{purchaseType(order)}:</span>
                             <div className="transaction-desc">
-                                <p className='fw-medium'>{purchaser(order)}</p>
+                                <p className='fw-medium'>{capitalizeString(purchaser(order))}</p>
                                 <span className='caption'>{order?.details?.ticketCount} tickets</span>
                                 {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(order?.total / order?.details?.ticketCount)} paid by {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand} {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4} </p>)}
                             </div>
@@ -117,7 +117,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                             </thead>
                             <tbody>
                                 {[...Array(order?.details?.ticketCount)].map((x, i) => {
-                                        return <TicketRow key={i} orderId={order.uuid} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} type={order?.type} show={showDropdown} refund={refund} order={order} />
+                                    return <TicketRow key={i} orderId={order.uuid} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} type={order?.type} show={showDropdown} refund={refund} order={order} />
                                 })}
                                 <tr className='total-row'>
                                     <td colSpan={5}>Total</td>
