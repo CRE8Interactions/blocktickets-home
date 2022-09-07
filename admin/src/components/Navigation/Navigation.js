@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom'
+
 import { formatString } from '../../utilities/helpers';
+import { useWindowSize } from '../../utilities/hooks';
 
 import AuthService from '../../utilities/services/auth.service';
-import { useWindowSize } from '../../utilities/hooks';
 
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';

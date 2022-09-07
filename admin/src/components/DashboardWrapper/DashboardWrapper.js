@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Reports } from '../Reports';
 import { OrdersTable } from '../OrdersTable';
 import { Cards } from './Cards';
 
-export default function DashboardWrapper({stats, setRange}) {
+export default function DashboardWrapper({ stats, setRange }) {
     return (
         <div className='max-width-wrapper'>
             <Reports title="dashboard" stats={stats} setRange={setRange} />

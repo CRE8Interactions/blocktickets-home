@@ -11,27 +11,25 @@ import { toggleContainer, changeBackground } from './utilities/helpers';
 import { Navigation } from './components';
 
 function App() {
+
+    let location = useLocation();
+
     const user = authService.getUser()
     const me = useContext(UserContext)
 
     useEffect(() => {
 
     })
+
     const [
         authenticated,
         setAuthenticated
     ] = useState(false);
+
     const [
         org,
         setOrganization
     ] = useState('');
-
-    const [
-        sideNavEnabled,
-        setSideNavEnabled
-    ] = useState(false);
-
-    let location = useLocation();
 
     useLayoutEffect(() => {
         changeBackground(location.pathname)

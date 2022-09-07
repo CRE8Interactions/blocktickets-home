@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getOrders } from '../../utilities/api';
 
 import { formatCurrency, formatNumber } from "./../../utilities/helpers";
@@ -12,9 +12,8 @@ import { SearchBar } from '../SearchBar';
 import { ExportSelect } from "../ExportSelect";
 import { OrderSummary } from '../OrderSummary';
 
+export default function OrdersWrapper({ eventId }) {
 
-export default function OrdersWrapper() {
-    const { uuid } = useParams()
     const [details, setDetails] = useState({
         grossSales: 0,
         attendeesCount: 0,
@@ -23,10 +22,10 @@ export default function OrdersWrapper() {
     })
 
     useEffect(() => {
-        getOrders(uuid)
-            .then((res) => {setDetails(res.data)})
+        getOrders(eventId)
+            .then((res) => { setDetails(res.data) })
             .catch((err) => console.error(err))
-    }, [uuid]);
+    }, [eventId]);
 
     const ordersViewOpt = [
         {

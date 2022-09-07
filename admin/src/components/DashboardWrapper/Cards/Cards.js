@@ -68,7 +68,7 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span><b>${parseFloat(stats?.primaryNetSales).toFixed(2)}</b> <span className="small-text">net sales</span></span>
+                                <span><b>{formatCurrency(stats?.primaryNetSales)}</b> <span className="small-text">net sales</span></span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
