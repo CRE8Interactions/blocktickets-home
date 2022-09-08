@@ -66,6 +66,10 @@ export const createW9 = async (data) => {
   return instance.post('/organizations/create-w9', data)
 }
 
+export const createPromoLink = async (data) => {
+  return instance.post('/organizations/create-promo', data)
+}
+
 export const createOrEditMember = async (data) => {
   return instance.post('/organizations/invite-member', data)
 }
@@ -80,6 +84,10 @@ export const getCategories = async () => {
 
 export const getVenues = async () => {
   return instance.get('/venues')
+}
+
+export const getPromoStats = async (uuid) => {
+  return instance.get(`/organizations/promo-stats?uuid=${uuid}`)
 }
 
 export const createEvent = async (data) => {

@@ -7,7 +7,7 @@ import { TicketPurchase } from './TicketPurchase';
 
 import './purchaseTickets.scss';
 
-export default function PurchaseTickets() {
+export default function PurchaseTickets({code}) {
     // 1 - ticket selection
     // 2 - ticket confirmation
     // 3 - presale
@@ -88,6 +88,7 @@ export default function PurchaseTickets() {
                 eventType={eventType}
                 ticket={ticket}
                 listing={listing}
+                code={code}
             />
         </div>
     );

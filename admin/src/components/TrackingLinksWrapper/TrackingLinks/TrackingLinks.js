@@ -8,7 +8,7 @@ import { TrackingLink } from './TrackingLink'
 import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
 
-export default function TrackingLinks() {
+export default function TrackingLinks({promos}) {
 
     const [show, setShow] = useState(false)
 
@@ -16,16 +16,17 @@ export default function TrackingLinks() {
 
     const handleClose = () => setShow(false);
 
-    let links = [
-        {
-            default: true,
-            name: 'Your event url',
-            url: 'https://www.blocktickets.xyz/e/welcome-to-the-party-tickets-380737735817?aff=fanclubonly',
-            views: 24,
-            ticketsSold: 8,
-            grossSales: 2500
-        }
-    ];
+    const totalTicketsSold = (object) => {
+        return parseInt(object?.reduce((accumulator, object) => {
+            return accumulator + (object?.ticketsSold);
+        }, 0));
+    }
+
+    const totalGross = (object) => {
+        return parseFloat(object?.reduce((accumulator, object) => {
+            return accumulator + parseFloat(object?.grossSales);
+        }, 0)).toFixed(2);
+    }
 
     return (
         <>
@@ -33,7 +34,7 @@ export default function TrackingLinks() {
                 <Link to='add' className="btn btn-outline-light btn-lg btn-plus btn-plus--dark ms-auto">Create tracking link</Link>
             </Stack>
             <Card body>
-                {links && links.length > 0 ? (
+                {promos && promos.length > 0 ? (
                     <div className="list-table five-col" role="table">
                         <div className="flex-row list-table-header" role="rowgroup">
                             <div className='list-table-col list-table-col-header lg' role="columnheader">
@@ -52,7 +53,7 @@ export default function TrackingLinks() {
                                 <span>Gross sales</span>
                             </div>
                         </div>
-                        {links.map((link, index) => (
+                        {promos?.map((link, index) => (
                             <TrackingLink key={index} link={link} handleShow={handleShow} />
                         ))}
                         <div className="total-row flex-row" role="row">
@@ -63,10 +64,10 @@ export default function TrackingLinks() {
                                 <span>&nbsp;</span>
                             </div>
                             <div className="list-table-col list-table-col" role="cell">
-                                <span>124</span>
+                                <span>{totalTicketsSold(promos)}</span>
                             </div>
                             <div className="list-table-col list-table-col" role="cell">
-                                <span>78</span>
+                                <span>${totalGross(promos)}</span>
                             </div>
                         </div>
                     </div>

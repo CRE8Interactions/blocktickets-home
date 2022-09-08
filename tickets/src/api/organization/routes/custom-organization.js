@@ -56,6 +56,11 @@ module.exports = {
       handler: 'organization.createEvent'
     },
     {
+      method: 'POST',
+      path: '/organizations/create-promo',
+      handler: 'organization.createPromoLink'
+    },
+    {
       method: 'GET',
       path: '/organizations/event-stats',
       handler: 'organization.getEventStats'
@@ -69,6 +74,11 @@ module.exports = {
       method: 'GET',
       path: '/organizations/all-ticket-details',
       handler: 'organization.getTicketDetails'
+    },
+    {
+      method: 'GET',
+      path: '/organizations/promo-stats',
+      handler: 'organization.getPromoLinks'
     },
   ]
 }

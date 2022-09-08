@@ -68,7 +68,8 @@ export default function CheckoutWrapper() {
         let data = {
             ticket: cart.ticket,
             listing: cart.listing,
-            ticketCount: cart.ticketCount
+            ticketCount: cart.ticketCount,
+            promoCode: cart.promoCode
         };
 
         getPaymentIntent(data)

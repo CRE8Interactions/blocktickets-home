@@ -15,6 +15,9 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
   async generateCode() {
     return Math.floor(1000 + Math.random() * 9000)
   },
+  async generatePromoCode() {
+    return Math.floor(100000 + Math.random() * 900000)
+  },
   async refreshDB() {
     await strapi.db.query('api::ticket.ticket').deleteMany({
       where: {
@@ -145,6 +148,14 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
     });
 
     await strapi.db.query('api::event.event').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::page-view.page-view').deleteMany({
       where: {
         createdAt: {
           $lte: new Date()

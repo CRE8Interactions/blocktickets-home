@@ -12,7 +12,7 @@ import { BackButton } from '../../../BackButton';
 import { TicketDescriptionModal } from './TicketDescriptionModal'
 import './ticketConfirmation.scss';
 
-export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount }) {
+export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount, code }) {
     let ticketPrice;
     let totalTicketPrice;
     let section;
@@ -62,9 +62,9 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
             let data = {
                 ticket,
                 ticketCount,
-                listing
+                listing,
+                promoCode: code
             };
-
             sessionStorage.setItem('cart', JSON.stringify(data));
         },
         [

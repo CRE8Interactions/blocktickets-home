@@ -4,7 +4,7 @@ import { stateOpt } from '../../utilities/helpers'
 
 import { OrganizationInformation } from './OrganizationInformation'
 
-export default function OrganizationInformationWrapper({ getOrgInfo }) {
+export default function OrganizationInformationWrapper({ orgInfo, setOrgInfo }) {
 
     const [org, setOrg] = useState({
         orgName: '',
@@ -16,14 +16,14 @@ export default function OrganizationInformationWrapper({ getOrgInfo }) {
 
     // update parent state when state changes 
     useEffect(() => {
-        getOrgInfo(org)
-    }, [org])
+
+    }, [orgInfo])
 
     const handleOrg = (e) => {
         setOrg({ ...org, [e.target.name]: e.target.value })
     }
 
     return (
-        <OrganizationInformation org={org} handleOrg={handleOrg} />
+        <OrganizationInformation org={orgInfo} handleOrg={handleOrg} />
     )
 }

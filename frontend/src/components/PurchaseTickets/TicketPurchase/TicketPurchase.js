@@ -13,7 +13,8 @@ export default function TicketPurchase({
     eventType,
     isZoomed,
     ticket,
-    listing
+    listing,
+    code
 }) {
     // how many tickets user wants
     const [
@@ -40,6 +41,7 @@ export default function TicketPurchase({
                     listing={listing}
                     setTicketCount={setTicketCount}
                     ticketCount={ticketCount}
+                    code={code}
                 />
             )}
 
