@@ -21,11 +21,11 @@ export default function TrackingLink({ link, handleShow }) {
                 <span>{link.ticketsSold}</span>
             </div>
             <div className="list-table-col" role="cell">
-                <span>{link.grossSales}</span>
+                <span>${link.grossSales}</span>
             </div>
             {!link.default && (
                 <div className="btn-more-col list-table-col" role="cell">
-                    <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
+                    <EditDeleteDropdown handleShow={handleShow} link={`edit?id=${link?.code}`} />
                 </div>
             )}
         </div>

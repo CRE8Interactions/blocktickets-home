@@ -21,7 +21,7 @@ export default function TrackingLink({ link, handleChange, isValid, validInputs 
                 />
                 <Form.Text className={`${(link.name && !isValid) ? 'text-danger' : ''}`}>Only letters and numbers are allowed. (Examples: presalediscount, fanclubonly, fc143342, etc.)</Form.Text>
             </Form.Group>
-            <Form.Group className="form-group">
+            {/* <Form.Group className="form-group">
                 <Form.Label htmlFor="url">Unique tracking link</Form.Label>
                 <div className="input-wrapper">
                     <InputGroup>
@@ -42,7 +42,7 @@ export default function TrackingLink({ link, handleChange, isValid, validInputs 
                     </InputGroup>
                     <CopyButton link={link.url} />
                 </div>
-            </Form.Group>
+            </Form.Group> */}
         </Form>
     );
 }

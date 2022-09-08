@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 import TicketContext from '../../context/Ticket/Ticket';
 
@@ -9,6 +9,17 @@ import { Event, PurchaseTickets } from '../../components';
 
 export default function TicketsPage() {
     let { id } = useParams();
+
+    // A custom hook that builds on useLocation to parse
+    // the query string for you.
+    function useQuery() {
+    const { search } = useLocation();
+  
+        return React.useMemo(() => new URLSearchParams(search), [search]);
+    }
+
+    let query = useQuery();
+    let code = query.get("code") ? query.get("code") : 0;
 
     const [
         event,
@@ -36,14 +47,14 @@ export default function TicketsPage() {
     ] = useState();
 
 	useEffect(() => {
-		getAllEventTickets(id)
+		getAllEventTickets(id, code)
 			.then((res) => {
 				setTickets(res.data?.tickets)
 				setEvent(res.data?.event)
                 setListings(res.data?.listings)
 			})
 			.catch((err) => console.error(err))
-	}, [id])
+	}, [id, code])
 
     return (
         <div className="full-height-wrapper">
@@ -51,7 +62,7 @@ export default function TicketsPage() {
                 <div className="pt-md-3">
                     <Event event={event} />
                 </div>
-                <PurchaseTickets />
+                <PurchaseTickets code={code} />
             </TicketContext.Provider>
         </div>
     );

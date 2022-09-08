@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promos",
+  "info": {
+    "singularName": "promo",
+    "pluralName": "promos",
+    "displayName": "promo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "promo_views": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::promo-view.promo-view"
+    },
+    "promo_sales": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::promo-sale.promo-sale"
+    },
+    "code": {
+      "type": "biginteger",
+      "required": true,
+      "unique": true
+    }
+  }
+}

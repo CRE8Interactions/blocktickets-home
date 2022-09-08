@@ -8,17 +8,17 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
 export default function OrganizationInformation({ org, handleOrg }) {
-
+    console.log(org)
     return (
         <Form>
-            <Form.Group className='form-group' controlId="identifier">
+            <Form.Group className='form-group' controlId="name">
                 <Form.Label>Organization name</Form.Label>
                 <Form.Control
                     type="text"
                     name="orgName"
                     required
                     placeholder="Enter organization name"
-                    value={org.orgName}
+                    value={org?.name}
                     onChange={handleOrg}
                 />
             </Form.Group>

@@ -29,7 +29,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
             venue: true,
             artists: true
           }
-        }
+        },
+        address: true
       }
     })
     // Returns organizations which user is a member of
@@ -656,5 +657,69 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
 
     return ticketGroups
+  },
+  async createPromoLink(ctx) {
+    const { uuid, name } = ctx.request.body.data;
+
+    const event = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: uuid}
+    })
+
+    const entry = await strapi.entityService.create('api::promo.promo', {
+      data: {
+        name: name,
+        event: event.id,
+        code: await strapi.service('api::utility.utility').generatePromoCode()
+      },
+    });
+
+    return entry
+  },
+  async getPromoLinks(ctx) {
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const event = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: uuid}
+    })
+
+    const promos = await strapi.db.query('api::promo.promo').findMany({
+      where: { event: event.id },
+      populate: {
+        promo_views: true,
+        promo_sales: {
+          populate: {
+            order: true
+          }
+        }
+      }
+    })
+
+    if (!promos) return 200
+
+    let arr = []
+
+    promos?.map((promo) => {
+      let data = {}
+      let orders = promo?.promo_sales?.map(sale => sale?.order);
+      let ticketsSold = parseInt(orders?.reduce((accumulator, object) => {
+        return accumulator + (object?.details?.ticketCount);
+      }, 0));
+      let grossSales = parseFloat(orders?.reduce((accumulator, object) => {
+        return accumulator + (object?.total);
+      }, 0)).toFixed(2);
+
+      let path = process.env.NODE_ENV === 'production' ? 'https://blocktickets.xyz' : 'https://preview.blocktickets.xyz'
+      data['name'] = promo?.name
+      data['code'] = promo?.code
+      data['url'] = `${path}/tickets/${event.uuid}?code=${data.code}`
+      data['views'] = promo?.promo_views?.length
+      data['ticketsSold'] = ticketsSold
+      data['grossSales'] = grossSales
+      arr.push(data)
+    })
+
+    return arr
   }
 }));

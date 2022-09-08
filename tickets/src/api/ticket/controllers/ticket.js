@@ -127,7 +127,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
     });
   },
   async availableTickets(ctx) {
-    const { eventUUID } = ctx.request.query;
+    const { eventUUID, code } = ctx.request.query;
 
     let event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: eventUUID },
@@ -140,6 +140,32 @@ module.exports = createCoreController('api::ticket.ticket', ({
         image: true
       }
     });
+
+    if (code !== 0) {
+      let promo = await strapi.db.query('api::promo.promo').findOne({
+        where: { code: code },
+        populate: {
+          promo_views: true
+        }
+      });
+
+      if (promo) {
+        let promoView = await strapi.entityService.create('api::promo-view.promo-view', {
+          data: {
+            seen: new Date(),
+            event: event.id
+          },
+        });
+  
+        let promoViews = [...promo?.promo_views, promoView]
+  
+        await strapi.entityService.update('api::promo.promo', promo.id, {
+          data: {
+            promo_views: promoViews
+          },
+        });
+      }  
+    }
 
     await strapi.entityService.create('api::page-view.page-view', {
       data: {

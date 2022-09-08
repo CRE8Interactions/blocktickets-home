@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promo_views",
+  "info": {
+    "singularName": "promo-view",
+    "pluralName": "promo-views",
+    "displayName": "promoView"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "seen": {
+      "type": "datetime"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createPromoLink } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -11,9 +12,11 @@ export default function TrackingLinkWrapper({ id }) {
 
     const navigate = useNavigate();
 
+    const { uuid } = useParams()
+
     const [link, setLink] = useState({
         name: '',
-        url: 'https://www.blocktickets.xyz/e/welcome-to-the-party-tickets-380737735817?aff=fanclubonly'
+        uuid: uuid
     })
 
     const [isValid, setIsValid] = useState(true)
@@ -31,6 +34,9 @@ export default function TrackingLinkWrapper({ id }) {
     }
 
     const handleSave = () => {
+        createPromoLink({data: link})
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err))
         navigate(-1)
     }
 

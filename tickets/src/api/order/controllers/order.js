@@ -139,6 +139,32 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
           },
         });
 
+        if (order?.details?.promoCode && order?.details?.promoCode !== 0) {
+          const promo = await strapi.db.query('api::promo.promo').findOne({
+            where: { code: order?.details?.promoCode },
+            populate: {
+              promo_sales: true
+            }
+          })
+
+          if (promo) {
+            const pomoSale = await strapi.entityService.create('api::promo-sale.promo-sale', {
+              data: {
+                purchased: new Date(),
+                order: order.id
+              },
+            });
+
+            let promoSales = [...promo?.promo_sales, pomoSale]
+  
+            await strapi.entityService.update('api::promo.promo', promo.id, {
+              data: {
+                promo_sales: promoSales
+              },
+            });
+          }
+        }
+
         if (!order) return;
 
         order.tickets.map(async (ticket) => {          
