@@ -5,7 +5,7 @@ import moment from 'moment';
 import UserContext from '../../context/User/User';
 import AuthService from '../../utilities/services/auth.service';
 
-import { getCategories, getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
+import { getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -67,10 +67,6 @@ export default function BasicInfoWrapper({ eventId }) {
     })
 
     useEffect(() => {
-        getCategories()
-            .then((res) => { setCategories(res?.data?.data) })
-            .catch((err) => console.error(err))
-
         getVenues()
             .then((res) => { setVenues(res?.data) })
             .catch((err) => console.error(err))
