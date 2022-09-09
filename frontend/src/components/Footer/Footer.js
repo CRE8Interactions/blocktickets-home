@@ -14,7 +14,7 @@ import facebook from '../../assets/icons/facebook-filled.svg';
 import instagram from '../../assets/icons/instagram.svg';
 import twitter from '../../assets/icons/twitter-filled.svg';
 import tiktok from '../../assets/icons/tiktok-filled.svg';
-import discord from '../../assets/icons/discord-filled.svg';
+import linkedin from '../../assets/icons/linkedin.svg';
 
 import './footer.scss';
 
@@ -80,28 +80,28 @@ export default function Footer() {
                     <h3 className="footer-title">Also find us on</h3>
                     <Stack as="ul" direction="horizontal" className="social-icons">
                         <li>
-                            <a href="https://www.facebook.com/blocktickets" target="_blank">
+                            <a href="https://www.facebook.com/blocktickets.xyz" target="_blank">
                                 <img src={facebook} alt="facebook" />
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/blocktickets" target="_blank">
+                            <a href="https://instagram.com/blocktickets.xyz?igshid=YmMyMTA2M2Y=" target="_blank">
                                 <img src={instagram} alt="instagram" />
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com/blocktickets" target="_blank">
+                            <a href="https://twitter.com/BlockticketsUSA" target="_blank">
                                 <img src={twitter} alt="twitter" />
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.tiktok.com/blocktickets" target="_blank">
+                            <a href="https://www.tiktok.com/@blocktickets?is_from_webapp=1&sender_device=pc" target="_blank">
                                 <img src={tiktok} alt="tiktok" />
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.discord.com/blocktickets" target="_blank">
-                                <img src={discord} alt="discord" />
+                            <a href="https://www.linkedin.com/company/blocktickets-xyz/" target="_blank">
+                                <img src={linkedin} alt="linkedin" />
                             </a>
                         </li>
                     </Stack>
