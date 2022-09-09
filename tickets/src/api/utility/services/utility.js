@@ -107,7 +107,7 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
       },
     });
 
-    await strapi.db.query('api::user.user').deleteMany({
+    await strapi.db.query('plugin::users-permissions.user').deleteMany({
       where: {
         createdAt: {
           $lte: new Date()
