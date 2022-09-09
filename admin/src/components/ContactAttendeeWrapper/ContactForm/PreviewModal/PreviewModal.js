@@ -12,7 +12,6 @@ import facebook from '../../../../assets/icons/facebook-filled.svg';
 import instagram from '../../../../assets/icons/instagram.svg';
 import twitter from '../../../../assets/icons/twitter-filled.svg';
 import tiktok from '../../../../assets/icons/tiktok-filled.svg';
-import discord from '../../../../assets/icons/discord-filled.svg';
 
 import './previewModal.scss';
 
@@ -82,13 +81,7 @@ export default function PreviewModal({ show, handleClose, message, event }) {
                                 <Image src={tiktok} alt="tiktok" />
                             </a>
                         </li>
-                        <li>
-                            <a href="https://www.discord.com/blocktickets" target="_blank">
-                                <Image src={discord} alt="discord" />
-                            </a>
-                        </li>
                     </Stack>
-
                 </div>
             </Modal.Body>
         </Modal>
