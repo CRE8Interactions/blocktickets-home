@@ -27,7 +27,7 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
       },
     });
 
-    await strapi.db.query('organization.organization').deleteMany({
+    await strapi.db.query('api::organization.organization').deleteMany({
       where: {
         createdAt: {
           $lte: new Date()
@@ -155,7 +155,31 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
       },
     });
 
-    await strapi.db.query('api::page-view.page-view').deleteMany({
+    await strapi.db.query('api::promo.promo').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::promo-sale.promo-sale').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::promo-view.promo-view').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
+
+    await strapi.db.query('api::invite.invite').deleteMany({
       where: {
         createdAt: {
           $lte: new Date()
