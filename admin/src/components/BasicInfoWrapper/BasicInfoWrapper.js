@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
@@ -8,13 +8,12 @@ import AuthService from '../../utilities/services/auth.service';
 import { getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
-import Stack from 'react-bootstrap/Stack';
-import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
 import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
+import { CreateEventButtons } from '../CreateEventButtons';
 
 export default function BasicInfoWrapper({ eventId }) {
 
@@ -37,17 +36,17 @@ export default function BasicInfoWrapper({ eventId }) {
         }
     ]
 
+    const [initialState, setInitialState] = useState();
+
+    const [showFooter, setShowFooter] = useState(false)
+
     const [startDate, setStartDate] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
     const [endDate, setEndDate] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
 
-    const [hasError, setHasError] = useState(false);
+    const [doorsOpenDate, setDoorsOpenDate] = useState(new Date());
 
-    useEffect(() => {
-        setHasError(endDate.getTime() < startDate.getTime())
-    }, [startDate, endDate])
-
-    const [categories, setCategories] = useState()
+    const [errorFields, setErrorFields] = useState();
 
     const [venues, setVenues] = useState()
 
@@ -56,17 +55,28 @@ export default function BasicInfoWrapper({ eventId }) {
         name: '',
         venue: '',
         timezone: timezoneOpt[0].value,
-        displayEndTime: true
+        displayStartTime: true,
+        displayDoorsOpen: false,
+        displayEventEnd: false
     })
 
     const [alert, setAlert] = useState({
         show: false,
         variant: '',
         message: ''
-
     })
 
+    const [isSaving, setIsSaving] = useState(false)
+
     useEffect(() => {
+
+        // save initial state to check whether to show save buttons
+        setInitialState({
+            event,
+            startDate,
+            endDate,
+            doorsOpenDate
+        })
         getVenues()
             .then((res) => { setVenues(res?.data) })
             .catch((err) => console.error(err))
@@ -86,11 +96,58 @@ export default function BasicInfoWrapper({ eventId }) {
         // Future event
     }, [event])
 
+    useEffect(() => {
+        if (initialState?.event !== event) setShowFooter(true)
+        else setShowFooter(false)
+
+    }, [initialState, event.presentedBy, event.name, event.venue, event.timezone, event.displayEndTime])
+
+    // control error messages for start, end and doors open dates 
+    useLayoutEffect(() => {
+        let fields = [];
+        let message = '';
+
+        if (event.displayEventEnd) {
+            fields = ['event-end', 'event-start']
+            if (endDate.getTime() < startDate.getTime()) {
+                message = "Event end date must be after event start date"
+                addError(fields, message)
+            }
+            else {
+                removeError(fields)
+            }
+        }
+        else if (event.displayDoorsOpen) {
+            fields = ['doors-open', 'event-start']
+            if (doorsOpenDate.getDate() !== startDate.getDate()) {
+                message = "Doors open date must be on the same day as the event start date"
+                addError(fields, message)
+            }
+            else {
+                removeError(fields)
+            }
+        }
+
+    }, [startDate, endDate, doorsOpenDate])
+
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
     }
 
+    const addError = (fields, message) => {
+        setErrorFields([...fields]);
+        fields.forEach(field => document.querySelector(`#${field}`).classList.add('error-border'))
+        fields.forEach(field => document.querySelector(`.form-text#${field}`).innerHTML = message)
+    }
+
+    const removeError = (fields) => {
+        fields.forEach(field => document.querySelector(`#${field}`).classList.remove('error-border'))
+        fields.forEach(field => document.querySelector(`.form-text#${field}`).innerHTML = '')
+        setErrorFields([])
+    }
+
     const handleSave = () => {
+        setIsSaving(true)
         // create event 
         const data = {};
         data['name'] = event.name;
@@ -123,8 +180,8 @@ export default function BasicInfoWrapper({ eventId }) {
                         show: true,
                         varient: 'error',
                         message: 'Unable to save info please try again.'
+                    })
                 })
-            })
 
         } else {
             createEvent({ data })
@@ -139,6 +196,7 @@ export default function BasicInfoWrapper({ eventId }) {
                     })
                 })
         }
+        setIsSaving(false)
     }
 
     return (
@@ -146,16 +204,16 @@ export default function BasicInfoWrapper({ eventId }) {
             <section>
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Basic info</h1>
-                    { alert.show && 
+                    {alert.show &&
                         <>
-                            <Alert variant={alert.varient} onClose={() => setAlert({show: false, variant: '', message: ''})} dismissible>
+                            <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
                                 {alert.message}
                             </Alert>
                         </>
                     }
                 </header>
                 <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} event={event} categories={categories} />
+                    <BasicInfo handleChange={handleChange} event={event} />
                 </Card>
             </section>
             <section>
@@ -163,7 +221,7 @@ export default function BasicInfoWrapper({ eventId }) {
                     <h1>Date & Time</h1>
                 </header>
                 <Card body className='card--sm'>
-                    <DateTime event={event} handleChange={handleChange} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} />
+                    <DateTime event={event} handleChange={handleChange} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} setDoorsOpenDate={setDoorsOpenDate} doorsOpenDate={doorsOpenDate} />
                 </Card>
             </section>
             <section>
@@ -174,9 +232,9 @@ export default function BasicInfoWrapper({ eventId }) {
                     <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} venues={venues} />
                 </Card>
             </section>
-            <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={hasError || !event.name || !event.venue} onClick={handleSave}>Save {eventId ? 'changes' : 'and continue'}</Button>
-            </Stack>
+            {showFooter && (
+                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={errorFields?.length > 0 || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} />
+            )}
         </section>
     );
 }
