@@ -14,7 +14,7 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { TicketBreakdownModal } from './TicketBreakdownModal';
 
-export default function CreateTicket({ type, handleChange, ticket, setStartDate, startDate, setEndDate, endDate, hasError }) {
+export default function CreateTicket({ type, handleChange, handleValid, ticket, setStartDate, startDate, setEndDate, endDate, hasError, errors }) {
 
     const isPaid = type === 'paid'
 
@@ -25,7 +25,22 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
 
     return (
         <>
-            <Form>
+            <Form className='pb-5'>
+                <div className="form-group">
+                    <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id="check-hide-checkbox">
+                        <Form.Check.Input
+                            name="hideTicket"
+                            type='checkbox'
+                            defaultChecked={ticket.hideTicket}
+                            onChange={(e) => { handleChange(e, e.target.checked) }} />
+                        <div>
+                            <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Hide ticket</Form.Check.Label>
+                            <small className='d-block text-muted fw-semi-bold'>
+                                Once you hide the ticket it will not be available for purchase
+                            </small>
+                        </div>
+                    </Form.Check>
+                </div>
                 <Form.Group className="form-group" controlId="ticketType">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" name="name" placeholder="Name of ticket" value={ticket.name} onChange={handleChange} required />
@@ -43,43 +58,49 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                         </OverlayTrigger>
                     </div>
                     <Form.Control
-                        as="textarea" rows={3}
+                        as="textarea" rows={5}
                         name="description"
                         value={ticket.description} onChange={handleChange}
                     />
                 </Form.Group>
-
-                <Form.Group className="form-group" controlId="quantity">
-                    <Form.Label>Available quantity</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="quantity"
-                        pattern="^[0-9]*$"
-                        placeholder="Number of tickets available"
-                        value={ticket.quantity}
-                        onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.quantity)}
-                        required
-                    />
-                </Form.Group>
-
+                <Row className='form-group'>
+                    <Col>
+                        <Form.Group controlId="quantity">
+                            <Form.Label>Available quantity</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="quantity"
+                                pattern="^[0-9]*$"
+                                placeholder="Number of tickets available"
+                                value={ticket.quantity}
+                                onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.quantity)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                    {isPaid && (
+                        <Col>
+                            <Form.Group>
+                                <Form.Label htmlFor="price">Price per ticket</Form.Label>
+                                <InputGroup>
+                                    <InputGroup.Text id="price-val">$</InputGroup.Text>
+                                    <Form.Control
+                                        placeholder="Price per ticket"
+                                        id="price"
+                                        name="price"
+                                        aria-describedby="price-val"
+                                        pattern="^[0-9.]*$"
+                                        value={ticket.price}
+                                        onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.price)}
+                                        required
+                                    />
+                                </InputGroup>
+                            </Form.Group>
+                        </Col>
+                    )}
+                </Row>
                 {isPaid && (
                     <>
-                        <Form.Group className="form-group">
-                            <Form.Label htmlFor="price">Price per ticket</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Text id="price-val">$</InputGroup.Text>
-                                <Form.Control
-                                    placeholder="Price per ticket"
-                                    id="price"
-                                    name="price"
-                                    aria-describedby="price-val"
-                                    pattern="^[0-9.]*$"
-                                    value={ticket.price}
-                                    onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.price)}
-                                    required
-                                />
-                            </InputGroup>
-                        </Form.Group>
                         <Form.Group className="form-group">
                             <Form.Label htmlFor="fee">Facility fee</Form.Label>
                             <InputGroup>
@@ -106,7 +127,7 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                             <Row>
                                 <Col>
                                     <Form.Label htmlFor="min">Minimum</Form.Label>
-                                    <InputGroup>
+                                    <InputGroup className={`${errors?.field === 'minResalePrice' ? 'input-group-error' : ''}`}>
                                         <InputGroup.Text id="min-val">
                                             $
                                         </InputGroup.Text>
@@ -115,12 +136,17 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                                             value={ticket.minResalePrice}
                                             pattern="^[0-9.]*$"
                                             onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.minResalePrice)}
-                                            required />
+                                            onBlur={(e) => handleValid(e, e.target)}
+                                            required
+                                        />
                                     </InputGroup>
+                                    {errors?.field === 'minResalePrice' && (
+                                        <Form.Text className='error'>{errors?.message}</Form.Text>
+                                    )}
                                 </Col>
                                 <Col>
                                     <Form.Label htmlFor="max">Maximum</Form.Label>
-                                    <InputGroup>
+                                    <InputGroup className={`${errors?.field === 'maxResalePrice' ? 'input-group-error' : ''}`}>
                                         <InputGroup.Text id="max-val">$</InputGroup.Text>
                                         <Form.Control
                                             placeholder="Maximum Value"
@@ -130,9 +156,13 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                                             pattern="^[0-9.]*$"
                                             value={ticket.maxResalePrice}
                                             onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.maxResalePrice)}
+                                            onBlur={(e) => handleValid(e, e.target)}
                                             required
                                         />
                                     </InputGroup>
+                                    {errors?.field === 'maxResalePrice' && (
+                                        <Form.Text className='error'>{errors?.message}</Form.Text>
+                                    )}
                                 </Col>
                             </Row>
                         </fieldset>
@@ -177,8 +207,14 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                                     name="minQuantity"
                                     onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.minQuantity)}
                                     value={ticket.minQuantity}
-                                    required />
+                                    onBlur={(e) => handleValid(e, e.target)}
+                                    className={`${errors?.field === 'minQuantity' ? 'error-border' : ''}`}
+                                    required
+                                />
                             </Form.Group>
+                            {errors?.field === 'minQuantity' && (
+                                <Form.Text className='error'>{errors?.message}</Form.Text>
+                            )}
                         </Col>
                         <Col>
                             <Form.Group controlId="maxQuantity">
@@ -188,8 +224,14 @@ export default function CreateTicket({ type, handleChange, ticket, setStartDate,
                                     value={ticket.maxQuantity}
                                     name="maxQuantity"
                                     onChange={(e) => handleChange(e.target.value === '' || e.target.validity.valid ? e : ticket.maxQuantity)}
-                                    required />
+                                    onBlur={(e) => handleValid(e, e.target)}
+                                    className={`${errors?.field === 'maxQuantity' ? 'error-border' : ''}`}
+                                    required
+                                />
                             </Form.Group>
+                            {errors?.field === 'maxQuantity' && (
+                                <Form.Text className='error'>{errors?.message}</Form.Text>
+                            )}
                         </Col>
                     </Row>
                 </fieldset>

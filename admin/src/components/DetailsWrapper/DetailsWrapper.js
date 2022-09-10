@@ -5,16 +5,18 @@ import { getEvent } from '../../utilities/api';
 import { addDetailsToEvent, upload } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
-import Stack from 'react-bootstrap/Stack';
-import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
 import { UploadEventImage } from '../UploadEventImage';
 import { TextEditor } from '../TextEditor';
+import { CreateEventButtons } from '../CreateEventButtons';
 
 export default function DetailsWrapper({ eventId }) {
+    const navigate = useNavigate();
 
     const [selectedImage, setSelectedImage] = useState()
+
+    const [initialState, setInitialState] = useState(false)
 
     const [event, setEvent] = useState()
 
@@ -22,14 +24,28 @@ export default function DetailsWrapper({ eventId }) {
         show: false,
         variant: '',
         message: ''
-
     })
+
+    const [showFooter, setShowFooter] = useState(false)
 
     const [eventImg, setEventImg] = useState()
 
     const [description, setDescription] = useState()
 
-    const navigate = useNavigate();
+    const [isSaving, setIsSaving] = useState(false)
+
+    // save initial state to check whether to show save buttons 
+    useEffect(() => {
+        setInitialState({
+            selectedImage,
+            description,
+        })
+    }, [])
+
+    useEffect(() => {
+        if (initialState?.selectedImage !== selectedImage || initialState?.description !== description) setShowFooter(true)
+        else setShowFooter(false)
+    }, [initialState, selectedImage, description])
 
     useEffect(() => {
         getEvent(eventId)
@@ -48,6 +64,7 @@ export default function DetailsWrapper({ eventId }) {
     }
 
     const handleSave = () => {
+        setIsSaving(true)
         if (eventImg) {
             const formData = new FormData();
             formData.append(`files`, eventImg);
@@ -60,30 +77,33 @@ export default function DetailsWrapper({ eventId }) {
                     data['image'] = res?.data[0].id;
 
                     addDetailsToEvent({ data })
-                        .then((res) => { 
-                            navigate(`/myevent/${eventId}/tickets`) 
+                        .then((res) => {
+                            navigate(`/myevent/${eventId}/tickets`)
+                            setIsSaving(false)
                             setAlert({
                                 show: true,
                                 varient: 'success',
                                 message: 'Your details have been updated.'
-                            }) 
-                    })
+                            })
+                        })
                         .catch((err) => {
                             console.error(err)
+                            setIsSaving(false)
                             setAlert({
                                 show: true,
                                 varient: 'error',
                                 message: 'Unable to save details please try again.'
-                            }) 
+                            })
                         })
                 })
                 .catch((err) => {
                     console.error(err)
+                    setIsSaving(false)
                     setAlert({
                         show: true,
                         varient: 'error',
                         message: 'Unable to save details please try again.'
-                    }) 
+                    })
                 })
         } else {
             let data = {};
@@ -92,16 +112,18 @@ export default function DetailsWrapper({ eventId }) {
             data['image'] = event?.image?.id;
 
             addDetailsToEvent({ data })
-                .then((res) => { 
+                .then((res) => {
                     navigate(`/myevent/${eventId}/details`)
+                    setIsSaving(false)
                     setAlert({
                         show: true,
                         varient: 'success',
                         message: 'Your details have been updated.'
-                    }) 
+                    })
                 })
                 .catch((err) => {
                     console.error(err)
+                    setIsSaving(false)
                     setAlert({
                         show: true,
                         varient: 'error',
@@ -116,9 +138,9 @@ export default function DetailsWrapper({ eventId }) {
             <section>
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Main event image</h1>
-                    { alert.show && 
+                    {alert.show &&
                         <>
-                            <Alert variant={alert.varient} onClose={() => setAlert({show: false, variant: '', message: ''})} dismissible>
+                            <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
                                 {alert.message}
                             </Alert>
                         </>
@@ -136,9 +158,9 @@ export default function DetailsWrapper({ eventId }) {
                     <TextEditor handleChange={handleDescription} event={event} />
                 </Card>
             </section>
-            <Stack direction="horizontal" className="btn-group-flex">
-                <Button size="lg" disabled={!event && !selectedImage} onClick={handleSave}>{event ? 'Save' : 'Save and continue'}</Button>
-            </Stack>
+            {showFooter && (
+                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={!eventImg} isSaving={isSaving} handleSave={handleSave} />
+            )}
         </section>
     );
 }

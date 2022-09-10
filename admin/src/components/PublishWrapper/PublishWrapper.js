@@ -9,6 +9,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { PublishEvent } from './PublishEvent';
+import { Spinner } from '../Spinner';
 
 export default function PublishWrapper({ event }) {
 
@@ -20,24 +21,31 @@ export default function PublishWrapper({ event }) {
 
     const [publishType, setPublishType] = useState('1')
 
+    const [isSaving, setIsSaving] = useState(false)
+
     const checkEventStart = () => {
         const currentDate = new Date();
         setEventStarted(moment(event?.start) < currentDate.getTime())
     }
 
     const publish = () => {
+        setIsSaving(true)
         let data = {};
         data['publishType'] = publishType ? publishType : 1;
         data['publishDate'] = moment(publishDate).format();
-        // Remove tickets so payload isn't to large
+        // Remove tickets so payload isn't too large
         delete event?.tickets;
         data['event'] = event;
 
         publishEvent({ data })
             .then((res) => {
+                setIsSaving(false)
                 navigate('/')
             })
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                setIsSaving(false)
+                console.error(err)
+            })
 
     }
 
@@ -59,8 +67,12 @@ export default function PublishWrapper({ event }) {
                 <PublishEvent setDate={setPublishDate} date={publishDate} setPublishType={setPublishType} publishType={publishType} eventStatus={event?.status} eventStarted={eventStarted} event={event} />
             </Card>
             {!eventStarted && event?.status !== "on_sale" && (
-                <Stack direction="horizontal" className="btn-group-flex ">
-                    <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
+                <Stack direction="horizontal" className="btn-group-flex">
+                    {isSaving ? (
+                        <Spinner variant="light" size="sm" />
+                    ) : (
+                        <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
+                    )}
                 </Stack>
             )}
         </section>

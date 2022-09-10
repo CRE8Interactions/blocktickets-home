@@ -18,6 +18,6 @@ export default function ViewTicketsPage() {
     }, [])
 
     return (
-        <TicketsWrapper tickets={tickets} />
+        <TicketsWrapper tickets={tickets} eventId={uuid} />
     )
 }

@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../layout/forms' as *;
 @use '../theme/input' as *;
 @use '../theme/borders' as theme;
 
@@ -24,5 +25,9 @@
 		&:focus {
 			border-color: transparent;
 		}
+	}
+
+	&.input-group-error {
+		@extend .error-border !optional;
 	}
 }
