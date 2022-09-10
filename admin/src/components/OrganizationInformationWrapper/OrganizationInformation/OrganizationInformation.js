@@ -8,7 +8,6 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
 export default function OrganizationInformation({ org, handleOrg }) {
-    console.log(org)
     return (
         <Form>
             <Form.Group className='form-group' controlId="name">
@@ -31,7 +30,7 @@ export default function OrganizationInformation({ org, handleOrg }) {
                         aria-label="Address"
                         required
                         placeholder="Address"
-                        value={org.address}
+                        value={org?.address}
                         onChange={handleOrg}
                     />
                     <Form.Control
@@ -40,7 +39,7 @@ export default function OrganizationInformation({ org, handleOrg }) {
                         aria-label="City"
                         required
                         placeholder="City"
-                        value={org.city}
+                        value={org?.city}
                         onChange={handleOrg}
                     />
                     <Row>
@@ -51,12 +50,12 @@ export default function OrganizationInformation({ org, handleOrg }) {
                                 aria-label="Zip Code"
                                 required
                                 placeholder="Zip code"
-                                value={org.zip_code}
+                                value={org?.zip_code}
                                 onChange={handleOrg}
                             />
                         </Col>
                         <Col className='ps-0'>
-                            <Form.Select aria-label="State" value={org.state} onChange={handleOrg} name="state">
+                            <Form.Select aria-label="State" value={org?.state} onChange={handleOrg} name="state">
                                 {stateOpt.map((option, index) => (
                                     <option key={index} value={option.value}>{option.name}</option>
                                 ))}

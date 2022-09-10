@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 import Form from 'react-bootstrap/Form';
@@ -12,6 +12,15 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 export default function PublishEvent({ setDate, date, setPublishType, publishType, eventStarted, eventStatus, event }) {
+    const [startDate, setStartDate] = useState('');
+
+    useEffect(() => {
+        if (event?.scheduled) {
+            setStartDate(moment(event?.scheduledTime).format())
+        } else {
+            setStartDate(new Date())
+        }
+    }, [event])
     return (
         <>
             <Row>
@@ -98,10 +107,10 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
             {!eventStarted && publishType === '2' && (
                 <Row>
                     <Col>
-                        <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={new Date()} />
+                        <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={startDate} />
                     </Col>
                     <Col>
-                        <TimeInputWrapper label="Time" id="event-time" setDate={setDate} selectedDate={date} />
+                        <TimeInputWrapper label="Time" id="event-time" setDate={setDate} selectedDate={date}  />
                     </Col>
                 </Row>
             )}

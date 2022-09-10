@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
@@ -6,6 +6,11 @@ import Form from 'react-bootstrap/Form';
 import { DateInput } from './DateInput';
 
 export default function DateInputWrapper({ label, id, setDate, selectedDate, startDate, endDate, error, size, event }) {
+
+    useEffect(() => {
+        
+    }, [startDate])
+
     return (
         <Form.Group>
             <div id={id} className={`date-picker-card day-picker-card ${size ? `date-picker-card-${size}` : ''} ${error ? 'error-border' : ''}`}>
