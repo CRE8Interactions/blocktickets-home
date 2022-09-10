@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import { InfoIcon } from '../../InfoIcon';
 
-export default function BasicInfo({ handleChange, event, categories }) {
+export default function BasicInfo({ handleChange, event }) {
     return (
         <Form>
             <Form.Group className="form-group" controlId="presentedBy">
