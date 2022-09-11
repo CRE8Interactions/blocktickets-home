@@ -17,12 +17,13 @@ export default function Spinner({ variant = 'default', size }) {
 			break;
 	}
 
-	if (size == 'sm') {
+	if (size === 'sm') {
 		width = '13';
 		height = '13';
 	}
 	else {
-		(width = '20'), (height = '20');
+		width = '20';
+		height = '20';
 	}
 	return (
 		<svg
