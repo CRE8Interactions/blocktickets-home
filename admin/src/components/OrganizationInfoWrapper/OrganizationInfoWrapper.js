@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import { getMyOrganizations } from '../../utilities/api';
+
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import { getMyOrganizations } from '../../utilities/api';
 
 import { OrganizationInformationWrapper } from "../OrganizationInformationWrapper";
 
