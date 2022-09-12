@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
 import { PublishEvent } from './PublishEvent';
+import { Spinner } from '../Spinner';
 
 export default function PublishWrapper({ event }) {
 
@@ -25,8 +26,9 @@ export default function PublishWrapper({ event }) {
         show: false,
         variant: '',
         message: ''
-
     })
+
+    const [isSaving, setIsSaving] = useState(false)
 
     const checkEventStart = () => {
         const currentDate = new Date();
@@ -34,15 +36,17 @@ export default function PublishWrapper({ event }) {
     }
 
     const publish = () => {
+        setIsSaving(true)
         let data = {};
         data['publishType'] = publishType ? publishType : 1;
         data['publishDate'] = moment(publishDate).format();
-        // Remove tickets so payload isn't to large
+        // Remove tickets so payload isn't too large
         delete event?.tickets;
         data['event'] = event;
 
         publishEvent({ data })
             .then((res) => {
+                setIsSaving(false)
                 if (data.publishType == 2) {
                     setAlert({
                         show: true,
@@ -54,7 +58,10 @@ export default function PublishWrapper({ event }) {
                 }
             })
             .catch((err) => {
-                console.error(err)
+                setIsSaving(false)
+                {
+                    console.error(err)
+                }
                 setAlert({
                     show: true,
                     varient: 'error',
@@ -78,9 +85,9 @@ export default function PublishWrapper({ event }) {
         <section className='wrapper'>
             <header className="section-header-sm section-heading section-heading--secondary">
                 <h1>Publish event</h1>
-                { alert.show && 
+                {alert.show &&
                     <>
-                        <Alert variant={alert.varient} onClose={() => setAlert({show: false, variant: '', message: ''})} dismissible>
+                        <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
                             {alert.message}
                         </Alert>
                     </>
@@ -90,8 +97,12 @@ export default function PublishWrapper({ event }) {
                 <PublishEvent setDate={setPublishDate} date={publishDate} setPublishType={setPublishType} publishType={publishType} eventStatus={event?.status} eventStarted={eventStarted} event={event} />
             </Card>
             {!eventStarted && event?.status !== "on_sale" && (
-                <Stack direction="horizontal" className="btn-group-flex ">
-                    <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
+                <Stack direction="horizontal" className="btn-group-flex">
+                    {isSaving ? (
+                        <Spinner variant="light" size="sm" />
+                    ) : (
+                        <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
+                    )}
                 </Stack>
             )}
         </section>

@@ -167,6 +167,7 @@ export default function BasicInfoWrapper({ eventId }) {
             editEvent({ data })
                 .then((res) => {
                     navigate(`/myevent/${eventId}/basic-info`)
+                    setIsSaving(false)
                     setAlert({
                         show: true,
                         varient: 'success',
@@ -176,6 +177,7 @@ export default function BasicInfoWrapper({ eventId }) {
                 .catch((err) => {
                     console.error(err)
                     navigate(`/myevent/${eventId}/basic-info`)
+                    setIsSaving(false)
                     setAlert({
                         show: true,
                         varient: 'error',
@@ -185,9 +187,13 @@ export default function BasicInfoWrapper({ eventId }) {
 
         } else {
             createEvent({ data })
-                .then((res) => navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`))
+                .then((res) => {
+                    setIsSaving(false)
+                    navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`)
+                })
                 .catch((err) => {
                     console.error(err)
+                    setIsSaving(false)
                     navigate(`/myevent/${eventId}/basic-info`)
                     setAlert({
                         show: true,
@@ -196,7 +202,6 @@ export default function BasicInfoWrapper({ eventId }) {
                     })
                 })
         }
-        setIsSaving(false)
     }
 
     return (
