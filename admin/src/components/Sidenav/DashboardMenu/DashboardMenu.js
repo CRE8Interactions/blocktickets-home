@@ -9,6 +9,7 @@ import Nav from 'react-bootstrap/Nav';
 import Badge from 'react-bootstrap/Badge';
 
 export default function DashboardMenu({ open, setOpen, event }) {
+
     const badgeStatus = (event) => {
         if (event?.status === 'unpublished') {
             return <Badge bg="warning" className='mb-3 align-self-start'>Unpublished</Badge>
