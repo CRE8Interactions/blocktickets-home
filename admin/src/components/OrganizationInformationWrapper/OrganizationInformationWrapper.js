@@ -7,7 +7,7 @@ import { OrganizationInformation } from './OrganizationInformation'
 export default function OrganizationInformationWrapper({ getOrgInfo }) {
 
     const [org, setOrg] = useState({
-        org: '',
+        orgName: '',
         address: '',
         city: '',
         zip_code: '',
