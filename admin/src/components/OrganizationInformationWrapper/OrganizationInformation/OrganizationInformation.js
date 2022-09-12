@@ -17,7 +17,7 @@ export default function OrganizationInformation({ org, handleOrg }) {
                     name="orgName"
                     required
                     placeholder="Enter organization name"
-                    value={org?.name}
+                    value={org?.orgName}
                     onChange={handleOrg}
                 />
             </Form.Group>
