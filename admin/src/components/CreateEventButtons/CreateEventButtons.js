@@ -38,7 +38,7 @@ export default function CreateEventButtons({ isEditing, isDisabled = false, isSa
                     <Button variant="outline-light" size="lg">Discard</Button>
                 )}
 
-                <Button size="lg" disabled={isDisabled} className={`${!isEditing && !isSaving ? 'btn-next' : ''} ${!isEditing ? 'btn-width' : ''} `} onClick={handleSave}>{getText()}</Button>
+                <Button size="lg" disabled={isDisabled} className={`${!isEditing && !isSaving ? 'btn-next' : ''} ${isEditing ? 'btn-width-sm' : 'btn-width-lg'} `} onClick={handleSave}>{getText()}</Button>
 
             </Stack>
         </div>

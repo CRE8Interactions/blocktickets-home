@@ -161,7 +161,7 @@ export default function DetailsWrapper({ eventId }) {
                 </section>
             </section>
             {showFooter && (
-                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!eventImg} isSaving={isSaving} handleSave={handleSave} />
+                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!event?.image?.id ? !eventImg : !event?.image?.id} isSaving={isSaving} handleSave={handleSave} />
             )}
         </>
     );

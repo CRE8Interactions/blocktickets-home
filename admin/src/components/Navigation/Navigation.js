@@ -19,7 +19,7 @@ import desktopLogo from '../../assets/logo.svg';
 
 import './navigation.scss';
 
-export default function Navigation({ user, me }) {
+export default function Navigation({ user }) {
     const windowSize = useWindowSize();
     const navigate = useNavigate();
     const [org, setOrg] = useState()

@@ -48,12 +48,10 @@ export default function UploadEventImage({ setSelectedImage, event }) {
 
     const handleRemove = () => {
         setSelectedImage('')
+        setPreviewImage('')
         setShowPreview(false)
         setImageUrl('')
-    }
-
-    const handleReplace = () => {
-        handleRemove()
+        setCroppedCoordinates()
     }
 
     return (
@@ -72,7 +70,7 @@ export default function UploadEventImage({ setSelectedImage, event }) {
                         <Image src={imageUrl} rounded width={!event && !showPreview ? croppedCoordinates.width : ''} height={!event && !showPreview ? croppedCoordinates.height : ''} />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
-                            <Button variant='outline-light' onClick={handleReplace}>Replace</Button>
+                            <Button variant='outline-light' onClick={handleRemove}>Replace</Button>
                         </Stack>
                     </>
                 )
@@ -97,7 +95,7 @@ export default function UploadEventImage({ setSelectedImage, event }) {
                             />
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="outline-light" onClick={handleClose}>Cancel</Button>
+                            <Button variant="outline-light" onClick={handleRemove}>Cancel</Button>
                             <Button onClick={handleSave}>Crop and save</Button>
                         </Modal.Footer>
                     </Modal>

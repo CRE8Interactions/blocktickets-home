@@ -57,7 +57,6 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                                 type="text"
                                 name="address"
                                 aria-label="Address"
-                                required
                                 placeholder="Address"
                                 value={taxDetails.address}
                                 onChange={handleTaxDetails}
@@ -66,7 +65,6 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                                 type="text"
                                 name="city"
                                 aria-label="City"
-                                required
                                 placeholder="City"
                                 value={taxDetails.city}
                                 onChange={handleTaxDetails}
@@ -77,7 +75,6 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                                         type="text"
                                         name="zip_code"
                                         aria-label="Zip Code"
-                                        required
                                         placeholder="Zip code"
                                         value={taxDetails.zip_code}
                                         onChange={handleTaxDetails}
@@ -106,7 +103,6 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                             name="ein"
                             maxLength="10"
                             onChange={handleTaxDetails}
-                            required
                         />
                         <Form.Text>TIN and EIN type must correspond to the name provided in Step 1</Form.Text>
                     </Form>

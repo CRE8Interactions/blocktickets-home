@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Tickets } from './Tickets';
 
-export default function TicketsWrapper({ tickets, eventId }) {
+export default function TicketsWrapper({ tickets, eventStatus, eventId }) {
 
     const navigate = useNavigate();
 
@@ -20,11 +20,13 @@ export default function TicketsWrapper({ tickets, eventId }) {
                 <Tickets tickets={tickets} />
             </section>
             {/* only show if event is not published yet */}
-            <div className="btn-footer">
-                <Stack direction="horizontal" className="btn-group-flex max-width-wrapper">
-                    <Link to={`/myevent/${eventId}/publish`} className='btn btn-primary btn-lg btn-next'>Publish</Link>
-                </Stack>
-            </div>
+            {eventStatus === "unpublished" && (
+                <div className="btn-footer">
+                    <Stack direction="horizontal" className="btn-group-flex max-width-wrapper">
+                        <Link to={`/myevent/${eventId}/publish`} className='btn btn-primary btn-lg btn-next'>Publish</Link>
+                    </Stack>
+                </div>
+            )}
         </>
     );
 }

@@ -16,7 +16,7 @@ import { TicketBreakdownModal } from './TicketBreakdownModal';
 
 export default function CreateTicket({ type, isEdit, handleChange, handleValid, ticket, setStartDate, startDate, setEndDate, endDate, hasError, errors }) {
 
-    const isPaid = type === 'paid'
+    const isPaid = type === 'paid';
 
     const [show, setShow] = useState(false)
 

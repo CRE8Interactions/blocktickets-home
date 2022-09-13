@@ -64,7 +64,12 @@ $navbar-height: rem(82);
 		margin-bottom: 0px;
 
 		.btn-width {
-			flex-basis: 226px;
+			&-sm {
+				flex-basis: 89px;
+			}
+			&-lg {
+				flex-basis: 226px;
+			}
 		}
 	}
 }
