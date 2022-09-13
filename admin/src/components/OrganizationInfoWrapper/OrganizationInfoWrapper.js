@@ -31,7 +31,7 @@ export default function OrganizationInfoWrapper() {
                 <p className='section-header-desc'>Details that apply across your events and billing</p>
             </header>
             <Card body className='card--sm'>
-                <OrganizationInformationWrapper orgInfo={orgInfo} setOrgInfo={setOrgInfo} />
+                <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button size="lg" onClick={handleSave}>Save</Button>
