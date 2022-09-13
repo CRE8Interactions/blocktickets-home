@@ -43,9 +43,9 @@ export default function DetailsWrapper({ eventId }) {
     }, [])
 
     useEffect(() => {
-        if (initialState?.selectedImage !== selectedImage || initialState?.description !== description) setShowFooter(true)
+        if ((event?.image?.id || initialState?.selectedImage !== selectedImage || initialState?.description !== description)) setShowFooter(true)
         else setShowFooter(false)
-    }, [initialState, selectedImage, description])
+    }, [initialState, selectedImage, description, event])
 
     useEffect(() => {
         getEvent(eventId)
@@ -134,33 +134,35 @@ export default function DetailsWrapper({ eventId }) {
     }
 
     return (
-        <section className='wrapper'>
-            <section>
-                <header className="section-header-sm section-heading section-heading--secondary">
-                    <h1>Main event image</h1>
-                    {alert.show &&
-                        <>
-                            <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
-                                {alert.message}
-                            </Alert>
-                        </>
-                    }
-                </header>
-                <Card body className='card--sm'>
-                    <UploadEventImage setSelectedImage={setSelectedImage} event={event} />
-                </Card>
-            </section>
-            <section>
-                <header className="section-header-sm section-heading section-heading--secondary">
-                    <h1>Event description</h1>
-                </header>
-                <Card body className='card--sm'>
-                    <TextEditor handleChange={handleDescription} event={event} />
-                </Card>
+        <>
+            <section className='wrapper event-form'>
+                <section>
+                    <header className="section-header-sm section-heading section-heading--secondary">
+                        <h1>Main event image</h1>
+                        {alert.show &&
+                            <>
+                                <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                                    {alert.message}
+                                </Alert>
+                            </>
+                        }
+                    </header>
+                    <Card body className='card--sm'>
+                        <UploadEventImage setSelectedImage={setSelectedImage} event={event} />
+                    </Card>
+                </section>
+                <section>
+                    <header className="section-header-sm section-heading section-heading--secondary">
+                        <h1>Event description</h1>
+                    </header>
+                    <Card body className='card--sm'>
+                        <TextEditor handleChange={handleDescription} event={event} />
+                    </Card>
+                </section>
             </section>
             {showFooter && (
-                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={!eventImg} isSaving={isSaving} handleSave={handleSave} />
+                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!eventImg} isSaving={isSaving} handleSave={handleSave} />
             )}
-        </section>
+        </>
     );
 }

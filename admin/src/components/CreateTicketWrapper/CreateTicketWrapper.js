@@ -58,7 +58,13 @@ export default function CreateTicketWrapper({ eventId, type }) {
         if (initialState?.ticket !== ticket) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, ticket.hideTicket, ticket.name, ticket.description, ticket.quantity, ticket.price])
+    }, [initialState, ticket.hideTicket, ticket.name, ticket.description, ticket.quantity, ticket.price, ticket.fee, ticket.price, ticket.minResalePrice,
+        , ticket.maxResalePrice, ticket.minQuantity, ticket.maxQuantity])
+
+    useEffect(() => {
+        setHasError(endDate.getTime() < startDate.getTime())
+
+    }, [startDate, endDate])
 
     useEffect(() => {
         if (type) {
@@ -83,11 +89,6 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 .catch((err) => console.error(err))
         }
     }, [type])
-
-    useEffect(() => {
-        setHasError(endDate.getTime() < startDate.getTime())
-
-    }, [startDate, endDate])
 
     const handleChange = (e, val = e.target.value) => {
         setTicket({ ...ticket, [e.target.name]: val })
@@ -119,7 +120,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 }
                 break;
             case 'minQuantity':
-                if (value && value > ticket.quantity) {
+                if (value > ticket.quantity) {
                     setErrors({
                         field: name,
                         message: 'Minimum quantity cannot be more than available quantity'
@@ -200,7 +201,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
     }
 
     return (
-        <section className='wrapper'>
+        <section className='wrapper event-form'>
             <header className="section-header-sm section-heading section-heading--secondary">
                 <h1>{type ? 'Edit' : 'Create a'} ticket</h1>
             </header>
@@ -222,16 +223,18 @@ export default function CreateTicketWrapper({ eventId, type }) {
                     </div>
                     <Tab.Content>
                         <Tab.Pane eventKey="paid">
-                            <CreateTicket type={key} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} errors={errors} />
+                            <CreateTicket type={key}
+                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} errors={errors} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="free">
-                            <CreateTicket type={key} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} errors={errors} />
+                            <CreateTicket type={key}
+                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} errors={errors} />
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>
             </Card>
             {showFooter && (
-                <CreateEventButtons type="Create ticket" isEditing={type ? true : false} isDisabled={checkDisabled()} isSaving={isSaving} handleSave={handleSave} />
+                <CreateEventButtons page="Create ticket" isEditing={type ? true : false} isDisabled={checkDisabled()} isSaving={isSaving} handleSave={handleSave} />
             )}
         </section>
     );
