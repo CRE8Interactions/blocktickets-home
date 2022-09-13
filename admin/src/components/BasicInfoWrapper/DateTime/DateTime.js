@@ -25,7 +25,7 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                     </Col>
                 </Row>
             </fieldset>
-            <div className="form-group">
+            <div className="pt-2 pb-5">
                 <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id="check-display-checkbox">
                     <Form.Check.Input
                         name="displayStartTime"
@@ -41,7 +41,6 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                 </Form.Check>
             </div>
             <Form.Check
-                className='form-group'
                 type="switch"
                 label="Doors open"
                 id="doors"
@@ -53,23 +52,20 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                     <legend>Doors open</legend>
                     <Row>
                         <Col>
-                            <DateInputWrapper label="Date" id="doors-open" setDate={setDoorsOpenDate} selectedDate={doorsOpenDate} startDate={doorsOpenDate}
-                                endDate={doorsOpenDate}
-                            />
-                        </Col>
-                        <Col>
                             <TimeInputWrapper
                                 label="time"
                                 id="doors-open-time"
                                 setDate={setDoorsOpenDate} selectedDate={doorsOpenDate}
                             />
                         </Col>
+                        <Col>
+
+                        </Col>
                     </Row>
                 </fieldset>
             )}
 
             <Form.Check
-                className='form-group'
                 type="switch"
                 label="Event ends"
                 id="ends"

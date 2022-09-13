@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
@@ -6,9 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { BackButton } from "./../BackButton";
 import { Spinner } from '../Spinner';
 
-import './createEventButtons.scss';
-
-export default function CreateEventButtons({ isEditing, isDisabled = false, isSaving, handleSave, type }) {
+export default function CreateEventButtons({ isEditing, isDisabled = false, isSaving, handleSave, page, styles }) {
 
     const getText = () => {
         if (isSaving) {
@@ -18,8 +17,8 @@ export default function CreateEventButtons({ isEditing, isDisabled = false, isSa
             if (isEditing) {
                 return 'Save'
             } else {
-                if (type === 'Create ticket') {
-                    return type
+                if (page === 'Create ticket') {
+                    return page
                 }
                 else {
                     return "Save and continue"
@@ -28,15 +27,19 @@ export default function CreateEventButtons({ isEditing, isDisabled = false, isSa
         }
     }
     return (
-        <div id="btn-footer">
-            <Stack direction="horizontal" className="btn-container my-0 btn-group-flex">
-                {isEditing && (
-                    <Button variant="outline-light" size="lg">Discard</Button>
-                )}
-                {type === 'Create ticket' && (
+        <div className={`btn-footer ${styles}`}>
+            <Stack direction="horizontal" className="wrapper btn-group-flex">
+
+                {page === 'Create ticket' && (
                     <BackButton />
                 )}
-                <Button size="lg" disabled={isDisabled} className={`${!isEditing ? 'btn-next' : ''} `} onClick={handleSave}>{getText()}</Button>
+
+                {!page && (
+                    <Button variant="outline-light" size="lg">Discard</Button>
+                )}
+
+                <Button size="lg" disabled={isDisabled} className={`${!isEditing && !isSaving ? 'btn-next' : ''} ${!isEditing ? 'btn-width' : ''} `} onClick={handleSave}>{getText()}</Button>
+
             </Stack>
         </div>
     )

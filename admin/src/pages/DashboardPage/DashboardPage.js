@@ -16,7 +16,7 @@ export default function DashboardPage() {
     return (
         <>
             <Sidenav event={event} />
-            <div className='spacer-md'>
+            <div className='spacer-md' id="main-content">
                 <Outlet />
             </div>
         </>

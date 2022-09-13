@@ -72,11 +72,19 @@ export const changeBackground = url => {
 
 export const toggleContainer = (url) => {
     if (/myevent|\/settings/g.test(url)) {
-        document.querySelectorAll('#main-container').forEach(el => el.classList.remove('container')) // remove container class - shared
-        document.querySelectorAll('#main-container').forEach(el => el.classList.add('sidebar-container')) // add sidebar container class - shared
+        document.querySelector('#main-container').classList.remove('container') // remove container class 
+        document.querySelector('#main-container').classList.add('sidebar-container') // add sidebar container class 
     } else {
-        document.querySelectorAll('#main-container').forEach(el => el.classList.add('container'))
-        document.querySelectorAll('#main-container').forEach(el => el.classList.remove('sidebar-container'))
+        document.querySelector('#main-container').classList.add('container')
+        document.querySelector('#main-container').classList.remove('sidebar-container')
+    }
+}
+
+export const toggleSpacing = (url) => {
+    if (/create|\/basic-info|\/details|\/tickets\/create|\/tickets\/edit/g.test(url)) {
+        document.querySelector('#main-content').classList.add('pb-0')
+    } else {
+        document.querySelector('#main-content').classList.remove('pb-0')
     }
 }
 

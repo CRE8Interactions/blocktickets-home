@@ -6,7 +6,7 @@ import Router from './Router';
 import authService from './utilities/services/auth.service';
 import UserContext from './context/User/User';
 
-import { toggleContainer, changeBackground } from './utilities/helpers';
+import { toggleContainer, toggleSpacing, changeBackground } from './utilities/helpers';
 
 import { Navigation } from './components';
 
@@ -33,7 +33,8 @@ function App() {
 
     useLayoutEffect(() => {
         changeBackground(location.pathname)
-        toggleContainer(location.pathname)
+        toggleContainer(location.pathname);
+        toggleSpacing(location.pathname);
 
     }, [location.pathname])
 

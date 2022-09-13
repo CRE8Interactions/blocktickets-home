@@ -19,12 +19,12 @@ $text-spacer-xs: rem(16);
 	padding: $spacer-md 0px;
 }
 
-section + section {
-	margin-top: $text-spacer;
+.event-form {
+	padding-bottom: rem(148);
 }
 
-#create-event section + section {
-	margin-top: rem(36);
+section + section {
+	margin-top: $text-spacer;
 }
 
 %flex-between {

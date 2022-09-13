@@ -23,6 +23,11 @@ select:-webkit-autofill:focus {
 	}
 }
 
+.form-check + .form-check,
+.form-group + .form-check {
+	margin-top: $text-spacer;
+}
+
 .form-control,
 .form-select {
 	&:disabled {
@@ -42,6 +47,8 @@ select:-webkit-autofill:focus {
 
 legend {
 	font-weight: $fw-semi-bold;
+	margin-bottom: 0px;
+	padding-bottom: rem(18);
 }
 
 .form-label,

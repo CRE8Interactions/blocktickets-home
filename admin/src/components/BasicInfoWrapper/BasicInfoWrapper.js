@@ -44,9 +44,9 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const [endDate, setEndDate] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
 
-    const [doorsOpenDate, setDoorsOpenDate] = useState(new Date());
+    const [doorsOpenDate, setDoorsOpenDate] = useState(new Date(moment('10:00 am', 'h:mm a').format()));
 
-    const [errorFields, setErrorFields] = useState();
+    const [hasError, setHasError] = useState(false)
 
     const [venues, setVenues] = useState()
 
@@ -97,53 +97,18 @@ export default function BasicInfoWrapper({ eventId }) {
     }, [event])
 
     useEffect(() => {
+        setHasError(endDate.getTime() < startDate.getTime())
+
+    }, [startDate, endDate])
+
+    useEffect(() => {
         if (initialState?.event !== event) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, event.presentedBy, event.name, event.venue, event.timezone, event.displayEndTime])
-
-    // control error messages for start, end and doors open dates 
-    useLayoutEffect(() => {
-        let fields = [];
-        let message = '';
-
-        if (event.displayEventEnd) {
-            fields = ['event-end', 'event-start']
-            if (endDate.getTime() < startDate.getTime()) {
-                message = "Event end date must be after event start date"
-                addError(fields, message)
-            }
-            else {
-                removeError(fields)
-            }
-        }
-        else if (event.displayDoorsOpen) {
-            fields = ['doors-open', 'event-start']
-            if (doorsOpenDate.getDate() !== startDate.getDate()) {
-                message = "Doors open date must be on the same day as the event start date"
-                addError(fields, message)
-            }
-            else {
-                removeError(fields)
-            }
-        }
-
-    }, [startDate, endDate, doorsOpenDate])
+    }, [initialState, event.presentedBy, event.name, event.venue, event.timezone, event.displayStartDate, event.displayEndTime, event.displayDoorsOpen])
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
-    }
-
-    const addError = (fields, message) => {
-        setErrorFields([...fields]);
-        fields.forEach(field => document.querySelector(`#${field}`).classList.add('error-border'))
-        fields.forEach(field => document.querySelector(`.form-text#${field}`).innerHTML = message)
-    }
-
-    const removeError = (fields) => {
-        fields.forEach(field => document.querySelector(`#${field}`).classList.remove('error-border'))
-        fields.forEach(field => document.querySelector(`.form-text#${field}`).innerHTML = '')
-        setErrorFields([])
     }
 
     const handleSave = () => {
@@ -192,9 +157,10 @@ export default function BasicInfoWrapper({ eventId }) {
                     navigate(`/myevent/${res.data?.data?.attributes?.uuid}/details`)
                 })
                 .catch((err) => {
+                    window.scrollTo(0, 0)
                     console.error(err)
                     setIsSaving(false)
-                    navigate(`/myevent/${eventId}/basic-info`)
+                    // navigate(`/myevent/${eventId}/basic-info`)
                     setAlert({
                         show: true,
                         varient: 'error',
@@ -205,41 +171,45 @@ export default function BasicInfoWrapper({ eventId }) {
     }
 
     return (
-        <section className='wrapper'>
-            <section>
-                <header className="section-header-sm section-heading section-heading--secondary">
-                    <h1>Basic info</h1>
-                    {alert.show &&
-                        <>
-                            <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
-                                {alert.message}
-                            </Alert>
-                        </>
-                    }
-                </header>
-                <Card body className='card--sm'>
-                    <BasicInfo handleChange={handleChange} event={event} />
-                </Card>
+        <>
+            <section className='wrapper event-form'>
+                <section>
+                    <header className="section-header-sm section-heading section-heading--secondary">
+                        <h1>Basic info</h1>
+                        {alert.show &&
+                            <>
+                                <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                                    {alert.message}
+                                </Alert>
+                            </>
+                        }
+                    </header>
+                    <Card body className='card--sm'>
+                        <BasicInfo handleChange={handleChange} event={event} />
+                    </Card>
+                </section>
+                <section>
+                    <header className="section-header-sm section-heading section-heading--secondary">
+                        <h1>Date & Time</h1>
+                    </header>
+                    <Card body className='card--sm'>
+                        <DateTime event={event} handleChange={handleChange} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} setDoorsOpenDate={setDoorsOpenDate} doorsOpenDate={doorsOpenDate} error={hasError} />
+                    </Card>
+                </section>
+                <section>
+                    <header className="section-header-sm section-heading section-heading--secondary">
+                        <h1>Location</h1>
+                    </header>
+                    <Card body className='card--sm'>
+                        <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} venues={venues} />
+                    </Card>
+                </section>
             </section>
-            <section>
-                <header className="section-header-sm section-heading section-heading--secondary">
-                    <h1>Date & Time</h1>
-                </header>
-                <Card body className='card--sm'>
-                    <DateTime event={event} handleChange={handleChange} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} setDoorsOpenDate={setDoorsOpenDate} doorsOpenDate={doorsOpenDate} />
-                </Card>
-            </section>
-            <section>
-                <header className="section-header-sm section-heading section-heading--secondary">
-                    <h1>Location</h1>
-                </header>
-                <Card body className='card--sm'>
-                    <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} venues={venues} />
-                </Card>
-            </section>
+
             {showFooter && (
-                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={errorFields?.length > 0 || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} />
-            )}
-        </section>
+                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={hasError || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} styles={`${!eventId ? 'without-sidebar' : ' '} `} />
+            )
+            }
+        </>
     );
 }
