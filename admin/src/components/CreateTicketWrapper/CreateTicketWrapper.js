@@ -54,6 +54,12 @@ export default function CreateTicketWrapper({ eventId, type }) {
         })
     }, [])
 
+    // TODO: change key if ticket is free when editing ticket 
+    useEffect(() => {
+        if (ticket.free) setKey('free')
+    }, [ticket])
+
+
     useEffect(() => {
         if (initialState?.ticket !== ticket) setShowFooter(true)
         else setShowFooter(false)
@@ -74,6 +80,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                     if (!ticket) return
                     setTicket({
                         name: ticket?.name,
+                        free: ticket?.free,
                         description: ticket?.description,
                         quantity: res.data?.tickets?.filter((ticket) => ticket.name === type).length,
                         price: ticket?.cost,
@@ -96,10 +103,11 @@ export default function CreateTicketWrapper({ eventId, type }) {
 
     const handleValid = (_, el) => {
         const { name, value } = el;
+        let num = parseFloat(value)
 
         switch (name) {
             case 'minResalePrice':
-                if (value && value < ticket.price) {
+                if (num && num < ticket.price) {
                     setErrors({
                         field: name,
                         message: 'Minimum resale price cannot be less than price of ticket'
@@ -109,7 +117,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 }
                 break;
             case 'maxResalePrice':
-                if (value && value < ticket.minResalePrice) {
+                if (num && num < ticket.minResalePrice) {
                     setErrors({
                         field: name,
                         message: 'Maximum resale price cannot be less than minimum resale price'
@@ -120,7 +128,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 }
                 break;
             case 'minQuantity':
-                if (value > ticket.quantity) {
+                if (num > ticket.quantity) {
                     setErrors({
                         field: name,
                         message: 'Minimum quantity cannot be more than available quantity'
@@ -130,7 +138,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 }
                 break;
             case 'maxQuantity':
-                if (value && ((value < ticket.minQuantity) || (value > ticket.quantity))) {
+                if (num && ((num < ticket.minQuantity) || (num > ticket.quantity))) {
                     setErrors({
                         field: name,
                         message: 'Maximum quantity cannot be less than minimum quantity or more than available quantity'
@@ -161,7 +169,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
         data['minResalePrice'] = parseFloat(ticket.minResalePrice);
         data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
         data['eventId'] = eventId;
-        data['free'] = ticket.price > 0 ? false : true;
+        data['free'] = key === "free" ? true : false;
         data['generalAdmission'] = true;
         data['quantity'] = ticket.quantity;
         data['sales_start'] = moment(start).format();
@@ -207,20 +215,22 @@ export default function CreateTicketWrapper({ eventId, type }) {
             </header>
             <Card body className='card--sm'>
                 <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-                    <div className='d-flex mb-5 '>
-                        <Nav as="ul" variant="pills" justify>
-                            <Nav.Item as="li">
-                                <Nav.Link as="button" eventKey="paid">
-                                    Paid
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item as="li">
-                                <Nav.Link as="button" eventKey="free">
-                                    Free
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                    </div>
+                    {!type && (
+                        <div className='d-flex mb-5 '>
+                            <Nav as="ul" variant="pills" justify>
+                                <Nav.Item as="li">
+                                    <Nav.Link as="button" eventKey="paid">
+                                        Paid
+                                    </Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item as="li">
+                                    <Nav.Link as="button" eventKey="free">
+                                        Free
+                                    </Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </div>
+                    )}
                     <Tab.Content>
                         <Tab.Pane eventKey="paid">
                             <CreateTicket type={key}

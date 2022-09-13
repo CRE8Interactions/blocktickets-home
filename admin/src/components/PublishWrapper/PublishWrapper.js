@@ -50,7 +50,7 @@ export default function PublishWrapper({ event }) {
                 if (data.publishType == 2) {
                     setAlert({
                         show: true,
-                        varient: 'success',
+                        variant: 'success',
                         message: 'Your event has been scheduled.'
                     })
                 } else {
@@ -64,7 +64,7 @@ export default function PublishWrapper({ event }) {
                 }
                 setAlert({
                     show: true,
-                    varient: 'error',
+                    variant: 'danger',
                     message: 'Unable to save info please try again.'
                 })
             })
@@ -88,7 +88,7 @@ export default function PublishWrapper({ event }) {
                     <h1>Publish event</h1>
                     {alert.show &&
                         <>
-                            <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                            <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
                                 {alert.message}
                             </Alert>
                         </>

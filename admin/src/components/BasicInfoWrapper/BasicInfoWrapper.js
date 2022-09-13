@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
@@ -77,6 +77,7 @@ export default function BasicInfoWrapper({ eventId }) {
             endDate,
             doorsOpenDate
         })
+
         getVenues()
             .then((res) => { setVenues(res?.data) })
             .catch((err) => console.error(err))
@@ -97,8 +98,9 @@ export default function BasicInfoWrapper({ eventId }) {
     }, [event])
 
     useEffect(() => {
-        setHasError(endDate.getTime() < startDate.getTime())
-
+        if (event.displayEventEnd) {
+            setHasError(endDate.getTime() < startDate.getTime())
+        }
     }, [startDate, endDate])
 
     useEffect(() => {
@@ -112,6 +114,7 @@ export default function BasicInfoWrapper({ eventId }) {
     }
 
     const handleSave = () => {
+        // TODO: add validation - An event can't be created by an organization if there's already one present with the same name and start date and location
         setIsSaving(true)
         // create event 
         const data = {};
@@ -135,17 +138,18 @@ export default function BasicInfoWrapper({ eventId }) {
                     setIsSaving(false)
                     setAlert({
                         show: true,
-                        varient: 'success',
+                        variant: 'success',
                         message: 'Your info has been updated.'
                     })
                 })
                 .catch((err) => {
                     console.error(err)
-                    navigate(`/myevent/${eventId}/basic-info`)
+                    window.scrollTo(0, 0)
+                    // navigate(`/myevent/${eventId}/basic-info`)
                     setIsSaving(false)
                     setAlert({
                         show: true,
-                        varient: 'error',
+                        variant: 'danger',
                         message: 'Unable to save info please try again.'
                     })
                 })
@@ -163,7 +167,7 @@ export default function BasicInfoWrapper({ eventId }) {
                     // navigate(`/myevent/${eventId}/basic-info`)
                     setAlert({
                         show: true,
-                        varient: 'error',
+                        variant: 'danger',
                         message: 'Unable to save info please try again.'
                     })
                 })
@@ -173,16 +177,16 @@ export default function BasicInfoWrapper({ eventId }) {
     return (
         <>
             <section className='wrapper event-form'>
+                {alert.show &&
+                    <>
+                        <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                            {alert.message}
+                        </Alert>
+                    </>
+                }
                 <section>
                     <header className="section-header-sm section-heading section-heading--secondary">
                         <h1>Basic info</h1>
-                        {alert.show &&
-                            <>
-                                <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
-                                    {alert.message}
-                                </Alert>
-                            </>
-                        }
                     </header>
                     <Card body className='card--sm'>
                         <BasicInfo handleChange={handleChange} event={event} />

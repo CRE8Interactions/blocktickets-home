@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getTicketDetails } from '../../utilities/api';
+import { getTicketDetails, getEvent } from '../../utilities/api';
 
 import { TicketsWrapper } from "../../components";
 
 export default function ViewTicketsPage() {
 
     const { uuid } = useParams()
+
+    const [event, setEvent] = useState();
 
     const [tickets, setTickets] = useState()
 
@@ -17,7 +19,13 @@ export default function ViewTicketsPage() {
             .catch((err) => console.error(err))
     }, [])
 
+    useEffect(() => {
+        getEvent(uuid)
+            .then((res) => setEvent(res.data))
+            .catch((err) => console.error(err))
+    }, [uuid])
+
     return (
-        <TicketsWrapper tickets={tickets} eventId={uuid} />
+        <TicketsWrapper tickets={tickets} eventStatus={event?.status} eventId={uuid} />
     )
 }
