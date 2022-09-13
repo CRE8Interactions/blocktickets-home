@@ -83,7 +83,7 @@ jobs:
 # Orchestrate our job run sequence
 workflows:
   version: 2
-  build-project:
+  build-deploy:
     jobs:
       - pull-and-build:
           filters:
