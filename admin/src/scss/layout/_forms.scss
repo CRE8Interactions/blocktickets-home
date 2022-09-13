@@ -23,8 +23,9 @@ select:-webkit-autofill:focus {
 	}
 }
 
-.form-check + .form-check,
-.form-group + .form-check {
+.form-switch + .form-switch,
+.form-switch + .form-group,
+.form-group + .form-switch {
 	margin-top: $text-spacer;
 }
 
@@ -58,6 +59,12 @@ legend {
 	margin-bottom: rem(12);
 	color: $text-muted;
 	text-transform: uppercase;
+}
+
+.form-switch {
+	.form-check-input {
+		height: rem(26);
+	}
 }
 
 .form-text {
