@@ -11,7 +11,7 @@ import { OrganizationInformationWrapper } from "../OrganizationInformationWrappe
 export default function OrganizationInfoWrapper() {
 
     const [orgInfo, setOrgInfo] = useState({
-        name: '',
+        orgName: '',
         address: []
     })
 
@@ -20,7 +20,9 @@ export default function OrganizationInfoWrapper() {
             .then((res) => setOrgInfo(res.data[0]))
     }, [])
 
-    const handleSave = () => { }
+    const handleSave = () => {
+        // TODO: make orgName unique
+    }
 
     return (
         <section className='wrapper'>

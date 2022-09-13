@@ -28,7 +28,6 @@ export default function OrganizationInformation({ org, handleOrg }) {
                         type="text"
                         name="address"
                         aria-label="Address"
-                        required
                         placeholder="Address"
                         value={org?.address}
                         onChange={handleOrg}
@@ -37,7 +36,6 @@ export default function OrganizationInformation({ org, handleOrg }) {
                         type="text"
                         name="city"
                         aria-label="City"
-                        required
                         placeholder="City"
                         value={org?.city}
                         onChange={handleOrg}
@@ -48,7 +46,6 @@ export default function OrganizationInformation({ org, handleOrg }) {
                                 type="text"
                                 name="zip_code"
                                 aria-label="Zip Code"
-                                required
                                 placeholder="Zip code"
                                 value={org?.zip_code}
                                 onChange={handleOrg}

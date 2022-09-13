@@ -4,6 +4,7 @@ import { stateOpt } from '../../utilities/helpers'
 
 import { OrganizationInformation } from './OrganizationInformation'
 
+// child component to parent components 
 export default function OrganizationInformationWrapper({ getOrgInfo }) {
 
     const [org, setOrg] = useState({
