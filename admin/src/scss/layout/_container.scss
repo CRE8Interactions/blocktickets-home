@@ -45,6 +45,30 @@ $navbar-height: rem(82);
 	overflow: hidden;
 }
 
+.btn-footer {
+	position: fixed;
+	left: 314px;
+	right: 0;
+	bottom: 0;
+	padding: $text-spacer-sm;
+	background-color: $gray-300;
+	border-top: border();
+	transition: all .32s cubic-bezier(.4, 0, .3, 1);
+
+	&.without-sidebar {
+		left: 0;
+	}
+	.wrapper,
+	.max-width-wrapper {
+		margin-top: 0px;
+		margin-bottom: 0px;
+
+		.btn-width {
+			flex-basis: 226px;
+		}
+	}
+}
+
 @mixin hide-scrollbars() {
 	& {
 		-ms-overflow-style: none; /* Internet Explorer 10+ */
