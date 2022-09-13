@@ -81,10 +81,14 @@ export const toggleContainer = (url) => {
 }
 
 export const toggleSpacing = (url) => {
-    if (/create|\/basic-info|\/details|\/tickets\/create|\/tickets\/edit/g.test(url)) {
-        document.querySelector('#main-content').classList.add('pb-0')
-    } else {
-        document.querySelector('#main-content').classList.remove('pb-0')
+    const el = document.querySelector('#main-content');
+
+    if (el) {
+        if (/create|\/basic-info|\/details|\/tickets\/create|\/tickets\/edit/g.test(url)) {
+            el.classList.add('pb-0')
+        } else {
+            el.classList.remove('pb-0')
+        }
     }
 }
 
