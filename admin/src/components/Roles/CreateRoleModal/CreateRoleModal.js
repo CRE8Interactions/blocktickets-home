@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import './createRole.scss';
 
 export default function CreateRoleModal({ show, handleClose, permissions, id, role, setRole, isCheck, handleSelectAll, handleCheck, handleCreate }) {
-    if (permissions.length === 0) return (<div />);
+    if (permissions?.length === 0) return (<div />);
     return (
         <Modal id="create-role" scrollable centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -49,7 +49,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                                     onChange={handleSelectAll}
                                 />
                             </li>
-                            {Object.values(permissions.settings).map(({ id, name }) => (
+                            {Object.values(permissions?.settings).map(({ id, name }) => (
                                 <li key={id}>
                                     <Form.Check
                                         type="checkbox"
@@ -65,7 +65,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                     <li className='list'>
                         <p className='heading'>Event oversight</p>
                         <ul>
-                            {Object.values(permissions.events).map(({ id, name }) => (
+                            {Object.values(permissions?.events).map(({ id, name }) => (
                                 <li key={id}>
                                     <Form.Check
                                         type="checkbox"
@@ -90,7 +90,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                                     onChange={handleSelectAll}
                                 />
                             </li>
-                            {Object.values(permissions.management).map(({ id, name }) => (
+                            {Object.values(permissions?.management).map(({ id, name }) => (
                                 <li key={id}>
                                     <Form.Check
                                         type="checkbox"
