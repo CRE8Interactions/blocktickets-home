@@ -19,8 +19,8 @@ export default function TicketsWrapper({ tickets, eventStatus, eventId }) {
                 </header>
                 <Tickets tickets={tickets} />
             </section>
-            {/* only show if event is not published yet */}
-            {eventStatus === "unpublished" && (
+            {/* only show if event is not published yet and event has tickets */}
+            {eventStatus === "unpublished" && tickets.length > 0 && (
                 <div className="btn-footer">
                     <Stack direction="horizontal" className="btn-group-flex max-width-wrapper">
                         <Link to={`/myevent/${eventId}/publish`} className='btn btn-primary btn-lg btn-next'>Publish</Link>

@@ -7,25 +7,29 @@ import Col from 'react-bootstrap/Col';
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
-export default function DateTime({ event, handleChange, setStartDate, startDate, setEndDate, endDate, setDoorsOpenDate, doorsOpenDate, error }) {
+export default function DateTime({ event, handleChange, setEventStart, eventStart, setEventEnd, eventEnd, setDoorsOpen, doorsOpen, setError, error, timeError }) {
     return (
         <Form>
             <fieldset className='form-group'>
                 <legend>Event starts</legend>
                 <Row>
                     <Col>
-                        <DateInputWrapper label="Event start" id="event-start" setDate={setStartDate} selectedDate={startDate} startDate={startDate} endDate={endDate} error={error} />
+                        <DateInputWrapper label="Event start" id="event-start" setDate={setEventStart} selectedDate={eventStart} startDate={eventStart} endDate={eventEnd}
+                            setEndDate={setEventEnd}
+                            displayEventEnd={event.displayEventEnd}
+                            setError={setError}
+                            error={error} />
                     </Col>
                     <Col>
                         <TimeInputWrapper
                             label="Start time"
                             id="event-start-time"
-                            setDate={setStartDate} selectedDate={startDate}
+                            setDate={setEventStart} selectedDate={eventStart}
                         />
                     </Col>
                 </Row>
             </fieldset>
-            <div className="pt-2 pb-5">
+            <div className="mt-3 mb-5">
                 <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id="check-display-checkbox">
                     <Form.Check.Input
                         name="displayStartTime"
@@ -55,7 +59,8 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                             <TimeInputWrapper
                                 label="time"
                                 id="doors-open-time"
-                                setDate={setDoorsOpenDate} selectedDate={doorsOpenDate}
+                                setDate={setDoorsOpen} selectedDate={doorsOpen}
+                                error={timeError}
                             />
                         </Col>
                         <Col>
@@ -78,14 +83,17 @@ export default function DateTime({ event, handleChange, setStartDate, startDate,
                     <legend>Event ends</legend>
                     <Row>
                         <Col>
-                            <DateInputWrapper label='Event end' id="event-end" setDate={setEndDate} selectedDate={endDate} startDate={startDate} endDate={endDate} error={error} />
+                            <DateInputWrapper label='Event end' id="event-end" setDate={setEventEnd} selectedDate={eventEnd} startDate={eventStart} endDate={eventEnd} displayEventEnd={event.displayEventEnd}
+                                setEndDate={setEventEnd}
+                                setError={setError}
+                                error={error} />
 
                         </Col>
                         <Col>
                             <TimeInputWrapper
                                 label="End time"
                                 id="event-end-time"
-                                setDate={setEndDate} selectedDate={endDate}
+                                setDate={setEventEnd} selectedDate={eventEnd}
                                 onChange={handleChange}
                             />
                         </Col>
