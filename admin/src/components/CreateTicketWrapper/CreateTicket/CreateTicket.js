@@ -14,7 +14,7 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { TicketBreakdownModal } from './TicketBreakdownModal';
 
-export default function CreateTicket({ type, isEdit, handleChange, handleValid, ticket, setStartDate, startDate, setEndDate, endDate, hasError, errors }) {
+export default function CreateTicket({ type, isEdit, handleChange, handleValid, ticket, setSalesStart, salesStart, setSalesEnd, salesEnd, setHasError, hasError, errors }) {
 
     const isPaid = type === 'paid';
 
@@ -176,26 +176,28 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                     <legend>When are tickets available</legend>
                     <Row className='pt-1 mb-3'>
                         <Col>
-                            <DateInputWrapper label="Sales start" id="sales-start" setDate={setStartDate} selectedDate={startDate} startDate={startDate} endDate={endDate} error={hasError} />
+                            <DateInputWrapper label="Sales start" id="sales-start" setDate={setSalesStart}
+                                setEndDate={setSalesEnd} selectedDate={salesStart} startDate={salesStart} endDate={salesEnd} setError={setHasError} error={hasError} />
                         </Col>
                         <Col>
                             <TimeInputWrapper
                                 label="Start time"
                                 id="sales-start-time"
-                                setDate={setStartDate} selectedDate={startDate}
+                                setDate={setSalesStart} selectedDate={salesStart}
                             />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <DateInputWrapper label='Sales end' id="sales-end" setDate={setEndDate} selectedDate={endDate} startDate={startDate} endDate={endDate} error={hasError} />
+                            <DateInputWrapper label='Sales end' id="sales-end" setDate={setSalesEnd} setEndDate={setSalesEnd} selectedDate={salesEnd} startDate={salesStart} endDate={salesEnd} setError={setHasError}
+                                error={hasError} />
 
                         </Col>
                         <Col>
                             <TimeInputWrapper
                                 label="End time"
                                 id="sales-end-time"
-                                setDate={setEndDate} selectedDate={endDate}
+                                setDate={setSalesEnd} selectedDate={salesEnd}
                             />
                         </Col>
                     </Row>

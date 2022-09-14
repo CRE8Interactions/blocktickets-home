@@ -15,14 +15,14 @@ export default function EditDeleteDropdown({ handleShow, link, onClick, ticket }
             <Dropdown.Menu>
                 <Stack as="ul" gap={2}>
                     {link && (
-                        <li>
+                        <li className='w-100'>
                             <LinkContainer to={link}>
                                 <Dropdown.Item className="btn-edit">Edit</Dropdown.Item>
                             </LinkContainer>
                         </li>
                     )}
                     {onClick && (
-                        <li>
+                        <li className='w-100'>
                             <Dropdown.Item as="button" className="btn-edit" onClick={onClick}>Edit</Dropdown.Item>
                         </li>
                     )}

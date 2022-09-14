@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 
 import { TimeInput } from './TimeInput';
 
-export default function TimeInputWrapper({ label, id, setDate, selectedDate, size }) {
+export default function TimeInputWrapper({ label, id, setDate, selectedDate, size, error }) {
 
     const filterPassedTime = (time) => {
         const currentDate = new Date();
@@ -16,12 +16,15 @@ export default function TimeInputWrapper({ label, id, setDate, selectedDate, siz
 
     return (
         <Form.Group>
-            <div className={`date-picker-card time-picker-card ${size ? `date-picker-card-${size}` : ''}`} >
+            <div className={`date-picker-card time-picker-card ${size ? `date-picker-card-${size}` : ''} ${error ? 'error-border' : ''}`} >
                 <Stack>
                     {label && (<Form.Label htmlFor={id}>{label}</Form.Label>)}
                     <TimeInput id={id} setDate={setDate} selectedDate={selectedDate} filterPassedTime={filterPassedTime} />
                 </Stack>
             </div>
+            {error && (
+                <Form.Text id={id} className="error">Doors open time must be before event start time</Form.Text>
+            )}
         </Form.Group>
     );
 }

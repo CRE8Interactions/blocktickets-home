@@ -40,13 +40,15 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const [showFooter, setShowFooter] = useState(false)
 
-    const [startDate, setStartDate] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
+    const [eventStart, setEventStart] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
-    const [endDate, setEndDate] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
+    const [eventEnd, setEventEnd] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
 
-    const [doorsOpenDate, setDoorsOpenDate] = useState(new Date(moment('10:00 am', 'h:mm a').format()));
+    const [doorsOpen, setDoorsOpen] = useState(new Date(moment('10:00 am', 'h:mm a').format()));
 
     const [hasError, setHasError] = useState(false)
+
+    const [timeError, setTimeError] = useState(false)
 
     const [venues, setVenues] = useState()
 
@@ -73,9 +75,9 @@ export default function BasicInfoWrapper({ eventId }) {
         // save initial state to check whether to show save buttons
         setInitialState({
             event,
-            startDate,
-            endDate,
-            doorsOpenDate
+            eventStart,
+            eventEnd,
+            doorsOpen
         })
 
         getVenues()
@@ -87,27 +89,36 @@ export default function BasicInfoWrapper({ eventId }) {
         getEvent(eventId)
             .then((res) => {
                 setEvent(res?.data)
-                setStartDate(moment(res?.data?.start).toDate())
-                setEndDate(moment(res?.data?.end).toDate())
+                setEventStart(moment(res?.data?.start).toDate())
+                setEventEnd(moment(res?.data?.end).toDate())
             })
             .catch((err) => console.error(err))
     }, [])
+
+    // make doors open time the same as start date when start date changes 
+    useEffect(() => {
+        setDoorsOpen(new Date(eventStart))
+
+    }, [eventStart])
+
+    // validation for doors open
+    useEffect(() => {
+        if (event.displayDoorsOpen) {
+            setTimeError(doorsOpen.getTime() > eventStart.getTime())
+        } else {
+            setTimeError(false)
+        }
+    }, [doorsOpen, event.displayDoorsOpen])
 
     useEffect(() => {
         // Future event
     }, [event])
 
     useEffect(() => {
-        if (event.displayEventEnd) {
-            setHasError(endDate.getTime() < startDate.getTime())
-        }
-    }, [startDate, endDate])
-
-    useEffect(() => {
         if (initialState?.event !== event) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, event.presentedBy, event.name, event.venue, event.timezone, event.displayStartDate, event.displayEndTime, event.displayDoorsOpen])
+    }, [initialState, event.presentedBy, event.name, event.venue, event.timezone, event.displayStartTime, event.displayEndTime, event.displayDoorsOpen])
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
@@ -121,8 +132,8 @@ export default function BasicInfoWrapper({ eventId }) {
         data['name'] = event.name;
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
-        data['start'] = moment(startDate).format();
-        data['end'] = moment(endDate).format();
+        data['start'] = moment(eventStart).format();
+        data['end'] = moment(eventEnd).format();
         data['venue'] = (Number(event.venue));
         data['status'] = 'unpublished';
         data['currency'] = 'usd';
@@ -197,7 +208,7 @@ export default function BasicInfoWrapper({ eventId }) {
                         <h1>Date & Time</h1>
                     </header>
                     <Card body className='card--sm'>
-                        <DateTime event={event} handleChange={handleChange} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} setDoorsOpenDate={setDoorsOpenDate} doorsOpenDate={doorsOpenDate} error={hasError} />
+                        <DateTime event={event} handleChange={handleChange} setEventStart={setEventStart} eventStart={eventStart} setEventEnd={setEventEnd} eventEnd={eventEnd} setDoorsOpen={setDoorsOpen} doorsOpen={doorsOpen} setError={setHasError} error={hasError} timeError={timeError} />
                     </Card>
                 </section>
                 <section>
@@ -211,7 +222,7 @@ export default function BasicInfoWrapper({ eventId }) {
             </section>
 
             {showFooter && (
-                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={hasError || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} styles={`${!eventId ? 'without-sidebar' : ' '} `} />
+                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={hasError || timeError || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} styles={`${!eventId ? 'without-sidebar' : ' '} `} />
             )
             }
         </>

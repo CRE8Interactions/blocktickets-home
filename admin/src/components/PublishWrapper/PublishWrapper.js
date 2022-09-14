@@ -98,7 +98,7 @@ export default function PublishWrapper({ event }) {
                     <PublishEvent setDate={setPublishDate} date={publishDate} setPublishType={setPublishType} publishType={publishType} eventStatus={event?.status} eventStarted={eventStarted} event={event} />
                 </Card>
             </section>
-            {!eventStarted && event?.status !== "on_sale" && (
+            {(!eventStarted && event?.status !== "on_sale" && event?.tickets.length > 0) && (
                 <div className="btn-footer">
                     <Stack direction="horizontal" className="btn-group-flex wrapper">
                         {isSaving ? (

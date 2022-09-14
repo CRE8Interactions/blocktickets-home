@@ -22,9 +22,9 @@ export default function CreateTicketWrapper({ eventId, type }) {
 
     const [initialState, setInitialState] = useState()
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [salesStart, setSalesStart] = useState(new Date());
 
-    const [endDate, setEndDate] = useState(new Date());
+    const [salesEnd, setSalesEnd] = useState(new Date());
 
     const [hasError, setHasError] = useState(false);
 
@@ -68,11 +68,6 @@ export default function CreateTicketWrapper({ eventId, type }) {
         , ticket.maxResalePrice, ticket.minQuantity, ticket.maxQuantity])
 
     useEffect(() => {
-        setHasError(endDate.getTime() < startDate.getTime())
-
-    }, [startDate, endDate])
-
-    useEffect(() => {
         if (type) {
             getEvent(eventId)
                 .then((res) => {
@@ -90,8 +85,8 @@ export default function CreateTicketWrapper({ eventId, type }) {
                         minQuantity: ticket?.minimum_quantity,
                         maxQuantity: ticket?.maximum_quantity
                     })
-                    setStartDate(new Date(ticket?.sales_start))
-                    setEndDate(new Date(ticket?.sales_end))
+                    setSalesStart(new Date(ticket?.sales_start))
+                    setSalesEnd(new Date(ticket?.sales_end))
                 })
                 .catch((err) => console.error(err))
         }
@@ -107,7 +102,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
 
         switch (name) {
             case 'minResalePrice':
-                if (num && num < ticket.price) {
+                if (num < ticket.price) {
                     setErrors({
                         field: name,
                         message: 'Minimum resale price cannot be less than price of ticket'
@@ -115,17 +110,28 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 } else {
                     setErrors()
                 }
+                if (ticket.maxResalePrice) {
+                    if (num > ticket.maxResalePrice) {
+                        setErrors({
+                            field: name,
+                            message: 'Minimum resale price cannot be more than maximum resale price'
+                        })
+                    }
+                    else {
+                        setErrors()
+                    }
+                }
                 break;
             case 'maxResalePrice':
-                if (num && num < ticket.minResalePrice) {
+                if (num < ticket.minResalePrice) {
                     setErrors({
                         field: name,
                         message: 'Maximum resale price cannot be less than minimum resale price'
                     })
-                }
-                else {
+                } else {
                     setErrors()
                 }
+
                 break;
             case 'minQuantity':
                 if (num > ticket.quantity) {
@@ -136,9 +142,19 @@ export default function CreateTicketWrapper({ eventId, type }) {
                 } else {
                     setErrors()
                 }
+                if (ticket.maxQuantity) {
+                    if (num > ticket.maxQuantity) {
+                        setErrors({
+                            field: name,
+                            message: 'Minimum quantity cannot be more than maximum quantity'
+                        })
+                    }
+                } else {
+                    setErrors()
+                }
                 break;
             case 'maxQuantity':
-                if (num && ((num < ticket.minQuantity) || (num > ticket.quantity))) {
+                if (num < ticket.minQuantity || num > ticket.quantity) {
                     setErrors({
                         field: name,
                         message: 'Maximum quantity cannot be less than minimum quantity or more than available quantity'
@@ -154,7 +170,7 @@ export default function CreateTicketWrapper({ eventId, type }) {
     }
 
     const handleSave = () => {
-        buildTickets(ticket, startDate, endDate)
+        buildTickets(ticket, salesStart, salesEnd)
     }
 
     const buildTickets = (ticket, start, end) => {
@@ -234,11 +250,11 @@ export default function CreateTicketWrapper({ eventId, type }) {
                     <Tab.Content>
                         <Tab.Pane eventKey="paid">
                             <CreateTicket type={key}
-                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} errors={errors} />
+                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setSalesStart={setSalesStart} salesStart={salesStart} setSalesEnd={setSalesEnd} salesEnd={salesEnd} setHasError={setHasError} hasError={hasError} errors={errors} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="free">
                             <CreateTicket type={key}
-                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setStartDate={setStartDate} startDate={startDate} setEndDate={setEndDate} endDate={endDate} hasError={hasError} errors={errors} />
+                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setSalesStart={setSalesStart} salesStart={salesStart} setSalesEnd={setSalesEnd} salesEnd={salesEnd} setHasError={setHasError} hasError={hasError} errors={errors} />
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>
