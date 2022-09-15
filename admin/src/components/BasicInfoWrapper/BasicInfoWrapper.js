@@ -108,12 +108,28 @@ export default function BasicInfoWrapper({ eventId }) {
 
     }, [eventStart])
 
-    // validation for doors open
+    // validation for doors open when doors open changes
     useEffect(() => {
         if (event.displayDoorsOpen) {
-            setTimeError(doorsOpen.getTime() > eventStart.getTime())
+            setTimeError(doorsOpen.getTime() >= eventStart.getTime())
         }
     }, [doorsOpen, event.displayDoorsOpen])
+
+    // always set doors open an hour behind event start 
+    useEffect(() => {
+        if (event.displayDoorsOpen) {
+            const eventStartTime = moment(eventStart).subtract(1, 'h')
+            setDoorsOpen(new Date(eventStartTime))
+        }
+
+    }, [event.displayDoorsOpen, eventStart])
+
+    // reset event end if toggled off
+    useEffect(() => {
+        if (!event.displayEventEnd) {
+            setEventEnd(new Date(moment(initialState?.eventEnd)))
+        }
+    }, [initialState, event.displayEventEnd])
 
     useEffect(() => {
         // Future event

@@ -28,7 +28,7 @@ export default function DateInputWrapper({ label, id, setDate, selectedDate, sta
     useEffect(() => {
         if (endDate) {
             if (displayEventEnd) {
-                setError(endDate.getTime() < startDate.getTime())
+                setError(endDate.getTime() <= startDate.getTime())
             } else {
                 setError();
             }
