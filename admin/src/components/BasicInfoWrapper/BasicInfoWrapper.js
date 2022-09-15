@@ -111,7 +111,7 @@ export default function BasicInfoWrapper({ eventId }) {
     // validation for doors open when doors open changes
     useEffect(() => {
         if (event.displayDoorsOpen) {
-            setTimeError(doorsOpen.getTime() > eventStart.getTime())
+            setTimeError(doorsOpen.getTime() >= eventStart.getTime())
         }
     }, [doorsOpen, event.displayDoorsOpen])
 
