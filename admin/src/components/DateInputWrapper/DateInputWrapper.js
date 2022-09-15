@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import moment from 'moment'
 
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
@@ -9,15 +10,27 @@ export default function DateInputWrapper({ label, id, setDate, selectedDate, sta
 
     // make end date the same as start date when start date changes 
     useEffect(() => {
-        if (setEndDate) setEndDate(new Date(startDate))
+        if (setEndDate) {
+            // create a moment object
+            const dateObj = moment(endDate)
+
+            // do changes on that object
+            dateObj.set('year', moment(startDate).year());
+            dateObj.set('month', moment(startDate).month());
+            dateObj.set('date', moment(startDate).date());
+
+            setEndDate(new Date(dateObj))
+        }
 
     }, [startDate])
 
     // start and end date validation 
     useEffect(() => {
-        if (endDate || displayEventEnd) {
-            if (setError) {
+        if (endDate) {
+            if (displayEventEnd) {
                 setError(endDate.getTime() < startDate.getTime())
+            } else {
+                setError();
             }
         }
     }, [startDate, endDate, displayEventEnd])
