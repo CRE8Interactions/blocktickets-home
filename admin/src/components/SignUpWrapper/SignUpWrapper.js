@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
 import {
-    signUp, createOrganization, getOrganizationRoles, getOrganizationPermissions,
+    createOrganization, getOrganizationRoles, getOrganizationPermissions,
     createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register
 } from '../../utilities/api'
 import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
@@ -25,6 +25,7 @@ import { BankAccountDetailsWrapper } from "./../BankAccountDetailsWrapper";
 import { TaxWrapper } from "../TaxWrapper";
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
+import { Spinner } from '../Spinner';
 
 import './signUpWrapper.scss'
 
@@ -32,7 +33,9 @@ export default function SignUpWrapper() {
 
     const { setAuthenticated } = useContext(UserContext);
 
-    const inputEl = useRef();
+    const passwordEl = useRef();
+    const repeatedPasswordEl = useRef();
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -44,10 +47,13 @@ export default function SignUpWrapper() {
         password: ''
     })
 
+    // get org information from organization information child component
     const [orgInfo, setOrgInfo] = useState()
 
+    // get tax details from tax status child component
     const [taxDetails, setTaxDetails] = useState()
 
+    // get payment information from payment information child component
     const [bankAccount, setBankAccount] = useState({})
 
     const [step, setStep] = useState(1)
@@ -60,18 +66,17 @@ export default function SignUpWrapper() {
 
     const [formValid, setFormValid] = useState(true)
 
+    const [isSaving, setIsSaving] = useState(false)
+
     const [isSuccess, setIsSuccess] = useState(false)
 
     const [roles, setRoles] = useState([])
-    const [permissions, setPermissions] = useState([])
-    const [members, setMembers] = useState([])
-    const [company, setCompany] = useState()
 
-    const createRoles = (data) => {
-        createOrEditRole({ data })
-            .then((res) => setRoles(res.data))
-            .catch((err) => console.error(err))
-    }
+    const [permissions, setPermissions] = useState([])
+
+    const [members, setMembers] = useState([])
+
+    const [company, setCompany] = useState()
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -83,7 +88,32 @@ export default function SignUpWrapper() {
     useEffect(() => {
         setError({})
         setIsValid(true)
-    }, [credentials.email, credentials.password, bankAccount?.accountNumber])
+    }, [credentials.email, credentials.password, orgInfo?.orgName, bankAccount?.accountNumber])
+
+    // go to step based on url if browser refresh 
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/signup/organization-information':
+                setStep(2)
+                break;
+
+            case '/signup/team-management':
+                setStep(3)
+                break;
+
+            case '/signup/payment-information':
+                setStep(4)
+                break;
+
+            case '/signup/tax-status':
+                setStep(5)
+                break;
+
+            default:
+                break;
+        }
+    }, [location])
+
 
     useEffect(() => {
         if (step === 1) AuthService.removeSignup()
@@ -132,9 +162,17 @@ export default function SignUpWrapper() {
         }
     }
 
+    const createRoles = (data) => {
+        createOrEditRole({ data })
+            .then((res) => setRoles(res.data))
+            .catch((err) => console.error(err))
+    }
+
     const getRolesAndPermissions = () => {
         getOrganizationRoles()
-            .then((res) => { setRoles(res.data) })
+            .then((res) => {
+                setRoles(res.data)
+            })
             .catch((err) => console.error(err))
 
         getOrganizationPermissions()
@@ -156,9 +194,14 @@ export default function SignUpWrapper() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    const handleMatching = () => {
-        if (!isMatching(credentials.password, inputEl.current.value)) {
+    const handleValid = () => {
+        if (!isMatching(credentials.password, repeatedPasswordEl
+            .current.value)) {
             setError({ type: 'match' })
+        }
+
+        if (!passwordEl.current.validity.valid) {
+            setError({ type: 'patternMatch' })
         }
     }
 
@@ -170,6 +213,7 @@ export default function SignUpWrapper() {
         if (taxStep > 1) {
             setTaxStep(taxStep - 1)
         } else {
+            navigate(-1)
             setStep(step - 1)
             setTaxStep(undefined)
         }
@@ -189,6 +233,7 @@ export default function SignUpWrapper() {
 
         if (step === 1) {
             if (!error.type) {
+                setIsSaving(true)
                 credentials['username'] = credentials.email;
                 credentials['gender'] = 'other';
                 const today = new Date()
@@ -198,41 +243,82 @@ export default function SignUpWrapper() {
                 register(credentials)
                     .then((res) => {
                         AuthService.setSignUpToken(res.data?.jwt);
+                        setIsSaving(false)
+                        navigate("organization-information");
                         handleStep(curStep, setter)
                     })
                     .catch((err) => {
-                        console.error(err);
-                        setError({ type: 'alreadyExist' })
+                        setIsSaving(false)
+                        if (err.response.status === 400) setError({ type: "alreadyExist", field: 'email' })
+                        else setError({ type: 'default' })
                     })
             }
         }
         else if (step === 2) {
+            setIsSaving(true)
             createOrganization({ data: orgInfo })
-                .then((res) => { handleStep(curStep, setter); getRolesAndPermissions() })
-                .catch((err) => console.error(err))
+                .then((res) => {
+                    setIsSaving(false)
+                    handleStep(curStep, setter);
+                    navigate("/signup/team-management");
+                    getRolesAndPermissions()
+                })
+                .catch((err) => {
+                    setIsSaving(false)
+                    setError({ type: 'alreadyExist', field: 'organization name' })
+                    console.error(err);
+                })
+        }
+        else if (step === 3) {
+            navigate("/signup/payment-information")
+            handleStep(curStep, setter);
         }
         else if (step === 4) {
+            setIsSaving(true)
             createPaymentInfo({ data: bankAccount })
-                .then((res) => { setCompany(res.data); handleStep(curStep, setter) })
-                .catch((err) => console.error(err))
+                .then((res) => {
+                    setIsSaving(false)
+                    setCompany(res.data);
+                    navigate("/signup/tax-status");
+                    handleStep(curStep, setter)
+                })
+                .catch((err) => {
+                    setIsSaving(false)
+                    console.error(err)
+                })
         }
-        else if (step === 5 && taxStep === 4) {
-            // setIsSuccess(true)
+        else if (step === 5 && taxStep === 3) {
+            setIsSaving(true)
+            createW9({ data: taxDetails })
+                .then((res) => {
+                    AuthService.removeSignup();
+                    setIsSaving(false)
+                    setIsSuccess(true)
+                })
+                .catch((err) => {
+                    setIsSaving(false)
+                    console.error(err)
+                })
         }
         else {
             handleStep(curStep, setter);
         }
-        if (taxStep === 3) {
-            createW9({ data: taxDetails })
-                .then((res) => { AuthService.removeSignup(); setIsSuccess(true) })
-                .catch((err) => console.error(err))
-        }
     }
 
     const checkDisabled = () => {
-        const { firstName, lastName, email, password } = credentials;
+        switch (step) {
 
-        return !firstName || !lastName || !email || !password || !isValid || error.type
+            case 1:
+
+                const { firstName, lastName, email, password } = credentials;
+
+                return !firstName || !lastName || !email || !password || error.type
+
+            case 2:
+                if (orgInfo)
+                    return !orgInfo.orgName || error.type
+        }
+
     }
 
     return (
@@ -292,28 +378,32 @@ export default function SignUpWrapper() {
                                         name="email"
                                         required
                                         placeholder="e.g mail@example.com"
+                                        className={`${error.type === 'alreadyExist' ? 'error-border' : ''}`}
                                         value={credentials.email}
                                         onChange={handleCredentials}
                                     />
                                 </Form.Group>
                                 <Form.Group className='form-group' controlId="password">
                                     <Form.Label>Create a Password</Form.Label>
-                                    <PasswordInputWrapper value={credentials.password} isValid={error?.type !== 'match'} onBlur={handleMatching} handlePassword={handleCredentials} />
+                                    <PasswordInputWrapper reference={passwordEl} value={credentials.password} isValid={(error?.type !== 'match' && error?.type !== "patternMatch")} onBlur={handleValid} handlePassword={handleCredentials} />
                                 </Form.Group>
                                 <Form.Group className='form-group' controlId="repeatPassword">
                                     <Form.Label>Repeat password</Form.Label>
-                                    <PasswordInput placeholder="Confirm password" isValid={error?.type !== 'match'} onBlur={handleMatching} reference={inputEl} />
+                                    <PasswordInput placeholder="Confirm password" isValid={error?.type !== 'match'} onBlur={handleValid} reference={repeatedPasswordEl} />
                                 </Form.Group>
-                                {error?.type === 'match' && (
-                                    <Error type="match" />
+                                {error?.type && (
+                                    <Error type={error.type} field={error.field} />
                                 )}
-                                {error?.type === 'alreadyExist' && (
-                                    <Error type="alreadyExist" />
-                                )}
+
                             </Form>
                         )}
                         {step === 2 && (
-                            <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
+                            <>
+                                <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
+                                {error.type && (
+                                    <Error type={error.type} field={error.field} />
+                                )}
+                            </>
                         )}
                         {step === 3 && (
                             <>
@@ -325,7 +415,7 @@ export default function SignUpWrapper() {
                             <>
                                 <h1 className='normal'>Bank information</h1>
                                 <div className="seperator">
-                                    <BankAccountDetailsWrapper getBankAccount={bankAccount} isValid={isValid} setIsValid={setIsValid} submitBankAccount={setBankAccount} />
+                                    <BankAccountDetailsWrapper getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
                                 </div>
                             </>
                         )}
@@ -334,7 +424,12 @@ export default function SignUpWrapper() {
                         )}
 
                         {!isSuccess && (
-                            <Button size="lg" className='mt-4 w-100 btn-next' disabled={checkDisabled()} onClick={handleNext}>{taxStep === 3 ? 'Create' : 'Next'}</Button>
+                            <Button size="lg" className={`mt-4 w-100 ${!isSaving && 'btn-next'} `} disabled={checkDisabled()} onClick={handleNext}>{isSaving ? (
+                                <Spinner variant="light" size="sm" />
+                            ) : (
+                                taxStep === 3 ? 'Create' : 'Next'
+                            )}
+                            </Button>
                         )}
 
                         {step === 1 && (
