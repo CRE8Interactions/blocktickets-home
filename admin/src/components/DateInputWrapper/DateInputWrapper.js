@@ -5,20 +5,20 @@ import Form from 'react-bootstrap/Form';
 
 import { DateInput } from './DateInput';
 
-export default function DateInputWrapper({ label, id, setDate, selectedDate, startDate, endDate, setEndDate, setError, error, size, displayEventEnd = true }) {
+export default function DateInputWrapper({ label, id, setDate, selectedDate, startDate, endDate, setEndDate, setError, error, size, displayEventEnd }) {
 
     // make end date the same as start date when start date changes 
     useEffect(() => {
-        setEndDate(new Date(startDate))
+        if (setEndDate) setEndDate(new Date(startDate))
 
     }, [startDate])
 
     // start and end date validation 
     useEffect(() => {
-        if (displayEventEnd) {
-            setError(endDate.getTime() < startDate.getTime())
-        } else {
-            setError(false)
+        if (endDate || displayEventEnd) {
+            if (setError) {
+                setError(endDate.getTime() < startDate.getTime())
+            }
         }
     }, [startDate, endDate, displayEventEnd])
 
