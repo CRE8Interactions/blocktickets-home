@@ -40,11 +40,11 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const [showFooter, setShowFooter] = useState(false)
 
-    const [eventStart, setEventStart] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
+    const [eventStart, setEventStart] = useState(new Date(moment('7:00 pm', 'h:mm a').format()));
 
-    const [eventEnd, setEventEnd] = useState(new Date(moment('1:00 pm', 'h:mm a').format()));
+    const [eventEnd, setEventEnd] = useState(new Date(moment('10:00 pm', 'h:mm a').format()));
 
-    const [doorsOpen, setDoorsOpen] = useState(new Date(moment('10:00 am', 'h:mm a').format()));
+    const [doorsOpen, setDoorsOpen] = useState(new Date(moment('6:00 pm', 'h:mm a').format()));
 
     const [hasError, setHasError] = useState(false)
 
@@ -95,9 +95,16 @@ export default function BasicInfoWrapper({ eventId }) {
             .catch((err) => console.error(err))
     }, [])
 
-    // make doors open time the same as start date when start date changes 
+    // make doors open the same as event start when event start changes 
     useEffect(() => {
-        setDoorsOpen(new Date(eventStart))
+        // create a moment object
+        const dateObj = moment(doorsOpen)
+
+        // do changes on that object
+        dateObj.set('year', moment(eventStart).year());
+        dateObj.set('month', moment(eventStart).month());
+        dateObj.set('date', moment(eventStart).date());
+        setDoorsOpen(new Date(dateObj))
 
     }, [eventStart])
 
@@ -105,8 +112,6 @@ export default function BasicInfoWrapper({ eventId }) {
     useEffect(() => {
         if (event.displayDoorsOpen) {
             setTimeError(doorsOpen.getTime() > eventStart.getTime())
-        } else {
-            setTimeError(false)
         }
     }, [doorsOpen, event.displayDoorsOpen])
 
