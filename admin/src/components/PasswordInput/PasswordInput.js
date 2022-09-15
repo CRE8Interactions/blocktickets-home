@@ -18,11 +18,13 @@ export default function PasswordInput({ name = "password", value, isValid, handl
                 type={show ? 'text' : 'password'}
                 name={name}
                 placeholder={placeholder}
+                pattern="[A-Za-z]{6,}"
                 value={value}
                 onBlur={onBlur}
                 onChange={handlePassword}
                 required
             ></Form.Control>
+
 
 
             <Button variant="link" onClick={() => setShow(!show)}>

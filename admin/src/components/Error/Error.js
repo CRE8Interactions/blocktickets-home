@@ -11,11 +11,14 @@ export default function Error({ type, field = "password" }) {
             case 'match':
                 return `Your ${field}s do not match. Please try again`;
 
+            case 'patternMatch':
+                return `Your password has to be at least 6 characters. Please try again`;
+
             case 'sameMatch':
                 return `Your ${field} cannot be the same as your old ${field.substring(field.indexOf(' '))}! Please try again`;
 
             case 'alreadyExist':
-                return `Your email already exists or is taken. Please try again`;
+                return `Your ${field} already exists or is taken. Please try again`;
 
             case 'notExist':
                 return `Your ${field} does not match our records. Please try again`;
