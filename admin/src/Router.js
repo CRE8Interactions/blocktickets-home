@@ -20,7 +20,9 @@ const Router = () => {
                 <Route path="/" element={<RequireAuth><HomePage /></RequireAuth>} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/login/forgot-password" element={<ForgotPasswordPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
+                {["/signup", "/signup/organization-information", "/signup/team-management", "/signup/payment-information", "signup/tax-status"].map(path => (
+                    <Route key={path} path={path} element={<SignUpPage />} />
+                ))}
                 <Route path="/myevent/:uuid" element={<RequireAuth><DashboardPage /></RequireAuth>}>
                     <Route index element={<MyEventPage />} />
                     <Route path="basic-info" element={<BasicInfoPage />} />
