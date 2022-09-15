@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button'
 
 import { PasswordInput } from '../PasswordInput';
 import { Error } from '../Error'
+import { Spinner } from '../Spinner'
 
 export default function LoginWrapper() {
 
@@ -27,6 +28,8 @@ export default function LoginWrapper() {
 
     const [isValid, setIsValid] = useState(true)
 
+    const [isSaving, setIsSaving] = useState(false)
+
     useEffect(() => {
         if (!isValid)
             setIsValid(true)
@@ -39,14 +42,17 @@ export default function LoginWrapper() {
 
     const submit = () => {
         if (isValid) {
+            setIsSaving(true)
             login(credentials)
                 .then((res) => {
                     AuthService.setUser(res.data);
                     setAuthenticated(res.data);
+                    setIsSaving(false)
                 })
                 .then(() => {
                     getMyOrganizations()
                         .then((res) => {
+                            setIsSaving(false)
                             if (res.data.length > 0) {
                                 AuthService.setOrg(res.data)
                                 setOrganization(res.data)
@@ -65,9 +71,11 @@ export default function LoginWrapper() {
                     // won't end up back on the login page, which is also really nice for the
                     // user experience.
                     navigate(from, { replace: true });
+                    setIsSaving(false)
                 }, [])
                 .catch((err) => {
                     setIsValid(false)
+                    setIsSaving(false)
                     console.error(err)
                 })
         }
@@ -102,7 +110,13 @@ export default function LoginWrapper() {
                 {!isValid && (
                     <Error type="login" />
                 )}
-                <Button size="lg" className='mt-4 w-100 btn-next' disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>Login</Button>
+                <Button size="lg" className={`mt-4 w-100 ${!isSaving ? 'btn-next' : ''} `} disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>
+                    {isSaving ? (
+                        <Spinner variant="light" size="sm" />
+                    ) : (
+                        'Login'
+                    )}
+                </Button>
             </Form>
             <div className="text-center mt-4 caption">
                 <span className='text-muted'>Don't have an account yet? <Link to="/signup">Signup</Link></span>
