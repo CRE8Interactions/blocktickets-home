@@ -411,8 +411,8 @@ module.exports = {
                 address_2: result.address[0].address_2,
                 city: result.address[0].city,
                 state: result.address[0].state,
-                latitude: String(geometry.location.lat),
-                longitude: String(geometry.location.lng)
+                latitude: String(geometry?.location.lat),
+                longitude: String(geometry?.location.lng)
               }],
             },
           });
