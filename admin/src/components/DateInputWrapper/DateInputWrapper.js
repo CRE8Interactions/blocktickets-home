@@ -29,8 +29,8 @@ export default function DateInputWrapper({ label, id, setDate, selectedDate, sta
         if (displayEndDate) {
             setError(endDate.getTime() <= startDate.getTime())
         } else {
-            if (endDate) {
-                setError();
+            if (setError) {
+                setError(false);
             }
         }
     }, [startDate, endDate, displayEndDate])

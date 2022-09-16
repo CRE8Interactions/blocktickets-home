@@ -23,7 +23,7 @@ export default function TicketsWrapper({ tickets, eventStatus, eventId }) {
             {eventStatus === "unpublished" && (
                 <div className="btn-footer">
                     <Stack direction="horizontal" className="btn-group-flex max-width-wrapper">
-                        <Link to={`/myevent/${eventId}/publish`} className={`btn btn-primary btn-lg btn-next ${tickets.length > 0 ? '' : 'btn-disabled'}`}>Publish</Link>
+                        <Link to={`/myevent/${eventId}/publish`} className={`btn btn-primary btn-lg btn-next ${tickets?.length > 0 ? '' : 'btn-link-disabled'}`}>Publish</Link>
                     </Stack>
                 </div>
             )}
