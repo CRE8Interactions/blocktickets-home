@@ -16,7 +16,7 @@ export default function PublishWrapper({ event }) {
 
     const navigate = useNavigate();
 
-    const [publishDate, setPublishDate] = useState(new Date());
+    const [publishDate, setPublishDate] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
     const [eventStarted, setEventStarted] = useState(false)
 
@@ -84,27 +84,27 @@ export default function PublishWrapper({ event }) {
     return (
         <>
             <section className='wrapper'>
+                {alert.show &&
+                    <>
+                        <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                            {alert.message}
+                        </Alert>
+                    </>
+                }
                 <header className="section-header-sm section-heading section-heading--secondary">
                     <h1>Publish event</h1>
-                    {alert.show &&
-                        <>
-                            <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
-                                {alert.message}
-                            </Alert>
-                        </>
-                    }
                 </header>
                 <Card body className="card--sm">
                     <PublishEvent setDate={setPublishDate} date={publishDate} setPublishType={setPublishType} publishType={publishType} eventStatus={event?.status} eventStarted={eventStarted} event={event} />
                 </Card>
             </section>
-            {(!eventStarted && event?.status !== "on_sale" && event?.tickets.length > 0) && (
+            {(!eventStarted && event?.status !== "on_sale") && (
                 <div className="btn-footer">
                     <Stack direction="horizontal" className="btn-group-flex wrapper">
                         {isSaving ? (
                             <Spinner variant="light" size="sm" />
                         ) : (
-                            <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
+                            <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish} disabled={event?.tickets?.length === 0}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
                         )}
                     </Stack>
                 </div>

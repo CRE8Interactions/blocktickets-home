@@ -45,8 +45,11 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                 )}
                 <Form.Group className="form-group" controlId="ticketType">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" name="name" placeholder="Name of ticket" value={ticket.name} onChange={handleChange} required />
+                    <Form.Control type="text" name="name" placeholder="Name of ticket" value={ticket.name} onChange={handleChange} className={`${errors?.field === 'name' ? 'error-border' : ''}`} required />
                 </Form.Group>
+                {errors?.field === 'name' && (
+                    <Form.Text className='error mb-4'>{errors?.message}</Form.Text>
+                )}
 
                 <Form.Group className="form-group" controlId="description">
                     <div className="form-label--flex">
@@ -177,7 +180,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                     <Row className='pt-1 mb-3'>
                         <Col>
                             <DateInputWrapper label="Sales start" id="sales-start" setDate={setSalesStart}
-                                setEndDate={setSalesEnd} selectedDate={salesStart} startDate={salesStart} endDate={salesEnd} setError={setHasError} error={hasError} />
+                                setEndDate={setSalesEnd} selectedDate={salesStart} startDate={salesStart} endDate={salesEnd} displayEndDate={true} setError={setHasError} error={hasError} />
                         </Col>
                         <Col>
                             <TimeInputWrapper
@@ -189,7 +192,8 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                     </Row>
                     <Row>
                         <Col>
-                            <DateInputWrapper label='Sales end' id="sales-end" setDate={setSalesEnd} setEndDate={setSalesEnd} selectedDate={salesEnd} startDate={salesStart} endDate={salesEnd} setError={setHasError}
+                            <DateInputWrapper label='Sales end' id="sales-end" setDate={setSalesEnd} setEndDate={setSalesEnd} selectedDate={salesEnd} startDate={salesStart} endDate={salesEnd}
+                                displayEndDate={true} setError={setHasError}
                                 error={hasError} />
 
                         </Col>

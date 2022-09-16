@@ -1,6 +1,11 @@
 @use '../abstracts' as *;
 @use '../theme/borders' as *;
 
+.btn-link-disabled {
+	pointer-events: none;
+	opacity: .65;
+}
+
 @mixin hover-effect() {
 	background-color: $clr-lightGray;
 	border-radius: $border-radius;

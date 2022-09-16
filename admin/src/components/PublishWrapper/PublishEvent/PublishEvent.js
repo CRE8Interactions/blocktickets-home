@@ -25,7 +25,7 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
         <>
             <Row>
                 <Col lg={5} className="w-auto">
-                    <Image src={event?.image?.url} rounded alt="Nic Fanciulli" width="291" height="291" className="event-image">
+                    <Image src={event?.image?.url} rounded alt={event?.name} width="291" height="291" className="event-image">
                     </Image>
                 </Col>
                 <Col>
@@ -110,7 +110,7 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
                         <DateInputWrapper label="Date" id="event-date" setDate={setDate} selectedDate={date} startDate={startDate} />
                     </Col>
                     <Col>
-                        <TimeInputWrapper label="Time" id="event-time" setDate={setDate} selectedDate={date}  />
+                        <TimeInputWrapper label="Time" id="event-time" setDate={setDate} selectedDate={date} />
                     </Col>
                 </Row>
             )}
