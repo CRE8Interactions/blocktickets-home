@@ -10,48 +10,46 @@ import Image from 'react-bootstrap/Image';
 import { Dropzone } from './Dropzone';
 import { InfoIcon } from '../InfoIcon';
 
-export default function UploadEventImage({ setSelectedImage, event }) {
+export default function UploadEventImage({ selectedImage, setSelectedImage, event }) {
 
-    const [previewImage, setPreviewImage] = useState()
+    // cropped image inside preview modal 
+    const [croppedImage, setCroppedImage] = useState()
 
-    const [croppedCoordinates, setCroppedCoordinates] = useState()
+    // image when uploading it from file system 
+    const [image, setImage] = useState()
+
+    const [coordinates, setCoordinates] = useState()
 
     const [show, setShow] = useState(false)
 
-    const [showPreview, setShowPreview] = useState(true)
-
-    const [imageUrl, setImageUrl] = useState()
-
     useEffect(() => {
-        if (previewImage) {
-            setImageUrl(previewImage[0].preview);
-        } else {
-            setImageUrl(event?.image?.url)
+        if (event?.image?.id) {
+            setSelectedImage(event?.image?.url)
         }
-    }, [show, event])
+    }, [event])
 
     const handleClose = () => setShow(false)
 
     const handleSave = () => {
-        setSelectedImage(previewImage[0]);
+        setSelectedImage(croppedImage);
         handleClose();
     }
 
     const handleUpload = (img) => {
-        setPreviewImage(img);
+        setImage(img);
         setShow(true);
     }
 
-    const onChange = (cropper) => {
-        setCroppedCoordinates(cropper.getCoordinates())
-    }
+    const onCrop = (cropper) => {
+        setCoordinates(cropper.getCoordinates());
+        setCroppedImage(cropper.getCanvas()?.toDataURL());
+    };
 
     const handleRemove = () => {
         setSelectedImage('')
-        setPreviewImage('')
-        setShowPreview(false)
-        setImageUrl('')
-        setCroppedCoordinates()
+        setCroppedImage('')
+        handleClose()
+        setCoordinates()
     }
 
     return (
@@ -63,11 +61,11 @@ export default function UploadEventImage({ setSelectedImage, event }) {
                 </small>
             </Stack>
             <div className="mt-3">
-                {!imageUrl ? (
+                {!selectedImage ? (
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        <Image src={imageUrl} rounded width={!event && !showPreview ? croppedCoordinates.width : ''} height={!event && !showPreview ? croppedCoordinates.height : ''} />
+                        <Image src={selectedImage} width={selectedImage ? coordinates.width : ''} height={selectedImage ? coordinates.height : ''} rounded />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleRemove}>Replace</Button>
@@ -76,7 +74,7 @@ export default function UploadEventImage({ setSelectedImage, event }) {
                 )
                 }
 
-                {previewImage && (
+                {image && (
                     <Modal centered animation={false} fullscreen="md-down" show={show} onHide={handleClose} backdrop='static'>
                         <Modal.Header closeButton className='mb-0'>
                             <Modal.Title as="h4">Image crop</Modal.Title>
@@ -84,14 +82,11 @@ export default function UploadEventImage({ setSelectedImage, event }) {
                         <Modal.Body>
 
                             <Cropper
-                                src={previewImage[0].preview}
-                                onChange={onChange}
+                                src={image[0].preview}
+                                onChange={onCrop}
                                 className={'cropper'}
                                 autoZoom={false}
-                                stencilProps={{
-                                    handlers: {},
-                                    aspectRatio: 1.5 / 1.5
-                                }}
+
                             />
                         </Modal.Body>
                         <Modal.Footer>

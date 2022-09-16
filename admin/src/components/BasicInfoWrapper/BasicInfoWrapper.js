@@ -124,12 +124,14 @@ export default function BasicInfoWrapper({ eventId }) {
 
     }, [event.displayDoorsOpen, eventStart])
 
-    // reset event end if toggled off
+    // always set event end 3 hours ahead of event start 
     useEffect(() => {
-        if (!event.displayEventEnd) {
-            setEventEnd(new Date(moment(initialState?.eventEnd)))
+        if (event.displayEventEnd) {
+            const eventStartTime = moment(eventStart).add(3, 'h')
+            setEventEnd(new Date(eventStartTime))
         }
-    }, [initialState, event.displayEventEnd])
+
+    }, [event.displayEventEnd, eventStart])
 
     useEffect(() => {
         // Future event
@@ -166,8 +168,8 @@ export default function BasicInfoWrapper({ eventId }) {
             data['venue'] = (Number(event.venue));
             editEvent({ data })
                 .then((res) => {
-                    navigate(`/myevent/${eventId}/basic-info`)
                     setIsSaving(false)
+                    window.scrollTo(0, 0)
                     setAlert({
                         show: true,
                         variant: 'success',
@@ -177,7 +179,6 @@ export default function BasicInfoWrapper({ eventId }) {
                 .catch((err) => {
                     console.error(err)
                     window.scrollTo(0, 0)
-                    // navigate(`/myevent/${eventId}/basic-info`)
                     setIsSaving(false)
                     setAlert({
                         show: true,
@@ -196,7 +197,6 @@ export default function BasicInfoWrapper({ eventId }) {
                     window.scrollTo(0, 0)
                     console.error(err)
                     setIsSaving(false)
-                    // navigate(`/myevent/${eventId}/basic-info`)
                     setAlert({
                         show: true,
                         variant: 'danger',

@@ -28,7 +28,7 @@ export default function DetailsWrapper({ eventId }) {
 
     const [showFooter, setShowFooter] = useState(false)
 
-    const [eventImg, setEventImg] = useState()
+    // const [eventImg, setEventImg] = useState()
 
     const [description, setDescription] = useState()
 
@@ -55,9 +55,9 @@ export default function DetailsWrapper({ eventId }) {
             .catch((err) => console.error(err))
     }, [eventId])
 
-    useEffect(() => {
-        setEventImg(selectedImage)
-    }, [selectedImage])
+    // useEffect(() => {
+    //     setEventImg(selectedImage)
+    // }, [selectedImage])
 
     const handleDescription = (e) => {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))
@@ -65,12 +65,13 @@ export default function DetailsWrapper({ eventId }) {
 
     const handleSave = () => {
         setIsSaving(true)
-        if (eventImg) {
+        if (selectedImage) {
             const formData = new FormData();
-            formData.append(`files`, eventImg);
+            formData.append(`files`, selectedImage);
 
             upload(formData)
                 .then((res) => {
+                    console.log(res);
                     let data = {};
                     data['description'] = description;
                     data['eventUUID'] = eventId;
@@ -82,16 +83,17 @@ export default function DetailsWrapper({ eventId }) {
                             setIsSaving(false)
                             setAlert({
                                 show: true,
-                                varient: 'success',
+                                variant: 'success',
                                 message: 'Your details have been updated.'
                             })
                         })
                         .catch((err) => {
                             console.error(err)
+                            window.scrollTo(0, 0)
                             setIsSaving(false)
                             setAlert({
                                 show: true,
-                                varient: 'error',
+                                variant: 'danger',
                                 message: 'Unable to save details please try again.'
                             })
                         })
@@ -99,9 +101,10 @@ export default function DetailsWrapper({ eventId }) {
                 .catch((err) => {
                     console.error(err)
                     setIsSaving(false)
+                    window.scrollTo(0, 0)
                     setAlert({
                         show: true,
-                        varient: 'error',
+                        variant: 'danger',
                         message: 'Unable to save details please try again.'
                     })
                 })
@@ -113,20 +116,22 @@ export default function DetailsWrapper({ eventId }) {
 
             addDetailsToEvent({ data })
                 .then((res) => {
-                    navigate(`/myevent/${eventId}/details`)
+                    // navigate(`/myevent/${eventId}/details`)
                     setIsSaving(false)
+                    window.scrollTo(0, 0)
                     setAlert({
                         show: true,
-                        varient: 'success',
+                        variant: 'success',
                         message: 'Your details have been updated.'
                     })
                 })
                 .catch((err) => {
                     console.error(err)
                     setIsSaving(false)
+                    window.scrollTo(0, 0)
                     setAlert({
                         show: true,
-                        varient: 'error',
+                        variant: 'danger',
                         message: 'Unable to save details please try again.'
                     })
                 })
@@ -136,19 +141,19 @@ export default function DetailsWrapper({ eventId }) {
     return (
         <>
             <section className='wrapper event-form'>
+                {alert.show &&
+                    <>
+                        <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                            {alert.message}
+                        </Alert>
+                    </>
+                }
                 <section>
                     <header className="section-header-sm section-heading section-heading--secondary">
                         <h1>Main event image</h1>
-                        {alert.show &&
-                            <>
-                                <Alert variant={alert.varient} onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
-                                    {alert.message}
-                                </Alert>
-                            </>
-                        }
                     </header>
                     <Card body className='card--sm'>
-                        <UploadEventImage setSelectedImage={setSelectedImage} event={event} />
+                        <UploadEventImage setSelectedImage={setSelectedImage} selectedImage={selectedImage} event={event} />
                     </Card>
                 </section>
                 <section>
@@ -161,7 +166,7 @@ export default function DetailsWrapper({ eventId }) {
                 </section>
             </section>
             {showFooter && (
-                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!event?.image?.id ? !eventImg : !event?.image?.id} isSaving={isSaving} handleSave={handleSave} />
+                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!event?.image?.id ? !selectedImage : !event?.image?.id} isSaving={isSaving} handleSave={handleSave} />
             )}
         </>
     );
