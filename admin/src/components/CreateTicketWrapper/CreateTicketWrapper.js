@@ -11,9 +11,12 @@ import Tab from 'react-bootstrap/Tab';
 import { CreateTicket } from './CreateTicket';
 import { CreateEventButtons } from '../CreateEventButtons';
 
-export default function CreateTicketWrapper({ eventId, type }) {
+export default function CreateTicketWrapper({ event, eventId, type }) {
 
     const navigate = useNavigate();
+
+    // error flag for ticket name because setErrors is asynchronous 
+    let nameUniqueError = false;
 
     const [
         key,
@@ -22,11 +25,11 @@ export default function CreateTicketWrapper({ eventId, type }) {
 
     const [initialState, setInitialState] = useState()
 
-    const [salesStart, setSalesStart] = useState(new Date());
+    const [salesStart, setSalesStart] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
     const [salesEnd, setSalesEnd] = useState(new Date());
 
-    const [hasError, setHasError] = useState(false);
+    const [hasError, setHasError] = useState(false)
 
     const [errors, setErrors] = useState()
 
@@ -53,6 +56,26 @@ export default function CreateTicketWrapper({ eventId, type }) {
             ticket
         })
     }, [])
+
+    // scroll to top if ticket name is already created
+    useEffect(() => {
+        if (errors?.field === 'name') {
+            window.scroll(0, 0)
+        }
+    }, [errors])
+
+    // remove error when ticket name changes
+    useEffect(() => {
+        if (errors?.field === 'name') {
+            setErrors()
+        }
+    }, [ticket.name])
+
+
+    // set sales end to event start 
+    useEffect(() => {
+        setSalesEnd(new Date(moment(event?.start).format()))
+    }, [event])
 
     // TODO: change key if ticket is free when editing ticket 
     useEffect(() => {
@@ -96,6 +119,19 @@ export default function CreateTicketWrapper({ eventId, type }) {
         setTicket({ ...ticket, [e.target.name]: val })
     }
 
+    // check whether ticket name is unique if not editing ticket 
+    const checkUnique = () => {
+        if (!type) {
+            console.log(event?.tickets.findIndex(evtTicket => evtTicket.name === ticket.name));
+            if (event?.tickets.findIndex(evtTicket => evtTicket.name === ticket.name) !== -1) {
+                nameUniqueError = true
+                setErrors({
+                    field: 'name',
+                    message: 'A ticket is already created with the same name. Please choose a different name'
+                })
+            }
+        }
+    }
     const handleValid = (_, el) => {
         const { name, value } = el;
         let num = parseFloat(value)
@@ -174,43 +210,46 @@ export default function CreateTicketWrapper({ eventId, type }) {
     }
 
     const buildTickets = (ticket, start, end) => {
-        setIsSaving(true)
-        const data = {};
-        data['name'] = ticket.name;
-        data['description'] = ticket.description;
-        data['cost'] = parseFloat(ticket.price);
-        data['fee'] = parseFloat(ticket.fee);
-        data['minimum_quantity'] = Number(ticket.minQuantity);
-        data['maximum_quantity'] = Number(ticket.maxQuantity);
-        data['minResalePrice'] = parseFloat(ticket.minResalePrice);
-        data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
-        data['eventId'] = eventId;
-        data['free'] = key === "free" ? true : false;
-        data['generalAdmission'] = true;
-        data['quantity'] = ticket.quantity;
-        data['sales_start'] = moment(start).format();
-        data['sales_end'] = moment(end).format();
-        if (!type) {
-            createTickets({ data })
-                .then((res) => {
-                    setIsSaving(false)
-                    navigate(`/myevent/${eventId}/tickets`)
-                })
-                .catch((err) => {
-                    setIsSaving(false)
-                    console.error(err)
-                })
-        } else {
-            data['type'] = type
-            updateTickets({ data })
-                .then((res) => {
-                    setIsSaving(false)
-                    navigate(`/myevent/${eventId}/tickets`)
-                })
-                .catch((err) => {
-                    setIsSaving(false)
-                    console.error(err)
-                })
+        checkUnique();
+        if (!errors && !nameUniqueError) {
+            setIsSaving(true)
+            const data = {};
+            data['name'] = ticket.name;
+            data['description'] = ticket.description;
+            data['cost'] = parseFloat(ticket.price);
+            data['fee'] = parseFloat(ticket.fee);
+            data['minimum_quantity'] = Number(ticket.minQuantity);
+            data['maximum_quantity'] = Number(ticket.maxQuantity);
+            data['minResalePrice'] = parseFloat(ticket.minResalePrice);
+            data['maxResalePrice'] = parseFloat(ticket.maxResalePrice);
+            data['eventId'] = eventId;
+            data['free'] = key === "free" ? true : false;
+            data['generalAdmission'] = true;
+            data['quantity'] = ticket.quantity;
+            data['sales_start'] = moment(start).format();
+            data['sales_end'] = moment(end).format();
+            if (!type) {
+                createTickets({ data })
+                    .then((res) => {
+                        setIsSaving(false)
+                        navigate(`/myevent/${eventId}/tickets`)
+                    })
+                    .catch((err) => {
+                        setIsSaving(false)
+                        console.error(err)
+                    })
+            } else {
+                data['type'] = type
+                updateTickets({ data })
+                    .then((res) => {
+                        setIsSaving(false)
+                        navigate(`/myevent/${eventId}/tickets`)
+                    })
+                    .catch((err) => {
+                        setIsSaving(false)
+                        console.error(err)
+                    })
+            }
         }
     }
 
