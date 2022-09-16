@@ -616,12 +616,12 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
 
     const getDescription = (ticket) => {
-      if (moment(ticket?.sales_start) < moment()) {
-          return `Ends ${moment(ticket?.sales_end).format('MMM DD, yyyy')} at ${moment(ticket?.sales_end).format('h:mm A')}`
-      } else if (moment(ticket?.sales_start) > moment()) {
-          return `Starts ${moment(ticket?.sales_start).format('MMM DD, yyyy')} at ${moment(ticket?.sales_start).format('h:mm A')}`
-      } else if (moment(ticket?.sales_end) >= moment()) {
-          return ''
+      if (new Date(ticket?.sales_start) < new Date()) {
+          return ticket?.sales_end
+      } else if (new Date(ticket?.sales_start) > new Date()) {
+          return ticket?.sales_start
+      } else if (new Date(ticket?.sales_end) >= new Date()) {
+          return ticket?.sales_end
       }
     }
 
