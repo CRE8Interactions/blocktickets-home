@@ -19,6 +19,8 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
     let sum;
     let maxQuantity;
     let ticketFees;
+    let hasDesciption;
+
     const ticketContext = useContext(TicketContext);
 
     const [show, setShow] = useState(false)
@@ -43,7 +45,8 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
         sum = prices.ticketCostWithFees;
         maxQuantity = ticket.maximum_quantity;
         ticketFees = (prices.totalFees).toFixed(2);
-        totalTicketPrice = prices.ticketCostWithFees
+        totalTicketPrice = prices.ticketCostWithFees;
+        hasDesciption = ticket?.description.split('').length > 0 ? true : false;
     }
 
     let [
@@ -117,7 +120,7 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
                                     Resale Ticket
                                 </span>
                             )}
-                            <Button variant="link" onClick={handleShow}>{listing ? listing.tickets[0].name : ticket.name}</Button>
+                            <Button variant={hasDesciption ? "link" : "other"} onClick={hasDesciption ? handleShow : () => {}}>{listing ? listing.tickets[0].name : ticket.name}</Button>
                             <span className="fw-bold">
                                 ${totalTicketPrice} ea</span>
                             <span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} + ${ticketFees} Fees</span>
