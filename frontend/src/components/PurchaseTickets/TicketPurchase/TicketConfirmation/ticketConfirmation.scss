@@ -13,6 +13,14 @@
 		}
 	}
 
+	.btn-other {
+		font-size: $body-2;
+		padding: 0;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
 	.ticket-details {
 		h1 {
 			margin-bottom: rem(6);
