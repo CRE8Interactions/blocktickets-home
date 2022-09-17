@@ -12,7 +12,7 @@ export default function DashboardMenu({ open, setOpen, event }) {
 
     const badgeStatus = (event) => {
         if (event?.status === 'unpublished') {
-            return <Badge bg="warning" className='mb-3 align-self-start'>Unpublished</Badge>
+            return <Badge bg="warning" className='mb-3 align-self-start'>Draft</Badge>
         } else if (event?.status === 'on_sale') {
             return <Badge bg="success" className='mb-3 align-self-start'>On Sale</Badge>
         }

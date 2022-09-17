@@ -55,9 +55,9 @@ export default function DetailsWrapper({ eventId }) {
             .catch((err) => console.error(err))
     }, [eventId])
 
-    // useEffect(() => {
-    //     setEventImg(selectedImage)
-    // }, [selectedImage])
+    useEffect(() => {
+        console.log(selectedImage)
+    }, [selectedImage])
 
     const handleDescription = (e) => {
         setDescription(e.replace(/(<([^>]+)>)/gi, ""))

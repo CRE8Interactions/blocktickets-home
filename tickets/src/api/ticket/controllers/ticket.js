@@ -31,9 +31,9 @@ module.exports = createCoreController('api::ticket.ticket', ({
       await new Promise((resolve, reject) => {
         resolve(
           ticketArr.push(
-            {name: data.name, cost: data.cost, description: data.description, minimum_quantity: data.minimum_quantity, 
+            {name: data.name, cost: data.cost, description: data.description, minimum_quantity: data.minimum_quantity, hidden: data.hidden,
               maximum_quantity: data.maximum_quantity, status: 'available', minResalePrice: data.minResalePrice, maxResalePrice: data.maxResalePrice,
-              sales_start: data.sales_start, sales_end: data.sales_end, fee: data.fee, royalty: data.royalty, eventId: data.eventId,
+              sales_start: data.sales_start, sales_end: data.sales_end, fee: data.fee, free: data.free, royalty: data.royalty, eventId: data.eventId,
               checkInCode: `${letter}-${Math.floor(100000 + Math.random() * 900000)}`, uuid: uuidv4(), generalAdmission: data.generalAdmission
             }
           )

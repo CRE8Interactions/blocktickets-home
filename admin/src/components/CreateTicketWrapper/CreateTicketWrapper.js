@@ -106,7 +106,8 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                         minResalePrice: ticket?.minResalePrice,
                         maxResalePrice: ticket?.maxResalePrice,
                         minQuantity: ticket?.minimum_quantity,
-                        maxQuantity: ticket?.maximum_quantity
+                        maxQuantity: ticket?.maximum_quantity,
+                        hideTicket: ticket?.hidden
                     })
                     setSalesStart(new Date(ticket?.sales_start))
                     setSalesEnd(new Date(ticket?.sales_end))
@@ -216,8 +217,8 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
             const data = {};
             data['name'] = ticket.name;
             data['description'] = ticket.description;
-            data['cost'] = parseFloat(ticket.price);
-            data['fee'] = parseFloat(ticket.fee);
+            data['cost'] = key === "free" ? 0 : parseFloat(ticket.price);
+            data['fee'] = key === "free" ? 0 : parseFloat(ticket.fee);
             data['minimum_quantity'] = Number(ticket.minQuantity);
             data['maximum_quantity'] = Number(ticket.maxQuantity);
             data['minResalePrice'] = parseFloat(ticket.minResalePrice);
@@ -228,6 +229,7 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
             data['quantity'] = ticket.quantity;
             data['sales_start'] = moment(start).format();
             data['sales_end'] = moment(end).format();
+            data['hidden'] = ticket.hideTicket ? true : false
             if (!type) {
                 createTickets({ data })
                     .then((res) => {

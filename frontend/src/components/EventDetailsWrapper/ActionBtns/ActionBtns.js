@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button';
 
 import './actionBtns.scss';
 
-export default function ActionBtns({ handleClick, ticketStatus }) {
+export default function ActionBtns({ handleClick, ticketStatus, order }) {
+   let hideSell = order?.tickets?.filter((ticket) => ticket.free === true).length > 0;
     return (
         <Stack
             direction="horizontal"
@@ -18,13 +19,16 @@ export default function ActionBtns({ handleClick, ticketStatus }) {
                 disabled={ticketStatus === 'transferred'}>
                 Transfer
             </Button>
-            <Button
-                disabled={ticketStatus === 'listed'}
-                onClick={() => handleClick('sell')}
-                variant="dark"
-                size="lg">
-                Sell
-            </Button>
+            {
+                !hideSell &&
+                <Button
+                    disabled={ticketStatus === 'listed'}
+                    onClick={() => handleClick('sell')}
+                    variant="dark"
+                    size="lg">
+                    Sell
+                </Button>
+            }
         </Stack>
     );
 }

@@ -32,7 +32,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                             <Form.Check.Input
                                 name="hideTicket"
                                 type='checkbox'
-                                defaultChecked={ticket.hideTicket}
+                                defaultChecked={ticket?.hideTicket}
                                 onChange={(e) => { handleChange(e, e.target.checked) }} />
                             <div>
                                 <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Hide ticket</Form.Check.Label>
@@ -115,6 +115,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                         </Stack>
                     </>
                 )}
+                {!isEdit && (
                 <Form.Group controlId="quantity" className='form-group'>
                     <Form.Label>Available quantity</Form.Label>
                     <Form.Control
@@ -127,6 +128,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                         required
                     />
                 </Form.Group>
+                )}
                 {isPaid && (
                     <>
                         <fieldset className="form-group">

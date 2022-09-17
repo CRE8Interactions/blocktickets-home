@@ -43,7 +43,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
         <Fragment>
             <Card body className="ticket-card">
                 <Card.Img
-                    src={event?.image.url}
+                    src={event?.image?.url}
                     width="217"
                     height="217"
                     className="event-image-lg mb-3"
