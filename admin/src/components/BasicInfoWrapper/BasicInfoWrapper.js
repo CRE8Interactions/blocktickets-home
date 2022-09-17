@@ -135,6 +135,7 @@ export default function BasicInfoWrapper({ eventId }) {
 
     useEffect(() => {
         // Future event
+        
     }, [event])
 
     useEffect(() => {
