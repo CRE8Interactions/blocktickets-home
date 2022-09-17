@@ -47,15 +47,7 @@ export default function PublishWrapper({ event }) {
         publishEvent({ data })
             .then((res) => {
                 setIsSaving(false)
-                if (data.publishType == 2) {
-                    setAlert({
-                        show: true,
-                        variant: 'success',
-                        message: 'Your event has been scheduled.'
-                    })
-                } else {
-                    navigate('/')
-                }
+                navigate(`/myevent/${event.uuid}`)
             })
             .catch((err) => {
                 setIsSaving(false)

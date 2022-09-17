@@ -51,7 +51,7 @@ export default function Ticket({ ticket, handleShow }) {
                 <span>{ticket?.sold}/{ticket?.count}</span>
             </Stack>
             <Stack>
-                <span>{ticket?.price ? formatCurrency(ticket?.price) : '---'}</span>
+                <span>{ticket?.price && ticket?.price > 0 ? formatCurrency(ticket?.price) : 'Free'}</span>
             </Stack>
             <EditDeleteDropdown handleShow={handleShow} ticket={ticket} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket?.name))}`)} />
         </Stack>

@@ -388,7 +388,7 @@ module.exports = {
           const address2 = address.address_2;
           const city = address.city;
           const state = address.state;
-          const query = `${address1},${city},${state}&key=${geoApiKey}`
+          const query = `${address1},${city},${state}&key=${geoApiKey}`;
           let geometry;
 
           const config = {
@@ -402,6 +402,8 @@ module.exports = {
               geometry = data.results[0].geometry;
             })
             .catch(err => console.log(err))
+
+          if (!geometry) return;
 
           await strapi.entityService.update('api::venue.venue', result.id, {
             data: {
