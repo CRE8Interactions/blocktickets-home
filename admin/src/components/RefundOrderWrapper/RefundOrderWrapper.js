@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { getOrders } from '../../utilities/api';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -7,187 +9,18 @@ import { OrderSummary } from '../OrderSummary';
 import { RefundModal } from '../RefundModal';
 import { BackButton } from "../BackButton";
 
-export default function RefundOrderWrapper({ orderId }) {
+export default function RefundOrderWrapper({ orderId, eventId }) {
 
     const [show, setShow] = useState(false);
 
-    // demo - same orders array that is built from data from database 
-    const ordersObj = [
-        {
-            orderId: 19331942333101,
-            marketType: 'primary',
-            ticketBuyer: {
-                firstName: 'harrison',
-                lastName: 'cogan'
-            },
-            ticketType: 'general_admission',
-            totalTickets: 2,
-            tickets: [
-                {
-                    id: 10001,
-                    status: 'standard',
-                    price: 45.50
-                },
-                {
-                    id: 11111,
-                    status: 'standard',
-                    price: 45.50
-                }
-            ],
-            status:
-            {
-                key: 'Purchased by',
-                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
-            }
+    const [order, setOrder] = useState()
 
-        },
-        {
-            orderId: 19331942333102,
-            marketType: 'primary',
-            ticketBuyer: {
-                firstName: 'billy',
-                lastName: 'bob'
-            },
-            totalTickets: 2,
-            ticketType: 'general_admission',
-            tickets: [
-                {
-                    id: 10002,
-                    status: 'transferred',
-                    price: 0
-                },
-                {
-                    id: 10002,
-                    status: 'transferred',
-                    price: 0
-                },
-            ],
-            status: {
-                key: 'Transferred by',
-                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
-            }
-
-        },
-        {
-            orderId: 19331942333103,
-            marketType: 'primary',
-            ticketBuyer: {
-                firstName: 'harrison',
-                lastName: 'cogan'
-            },
-            totalTickets: 2,
-            ticketType: 'general_admission',
-            tickets: [
-                {
-                    id: 10003,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 10003,
-                    status: 'transferred',
-                    price: 45.50
-                },
-            ],
-            status: {
-                key: 'Purchased by',
-                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
-            },
-            refund: {
-                date: 'Feb 12, 2022 at 4:29 PM (EDT)'
-            }
-
-        },
-        {
-            orderId: 19331942333104,
-            marketType: 'secondary',
-            ticketBuyer: {
-                firstName: 'chaz',
-                lastName: 'haskins'
-            },
-            ticketType: 'general_admission',
-            totalTickets: 2,
-            tickets: [
-                {
-                    id: 10004,
-                    status: 'standard',
-                    price: 80
-                },
-                {
-                    id: 11114,
-                    status: 'standard',
-                    price: 80
-                }
-            ],
-            status:
-            {
-                key: 'Sold by',
-                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
-
-            }
-        },
-        {
-            orderId: 19331942333105,
-            marketType: 'secondary',
-            ticketBuyer: {
-                firstName: 'harry',
-                lastName: 'walkins'
-            },
-            ticketType: 'general_admission',
-            totalTickets: 2,
-            tickets: [
-                {
-                    id: 10004,
-                    status: 'transferred',
-                    price: 0
-                },
-                {
-                    id: 11114,
-                    status: 'transferred',
-                    price: 0
-                }
-            ],
-            status:
-            {
-                key: 'Transferred by',
-                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
-
-            }
-        },
-        {
-            orderId: 19331942333106,
-            marketType: 'secondary',
-            ticketBuyer: {
-                firstName: 'harrison',
-                lastName: 'cogan'
-            },
-            totalTickets: 2,
-            ticketType: 'general_admission',
-            tickets: [
-                {
-                    id: 10006,
-                    status: 'transferred',
-                    price: 45.50
-                },
-                {
-                    id: 10006,
-                    status: 'transferred',
-                    price: 45.50
-                },
-            ],
-            status: {
-                key: 'Sold by',
-                name: 'Harrison Cogan (416.809.5557) on Mar 19, 2022 at 11:18am (EDT)'
-            },
-            refund: {
-                date: 'Feb 12, 2022 at 4:29 PM (EDT)'
-            }
-        },
-    ]
-
-    const order = ordersObj.find(order => order.orderId == orderId)
-
-    // const ticket = order.tickets.find(ticket => ticket.id == ticketId)
+    // get specific order
+    useEffect(() => {
+        getOrders(eventId)
+            .then((res) => { setOrder(...res.data.orders.filter(order => order.uuid === orderId)) })
+            .catch((err) => console.error(err))
+    }, [eventId]);
 
     const handleShow = () => setShow(true)
 

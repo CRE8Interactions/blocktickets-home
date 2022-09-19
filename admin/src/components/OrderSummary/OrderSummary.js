@@ -17,16 +17,11 @@ import { TicketRow } from './TicketRow'
 
 import './orderSummary.scss';
 
+// component used on orders page and refund orders page
 export default function OrderSummary({ order, showDropdown = true, isOpen = false }) {
     const { status, refund } = order;
 
     const [open, setOpen] = useState(isOpen);
-
-    // let ticketArr = ticket ? [ticket] : order.tickets;
-
-    // const sumOfTickets = tickets => {
-    //     return tickets?.reduce((prev, cur) => prev + cur.price, 0)
-    // }
 
     const orderType = (order) => {
         let type = order?.type === 'resale' ? 'secondary' : 'primary';
