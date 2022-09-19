@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { formatPhoneNumber } from '../../../../utilities/helpers';
+
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
 export default function Guest({ guest, handleShow }) {
@@ -7,10 +9,13 @@ export default function Guest({ guest, handleShow }) {
     return (
         <div className='flex-row' role="rowgroup">
             <div className='list-table-col lg-2' role="cell">
-                <span>{guest.name}</span>
+                <span>{guest.firstName}</span>
+            </div>
+            <div className='list-table-col lg-2' role="cell">
+                <span>{guest.lastName}</span>
             </div>
             <div className="list-table-col lg-2" role="cell">
-                <span>{guest.email}</span>
+                <span>{formatPhoneNumber(guest.phoneNumber)}</span>
             </div>
             <div className="list-table-col" role="cell">
                 <span>{guest.quantity}</span>

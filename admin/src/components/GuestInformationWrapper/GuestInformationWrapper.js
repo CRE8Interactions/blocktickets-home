@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
@@ -11,7 +12,7 @@ export default function GuestInformationWrapper({ id }) {
 
     const navigate = useNavigate();
 
-    // demo purposes - will come from database 
+    // demo purposes - will come from database - display error is ticket quantity is more than event max ticket quantity 
     const maxTicketQuantity = 4;
 
     const ticketTypeOpt = [
@@ -28,12 +29,14 @@ export default function GuestInformationWrapper({ id }) {
     const [guest, setGuest] = useState({
         firstName: '',
         lastName: '',
-        email: '',
+        phoneNumber: '',
         quantity: '',
         ticketType: ticketTypeOpt[0].value
     })
 
     const [isQuantityValid, setIsQuantityValid] = useState(true)
+
+    const [countryCode, setCountryCode] = useState('');
 
     useEffect(() => {
         if (!isQuantityValid) {
@@ -41,6 +44,12 @@ export default function GuestInformationWrapper({ id }) {
         }
     }, [guest.quantity])
 
+
+    useEffect(() => {
+        axios
+            .get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
+            .then((res) => setCountryCode(res.data.country_code));
+    }, []);
 
     const validQuantity = e => {
         if (e.target.value > maxTicketQuantity) {
@@ -63,7 +72,7 @@ export default function GuestInformationWrapper({ id }) {
                     <h1>{id ? 'Edit guest' : 'Guest'} information</h1>
                 </header>
                 <Card body>
-                    <GuestInfo ticketTypeOpt={ticketTypeOpt} guest={guest} handleChange={handleChange} isQuantityValid={isQuantityValid} validQuantity={validQuantity} />
+                    <GuestInfo ticketTypeOpt={ticketTypeOpt} guest={guest} handleChange={handleChange} isQuantityValid={isQuantityValid} validQuantity={validQuantity} countryCode={countryCode} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
