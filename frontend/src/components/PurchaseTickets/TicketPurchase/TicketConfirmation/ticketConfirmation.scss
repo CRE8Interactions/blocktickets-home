@@ -13,11 +13,13 @@
 		}
 	}
 
-	.btn-other {
+	.btn-default {
 		font-size: $body-2;
 		padding: 0;
+		margin-top: 0;
 		&:hover {
-			text-decoration: underline;
+			text-decoration: none;
+			cursor: default;
 		}
 	}
 
