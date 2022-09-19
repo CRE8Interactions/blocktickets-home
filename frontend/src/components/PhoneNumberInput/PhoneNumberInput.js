@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input';
 import axios from 'axios';
 
-import Form from 'react-bootstrap/Form';
-
 import { Error } from '../Error';
 
 import 'react-phone-number-input/style.css';

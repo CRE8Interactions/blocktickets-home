@@ -34,9 +34,21 @@ export default function GuestInformationWrapper({ id }) {
         ticketType: ticketTypeOpt[0].value
     })
 
+    const [
+        phoneNumber,
+        setValue
+    ] = useState();
+
     const [isQuantityValid, setIsQuantityValid] = useState(true)
 
     const [countryCode, setCountryCode] = useState('');
+
+    // save phone number to guest object every time it changes
+    useEffect(() => {
+        if (phoneNumber) {
+            setGuest({ ...guest, phoneNumber })
+        }
+    }, [phoneNumber])
 
     useEffect(() => {
         if (!isQuantityValid) {
@@ -72,7 +84,8 @@ export default function GuestInformationWrapper({ id }) {
                     <h1>{id ? 'Edit guest' : 'Guest'} information</h1>
                 </header>
                 <Card body>
-                    <GuestInfo ticketTypeOpt={ticketTypeOpt} guest={guest} handleChange={handleChange} isQuantityValid={isQuantityValid} validQuantity={validQuantity} countryCode={countryCode} />
+                    <GuestInfo ticketTypeOpt={ticketTypeOpt} guest={guest} handleChange={handleChange}
+                        setPhoneNumber={setValue} isQuantityValid={isQuantityValid} validQuantity={validQuantity} countryCode={countryCode} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">

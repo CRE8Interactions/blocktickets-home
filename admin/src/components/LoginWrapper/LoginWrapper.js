@@ -112,7 +112,7 @@ export default function LoginWrapper() {
                 )}
                 <Button size="lg" className={`mt-4 w-100 ${!isSaving ? 'btn-next' : ''} `} disabled={credentials.identifier === '' || credentials.password === ''} onClick={submit}>
                     {isSaving ? (
-                        <Spinner variant="light" size="sm" />
+                        <Spinner />
                     ) : (
                         'Login'
                     )}
