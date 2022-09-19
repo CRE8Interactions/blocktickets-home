@@ -4,7 +4,7 @@ import { RequireAuth } from './context/Auth/Auth';
 
 import {
     LoginPage,
-    ForgotPasswordPage, SignUpPage, HomePage, ReportsPage, DashboardPage, MyEventPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundTicketPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage
+    ForgotPasswordPage, SignUpPage, HomePage, ReportsPage, DashboardPage, MyEventPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundOrderPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, CheckInPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage
 } from './pages';
 
 import { ScrollToTop } from './components';
@@ -36,7 +36,7 @@ const Router = () => {
                     <Route path="orders" element={<OrdersPage />}>
                         <Route index element={<AllOrdersPage />} />
                         <Route path="refund/all" element={<RefundOrdersPage />} />
-                        <Route path="refund" element={<RefundTicketPage />} />
+                        <Route path="refund" element={<RefundOrderPage />} />
                         <Route path="attendees-report" element={<AttendeesReportPage />} />
                     </Route>
                     <Route path="attendees-list" element={<AttendeesListPage />} />
