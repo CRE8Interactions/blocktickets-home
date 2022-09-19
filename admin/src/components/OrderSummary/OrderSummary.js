@@ -63,15 +63,15 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                                         <li>
                                             <LinkContainer to={`refund?order=${order?.uuid}`}>
                                                 <Dropdown.Item className="btn-refund">
-                                                    Refund order
+                                                    Refund tickets
                                                 </Dropdown.Item>
                                             </LinkContainer>
                                         </li>
                                     )}
                                     <li>
-                                        <LinkContainer to={`attendees-report?order=${order?.uuid}`}>
+                                        <LinkContainer to={`attendees-list?order=${order?.uuid}`}>
                                             <Dropdown.Item className="btn-view">
-                                                View attendees report
+                                                View attendees list
                                             </Dropdown.Item>
                                         </LinkContainer>
                                     </li>
