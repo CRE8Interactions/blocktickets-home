@@ -1,11 +1,12 @@
 import React from 'react';
 import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function GuestInfo({ ticketTypeOpt, guest, handleChange, isQuantityValid, validQuantity, countryCode }) {
+export default function GuestInfo({ ticketTypeOpt, guest, handleChange, setPhoneNumber, isQuantityValid, validQuantity, countryCode }) {
 
     return (
         <Form>
@@ -32,7 +33,7 @@ export default function GuestInfo({ ticketTypeOpt, guest, handleChange, isQuanti
                     defaultCountry={countryCode}
                     value={guest.phoneNumber}
                     required
-                    onChange={handleChange}
+                    onChange={setPhoneNumber}
                 />
             </Form.Group>
             <Row className='form-group'>
