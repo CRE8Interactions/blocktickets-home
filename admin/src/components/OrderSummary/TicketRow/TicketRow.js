@@ -1,13 +1,8 @@
 import React from 'react';
-import { LinkContainer } from "react-router-bootstrap";
 
 import { formatCurrency, formatString, capitalizeString } from '../../../utilities/helpers';
 
-import Dropdown from 'react-bootstrap/Dropdown';
-
-import { MoreIcon } from '../../MoreIcon';
-
-export default function TicketRow({ orderId, ticketBuyer, marketType, type, ticket, show = true, refund, order }) {
+export default function TicketRow({ orderId, ticket, ticketBuyer, marketType, type, refund, order }) {
     const ticketType = (ticket) => {
         return ticket?.generalAdmission ? 'General Admission' : 'Seated';
     }
@@ -32,35 +27,6 @@ export default function TicketRow({ orderId, ticketBuyer, marketType, type, tick
             <td>
                 {formatCurrency((order?.total / order?.details?.ticketCount))}
             </td>
-            {show && (
-                <td className="btn-more">
-                    <Dropdown align="right">
-                        <Dropdown.Toggle variant="default">
-                            <MoreIcon />
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <ul>
-                                {!refund && (
-                                    <li>
-                                        <LinkContainer to={`refund?order=${orderId}&ticket=${ticket?.id}`}>
-                                            <Dropdown.Item className="btn-refund">
-                                                Refund ticket
-                                            </Dropdown.Item>
-                                        </LinkContainer>
-                                    </li>
-                                )}
-                                <li>
-                                    <LinkContainer to={`attendees-report?order=${orderId}&ticket=${ticket?.id}`}>
-                                        <Dropdown.Item className="btn-view">
-                                            View attendees report
-                                        </Dropdown.Item>
-                                    </LinkContainer>
-                                </li>
-                            </ul>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </td>
-            )}
         </tr>
     );
 }

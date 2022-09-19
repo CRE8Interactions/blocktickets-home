@@ -5,9 +5,9 @@ import Stack from 'react-bootstrap/Stack';
 
 import { OrderSummary } from '../OrderSummary';
 import { RefundModal } from '../RefundModal';
-import { BackButton } from "./../BackButton";
+import { BackButton } from "../BackButton";
 
-export default function RefundTicketWrapper({ orderId, ticketId }) {
+export default function RefundOrderWrapper({ orderId }) {
 
     const [show, setShow] = useState(false);
 
@@ -187,7 +187,7 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
 
     const order = ordersObj.find(order => order.orderId == orderId)
 
-    const ticket = order.tickets.find(ticket => ticket.id == ticketId)
+    // const ticket = order.tickets.find(ticket => ticket.id == ticketId)
 
     const handleShow = () => setShow(true)
 
@@ -198,12 +198,12 @@ export default function RefundTicketWrapper({ orderId, ticketId }) {
             <section className='max-width-wrapper'>
                 <header className='section-header'>
                     <div className="section-heading">
-                        <h1>Refund {ticket ? 'ticket' : 'order'}</h1>
+                        <h1>Refund order</h1>
                     </div>
                     <p className='section-header-desc'>Issue an attendee a refund for their original ticket price</p>
                 </header>
                 <Stack as="ul" gap={4}>
-                    <OrderSummary order={order} ticket={ticket} showDropdown={false} isOpen={true} />
+                    <OrderSummary order={order} showDropdown={false} isOpen={true} />
                 </Stack>
                 <Stack direction='horizontal' className='btn-group-flex'>
                     <BackButton />

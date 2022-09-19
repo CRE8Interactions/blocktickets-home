@@ -17,17 +17,16 @@ import { TicketRow } from './TicketRow'
 
 import './orderSummary.scss';
 
-// could be whole order or single ticket 
-export default function OrderSummary({ ticket, order, showDropdown = true, isOpen = false }) {
+export default function OrderSummary({ order, showDropdown = true, isOpen = false }) {
     const { status, refund } = order;
 
     const [open, setOpen] = useState(isOpen);
 
-    let ticketArr = ticket ? [ticket] : order.tickets;
+    // let ticketArr = ticket ? [ticket] : order.tickets;
 
-    const sumOfTickets = tickets => {
-        return tickets?.reduce((prev, cur) => prev + cur.price, 0)
-    }
+    // const sumOfTickets = tickets => {
+    //     return tickets?.reduce((prev, cur) => prev + cur.price, 0)
+    // }
 
     const orderType = (order) => {
         let type = order?.type === 'resale' ? 'secondary' : 'primary';
@@ -40,7 +39,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
     }
 
     const purchaser = (order) => {
-        return `${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName} on ${moment(order?.processedAt).format('MMM DD, YYYY')} at ${moment(order?.processedAt).format('h:mma')} EST`
+        return `${capitalizeString(order?.users_permissions_user?.firstName)} ${capitalizeString(order?.users_permissions_user?.lastName)} on ${moment(order?.processedAt).format('MMM DD, YYYY')} at ${moment(order?.processedAt).format('h:mma')} EST`
     }
 
     return (
@@ -91,7 +90,7 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                         <Stack gap={1} key={order.orderId} className="transaction">
                             <span className='caption status-label'>{purchaseType(order)}:</span>
                             <div className="transaction-desc">
-                                <p className='fw-medium'>{capitalizeString(purchaser(order))}</p>
+                                <p className='fw-medium'>{purchaser(order)}</p>
                                 <span className='caption'>{order?.details?.ticketCount} tickets</span>
                                 {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(order?.total / order?.details?.ticketCount)} paid by {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand} {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4} </p>)}
                             </div>
@@ -112,23 +111,21 @@ export default function OrderSummary({ ticket, order, showDropdown = true, isOpe
                                     <th>Transaction type</th>
                                     <th>Ticket type</th>
                                     <th>Paid</th>
-                                    {showDropdown && (<th>Action</th>)}
                                 </tr>
                             </thead>
                             <tbody>
                                 {[...Array(order?.details?.ticketCount)].map((x, i) => {
-                                    return <TicketRow key={i} orderId={order.uuid} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} type={order?.type} show={showDropdown} refund={refund} order={order} />
+                                    return <TicketRow key={i} orderId={order.uuid} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} type={order?.type} refund={refund} order={order} />
                                 })}
                                 <tr className='total-row'>
                                     <td colSpan={5}>Total</td>
-                                    <td className={`${showDropdown ? 'text-center' : 'text-end'}`}>{formatCurrency(order?.total)}</td>
+                                    <td className='text-end'>{formatCurrency(order?.total)}</td>
                                 </tr>
                             </tbody>
                         </Table>
                     </div>
                 </Collapse>
-
             </Card>
-        </li >
+        </li>
     );
 }

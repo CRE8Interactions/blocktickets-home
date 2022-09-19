@@ -14,7 +14,7 @@ export { ViewTicketsPage } from './ViewTicketsPage';
 export { PublishPage } from './PublishPage';
 export { OrdersPage } from './OrdersPage';
 export { AllOrdersPage } from './AllOrdersPage';
-export { RefundTicketPage } from './RefundTicketPage';
+export { RefundOrderPage } from './RefundOrderPage';
 export { RefundOrdersPage } from './RefundOrdersPage';
 export { AttendeesReportPage } from './AttendeesReportPage';
 export { AttendeesListPage } from './AttendeesListPage';
