@@ -77,7 +77,7 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
         setSalesEnd(new Date(moment(event?.start).format()))
     }, [event])
 
-    // TODO: change key if ticket is free when editing ticket 
+    // change key if ticket is free when editing ticket 
     useEffect(() => {
         if (ticket.free) setKey('free')
     }, [ticket])
