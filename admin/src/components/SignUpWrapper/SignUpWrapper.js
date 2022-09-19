@@ -425,7 +425,7 @@ export default function SignUpWrapper() {
 
                         {!isSuccess && (
                             <Button size="lg" className={`mt-4 w-100 ${!isSaving && 'btn-next'} `} disabled={checkDisabled()} onClick={handleNext}>{isSaving ? (
-                                <Spinner variant="light" size="sm" />
+                                <Spinner />
                             ) : (
                                 taxStep === 3 ? 'Create' : 'Next'
                             )}

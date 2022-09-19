@@ -10,7 +10,7 @@ export default function CreateEventButtons({ isEditing, isDisabled = false, isSa
 
     const getText = () => {
         if (isSaving) {
-            return <Spinner variant="light" size="sm" />
+            return <Spinner />
         }
         else {
             if (isEditing) {
