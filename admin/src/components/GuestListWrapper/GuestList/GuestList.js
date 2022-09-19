@@ -18,8 +18,9 @@ export default function GuestList() {
 
     let guests = [
         {
-            name: 'Harrison Cogan',
-            email: 'harrison@gmail.com',
+            firstName: 'Harrison',
+            lastName: "Cogan",
+            phoneNumber: 4168095557,
             quantity: 24,
             ticketType: 'General Admissions'
         }
@@ -35,10 +36,13 @@ export default function GuestList() {
                     <div className="list-table four-col" role="table">
                         <div className="flex-row list-table-header" role="rowgroup">
                             <div className='list-table-col list-table-col-header lg-2' role="columnheader">
-                                <span>Name</span>
+                                <span>First name</span>
+                            </div>
+                            <div className='list-table-col list-table-col-header lg-2' role="columnheader">
+                                <span>Last name</span>
                             </div>
                             <div className="list-table-col list-table-col-header lg-2" role="columnheader">
-                                <span>Email</span>
+                                <span>Phone number</span>
                             </div>
                             <div className="list-table-col list-table-col-header" role="columnheader">
                                 <span>Quantity</span>
@@ -54,7 +58,7 @@ export default function GuestList() {
 
                 ) : (
                     <EmptyContainer>
-                        <p>There are no guests, create a guest to add them to the guest list.</p>
+                        <p>No guest list created, click Add guests to create a list.</p>
                     </EmptyContainer>
                 )}
             </Card>

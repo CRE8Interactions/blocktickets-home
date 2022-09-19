@@ -1,10 +1,11 @@
 import React from 'react';
+import PhoneInput from 'react-phone-number-input';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function GuestInfo({ ticketTypeOpt, guest, handleChange, isQuantityValid, validQuantity }) {
+export default function GuestInfo({ ticketTypeOpt, guest, handleChange, isQuantityValid, validQuantity, countryCode }) {
 
     return (
         <Form>
@@ -24,9 +25,15 @@ export default function GuestInfo({ ticketTypeOpt, guest, handleChange, isQuanti
                     </Form.Group>
                 </Col>
             </Row>
-            <Form.Group className="form-group" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" name="email" placeholder="Email address" value={guest.email} onChange={handleChange} required />
+            <Form.Group className="form-group" controlId="number">
+                <Form.Label>Phone Number</Form.Label>
+                <PhoneInput
+                    autoComplete={'off'}
+                    defaultCountry={countryCode}
+                    value={guest.phoneNumber}
+                    required
+                    onChange={handleChange}
+                />
             </Form.Group>
             <Row className='form-group'>
                 <Col>
