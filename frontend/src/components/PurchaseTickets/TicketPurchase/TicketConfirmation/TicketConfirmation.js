@@ -116,11 +116,11 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
                     <Stack direction="horizontal" className="justify-content-between">
                         <Stack className="align-items-start" gap={1}>
                             {listing && (
-                                <span className="fw-semi-bold caption m- 0 text-muted">
+                                <span className="fw-semi-bold caption m-0 text-muted">
                                     Resale Ticket
                                 </span>
                             )}
-                            <Button variant={hasDesciption ? "link" : "other"} onClick={hasDesciption ? handleShow : () => {}}>{listing ? listing.tickets[0].name : ticket.name}</Button>
+                            <Button variant={hasDesciption ? "link" : "default"} onClick={hasDesciption ? handleShow : () => { }}>{listing ? listing.tickets[0].name : ticket.name}</Button>
                             <span className="fw-bold">
                                 ${totalTicketPrice} ea</span>
                             <span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} + ${ticketFees} Fees</span>
