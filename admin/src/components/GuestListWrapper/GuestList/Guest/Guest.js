@@ -8,13 +8,13 @@ export default function Guest({ guest, handleShow }) {
 
     return (
         <div className='flex-row' role="rowgroup">
-            <div className='list-table-col lg-2' role="cell">
+            <div className='list-table-col ' role="cell">
                 <span>{guest.firstName}</span>
             </div>
-            <div className='list-table-col lg-2' role="cell">
+            <div className='list-table-col ' role="cell">
                 <span>{guest.lastName}</span>
             </div>
-            <div className="list-table-col lg-2" role="cell">
+            <div className="list-table-col " role="cell">
                 <span>{formatPhoneNumber(guest.phoneNumber)}</span>
             </div>
             <div className="list-table-col" role="cell">
@@ -23,7 +23,7 @@ export default function Guest({ guest, handleShow }) {
             <div className="list-table-col" role="cell">
                 <span>{guest.ticketType}</span>
             </div>
-            <div className="btn-more-col list-table-col" role="cell">
+            <div className="btn-more-col" role="cell">
                 <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
             </div>
         </div>

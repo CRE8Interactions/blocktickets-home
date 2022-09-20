@@ -14,7 +14,7 @@ export default function Recipient({ attendee, handleShow }) {
             <div className='list-table-col lg' role="cell">
                 {attendee.email}
             </div>
-            <div className="btn-more-col list-table-col" role="cell">
+            <div className="btn-more-col" role="cell">
                 <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
             </div>
         </div>

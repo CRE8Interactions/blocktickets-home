@@ -24,7 +24,7 @@ export default function TrackingLink({ link, handleShow }) {
                 <span>${link.grossSales}</span>
             </div>
             {!link.default && (
-                <div className="btn-more-col list-table-col" role="cell">
+                <div className="btn-more-col" role="cell">
                     <EditDeleteDropdown handleShow={handleShow} link={`edit?id=${link?.code}`} />
                 </div>
             )}
