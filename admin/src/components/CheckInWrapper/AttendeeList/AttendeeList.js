@@ -170,7 +170,7 @@ export default function AttendeeList() {
     return (
         <>
             <header className="section-header">
-                <Row className='actions-group--flex'>
+                <Row className='actions-group-flex'>
                     <Col xl={4} className="flex-grow-1 pe-xl-0">
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} placeholder="Search by name, phone number or email" />
                     </Col>

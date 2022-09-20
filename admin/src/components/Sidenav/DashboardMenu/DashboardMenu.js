@@ -61,7 +61,7 @@ export default function DashboardMenu({ open, setOpen, event }) {
                     </LinkContainer>
                 </Nav.Item>
                 <Nav.Item as="li">
-                    <Button variant="link" className='btn-toggle'
+                    <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setOpen(!open)}
                         aria-controls="attendees-collapse"
                         aria-expanded={open}
@@ -97,7 +97,7 @@ export default function DashboardMenu({ open, setOpen, event }) {
                     </Collapse>
                 </Nav.Item>
                 <Nav.Item as="li">
-                    <Button variant="link" className='btn-toggle'
+                    <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setOpen(!open)}
                         aria-controls="reports-collapse"
                         aria-expanded={open}
@@ -129,7 +129,7 @@ export default function DashboardMenu({ open, setOpen, event }) {
                     </Collapse>
                 </Nav.Item>
                 <Nav.Item as="li">
-                    <Button variant="link" className='btn-toggle'
+                    <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setOpen(!open)}
                         aria-controls="marketing-collapse"
                         aria-expanded={open}

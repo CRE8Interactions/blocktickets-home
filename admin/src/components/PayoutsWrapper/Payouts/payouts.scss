@@ -5,6 +5,7 @@
 .payouts {
 	.payout-row {
 		.btn-toggle {
+			width: 100%;
 			.vstack {
 				gap: $gap-sm;
 				align-items: flex-start;
