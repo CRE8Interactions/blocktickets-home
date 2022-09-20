@@ -21,21 +21,6 @@ export default function BasicInfoWrapper({ eventId }) {
     const user = useContext(UserContext);
     const organization = AuthService.getOrg()[0];
 
-    const timezoneOpt = [
-        {
-            label: '(GMt-0400) United States (New York) Time',
-            value: "NY"
-        },
-        {
-            label: '(GMt-0400) British Virgin Island Time',
-            value: "BVI"
-        },
-        {
-            label: '(GMt-0400) United States (Chicago) Time',
-            value: "CH"
-        }
-    ]
-
     const [initialState, setInitialState] = useState();
 
     const [showFooter, setShowFooter] = useState(false)
@@ -56,7 +41,6 @@ export default function BasicInfoWrapper({ eventId }) {
         presentedBy: '',
         name: '',
         venue: '',
-        timezone: timezoneOpt[0].value,
         displayStartTime: true,
         displayDoorsOpen: false,
         displayEventEnd: false
@@ -135,14 +119,14 @@ export default function BasicInfoWrapper({ eventId }) {
 
     useEffect(() => {
         // Future event
-        
+
     }, [event])
 
     useEffect(() => {
         if (initialState?.event !== event) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, event.presentedBy, event.name, event.venue, event.timezone, event.displayStartTime, event.displayEndTime, event.displayDoorsOpen])
+    }, [initialState, event.presentedBy, event.name, event.venue, event.displayStartTime, event.displayEndTime, event.displayDoorsOpen])
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
@@ -238,7 +222,7 @@ export default function BasicInfoWrapper({ eventId }) {
                         <h1>Location</h1>
                     </header>
                     <Card body className='card--sm'>
-                        <Location event={event} handleChange={handleChange} timezoneOpt={timezoneOpt} venues={venues} />
+                        <Location event={event} handleChange={handleChange} venues={venues} />
                     </Card>
                 </section>
             </section>
