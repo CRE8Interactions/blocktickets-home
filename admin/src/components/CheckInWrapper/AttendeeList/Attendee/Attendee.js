@@ -41,8 +41,8 @@ export default function Attendee({ attendee, handleToggle }) {
                         </Button>
                     </div>
                     <Collapse in={open}>
-                        <div className="mt-4" id="attendee-info">
-                            <ul className='d-flex' style={{ gap: "15%" }} >
+                        <div id="attendee-info">
+                            <ul className='d-flex mt-4' style={{ gap: "15%" }} >
                                 <li>
                                     <Stack as="ul" gap={3}>
                                         <li>
