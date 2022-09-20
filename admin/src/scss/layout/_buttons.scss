@@ -6,12 +6,12 @@
 @use '../theme/colors' as *;
 @use '../theme/borders' as *;
 
-// .btn {
-// 	&:hover,
-// 	&:focus {
-// 		border-color: inherit;
-// 	}
-// }
+.btn {
+	&:hover,
+	&:focus {
+		border-color: transparent;
+	}
+}
 
 .btn-group-flex {
 	margin-top: $text-spacer;
