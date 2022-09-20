@@ -12,7 +12,7 @@ export default function CheckInWrapper() {
             <header className='section-header'>
                 <div className="section-header" >
                     <div className="section-heading">
-                        <h1>Check in</h1>
+                        <h1>Attendees</h1>
                     </div>
                     <p className='section-header-desc'>Check in attendees by scanning the QR code on their smart ticket</p>
                 </div>
