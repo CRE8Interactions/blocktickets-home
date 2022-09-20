@@ -4,10 +4,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Stack from "react-bootstrap/Stack";
 
 import { SearchBar } from '../../SearchBar';
 import { ExportSelect } from "../../ExportSelect";
-import { Attendees } from './Attendees';
+import { Attendee } from './Attendee';
 
 export default function AttendeeList() {
 
@@ -154,17 +155,26 @@ export default function AttendeeList() {
 
     const handleSearch = (query) => { }
 
+    const handleToggle = id => {
+        setAttendees(prevState => {
+            let attendees = [...prevState];
+            let indexOfAttendee = attendees.findIndex(attendee => attendee.id === id);
+            attendees[indexOfAttendee] = {
+                ...attendees[indexOfAttendee],
+                checked_in: !attendees[indexOfAttendee].checked_in
+            };
+            return attendees;
+        })
+    }
+
     return (
         <>
             <header className="section-header">
-                <Row className='heading--flex'>
-                    <Col className="pe-0" lg={3} xl={2}>
-                        <h3 className='fs-md m-0'>Attendee list</h3>
-                    </Col>
-                    <Col lg={8} xl={4} className="px-xl-0 flex-grow-1">
+                <Row className='actions-group-flex'>
+                    <Col xl={4} className="flex-grow-1 pe-xl-0">
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} placeholder="Search by name, phone number or email" />
                     </Col>
-                    <Col className="px-0">
+                    <Col className="px-xl-0">
                         <FloatingLabel controlId="list-status" label="List status">
                             <Form.Select value={filter} onChange={setFilter}>
                                 {listOpt.map((option, index) => (
@@ -176,13 +186,18 @@ export default function AttendeeList() {
                         </FloatingLabel>
                     </Col>
 
-                    <Col className="ps-0">
+                    <Col className="ps-xl-0">
                         <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
                     </Col>
 
                 </Row>
             </header>
-            <Attendees attendees={attendees} />
+            <Stack as="ul" gap={3}>
+                {attendees.map(attendee => (
+                    <Attendee key={attendee.id} attendee={attendee} handleToggle={handleToggle} />
+                ))}
+            </Stack>
+
         </>
 
     );

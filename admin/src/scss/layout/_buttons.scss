@@ -6,6 +6,13 @@
 @use '../theme/colors' as *;
 @use '../theme/borders' as *;
 
+// .btn {
+// 	&:hover,
+// 	&:focus {
+// 		border-color: inherit;
+// 	}
+// }
+
 .btn-group-flex {
 	margin-top: $text-spacer;
 	align-items: center;
@@ -62,6 +69,10 @@ button,
 	}
 }
 
+.btn-default {
+	padding: 0;
+}
+
 .btn-link,
 .btn-link:hover {
 	margin-top: 0px;
@@ -73,7 +84,6 @@ button,
 		color: $body-color;
 		display: flex;
 		align-items: center;
-		width: 100%;
 
 		&[aria-expanded="true"] {
 			&::after {
