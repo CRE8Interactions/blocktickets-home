@@ -35,13 +35,13 @@ export default function GuestList() {
                 {guests && guests.length > 0 ? (
                     <div className="list-table four-col" role="table">
                         <div className="flex-row list-table-header" role="rowgroup">
-                            <div className='list-table-col list-table-col-header lg-2' role="columnheader">
+                            <div className='list-table-col list-table-col-header' role="columnheader">
                                 <span>First name</span>
                             </div>
-                            <div className='list-table-col list-table-col-header lg-2' role="columnheader">
+                            <div className='list-table-col list-table-col-header  ' role="columnheader">
                                 <span>Last name</span>
                             </div>
-                            <div className="list-table-col list-table-col-header lg-2" role="columnheader">
+                            <div className="list-table-col list-table-col-header" role="columnheader">
                                 <span>Phone number</span>
                             </div>
                             <div className="list-table-col list-table-col-header" role="columnheader">
