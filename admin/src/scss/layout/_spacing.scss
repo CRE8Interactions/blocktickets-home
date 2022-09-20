@@ -64,10 +64,16 @@ section + section {
 	.form-floating:not(.export-form-floating),
 	.export-group {
 		flex-basis: 240px;
+		height: 64px;
+
+		.form-select {
+			height: 100%;
+		}
 	}
 
 	.search {
 		flex: 1;
+		height: 64px;
 	}
 }
 
