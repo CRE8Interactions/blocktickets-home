@@ -27,7 +27,6 @@ $datepicker__background-color: transparent;
 
 .popper-container {
 	transform: translate(0px, 64px) !important;
-	width: 100%;
 }
 
 $pad-y: rem(20);
@@ -89,6 +88,11 @@ $pad-x: rem(24);
 
 			@include breakpoint-min(lg) {
 				margin: rem(10);
+			}
+
+			&-names {
+				display: flex;
+				justify-content: space-between;
 			}
 
 			&:not(.react-datepicker__day--disabled) {
