@@ -16,7 +16,7 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                     <Col>
                         <DateInputWrapper label="Event start" id="event-start" setDate={setEventStart} selectedDate={eventStart} startDate={eventStart} endDate={eventEnd}
                             setEndDate={setEventEnd}
-                            displayEventEnd={event.displayEventEnd}
+                            displayEventEnd={!event.hide_end_date}
                             setError={setError}
                             error={error} />
                     </Col>
@@ -32,10 +32,10 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
             <div className="mt-3 mb-5">
                 <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id="check-display-checkbox">
                     <Form.Check.Input
-                        name="displayStartTime"
+                        name="hide_start_date"
                         type='checkbox'
-                        defaultChecked={!event?.hide_end_date}
-                        onChange={(e) => { handleChange(e, e.target.checked) }} />
+                        checked={!event?.hide_start_date}
+                        onChange={(e) => { handleChange(e, !e.target.checked) }} />
                     <div>
                         <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Display start time</Form.Check.Label>
                         <small className='d-block text-muted fw-semi-bold'>
@@ -48,10 +48,11 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                 type="switch"
                 label="Doors open"
                 id="doors"
-                name="displayDoorsOpen"
-                onChange={(e) => { handleChange(e, e.target.checked) }}
+                name="hide_doors_open"
+                checked={!event.hide_doors_open}
+                onChange={(e) => { handleChange(e, !e.target.checked) }}
             />
-            {event.displayDoorsOpen && (
+            {!event.hide_doors_open && (
                 <fieldset className='form-group'>
                     <legend>Doors open</legend>
                     <Row>
@@ -64,7 +65,6 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                             />
                         </Col>
                         <Col>
-
                         </Col>
                     </Row>
                 </fieldset>
@@ -74,16 +74,17 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                 type="switch"
                 label="Event ends"
                 id="ends"
-                name="displayEventEnd"
-                onChange={(e) => { handleChange(e, e.target.checked) }}
+                name="hide_end_date"
+                checked={!event.hide_end_date}
+                onChange={(e) => { handleChange(e, !e.target.checked) }}
             />
 
-            {event.displayEventEnd && (
+            {!event.hide_end_date && (
                 <fieldset className="form-group">
                     <legend>Event ends</legend>
                     <Row>
                         <Col>
-                            <DateInputWrapper label='Event end' id="event-end" setDate={setEventEnd} selectedDate={eventEnd} startDate={eventStart} endDate={eventEnd} displayEndDate={event.displayEventEnd}
+                            <DateInputWrapper label='Event end' id="event-end" setDate={setEventEnd} selectedDate={eventEnd} startDate={eventStart} endDate={eventEnd} displayEndDate={!event.hide_end_date}
                                 setEndDate={setEventEnd}
                                 setError={setError}
                                 error={error} />
