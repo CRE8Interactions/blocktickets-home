@@ -26,7 +26,7 @@
     },
     "end": {
       "type": "datetime",
-      "required": true
+      "required": false
     },
     "status": {
       "type": "string",
@@ -138,6 +138,10 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "hide_doors_open": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
