@@ -25,7 +25,7 @@ export default function Guest({ guest, handleShow }) {
                 Pending
             </td>
             <td className="btn-more">
-                <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} deleteText="Cancel" />
+                <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
             </td>
         </tr>
     );
