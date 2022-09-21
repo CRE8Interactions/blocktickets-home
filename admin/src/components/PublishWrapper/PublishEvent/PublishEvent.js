@@ -13,7 +13,7 @@ import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 export default function PublishEvent({ setDate, date, setPublishType, publishType, eventStarted, eventStatus, event }) {
     const [startDate, setStartDate] = useState('');
-
+    console.log(event)
     useEffect(() => {
         if (event?.scheduled) {
             setStartDate(moment(event?.scheduledTime).format())
@@ -63,7 +63,7 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Price range</span>
-                                    <span className='fw-medium text-end flex-grow-1'>$40.00-$80.00</span>
+                                    <span className='fw-medium text-end flex-grow-1'>${parseFloat(event?.priceRange?.low).toFixed(2)}-${parseFloat(event?.priceRange?.high).toFixed(2)}</span>
                                 </Stack>
                             </Stack>
                         </li>

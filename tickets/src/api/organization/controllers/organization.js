@@ -284,6 +284,14 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       }
     });
 
+    if (event && event?.tickets.length > 0) {
+      const cost = event.tickets.map((ticket) => ticket.cost);
+      event['priceRange'] = {
+        low: Math.min(...cost),
+        high: Math.max(...cost)
+      }
+    }
+
     return event;
 
   },
