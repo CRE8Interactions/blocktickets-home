@@ -13,6 +13,7 @@ export default function DeleteModal({ show, handleClose }) {
         <Modal id="delete-modal" centered animation={false} fullscreen="md-down" show={show} onHide={handleClose} backdrop="static">
             <Modal.Body>
                 <h1 className="modal-body-heading-title">Are you sure you want to delete this guest?</h1>
+                <p>You cannot undo this action once it's made</p>
                 <Stack className="btn-group-flex">
                     <Button variant="outline-light" size="lg" className='text-danger' onClick={handleDelete}>
                         Delete

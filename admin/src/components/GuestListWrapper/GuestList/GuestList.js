@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import Stack from 'react-bootstrap/Stack';
-import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table'
 
 import { Guest } from './Guest'
@@ -48,7 +47,7 @@ export default function GuestList() {
                         </thead>
                         <tbody>
                             {guests.map((guest, index) => (
-                                <Guest key={index} guest={guest} />
+                                <Guest key={index} guest={guest} handleShow={handleShow} />
                             ))}
                         </tbody>
                     </Table>
