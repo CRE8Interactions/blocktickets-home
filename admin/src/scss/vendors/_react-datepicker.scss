@@ -26,6 +26,7 @@ $datepicker__background-color: transparent;
 }
 
 .popper-container {
+	min-width: 100%;
 	transform: translate(0px, 64px) !important;
 }
 
@@ -66,7 +67,7 @@ $pad-x: rem(24);
 			}
 		}
 		&__header {
-			padding: $pad-y $pad-x rem(5);
+			padding: $pad-y $pad-x;
 			font-weight: $fw-semi-bold;
 		}
 
@@ -80,14 +81,29 @@ $pad-x: rem(24);
 		}
 
 		&__month {
+			margin-right: $pad-x;
+			margin-left: $pad-x;
 			background: $datepicker__background-color;
 		}
 
+		&__week {
+			@include breakpoint-min(lg) {
+				+ .react-datepicker__week {
+					margin-top: rem(17);
+				}
+			}
+		}
 		&__day {
 			font-weight: $fw-semi-bold;
 
 			@include breakpoint-min(lg) {
-				margin: rem(10);
+				+ .react-datepicker__day {
+					margin-left: rem(17);
+				}
+
+				&-name + .react-datepicker__day-name {
+					margin-left: rem(17);
+				}
 			}
 
 			&-names {
