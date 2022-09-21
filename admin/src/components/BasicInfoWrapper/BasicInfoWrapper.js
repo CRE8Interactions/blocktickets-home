@@ -141,16 +141,19 @@ export default function BasicInfoWrapper({ eventId }) {
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
         data['start'] = moment(eventStart).format();
-        data['end'] = moment(eventEnd).format();
+        if (event.displayEventEnd) data['end'] = moment(eventEnd).format();
         data['venue'] = (Number(event.venue));
         data['status'] = 'unpublished';
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
-        data['hide_end_date'] = !event?.displayEndTime;
+        data['hide_end_date'] = data['end'] && event.displayEventEnd ? false: true;
+        if (event.displayDoorsOpen) data['doorsOpen'] = moment(doorsOpen).format();
+        data['hide_doors_open'] = data['doorsOpen'] && event.displayDoorsOpen ? false: true;
+        
         if (eventId) {
             data['uuid'] = eventId;
-            data['venue'] = (Number(event.venue));
+            if (isNaN(data.venue)) data['venue'] = event.venue.id
             editEvent({ data })
                 .then((res) => {
                     setIsSaving(false)
