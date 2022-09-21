@@ -273,7 +273,6 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     const event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: uuid },
       populate: {
-        tickets: true,
         page_views: true,
         image: true,
         venue: {
@@ -284,8 +283,14 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       }
     });
 
-    if (event && event?.tickets.length > 0) {
-      const cost = event.tickets.map((ticket) => ticket.cost);
+    const tickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: { eventId: event.uuid }
+    })
+
+    event['capacity'] = tickets.length
+
+    if (tickets && tickets.length > 0) {
+      const cost = tickets.map((ticket) => ticket.cost);
       event['priceRange'] = {
         low: Math.min(...cost),
         high: Math.max(...cost)

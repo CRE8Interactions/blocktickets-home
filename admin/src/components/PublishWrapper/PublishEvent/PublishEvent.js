@@ -59,7 +59,7 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
                             <Stack as="ul" gap={3}>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Capacity</span>
-                                    <span className='fw-medium text-end flex-grow-1'>{event?.tickets?.length}</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{event?.capacity}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Price range</span>
