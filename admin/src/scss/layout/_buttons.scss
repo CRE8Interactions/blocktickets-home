@@ -69,10 +69,6 @@ button,
 	}
 }
 
-.btn-default {
-	padding: 0;
-}
-
 .btn-link,
 .btn-link:hover {
 	margin-top: 0px;
@@ -144,6 +140,7 @@ button,
 
 .btn-edit,
 .btn-delete,
+.btn-cancel,
 .btn-refund,
 .btn-view,
 .btn-copy {
@@ -161,6 +158,12 @@ button,
 .btn-delete {
 	&::before {
 		content: url($data-svg-prefix + map-get($icons, 'trash'));
+	}
+}
+
+.btn-cancel {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'cancel'));
 	}
 }
 
