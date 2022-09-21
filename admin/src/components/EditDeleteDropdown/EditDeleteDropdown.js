@@ -6,7 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import { MoreIcon } from '../MoreIcon';
 
-export default function EditDeleteDropdown({ handleShow, link, onClick, ticket, deleteText = 'Delete' }) {
+export default function EditDeleteDropdown({ handleShow, link, onClick, ticket }) {
     return (
         <Dropdown className='btn-more'>
             <Dropdown.Toggle variant="default" id="btn-more-toggle">
@@ -27,7 +27,7 @@ export default function EditDeleteDropdown({ handleShow, link, onClick, ticket, 
                         </li>
                     )}
                     <li>
-                        <Dropdown.Item as="button" className={`${deleteText === "Cancel" ? "btn-cancel" : "btn-delete"}`} onClick={handleShow} disabled={ticket?.status === "on_sale"}>{deleteText}</Dropdown.Item>
+                        <Dropdown.Item as="button" className="btn-delete" onClick={handleShow} disabled={ticket?.status === "on_sale"}>Delete</Dropdown.Item>
                     </li>
                 </Stack>
             </Dropdown.Menu>
