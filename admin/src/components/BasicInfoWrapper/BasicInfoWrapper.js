@@ -41,9 +41,9 @@ export default function BasicInfoWrapper({ eventId }) {
         presentedBy: '',
         name: '',
         venue: '',
-        displayStartTime: true,
-        displayDoorsOpen: false,
-        displayEventEnd: false
+        hide_start_date: false,
+        hide_doors_open: true,
+        hide_end_date: true
     })
 
     const [alert, setAlert] = useState({
@@ -73,6 +73,7 @@ export default function BasicInfoWrapper({ eventId }) {
         getEvent(eventId)
             .then((res) => {
                 setEvent(res?.data)
+                console.log('Event ', res.data)
                 setEventStart(moment(res?.data?.start).toDate())
                 setEventEnd(moment(res?.data?.end).toDate())
             })
@@ -94,39 +95,38 @@ export default function BasicInfoWrapper({ eventId }) {
 
     // validation for doors open when doors open changes
     useEffect(() => {
-        if (event.displayDoorsOpen) {
+        if (event.hide_doors_open) {
             setTimeError(doorsOpen.getTime() >= eventStart.getTime())
         }
-    }, [doorsOpen, event.displayDoorsOpen])
+    }, [doorsOpen, event.hide_doors_open])
 
     // always set doors open an hour behind event start 
     useEffect(() => {
-        if (event.displayDoorsOpen) {
+        if (event.hide_doors_open) {
             const eventStartTime = moment(eventStart).subtract(1, 'h')
             setDoorsOpen(new Date(eventStartTime))
         }
 
-    }, [event.displayDoorsOpen, eventStart])
+    }, [event.hide_doors_open, eventStart])
 
     // always set event end 3 hours ahead of event start 
     useEffect(() => {
-        if (event.displayEventEnd) {
+        if (event.hide_end_date) {
             const eventStartTime = moment(eventStart).add(3, 'h')
             setEventEnd(new Date(eventStartTime))
         }
 
-    }, [event.displayEventEnd, eventStart])
+    }, [event.hide_end_date, eventStart])
 
     useEffect(() => {
         // Future event
-
     }, [event])
 
     useEffect(() => {
         if (initialState?.event !== event) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, event.presentedBy, event.name, event.venue, event.displayStartTime, event.displayEndTime, event.displayDoorsOpen])
+    }, [initialState, event.presentedBy, event.name, event.venue, event.displayStartTime, event.displayEndTime, event.hide_doors_open])
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
@@ -141,19 +141,21 @@ export default function BasicInfoWrapper({ eventId }) {
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
         data['start'] = moment(eventStart).format();
-        if (event.displayEventEnd) data['end'] = moment(eventEnd).format();
+        if (!event.hide_end_date) data['end'] = moment(eventEnd).format();
         data['venue'] = (Number(event.venue));
         data['status'] = 'unpublished';
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
-        data['hide_end_date'] = data['end'] && event.displayEventEnd ? false: true;
-        if (event.displayDoorsOpen) data['doorsOpen'] = moment(doorsOpen).format();
-        data['hide_doors_open'] = data['doorsOpen'] && event.displayDoorsOpen ? false: true;
+        data['hide_end_date'] = event.hide_end_date;
+        if (!event.hide_doors_open) data['doorsOpen'] = moment(doorsOpen).format();
+        data['hide_doors_open'] = event.hide_doors_open;
+        data['hide_start_date'] = event.hide_start_date;
         
         if (eventId) {
             data['uuid'] = eventId;
             if (isNaN(data.venue)) data['venue'] = event.venue.id
+            console.log('Update Data ', data)
             editEvent({ data })
                 .then((res) => {
                     setIsSaving(false)
