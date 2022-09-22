@@ -65,7 +65,7 @@ export default function UploadEventImage({ selectedImage, setSelectedImage, even
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        <Image src={selectedImage} width={selectedImage ? coordinates.width : ''} height={selectedImage ? coordinates.height : ''} rounded />
+                        <Image src={selectedImage} width={selectedImage ? coordinates?.width : ''} height={selectedImage ? coordinates?.height : ''} rounded />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
                             <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleRemove}>Replace</Button>
