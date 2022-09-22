@@ -110,13 +110,17 @@ export default function DetailsWrapper({ eventId }) {
 
                     addDetailsToEvent({ data })
                         .then((res) => {
-                            navigate(`/myevent/${eventId}/tickets`)
                             setIsSaving(false)
+                            window.scroll(0, 0)
                             setAlert({
                                 show: true,
                                 variant: 'success',
                                 message: 'Your details have been updated.'
                             })
+                            // if not updating image
+                            if (!event.image) {
+                                navigate(`/myevent/${eventId}/tickets`)
+                            }
                         })
                         .catch((err) => {
                             console.error(err)
@@ -147,7 +151,6 @@ export default function DetailsWrapper({ eventId }) {
 
             addDetailsToEvent({ data })
                 .then((res) => {
-                    // navigate(`/myevent/${eventId}/details`)
                     setIsSaving(false)
                     window.scrollTo(0, 0)
                     setAlert({
