@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,6 +7,9 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 export default function DateTime({ event, handleChange, setEventStart, eventStart, setEventEnd, eventEnd, setDoorsOpen, doorsOpen, setError, error, timeError }) {
+    useEffect(() => {
+        
+    }, [event])
     return (
         <Form>
             <fieldset className='form-group'>
@@ -34,7 +36,7 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                     <Form.Check.Input
                         name="hide_start_date"
                         type='checkbox'
-                        checked={!event?.hide_start_date}
+                        defaultChecked={!event?.hide_start_date}
                         onChange={(e) => { handleChange(e, !e.target.checked) }} />
                     <div>
                         <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Display start time</Form.Check.Label>
@@ -65,6 +67,7 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                             />
                         </Col>
                         <Col>
+
                         </Col>
                     </Row>
                 </fieldset>

@@ -94,14 +94,14 @@ export default function BasicInfoWrapper({ eventId }) {
 
     // validation for doors open when doors open changes
     useEffect(() => {
-        if (!event.hide_doors_open) {
+        if (event.hide_doors_open) {
             setTimeError(doorsOpen.getTime() >= eventStart.getTime())
         }
     }, [doorsOpen, event.hide_doors_open])
 
     // always set doors open an hour behind event start 
     useEffect(() => {
-        if (!event.hide_doors_open) {
+        if (event.hide_doors_open) {
             const eventStartTime = moment(eventStart).subtract(1, 'h')
             setDoorsOpen(new Date(eventStartTime))
         }
@@ -110,7 +110,7 @@ export default function BasicInfoWrapper({ eventId }) {
 
     // always set event end 3 hours ahead of event start 
     useEffect(() => {
-        if (!event.hide_end_date) {
+        if (event.hide_end_date) {
             const eventStartTime = moment(eventStart).add(3, 'h')
             setEventEnd(new Date(eventStartTime))
         }
@@ -125,7 +125,7 @@ export default function BasicInfoWrapper({ eventId }) {
         if (initialState?.event !== event) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, event.presentedBy, event.name, event.venue, event.hide_start_date, event.hide_doors_open])
+    }, [initialState, event.presentedBy, event.name, event.venue, event.displayStartTime, event.displayEndTime, event.hide_doors_open])
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
@@ -140,17 +140,17 @@ export default function BasicInfoWrapper({ eventId }) {
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
         data['start'] = moment(eventStart).format();
-        data['hide_start_date'] = event.hide_start_date;
-        if (!event.hide_end_date) data['end'] = moment(eventEnd).format();
+        data['end'] = moment(eventEnd).format();
         data['venue'] = (Number(event.venue));
         data['status'] = 'unpublished';
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
-        data['hide_end_date'] = data['end'] && event.hide_end_date
-        if (!event.hide_doors_open) data['doorsOpen'] = moment(doorsOpen).format();
-        data['hide_doors_open'] = data['doorsOpen'] && event.hide_doors_open;
-
+        data['hide_end_date'] = event.hide_end_date;
+        data['doorsOpen'] = moment(doorsOpen).format();
+        data['hide_doors_open'] = event.hide_doors_open;
+        data['hide_start_date'] = event.hide_start_date;
+        
         if (eventId) {
             data['uuid'] = eventId;
             if (isNaN(data.venue)) data['venue'] = event.venue.id

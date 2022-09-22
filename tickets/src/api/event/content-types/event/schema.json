@@ -26,7 +26,7 @@
     },
     "end": {
       "type": "datetime",
-      "required": false
+      "required": true
     },
     "status": {
       "type": "string",

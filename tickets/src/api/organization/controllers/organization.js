@@ -273,7 +273,6 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     const event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: uuid },
       populate: {
-        tickets: true,
         page_views: true,
         image: true,
         venue: {
@@ -283,6 +282,20 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         }
       }
     });
+
+    const tickets = await strapi.db.query('api::ticket.ticket').findMany({
+      where: { eventId: event.uuid }
+    })
+    event['tickets'] = tickets;
+    event['capacity'] = tickets.length;
+
+    if (tickets && tickets.length > 0) {
+      const cost = tickets.map((ticket) => ticket.cost);
+      event['priceRange'] = {
+        low: Math.min(...cost),
+        high: Math.max(...cost)
+      }
+    }
 
     return event;
 
@@ -299,6 +312,9 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       online_event,
       organizationId,
       hide_end_date,
+      hide_start_date,
+      hide_doors_open,
+      doorsOpen
     } = ctx.request.body.data;
 
     const entry = await strapi.db.query('api::event.event').create({
@@ -312,7 +328,10 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         currency,
         online_event,
         organizationId,
-        hide_end_date
+        hide_end_date,
+        hide_start_date,
+        hide_doors_open,
+        doorsOpen
       },
     });
 
