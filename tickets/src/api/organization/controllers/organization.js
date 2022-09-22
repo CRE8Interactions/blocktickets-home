@@ -286,7 +286,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     const tickets = await strapi.db.query('api::ticket.ticket').findMany({
       where: { eventId: event.uuid }
     })
-
+    event['tickets'] = [...new Set(tickets.map(item => item.name))];
     event['capacity'] = tickets.length
 
     if (tickets && tickets.length > 0) {

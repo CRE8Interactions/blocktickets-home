@@ -123,7 +123,7 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
     // check whether ticket name is unique if not editing ticket 
     const checkUnique = () => {
         if (!type) {
-            if (event?.tickets?.findIndex(evtTicket => evtTicket.name === ticket.name) !== -1) {
+            if (event?.tickets?.findIndex(evtTicket => evtTicket === ticket.name) !== -1) {
                 nameUniqueError = true
                 setErrors({
                     field: 'name',
