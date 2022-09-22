@@ -28,8 +28,6 @@ export default function DetailsWrapper({ eventId }) {
 
     const [showFooter, setShowFooter] = useState(false)
 
-    // const [eventImg, setEventImg] = useState()
-
     const [description, setDescription] = useState()
 
     const [isSaving, setIsSaving] = useState(false)
@@ -83,9 +81,9 @@ export default function DetailsWrapper({ eventId }) {
             byteArrays.push(byteArray);
         }
 
-      var blob = new Blob(byteArrays, {type: contentType});
-      return blob;
-}
+        var blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
 
     const handleSave = () => {
         setIsSaving(true)
