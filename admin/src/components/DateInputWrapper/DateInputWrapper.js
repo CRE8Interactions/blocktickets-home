@@ -33,7 +33,7 @@ export default function DateInputWrapper({ label, id, setDate, selectedDate, sta
                 setError(false);
             }
         }
-    }, [startDate, endDate, displayEndDate])
+    }, [endDate, displayEndDate])
 
     return (
         <Form.Group>
