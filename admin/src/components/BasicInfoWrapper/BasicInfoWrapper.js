@@ -73,7 +73,6 @@ export default function BasicInfoWrapper({ eventId }) {
         getEvent(eventId)
             .then((res) => {
                 setEvent(res?.data)
-                console.log('Event ', res.data)
                 setEventStart(moment(res?.data?.start).toDate())
                 setEventEnd(moment(res?.data?.end).toDate())
             })
@@ -155,7 +154,6 @@ export default function BasicInfoWrapper({ eventId }) {
         if (eventId) {
             data['uuid'] = eventId;
             if (isNaN(data.venue)) data['venue'] = event.venue.id
-            console.log('Update Data ', data)
             editEvent({ data })
                 .then((res) => {
                     setIsSaving(false)
