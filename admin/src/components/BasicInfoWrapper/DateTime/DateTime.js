@@ -18,7 +18,7 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
                     <Col>
                         <DateInputWrapper label="Event start" id="event-start" setDate={setEventStart} selectedDate={eventStart} startDate={eventStart} endDate={eventEnd}
                             setEndDate={setEventEnd}
-                            displayEventEnd={!event.hide_end_date}
+                            displayEndDate={!event.hide_end_date}
                             setError={setError}
                             error={error} />
                     </Col>
