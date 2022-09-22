@@ -140,14 +140,14 @@ export default function BasicInfoWrapper({ eventId }) {
         // data['summary'] = description;
         data['presentedBy'] = event.presentedBy;
         data['start'] = moment(eventStart).format();
-        if (!event.hide_end_date) data['end'] = moment(eventEnd).format();
+        data['end'] = moment(eventEnd).format();
         data['venue'] = (Number(event.venue));
         data['status'] = 'unpublished';
         data['currency'] = 'usd';
         data['online_event'] = false;
         data['organizationId'] = organization?.id;
         data['hide_end_date'] = event.hide_end_date;
-        if (!event.hide_doors_open) data['doorsOpen'] = moment(doorsOpen).format();
+        data['doorsOpen'] = moment(doorsOpen).format();
         data['hide_doors_open'] = event.hide_doors_open;
         data['hide_start_date'] = event.hide_start_date;
         

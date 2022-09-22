@@ -287,7 +287,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       where: { eventId: event.uuid }
     })
     event['tickets'] = [...new Set(tickets.map(item => item.name))];
-    event['capacity'] = tickets.length
+    event['capacity'] = tickets.length;
 
     if (tickets && tickets.length > 0) {
       const cost = tickets.map((ticket) => ticket.cost);

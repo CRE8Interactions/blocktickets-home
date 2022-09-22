@@ -8,7 +8,7 @@ import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 export default function DateTime({ event, handleChange, setEventStart, eventStart, setEventEnd, eventEnd, setDoorsOpen, doorsOpen, setError, error, timeError }) {
     useEffect(() => {
-
+        
     }, [event])
     return (
         <Form>
