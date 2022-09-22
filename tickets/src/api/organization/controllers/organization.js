@@ -312,6 +312,9 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       online_event,
       organizationId,
       hide_end_date,
+      hide_start_date,
+      hide_doors_open,
+      doorsOpen
     } = ctx.request.body.data;
 
     const entry = await strapi.db.query('api::event.event').create({
@@ -325,7 +328,10 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         currency,
         online_event,
         organizationId,
-        hide_end_date
+        hide_end_date,
+        hide_start_date,
+        hide_doors_open,
+        doorsOpen
       },
     });
 
