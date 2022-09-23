@@ -173,12 +173,12 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                                 Filter
                             </Button>
                         </Stack>
-                        <PriceRangeSlider
+                        {/* <PriceRangeSlider
                             styles="tablet-desktop-only"
                             sliderValues={sliderValues}
                             setSliderValues={setSliderValues}
                             originalValues={originalValues}
-                        />
+                        /> */}
                     </header>
                     <Stack direction="vertical">
                         {showFilter && (

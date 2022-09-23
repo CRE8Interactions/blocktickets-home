@@ -35,15 +35,15 @@ export default function OrderSummary({order}) {
 							</Stack>
 					<Stack direction="horizontal" as="li"  className="split-row">
 								<span>Fees</span>
-								<span className='text-end'>${fees}</span>
+								<span className='text-end'>${sum == 0 ? 0 : fees}</span>
 						</Stack>
 					<Stack direction="horizontal" as="li"  className="split-row">
 								<span>Tax</span>
-								<span className='text-end'>${(5.00).toFixed(2)}</span>
+								<span className='text-end'>${sum == 0 ? 0 : (5.00).toFixed(2)}</span>
 							</Stack>
 					<Stack direction="horizontal" as="li"  className="split-row">
 								<span>Total</span>
-								<span className='text-end'>${(order?.total).toFixed(2)}</span>
+								<span className='text-end'>${sum == 0 ? 0 : (order?.total).toFixed(2)}</span>
 							</Stack>
 				</ul>
 			</ListGroup.Item>

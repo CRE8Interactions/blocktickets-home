@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { getPaymentIntent } from '../../utilities/api';
+import { createOrder } from '../../utilities/api';
 
 import Row from 'react-bootstrap/Row';
 
@@ -72,13 +73,38 @@ export default function CheckoutWrapper() {
             promoCode: cart.promoCode
         };
 
-        getPaymentIntent(data)
+        if (cart.ticket.free) {
+            let order = {
+                cart: cart,
+                paymentIntentId: "0"
+            };
+            createOrder(order)
+            .then((res) => {
+                // Need better way to store order data
+                sessionStorage.setItem('order', JSON.stringify(res.data));
+                setClientSecret('pi_3Lj32nEjx5eLnToD1C9LQPI9_secret_ImFRee2TheUSer2BUY')
+                setStatus('successful')
+                setOrder(res.data)
+            })
+            .catch((err) => {
+                console.error(err);
+                // setPurchasing(false);
+                // setHasError(true)
+            })
+            
+        } else {
+            getPaymentIntent(data)
             .then((res) => {
                 setClientSecret(res.data.client_secret);
                 setIntentId(res.data.id);
             })
             .catch((err) => console.error(err));
+        }
     }, []);
+
+    useEffect(() => {
+        // listen for order changes
+    }, [order])
 
     const addOns = [];
 

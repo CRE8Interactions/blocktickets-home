@@ -26,6 +26,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
 
     useEffect(() => {
         // listens for changes on ticket
+        console.log('Edit Ticket ', ticket)
     }, [ticket])
     return (
         <>
