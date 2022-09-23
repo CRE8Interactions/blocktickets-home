@@ -161,7 +161,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       end,
       venue,
       hide_end_date,
-      hide_start_date,
+      display_start_time,
       hide_doors_open,
       doorsOpen
      } = ctx.request.body.data;
@@ -169,7 +169,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
      let eventVenue = await strapi.db.query('api::venue.venue').findOne({
       where: { id: venue }
      })
-
+     console.log('Doors open ', doorsOpen)
     const entry = await strapi.db.query('api::event.event').update({
       where: { uuid: uuid },
       data: {
@@ -179,7 +179,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         end,
         venue: eventVenue,
         hide_end_date,
-        hide_start_date,
+        display_start_time,
         hide_doors_open,
         doorsOpen
       },

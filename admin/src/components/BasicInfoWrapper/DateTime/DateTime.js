@@ -34,10 +34,10 @@ export default function DateTime({ event, handleChange, setEventStart, eventStar
             <div className="mt-3 mb-5">
                 <Form.Check type='checkbox' className="d-flex align-items-center gap-3" id="check-display-checkbox">
                     <Form.Check.Input
-                        name="hide_start_date"
+                        name="display_start_time"
                         type='checkbox'
-                        defaultChecked={!event?.hide_start_date}
-                        onChange={(e) => { handleChange(e, !e.target.checked) }} />
+                        checked={event?.display_start_time}
+                        onChange={(e) => { handleChange(e, e.target.checked) }} />
                     <div>
                         <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Display start time</Form.Check.Label>
                         <small className='d-block text-muted fw-semi-bold'>

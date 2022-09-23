@@ -35,13 +35,15 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const [timeError, setTimeError] = useState(false)
 
+    const [hideStartTime, setHideStart] = useState(false)
+
     const [venues, setVenues] = useState()
 
     const [event, setEvent] = useState({
         presentedBy: '',
         name: '',
         venue: '',
-        hide_start_date: false,
+        display_start_time: true,
         hide_doors_open: true,
         hide_end_date: true
     })
@@ -75,6 +77,7 @@ export default function BasicInfoWrapper({ eventId }) {
                 setEvent(res?.data)
                 setEventStart(moment(res?.data?.start).toDate())
                 setEventEnd(moment(res?.data?.end).toDate())
+                if (res?.data?.doorsOpen) setDoorsOpen(moment(res?.data?.doorsOpen).toDate())
             })
             .catch((err) => console.error(err))
     }, [])
@@ -118,7 +121,8 @@ export default function BasicInfoWrapper({ eventId }) {
     }, [event.hide_end_date, eventStart])
 
     useEffect(() => {
-        // Future event
+        // Listens for changes on event
+        setHideStart(event.display_start_time)
     }, [event])
 
     useEffect(() => {
@@ -149,7 +153,7 @@ export default function BasicInfoWrapper({ eventId }) {
         data['hide_end_date'] = event.hide_end_date;
         data['doorsOpen'] = moment(doorsOpen).format();
         data['hide_doors_open'] = event.hide_doors_open;
-        data['hide_start_date'] = event.hide_start_date;
+        data['display_start_time'] = hideStartTime;
 
         if (eventId) {
             data['uuid'] = eventId;

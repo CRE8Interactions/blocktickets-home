@@ -142,6 +142,10 @@
     },
     "summary": {
       "type": "richtext"
+    },
+    "display_start_time": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
