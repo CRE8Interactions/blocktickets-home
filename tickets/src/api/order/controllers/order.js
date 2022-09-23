@@ -106,6 +106,48 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       },
     });
 
+    // Automatically finalize order if free ticket
+    if (cart.ticket.free) {
+      order = await strapi.db.query('api::order.order').update({
+        where: { id: order.id },
+        data: {
+          status: 'complete',
+          intentDetails: {
+            amount: 0,
+            "payment_method": "free"
+          },
+          emailSent: true
+        },
+        populate: {
+          users_permissions_user: true,
+          tickets: true,
+          event: {
+            populate: {
+              image: true,
+              venue: {
+                populate: {
+                  address: true
+                }
+              }
+            }
+          }
+        }
+      });
+      // Update ticket statuses
+      order.tickets.map(async (ticket) => {          
+        await strapi.db.query('api::ticket.ticket').update({
+          where: {
+            id: ticket.id,
+          },
+          data: {
+            on_sale_status: 'sold'
+          },
+        });
+      })
+      // Send Notification
+      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').orderNotification(order);
+    }
+
     return order
   },
   async finalize(ctx) {

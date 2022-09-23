@@ -374,7 +374,7 @@ module.exports = {
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
-          if (params.data.status === 'completeFromTransfer') return
+          if (params.data.status === 'completeFromTransfer' || event.params.data.paymentIntentId === "0") return
           const paymentIntent = await stripe.paymentIntents.update(
             event.params.data.paymentIntentId,
             { metadata: {order_id: result.id }}

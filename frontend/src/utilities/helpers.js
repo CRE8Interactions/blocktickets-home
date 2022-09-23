@@ -70,7 +70,7 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true) => 
         prices['ticketServiceFee'] = ticket?.attributes ? ticket?.attributes?.fee : ticket?.fee;
         prices['ticketFacilityFee'] = ticket?.attributes ? ticket?.attributes?.facilityFee : ticket.facilityFee;
         prices['tax'] = 5;
-        prices['totalFees'] = prices.ticketServiceFee + prices.ticketFacilityFee;
+        prices['totalFees'] = prices.ticketCost == 0 ? 0 : prices.ticketServiceFee + prices.ticketFacilityFee;
         prices['ticketType'] = ticket?.attributes ? ticket?.attributes?.resale ? 'Resale Ticket' : 'Standard Ticket' : ticket?.resale ? 'Resale Ticket' : 'Standard Ticket';
         prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
         prices['ticketName'] = ticket?.attributes ? ticket?.attributes?.name : ticket?.name;
