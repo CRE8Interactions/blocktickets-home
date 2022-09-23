@@ -40,13 +40,26 @@ export default function Event(props) {
                         </p>
                         <Row>
                             <Col className="details-heading tablet-desktop-only" md={2}>
-                                <span className="time-caption">Time</span>
+                                <span className="time-caption">
+                                {event?.display_start_time &&
+                                    <>Time</>
+                                }
+                                {!event?.display_start_time &&
+                                    <>Date</>
+                                }                           
+                                    
+                                </span>
                             </Col>
                             <Col>
                                 <p className="small">
                                     {event?.hide_end_date &&
                                         <>
-                                            <span className='date'>{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')}</span><span className="time">{moment(event?.start).format('h:mm A')}</span>
+                                        <span className='date'>{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')}</span>
+                                        {event?.display_start_time &&
+                                            <>
+                                                <span className="time">{moment(event?.start).format('h:mm A')}</span>
+                                            </>
+                                        }   
                                         </>
                                     }
                                     {!event?.hide_end_date &&

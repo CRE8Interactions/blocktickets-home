@@ -178,6 +178,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
       where: {
         $and: [
           { eventId: eventUUID },
+          { hidden: false },
           { on_sale_status: { $in: ['available'] }},
           { isActive: { $eq: true }},
           { sales_end: { $gte: new Date()}}
