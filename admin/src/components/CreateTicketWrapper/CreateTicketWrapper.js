@@ -228,7 +228,7 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
             data['quantity'] = ticket.quantity;
             data['sales_start'] = moment(start).format();
             data['sales_end'] = moment(end).format();
-            data['hidden'] = ticket.hideTicket ? true : false
+            data['hidden'] = ticket.hideTicket
             if (!type) {
                 createTickets({ data })
                     .then((res) => {
@@ -240,7 +240,7 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                         console.error(err)
                     })
             } else {
-                data['type'] = type
+                data['type'] = type;
                 updateTickets({ data })
                     .then((res) => {
                         setIsSaving(false)

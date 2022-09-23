@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
@@ -23,6 +23,10 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+    useEffect(() => {
+        // listens for changes on ticket
+    }, [ticket])
     return (
         <>
             <Form>
@@ -32,7 +36,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                             <Form.Check.Input
                                 name="hideTicket"
                                 type='checkbox'
-                                defaultChecked={ticket?.hideTicket}
+                                checked={ticket.hideTicket}
                                 onChange={(e) => { handleChange(e, e.target.checked) }} />
                             <div>
                                 <Form.Check.Label id="check-display-checkbox-label" className='mb-1 fw-semi-bold'>Hide ticket</Form.Check.Label>
