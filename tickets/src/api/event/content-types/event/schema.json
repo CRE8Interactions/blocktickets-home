@@ -17,9 +17,6 @@
       "required": true,
       "unique": true
     },
-    "summary": {
-      "type": "text"
-    },
     "start": {
       "type": "datetime",
       "required": true
@@ -142,6 +139,9 @@
     "hide_doors_open": {
       "type": "boolean",
       "default": true
+    },
+    "summary": {
+      "type": "richtext"
     }
   }
 }
