@@ -13,99 +13,100 @@ import { Chart } from './Chart';
 import './reports.scss';
 
 export default function Reports({ title = "Reports", stats, setRange }) {
-    const viewsOpt = [
-        {
-            label: "Last 24 hrs",
-            value: '24_hrs'
-        },
-        {
-            label: "Last 7 days",
-            value: '7_days'
-        },
-        {
-            label: "Last 14 days",
-            value: '14_days'
-        },
-        {
-            label: "Last 30 days",
-            value: '30_days'
-        },
-        {
-            label: "All time",
-            value: 'all'
-        }
-    ];
+    // const viewsOpt = [
+    //     {
+    //         label: "Last 24 hrs",
+    //         value: '24_hrs'
+    //     },
+    //     {
+    //         label: "Last 7 days",
+    //         value: '7_days'
+    //     },
+    //     {
+    //         label: "Last 14 days",
+    //         value: '14_days'
+    //     },
+    //     {
+    //         label: "Last 30 days",
+    //         value: '30_days'
+    //     },
+    //     {
+    //         label: "All time",
+    //         value: 'all'
+    //     }
+    // ];
 
-    const salesOpt = [
-        {
-            label: "Primary sales",
-            value: 'primary'
-        },
-        {
-            label: "Secondary sales",
-            value: 'secondary'
-        }
-    ];
+    // const salesOpt = [
+    //     {
+    //         label: "Primary sales",
+    //         value: 'primary'
+    //     },
+    //     {
+    //         label: "Secondary sales",
+    //         value: 'secondary'
+    //     }
+    // ];
 
-    const [options, setOptions] = useState({
-        view: viewsOpt[0].value,
-        sales: salesOpt[0].value
-    })
+    // const [options, setOptions] = useState({
+    //     view: viewsOpt[0].value,
+    //     sales: salesOpt[0].value
+    // })
 
-    const [
-        key,
-        setKey
-    ] = useState();
+    // const [
+    //     key,
+    //     setKey
+    // ] = useState();
 
-    useEffect(() => {
-        setRange({
-            timePeriod: options.view,
-            type: options.sales
-        })
-    }, [options])
+    // useEffect(() => {
+    //     setRange({
+    //         timePeriod: options.view,
+    //         type: options.sales
+    //     })
+    // }, [options])
 
     // set tab key when sales option changes
-    useEffect(() => {
-        const initialState = options.sales == "primary" ? 'net' : 'royalties';
-        setKey(initialState)
+    // useEffect(() => {
+    //     const initialState = options.sales == "primary" ? 'net' : 'royalties';
+    //     setKey(initialState)
 
-    }, [options.sales])
+    // }, [options.sales])
 
-    const handleText = (val, arr) => {
-        const obj = arr.find(obj => obj.value == val);
-        return obj.label
-    }
+    // const handleText = (val, arr) => {
+    //     const obj = arr.find(obj => obj.value == val);
+    //     return obj.label
+    // }
 
-    const handleOption = e => {
-        setOptions({ ...options, [e.target.name]: e.target.value })
-    }
+    // const handleOption = e => {
+    //     setOptions({ ...options, [e.target.name]: e.target.value })
+    // }
 
-    const getDirection = (value) => {
-        if (Math.sign(value) === 1) return 'up' 
-        return 'down'
-    }
+    // const getDirection = (value) => {
+    //     if (Math.sign(value) === 1) return 'up' 
+    //     return 'down'
+    // }
 
     return (
         <section id="reports">
             <>
-                <Row as="header" className="section-header section-heading section-heading--flex justify-content-flex-start">
-                    <Col className='d-flex align-items-center'>
-                        <h1 className="text-capitalize">{title}</h1>
-                        <Form.Select name="view" onChange={handleOption} value={options.view} className='ms-auto w-auto'>
+                <header className="section-header section-heading section-heading--flex justify-content-between">
+                    {/* <Col className='d-flex align-items-center'> */}
+                    <h1 className="text-capitalize">{title}</h1>
+                    <small className='caption text-muted'>Data refreshes automatically every 15 seconds</small>
+                    {/* <Form.Select name="view" onChange={handleOption} value={options.view} className='ms-auto w-auto'>
                             {viewsOpt.map((view, index) => (
                                 <option key={index} value={view.value}>{view.label}</option>
                             ))}
-                        </Form.Select>
-                    </Col>
-                    <Col sm={4}>
+                        </Form.Select> */}
+                    {/* </Col> */}
+                    {/* <Col sm={4}>
                         <Form.Select name="sales" onChange={handleOption} value={options.sales} className='ms-auto w-auto'>
                             {salesOpt.map((sales, index) => (
                                 <option key={index} value={sales.value}>{sales.label}</option>
                             ))}
                         </Form.Select>
-                    </Col>
-                </Row>
-                <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
+                    </Col> */}
+                </header>
+                {/* <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
                     <Row>
                         <Col lg={4} id="tabs">
                             <Nav as="ul" className="flex-column mb-lg-0">
@@ -187,7 +188,7 @@ export default function Reports({ title = "Reports", stats, setRange }) {
                             </Tab.Content>
                         </Col>
                     </Row>
-                </Tab.Container>
+                </Tab.Container> */}
             </>
         </section>
     );
