@@ -5,10 +5,10 @@ import { getEvent } from '../../utilities/api';
 import { addDetailsToEvent, upload } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 
 import { UploadEventImage } from '../UploadEventImage';
-import { TextEditor } from '../TextEditor';
 import { CreateEventButtons } from '../CreateEventButtons';
 
 export default function DetailsWrapper({ eventId }) {
@@ -195,7 +195,11 @@ export default function DetailsWrapper({ eventId }) {
                         <h1>Event description</h1>
                     </header>
                     <Card body className='card--sm'>
-                        <TextEditor handleChange={handleDescription} event={event} />
+                        <Form.Control
+                            as="textarea" rows={5}
+                            name="description"
+                            value={event && event?.summary ? event?.summary : ''} onChange={setDescription}
+                        />
                     </Card>
                 </section>
             </section>

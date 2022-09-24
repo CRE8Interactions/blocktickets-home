@@ -28,13 +28,6 @@ export default function UploadEventImage({ selectedImage, setSelectedImage, even
         }
     }, [event])
 
-    // set image as background 
-    // useEffect(() => {
-    //     if (selectedImage) {
-    //         document.getElementById('upload-area').style.background = `url(${selectedImage})`
-    //     }
-    // }, [selectedImage])
-
     const handleClose = () => setShow(false)
 
     const handleSave = () => {
@@ -72,13 +65,9 @@ export default function UploadEventImage({ selectedImage, setSelectedImage, even
                     <Dropzone handleUpload={handleUpload} />
                 ) : (
                     <>
-                        {/* <div id="upload-area" style={{ height: "234px", objectFit: "cover", backgroundRepeat: 'no-repeat' }}>
-                        </div> */}
-
                         <Image src={selectedImage} width={selectedImage ? coordinates?.width : ''} height={selectedImage ? coordinates?.height : ''} style={{ height: "234px", width: '232px' }}
                             rounded />
                         <Stack direction='horizontal' className='btn-group-flex justify-content-start'>
-                            <Button variant='outline-light' className='text-danger' onClick={handleRemove}>Remove</Button>
                             <Button variant='outline-light' onClick={handleRemove}>Replace</Button>
                         </Stack>
                     </>
