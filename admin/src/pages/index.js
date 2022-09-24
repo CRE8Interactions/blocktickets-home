@@ -21,7 +21,7 @@ export { AttendeesListPage } from './AttendeesListPage';
 export { GuestListPage } from './GuestListPage';
 export { ViewGuestListPage } from './ViewGuestListPage';
 export { GuestInformationPage } from './GuestInformationPage';
-export { CheckInPage } from './CheckInPage';
+export { AttendeesPage } from './AttendeesPage';
 export { PrimarySalesPage } from './PrimarySalesPage';
 export { SecondarySalesPage } from './SecondarySalesPage';
 export { AutomaticReportingPage } from './AutomaticReportingPage';

@@ -78,25 +78,25 @@ export default function DashboardMenu({ open, setOpen, event }) {
                                     <Nav.Link>Orders</Nav.Link>
                                 </LinkContainer>
                             </Nav.Item>
-                            <Nav.Item as="li">
+                            {/* <Nav.Item as="li">
                                 <LinkContainer to="attendees-list">
                                     <Nav.Link>Attendees list</Nav.Link>
                                 </LinkContainer>
-                            </Nav.Item>
+                            </Nav.Item> */}
                             <Nav.Item as="li">
                                 <LinkContainer to="guest-list">
                                     <Nav.Link>Guest list</Nav.Link>
                                 </LinkContainer>
                             </Nav.Item>
                             <Nav.Item as="li">
-                                <LinkContainer to="check-in">
-                                    <Nav.Link>Check in</Nav.Link>
+                                <LinkContainer to="attendees">
+                                    <Nav.Link>Attendees</Nav.Link>
                                 </LinkContainer>
                             </Nav.Item>
                         </ul>
                     </Collapse>
                 </Nav.Item>
-                <Nav.Item as="li">
+                {/* <Nav.Item as="li">
                     <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setOpen(!open)}
                         aria-controls="reports-collapse"
@@ -127,7 +127,7 @@ export default function DashboardMenu({ open, setOpen, event }) {
                             </Nav.Item>
                         </ul>
                     </Collapse>
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Item as="li">
                     <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setOpen(!open)}
@@ -141,11 +141,11 @@ export default function DashboardMenu({ open, setOpen, event }) {
                     </Button>
                     <Collapse in={open}>
                         <ul id="marketing-collapse" className='submenu'>
-                            <Nav.Item as="li">
+                            {/* <Nav.Item as="li">
                                 <LinkContainer to="contact-attendees">
                                     <Nav.Link>Contact attendees</Nav.Link>
                                 </LinkContainer>
-                            </Nav.Item>
+                            </Nav.Item> */}
                             <Nav.Item as="li">
                                 <LinkContainer to="tracking-links">
                                     <Nav.Link>Tracking links</Nav.Link>
