@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Nav from 'react-bootstrap/Nav';
 
@@ -9,8 +9,6 @@ import './sidenav.scss';
 
 export default function Sidenav({ event }) {
 
-    const [open, setOpen] = useState(true);
-
     const isDashboard = /myevent/.test(window.location)
 
     return (
@@ -18,7 +16,7 @@ export default function Sidenav({ event }) {
             <div className="sidebar-wrapper">
                 <Nav as="nav" className="position-sticky" activeKey={window.location.pathname}>
                     {isDashboard ? (
-                        <DashboardMenu open={open} setOpen={setOpen} event={event} />
+                        <DashboardMenu event={event} />
                     ) : (
                         <SettingsMenu />
                     )}
