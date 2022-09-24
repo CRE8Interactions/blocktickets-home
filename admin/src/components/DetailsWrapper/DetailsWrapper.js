@@ -28,7 +28,7 @@ export default function DetailsWrapper({ eventId }) {
 
     const [showFooter, setShowFooter] = useState(false)
 
-    const [summary, setSummary] = useState()
+    const [description, setDescription] = useState()
 
     const [isSaving, setIsSaving] = useState(false)
 
@@ -36,14 +36,19 @@ export default function DetailsWrapper({ eventId }) {
     useEffect(() => {
         setInitialState({
             selectedImage,
-            summary,
+            description,
         })
     }, [])
 
+    // set event description to keep event summary and description in sync
     useEffect(() => {
-        if ((event?.image?.id || initialState?.selectedImage !== selectedImage || initialState?.summary !== summary)) setShowFooter(true)
+        setEvent({ ...event, summary: description })
+    }, [description])
+
+    useEffect(() => {
+        if ((event?.image?.id || initialState?.selectedImage !== selectedImage || initialState?.description !== description)) setShowFooter(true)
         else setShowFooter(false)
-    }, [initialState, selectedImage, summary, event])
+    }, [initialState, selectedImage, description, event])
 
     useEffect(() => {
         getEvent(eventId)
@@ -100,7 +105,7 @@ export default function DetailsWrapper({ eventId }) {
             upload(formData)
                 .then((res) => {
                     let data = {};
-                    data['description'] = summary;
+                    data['description'] = description;
                     data['eventUUID'] = eventId;
                     data['image'] = res?.data[0].id;
 
@@ -141,7 +146,7 @@ export default function DetailsWrapper({ eventId }) {
                 })
         } else {
             let data = {};
-            data['description'] = summary;
+            data['description'] = description;
             data['eventUUID'] = eventId;
             data['image'] = event?.image?.id;
 
@@ -193,8 +198,8 @@ export default function DetailsWrapper({ eventId }) {
                     <Card body className='card--sm'>
                         <Form.Control
                             as="textarea" rows={5}
-                            name="summary"
-                            value={event?.summary} onChange={setSummary}
+                            name="description"
+                            value={event?.summary ? event.summary : description} onChange={(e) => setDescription(e.target.value)}
                         />
                     </Card>
                 </section>
