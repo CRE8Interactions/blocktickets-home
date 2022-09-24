@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 
 import { AttendeeList } from './AttendeeList';
 
-export default function CheckInWrapper() {
+export default function AttendeesWrapper() {
 
     return (
         <section className='max-width-wrapper'>
