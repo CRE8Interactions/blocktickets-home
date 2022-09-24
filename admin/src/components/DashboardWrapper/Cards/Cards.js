@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatCurrency } from '../../../utilities/helpers';
+import { formatCurrency, formatNumber } from '../../../utilities/helpers';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -28,7 +28,7 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span><b className="fs-md">{stats?.allTicketsSold}</b> <span className='text-muted'>/ {stats?.totalTickets}</span></span>
+                                <span><b className="fs-md">{formatNumber(stats?.allTicketsSold)}</b> <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span></span>
                             </Col>
                             <Col className='text-end'>
                                 <span className='fw-medium'>{stats?.totalSoldPercentage}%</span>
@@ -37,18 +37,6 @@ export default function Cards({ stats }) {
                         <ProgressBar now={stats?.totalSoldPercentage} />
                     </Card>
                 </Col>
-                <Col lg={6}>
-                    <Card body>
-                        <div className='heading--flex card-body-heading'>
-                            <h1 className='card-body-title card-body-title--flex shareable-link'>Shareable link</h1>
-                            <Button variant="outline-light">Copy URL</Button>
-                        </div>
-                        <p className='mb-4 fw-bold'>Your event URL</p>
-                        <p className='text-muted'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>
-                    </Card>
-                </Col>
-            </Row>
-            <Row className='mt-5'>
                 <Col lg={6}>
                     <Card body>
                         <div className='heading--flex card-body-heading total-sales mb-4'>
@@ -68,7 +56,7 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span><b>{formatCurrency(stats?.primaryNetSales)}</b> <span className="small-text">net sales</span></span>
+                                <span><b>{formatCurrency(stats?.primaryNetSales)}</b> <span className="small-text">Net sales</span></span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
@@ -76,33 +64,109 @@ export default function Cards({ stats }) {
                         </Row>
                         <Row>
                             <Col>
-                                <span><b>{formatCurrency(0)}</b> <span className="small-text">royalties</span></span>
+                                <span><b>{formatCurrency(0)}</b> <span className="small-text">Royalties</span></span>
                             </Col>
                             <Col className='text-end'>
-                                <Badge bg="default" className='badge-outline badge-outline--secondary'>Secondary</Badge>
+                                <Badge bg="default" className='badge-outline badge-outline--secondary'>Resale</Badge>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className='mt-5'>
+                <Col lg={6}>
+                    <Card body>
+                        <div className='heading--flex card-body-heading royalties mb-4'>
+                            <Stack>
+                                <Stack direction="horizontal" gap={2} className="small-label--flex">
+                                    <span className='small-label'>Royalites</span>
+                                    <OverlayTrigger
+                                        placement="right"
+                                        overlay={<Tooltip>Royalties you’ve collected from secondary ticket sales across all your events</Tooltip>}>
+                                        <Button variant="link">
+                                            <InfoIcon variant="dark" />
+                                        </Button>
+                                    </OverlayTrigger>
+                                </Stack>
+                                <h1 className='card-body-title'>{formatCurrency(0)}</h1>
+                            </Stack>
+                            <Badge bg="default" className='badge-outline badge-outline--secondary'>Resale</Badge>
+                        </div>
+                        <Row>
+                            <Col>
+                                <span><b>{formatNumber(stats?.primaryTicketsSold)}</b> <span className="small-text">Tickets sold</span></span>
                             </Col>
                         </Row>
                     </Card>
                 </Col>
                 <Col lg={6}>
                     <Card body>
-                        <div className="heading--flex card-body-heading payout mb-4">
+                        <div className='heading--flex card-body-heading net-sales mb-4'>
                             <Stack>
                                 <Stack direction="horizontal" gap={2} className="small-label--flex">
-                                    <span className='small-label'>Payouts</span>
+                                    <span className='small-label'>Net sales</span>
                                     <OverlayTrigger
                                         placement="right"
-                                        overlay={<Tooltip>Your total earnings made from event</Tooltip>}>
+                                        overlay={<Tooltip>Sales across all your events after fees have been paid</Tooltip>}>
                                         <Button variant="link">
                                             <InfoIcon variant="dark" />
                                         </Button>
                                     </OverlayTrigger>
                                 </Stack>
-                                <h1 className='card-body-title'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
+                                <h1 className='card-body-title'>{formatCurrency(stats?.primaryNetSales)}</h1>
                             </Stack>
-                            <Badge bg="default" className='badge-outline badge-outline--success'>Paid</Badge>
+                            <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>
-                        <p className='text-muted'>Your payout will be released on 28 November 2020 to allow for any refunds. Depending on your bank, it may take 4-5 business days to receive your funds.</p>
+                        <Row>
+                            <Col>
+                                <span><b>{formatCurrency(stats?.primaryGrossSales)}</b> <span className="small-text">Gross sales</span></span>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className='mt-5'>
+                <Col lg={3}>
+                    <Card body>
+                        <div className="card-body-heading page-views">
+                            <Stack direction="horizontal" gap={2} className="mt-3 small-label--flex">
+                                <span className='small-label'>Page views</span>
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={<Tooltip>Page views for all your events on sales</Tooltip>}>
+                                    <Button variant="link">
+                                        <InfoIcon variant="dark" />
+                                    </Button>
+                                </OverlayTrigger>
+                            </Stack>
+                            <h1 className='card-body-title'>{formatNumber(stats?.pageViews)}</h1>
+                        </div>
+                    </Card>
+                </Col>
+                <Col lg={3}>
+                    <Card body>
+                        <div className="card-body-heading payout">
+                            <Stack direction="horizontal" gap={2} className="mt-3 small-label--flex">
+                                <span className='small-label'>Your payouts</span>
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={<Tooltip>Your total earnings made from event</Tooltip>}>
+                                    <Button variant="link">
+                                        <InfoIcon variant="dark" />
+                                    </Button>
+                                </OverlayTrigger>
+                            </Stack>
+                            <h1 className='card-body-title'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
+                        </div>
+                    </Card>
+                </Col>
+                <Col lg={6}>
+                    <Card body>
+                        <div className='heading--flex card-body-heading mb-4'>
+                            <h1 className='card-body-title card-body-title--flex shareable-link'>Shareable link</h1>
+                            <Button variant="outline-light">Copy URL</Button>
+                        </div>
+                        <p className='text-muted mt-3'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>
                     </Card>
                 </Col>
             </Row>
