@@ -74,6 +74,10 @@ export const createOrEditMember = async (data) => {
   return instance.post('/organizations/invite-member', data)
 }
 
+export const removeTeamMember = async (data) => {
+  return instance.post('/organizations/remove-member', data)
+}
+
 export const removeRoles = async (data) => {
   return instance.post('/organization-roles/remove', data)
 }

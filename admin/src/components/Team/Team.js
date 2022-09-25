@@ -7,7 +7,7 @@ import { Member } from './Member'
 import { AddMemberModal } from './AddMemberModal'
 import { DeleteModal } from './DeleteModal'
 
-export default function Team({ members, roles, inviteMember }) {
+export default function Team({ members, roles, inviteMember, removeMember }) {
     const [member, setMember] = useState({
         firstName: '',
         lastName: '',
@@ -23,6 +23,8 @@ export default function Team({ members, roles, inviteMember }) {
 
 
     const [showDelete, setShowDelete] = useState(false);
+
+    const [removeSelectedMember, setRemoveSelectedMember] = useState()
 
     const handleMember = (e) => {
         const role = document.getElementById('role').value;
@@ -44,7 +46,10 @@ export default function Team({ members, roles, inviteMember }) {
 
     const handleCloseAdd = () => setShowAdd(false)
 
-    const handleShowDelete = () => setShowDelete(true)
+    const handleShowDelete = (member) => {
+        setShowDelete(true)
+        setRemoveSelectedMember(member)
+    }
 
     const handleCloseDelete = () => setShowDelete(false)
 
@@ -56,11 +61,11 @@ export default function Team({ members, roles, inviteMember }) {
             </div>
             <Stack as="ul" gap={2}>
                 {members.map((member, index) => (
-                    <Member key={index} member={member} handleShowAdd={handleShowAdd} handleShowDelete={handleShowDelete} />
+                    <Member key={index} member={member} handleShowAdd={handleShowAdd} handleShowDelete={handleShowDelete} setRemoveSelectedMember={setRemoveSelectedMember} />
                 ))}
             </Stack>
             <AddMemberModal show={showAdd} handleClose={handleCloseAdd} roles={roles} id={id} member={member} handleMember={handleMember} handleAdd={handleAdd} />
-            <DeleteModal show={showDelete} handleClose={handleCloseDelete} />
+            <DeleteModal show={showDelete} handleClose={handleCloseDelete} removeMember={removeMember} removeSelectedMember={removeSelectedMember} />
         </>
     )
 }

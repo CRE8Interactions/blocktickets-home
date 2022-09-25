@@ -4,7 +4,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import AuthService from '../../utilities/services/auth.service'
 import {
     createOrganization, getOrganizationRoles, getOrganizationPermissions,
-    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register
+    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register, removeTeamMember
 } from '../../utilities/api'
 import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
 import UserContext from '../../context/User/User'
@@ -116,7 +116,7 @@ export default function SignUpWrapper() {
 
 
     useEffect(() => {
-        if (step === 1) AuthService.removeSignup()
+        // if (step === 1) AuthService.removeSignup()
     }, [])
 
     const getTitle = () => {
@@ -186,7 +186,18 @@ export default function SignUpWrapper() {
 
     const inviteMember = (member) => {
         createOrEditMember({ member })
-            .then((res) => console.log(res))
+            .then((res) => {
+                setMembers(res.data)
+            })
+            .catch((err) => console.error(err))
+    }
+
+    const removeMember = (member) => {
+        removeTeamMember(member)
+            .then((res) => {
+                let newMembers = members.filter(m => m.email != member.email)
+                setMembers(newMembers)
+            })
             .catch((err) => console.error(err))
     }
 
@@ -291,7 +302,6 @@ export default function SignUpWrapper() {
             setIsSaving(true)
             createW9({ data: taxDetails })
                 .then((res) => {
-                    AuthService.removeSignup();
                     setIsSaving(false)
                     setIsSuccess(true)
                 })
@@ -408,7 +418,7 @@ export default function SignUpWrapper() {
                         {step === 3 && (
                             <>
                                 <Roles roles={roles} permissions={permissions} createRoles={createRoles} setRoles={setRoles} />
-                                <Team members={members} roles={roles} inviteMember={inviteMember} />
+                                <Team members={members} roles={roles} inviteMember={inviteMember} removeMember={removeMember} />
                             </>
                         )}
                         {step === 4 && (
