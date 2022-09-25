@@ -64,6 +64,28 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     // Returns organizations which user is a member of
     let organization = organizations.find(org => org.members.length >= 1)
 
+    let teamMembers = await strapi.entityService.findMany('api::invite-team-member.invite-team-member', {
+      where: {
+        $and: [
+          { claimed: false }
+        ]
+       },
+      populate: {
+        organization_role: true,
+        organization: {
+          filters: {
+            id: {
+              $eq: organization.id
+            },
+          }
+        }
+      }
+    })
+
+    let arr = []
+    // Adds pending invite to members array
+    teamMembers?.map(member => arr.push({id: member.id, firstName: member.firstName, lastName: member.lastName, email: member.email, uuid: member.uuid, organization_role: member.organization_role, pending: true }) )
+
     organization = await strapi.entityService.findOne('api::organization.organization', organization.id, {
       populate: {
         members: {
@@ -74,6 +96,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         }
       },
     });
+
+    if (arr.length > 0) organization['members'] = [...organization.members, ...arr]
 
     return organization
   },
@@ -105,22 +129,188 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     // Returns organizations which user is a member of
     let organization = organizations.find(org => org.members.length >= 1)
 
-    const orgRole = await strapi.entityService.findOne('api::organization-role.organization-role', Number(role), {
-      
+    let data = {}
+
+    // Lets get all members of the organization
+    let orgMembers = await strapi.db.query('api::organization.organization').findOne({
+      where: { id: organization.id },
+      populate: { members: true },
     });
 
-    if (!uuid) {
+    let members = orgMembers.members;
+
+    let hasMember = members.find((member => member.email === email)) 
+
+    const invite = await strapi.db.query('api::invite-team-member.invite-team-member').findOne({
+      where: { 
+        $and: [
+         { email },
+         { claimed: false },
+        ]
+       }
+    });
+
+    if (!hasMember && !invite) {
       entry = await strapi.entityService.create('api::invite-team-member.invite-team-member', {
         data: {
           firstName,
           lastName,
           email,
           organization: organization.id,
-          role
+          organization_role: role
+        },
+        populate: {
+          organization_role: true
+        }
+      });
+
+    } else if (invite && !hasMember) {
+      entry = await strapi.db.query('api::invite-team-member.invite-team-member').update({
+        where: { id: invite.id },
+        data: {
+          firstName,
+          lastName,
+          email,
+          organization: organization.id,
+          organization_role: role
+        },
+        populate: {
+          organization_role: true
+        }
+      });
+    } else if (hasMember) {
+      entry = await strapi.db.query('plugin::users-permissions.user').update({
+        where: { uuid: hasMember.uuid },
+        data: {
+          firstName,
+          lastName,
+          email,
+          organization_role: role
+        },
+        populate: {
+          organization_role: true
+        }
+      });
+    }
+
+    let arr = [];
+
+    let teamMembers = await strapi.entityService.findMany('api::invite-team-member.invite-team-member', {
+      where: {
+        $and: [
+          { claimed: false }
+        ]
+       },
+      populate: {
+        organization_role: true,
+        organization: {
+          filters: {
+            id: {
+              $eq: organization.id
+            },
+          }
+        }
+      }
+    })
+
+    teamMembers?.map(member => arr.push({id: member.id, firstName: member.firstName, lastName: member.lastName, email: member.email, uuid: member.uuid, organization_role: member.organization_role, pending: true }) )
+
+    organization = await strapi.entityService.findOne('api::organization.organization', organization.id, {
+      populate: {
+        members: {
+          fields: ['firstName', 'lastName', 'uuid', 'email'],
+          populate: {
+            organization_role: true
+          }
+        }
+      },
+    });
+
+    if (arr.length > 0) organization['members'] = [...organization.members, ...arr]
+
+    let res = [];
+    await organization['members'].map(member => {
+      let data = {}
+      data['name'] = `${member.firstName} ${member.lastName}`
+      data['email'] = `${member.firstName} ${member.lastName}`
+      data['role'] = member.organization_role
+      data['uuid'] = member.uuid
+      res.push(data)
+    })
+
+    return res
+  },
+  async removeTeamMember(ctx) {
+    const user = ctx.state.user;
+    const {
+      firstName,
+      lastName,
+      email,
+      role,
+      name,
+      uuid
+    } = ctx.request.body;
+    
+    let organizations = await strapi.entityService.findMany('api::organization.organization', {
+      populate: {
+        members: {
+          filters: {
+            id: {
+              $eq: user.id
+            }
+          }
+        }
+      }
+    })
+    // Returns organizations which user is a member of
+    let organization = organizations.find(org => org.members.length >= 1)
+    // Removes team invite if unclaimed
+    const invite = await strapi.db.query('api::invite-team-member.invite-team-member').findOne({
+      where: { 
+        $and: [
+         { email },
+         { claimed: false },
+        ]
+       },
+       populate: {
+        organization: {
+          filters: {
+            id: {
+              $eq: organization.id
+            }
+          }
+        }
+      }
+    });
+
+    let orgMembers = await strapi.db.query('api::organization.organization').findOne({
+      where: { id: organization.id },
+      populate: { members: true },
+    });
+
+    let members = orgMembers.members;
+
+    let hasMember = members.find((member => member.email === email))
+
+    if (invite?.organization?.id === organization?.id) {
+      await strapi.db.query('api::invite-team-member.invite-team-member').delete({
+        where: { id: invite.id },
+      });
+    }
+
+    if (hasMember) {
+      let newMembers = members.filter(mem => mem.email !== email)
+
+      await strapi.db.query('api::organization.organization').update({
+        where: { id: organization.id },
+        data: {
+          members: newMembers,
         },
       });
     }
-    return user
+
+    return 200
+
   },
   async getRoles(ctx) {
     const roles = await strapi.db.query('plugin::users-permissions.role').findMany()

@@ -14,7 +14,7 @@ export default function Member({ member, handleShowAdd, handleShowDelete }) {
             <Stack direction='horizontal' gap={2}>
                 <Badge bg={`${member?.role?.name === 'Admin' ? 'success' : 'default'}`} className={`text-uppercase ${member?.role?.name !== 'Admin' ? 'badge-outline badge-outline--dark' : ''}`}>{formatString(member?.role?.name)}</Badge>
                 {member.role !== 'master_admin' && (
-                    <EditDeleteDropdown onClick={(e) => handleShowAdd(e, member)} handleShow={handleShowDelete} />
+                    <EditDeleteDropdown onClick={(e) => handleShowAdd(e, member)} handleShow={(e) => handleShowDelete(member)} />
                 )}
             </Stack>
         </Stack>

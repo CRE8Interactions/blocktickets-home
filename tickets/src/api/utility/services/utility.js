@@ -186,5 +186,13 @@ module.exports = createCoreService('api::utility.utility', ({ strapi }) => ({
         },
       },
     });
+
+    await strapi.db.query('api::organization-payment-information.organization-payment-information').deleteMany({
+      where: {
+        createdAt: {
+          $lte: new Date()
+        },
+      },
+    });
   } 
 }));

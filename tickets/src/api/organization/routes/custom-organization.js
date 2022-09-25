@@ -61,6 +61,11 @@ module.exports = {
       handler: 'organization.createPromoLink'
     },
     {
+      method: 'POST',
+      path: '/organizations/remove-member',
+      handler: 'organization.removeTeamMember'
+    },
+    {
       method: 'GET',
       path: '/organizations/event-stats',
       handler: 'organization.getEventStats'

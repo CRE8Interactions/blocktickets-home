@@ -493,6 +493,11 @@ module.exports = {
         }
 
         // Changes on listing model
+        if (event.model.singularName === 'invite-team-member') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
+
+        // Changes on listing model
         if (event.model.singularName === 'listing') {
           event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
