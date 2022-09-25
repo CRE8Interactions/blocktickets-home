@@ -116,7 +116,8 @@ export default function SignUpWrapper() {
 
 
     useEffect(() => {
-        // if (step === 1) AuthService.removeSignup()
+        // Remove signup token once done with step form
+        if (isSuccess) AuthService.removeSignup()
     }, [])
 
     const getTitle = () => {
