@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import AuthService from '../../utilities/services/auth.service';
 import { isMatching } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
@@ -7,11 +7,12 @@ import Card from 'react-bootstrap/Card';
 import { Security } from "./Security";
 
 export default function SecurityWrapper() {
+    const user = AuthService.getUser()?.user;
 
     const [info, setInfo] = useState({
-        firstName: 'Harrison',
-        lastName: 'Cogan',
-        curEmail: '',
+        firstName: user.firstName,
+        lastName: user.lastName,
+        curEmail: user.email,
         email: '',
         curPassword: '',
         password: ''
@@ -33,7 +34,6 @@ export default function SecurityWrapper() {
         setError('')
 
     }, [info.curEmail, info.email, info.curPassword, info.password])
-
 
     // validate if curEmail is correct, newEmail is correct, curPassword is correct, newPassword is correct and pattern match ?
     const handleInput = (e) => {

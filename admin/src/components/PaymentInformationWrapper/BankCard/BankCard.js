@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
@@ -9,13 +9,21 @@ import { DeleteModal } from './DeleteModal';
 
 import './bankCard.scss';
 
-export default function BankCard({ handleShow }) {
+export default function BankCard({ handleShow, bankAccount }) {
 
     const [show, setShow] = useState(false)
 
     const handleShowDelete = () => setShow(true)
 
     const handleClose = () => setShow(false)
+
+    const lastN = (str, int) => {
+        return str.slice(`-${int}`);
+    }
+
+    useEffect(() => {
+    
+    }, [bankAccount])
 
     return (
         <>
@@ -27,8 +35,8 @@ export default function BankCard({ handleShow }) {
                     <Stack className="info">
                         <h1>Bank information</h1>
                         <ul className='text-muted small'>
-                            <li>Comerica Bank</li>
-                            <li>Checking TPG USA XXXXXX674232</li>
+                            <li>{bankAccount?.bankName}</li>
+                            <li>{bankAccount?.accountType} {bankAccount?.companyName} USA XXXXXX{lastN(bankAccount?.accountNumber, 6)}</li>
                             <li>US. Dollars, United States</li>
                         </ul>
                         <Stack direction='horizontal' gap={3} className="mt-3">

@@ -85,5 +85,10 @@ module.exports = {
       path: '/organizations/promo-stats',
       handler: 'organization.getPromoLinks'
     },
+    {
+      method: 'GET',
+      path: '/organizations/payment-info',
+      handler: 'organization.getPaymentInfo'
+    },
   ]
 }

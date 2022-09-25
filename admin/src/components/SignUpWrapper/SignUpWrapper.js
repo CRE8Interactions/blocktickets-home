@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
-import AuthService from '../../utilities/services/auth.service'
+import AuthService from '../../utilities/services/auth.service';
 import {
     createOrganization, getOrganizationRoles, getOrganizationPermissions,
     createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register, removeTeamMember
