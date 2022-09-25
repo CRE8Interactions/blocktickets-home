@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+    getOrganizationRoles, getOrganizationPermissions,
+    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register, removeTeamMember
+} from '../../utilities/api'
+import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -8,28 +13,52 @@ import { Roles } from "../Roles";
 import { Team } from "../Team";
 
 export default function TeamManagementWrapper() {
-    // demo purposes: will come from database - delete later
-    const roles = ['master_admin', 'admin', 'marketer', 'viewer']
+    const [roles, setRoles] = useState([])
+    const [permissions, setPermissions] = useState([])
+    const [members, setMembers] = useState([])
 
-    // demo purposes: will come from database - delete later 
-    const members = [
-        {
-            name: 'harrison_cogan',
-            role: 'master_admin',
-        },
-        {
-            name: 'chaz_haskins',
-            role: 'viewer',
-        },
-        {
-            name: 'florenc_sinanaj',
-            role: 'marketer',
-        },
-        {
-            name: 'jaime_convery',
-            role: 'admin',
-        }
-    ]
+    const getRolesAndPermissions = () => {
+        getOrganizationRoles()
+            .then((res) => {
+                setRoles(res.data)
+            })
+            .catch((err) => console.error(err))
+
+        getOrganizationPermissions()
+            .then((res) => setPermissions(formatPermissions(res.data.data)))
+            .catch((err) => console.error(err))
+
+        getTeam()
+            .then((res) => setMembers(formatMembers(res.data?.members)))
+            .catch((err) => console.error(err))
+    }
+
+    const createRoles = (data) => {
+        createOrEditRole({ data })
+            .then((res) => setRoles(res.data))
+            .catch((err) => console.error(err))
+    }
+
+    const inviteMember = (member) => {
+        createOrEditMember({ member })
+            .then((res) => {
+                setMembers(res.data)
+            })
+            .catch((err) => console.error(err))
+    }
+
+    const removeMember = (member) => {
+        removeTeamMember(member)
+            .then((res) => {
+                let newMembers = members.filter(m => m.email != member.email)
+                setMembers(newMembers)
+            })
+            .catch((err) => console.error(err))
+    }
+
+    useEffect(() => {
+        getRolesAndPermissions()
+    }, [])
 
     const [
         key,
@@ -62,10 +91,10 @@ export default function TeamManagementWrapper() {
                     </div>
                     <Tab.Content>
                         <Tab.Pane eventKey="roles">
-                            <Roles roles={roles} />
+                            <Roles roles={roles} permissions={permissions} createRoles={createRoles} setRoles={setRoles} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="team">
-                            <Team members={members} />
+                            <Team members={members} roles={roles} inviteMember={inviteMember} removeMember={removeMember} />
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>

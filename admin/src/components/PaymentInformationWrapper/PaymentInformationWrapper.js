@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { getPaymentInfo } from '../../utilities/api';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -8,7 +8,13 @@ import { BankCard } from "./BankCard";
 
 export default function PaymentInformationWrapper() {
 
-    const [bankAccount, setBankAccount] = useState()
+    const [bankAccount, setBankAccount] = useState({
+        accountNumber: '',
+        accountType: '',
+        bankName: '',
+        companyName: '',
+        routingNumber: ''
+    })
 
     const [isValid, setIsValid] = useState(true)
 
@@ -25,6 +31,12 @@ export default function PaymentInformationWrapper() {
 
     }, [bankAccount?.accountNumber])
 
+    useEffect(() => {
+        getPaymentInfo()
+            .then((res) => setBankAccount(res.data))
+            .catch((err) => console.error(err))
+    }, [])
+
     return (
         <>
             <section className='wrapper'>
@@ -36,7 +48,7 @@ export default function PaymentInformationWrapper() {
                 </header>
                 <Card body className='card--sm'>
                     {bankAccount ? (
-                        <BankCard handleShow={handleShow} />
+                        <BankCard handleShow={handleShow} bankAccount={bankAccount} />
                     ) : (
                         <Button size="lg" className="btn-plus w-100" onClick={handleShow}>Link bank account</Button>
                     )}

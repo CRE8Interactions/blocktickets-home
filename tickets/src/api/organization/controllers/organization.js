@@ -930,5 +930,40 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
 
     return arr
-  }
+  },
+  async getPaymentInfo(ctx) {
+    const user = ctx.state.user;
+
+    // Get Organizations member belongs to
+    let organizations = await strapi.entityService.findMany('api::organization.organization', {
+      populate: {
+        members: {
+          filters: {
+            id: {
+              $eq: user.id
+            }
+          }
+        },
+        events: {
+          populate: {
+            tickets: true,
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
+    })
+    // Returns organizations which user is a member of
+    let organization = organizations.find(org => org.members.length >= 1)
+  
+    let paymentInfo = await strapi.db.query('api::organization-payment-information.organization-payment-information').findOne({
+      where: { organization: organization.id },
+    });
+
+    return paymentInfo
+  },
 }));

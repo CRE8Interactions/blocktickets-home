@@ -11,7 +11,7 @@ import { OrganizationInformationWrapper } from "../OrganizationInformationWrappe
 export default function OrganizationInfoWrapper() {
 
     const [orgInfo, setOrgInfo] = useState({
-        orgName: '',
+        name: '',
         address: []
     })
 
@@ -33,7 +33,7 @@ export default function OrganizationInfoWrapper() {
                 <p className='section-header-desc'>Details that apply across your events and billing</p>
             </header>
             <Card body className='card--sm'>
-                <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
+                <OrganizationInformationWrapper getOrgInfo={setOrgInfo} orgInfo={orgInfo} />
             </Card>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button size="lg" onClick={handleSave}>Save</Button>

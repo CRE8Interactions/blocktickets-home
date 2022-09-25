@@ -62,6 +62,10 @@ export const createPaymentInfo = async (data) => {
   return instance.post('/organizations/create-payment-info', data)
 }
 
+export const getPaymentInfo = async () => {
+  return instance.get(`/organizations/payment-info`)
+}
+
 export const createW9 = async (data) => {
   return instance.post('/organizations/create-w9', data)
 }
