@@ -14,7 +14,7 @@ export default function TicketDescriptionModal({ show, handleClose, name, ticket
                 <h1 className="m-0 fs-md">Description</h1>
             </div>
             <Modal.Body>
-                <p>{ticket?.description}</p>
+                <pre>{ticket?.description}</pre>
             </Modal.Body>
         </Modal>
     );
