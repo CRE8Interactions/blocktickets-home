@@ -114,10 +114,9 @@ export default function SignUpWrapper() {
         }
     }, [location])
 
-
     useEffect(() => {
-
-    }, [])
+        // listens to orginfo changes
+    }, [orgInfo])
 
     const getTitle = () => {
         switch (step) {
@@ -305,6 +304,7 @@ export default function SignUpWrapper() {
                 .then((res) => {
                     setIsSaving(false)
                     setIsSuccess(true)
+                    AuthService.removeSignup()
                 })
                 .catch((err) => {
                     setIsSaving(false)
