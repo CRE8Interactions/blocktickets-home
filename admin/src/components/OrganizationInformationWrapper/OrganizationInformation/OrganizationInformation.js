@@ -17,10 +17,10 @@ export default function OrganizationInformation({ org, handleOrg }) {
                 <Form.Label>Organization name</Form.Label>
                 <Form.Control
                     type="text"
-                    name="name"
+                    name="orgName"
                     required
                     placeholder="Enter organization name"
-                    value={org?.name}
+                    value={org?.orgName}
                     onChange={handleOrg}
                 />
             </Form.Group>
