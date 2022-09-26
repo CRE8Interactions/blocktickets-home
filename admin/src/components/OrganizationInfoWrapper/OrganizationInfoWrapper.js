@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 import { OrganizationInformationWrapper } from "../OrganizationInformationWrapper";
 
+// Settings Organization Information page 
 export default function OrganizationInfoWrapper() {
 
     const [orgInfo, setOrgInfo] = useState({
@@ -19,6 +20,7 @@ export default function OrganizationInfoWrapper() {
         getMyOrganizations()
             .then((res) => setOrgInfo(res.data[0]))
     }, [])
+
 
     const handleSave = () => {
         // TODO: make orgName unique
