@@ -8,14 +8,15 @@ import { OrganizationInformation } from './OrganizationInformation'
 export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo }) {
 
     const [org, setOrg] = useState({
-        name: '',
+        orgName: '',
         address: []
     })
 
     // update parent state when state changes 
     useEffect(() => {
-        setOrg(orgInfo)
-    }, [orgInfo])
+        getOrgInfo(org)
+        // setOrg(orgInfo)
+    }, [org])
 
     const handleOrg = (e) => {
         setOrg({ ...org, [e.target.name]: e.target.value })

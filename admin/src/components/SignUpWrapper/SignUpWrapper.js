@@ -114,11 +114,9 @@ export default function SignUpWrapper() {
         }
     }, [location])
 
-
     useEffect(() => {
-        // Remove signup token once done with step form
-        if (isSuccess) AuthService.removeSignup()
-    }, [])
+        // listens to orginfo changes
+    }, [orgInfo])
 
     const getTitle = () => {
         switch (step) {
@@ -305,6 +303,7 @@ export default function SignUpWrapper() {
                 .then((res) => {
                     setIsSaving(false)
                     setIsSuccess(true)
+                    AuthService.removeSignup()
                 })
                 .catch((err) => {
                     setIsSaving(false)
