@@ -10,6 +10,12 @@
 	background-position: center;
 }
 
+.btn {
+	&:active {
+		border-color: transparent;
+	}
+}
+
 .btn + .btn {
 	margin-left: rem(16);
 }

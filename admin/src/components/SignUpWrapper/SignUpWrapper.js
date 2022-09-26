@@ -304,7 +304,6 @@ export default function SignUpWrapper() {
                 .then((res) => {
                     setIsSaving(false)
                     setIsSuccess(true)
-                    AuthService.removeSignup()
                 })
                 .catch((err) => {
                     setIsSaving(false)

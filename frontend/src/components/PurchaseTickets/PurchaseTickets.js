@@ -7,7 +7,7 @@ import { TicketPurchase } from './TicketPurchase';
 
 import './purchaseTickets.scss';
 
-export default function PurchaseTickets({code}) {
+export default function PurchaseTickets({ code }) {
     // 1 - ticket selection
     // 2 - ticket confirmation
     // 3 - presale
@@ -52,7 +52,7 @@ export default function PurchaseTickets({code}) {
         []
     );
 
-    // demo purposes: will come from database 
+    // demo purposes: will come from database when we have more than one type of ticket
     const eventType = "genAdmission";
 
     const handleClick = (step, ticket, listing) => {
