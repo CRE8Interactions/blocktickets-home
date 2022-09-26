@@ -7,21 +7,25 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
-export default function OrganizationInformation({ org, handleOrg }) {
+import { Error } from '../../Error'
+
+export default function OrganizationInformation({ org, setName, handleAddress, error }) {
     useEffect(() => {
 
     }, [org])
+
     return (
         <Form>
-            <Form.Group className='form-group'>
+            <Form.Group className='form-group' controlId='name'>
                 <Form.Label>Organization name</Form.Label>
                 <Form.Control
                     type="text"
-                    name="name"
+                    name="orgName"
                     required
                     placeholder="Enter organization name"
-                    value={org?.name}
-                    onChange={handleOrg}
+                    value={org?.orgName}
+                    onChange={setName}
+                    className={error?.type ? 'error-border' : ''}
                 />
             </Form.Group>
             <fieldset className='form-group'>
@@ -29,11 +33,11 @@ export default function OrganizationInformation({ org, handleOrg }) {
                 <Stack gap={2}>
                     <Form.Control
                         type="text"
-                        name="address"
+                        name="address_1"
                         aria-label="Address"
                         placeholder="Address"
                         value={org?.address?.address_1}
-                        onChange={handleOrg}
+                        onChange={handleAddress}
                     />
                     <Form.Control
                         type="text"
@@ -41,21 +45,21 @@ export default function OrganizationInformation({ org, handleOrg }) {
                         aria-label="City"
                         placeholder="City"
                         value={org?.address?.city}
-                        onChange={handleOrg}
+                        onChange={handleAddress}
                     />
                     <Row>
                         <Col md={4}>
                             <Form.Control
                                 type="text"
-                                name="zip_code"
+                                name="zipcode"
                                 aria-label="Zip Code"
                                 placeholder="Zip code"
                                 value={org?.address?.zipcode}
-                                onChange={handleOrg}
+                                onChange={handleAddress}
                             />
                         </Col>
                         <Col className='ps-0'>
-                            <Form.Select aria-label="State" value={org?.address?.state} onChange={handleOrg} name="state">
+                            <Form.Select aria-label="State" value={org?.address?.state} onChange={handleAddress} name="state">
                                 {stateOpt.map((option, index) => (
                                     <option key={index} value={option.value}>{option.name}</option>
                                 ))}
@@ -64,6 +68,9 @@ export default function OrganizationInformation({ org, handleOrg }) {
                     </Row>
                 </Stack>
             </fieldset>
+            {error.type && (
+                <Error type={error.type} field={error.field} />
+            )}
         </Form>
     )
 }

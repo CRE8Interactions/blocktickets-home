@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
+import UserContext from '../../context/User/User'
 import AuthService from '../../utilities/services/auth.service';
 import {
     createOrganization, getOrganizationRoles, getOrganizationPermissions,
     createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register, removeTeamMember
 } from '../../utilities/api'
 import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
-import UserContext from '../../context/User/User'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -88,7 +88,7 @@ export default function SignUpWrapper() {
     useEffect(() => {
         setError({})
         setIsValid(true)
-    }, [credentials.email, credentials.password, orgInfo?.orgName, bankAccount?.accountNumber])
+    }, [credentials.email, credentials.password, orgInfo?.name, bankAccount?.accountNumber])
 
     // go to step based on url if browser refresh 
     useEffect(() => {
@@ -116,8 +116,7 @@ export default function SignUpWrapper() {
 
 
     useEffect(() => {
-        // Remove signup token once done with step form
-        if (isSuccess) AuthService.removeSignup()
+
     }, [])
 
     const getTitle = () => {
@@ -277,6 +276,7 @@ export default function SignUpWrapper() {
                 })
                 .catch((err) => {
                     setIsSaving(false)
+                    console.log(orgInfo);
                     setError({ type: 'alreadyExist', field: 'organization name' })
                     console.error(err);
                 })
@@ -326,8 +326,15 @@ export default function SignUpWrapper() {
                 return !firstName || !lastName || !email || !password || error.type
 
             case 2:
-                if (orgInfo)
-                    return !orgInfo.orgName || error.type
+                if (orgInfo) {
+                    return !orgInfo.orgName || !orgInfo.address?.address_1 || !orgInfo.address?.city || !orgInfo.address?.zipcode || !orgInfo.address?.state || error.type
+                }
+                else {
+                    return false
+                }
+
+            default:
+                return;
         }
 
     }
@@ -410,10 +417,7 @@ export default function SignUpWrapper() {
                         )}
                         {step === 2 && (
                             <>
-                                <OrganizationInformationWrapper getOrgInfo={setOrgInfo} />
-                                {error.type && (
-                                    <Error type={error.type} field={error.field} />
-                                )}
+                                <OrganizationInformationWrapper getOrgInfo={setOrgInfo} error={error} />
                             </>
                         )}
                         {step === 3 && (

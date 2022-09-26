@@ -4,24 +4,53 @@ import { stateOpt } from '../../utilities/helpers'
 
 import { OrganizationInformation } from './OrganizationInformation'
 
-// child component to parent components 
-export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo }) {
+// child component to parent components SignUp and Settings OrgInfoWrapper to be able to use same component 
+export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo, error }) {
 
     const [org, setOrg] = useState({
-        name: '',
+        orgName: '',
         address: []
     })
 
-    // update parent state when state changes 
+    // // assign state property in address object
     useEffect(() => {
-        setOrg(orgInfo)
+        setOrg(prevState => ({
+            ...prevState,
+            address: {
+                ...prevState.address,
+                state: stateOpt[0].value
+            }
+        }))
+    }, [])
+
+    // update component state from parent Setting OrganizationInfoWrapper 
+    useEffect(() => {
+        if (orgInfo) {
+            setOrg(org)
+        }
     }, [orgInfo])
 
-    const handleOrg = (e) => {
+    // update parent state when state changes 
+    useEffect(() => {
+        getOrgInfo(org)
+    }, [org])
+
+    const setName = (e) => {
         setOrg({ ...org, [e.target.name]: e.target.value })
     }
 
+    const handleAddress = (e) => {
+        const { name, value } = e.target;
+        setOrg(prevState => ({
+            ...prevState,
+            address: {
+                ...prevState.address,
+                [name]: value
+            }
+        }))
+    }
+
     return (
-        <OrganizationInformation org={org} handleOrg={handleOrg} />
+        <OrganizationInformation org={org} setName={setName} handleAddress={handleAddress} error={error} />
     )
 }
