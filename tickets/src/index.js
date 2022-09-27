@@ -330,6 +330,7 @@ module.exports = {
 
         // Changes on Invite
         if (event.model.singularName === 'invite-team-member') {
+          // Doesnt work
           if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendMemberInvite(params);
         }
 

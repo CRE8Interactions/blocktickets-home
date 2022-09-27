@@ -153,3 +153,7 @@ export const upload = async (data) => {
 export const getTicketDetails = async (uuid) => {
   return instance.get(`organizations/all-ticket-details?uuid=${uuid}`)
 }
+
+export const inviteValid = async (code) => {
+  return instance.get(`/organizations/invite-valid?code=${code}`)
+}

@@ -11,7 +11,7 @@ import { Error } from '../../Error'
 
 export default function OrganizationInformation({ org, setName, handleAddress, error }) {
     useEffect(() => {
-
+        console.log('Org ', org)
     }, [org])
 
     return (
@@ -69,7 +69,7 @@ export default function OrganizationInformation({ org, setName, handleAddress, e
                 </Stack>
             </fieldset>
             {error.type && (
-                <Error type={error.type} field={error.field} />
+                <Error type={error?.type} field={error.field} />
             )}
         </Form>
     )
