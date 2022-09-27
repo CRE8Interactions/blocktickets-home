@@ -266,6 +266,8 @@ export default function SignUpWrapper() {
         }
         else if (step === 2) {
             setIsSaving(true)
+            // Set Country
+            orgInfo['address']['country'] = "US"
             createOrganization({ data: orgInfo })
                 .then((res) => {
                     setIsSaving(false)
@@ -275,7 +277,6 @@ export default function SignUpWrapper() {
                 })
                 .catch((err) => {
                     setIsSaving(false)
-                    console.log(orgInfo);
                     setError({ type: 'alreadyExist', field: 'organization name' })
                     console.error(err);
                 })
@@ -304,6 +305,7 @@ export default function SignUpWrapper() {
                 .then((res) => {
                     setIsSaving(false)
                     setIsSuccess(true)
+                    AuthService.removeSignup()
                 })
                 .catch((err) => {
                     setIsSaving(false)

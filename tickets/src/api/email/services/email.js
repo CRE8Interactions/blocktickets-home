@@ -652,7 +652,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async sendMemberInvite(params) {
-    const org = await strapi.entityService.findOne('api::organization.organization', params.data.organization);
+    console.log(params)
     try {
       await strapi
         .plugin('email-designer')
@@ -660,7 +660,7 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
         .sendTemplatedEmail(
           {
             // required
-            to: params.data.email,
+            to: params.email,
   
             // optional if /config/plugins.js -> email.settings.defaultFrom is set
             from: process.env.MAIN_EMAIL,
@@ -681,9 +681,10 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
           },
           {
             // this object must include all variables you're using in your email template
-            user: params.data.firstName,
-            code: params.data.inviteCode,
-            organization: org
+            user: params.firstName,
+            code: params.code,
+            organization: params.orgName,
+            host: params.host
           }
         );
     } catch (err) {
