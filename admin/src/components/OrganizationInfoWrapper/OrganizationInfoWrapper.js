@@ -11,10 +11,7 @@ import { OrganizationInformationWrapper } from "../OrganizationInformationWrappe
 // Settings Organization Information page 
 export default function OrganizationInfoWrapper() {
 
-    const [orgInfo, setOrgInfo] = useState({
-        name: '',
-        address: []
-    })
+    const [orgInfo, setOrgInfo] = useState()
 
     useEffect(() => {
         getMyOrganizations()
