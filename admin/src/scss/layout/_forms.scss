@@ -56,6 +56,7 @@ legend:not(.form-label) {
 .form-label--flex {
 	font-weight: $fw-bold;
 	font-size: $caption;
+	padding: 0px;
 	margin-bottom: rem(12);
 	color: $text-muted;
 	text-transform: uppercase;
