@@ -28,27 +28,20 @@ export default function DetailsWrapper({ eventId }) {
 
     const [showFooter, setShowFooter] = useState(false)
 
-    const [description, setDescription] = useState()
-
     const [isSaving, setIsSaving] = useState(false)
 
     // save initial state to check whether to show save buttons 
     useEffect(() => {
         setInitialState({
             selectedImage,
-            description,
+            summary: event?.summary || null,
         })
     }, [])
 
-    // set event description to keep event summary and description in sync
     useEffect(() => {
-        setEvent({ ...event, summary: description })
-    }, [description])
-
-    useEffect(() => {
-        if ((event?.image?.id || initialState?.selectedImage !== selectedImage || initialState?.description !== description)) setShowFooter(true)
+        if ((event?.image?.id || initialState?.selectedImage !== selectedImage || initialState?.summary !== event?.summary)) setShowFooter(true)
         else setShowFooter(false)
-    }, [initialState, selectedImage, description, event])
+    }, [initialState, selectedImage, event?.summary, event])
 
     useEffect(() => {
         getEvent(eventId)
@@ -62,6 +55,9 @@ export default function DetailsWrapper({ eventId }) {
         // Listens for image upload
     }, [selectedImage])
 
+    const handleChange = (e) => {
+        setEvent({ ...event, [e.target.name]: e.target.value })
+    }
     const b64toBlob = (b64Data, contentType, sliceSize) => {
         contentType = contentType || '';
         sliceSize = sliceSize || 512;
@@ -105,7 +101,7 @@ export default function DetailsWrapper({ eventId }) {
             upload(formData)
                 .then((res) => {
                     let data = {};
-                    data['description'] = description;
+                    data['description'] = event?.summary;
                     data['eventUUID'] = eventId;
                     data['image'] = res?.data[0].id;
 
@@ -146,7 +142,7 @@ export default function DetailsWrapper({ eventId }) {
                 })
         } else {
             let data = {};
-            data['description'] = description;
+            data['description'] = event?.summary;
             data['eventUUID'] = eventId;
             data['image'] = event?.image?.id;
 
@@ -198,8 +194,9 @@ export default function DetailsWrapper({ eventId }) {
                     <Card body className='card--sm'>
                         <Form.Control
                             as="textarea" rows={5}
-                            name="description"
-                            value={event?.summary ? event.summary : description} onChange={(e) => setDescription(e.target.value)}
+                            name="summary"
+                            value={event?.summary || ''}
+                            onChange={handleChange}
                         />
                     </Card>
                 </section>
