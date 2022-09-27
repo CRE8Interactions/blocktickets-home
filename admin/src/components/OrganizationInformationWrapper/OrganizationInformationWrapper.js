@@ -9,22 +9,17 @@ export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo, er
 
     const [org, setOrg] = useState({
         orgName: '',
-        address: []
+        address: {
+            state: stateOpt[0].value
+        }
     })
-
-    // // assign state property in address object
-    useEffect(() => {
-        setOrg(prevState => ({
-            ...prevState,
-            address: {
-                ...prevState.address,
-                state: stateOpt[0].value
-            }
-        }))
-    }, [])
 
     // update component state from parent Setting OrganizationInfoWrapper 
     useEffect(() => {
+        if (orgInfo) {
+            setOrg(orgInfo)
+        }
+
     }, [orgInfo])
 
     // update parent state when state changes 
@@ -48,6 +43,6 @@ export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo, er
     }
 
     return (
-        <OrganizationInformation org={orgInfo} setName={setName} handleAddress={handleAddress} error={error} />
+        <OrganizationInformation org={org} setName={setName} handleAddress={handleAddress} error={error} />
     )
 }

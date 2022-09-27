@@ -46,7 +46,7 @@ select:-webkit-autofill:focus {
 	border-color: $danger;
 }
 
-legend {
+legend:not(.form-label) {
 	font-weight: $fw-semi-bold;
 	margin-bottom: 0px;
 	padding-bottom: rem(18);
