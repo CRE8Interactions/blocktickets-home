@@ -3,6 +3,11 @@
 @use 'container' as *;
 @use './../theme/colors' as *;
 
+pre {
+	white-space: break-spaces;
+	font-family: $font-body;
+}
+
 .normal {
 	font-size: $body-2;
 }

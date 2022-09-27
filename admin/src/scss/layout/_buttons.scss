@@ -8,7 +8,8 @@
 
 .btn {
 	&:hover,
-	&:focus {
+	&:focus,
+	&:active {
 		border-color: transparent;
 	}
 }

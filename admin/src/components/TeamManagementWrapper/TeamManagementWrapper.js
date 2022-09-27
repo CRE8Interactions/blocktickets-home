@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
     getOrganizationRoles, getOrganizationPermissions,
-    createOrEditRole, getTeam, createOrEditMember, createPaymentInfo, createW9, register, removeTeamMember
+    createOrEditRole, getTeam, createOrEditMember, removeTeamMember
 } from '../../utilities/api'
-import { isMatching, formatPermissions, formatMembers } from '../../utilities/helpers'
+import { formatPermissions, formatMembers } from '../../utilities/helpers'
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -13,9 +13,21 @@ import { Roles } from "../Roles";
 import { Team } from "../Team";
 
 export default function TeamManagementWrapper() {
+
+    const [
+        key,
+        setKey
+    ] = useState('roles');
+
     const [roles, setRoles] = useState([])
+
     const [permissions, setPermissions] = useState([])
+
     const [members, setMembers] = useState([])
+
+    useEffect(() => {
+        getRolesAndPermissions()
+    }, [])
 
     const getRolesAndPermissions = () => {
         getOrganizationRoles()
@@ -55,15 +67,6 @@ export default function TeamManagementWrapper() {
             })
             .catch((err) => console.error(err))
     }
-
-    useEffect(() => {
-        getRolesAndPermissions()
-    }, [])
-
-    const [
-        key,
-        setKey
-    ] = useState('roles');
 
     return (
         <section className='wrapper'>
