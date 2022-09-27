@@ -88,7 +88,7 @@ export default function SignUpWrapper() {
     useEffect(() => {
         setError({})
         setIsValid(true)
-    }, [credentials.email, credentials.password, orgInfo?.name, bankAccount?.accountNumber])
+    }, [credentials.email, credentials.password, orgInfo?.orgName, bankAccount?.accountNumber])
 
     // go to step based on url if browser refresh 
     useEffect(() => {
