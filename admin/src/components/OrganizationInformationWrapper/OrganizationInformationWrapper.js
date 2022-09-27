@@ -25,9 +25,6 @@ export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo, er
 
     // update component state from parent Setting OrganizationInfoWrapper 
     useEffect(() => {
-        if (orgInfo) {
-            setOrg(org)
-        }
     }, [orgInfo])
 
     // update parent state when state changes 
@@ -51,6 +48,6 @@ export default function OrganizationInformationWrapper({ getOrgInfo, orgInfo, er
     }
 
     return (
-        <OrganizationInformation org={org} setName={setName} handleAddress={handleAddress} error={error} />
+        <OrganizationInformation org={orgInfo} setName={setName} handleAddress={handleAddress} error={error} />
     )
 }
