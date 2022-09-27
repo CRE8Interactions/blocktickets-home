@@ -90,5 +90,10 @@ module.exports = {
       path: '/organizations/payment-info',
       handler: 'organization.getPaymentInfo'
     },
+    {
+      method: 'GET',
+      path: '/organizations/invite-valid',
+      handler: 'organization.inviteValid'
+    },
   ]
 }

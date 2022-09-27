@@ -350,10 +350,7 @@ module.exports = createCoreController('api::verify.verify', ({
 
     const {
       orgName,
-      address,
-      city,
-      state,
-      zip_code
+      address
     } = ctx.request.body.data;
 
     user = await strapi.db.query('plugin::users-permissions.user').update({
@@ -368,13 +365,7 @@ module.exports = createCoreController('api::verify.verify', ({
         name: orgName,
         creatorId: user.uuid,
         members: [user],
-        address: {
-          address_1: address,
-          city,
-          state,
-          zipcode: zip_code,
-          country: 'US'
-        }
+        address: address
       }
     })
 

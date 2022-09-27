@@ -81,6 +81,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         }
       }
     })
+    // Filters out members with non matching org
+    teamMembers = teamMembers.filter(team => team.organization !== null)
 
     let arr = []
     // Adds pending invite to members array
@@ -151,7 +153,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     });
 
     if (!hasMember && !invite) {
-      entry = await strapi.entityService.create('api::invite-team-member.invite-team-member', {
+      let entry = await strapi.entityService.create('api::invite-team-member.invite-team-member', {
         data: {
           firstName,
           lastName,
@@ -163,7 +165,18 @@ module.exports = createCoreController('api::organization.organization', ({ strap
           organization_role: true
         }
       });
-
+      let host;
+      if (process.env.NODE_ENV === 'development') host = 'http://localhost:3001';
+      if (process.env.NODE_ENV === 'preview') host = 'https://admin.blocktickets.xyz';
+      if (process.env.NODE_ENV === 'production') host = 'https:/admin.blocktickets.xyz';
+      let params = {
+        firstName,
+        orgName: organization.name,
+        code: entry.inviteCode,
+        email,
+        host
+      }
+      if (true) await strapi.service('api::email.email').sendMemberInvite(params)
     } else if (invite && !hasMember) {
       entry = await strapi.db.query('api::invite-team-member.invite-team-member').update({
         where: { id: invite.id },
@@ -966,4 +979,24 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     return paymentInfo
   },
+  async inviteValid(ctx) {
+    const {
+      code
+    } = ctx.request.query;
+
+    const invite = await strapi.db.query('api::invite-team-member.invite-team-member').findOne({
+      where: {
+        $and: [
+          { inviteCode: code},
+          { claimed: false }
+        ]
+      },
+      populate: { 
+        organization_role: true,
+        organization: true
+      },
+    });
+
+    return invite
+  }
 }));

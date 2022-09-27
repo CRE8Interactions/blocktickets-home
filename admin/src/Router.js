@@ -4,7 +4,8 @@ import { RequireAuth } from './context/Auth/Auth';
 
 import {
     LoginPage,
-    ForgotPasswordPage, SignUpPage, HomePage, ReportsPage, DashboardPage, MyEventPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundOrderPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, AttendeesPage, SettingsPage, OrganizationInfoPage, TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage
+    ForgotPasswordPage, SignUpPage, HomePage, ReportsPage, DashboardPage, MyEventPage, CreateEventPage, BasicInfoPage, DetailsPage, CreateTicketPage, TicketsPage, ViewTicketsPage, PublishPage, OrdersPage, AllOrdersPage, RefundOrderPage, RefundOrdersPage, AttendeesReportPage, AttendeesListPage, PrimarySalesPage, SecondarySalesPage, AutomaticReportingPage, ViewAutomaticReportingPage, UserInformationPage, ContactAttendeesPage, ViewContactAttendeesPage, ContactAttendeePage, TrackingLinksPage, ViewTrackingLinksPage, TrackingLinkPage, GuestListPage, ViewGuestListPage, GuestInformationPage, AttendeesPage, SettingsPage, OrganizationInfoPage,
+    TeamManagementPage, SecurityPage, PaymentInformationPage, PayoutsPage, TaxStatusPage, RegisterPage
 } from './pages';
 
 import { ScrollToTop } from './components';
@@ -19,6 +20,7 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<RequireAuth><HomePage /></RequireAuth>} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login/forgot-password" element={<ForgotPasswordPage />} />
                 {["/signup", "/signup/organization-information", "/signup/team-management", "/signup/payment-information", "signup/tax-status"].map(path => (
                     <Route key={path} path={path} element={<SignUpPage />} />
