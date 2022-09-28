@@ -65,7 +65,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     let organization = organizations.find(org => org.members.length >= 1)
 
     let teamMembers = await strapi.entityService.findMany('api::invite-team-member.invite-team-member', {
-      where: {
+      filters: {
         $and: [
           { claimed: false }
         ]
@@ -252,6 +252,51 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     })
 
     return res
+  },
+  async addMemberToTeam(ctx) {
+    const {
+      user,
+      invite
+    } = ctx.request.body.data;
+
+    const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: {
+        name: 'Organizer'
+      }
+    })
+
+   const currentUser = await strapi.db.query('plugin::users-permissions.user').update({
+      where: { id: user.id },
+      data: {
+        organization_role: invite.organization_role.id,
+        role: role
+      },
+    });
+
+    let org = await strapi.entityService.findOne('api::organization.organization', invite.organization.id, {
+      populate: {
+        members: {
+          fields: ['firstName', 'lastName', 'uuid', 'email'],
+        }
+      },
+    });
+
+    await strapi.db.query('api::organization.organization').update({
+      where: { id: org.id },
+      data: {
+        members: [...org.members, currentUser]
+      },
+    });
+
+    await strapi.db.query('api::invite-team-member.invite-team-member').update({
+      where: { id: invite.id },
+      data: {
+        claimed: true,
+        claimedOn: new Date()
+      },
+    });
+
+    return 200
   },
   async removeTeamMember(ctx) {
     const user = ctx.state.user;
@@ -984,6 +1029,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       code
     } = ctx.request.query;
 
+    if (code == 'null') return ctx.throw('Missing invite code', 403)
+
     const invite = await strapi.db.query('api::invite-team-member.invite-team-member').findOne({
       where: {
         $and: [
@@ -997,6 +1044,8 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       },
     });
 
-    return invite
+    if (!invite) return ctx.throw('Invalid invite code', 403)
+
+    return ctx.send(invite)
   }
 }));
