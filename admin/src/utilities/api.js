@@ -42,6 +42,10 @@ export const getTeam = async () => {
   return instance.get('/organizations/team')
 }
 
+export const addMember = async (data) => {
+  return instance.post('/organizations/add-member', data)
+}
+
 export const createOrganization = async (data) => {
   return instance.post('/verifies/admin-create-org', data)
 }

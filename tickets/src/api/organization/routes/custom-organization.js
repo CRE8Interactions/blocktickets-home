@@ -66,6 +66,11 @@ module.exports = {
       handler: 'organization.removeTeamMember'
     },
     {
+      method: 'POST',
+      path: '/organizations/add-member',
+      handler: 'organization.addMemberToTeam'
+    },
+    {
       method: 'GET',
       path: '/organizations/event-stats',
       handler: 'organization.getEventStats'
