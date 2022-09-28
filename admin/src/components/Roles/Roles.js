@@ -9,45 +9,62 @@ import { DeleteModal } from './DeleteModal';
 
 export default function Roles({ roles, permissions, createRoles, setRoles }) {
 
+    // new and existing role so objects match for controlled input fields 
     const [role, setRole] = useState('')
+
+    // save role id to send original role when editing 
+    const [id, setId] = useState();
 
     const [isCheckAll, setIsCheckAll] = useState(false);
 
     const [isCheck, setIsCheck] = useState([])
 
-    const [id, setId] = useState();
-
     const [showCreate, setShowCreate] = useState(false);
 
     const [showDelete, setShowDelete] = useState(false);
 
-    const [createRole, setCreateRole] = useState()
+    // when editing role 
+    useEffect(() => {
+        // if no id, reset 
+        if (!id) setIsCheck([]);
+        // if existing role
+        if (id) setIsCheck([...isCheck, ...role?.organization_permissions.map(item => item.id)])
+    }, [id])
 
     // handle create and edit
-    const handleShowCreate = (_, id) => {
-        setId(id)
+    const handleShowCreate = (_, role) => {
         setShowCreate(true)
-        setRole(id)
+        if (role) {
+            setId(role?.id)
+            setRole(role)
+        }
     }
 
-    const handleCloseCreate = () => { setShowCreate(false); setIsCheck([]) }
+    const handleCloseCreate = () => {
+        setShowCreate(false);
+        setIsCheck([]);
+        setRole('')
+        setId()
+    }
 
-    const handleShowDelete = (role) => { setShowDelete(true); setRole(role) }
+    const handleShowDelete = (role) => {
+        setShowDelete(true);
+        setRole(role)
+    }
 
-    const handleCloseDelete = () => setShowDelete(false)
+    const handleCloseDelete = () => {
+        setShowDelete(false);
+        setRole('')
+    }
 
     const handleCheck = e => {
         const { id, checked } = e.target;
+        setIsCheckAll(!isCheckAll)
         setIsCheck([...isCheck, Number(id)]);
         if (!checked) {
             setIsCheck(isCheck.filter(item => item !== Number(id)));
         }
     };
-
-    useEffect(() => {
-        if (!role) setIsCheck([]);
-        if (role) setIsCheck([...isCheck, ...role?.organization_permissions.map(item => item.id)])
-    }, [role])
 
     const handleSelectAll = e => {
         const { name } = e.target;
@@ -69,7 +86,7 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
     };
 
     const handleCreate = () => {
-        createRoles({ roleName: createRole, permissions: isCheck, currentRole: role })
+        createRoles({ roleName: role?.name, permissions: isCheck, currentRole: id ? role : undefined })
         handleCloseCreate();
     }
 
@@ -85,9 +102,9 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
                 ))}
             </Stack>
 
-            <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setCreateRole} isCheck={isCheck} handleSelectAll={handleSelectAll} handleCheck={handleCheck} handleCreate={handleCreate} />
+            <CreateRoleModal show={showCreate} handleClose={handleCloseCreate} permissions={permissions} id={id} role={role} setRole={setRole} isCheck={isCheck} handleSelectAll={handleSelectAll} handleCheck={handleCheck} handleCreate={handleCreate} />
 
-            <DeleteModal show={showDelete} handleClose={handleCloseDelete} role={role} setRoles={setRoles} />
+            <DeleteModal show={showDelete} handleClose={handleCloseDelete} id={role.id} setRoles={setRoles} />
         </>
     )
 }
