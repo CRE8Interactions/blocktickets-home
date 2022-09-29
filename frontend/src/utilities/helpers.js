@@ -15,13 +15,16 @@ export const getStartDateFormatter = (obj) => {
     return !obj?.display_start_time ? 'dateOnly' : ''
 }
 
-// format short date for cards
+// format short date for cards and search items with no year
 // display only date and start time
 export const formatShortDate = (date, formatter) => {
     console.log(date);
     switch (formatter) {
         case 'dateOnly':
             return date.format('MMM D')
+
+        case 'dateOnlyWithDay':
+            return date.format('ddd, MMM D')
 
         default:
             return date.format('MMM D h:mm A')
