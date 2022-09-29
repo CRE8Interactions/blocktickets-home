@@ -12,7 +12,7 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
     // new and existing role so objects match for controlled input fields 
     const [role, setRole] = useState('')
 
-    // save role id to send original role when editing 
+    // for editing - save role id for flag when sending original role when editing 
     const [id, setId] = useState();
 
     const [isCheckAll, setIsCheckAll] = useState(false);
@@ -23,11 +23,11 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
 
     const [showDelete, setShowDelete] = useState(false);
 
-    // when editing role 
+    // reset permissions when adding or editing 
     useEffect(() => {
-        // if no id, reset 
+        // if adding role  
         if (!id) setIsCheck([]);
-        // if existing role
+        // if editing existing role
         if (id) setIsCheck([...isCheck, ...role?.organization_permissions.map(item => item.id)])
     }, [id])
 
@@ -77,7 +77,8 @@ export default function Roles({ roles, permissions, createRoles, setRoles }) {
             setIsCheck(permissions[`${name}`].map(item => item.id))
         }
         else {
-            setIsCheck([...isCheck, ...permissions['settings'].map(item => item.id), ...permissions['events'].map(item => item.id), ...permissions['management'].map(item => item.id)])
+            setIsCheck([...isCheck, ...permissions['settings'].map(item => item.id), ...permissions['management'].map(item => item.id)])
+            // setIsCheck([...isCheck, ...permissions['settings'].map(item => item.id), ...permissions['events'].map(item => item.id), ...permissions['management'].map(item => item.id)])
         }
 
         if (isCheckAll) {

@@ -36,7 +36,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                     <Form.Check
                         label="Select all"
                         type="checkbox"
-                        checked={checker([...permissions['settings'], ...permissions['events'], ...permissions['management']])}
+                        checked={checker([...permissions['settings'], ...permissions['management']])}
                         id="all"
                         onChange={handleSelectAll}
                     />
