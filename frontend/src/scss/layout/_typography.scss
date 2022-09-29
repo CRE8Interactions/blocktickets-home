@@ -169,7 +169,7 @@ h4,
 	.card-title,
 	.event-name,
 	.card-subtitle,
-	.subtitle,
+	.presenter-text,
 	.event-detail,
 	.row > .col > *,
 	* {
@@ -184,7 +184,7 @@ h4,
 	}
 
 	.card-subtitle,
-	.subtitle {
+	.presenter-text {
 		order: -1;
 		margin-bottom: rem(8);
 		@extend .caption !optional;

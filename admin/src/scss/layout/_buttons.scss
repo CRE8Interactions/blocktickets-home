@@ -6,7 +6,7 @@
 @use '../theme/colors' as *;
 @use '../theme/borders' as *;
 
-.btn {
+.btn:not(.btn-outline-light) {
 	&:hover,
 	&:focus,
 	&:active {

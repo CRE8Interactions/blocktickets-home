@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import * as moment from 'moment';
 
+import { formatDateTime, getStartDateFormatter } from '../../utilities/helpers'
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -35,38 +37,26 @@ export default function Event(props) {
                     </Col>
                     <Col xs={6} md={2} lg={4} xl={6} className="d-flex flex-column details">
                         <h1 className="event-name">{event?.name}</h1>
-                        <p className="subtitle tablet-desktop-only">
+                        <p className="presenter-text tablet-desktop-only">
                             {event?.presentedBy}
                         </p>
                         <Row>
                             <Col className="details-heading tablet-desktop-only" md={2}>
                                 <span className="time-caption">
-                                {event?.display_start_time &&
-                                    <>Time</>
-                                }
-                                {!event?.display_start_time &&
-                                    <>Date</>
-                                }                           
-                                    
+                                    {event?.display_start_time &&
+                                        <>Time</>
+                                    }
+                                    {!event?.display_start_time &&
+                                        <>Date</>
+                                    }
+
                                 </span>
                             </Col>
                             <Col>
                                 <p className="small">
-                                    {event?.hide_end_date &&
-                                        <>
-                                        <span className='date'>{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')}</span>
-                                        {event?.display_start_time &&
-                                            <>
-                                                <span className="time">{moment(event?.start).format('h:mm A')}</span>
-                                            </>
-                                        }   
-                                        </>
-                                    }
-                                    {!event?.hide_end_date &&
-                                        <>
-                                            <span className='date'>{moment(event?.start).format('MMM')} {moment(event?.start).format('DD')}</span><span className="time">{moment(event?.start).format('h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
-                                        </>
-                                    }   
+                                    <span className='date'>
+                                        {formatDateTime(moment(event?.start), getStartDateFormatter(event))} {!event?.hide_end_date && (<span>- {formatDateTime(moment(event?.end), 'timeOnly')}</span>)}
+                                    </span>
                                 </p>
                             </Col>
                         </Row>

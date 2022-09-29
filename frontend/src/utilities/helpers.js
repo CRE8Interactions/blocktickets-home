@@ -5,6 +5,47 @@ export const getCopyrightYear = () => {
     return new Date().getFullYear();
 };
 
+// format full address 
+export const formatAddress = (obj) => {
+    return `${obj.address_1}, ${obj.city}, ${obj.state}, ${obj.zipcode}, ${obj.country}`
+}
+
+// whether to show full start date or just start time 
+export const getStartDateFormatter = (obj) => {
+    return !obj?.display_start_time ? 'dateOnly' : ''
+}
+
+// format short date for cards and search items with no year
+// display only date and start time
+export const formatShortDate = (date, formatter) => {
+    console.log(date);
+    switch (formatter) {
+        case 'dateOnly':
+            return date.format('MMM D')
+
+        case 'dateOnlyWithDay':
+            return date.format('ddd, MMM D')
+
+        default:
+            return date.format('MMM D h:mm A')
+    }
+}
+// format full date 
+// display full date with start and end time and/or time only
+// assumed an event is one day
+export const formatDateTime = (date, formatter) => {
+    switch (formatter) {
+        case 'dateOnly':
+            return date.format('ddd, MMM D, YYYY')
+
+        case 'timeOnly':
+            return date.format('h:mm A')
+
+        default:
+            return date.format('ddd, MMM D, YYYY h:mm A')
+    }
+}
+
 // check to see if page should be full height
 export const checkUrl = (url) => {
     var expression = /tickets|\/checkout|\/event-details/g;

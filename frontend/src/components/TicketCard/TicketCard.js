@@ -2,6 +2,8 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
+import { formatShortDate, getStartDateFormatter } from '../../utilities/helpers';
+
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
@@ -51,7 +53,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                 <div className="details d-flex-column">
                     <Card.Title as="h5">{event?.name}</Card.Title>
                     <p className="event-details">
-                        {moment(event?.start).format('MMM DD')} <span>{moment(event?.start).format('h:mm A')}</span><span className="venue">{event?.venue.name}</span><span className="loc">
+                        {formatShortDate(moment(event?.start), getStartDateFormatter(event))}<span className="venue">{event?.venue.name}</span><span className="loc">
                             {event?.venue.address[0]?.city}, {event?.venue.address[0].state}
                         </span>
                     </p>

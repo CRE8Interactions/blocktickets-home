@@ -59,7 +59,7 @@ button,
 	&:hover,
 	&:focus,
 	&:disabled {
-		color: $white;
+		color: $white !important;
 	}
 }
 
