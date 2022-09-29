@@ -66,6 +66,36 @@ module.exports = {
       handler: 'organization.removeTeamMember'
     },
     {
+      method: 'POST',
+      path: '/organizations/add-member',
+      handler: 'organization.addMemberToTeam'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/update-details',
+      handler: 'organization.updateDetails'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/update-user-email',
+      handler: 'organization.updateUserEmail'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/update-users-name',
+      handler: 'organization.updateUsersName'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/update-users-password',
+      handler: 'organization.resetPassword'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/email-valid',
+      handler: 'organization.emailValid'
+    },
+    {
       method: 'GET',
       path: '/organizations/event-stats',
       handler: 'organization.getEventStats'

@@ -67,6 +67,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                                     type="email"
                                     name="curEmail"
                                     placeholder="Enter current email"
+                                    disabled={true}
                                     value={info.curEmail}
                                     onBlur={handleInput}
                                     onChange={handleInfo}

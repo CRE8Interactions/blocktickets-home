@@ -40,7 +40,7 @@ export default function BankCard({ handleShow, bankAccount }) {
                             <li>US. Dollars, United States</li>
                         </ul>
                         <Stack direction='horizontal' gap={3} className="mt-3">
-                            <Button variant="link" onClick={handleShow}>Edit</Button>
+                            {/* <Button variant="link" onClick={handleShow}>Edit</Button> */}
                             <Button variant="link" className='text-danger' onClick={handleShowDelete}>Delete</Button>
                         </Stack>
                     </Stack>

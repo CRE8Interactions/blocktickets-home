@@ -108,24 +108,24 @@ module.exports = {
           },
           {
               key: "management",
-              name: "Create an event"
+              name: "Create / even an event"
           },
-          {
-              key: "management",
-              name: "Edit basic info"
-          },
-          {
-            key: "management",
-              name: "Edit details"
-          },
+          // {
+          //     key: "management",
+          //     name: "Edit basic info"
+          // },
+          // {
+          //   key: "management",
+          //     name: "Edit details"
+          // },
           {
             key: "management",
               name: "Edit & add tickets"
           },
-          {
-            key: "management",
-              name: "Edit event status (on sale / draft / delete)"
-          },
+          // {
+          //   key: "management",
+          //     name: "Edit event status (on sale / draft / delete)"
+          // },
           {
             key: "management",
               name: "View dashboard"
@@ -134,38 +134,38 @@ module.exports = {
             key: "management",
               name: "View orders"
           },
-          {
-            key: "management",
-              name: "View attendees list"
-          },
+          // {
+          //   key: "management",
+          //     name: "View attendees list"
+          // },
           {
             key: "management",
               name: "Issue refunds"
           },
           {
             key: "management",
-              name: "Edit & add guests"
+              name: "Edit & add guest list"
           },
           {
             key: "management",
-              name: "Check in"
+              name: "Attendees (check in)"
           },
-          {
-            key: "management",
-              name: "View primary sales"
-          },
-          {
-            key: "management",
-              name: "View secondary sales"
-          },
-          {
-            key: "management",
-              name: "Add recipients for automatic reporting"
-          },
-          {
-            key: "management",
-              name: "Contact attendees"
-          },
+          // {
+          //   key: "management",
+          //     name: "View primary sales"
+          // },
+          // {
+          //   key: "management",
+          //     name: "View secondary sales"
+          // },
+          // {
+          //   key: "management",
+          //     name: "Add recipients for automatic reporting"
+          // },
+          // {
+          //   key: "management",
+          //     name: "Contact attendees"
+          // },
           {
             key: "management",
               name: "Edit & add tracking links"
@@ -568,7 +568,7 @@ module.exports = {
           event.params.data.username = event.params.data.email.toLowerCase()
           event.params.data.firstName = event.params.data.firstName.toLowerCase()
           event.params.data.lastName = event.params.data.lastName.toLowerCase()
-          event.params.data.gender = event.params.data.gender.toLowerCase()
+          // event.params.data.gender = event.params.data.gender.toLowerCase()
           event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID()
         }
 

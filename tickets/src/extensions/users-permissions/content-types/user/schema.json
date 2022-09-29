@@ -74,12 +74,12 @@
       "unique": true
     },
     "dob": {
-      "required": true,
+      "required": false,
       "type": "date"
     },
     "gender": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "firstName": {
       "type": "string",
