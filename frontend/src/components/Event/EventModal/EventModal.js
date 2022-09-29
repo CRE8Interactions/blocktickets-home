@@ -1,6 +1,8 @@
 import React from 'react';
 import * as moment from 'moment';
 
+import { formatDateTime, getStartDateFormatter, formatAddress } from '../../../utilities/helpers'
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
@@ -27,16 +29,9 @@ export default function EventModal({ show, handleClose, event }) {
                 </Row>
                 <div className="mb-2">
                     <span className="time-caption">Time</span>
-                    {event?.hide_end_date &&
-                        <>
-                            <span className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')}</span>
-                        </>
-                    }
-                    {!event?.hide_end_date &&
-                        <>
-                            <span className="normal-sm">{moment(event?.start).format('MMM DD h:mm A')} - {moment(event?.end).format('h:mm A')} EST</span>
-                        </>
-                    }
+                    <span className="normal-sm">
+                        {formatDateTime(moment(event?.start), getStartDateFormatter(event))} {!event?.hide_end_date && (<span>- {formatDateTime(moment(event?.end), 'timeOnly')}</span>)}
+                    </span>
                 </div>
                 <div className="mb-2">
                     <span className="venue-caption">Venue</span>
@@ -45,7 +40,7 @@ export default function EventModal({ show, handleClose, event }) {
                 <div>
                     <span className="location-caption">Location</span>
                     <span className="normal-sm">
-                        {event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state} <a href="">Directions</a>
+                        {formatAddress(event?.venue?.address[0])} <a href="">Directions</a>
                     </span>
                 </div>
             </div>

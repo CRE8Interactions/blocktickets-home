@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as moment from 'moment';
 
 import { getEvent } from '../../../../utilities/api';
+import { formatDateTime } from '../../../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -37,7 +38,9 @@ export default function OrderPreview() {
                 <Stack className="details">
                     <h1 className="event-name fw-bold">{data?.name}</h1>
                     <p>
-                        {moment(data?.start).format('ddd, MMM DD YYYY')}<span className="time">{moment(data?.start).format('h:mm A')} EST</span>
+                        {formatDateTime(moment(data?.start), 'dateOnly')}{data?.display_start_time && (
+                            <span className="time">{formatDateTime(moment(data?.start), 'timeOnly')}</span>
+                        )}
                     </p>
                     <p>
                         {data?.venue?.name}<span className="loc">

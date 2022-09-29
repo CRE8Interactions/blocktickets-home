@@ -1,6 +1,8 @@
 import React from 'react';
 import * as moment from 'moment';
 
+import { formatDateTime } from '../../../../../utilities/helpers';
+
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
@@ -18,7 +20,11 @@ export default function OrderCard({ order }) {
                 <Stack className="details">
                     <h1 className="event-name fw-bold">{order?.event?.name}</h1>
                     <p>
-                        {moment(order?.event?.start).format('ddd, MMM DD YYYY')} <span className="time">{moment(order?.event?.start).format('h:mm A')} EST</span>
+                        {formatDateTime(moment(order?.event?.start), 'dateOnly')}
+                        {order?.event?.display_start_time && (
+                            <span className="time">{formatDateTime(moment(order?.event?.start), 'timeOnly')}</span>
+                        )}
+
                     </p>
                     <p>
                         {order?.event?.venue?.name}<span className="loc">
