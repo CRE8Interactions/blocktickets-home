@@ -11,8 +11,8 @@ import { Error } from '../../Error'
 
 export default function OrganizationInformation({ org, setName, handleAddress, error }) {
     useEffect(() => {
-        console.log('Org ', org)
-    }, [org])
+        
+    }, [])
 
     return (
         <Form>
@@ -20,10 +20,10 @@ export default function OrganizationInformation({ org, setName, handleAddress, e
                 <Form.Label>Organization name</Form.Label>
                 <Form.Control
                     type="text"
-                    name="orgName"
+                    name="name"
                     required
                     placeholder="Enter organization name"
-                    value={org?.orgName}
+                    value={org?.name}
                     onChange={setName}
                     className={error?.type ? 'error-border' : ''}
                 />

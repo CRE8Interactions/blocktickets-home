@@ -1,5 +1,6 @@
 'use strict';
 const moment = require('moment');
+const bcrypt = require('bcryptjs');
 
 /**
  *  organization controller
@@ -166,9 +167,12 @@ module.exports = createCoreController('api::organization.organization', ({ strap
         }
       });
       let host;
-      if (process.env.NODE_ENV === 'development') host = 'http://localhost:3001';
-      if (process.env.NODE_ENV === 'preview') host = 'https://admin.blocktickets.xyz';
-      if (process.env.NODE_ENV === 'production') host = 'https:/admin.blocktickets.xyz';
+      if (process.env.NODE_ENV === 'development') {
+        host = 'http://localhost:3001';
+      } else {
+        host = 'https://admin.blocktickets.xyz';
+      }
+      
       let params = {
         firstName,
         orgName: organization.name,
@@ -209,9 +213,10 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     let arr = [];
 
     let teamMembers = await strapi.entityService.findMany('api::invite-team-member.invite-team-member', {
-      where: {
+      filters: {
         $and: [
-          { claimed: false }
+          { claimed: false },
+          { organization: organization.id }
         ]
        },
       populate: {
@@ -1047,5 +1052,100 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     if (!invite) return ctx.throw('Invalid invite code', 403)
 
     return ctx.send(invite)
+  },
+  async updateDetails(ctx) {
+    const {
+      id,
+      name,
+      address
+    } = ctx.request.body;
+
+    const organization = await strapi.entityService.update('api::organization.organization', id, {
+      data: {
+        name,
+        address
+      },
+    });
+
+    return organization;
+  },
+  async updateUserEmail(ctx) {
+    const user = ctx.state.user;
+
+    const {
+      email
+    } = ctx.request.body;
+
+    const entry = await strapi.entityService.update('plugin::users-permissions.user', user.id, {
+      data: {
+        email,
+        username: email
+      },
+    });
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(entry)
+    return tokenData
+  },
+  async updateUsersName(ctx) {
+    const user = ctx.state.user;
+
+    const {
+      firstName,
+      lastName
+    } = ctx.request.body;
+
+    const entry = await strapi.entityService.update('plugin::users-permissions.user', user.id, {
+      data: {
+        firstName,
+        lastName
+      },
+    });
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(entry)
+    return tokenData
+  },
+  async emailValid(ctx) {
+    let {
+      email
+    } = ctx.request.body;
+    
+    email = email.toLowerCase();
+
+    const entry = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: { 
+        username: { 
+          $eq: email, 
+        } 
+      },
+    });
+
+    if (entry) ctx.send('Email Taken', 402)
+
+    return 200
+  },
+  async resetPassword(ctx) {
+    let user = ctx.state.user;
+
+    let {
+      password,
+      newPassword
+    } = ctx.request.body;
+
+    const validPassword = await strapi
+      .service("plugin::users-permissions.user")
+      .validatePassword(password, user.password);
+    
+    if (!validPassword) return ctx.throw(401, "wrong-current-password")
+
+    // Generate new hashed password
+    const pw = bcrypt.hashSync(newPassword, 10);
+
+    user = await strapi.query("plugin::users-permissions.user").update({
+      where: { id: user.id },
+      data: { resetPasswordToken: null, password: pw },
+    });
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+    return tokenData
   }
 }));

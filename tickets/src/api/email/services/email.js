@@ -652,7 +652,6 @@ module.exports = createCoreService('api::email.email', ({ strapi }) => ({
     }
   },
   async sendMemberInvite(params) {
-    console.log(params)
     try {
       await strapi
         .plugin('email-designer')

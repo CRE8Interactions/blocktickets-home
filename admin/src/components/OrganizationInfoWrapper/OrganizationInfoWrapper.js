@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import { getMyOrganizations } from '../../utilities/api';
+import { getMyOrganizations, updateOrgDetails } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import { OrganizationInformationWrapper } from "../OrganizationInformationWrapper";
 
@@ -12,6 +13,12 @@ import { OrganizationInformationWrapper } from "../OrganizationInformationWrappe
 export default function OrganizationInfoWrapper() {
 
     const [orgInfo, setOrgInfo] = useState()
+
+    const [alert, setAlert] = useState({
+        show: false,
+        variant: '',
+        message: ''
+    })
 
     useEffect(() => {
         getMyOrganizations()
@@ -21,10 +28,34 @@ export default function OrganizationInfoWrapper() {
 
     const handleSave = () => {
         // TODO: make orgName unique
+       
+        updateOrgDetails(orgInfo)
+            .then((res) => {
+                setAlert({
+                    show: true,
+                    variant: 'success',
+                    message: 'Your info has been updated.'
+                })
+            })
+            .catch((err) => {
+                console.error(err)
+                setAlert({
+                    show: true,
+                    variant: 'danger',
+                    message: 'Unable to save info please try again.'
+                })
+            })
     }
 
     return (
         <section className='wrapper'>
+            {alert.show &&
+                <>
+                    <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                        {alert.message}
+                    </Alert>
+                </>
+            }
             <header className="section-header">
                 <div className="section-heading section-heading--secondary">
                     <h1>Organization info</h1>
