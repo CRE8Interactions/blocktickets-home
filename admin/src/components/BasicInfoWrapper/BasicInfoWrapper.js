@@ -35,8 +35,6 @@ export default function BasicInfoWrapper({ eventId }) {
 
     const [timeError, setTimeError] = useState(false)
 
-    const [hideStartTime, setHideStart] = useState(false)
-
     const [venues, setVenues] = useState()
 
     const [event, setEvent] = useState({
@@ -122,14 +120,14 @@ export default function BasicInfoWrapper({ eventId }) {
 
     useEffect(() => {
         // Listens for changes on event
-        setHideStart(event.display_start_time)
+
     }, [event])
 
     useEffect(() => {
         if (initialState?.event !== event) setShowFooter(true)
         else setShowFooter(false)
 
-    }, [initialState, event.presentedBy, event.name, event.venue, event.displayStartTime, event.displayEndTime, event.hide_doors_open])
+    }, [initialState, event.presentedBy, event.name, event.venue, event.display_start_time, event.hide_end_date, event.hide_doors_open])
 
     const handleChange = (e, val = e.target.value) => {
         setEvent({ ...event, [e.target.name]: val })
@@ -153,7 +151,7 @@ export default function BasicInfoWrapper({ eventId }) {
         data['hide_end_date'] = event.hide_end_date;
         data['doorsOpen'] = moment(doorsOpen).format();
         data['hide_doors_open'] = event.hide_doors_open;
-        data['display_start_time'] = hideStartTime;
+        data['display_start_time'] = event.display_start_time;
 
         if (eventId) {
             data['uuid'] = eventId;
