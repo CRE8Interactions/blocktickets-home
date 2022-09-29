@@ -11,7 +11,7 @@ export default function MyCard({ prefix, venue, event }) {
 
     return (
         <Card className="myCard">
-            <Card.Img variant="top" src={prefix == 'event' ? event?.image?.url : venue?.image[0]?.url} width="254" height="303" />
+            <Card.Img variant="top" src={prefix == 'event' ? event?.image?.url : venue?.image[0]?.url} width="100" height="180" />
             <Card.Body>
                 {prefix === 'event' ? <EventCardBody event={event} /> : <VenueCardBody venue={venue} />}
             </Card.Body>
