@@ -349,7 +349,7 @@ module.exports = createCoreController('api::verify.verify', ({
     })
 
     const {
-      orgName,
+      name,
       address
     } = ctx.request.body.data;
 
@@ -362,7 +362,7 @@ module.exports = createCoreController('api::verify.verify', ({
 
     let org = await strapi.entityService.create('api::organization.organization', {
       data: {
-        name: orgName,
+        name: name,
         creatorId: user.uuid,
         members: [user],
         address: address

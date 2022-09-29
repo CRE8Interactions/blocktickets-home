@@ -328,7 +328,7 @@ export default function SignUpWrapper() {
 
             case 2:
                 if (orgInfo) {
-                    return !orgInfo.orgName || !orgInfo.address?.address_1 || !orgInfo.address?.city || !orgInfo.address?.zipcode || !orgInfo.address?.state || error.type
+                    return !orgInfo.name || !orgInfo.address?.address_1 || !orgInfo.address?.city || !orgInfo.address?.zipcode || !orgInfo.address?.state || error.type
                 }
                 else {
                     return false

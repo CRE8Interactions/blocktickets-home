@@ -46,6 +46,26 @@ export const addMember = async (data) => {
   return instance.post('/organizations/add-member', data)
 }
 
+export const updateOrgDetails = async (data) => {
+  return instance.post('/organizations/update-details', data)
+}
+
+export const emailVaid = async (data) => {
+  return instance.post('/organizations/email-valid', data)
+}
+
+export const updateUserEmail = async (data) => {
+  return instance.post('/organizations/update-user-email', data)
+}
+
+export const updateUsersName = async (data) => {
+  return instance.post('/organizations/update-users-name', data)
+}
+
+export const resetPassword = async (data) => {
+  return instance.post('/organizations/update-users-password', data)
+}
+
 export const createOrganization = async (data) => {
   return instance.post('/verifies/admin-create-org', data)
 }

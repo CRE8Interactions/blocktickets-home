@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AuthService from '../../utilities/services/auth.service';
 import { isMatching } from '../../utilities/helpers';
+import { emailVaid, updateUserEmail, updateUsersName, resetPassword } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 
@@ -27,7 +28,31 @@ export default function SecurityWrapper() {
     }
 
     const handleUpdate = (form) => {
-        setSuccess([...success, form])
+        if (form === 'email') {
+            updateUserEmail({email: info.email})
+                .then((res) => {
+                    AuthService.setUser(res.data)
+                    setSuccess([...success, form])
+                })
+                .catch((err) => err)
+        }
+
+        if (form === 'name') {
+            updateUsersName({firstName: info.firstName, lastName: info.lastName})
+                .then((res) => {
+                    AuthService.setUser(res.data)
+                    setSuccess([...success, form])
+                })
+                .catch((err) => err)
+        }
+
+        if (form === 'password') {
+            resetPassword({password: info.curPassword, newPassword: info.password})
+                .then((res) => {
+                    setSuccess([...success, form])
+                })
+                .catch((err) => setError({ field: 'current password', type: 'notExist' }))
+        }
     }
 
     useEffect(() => {
@@ -50,18 +75,21 @@ export default function SecurityWrapper() {
                 }
                 break;
             case 'email':
-                if (isMatching(info.curEmail, info.email)) {
-                    setError({ field: 'new email', type: 'sameMatch' })
-                }
+                emailVaid({email: info.email})
+                    .then(() => console.log('Valid'))
+                    .catch((err) => {
+                        console.log('Error ', err)
+                        setError({ field: 'new email', type: 'alreadyExist' })
+                    })
                 break;
             case 'curPassword':
                 if (info.curPassword !== '' && info.curPassword !== password) {
-                    setError({ field: 'current password', type: 'notExist' })
+                    // setError({ field: 'current password', type: 'notExist' })
                 }
                 break;
             case 'password':
                 if (isMatching(info.curPassword, info.password)) {
-                    setError({ field: 'new password', type: 'sameMatch' })
+                    // setError({ field: 'new password', type: 'sameMatch' })
                 }
                 break;
             default:
