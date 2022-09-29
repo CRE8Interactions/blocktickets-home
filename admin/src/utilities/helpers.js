@@ -56,7 +56,7 @@ export const stateOpt = [
 
 
 const checkUrl = (url) => {
-    var expression = /login|\/signup/g;
+    var expression = /login|\/signup|register/g;
     var regex = new RegExp(expression);
     return regex.test(url);
 };

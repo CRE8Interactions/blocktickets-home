@@ -1,176 +1,196 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
+import { useSearchParams, useNavigate } from "react-router-dom";
+
 import { inviteValid, register, addMember } from '../../utilities/api';
 
-import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 
 import { PasswordInput } from '../PasswordInput';
 import { Error } from '../Error'
+import { SuccessContainer } from '../SuccessContainer';
 import { Spinner } from '../Spinner'
 
 export default function RegisterWrapper() {
-  const [searchParams] = useSearchParams();
-  const code = searchParams.get("code");
-  const [hasError, setHasError] = useState(false);
-  const [valid, setValid] = useState(false)
-  const [alert, setAlert] = useState({
-    error: false,
-    message: ''
-  })
-  const [invite, setInvite] = useState({
-    inviteCode: '',
-    organization: {},
-    organization_role: {}
-  })
-  const [complete, setComplete] = useState(false)
 
-  const [credentials, setCredentials] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
-});
+    const [searchParams] = useSearchParams();
+    const code = searchParams.get("code");
 
-const [isValid, setIsValid] = useState(true)
+    const navigate = useNavigate();
+    const passwordEl = useRef();
 
-const [isSaving, setIsSaving] = useState(false)
+    const [alert, setAlert] = useState({
+        error: false,
+        message: ''
+    })
 
-useEffect(() => {
-    if (!isValid)
-        setIsValid(true)
+    const [invite, setInvite] = useState({
+        inviteCode: '',
+        organization: {},
+        organization_role: {}
+    })
 
-}, [credentials.identifier, credentials.password])
+    const [complete, setComplete] = useState(false)
 
-const handleCredentials = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value })
-}
+    const [credentials, setCredentials] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    });
 
-  useEffect(() => {
-    inviteValid(code)
-      .then((res) => {
-        setCredentials({
-          email: res.data.email,
-          username: res.data.email,
-          firstName: res.data.firstName,
-          lastName: res.data.lastName
-        })
-        setInvite(res.data)
-      })
-      .catch((err) => {
-        setAlert({
-          error: true,
-          message: 'Invalid invite code'
-        })
-      })
-  }, [code])
+    const [isValid, setIsValid] = useState(true)
 
-  useEffect(() => {
-    if (credentials.email && credentials.firstName && credentials.lastName && credentials.password && credentials.password.split('').length >= 6) {
-      setValid(true)
-    } else {
-      setValid(false)
-    }
-  }, [credentials])
+    const [isSaving, setIsSaving] = useState(false)
 
-  useEffect(() => {
-    
-  }, [valid])
+    useEffect(() => {
+        if (!isValid)
+            setIsValid(true)
 
-  const submit = () => {
-    register(credentials)
-      .then((res) => {
-        let user = res.data.user;
-        let data = {
-          user,
-          invite
+    }, [credentials.firstName, credentials.lastName, credentials.email, credentials.password])
+
+    useEffect(() => {
+        if (complete) {
+            setTimeout(() => {
+                navigate('/login')
+            }, 2000);
         }
-        addMember({data})
-          .then((res) => {
-            setComplete(true)
-          })
-          .catch((err) => console.error(err))
+    }, [complete])
 
-      })
-      .catch((err) => {
-          console.error(err)
-      })
-  }
+    const handleCredentials = (e) => {
+        setCredentials({ ...credentials, [e.target.name]: e.target.value })
+    }
 
-  return (
-    <section className='wrapper-xs'>
+    useEffect(() => {
+        inviteValid(code)
+            .then((res) => {
+                setCredentials({
+                    email: res.data.email,
+                    username: res.data.email,
+                    firstName: res.data.firstName,
+                    lastName: res.data.lastName
+                })
+                setInvite(res.data)
+            })
+            .catch((err) => {
+                window.scroll(0, 0)
+                setAlert({
+                    error: true,
+                    message: 'Invalid invite code'
+                })
+            })
+    }, [code])
+
+    const handleValid = () => {
+        if (!passwordEl.current.validity.valid) {
+            setIsValid(false)
+        }
+    }
+
+    const submit = () => {
+        if (isValid) {
+            setIsSaving(true)
+            register(credentials)
+                .then((res) => {
+                    let user = res.data.user;
+                    let data = {
+                        user,
+                        invite
+                    }
+                    addMember({ data })
+                        .then((res) => {
+                            setComplete(true)
+                            setIsSaving(false)
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                            setIsSaving(false)
+                        })
+
+                })
+                .catch((err) => {
+                    console.error(err);
+                    setIsSaving(false)
+                })
+        }
+    }
+
+    return (
+        <section className='wrapper-xs'>
             <>
-            { alert && alert.error &&
-              <Alert key="danger" variant="danger">
-                {alert?.message}
-              </Alert>
-            }
+                {alert && alert.error &&
+                    <Alert key="danger" variant="danger">
+                        {alert?.message}
+                    </Alert>
+                }
             </>
             <br />
-            <header className='mb-5'>
-                <h1 className='fs-md'>Team Member Registration</h1>
-                <h2 className='text-muted normal fw-medium'>The future of ticketing is here</h2>
-            </header>
-            {!complete &&
-              <>
-              <Form>
-                <Form.Group className='form-group'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        disabled={true}
-                        name="email"
-                        required
-                        value={credentials.email}
-                        onChange={handleCredentials}
-                    />
-                </Form.Group>
-                <Form.Group className='form-group'>
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="firstName"
-                        required
-                        value={credentials.firstName}
-                        onChange={handleCredentials}
-                        className={`${!isValid ? 'error-border' : ''}`}
-                    />
-                </Form.Group>
-                <Form.Group className='form-group'>
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="lastName"
-                        required
-                        value={credentials.lastName}
-                        onChange={handleCredentials}
-                        className={`${!isValid ? 'error-border' : ''}`}
-                    />
-                </Form.Group>
-                <Form.Group className='form-group' controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <PasswordInput value={credentials.password} isValid={true} handlePassword={handleCredentials} />
-                </Form.Group>
-                {!isValid && (
-                    <Error type="login" />
-                )}
-                <Button size="lg" className={`mt-4 w-100 ${!isSaving ? 'btn-next' : ''} `} disabled={!valid} onClick={submit}>
-                    {isSaving ? (
-                        <Spinner />
-                    ) : (
-                        'Submit'
-                    )}
-                </Button>
-            </Form>
-              </>
-            }
+            {!complete && (
+                <>
+                    <header className='mb-5'>
+                        <h1 className='fs-md'>Team Member Registration</h1>
+                        <h2 className='text-muted normal fw-medium'>The future of ticketing is here</h2>
+                    </header>
+                    <Form>
+                        <Form.Group className='form-group'>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                disabled
+                                name="email"
+                                required
+                                value={credentials.email}
+                                onChange={handleCredentials}
+                            />
+                        </Form.Group>
+                        <Form.Group className='form-group'>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="firstName"
+                                required
+                                placeholder="Enter your first name"
+                                value={credentials.firstName}
+                                onChange={handleCredentials}
+                            />
+                        </Form.Group>
+                        <Form.Group className='form-group'>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="lastName"
+                                required
+                                placeholder="Enter your last name"
+                                value={credentials.lastName}
+                                onChange={handleCredentials}
+                            />
+                        </Form.Group>
+                        <Form.Group className='form-group' controlId="password">
+                            <Form.Label>Password</Form.Label>
+                            <PasswordInput value={credentials.password} reference={passwordEl} isValid={isValid} handlePassword={handleCredentials}
+                                onBlur={handleValid}
+                            />
+                        </Form.Group>
+                        {!isValid && (
+                            <Error type="patternMatch" />
+                        )}
+                        <Button size="lg" className={`mt-4 w-100 ${!isSaving ? 'btn-next' : ''} `} disabled={!credentials.firstName || !credentials.lastName || !credentials.password || !isValid} onClick={submit}>
+                            {isSaving ? (
+                                <Spinner />
+                            ) : (
+                                'Submit'
+                            )}
+                        </Button>
+                    </Form>
+                </>
+            )}
             {complete &&
-              <>
-                <h2>Registration Complete you can login</h2>
-              </>
+                <SuccessContainer>
+                    <h1 className='heading'>Your account has been successfully created!</h1>
+                    <p className='text-muted fw-medium'>Redirecting to login...</p>
+                </SuccessContainer>
             }
         </section>
-  )
+    )
 }
