@@ -11,6 +11,8 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
 
     if (permissions?.length === 0) return (<div />);
 
+    let checker = (arr) => arr.every(v => isCheck.includes(v.id))
+
     return (
         <Modal id="create-role" scrollable centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -21,18 +23,20 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                     <Form.Label>Role name</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder={role ? role?.name : 'Enter Name'}
+                        name="name"
+                        placeholder={role?.name || 'Enter Name'}
                         required
-                        defaultValue={role ? role?.name : ''}
-                        onBlur={(e) => setRole(e.target.value)}
+                        value={role?.name || ''}
+                        onChange={(e) => setRole({ ...role, [e.target.name]: e.target.value })}
                     />
                 </Form.Group>
                 <div className="mb-2">
                     <h2 className="fs-md">Permissions</h2>
-                    <p className='text-muted fw-medium small mb-4 '>Grant your team members specific permissions to delegate tasks</p>
+                    <p className='text-muted fw-medium small mb-4'>Grant your team members specific permissions to delegate tasks</p>
                     <Form.Check
                         label="Select all"
                         type="checkbox"
+                        checked={checker([...permissions['settings'], ...permissions['management']])}
                         id="all"
                         onChange={handleSelectAll}
                     />
@@ -46,6 +50,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                                 <Form.Check
                                     label="Select all"
                                     type="checkbox"
+                                    checked={checker(permissions['settings'])}
                                     id="s-0"
                                     name="settings"
                                     onChange={handleSelectAll}
@@ -64,7 +69,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                             ))}
                         </ul>
                     </li>
-                    <li className='list'>
+                    {/* <li className='list'>
                         <p className='heading'>Event oversight</p>
                         <ul>
                             {Object.values(permissions?.events).map(({ id, name }) => (
@@ -79,7 +84,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                                 </li>
                             ))}
                         </ul>
-                    </li>
+                    </li> */}
                     <li className='list'>
                         <p className='heading'>Event management</p>
                         <ul>
@@ -88,6 +93,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                                     label="Select all"
                                     type="checkbox"
                                     id="m-0"
+                                    checked={checker(permissions['management'])}
                                     name="management"
                                     onChange={handleSelectAll}
                                 />
@@ -106,7 +112,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                         </ul>
                     </li>
                 </ul>
-                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleCreate}>Save {!id && 'and create'} role</Button></Stack>
+                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" disabled={!role?.name} onClick={handleCreate}>Save {!id && 'and create'} role</Button></Stack>
             </Modal.Body>
         </Modal>
 
