@@ -41,6 +41,11 @@ $navbar-height: rem(82);
 	}
 }
 
+// if no permission to page
+.overlay {
+	filter: blur(11px);
+}
+
 .nav-is-open {
 	overflow: hidden;
 }
