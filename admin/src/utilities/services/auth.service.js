@@ -3,6 +3,21 @@ const setUser = (userObj) => {
   sessionStorage.setItem('user', user)
 }
 
+const setPermissions = (permissionsObj) => {
+  let permissions = JSON.stringify(permissionsObj)
+  sessionStorage.setItem('permissions', permissions)
+}
+
+const getPermissions = () => {
+  let permissions = sessionStorage.getItem('permissions')
+  permissions = JSON.parse(permissions)
+  if (permissions) {
+    return permissions
+  } else {
+    return undefined
+  }
+}
+
 const setOrg = (orgObj) => {
   let org = JSON.stringify(orgObj)
   sessionStorage.setItem('org', org)
@@ -61,6 +76,7 @@ const isLoggedIn = () => {
 const logoutUser = () => {
   sessionStorage.removeItem('user')
   sessionStorage.removeItem('org')
+  sessionStorage.removeItem('permissions')
 }
 
 const removeSignup = () => {
@@ -84,7 +100,9 @@ const atts = {
   removeSignup,
   logoutUser,
   token,
-  isOrganizer
+  isOrganizer,
+  setPermissions,
+  getPermissions
 }
 
 export default atts

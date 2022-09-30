@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import AuthService from '../../utilities/services/auth.service'
-import { login, getMyOrganizations } from '../../utilities/api'
+import { login, getMyOrganizations, getMyPermissions } from '../../utilities/api'
 import UserContext from '../../context/User/User';
 
 import Stack from 'react-bootstrap/Stack'
@@ -16,6 +16,7 @@ import { Spinner } from '../Spinner'
 export default function LoginWrapper() {
 
     const { setAuthenticated, setOrganization } = useContext(UserContext);
+    const { setUser, setPermissions, setOrg } = AuthService;
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,7 +46,7 @@ export default function LoginWrapper() {
             setIsSaving(true)
             login(credentials)
                 .then((res) => {
-                    AuthService.setUser(res.data);
+                    setUser(res.data);
                     setAuthenticated(res.data);
                     setIsSaving(false)
                 })
@@ -54,7 +55,7 @@ export default function LoginWrapper() {
                         .then((res) => {
                             setIsSaving(false)
                             if (res.data.length > 0) {
-                                AuthService.setOrg(res.data)
+                                setOrg(res.data)
                                 setOrganization(res.data)
                             } else {
                                 // navigate('/signup', { replace: true })
@@ -64,14 +65,20 @@ export default function LoginWrapper() {
                         .catch((err) => console.error(err))
                 })
                 .then(() => {
-                    // Send them back to the page they tried to visit when they were
-                    // redirected to the login page. Use { replace: true } so we don't create
-                    // another entry in the history stack for the login page.  This means that
-                    // when they get to the protected page and click the back button, they
-                    // won't end up back on the login page, which is also really nice for the
-                    // user experience.
-                    navigate(from, { replace: true });
-                    setIsSaving(false)
+                    getMyPermissions()
+                        .then((res) => {
+                            setPermissions(res?.data?.organization_role)
+                            // Send them back to the page they tried to visit when they were
+                            // redirected to the login page. Use { replace: true } so we don't create
+                            // another entry in the history stack for the login page.  This means that
+                            // when they get to the protected page and click the back button, they
+                            // won't end up back on the login page, which is also really nice for the
+                            // user experience.
+                            navigate(from, { replace: true });
+                            setIsSaving(false)
+                        })
+                        .catch((err) => console.error(err))
+                   
                 }, [])
                 .catch((err) => {
                     setIsValid(false)

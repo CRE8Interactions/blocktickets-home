@@ -18,8 +18,8 @@ import { CreateEventButtons } from '../CreateEventButtons';
 export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
-    const user = useContext(UserContext);
     const organization = AuthService.getOrg()[0];
+    const { getPermissions } = AuthService;
 
     const [initialState, setInitialState] = useState();
 
@@ -55,7 +55,6 @@ export default function BasicInfoWrapper({ eventId }) {
     const [isSaving, setIsSaving] = useState(false)
 
     useEffect(() => {
-
         // save initial state to check whether to show save buttons
         setInitialState({
             event,
