@@ -125,5 +125,10 @@ module.exports = {
       path: '/organizations/invite-valid',
       handler: 'organization.inviteValid'
     },
+    {
+      method: 'GET',
+      path: '/organizations/my-permissions',
+      handler: 'organization.myPermissions'
+    },
   ]
 }
