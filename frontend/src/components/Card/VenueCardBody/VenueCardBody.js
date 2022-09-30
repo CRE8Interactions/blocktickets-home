@@ -17,7 +17,7 @@ export default function EventCardTop(props) {
             <Card.Title as="h5">{venue?.name}</Card.Title>
             <Card.Text as="p">{venue?.address[0].city}, {venue?.address[0].state}</Card.Text>
             <hr />
-            <ul>
+            <ul className='venue-list'>
                 {venue && venue.allEvents &&
                     venue.allEvents.map((event, index) => {
                         return (
