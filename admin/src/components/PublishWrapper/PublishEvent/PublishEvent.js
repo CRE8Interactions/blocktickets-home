@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
+import { formatCurrency, formatNumber } from '../../../utilities/helpers';
+
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
@@ -59,11 +61,11 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
                             <Stack as="ul" gap={3}>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Capacity</span>
-                                    <span className='fw-medium text-end flex-grow-1'>{event?.capacity}</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{formatNumber(event?.capacity)}</span>
                                 </Stack>
                                 <Stack as="li" direction='horizontal' className='split-row'>
                                     <span className='text-muted'>Price range</span>
-                                    <span className='fw-medium text-end flex-grow-1'>${parseFloat(event?.priceRange?.low).toFixed(2)}-${parseFloat(event?.priceRange?.high).toFixed(2)}</span>
+                                    <span className='fw-medium text-end flex-grow-1'>{formatCurrency(event?.priceRange?.low)}-{formatCurrency(event?.priceRange?.high)}</span>
                                 </Stack>
                             </Stack>
                         </li>

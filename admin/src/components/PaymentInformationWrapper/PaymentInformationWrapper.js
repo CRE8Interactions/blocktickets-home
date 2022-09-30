@@ -1,35 +1,22 @@
 import React, { useEffect, useState } from 'react';
+
 import { getPaymentInfo } from '../../utilities/api';
+
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-import { BankAccountDetailsModal } from "./BankAccountDetailsModal";
 import { BankCard } from "./BankCard";
+import { BankAccountDetailsModal } from "./BankAccountDetailsModal";
 
 export default function PaymentInformationWrapper() {
 
-    const [bankAccount, setBankAccount] = useState({
-        accountNumber: '',
-        accountType: '',
-        bankName: '',
-        companyName: '',
-        routingNumber: ''
-    })
-
-    const [isValid, setIsValid] = useState(true)
+    const [bankAccount, setBankAccount] = useState()
 
     const [show, setShow] = useState(false)
 
     const handleShow = () => setShow(true)
 
     const handleClose = () => setShow(false)
-
-    useEffect(() => {
-        if (!isValid) {
-            setIsValid(true)
-        }
-
-    }, [bankAccount?.accountNumber])
 
     useEffect(() => {
         getPaymentInfo()
@@ -55,7 +42,7 @@ export default function PaymentInformationWrapper() {
                 </Card>
             </section>
 
-            <BankAccountDetailsModal show={show} handleClose={handleClose} getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
+            <BankAccountDetailsModal show={show} handleClose={handleClose} getBankAccount={setBankAccount} account={bankAccount} />
         </>
     );
 }

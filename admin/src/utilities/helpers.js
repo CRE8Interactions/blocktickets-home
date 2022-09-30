@@ -143,6 +143,108 @@ export const formatPermissions = (permissions) => {
 
 export const formatMembers = (members) => {
     let arr = [];
-    members.map(member => arr.push({ name: `${member?.firstName} ${member?.lastName}`, role: member?.organization_role, email: member?.email, uuid: member?.uuid }))
+    members.map(member => arr.push({ firstName: member?.firstName, lastName: member?.lastName, role: member?.organization_role, email: member?.email, uuid: member?.uuid }))
     return arr
 }
+
+// export const exportHTML = (data) => {
+//     console.log(data);
+//     const excel = create();
+//     const [
+//         workbook,
+//         worksheet
+//     ] = excel;
+
+//     // add columns
+//     worksheet.columns = addColumns(Object.keys(formatExportBook(...books)), worksheet);
+
+//     // make the header bold
+//     // in Excel the rows are 1 based instead of 0 based
+//     worksheet.getRow(1).font = { bold: true };
+
+//     // add rows
+//     worksheet.addRows(addRows(Object.values(books), worksheet));
+
+//     // format rows
+//     let rowIndex = 1;
+//     for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
+//         worksheet.getRow(rowIndex).alignment = {
+//             vertical: 'middle',
+//             horizontal: 'left',
+//             wrapText: true
+//         };
+//         worksheet.getRow(rowIndex).border = {
+//             right: { style: 'thin' }
+//         };
+
+//         // fill even rows
+//         if (rowIndex % 2 === 0) {
+//             worksheet.getRow(rowIndex).fill = {
+//                 type: 'pattern',
+//                 pattern: 'solid',
+//                 fgColor: { argb: 'E0E0E0E0' }
+//             };
+//         }
+//     }
+
+//     // add filters to columns
+//     worksheet.autoFilter = {
+//         from: {
+//             row: 1,
+//             column: 1
+//         },
+//         to: {
+//             row: 1,
+//             column: worksheet.columns.length
+//         }
+//     };
+
+//     // save excel worksheet
+//     saveFile(workbook).then(alert('File saved')).catch((err) => alert(err.message));
+// };
+
+// export const create = () => {
+//     const workbook = new ExcelJS.Workbook();
+//     const sheet = workbook.addWorksheet('my-books', {
+//         properties: { defaultColWidth: 20 },
+//         pageSetup: { orientation: 'landscape' }
+//     });
+
+//     return [
+//         workbook,
+//         sheet
+//     ];
+// };
+
+// const addColumns = (names) => {
+//     return names.map((name) => {
+//         return {
+//             header: `${name.toString().charAt(0).toUpperCase()}${name.slice(1)}`,
+//             key: `${name.toString()}`
+//         };
+//     });
+// };
+
+// const addRows = (data) => {
+//     return data.map((val) => {
+//         return formatExportBook(val);
+//     });
+// };
+
+// const saveFile = async (workbook) => {
+//     workbook.xlsx.writeBuffer().then(function (buffer) {
+//         saveAs(
+//             new Blob(
+//                 [
+//                     buffer
+//                 ],
+//                 {
+//                     type:
+//                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+//                 }
+//             ),
+//             `my-books.xlsx`
+//         );
+//     });
+// };
+
