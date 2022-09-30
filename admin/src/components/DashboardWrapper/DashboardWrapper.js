@@ -14,7 +14,7 @@ export default function DashboardWrapper({ stats, setRange }) {
     const [hasPermission, setHasPermission] = useState();
 
     useEffect(() => {
-        setHasPermission(getPermissions().organization_permissions.map(permission => permission.name === 'View dashboard'));
+        setHasPermission(getPermissions().organization_permissions.some(permission => permission.name === 'View dashboard'));
 
     }, [])
 
