@@ -1,0 +1,32 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+
+.permissions {
+	display: flex;
+	flex-direction: column;
+	gap: $gap-sm;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 9;
+
+	h1 {
+		margin-bottom: 0px;
+		font-size: $h4-font-size;
+		font-weight: $fw-semi-bold;
+		text-align: center;
+	}
+
+	&::before {
+		content: '';
+		background-repeat: no-repeat;
+		background-position: center;
+		background-image: url('../../assets/icons/lock.svg');
+		width: 106px;
+		height: 106px;
+		transform: scale(4);
+	}
+}
