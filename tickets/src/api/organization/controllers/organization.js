@@ -1147,5 +1147,48 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
     return tokenData
+  },
+  async myPermissions(ctx) {
+    let user = ctx.state.user;
+
+    // Get Organizations member belongs to
+    let organizations = await strapi.entityService.findMany('api::organization.organization', {
+      populate: {
+        members: {
+          filters: {
+            id: {
+              $eq: user.id
+            }
+          }
+        },
+        events: {
+          populate: {
+            tickets: true,
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
+    })
+    // Returns organizations which user is a member of
+    let organization = organizations.find(org => org.members.length >= 1)
+
+    user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: { id: user.id },
+      populate: { 
+        role: true,
+        organization_role: {
+          populate: {
+            organization_permissions: true
+          }
+        }
+      },
+    });
+    console.log('User ', user)
+    return user 
   }
 }));

@@ -38,6 +38,10 @@ export const getMyOrganizations = async () => {
   return instance.get('/organizations/myOrgs')
 }
 
+export const getMyPermissions = async () => {
+  return instance.get('/organizations/my-permissions')
+}
+
 export const getTeam = async () => {
   return instance.get('/organizations/team')
 }
