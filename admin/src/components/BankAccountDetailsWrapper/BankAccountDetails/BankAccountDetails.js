@@ -40,6 +40,7 @@ export default function BankAccountDetails({ bankAccount, routingNumError, accou
                     required
                     name="companyName"
                     onChange={handleBankDetails}
+                    value={bankAccount.companyName}
                 />
             </Form.Group>
             <fieldset className='form-group'>
@@ -124,6 +125,7 @@ export default function BankAccountDetails({ bankAccount, routingNumError, accou
                 <Form.Control
                     type="text"
                     placeholder="e.g Wells Fargo, Chase, Bank of America"
+                    value={bankAccount.bankName}
                     required
                     name="bankName"
                     onChange={handleBankDetails}

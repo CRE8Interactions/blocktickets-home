@@ -8,7 +8,7 @@ import { BankAccountDetailsWrapper } from '../../BankAccountDetailsWrapper'
 
 import './bankAccountDetails.scss';
 
-export default function BankAccountDetailsModal({ show, handleClose, getBankAccount, id, isValid, setIsValid }) {
+export default function BankAccountDetailsModal({ show, handleClose, getBankAccount, account, id, isValid, setIsValid }) {
 
     return (
         <Modal id="bank-account" centered animation={false} backdrop="static" fullscreen="md-down" scrollable show={show} onHide={handleClose}>
@@ -16,7 +16,7 @@ export default function BankAccountDetailsModal({ show, handleClose, getBankAcco
                 <Modal.Title as="h4">{id ? 'Edit bank' : 'Bank'} information</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <BankAccountDetailsWrapper getBankAccount={getBankAccount} isValid={isValid} setIsValid={setIsValid} />
+                <BankAccountDetailsWrapper getBankAccount={getBankAccount} account={account} isValid={isValid} setIsValid={setIsValid} />
                 <Stack direction="horizontal" className="btn-group-flex">
                     <Button size="lg" onClick={handleClose}>{id ? 'Update' : 'Link'} bank account</Button>
                 </Stack>
