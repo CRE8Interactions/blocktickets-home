@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import AuthService from '../../utilities/services/auth.service';
 
 import { Reports } from '../Reports';
 import { OrdersTable } from '../OrdersTable';
@@ -7,14 +9,14 @@ import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
 export default function DashboardWrapper({ stats, setRange }) {
 
-    // const user = useContext(UserContext);
+    const { getPermissions } = AuthService;
 
-    let hasPermission = false;
+    const [hasPermission, setHasPermission] = useState();
 
-    // useEffect(() => {
-    //   hasPermission = user.permissions.includes['view_dashboard']
-    // }, [])
+    useEffect(() => {
+        setHasPermission(getPermissions().organization_permissions.map(permission => permission.name === 'View dashboard'));
 
+    }, [])
 
     return (
         <>
