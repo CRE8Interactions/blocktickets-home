@@ -34,7 +34,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
     }
 
     const purchaser = (order) => {
-        return `${capitalizeString(order?.users_permissions_user?.firstName)} ${capitalizeString(order?.users_permissions_user?.lastName)} on ${moment(order?.processedAt).format('MMM DD, YYYY')} at ${moment(order?.processedAt).format('h:mma')} EST`
+        return `${capitalizeString(order?.users_permissions_user?.firstName)} ${capitalizeString(order?.users_permissions_user?.lastName)} on ${moment(order?.processedAt).format('MMM DD, YYYY')} at ${moment(order?.processedAt).format('h:mma')}`
     }
 
     return (
