@@ -18,7 +18,6 @@ export const getStartDateFormatter = (obj) => {
 // format short date for cards and search items with no year
 // display only date and start time
 export const formatShortDate = (date, formatter) => {
-    console.log(date);
     switch (formatter) {
         case 'dateOnly':
             return date.format('MMM D')
