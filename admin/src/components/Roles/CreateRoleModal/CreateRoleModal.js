@@ -24,7 +24,7 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                     <Form.Control
                         type="text"
                         name="name"
-                        placeholder={role?.name || 'Enter Name'}
+                        placeholder='Enter name'
                         required
                         value={role?.name || ''}
                         onChange={(e) => setRole({ ...role, [e.target.name]: e.target.value })}
@@ -69,6 +69,22 @@ export default function CreateRoleModal({ show, handleClose, permissions, id, ro
                             ))}
                         </ul>
                     </li>
+                    {/* <li className='list'>
+                        <p className='heading'>Event oversight</p>
+                        <ul>
+                            {Object.values(permissions?.events).map(({ id, name }) => (
+                                <li key={id}>
+                                    <Form.Check
+                                        type="checkbox"
+                                        label={name}
+                                        id={id}
+                                        onChange={handleCheck}
+                                        checked={isCheck.includes(id)}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </li> */}
                     <li className='list'>
                         <p className='heading'>Event management</p>
                         <ul>
