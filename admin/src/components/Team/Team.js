@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
@@ -7,7 +7,7 @@ import { Member } from './Member'
 import { AddMemberModal } from './AddMemberModal'
 import { DeleteModal } from './DeleteModal'
 
-export default function Team({ members, roles, inviteMember, removeMember, hasPermission }) {
+export default function Team({ members, roles, inviteMember, removeMember, hasPermission = true }) {
 
     // new and existing role so objects match for controlled input fields 
     // also for setting the deleted member
