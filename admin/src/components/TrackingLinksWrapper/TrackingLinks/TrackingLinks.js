@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+
+import AuthService from '../../../utilities/services/auth.service';
+import { checkPermission } from '../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
@@ -8,13 +11,22 @@ import { TrackingLink } from './TrackingLink'
 import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
 
-export default function TrackingLinks({promos}) {
+export default function TrackingLinks({ promos }) {
+
+    const { getPermissions } = AuthService;
+
+    const [hasPermission, setHasPermission] = useState();
 
     const [show, setShow] = useState(false)
 
     const handleShow = () => setShow(true);
 
     const handleClose = () => setShow(false);
+
+    useEffect(() => {
+        setHasPermission(checkPermission(getPermissions(), 7));
+
+    }, [])
 
     const totalTicketsSold = (object) => {
         return parseInt(object?.reduce((accumulator, object) => {
@@ -31,7 +43,7 @@ export default function TrackingLinks({promos}) {
     return (
         <>
             <Stack direction='horizontal' className='mb-5'>
-                <Link to='add' className="btn btn-outline-light btn-lg btn-plus btn-plus--dark ms-auto">Create tracking link</Link>
+                <Link to='add' className={`btn btn-outline-light btn-lg btn-plus btn-plus--dark ms-auto ${!hasPermission ? 'btn-link-disabled' : ''}`}>Create tracking link</Link>
             </Stack>
             <Card body>
                 {promos && promos.length > 0 ? (
@@ -54,7 +66,7 @@ export default function TrackingLinks({promos}) {
                             </div>
                         </div>
                         {promos?.map((link, index) => (
-                            <TrackingLink key={index} link={link} handleShow={handleShow} />
+                            <TrackingLink key={index} link={link} handleShow={handleShow} hasPermission={hasPermission} />
                         ))}
                         <div className="total-row flex-row" role="row">
                             <div className="list-table-col list-table-col lg" role="cell">

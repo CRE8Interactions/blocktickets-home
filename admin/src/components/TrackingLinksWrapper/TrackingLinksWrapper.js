@@ -1,20 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { TrackingLinks } from './TrackingLinks';
-import { getPromoStats } from '../../utilities/api';
-import { useParams } from 'react-router-dom';
 
-export default function TrackingLinksWrapper() {
-    const [promos, setPromos] = useState([])
-
-    const { uuid } = useParams()
-
-    useEffect(() => {
-        getPromoStats(uuid)
-            .then((res) => setPromos(res.data))
-            .catch((err) => console.error(err))
-
-    }, [uuid])
+export default function TrackingLinksWrapper({ promos }) {
 
     return (
         <section className='max-width-wrapper'>

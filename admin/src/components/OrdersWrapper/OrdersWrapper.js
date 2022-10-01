@@ -18,7 +18,9 @@ export default function OrdersWrapper({ eventId }) {
 
     const { getPermissions } = AuthService;
 
-    const [hasPermission, setHasPermission] = useState();
+    const [hasPagePermission, setHasPagePermission] = useState();
+
+    const [hasRefundPermission, setHasRefundPermission] = useState();
 
     const [details, setDetails] = useState({
         grossSales: 0,
@@ -28,7 +30,9 @@ export default function OrdersWrapper({ eventId }) {
     })
 
     useEffect(() => {
-        setHasPermission(checkPermission(getPermissions(), 3));
+        setHasPagePermission(checkPermission(getPermissions(), 3));
+
+        setHasRefundPermission(checkPermission(getPermissions(), 4));
 
     }, [])
 
@@ -82,7 +86,7 @@ export default function OrdersWrapper({ eventId }) {
 
     return (
         <div className='position-relative'>
-            <section className={`max-width-wrapper ${!hasPermission ? 'overlay' : ''}`}>
+            <section className={`max-width-wrapper ${!hasPagePermission ? 'overlay' : ''}`}>
                 <header className='section-header'>
                     <div className="section-header">
                         <div className="section-heading">
@@ -116,17 +120,17 @@ export default function OrdersWrapper({ eventId }) {
                                 <span>{formatNumber(details.attendeesCount)}</span>
                             </li>
                         </Stack>
-                        <Link to="refund/all" className={`btn btn-outline-light ${!hasPermission && 'btn-link-disabled'}`}>Issue multiple refunds</Link>
+                        <Link to="refund/all" className={`btn btn-outline-light ${!hasRefundPermission && 'btn-link-disabled'}`}>Issue multiple refunds</Link>
                     </Stack>
                 </header>
                 <Stack as="ul" gap={4}>
                     {details.orders && details.orders.map((order, index) => (
-                        <OrderSummary key={index} order={order} hasPermission={hasPermission} />
+                        <OrderSummary key={index} order={order} hasPermission={hasRefundPermission} />
                     ))}
                 </Stack>
             </section>
 
-            {!hasPermission && (
+            {!hasPagePermission && (
                 <NoPermissionsContainer />
             )}
         </div>
