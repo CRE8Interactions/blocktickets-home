@@ -6,22 +6,22 @@ export default function PayoutsWrapper() {
 
     // demo purposes: will come from database 
     const payouts = [
-        {
-            id: 0,
-            date: 'Mar 10, 2022',
-            status: 'sent',
-            price: '880',
-            event: 'Nic Fanciulli Live',
-            invoice: 1933142333743
-        },
-        {
-            id: 2,
-            date: 'Mar 10, 2022',
-            status: 'sent',
-            price: '880',
-            event: 'Nic Fanciulli Live',
-            invoice: 1933142333743
-        }
+        // {
+        //     id: 0,
+        //     date: 'Mar 10, 2022',
+        //     status: 'sent',
+        //     price: '880',
+        //     event: 'Nic Fanciulli Live',
+        //     invoice: 1933142333743
+        // },
+        // {
+        //     id: 2,
+        //     date: 'Mar 10, 2022',
+        //     status: 'sent',
+        //     price: '880',
+        //     event: 'Nic Fanciulli Live',
+        //     invoice: 1933142333743
+        // }
     ]
 
     return (

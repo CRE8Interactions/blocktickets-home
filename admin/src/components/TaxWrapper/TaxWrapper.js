@@ -5,7 +5,7 @@ import { stateOpt } from '../../utilities/helpers'
 import { TaxStatus } from './TaxStatus'
 
 // step is controlled from parent component
-export default function TaxWrapper({ step, setStep, getTaxDetails, company }) {
+export default function TaxWrapper({ step, setStep, getTaxDetails, company, account }) {
 
     const taxCodeOpt = [
         {

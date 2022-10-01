@@ -96,6 +96,11 @@ module.exports = {
       handler: 'organization.emailValid'
     },
     {
+      method: 'POST',
+      path: '/organizations/remove-bankaccount',
+      handler: 'organization.removeBankAccount'
+    },
+    {
       method: 'GET',
       path: '/organizations/event-stats',
       handler: 'organization.getEventStats'
@@ -129,6 +134,11 @@ module.exports = {
       method: 'GET',
       path: '/organizations/my-permissions',
       handler: 'organization.myPermissions'
+    },
+    {
+      method: 'GET',
+      path: '/organizations/w9',
+      handler: 'organization.getW9'
     },
   ]
 }
