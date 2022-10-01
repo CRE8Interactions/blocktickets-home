@@ -11,7 +11,7 @@ import { Error } from '../../Error'
 
 export default function OrganizationInformation({ org, setName, handleAddress, error }) {
     useEffect(() => {
-        
+
     }, [])
 
     return (

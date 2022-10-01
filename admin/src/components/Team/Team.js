@@ -75,7 +75,7 @@ export default function Team({ members, roles, inviteMember, removeMember, hasPe
             </div>
             <Stack as="ul" gap={2}>
                 {members.map((member, index) => (
-                    <Member key={index} member={member} handleShowAdd={handleShowAdd} handleShowDelete={handleShowDelete} hasPermission={hasPermission} />
+                    <Member key={index} member={member} handleShowAdd={handleShowAdd} handleShowDelete={handleShowDelete} />
                 ))}
             </Stack>
             <AddMemberModal show={showAdd} handleClose={handleCloseAdd} roles={roles} id={id} member={member} handleMember={handleMember} handleRole={handleRole} handleAdd={handleAdd} />
