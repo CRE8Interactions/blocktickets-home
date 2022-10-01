@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import './addMember.scss';
 
-export default function AddMemberModal({ show, handleClose, roles, member, handleMember, handleAdd, id }) {
+export default function AddMemberModal({ show, handleClose, roles, member, handleMember, handleRole, handleAdd, id }) {
     return (
         <Modal id="add-member" centered animation={false} backdrop="static" fullscreen="md-down" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -22,7 +22,7 @@ export default function AddMemberModal({ show, handleClose, roles, member, handl
                             name="firstName"
                             placeholder="Enter first name"
                             required
-                            defaultValue={member? member?.name?.split(' ')[0] : ''}
+                            value={member?.firstName || ''}
                             onChange={handleMember}
                         />
                     </Form.Group>
@@ -33,7 +33,7 @@ export default function AddMemberModal({ show, handleClose, roles, member, handl
                             name="lastName"
                             placeholder="Enter last name"
                             required
-                            defaultValue={member? member?.name?.split(' ')[1] : ''}
+                            value={member?.lastName || ''}
                             onChange={handleMember}
                         />
                     </Form.Group>
@@ -44,7 +44,7 @@ export default function AddMemberModal({ show, handleClose, roles, member, handl
                             name="email"
                             placeholder="Enter email"
                             required
-                            defaultValue={member ? member?.email : ''}
+                            value={member?.email || ''}
                             onChange={handleMember}
                         />
                     </Form.Group>
@@ -52,12 +52,11 @@ export default function AddMemberModal({ show, handleClose, roles, member, handl
                         <Form.Label>Role</Form.Label>
                         <Form.Select
                             name="role"
-                            onChange={(e) => handleMember(e)}
+                            value={member?.role?.id || ''}
+                            onChange={handleRole}
                             autoComplete="off"
-                            >
-                                {!member &&
-                                    <option key={0} value=''>Select a Role</option>
-                                }
+                        >
+                            <option key={0}>Select a Role</option>
                             {roles && roles.map((option, index) => (
                                 <option key={index} value={option.id}>{option.name}</option>
                             ))}
@@ -71,7 +70,7 @@ export default function AddMemberModal({ show, handleClose, roles, member, handl
                         />
                     </Form.Group>
                 </Form>
-                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" onClick={handleAdd}>{id ? 'Save' : 'Add'} user</Button></Stack>
+                <Stack direction="horizontal" className="btn-group-flex"><Button size="lg" disabled={!member?.firstName || !member?.lastName || !member?.email || !member?.role?.id} onClick={handleAdd}>{id ? 'Save' : 'Add'} user</Button></Stack>
             </Modal.Body>
         </Modal>
 
