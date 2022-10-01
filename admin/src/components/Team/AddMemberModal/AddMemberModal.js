@@ -56,7 +56,7 @@ export default function AddMemberModal({ show, handleClose, roles, member, handl
                             onChange={handleRole}
                             autoComplete="off"
                         >
-                            <option key={0}>Select a Role</option>
+                            <option key="-1" disabled value="">Select a Role</option>
                             {roles && roles.map((option, index) => (
                                 <option key={index} value={option.id}>{option.name}</option>
                             ))}

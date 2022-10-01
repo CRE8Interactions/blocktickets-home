@@ -53,7 +53,6 @@ export default function LoginWrapper() {
                 .then(() => {
                     getMyOrganizations()
                         .then((res) => {
-                            setIsSaving(false)
                             if (res.data.length > 0) {
                                 setOrg(res.data)
                                 setOrganization(res.data)
@@ -78,7 +77,7 @@ export default function LoginWrapper() {
                             setIsSaving(false)
                         })
                         .catch((err) => console.error(err))
-                   
+
                 }, [])
                 .catch((err) => {
                     setIsValid(false)
