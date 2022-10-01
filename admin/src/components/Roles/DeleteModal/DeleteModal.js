@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 export default function DeleteModal({ show, handleClose, id, setRoles }) {
 
-    const removeRole = (id) => {
+    const removeRole = () => {
         removeRoles({ data: { roleId: id } })
             .then((res) => { setRoles(res.data); handleClose() })
             .catch((err) => console.error(err))
@@ -19,7 +19,7 @@ export default function DeleteModal({ show, handleClose, id, setRoles }) {
                 <h1 className="modal-body-heading-title">Are you sure you want to delete this role?</h1>
                 <p>You will not be able to restore this action</p>
                 <Stack className="btn-group-flex">
-                    <Button variant="outline-light" size="lg" className='text-danger' onClick={() => removeRole(id)}>
+                    <Button variant="outline-light" size="lg" className='text-danger' onClick={removeRole}>
                         Delete
                     </Button>
                     <Button size="lg" onClick={handleClose}>

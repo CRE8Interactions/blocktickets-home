@@ -186,7 +186,7 @@ export default function SignUpWrapper() {
     const inviteMember = (member) => {
         createOrEditMember({ member })
             .then((res) => {
-                setMembers(res.data)
+                setMembers(formatMembers(res.data))
             })
             .catch((err) => console.error(err))
     }
@@ -194,7 +194,7 @@ export default function SignUpWrapper() {
     const removeMember = (member) => {
         removeTeamMember(member)
             .then((res) => {
-                let newMembers = members.filter(m => m.email != member.email)
+                let newMembers = members.filter(m => m.email != member?.email)
                 setMembers(newMembers)
             })
             .catch((err) => console.error(err))
