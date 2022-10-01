@@ -114,6 +114,10 @@ export const removeRoles = async (data) => {
   return instance.post('/organization-roles/remove', data)
 }
 
+export const removeBankAccount = async (data) => {
+  return instance.post('/organizations/remove-bankaccount', data)
+}
+
 export const getCategories = async () => {
   return instance.get('/categories')
 }
@@ -124,6 +128,10 @@ export const getVenues = async () => {
 
 export const getPromoStats = async (uuid) => {
   return instance.get(`/organizations/promo-stats?uuid=${uuid}`)
+}
+
+export const getW9 = async (uuid) => {
+  return instance.get(`/organizations/w9`)
 }
 
 export const createEvent = async (data) => {

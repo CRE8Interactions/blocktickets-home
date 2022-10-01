@@ -9,7 +9,7 @@ import { DeleteModal } from './DeleteModal';
 
 import './bankCard.scss';
 
-export default function BankCard({ handleShow, bankAccount }) {
+export default function BankCard({ handleShow, bankAccount, removeAccount }) {
 
     const [show, setShow] = useState(false)
 
@@ -18,7 +18,7 @@ export default function BankCard({ handleShow, bankAccount }) {
     const handleClose = () => setShow(false)
 
     const lastN = (str, int) => {
-        return str.slice(`-${int}`);
+        return str?.slice(`-${int}`);
     }
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export default function BankCard({ handleShow, bankAccount }) {
                 </Col>
             </Row>
 
-            <DeleteModal show={show} handleClose={handleClose} />
+            <DeleteModal show={show} handleClose={handleClose} removeAccount={removeAccount} bankAccount={bankAccount} />
         </>
     );
 }

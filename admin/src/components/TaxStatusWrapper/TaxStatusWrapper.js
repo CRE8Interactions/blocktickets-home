@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import AuthService from '../../utilities/services/auth.service';
+import { getW9 } from '../../utilities/api';
 import { checkPermission } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
@@ -11,6 +12,7 @@ import { TaxCard } from "./TaxCard";
 import { TaxWrapper } from '../TaxWrapper';
 import { BackButton } from "../BackButton";
 import { NoPermissionsContainer } from '../NoPermissionsContainer';
+
 
 export default function TaxStatusWrapper() {
 
@@ -46,6 +48,18 @@ export default function TaxStatusWrapper() {
         }
     }
 
+    const myW9 = () => {
+        getW9()
+            .then((res) => {
+                setTaxStatus(res.data)
+            })
+            .catch((err) => console.error(err))
+    }
+
+    useEffect(() => {
+        myW9()
+    }, [])
+
     return (
         <div className='position-relative'>
             <section className={`wrapper ${!hasPermission ? 'overlay' : ''}`}>
@@ -59,13 +73,13 @@ export default function TaxStatusWrapper() {
                     {!showForm ? (
                         <>
                             {taxStatus ? (
-                                <TaxCard show={setShowForm} />
+                                <TaxCard show={setShowForm} account={taxStatus} />
                             ) : (
                                 <Button size="lg" className="btn-tax w-100" onClick={() => setShowForm(true)}>Fill out W9 form</Button>
                             )}
                         </>
                     ) : (
-                        <TaxWrapper step={step} setStep={setStep} getTaxDetails={setTaxStatus} />
+                        <TaxWrapper step={step} setStep={setStep} getTaxDetails={setTaxStatus} account={taxStatus} />
                     )}
                 </Card>
                 {showForm && (

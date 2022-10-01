@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import Stack from 'react-bootstrap/Stack';
 import Row from 'react-bootstrap/Row';
@@ -8,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 import './taxCard.scss';
 
-export default function TaxCard({ show }) {
+export default function TaxCard({ show, account }) {
 
     return (
         <>
@@ -20,9 +21,9 @@ export default function TaxCard({ show }) {
                     <Stack className='info'>
                         <h1>Tax information</h1>
                         <ul className='text-muted small'>
-                            <li>Party Group LLC.</li>
-                            <li>Taxpayer ID: XX-XXXBOB87</li>
-                            <li>Updated on Fec 28, 2022</li>
+                            <li>{account?.organization?.name}</li>
+                            <li>Taxpayer ID: {account?.ein}</li>
+                            <li>Updated on {moment(account?.updatedAt).format('MMM DD, yyyy')}</li>
                         </ul>
                         <Stack direction='horizontal' gap={3} className="mt-3">
                             <Button variant="link" onClick={() => show(true)}>Edit</Button>

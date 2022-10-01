@@ -4,10 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-export default function DeleteModal({ show, handleClose }) {
+export default function DeleteModal({ show, handleClose, removeAccount, bankAccount }) {
 
     const handleDelete = () => {
         handleClose();
+        removeAccount(bankAccount);
     }
     return (
         <Modal id="delete-modal" centered animation={false} fullscreen="md-down" show={show} onHide={handleClose} backdrop="static">

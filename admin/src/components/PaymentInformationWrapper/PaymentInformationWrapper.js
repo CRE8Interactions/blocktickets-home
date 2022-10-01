@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import AuthService from '../../utilities/services/auth.service';
-import { getPaymentInfo } from '../../utilities/api';
+import { getPaymentInfo, removeBankAccount, createPaymentInfo } from '../../utilities/api';
 import { checkPermission } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
@@ -21,17 +21,41 @@ export default function PaymentInformationWrapper() {
 
     const [show, setShow] = useState(false)
 
-    const handleShow = () => setShow(true)
-
-    const handleClose = () => setShow(false)
-
     useEffect(() => {
         setHasPermission(checkPermission(getPermissions(), 10));
 
         getPaymentInfo()
             .then((res) => setBankAccount(res.data))
             .catch((err) => console.error(err))
+        getAccountInfo()
     }, [])
+
+    const handleShow = () => setShow(true)
+
+    const handleClose = () => {
+        createPaymentInfo({ data: bankAccount })
+            .then(() => setShow(false))
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+
+    const removeAccount = (account) => {
+        removeBankAccount({ accountId: account.id })
+            .then(() => {
+                setBankAccount({})
+                getPaymentInfo()
+            })
+            .catch((err) => console.error(err))
+    }
+
+    const getAccountInfo = () => {
+        getPaymentInfo()
+            .then((res) => {
+                setBankAccount(res.data)
+            })
+            .catch((err) => console.error(err))
+    }
 
     return (
         <div className='position-relative'>
@@ -44,7 +68,7 @@ export default function PaymentInformationWrapper() {
                 </header>
                 <Card body className='card--sm'>
                     {bankAccount ? (
-                        <BankCard handleShow={handleShow} bankAccount={bankAccount} />
+                        <BankCard handleShow={handleShow} bankAccount={bankAccount} removeAccount={removeAccount} />
                     ) : (
                         <Button size="lg" className="btn-plus w-100" onClick={handleShow}>Link bank account</Button>
                     )}
