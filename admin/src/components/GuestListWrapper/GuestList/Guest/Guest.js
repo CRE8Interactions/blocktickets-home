@@ -4,7 +4,7 @@ import { formatPhoneNumber } from '../../../../utilities/helpers';
 
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
-export default function Guest({ guest, handleShow }) {
+export default function Guest({ guest, handleShow, hasPermission }) {
 
     return (
         <tr>
@@ -25,7 +25,7 @@ export default function Guest({ guest, handleShow }) {
                 Pending
             </td>
             <td className="btn-more">
-                <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
+                <EditDeleteDropdown hasPermission={hasPermission} handleShow={handleShow} link={'edit?id=001'} />
             </td>
         </tr>
     );

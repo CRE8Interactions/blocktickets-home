@@ -48,7 +48,6 @@ export default function LoginWrapper() {
                 .then((res) => {
                     setUser(res.data);
                     setAuthenticated(res.data);
-                    setIsSaving(false)
                 })
                 .then(() => {
                     getMyOrganizations()
