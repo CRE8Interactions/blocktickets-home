@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
-import UserContext from '../../context/User/User';
 import AuthService from '../../utilities/services/auth.service';
-
 import { getVenues, createEvent, getEvent, editEvent } from '../../utilities/api';
+import { checkPermission } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
@@ -14,12 +13,15 @@ import { BasicInfo } from './BasicInfo';
 import { DateTime } from './DateTime';
 import { Location } from './Location';
 import { CreateEventButtons } from '../CreateEventButtons';
+import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
 export default function BasicInfoWrapper({ eventId }) {
 
     const navigate = useNavigate();
     const organization = AuthService.getOrg()[0];
     const { getPermissions } = AuthService;
+
+    const [hasPermission, setHasPermission] = useState();
 
     const [initialState, setInitialState] = useState();
 
@@ -55,6 +57,9 @@ export default function BasicInfoWrapper({ eventId }) {
     const [isSaving, setIsSaving] = useState(false)
 
     useEffect(() => {
+
+        setHasPermission(checkPermission(getPermissions(), 1));
+
         // save initial state to check whether to show save buttons
         setInitialState({
             event,
@@ -196,8 +201,8 @@ export default function BasicInfoWrapper({ eventId }) {
     }
 
     return (
-        <>
-            <section className='wrapper event-form'>
+        <div className='position-relative'>
+            <section className={`wrapper event-form ${!hasPermission ? 'overlay' : ''}`}>
                 {alert.show &&
                     <>
                         <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
@@ -232,9 +237,13 @@ export default function BasicInfoWrapper({ eventId }) {
             </section>
 
             {showFooter && (
-                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={hasError || timeError || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} styles={`${!eventId ? 'without-sidebar' : ' '} `} />
+                <CreateEventButtons isEditing={eventId ? true : false} isDisabled={hasError || timeError || !event.name || !event.venue} isSaving={isSaving} handleSave={handleSave} styles={`${!eventId ? 'without-sidebar' : ' '} ${!hasPermission ? 'overlay' : ''} `} />
             )
             }
-        </>
+
+            {!hasPermission && (
+                <NoPermissionsContainer />
+            )}
+        </div>
     );
 }
