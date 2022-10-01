@@ -54,6 +54,30 @@ export const stateOpt = [
     { value: 'WY', name: 'Wyoming' }
 ];
 
+// user permissions
+const permissions = [
+    { id: 1, name: "Create / edit an event" },
+    { id: 2, name: "View dashboard" },
+    { id: 3, name: "View orders" },
+    { id: 4, name: "Issue refunds" },
+    { id: 5, name: "Edit & add guest list" },
+    { id: 6, name: "Attendees (check in)" },
+    { id: 7, name: "Edit & add tracking links" },
+    { id: 8, name: "Edit organization info" },
+    { id: 9, name: "Edit roles & add team members" },
+    { id: 10, name: "Edit payment information" },
+    { id: 11, name: "View payouts" },
+    { id: 12, name: "Edit tax status" },
+]
+
+// check if user has permission
+export const checkPermission = (userPermissions, id) => {
+
+    const permission = permissions.find(perm => perm.id == id);
+
+    return userPermissions.organization_permissions.some(userPerm => userPerm.name === permission.name);
+}
+
 
 const checkUrl = (url) => {
     var expression = /login|\/signup|register/g;
@@ -141,10 +165,112 @@ export const formatPermissions = (permissions) => {
     }, Object.create(null));
 }
 
+// creating and getting existing member have different object properties
+// creating member has name and role property
 export const formatMembers = (members) => {
     let arr = [];
-    members.map(member => arr.push({ name: `${member?.firstName} ${member?.lastName}`, role: member?.organization_role, email: member?.email, uuid: member?.uuid }))
+    members.map(member => arr.push({ firstName: member?.firstName || member?.name.split(' ')[0], lastName: member?.lastName || member?.name.split(' ')[1], role: member?.organization_role || member?.role, email: member?.email, uuid: member?.uuid }))
     return arr
 }
 
+// export const exportHTML = (data) => {
+//     console.log(data);
+//     const excel = create();
+//     const [
+//         workbook,
+//         worksheet
+//     ] = excel;
+
+//     // add columns
+//     worksheet.columns = addColumns(Object.keys(formatExportBook(...books)), worksheet);
+
+//     // make the header bold
+//     // in Excel the rows are 1 based instead of 0 based
+//     worksheet.getRow(1).font = { bold: true };
+
+//     // add rows
+//     worksheet.addRows(addRows(Object.values(books), worksheet));
+
+//     // format rows
+//     let rowIndex = 1;
+//     for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
+//         worksheet.getRow(rowIndex).alignment = {
+//             vertical: 'middle',
+//             horizontal: 'left',
+//             wrapText: true
+//         };
+//         worksheet.getRow(rowIndex).border = {
+//             right: { style: 'thin' }
+//         };
+
+//         // fill even rows
+//         if (rowIndex % 2 === 0) {
+//             worksheet.getRow(rowIndex).fill = {
+//                 type: 'pattern',
+//                 pattern: 'solid',
+//                 fgColor: { argb: 'E0E0E0E0' }
+//             };
+//         }
+//     }
+
+//     // add filters to columns
+//     worksheet.autoFilter = {
+//         from: {
+//             row: 1,
+//             column: 1
+//         },
+//         to: {
+//             row: 1,
+//             column: worksheet.columns.length
+//         }
+//     };
+
+//     // save excel worksheet
+//     saveFile(workbook).then(alert('File saved')).catch((err) => alert(err.message));
+// };
+
+// export const create = () => {
+//     const workbook = new ExcelJS.Workbook();
+//     const sheet = workbook.addWorksheet('my-books', {
+//         properties: { defaultColWidth: 20 },
+//         pageSetup: { orientation: 'landscape' }
+//     });
+
+//     return [
+//         workbook,
+//         sheet
+//     ];
+// };
+
+// const addColumns = (names) => {
+//     return names.map((name) => {
+//         return {
+//             header: `${name.toString().charAt(0).toUpperCase()}${name.slice(1)}`,
+//             key: `${name.toString()}`
+//         };
+//     });
+// };
+
+// const addRows = (data) => {
+//     return data.map((val) => {
+//         return formatExportBook(val);
+//     });
+// };
+
+// const saveFile = async (workbook) => {
+//     workbook.xlsx.writeBuffer().then(function (buffer) {
+//         saveAs(
+//             new Blob(
+//                 [
+//                     buffer
+//                 ],
+//                 {
+//                     type:
+//                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+//                 }
+//             ),
+//             `my-books.xlsx`
+//         );
+//     });
+// };
 

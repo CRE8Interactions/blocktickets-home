@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
+import AuthService from '../../utilities/services/auth.service';
 import {
     getOrganizationRoles, getOrganizationPermissions,
     createOrEditRole, getTeam, createOrEditMember, removeTeamMember
 } from '../../utilities/api'
-import { formatPermissions, formatMembers } from '../../utilities/helpers'
+import { checkPermission, formatPermissions, formatMembers } from '../../utilities/helpers'
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -13,6 +15,10 @@ import { Roles } from "../Roles";
 import { Team } from "../Team";
 
 export default function TeamManagementWrapper() {
+
+    const { getPermissions } = AuthService;
+
+    const [hasPermission, setHasPermission] = useState();
 
     const [
         key,
@@ -27,6 +33,8 @@ export default function TeamManagementWrapper() {
 
     useEffect(() => {
         getRolesAndPermissions()
+
+        setHasPermission(checkPermission(getPermissions(), 9));
     }, [])
 
     const getRolesAndPermissions = () => {
@@ -54,7 +62,7 @@ export default function TeamManagementWrapper() {
     const inviteMember = (member) => {
         createOrEditMember({ member })
             .then((res) => {
-                setMembers(res.data)
+                setMembers(formatMembers(res.data))
             })
             .catch((err) => console.error(err))
     }
@@ -62,7 +70,7 @@ export default function TeamManagementWrapper() {
     const removeMember = (member) => {
         removeTeamMember(member)
             .then((res) => {
-                let newMembers = members.filter(m => m.email != member.email)
+                let newMembers = members.filter(m => m.email != member?.email)
                 setMembers(newMembers)
             })
             .catch((err) => console.error(err))
@@ -94,10 +102,14 @@ export default function TeamManagementWrapper() {
                     </div>
                     <Tab.Content>
                         <Tab.Pane eventKey="roles">
-                            <Roles roles={roles} permissions={permissions} createRoles={createRoles} setRoles={setRoles} />
+                            <Roles roles={roles} permissions={permissions} createRoles={createRoles} setRoles={setRoles}
+                                hasPermission={hasPermission}
+                            />
                         </Tab.Pane>
                         <Tab.Pane eventKey="team">
-                            <Team members={members} roles={roles} inviteMember={inviteMember} removeMember={removeMember} />
+                            <Team members={members} roles={roles} inviteMember={inviteMember} removeMember={removeMember}
+                                hasPermission={hasPermission}
+                            />
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>
