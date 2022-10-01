@@ -95,7 +95,7 @@ export default function Roles({ roles, permissions, createRoles, setRoles, hasPe
         <>
             <div className='heading--flex mb-4'>
                 <h1 className='normal'>Roles</h1>
-                <Button variant='outline-light' disabled={!hasPermission} className="btn-plus btn-plus--dark" onClick={handleShowCreate}>Create a new role</Button>
+                <Button variant='outline-light' className="btn-plus btn-plus--dark" onClick={handleShowCreate}>Create a new role</Button>
             </div>
             <Stack as="ul" gap={2}>
                 {roles.map((role, index) => (
