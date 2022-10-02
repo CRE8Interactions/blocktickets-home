@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import AuthService from '../../utilities/services/auth.service';
+import { getW9 } from '../../utilities/api';
+import { checkPermission } from '../../utilities/helpers';
+
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
@@ -7,16 +11,25 @@ import Button from 'react-bootstrap/Button';
 import { TaxCard } from "./TaxCard";
 import { TaxWrapper } from '../TaxWrapper';
 import { BackButton } from "../BackButton";
+import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
-import { getW9 } from '../../utilities/api';
 
 export default function TaxStatusWrapper() {
+
+    const { getPermissions } = AuthService;
+
+    const [hasPermission, setHasPermission] = useState();
 
     const [taxStatus, setTaxStatus] = useState()
 
     const [showForm, setShowForm] = useState(false)
 
     const [step, setStep] = useState();
+
+    useEffect(() => {
+        setHasPermission(checkPermission(getPermissions(), 12));
+
+    }, [])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -48,8 +61,8 @@ export default function TaxStatusWrapper() {
     }, [])
 
     return (
-        <>
-            <section className='wrapper'>
+        <div className='position-relative'>
+            <section className={`wrapper ${!hasPermission ? 'overlay' : ''}`}>
                 <header className="section-header">
                     <div className="section-heading section-heading--secondary">
                         <h1>Tax status</h1>
@@ -78,7 +91,9 @@ export default function TaxStatusWrapper() {
                     </Stack>
                 )}
             </section>
-
-        </>
+            {!hasPermission && (
+                <NoPermissionsContainer />
+            )}
+        </div>
     );
 }

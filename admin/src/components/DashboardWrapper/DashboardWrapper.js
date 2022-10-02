@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import AuthService from '../../utilities/services/auth.service';
+import { checkPermission } from '../../utilities/helpers';
 
 import { Reports } from '../Reports';
 import { OrdersTable } from '../OrdersTable';
@@ -14,7 +15,7 @@ export default function DashboardWrapper({ stats, setRange }) {
     const [hasPermission, setHasPermission] = useState();
 
     useEffect(() => {
-        setHasPermission(getPermissions().organization_permissions.some(permission => permission.name === 'View dashboard'));
+        setHasPermission(checkPermission(getPermissions(), 2));
 
     }, [])
 

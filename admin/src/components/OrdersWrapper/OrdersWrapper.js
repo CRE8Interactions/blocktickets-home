@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getOrders } from '../../utilities/api';
 
-import { formatCurrency, formatNumber } from "./../../utilities/helpers";
+import AuthService from '../../utilities/services/auth.service';
+import { checkPermission, formatCurrency, formatNumber } from "./../../utilities/helpers";
 
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -11,8 +12,15 @@ import Stack from 'react-bootstrap/Stack';
 import { SearchBar } from '../SearchBar';
 import { ExportSelect } from "../ExportSelect";
 import { OrderSummary } from '../OrderSummary';
+import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
 export default function OrdersWrapper({ eventId }) {
+
+    const { getPermissions } = AuthService;
+
+    const [hasPagePermission, setHasPagePermission] = useState();
+
+    const [hasRefundPermission, setHasRefundPermission] = useState();
 
     const [details, setDetails] = useState({
         grossSales: 0,
@@ -20,6 +28,13 @@ export default function OrdersWrapper({ eventId }) {
         count: 0,
         orders: []
     })
+
+    useEffect(() => {
+        setHasPagePermission(checkPermission(getPermissions(), 3));
+
+        setHasRefundPermission(checkPermission(getPermissions(), 4));
+
+    }, [])
 
     useEffect(() => {
         getOrders(eventId)
@@ -70,8 +85,8 @@ export default function OrdersWrapper({ eventId }) {
     }
 
     return (
-        <>
-            <section className='max-width-wrapper'>
+        <div className='position-relative'>
+            <section className={`max-width-wrapper ${!hasPagePermission ? 'overlay' : ''}`}>
                 <header className='section-header'>
                     <div className="section-header">
                         <div className="section-heading">
@@ -105,15 +120,19 @@ export default function OrdersWrapper({ eventId }) {
                                 <span>{formatNumber(details.attendeesCount)}</span>
                             </li>
                         </Stack>
-                        <Link to="refund/all" className='btn btn-outline-light'>Issue multiple refunds</Link>
+                        <Link to="refund/all" className={`btn btn-outline-light ${!hasRefundPermission && 'btn-link-disabled'}`}>Issue multiple refunds</Link>
                     </Stack>
                 </header>
                 <Stack as="ul" gap={4}>
                     {details.orders && details.orders.map((order, index) => (
-                        <OrderSummary key={index} order={order} />
+                        <OrderSummary key={index} order={order} hasPermission={hasRefundPermission} />
                     ))}
                 </Stack>
             </section>
-        </>
+
+            {!hasPagePermission && (
+                <NoPermissionsContainer />
+            )}
+        </div>
     );
 }

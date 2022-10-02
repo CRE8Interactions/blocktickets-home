@@ -18,7 +18,7 @@ import { TicketRow } from './TicketRow'
 import './orderSummary.scss';
 
 // component used on orders page and refund orders page
-export default function OrderSummary({ order, showDropdown = true, isOpen = false }) {
+export default function OrderSummary({ order, showDropdown = true, isOpen = false, hasPermission }) {
     const { status, refund } = order;
 
     const [open, setOpen] = useState(isOpen);
@@ -62,7 +62,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                                     {!refund && (
                                         <li>
                                             <LinkContainer to={`refund?order=${order?.uuid}`}>
-                                                <Dropdown.Item className="btn-refund">
+                                                <Dropdown.Item className={`btn-refund ${!hasPermission && 'btn-link-disabled'} `}>
                                                     Refund tickets
                                                 </Dropdown.Item>
                                             </LinkContainer>

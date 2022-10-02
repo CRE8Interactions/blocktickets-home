@@ -4,8 +4,8 @@ import { formatPhoneNumber } from '../../../../utilities/helpers';
 
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
-export default function Guest({ guest, handleShow, setSelectedGuest }) {
 
+export default function Guest({ guest, handleShow, hasPermission, setSelectedGuest }) {
     return (
         <tr>
             <td>
@@ -23,9 +23,9 @@ export default function Guest({ guest, handleShow, setSelectedGuest }) {
             </td>
             {/* <td>
                 Pending
-            </td> */}
+            </td>
             <td className="btn-more" onMouseEnter={() => setSelectedGuest(guest)}>
-                <EditDeleteDropdown handleShow={handleShow} link={'edit?id=001'} />
+                <EditDeleteDropdown hasPermission={hasPermission} handleShow={handleShow} link={'edit?id=001'} />
             </td>
         </tr>
     );

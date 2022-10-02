@@ -3,7 +3,7 @@ import React from 'react';
 import { CopyButton } from '../../../CopyButton';
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
-export default function TrackingLink({ link, handleShow }) {
+export default function TrackingLink({ link, handleShow, hasPermission }) {
 
     return (
         <div className='flex-row' role="rowgroup">
@@ -25,7 +25,7 @@ export default function TrackingLink({ link, handleShow }) {
             </div>
             {!link.default && (
                 <div className="btn-more-col" role="cell">
-                    <EditDeleteDropdown handleShow={handleShow} link={`edit?id=${link?.id}`} />
+                    <EditDeleteDropdown handleShow={handleShow} link={`edit?id=${link?.id}`} hasPermission={hasPermission} />
                 </div>
             )}
         </div>
