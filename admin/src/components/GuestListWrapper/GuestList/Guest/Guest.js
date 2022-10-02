@@ -23,7 +23,7 @@ export default function Guest({ guest, handleShow, hasPermission, setSelectedGue
             </td>
             {/* <td>
                 Pending
-            </td>
+            </td> */}
             <td className="btn-more" onMouseEnter={() => setSelectedGuest(guest)}>
                 <EditDeleteDropdown hasPermission={hasPermission} handleShow={handleShow} link={'edit?id=001'} />
             </td>
