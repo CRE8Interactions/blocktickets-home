@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guest_passes",
+  "info": {
+    "singularName": "guest-pass",
+    "pluralName": "guest-passes",
+    "displayName": "guestPass",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "accessCode": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "guestListId": {
+      "type": "string"
+    },
+    "eventId": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
 import TransferCard from '../../TransferCard/TransferCard';
 
-export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, orders, transfers, acceptTransfer }) {
+export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, orders, transfers, acceptTransfer, guestLists }) {
 
     // filter out past events
     const filteredEvents = orders ? orders.filter((order) => order.event !== null) : '';
@@ -35,6 +35,16 @@ export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, o
                             </SwiperSlide>
                         );
                     })}
+                
+                {guestLists &&
+                    guestLists.map((gl, index) => {
+                        return (
+                            <SwiperSlide key={index} className="swiper-lazy">
+                                <TicketCard guestList={gl} />
+                            </SwiperSlide>
+                        );
+                    })
+                }
             </Slider>
         </div>
     );

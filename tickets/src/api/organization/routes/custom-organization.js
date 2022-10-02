@@ -97,8 +97,13 @@ module.exports = {
     },
     {
       method: 'POST',
-      path: '/organizations/remove-bankaccount',
-      handler: 'organization.removeBankAccount'
+      path: '/organizations/create-guest-list',
+      handler: 'organization.createGuestList'
+    },
+    {
+      method: 'POST',
+      path: '/organizations/remove-guest-list',
+      handler: 'organization.removeGuestList'
     },
     {
       method: 'GET',
@@ -139,6 +144,16 @@ module.exports = {
       method: 'GET',
       path: '/organizations/w9',
       handler: 'organization.getW9'
+    },
+    {
+      method: 'GET',
+      path: '/organizations/event-ticket-types',
+      handler: 'organization.ticketTypes'
+    },
+    {
+      method: 'GET',
+      path: '/organizations/guest-list',
+      handler: 'organization.guestList'
     },
   ]
 }

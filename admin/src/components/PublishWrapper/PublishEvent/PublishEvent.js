@@ -15,7 +15,7 @@ import { TimeInputWrapper } from '../../TimeInputWrapper';
 
 export default function PublishEvent({ setDate, date, setPublishType, publishType, eventStarted, eventStatus, event }) {
     const [startDate, setStartDate] = useState('');
-    console.log(event)
+
     useEffect(() => {
         if (event?.scheduled) {
             setStartDate(moment(event?.scheduledTime).format())

@@ -13,7 +13,7 @@ import { TicketModal } from '../TicketModal';
 
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketStatus, ticketState, order, listing, removeListing, getListings }) {
+export default function TicketCard({ id, ticketStatus, ticketState, order, listing, removeListing, getListings, guestList }) {
     const [
         ticketAction,
         setTicketAction
@@ -31,7 +31,9 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
         setTicketAction(action)
     };
 
-    const event = listing ? listing?.event : order?.event;
+    let event = listing ? listing?.event : order?.event;
+    if (guestList) event = guestList?.event;
+    if (guestList) console.log(guestList)
 
     if (listing) {
         order = {}
@@ -39,7 +41,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
         order['orderId'] = listing?.uuid;
     }
     useEffect(() => {
-    }, [ticketState, ticketStatus])
+    }, [ticketState, ticketStatus, guestList])
 
     return (
         <Fragment>
@@ -58,8 +60,12 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                         </span>
                     </p>
 
-                    {!id && (<span className="num-tickets">{listing ? listing?.tickets?.length : order?.tickets?.length} {listing?.tickets?.length > 1 || order?.tickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
+                    {(!id && !guestList) && (<span className="num-tickets">{listing ? listing?.tickets?.length : order?.tickets?.length} {listing?.tickets?.length > 1 || order?.tickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
                     )}
+
+                    { guestList &&
+                        (<span className="num-tickets">{guestList?.guest_passes.length} {guestList?.guest_passes.length > 1 ? 'Guest Passes' : 'Guest Pass'} </span>)
+                    }
 
                     <>
                         {ticketState &&
@@ -100,10 +106,20 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                         ) : ''}
 
                         {
-                            !id && !ticketStatus &&
+                            !id && !ticketStatus && !guestList &&
                             (
                                 <Link to={`/event-details/${order?.orderId}`} className="btn btn-primary">
                                     Event details
+                                </Link>
+                            )
+                        }
+
+                        {
+                        /* Guest List button */
+                        guestList &&
+                            (
+                                <Link to={``} className="btn btn-primary">
+                                    View Passes
                                 </Link>
                             )
                         }

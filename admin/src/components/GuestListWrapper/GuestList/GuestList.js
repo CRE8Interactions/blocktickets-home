@@ -1,30 +1,50 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from "react-router-dom";
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table'
 
 import { Guest } from './Guest'
 import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
+import { guestList, removeGuestList } from '../../../utilities/api';
 
 export default function GuestList() {
 
     const [show, setShow] = useState(false)
 
+    const [selectedGuest, setSelectedGuest] = useState()
+
+    const { uuid } = useParams();
+
     const handleShow = () => setShow(true);
 
     const handleClose = () => setShow(false);
 
-    let guests = [
-        {
-            firstName: 'Harrison',
-            lastName: "Cogan",
-            phoneNumber: 4168095557,
-            quantity: 24,
-            ticketType: 'General Admissions'
+    const [guests, setGuests] = useState([])
+
+    useEffect(() => {
+        getGL()
+    }, [])
+
+    useEffect(( )=> {
+        // Listen for selected guest changes
+    }, [selectedGuest])
+
+    const getGL = () => {
+        guestList(uuid)
+        .then((res) => setGuests(res.data))
+        .catch((err) => console.error(err))
+    }
+
+    const removeGuest= () => {
+        let data = {
+            id: selectedGuest.id,
+            event: uuid
         }
-    ];
+        removeGuestList(data)
+            .then((res) => getGL())
+            .catch((err) => console.error(err))
+    }
 
     return (
         <>
@@ -41,13 +61,13 @@ export default function GuestList() {
                                 <th>Phone number</th>
                                 <th>Quantity</th>
                                 <th>Ticket type</th>
-                                <th>Status</th>
+                                {/* <th>Status</th> */}
                                 <th>Quick links</th>
                             </tr>
                         </thead>
                         <tbody>
                             {guests.map((guest, index) => (
-                                <Guest key={index} guest={guest} handleShow={handleShow} />
+                                <Guest key={index} guest={guest} handleShow={handleShow} setSelectedGuest={setSelectedGuest} />
                             ))}
                         </tbody>
                     </Table>
@@ -58,7 +78,7 @@ export default function GuestList() {
                     <p>No guest list created, click Add guests to create a list.</p>
                 </EmptyContainer>
             )}
-            <DeleteModal show={show} handleClose={handleClose} />
+            <DeleteModal show={show} handleClose={handleClose} removeGuest={removeGuest} />
         </>
 
     );

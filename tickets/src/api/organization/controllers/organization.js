@@ -1244,5 +1244,125 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     });
 
     return entry
+  },
+  async guestList(ctx) {
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const guestList = await strapi.db.query('api::guest-list.guest-list').findMany({
+      where: { eventId: uuid }
+    });
+
+    return guestList
+
+  },
+  async createGuestList(ctx) {
+    const {
+      firstName,
+      lastName,
+      phoneNumber,
+      quantity,
+      ticketType,
+      event
+    } = ctx.request.body;
+
+    const $event = await strapi.db.query('api::event.event').findOne({
+      where: { uuid: event }
+    });
+
+    let guestList = await strapi.db.query('api::guest-list.guest-list').create({
+      data: {
+        firstName,
+        lastName,
+        phoneNumber,
+        quantity,
+        ticketType,
+        event: $event.id,
+        eventId: event,
+        requested: new Date()
+      },
+    });
+
+    let guestArr = []
+
+    for (let i = 1; i <= Number(quantity); i++) {
+      let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+      let letter = letters[Math.floor(Math.random()*10)]
+      await new Promise((resolve, reject) => {
+        resolve(
+          guestArr.push(
+            {
+              eventId: event, accessCode: `${letter}-${Math.floor(100000 + Math.random() * 900000)}`, phoneNumber, type: ticketType, guestListId: guestList.id
+            }
+          )
+        )
+      })
+    }
+
+    // Waits for the guestArr to be populated before continuing
+    let arr = await Promise.all(guestArr)
+    // Creates All passes in bulk
+    let passes = await strapi.db.query('api::guest-pass.guest-pass').createMany({
+      data: arr
+    })
+
+    // Queries for newly created passes as bulk creation doesn't allow for relation creation
+    passes = await strapi.db.query('api::guest-pass.guest-pass').findMany({
+      where: { eventId: event, guestListId: guestList.id }
+    })
+
+    guestList = await strapi.db.query('api::guest-list.guest-list').update({
+      where: { id: guestList.id },
+      data: {
+        guest_passes: passes
+      },
+      populate: {
+        guest_passes: true
+      }
+    })
+
+    strapi.service('api::notification.notification').guestListNotification(guestList, $event);
+
+    return guestList
+  },
+  async removeGuestList(ctx) {
+    const {
+      id,
+      event
+    } = ctx.request.body;
+
+    let guestList = await strapi.db.query('api::guest-list.guest-list').delete({
+      where: { id: id },
+    })
+
+    await strapi.db.query('api::guest-pass.guest-pass').deleteMany({
+      where: {
+        $and: [
+          {
+            eventId: event,
+          },
+          {
+            guestListId: id,
+          },
+        ]
+      },
+    });
+
+    return 200
+  },
+  async ticketTypes(ctx) {
+    const {
+      uuid
+    } = ctx.request.query;
+
+    const entries = await strapi.db.query('api::ticket.ticket').findMany({
+      select: ['name'],
+      where: { eventId: uuid },
+    });
+
+    const unique = Array.from(new Set(entries.map(item => item.name)));
+
+    return unique
   }
 }));

@@ -130,12 +130,28 @@ export const getPromoStats = async (uuid) => {
   return instance.get(`/organizations/promo-stats?uuid=${uuid}`)
 }
 
+export const getEventTicketTypes = async (uuid) => {
+  return instance.get(`/organizations/event-ticket-types?uuid=${uuid}`)
+}
+
 export const getW9 = async (uuid) => {
   return instance.get(`/organizations/w9`)
 }
 
+export const guestList = async (uuid) => {
+  return instance.get(`/organizations/guest-list?uuid=${uuid}`)
+}
+
 export const createEvent = async (data) => {
   return instance.post('/events', data)
+}
+
+export const createGuestList = async (data) => {
+  return instance.post('/organizations/create-guest-list', data)
+}
+
+export const removeGuestList = async (data) => {
+  return instance.post('/organizations/remove-guest-list', data)
 }
 
 export const editEvent = async (data) => {
