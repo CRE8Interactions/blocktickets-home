@@ -947,6 +947,21 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
     return entry
   },
+  async editPromoLink(ctx) {
+    const {
+      id,
+      name
+    } = ctx.request.body;
+
+    const entry = await strapi.db.query('api::promo.promo').update({
+      where: { id: id },
+      data: {
+        name: name,
+      },
+    });
+
+    return entry
+  },
   async getPromoLinks(ctx) {
     const {
       uuid
@@ -984,6 +999,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
 
       let path = process.env.NODE_ENV === 'production' ? 'https://blocktickets.xyz' : 'https://preview.blocktickets.xyz'
       data['name'] = promo?.name
+      data['id'] = promo?.id
       data['code'] = promo?.code
       data['url'] = `${path}/tickets/${event.uuid}?code=${data.code}`
       data['views'] = promo?.promo_views?.length

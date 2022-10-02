@@ -62,6 +62,11 @@ module.exports = {
     },
     {
       method: 'POST',
+      path: '/organizations/edit-promo',
+      handler: 'organization.editPromoLink'
+    },
+    {
+      method: 'POST',
       path: '/organizations/remove-member',
       handler: 'organization.removeTeamMember'
     },

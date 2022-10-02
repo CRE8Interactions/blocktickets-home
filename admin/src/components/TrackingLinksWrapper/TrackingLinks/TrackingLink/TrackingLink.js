@@ -25,7 +25,7 @@ export default function TrackingLink({ link, handleShow, hasPermission }) {
             </div>
             {!link.default && (
                 <div className="btn-more-col" role="cell">
-                    <EditDeleteDropdown handleShow={handleShow} link={`edit?id=${link?.code}`} hasPermission={hasPermission} />
+                    <EditDeleteDropdown handleShow={handleShow} link={`edit?id=${link?.id}`} hasPermission={hasPermission} />
                 </div>
             )}
         </div>
