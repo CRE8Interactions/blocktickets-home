@@ -7,7 +7,7 @@ import { Role } from "./Role";
 import { CreateRoleModal } from './CreateRoleModal';
 import { DeleteModal } from './DeleteModal';
 
-export default function Roles({ roles, permissions, createRoles, setRoles, hasPermission }) {
+export default function Roles({ roles, permissions, createRoles, setRoles, hasPermission = true }) {
 
     // new and existing role so objects match for controlled input fields 
     const [role, setRole] = useState('')
@@ -95,11 +95,11 @@ export default function Roles({ roles, permissions, createRoles, setRoles, hasPe
         <>
             <div className='heading--flex mb-4'>
                 <h1 className='normal'>Roles</h1>
-                <Button variant='outline-light' disabled={!hasPermission} className="btn-plus btn-plus--dark" onClick={handleShowCreate}>Create a new role</Button>
+                <Button variant='outline-light' className="btn-plus btn-plus--dark" onClick={handleShowCreate}>Create a new role</Button>
             </div>
             <Stack as="ul" gap={2}>
                 {roles.map((role, index) => (
-                    <Role key={index} role={role} handleShowCreate={handleShowCreate} handleShowDelete={handleShowDelete} />
+                    <Role key={index} role={role} handleShowCreate={handleShowCreate} handleShowDelete={handleShowDelete} hasPermission={hasPermission} />
                 ))}
             </Stack>
 

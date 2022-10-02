@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getEvent } from '../../utilities/api';
 
+import AuthService from '../../utilities/services/auth.service';
+import { getEvent } from '../../utilities/api';
 import { addDetailsToEvent, upload } from '../../utilities/api';
+import { checkPermission } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -10,9 +12,15 @@ import Alert from 'react-bootstrap/Alert';
 
 import { UploadEventImage } from '../UploadEventImage';
 import { CreateEventButtons } from '../CreateEventButtons';
+import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
 export default function DetailsWrapper({ eventId }) {
+
     const navigate = useNavigate();
+
+    const { getPermissions } = AuthService;
+
+    const [hasPermission, setHasPermission] = useState();
 
     const [selectedImage, setSelectedImage] = useState()
 
@@ -30,8 +38,11 @@ export default function DetailsWrapper({ eventId }) {
 
     const [isSaving, setIsSaving] = useState(false)
 
-    // save initial state to check whether to show save buttons 
     useEffect(() => {
+
+        setHasPermission(checkPermission(getPermissions(), 1));
+
+        // save initial state to check whether to show save buttons 
         setInitialState({
             selectedImage,
             summary: event?.summary || null,
@@ -170,8 +181,8 @@ export default function DetailsWrapper({ eventId }) {
     }
 
     return (
-        <>
-            <section className='wrapper event-form'>
+        <div className='position-relative'>
+            <section className={`wrapper event-form ${!hasPermission ? 'overlay' : ''}`}>
                 {alert.show &&
                     <>
                         <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
@@ -202,8 +213,12 @@ export default function DetailsWrapper({ eventId }) {
                 </section>
             </section>
             {showFooter && (
-                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!event?.image?.id ? !selectedImage : !event?.image?.id} isSaving={isSaving} handleSave={handleSave} />
+                <CreateEventButtons isEditing={event?.image?.id ? true : false} isDisabled={!event?.image?.id ? !selectedImage : !event?.image?.id} isSaving={isSaving} handleSave={handleSave} styles={`${!hasPermission ? 'overlay' : ''} `} />
             )}
-        </>
+
+            {!hasPermission && (
+                <NoPermissionsContainer />
+            )}
+        </div>
     );
 }

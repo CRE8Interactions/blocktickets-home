@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
+import AuthService from '../../utilities/services/auth.service';
 import { publishEvent } from '../../utilities/api';
+import { checkPermission } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -11,10 +13,14 @@ import Alert from 'react-bootstrap/Alert';
 
 import { PublishEvent } from './PublishEvent';
 import { Spinner } from '../Spinner';
+import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
 export default function PublishWrapper({ event }) {
 
     const navigate = useNavigate();
+    const { getPermissions } = AuthService;
+
+    const [hasPermission, setHasPermission] = useState();
 
     const [publishDate, setPublishDate] = useState(new Date(moment('12:00 pm', 'h:mm a').format()));
 
@@ -29,6 +35,16 @@ export default function PublishWrapper({ event }) {
     })
 
     const [isSaving, setIsSaving] = useState(false)
+
+    useEffect(() => {
+        setHasPermission(checkPermission(getPermissions(), 1));
+
+    }, [])
+
+    useEffect(() => {
+        checkEventStart()
+        if (event?.scheduled) setPublishDate(new Date(event?.scheduledTime))
+    }, [event])
 
     const checkEventStart = () => {
         const currentDate = new Date();
@@ -60,13 +76,7 @@ export default function PublishWrapper({ event }) {
                     message: 'Unable to save info please try again.'
                 })
             })
-
     }
-
-    useEffect(() => {
-        checkEventStart()
-        if (event?.scheduled) setPublishDate(new Date(event?.scheduledTime))
-    }, [event])
 
     // update state every second
     setTimeout(() => {
@@ -74,8 +84,8 @@ export default function PublishWrapper({ event }) {
     }, 1000);
 
     return (
-        <>
-            <section className='wrapper'>
+        <div className='position-relative'>
+            <section className={`wrapper event-form ${!hasPermission ? 'overlay' : ''}`}>
                 {alert.show &&
                     <>
                         <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
@@ -96,11 +106,15 @@ export default function PublishWrapper({ event }) {
                         {isSaving ? (
                             <Spinner variant="light" size="sm" />
                         ) : (
-                            <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} `} size="lg" onClick={publish} disabled={event?.tickets?.length === 0}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
+                            <Button className={`btn-${publishType == '1' ? 'send' : 'schedule'} ${!hasPermission ? 'overlay' : ''} `} size="lg" onClick={publish} disabled={event?.tickets?.length === 0}>{publishType == '1' ? 'Publish' : 'Schedule'}</Button>
                         )}
                     </Stack>
                 </div>
             )}
-        </>
+
+            {!hasPermission && (
+                <NoPermissionsContainer />
+            )}
+        </div>
     );
 }
