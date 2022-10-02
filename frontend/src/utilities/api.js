@@ -67,6 +67,14 @@ export const getVenues = async () => {
   return instance.get('/venues')
 }
 
+export const getGuestPasses = async (eventId, phoneNumber) => {
+  return instance.get(`/guest-passes?filters[eventId][$eq]=${eventId}&filters[phoneNumber][$eq]=${phoneNumber}`)
+}
+
+export const getGuestList = async (phoneNumber) => {
+  return instance.get(`/guest-lists?phoneNumber=${phoneNumber}`)
+}
+
 export const getVenue = async (id) => {
   return instance.get(`/venues?filters[id][$eq]=${id}`)
 }

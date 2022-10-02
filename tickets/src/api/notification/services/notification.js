@@ -48,5 +48,22 @@ module.exports = createCoreService('api::notification.notification', ({ strapi }
       .then(message => console.log(message.body))
       .catch(error => console.log('Twilio Transfer Notification Error ', error))
       .done()
+  },
+  async guestListNotification(guestList, event) {
+    let url;
+    if (process.env.NODE_ENV === 'preview') url = 'https://preview.blocktickets.xyz';
+    if (process.env.NODE_ENV === 'production') url = 'https://blocktickets.xyz';
+    if (process.env.NODE_ENV === 'development') url = 'http:localhost:3001';
+
+    await client.messages
+      .create({
+        body: `Blocktickets: ${guestList.firstName} you've been added to the guestlist for ${event.name}. Access Passes at: ${url}`,
+        messagingServiceSid: notificationsServiceSid,
+        to: guestList.phoneNumber,
+        from: process.env.NODE_ENV === 'development' ? myPhone : smsNotificationsNumber,
+      })
+      .then(message => console.log(message.body))
+      .catch(error => console.log('Twilio Transfer Notification Error ', error))
+      .done()
   }
 }))

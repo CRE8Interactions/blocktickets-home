@@ -1,15 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react';
 
-import { getMyEvents, getIncomingTransfers, acceptIncomingTransfers } from '../../utilities/api';
+import { getMyEvents, getIncomingTransfers, acceptIncomingTransfers, getGuestList } from '../../utilities/api';
 
 import { EmptyContainer } from '../EmptyContainer';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyEventsSlider } from './MyEventsSlider';
+import authService from '../../utilities/services/auth.service';
 
 export default function MyEventsWrapper() {
 
     const navigationPrevRef = useRef(null);
-    const navigationNextRef = useRef(null)
+    const navigationNextRef = useRef(null);
+
+    const { getUser } = authService;
+    const user = getUser().user;
 
     const [
         orders,
@@ -21,6 +25,11 @@ export default function MyEventsWrapper() {
         setTransfers
     ] = useState([]);
 
+    const [
+        guestLists,
+        setGuestLists
+    ] = useState([]);
+
     const getMyTickets = () => {
         getMyEvents()
             .then((res) => {
@@ -29,6 +38,10 @@ export default function MyEventsWrapper() {
             .catch((err) => console.error(err));
 
         getIncomingTransfers().then((res) => setTransfers(res.data)).catch((err) => console.log(err));
+
+        getGuestList(encodeURIComponent(user?.phoneNumber))
+            .then((res) => setGuestLists(res.data))
+            .catch((err) => console.error(err))
     };
 
     useEffect(() => {
@@ -50,8 +63,8 @@ export default function MyEventsWrapper() {
                     <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
                 </div>
             </div>
-            {orders?.filter(order => order.event !== null).length > 0 ? (
-                <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} />
+            {orders?.filter(order => order.event !== null).length > 0 || guestLists.length > 0 ? (
+                <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} guestLists={guestLists} />
             ) : (
                 <EmptyContainer>
                     <h1>You do not have any events</h1>

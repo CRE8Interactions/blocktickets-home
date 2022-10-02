@@ -4,9 +4,10 @@ import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-export default function DeleteModal({ show, handleClose }) {
+export default function DeleteModal({ show, handleClose, removeGuest }) {
 
     const handleDelete = () => {
+        removeGuest()
         handleClose();
     }
     return (

@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { GuestInfo } from './GuestInfo';
+import { createGuestList, getEventTicketTypes } from '../../utilities/api';
 
 export default function GuestInformationWrapper({ id }) {
 
     const navigate = useNavigate();
 
-    // demo purposes - will come from database - display error is ticket quantity is more than event max ticket quantity 
-    const maxTicketQuantity = 4;
+    const { uuid } = useParams();
 
-    const ticketTypeOpt = [
-        {
-            label: 'General Admission',
-            value: "genAdmission"
-        },
-        {
-            label: 'Seated',
-            value: "seated"
-        }
-    ]
+    const [ticketTypes, setTicketType] = useState()
+
+    const [valid, setValid] = useState(false)
+
+    // demo purposes - will come from database - display error is ticket quantity is more than event max ticket quantity 
+    const maxTicketQuantity = 50;
 
     const [guest, setGuest] = useState({
         firstName: '',
         lastName: '',
         phoneNumber: '',
         quantity: '',
-        ticketType: ticketTypeOpt[0].value
+        ticketType: ''
     })
 
     const [
@@ -56,12 +52,27 @@ export default function GuestInformationWrapper({ id }) {
         }
     }, [guest.quantity])
 
+    useEffect(() => {
+        if (guest.phoneNumber, guest.firstName, guest.lastName, guest.quantity, guest.ticketType) return setValid(true)
+        setValid(false)
+    }, [guest.firstName, guest.lastName, guest.quantity, guest.ticketType, guest.phoneNumber])
+
 
     useEffect(() => {
         axios
             .get(`https://api.ipdata.co?api-key=${process.env.REACT_APP_IP_DATA_API_KEY}`)
             .then((res) => setCountryCode(res.data.country_code));
     }, []);
+
+    useEffect(() => {
+        getEventTicketTypes(uuid)
+            .then((res) => {setTicketType(res.data)})
+            .catch((err) => console.log(err))
+    }, [])
+
+    useEffect(() => {
+
+    }, [ticketTypes])
 
     const validQuantity = e => {
         if (e.target.value > maxTicketQuantity) {
@@ -74,7 +85,13 @@ export default function GuestInformationWrapper({ id }) {
     }
 
     const handleSave = () => {
-        navigate(-1)
+        guest['quantity'] = Number(guest.quantity)
+        guest['event'] = uuid;
+        console.log('GL ', guest)
+        createGuestList(guest)
+            .then(() => navigate(-1))
+            .catch((err) => console.error(err))
+        
     }
 
     return (
@@ -84,13 +101,13 @@ export default function GuestInformationWrapper({ id }) {
                     <h1>{id ? 'Edit guest' : 'Guest'} information</h1>
                 </header>
                 <Card body>
-                    <GuestInfo ticketTypeOpt={ticketTypeOpt} guest={guest} handleChange={handleChange}
+                    <GuestInfo ticketTypes={ticketTypes} guest={guest} handleChange={handleChange}
                         setPhoneNumber={setValue} isQuantityValid={isQuantityValid} validQuantity={validQuantity} countryCode={countryCode} />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>Cancel</Button>
-                <Button size="lg" onClick={handleSave}>{id ? 'Update guest information' : 'Add Guest'}</Button>
+                <Button size="lg" onClick={handleSave} disabled={!valid}>{id ? 'Update guest information' : 'Add Guest'}</Button>
             </Stack>
         </section>
     );
