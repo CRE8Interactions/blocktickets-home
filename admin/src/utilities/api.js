@@ -102,6 +102,10 @@ export const createPromoLink = async (data) => {
   return instance.post('/organizations/create-promo', data)
 }
 
+export const editPromoLink = async (data) => {
+  return instance.post('/organizations/edit-promo', data)
+}
+
 export const createOrEditMember = async (data) => {
   return instance.post('/organizations/invite-member', data)
 }
