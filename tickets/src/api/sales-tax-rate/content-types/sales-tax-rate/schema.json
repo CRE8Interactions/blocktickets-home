@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sales_tax_rates",
+  "info": {
+    "singularName": "sales-tax-rate",
+    "pluralName": "sales-tax-rates",
+    "displayName": "salesTaxRate"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "stateTaxRate": {
+      "type": "float"
+    },
+    "localTaxRate": {
+      "type": "float"
+    },
+    "combinedTaxRate": {
+      "type": "float"
+    },
+    "state": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    }
+  }
+}

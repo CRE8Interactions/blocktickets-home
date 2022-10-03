@@ -49,7 +49,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                 </Button>
                 <Stack direction="horizontal" className='split-row card-body-subtitle--flex'>
                     <Stack direction="horizontal" gap={3}>
-                        <p>Order {formatOrderId(order?.uuid)}</p>
+                        <p>Order {order?.orderId}</p>
                         <Badge bg="default" className={`badge-outline badge-outline--${orderType(order)}`}>{orderType(order)}</Badge>
                     </Stack>
                     {showDropdown && (
