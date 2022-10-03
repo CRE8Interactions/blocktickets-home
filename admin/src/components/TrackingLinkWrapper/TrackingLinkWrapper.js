@@ -9,14 +9,13 @@ import Button from 'react-bootstrap/Button';
 
 import { TrackingLink } from './TrackingLink';
 
-export default function TrackingLinkWrapper({ id, eventId }) {
+export default function TrackingLinkWrapper({ eventId }) {
 
     const navigate = useNavigate();
 
     const [link, setLink] = useState({
         name: '',
-        uuid: eventId,
-        id: ''
+        uuid: eventId
     })
 
     const [isValid, setIsValid] = useState(true)
@@ -34,19 +33,11 @@ export default function TrackingLinkWrapper({ id, eventId }) {
     }
 
     const handleSave = () => {
-        if (id) {
-            editPromoLink({ id: id, name: link.name })
-                .then((res) => {
-                    navigate(-1)
-                })
-                .catch((err) => console.error(err))
-        } else {
-            createPromoLink({ data: link })
-                .then((res) => {
-                    navigate(-1)
-                })
-                .catch((err) => console.error(err))
-        }
+        createPromoLink({ data: link })
+            .then((res) => {
+                navigate(-1)
+            })
+            .catch((err) => console.error(err))
     }
 
     const validInputs = (e) => {
@@ -57,7 +48,7 @@ export default function TrackingLinkWrapper({ id, eventId }) {
         <section className='wrapper'>
             <section>
                 <header className="section-header section-heading">
-                    <h1>{id ? 'Edit' : 'Create a new'} tracking link</h1>
+                    <h1>Create a new tracking link</h1>
                 </header>
                 <Card body className='card--sm'>
                     <TrackingLink link={link} handleChange={handleChange} isValid={isValid} validInputs={validInputs} />
@@ -65,7 +56,7 @@ export default function TrackingLinkWrapper({ id, eventId }) {
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>Cancel</Button>
-                <Button size="lg" disabled={!isValid} onClick={handleSave}>{id ? 'Update' : 'Create'} tracking link</Button>
+                <Button size="lg" disabled={!link.name && !isValid} onClick={handleSave}>Create tracking link</Button>
             </Stack>
         </section>
     );
