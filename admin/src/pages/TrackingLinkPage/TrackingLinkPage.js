@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 
 import { TrackingLinkWrapper } from "../../components";
 
@@ -9,7 +9,9 @@ export default function TrackingLinkPage() {
 
     const id = searchParam.get("id")
 
+    const { uuid } = useParams()
+
     return (
-        <TrackingLinkWrapper id={id} />
+        <TrackingLinkWrapper id={id} eventId={uuid} />
     )
 }

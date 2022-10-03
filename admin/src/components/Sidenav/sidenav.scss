@@ -31,8 +31,9 @@
 			margin-bottom: $text-spacer;
 		}
 
-		.main-navigation {
-			padding: rem(28) 0px;
+		.main-navigation,
+		.secondary-navigation {
+			padding: rem(23) 0px;
 			border-top: border();
 		}
 	}
