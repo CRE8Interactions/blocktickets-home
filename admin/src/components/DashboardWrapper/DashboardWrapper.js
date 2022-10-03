@@ -9,7 +9,7 @@ import { Cards } from './Cards';
 import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
 export default function DashboardWrapper({ stats, setRange }) {
-
+    console.log(stats)
     const { getPermissions } = AuthService;
 
     const [hasPermission, setHasPermission] = useState();
