@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { isValidPhoneNumber } from 'react-phone-number-input';
+
 import { createGuestList, getEventTicketTypes } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
@@ -10,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 
 import { GuestInfo } from './GuestInfo';
 
-export default function GuestInformationWrapper({ id, eventId }) {
+export default function GuestInformationWrapper({ eventId }) {
 
     const navigate = useNavigate();
 
@@ -36,6 +38,8 @@ export default function GuestInformationWrapper({ id, eventId }) {
 
     const [isQuantityValid, setIsQuantityValid] = useState(true)
 
+    const [isValidNumber, setIsValidNumber] = useState(true)
+
     const [countryCode, setCountryCode] = useState('');
 
     // save phone number to guest object every time it changes
@@ -52,10 +56,15 @@ export default function GuestInformationWrapper({ id, eventId }) {
     }, [guest.quantity])
 
     useEffect(() => {
-        if (guest.phoneNumber, guest.firstName, guest.lastName, guest.quantity, guest.ticketType) return setValid(true)
-        setValid(false)
-    }, [guest.firstName, guest.lastName, guest.quantity, guest.ticketType, guest.phoneNumber])
+        if (!isValidNumber) {
+            setIsValidNumber(true)
+        }
+    }, [guest.phoneNumber])
 
+    useEffect(() => {
+        if (guest.phoneNumber && guest.firstName && guest.lastName && guest.quantity && guest.ticketType && isQuantityValid && isValidNumber) return setValid(true)
+        setValid(false)
+    }, [guest.firstName, guest.lastName, guest.quantity, guest.ticketType, guest.phoneNumber, isQuantityValid, isValidNumber])
 
     useEffect(() => {
         axios
@@ -73,6 +82,16 @@ export default function GuestInformationWrapper({ id, eventId }) {
 
     }, [ticketTypes])
 
+    const validNumber = () => {
+        return phoneNumber && isValidPhoneNumber(phoneNumber)
+    }
+
+    const handleValidNumber = (e) => {
+        // check if valid 
+        setIsValidNumber(validNumber(phoneNumber))
+        console.log(isValidNumber)
+    }
+
     const validQuantity = e => {
         if (e.target.value > maxTicketQuantity) {
             setIsQuantityValid(false)
@@ -87,9 +106,11 @@ export default function GuestInformationWrapper({ id, eventId }) {
         guest['quantity'] = Number(guest.quantity)
         guest['event'] = eventId;
         console.log('GL ', guest)
-        createGuestList(guest)
-            .then(() => navigate(-1))
-            .catch((err) => console.error(err))
+        if (validNumber()) {
+            createGuestList(guest)
+                .then(() => navigate(-1))
+                .catch((err) => console.error(err))
+        }
 
     }
 
@@ -97,16 +118,22 @@ export default function GuestInformationWrapper({ id, eventId }) {
         <section className='wrapper'>
             <section>
                 <header className="section-header section-heading">
-                    <h1>{id ? 'Edit guest' : 'Guest'} information</h1>
+                    <h1>Guest information</h1>
                 </header>
                 <Card body>
                     <GuestInfo ticketTypes={ticketTypes} guest={guest} handleChange={handleChange}
-                        setPhoneNumber={setValue} isQuantityValid={isQuantityValid} validQuantity={validQuantity} countryCode={countryCode} />
+                        setPhoneNumber={setValue}
+                        handleValidNumber={handleValidNumber}
+                        isValidPhoneNumber={isValidNumber}
+                        isQuantityValid={isQuantityValid}
+                        validQuantity={validQuantity}
+                        countryCode={countryCode}
+                    />
                 </Card>
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>Cancel</Button>
-                <Button size="lg" onClick={handleSave} disabled={!valid}>{id ? 'Update guest information' : 'Add Guest'}</Button>
+                <Button size="lg" onClick={handleSave} disabled={!valid}>Add Guest</Button>
             </Stack>
         </section>
     );

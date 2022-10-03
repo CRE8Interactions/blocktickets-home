@@ -211,7 +211,8 @@ li {
 		&:first-of-type {
 			text-align: left;
 		}
-		&:last-of-type {
+		&:last-of-type,
+		&:nth-last-child(2):not(.list-table-col-header) {
 			text-align: right;
 		}
 
@@ -229,9 +230,10 @@ li {
 		}
 	}
 
+	// wider columns
 	&.five-col {
 		.list-table-col:not(.btn-more-col) {
-			width: calc(100% / 8);
+			width: calc(100% / 5.5);
 		}
 	}
 

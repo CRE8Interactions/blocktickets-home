@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function GuestInfo({ ticketTypes, guest, handleChange, setPhoneNumber, isQuantityValid, validQuantity, countryCode }) {
+export default function GuestInfo({ ticketTypes, guest, handleChange, setPhoneNumber, isQuantityValid, validQuantity, handleValidNumber, isValidPhoneNumber, countryCode }) {
 
     return (
         <Form>
@@ -33,8 +33,13 @@ export default function GuestInfo({ ticketTypes, guest, handleChange, setPhoneNu
                     defaultCountry={countryCode}
                     value={guest.phoneNumber}
                     required
+                    onBlur={handleValidNumber}
                     onChange={setPhoneNumber}
+                    className={`${!isValidPhoneNumber ? 'error-border' : ''}`}
                 />
+                {guest.phoneNumber && !isValidPhoneNumber && (
+                    <Form.Text className="text-danger">Your phone number is not valid. Please try again</Form.Text>
+                )}
             </Form.Group>
             <Row className='form-group'>
                 <Col>
@@ -57,7 +62,7 @@ export default function GuestInfo({ ticketTypes, guest, handleChange, setPhoneNu
                     <Form.Group controlId='ticketType'>
                         <Form.Label>Ticket type</Form.Label>
                         <Form.Select name="ticketType" onChange={handleChange} value={guest.ticketType}>
-                        <option>Select Ticket Type</option>
+                            <option>Select Ticket Type</option>
                             {ticketTypes?.map((option, index) => (
                                 <option key={index} value={option}>{option}</option>
                             ))}
