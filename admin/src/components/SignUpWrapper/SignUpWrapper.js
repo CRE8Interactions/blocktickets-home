@@ -334,6 +334,9 @@ export default function SignUpWrapper() {
                     return false
                 }
 
+            case 4:
+                return !isValid;
+
             default:
                 return;
         }
@@ -431,7 +434,7 @@ export default function SignUpWrapper() {
                             <>
                                 <h1 className='normal'>Bank information</h1>
                                 <div className="seperator">
-                                    <BankAccountDetailsWrapper getBankAccount={setBankAccount} isValid={isValid} setIsValid={setIsValid} />
+                                    <BankAccountDetailsWrapper getBankAccount={setBankAccount} getIsValid={setIsValid} />
                                 </div>
                             </>
                         )}

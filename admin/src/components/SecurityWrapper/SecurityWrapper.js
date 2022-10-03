@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+
 import AuthService from '../../utilities/services/auth.service';
-import { isMatching } from '../../utilities/helpers';
+
 import { emailVaid, updateUserEmail, updateUsersName, resetPassword } from '../../utilities/api';
+import { isMatching } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 
 import { Security } from "./Security";
 
 export default function SecurityWrapper() {
+
     const user = AuthService.getUser()?.user;
+
+    // ref on new password to check pattern matching 
+    const passwordEl = useRef();
 
     const [info, setInfo] = useState({
         firstName: user.firstName,
@@ -29,7 +35,7 @@ export default function SecurityWrapper() {
 
     const handleUpdate = (form) => {
         if (form === 'email') {
-            updateUserEmail({email: info.email})
+            updateUserEmail({ email: info.email })
                 .then((res) => {
                     AuthService.setUser(res.data)
                     setSuccess([...success, form])
@@ -38,7 +44,7 @@ export default function SecurityWrapper() {
         }
 
         if (form === 'name') {
-            updateUsersName({firstName: info.firstName, lastName: info.lastName})
+            updateUsersName({ firstName: info.firstName, lastName: info.lastName })
                 .then((res) => {
                     AuthService.setUser(res.data)
                     setSuccess([...success, form])
@@ -47,7 +53,7 @@ export default function SecurityWrapper() {
         }
 
         if (form === 'password') {
-            resetPassword({password: info.curPassword, newPassword: info.password})
+            resetPassword({ password: info.curPassword, newPassword: info.password })
                 .then((res) => {
                     setSuccess([...success, form])
                 })
@@ -60,12 +66,12 @@ export default function SecurityWrapper() {
 
     }, [info.curEmail, info.email, info.curPassword, info.password])
 
-    // validate if curEmail is correct, newEmail is correct, curPassword is correct, newPassword is correct and pattern match ?
+    // validate if curEmail is correct, newEmail is correct, curPassword is correct, newPassword is correct and pattern match
     const handleInput = (e) => {
         const { name } = e.target;
 
-        // demo purposes:
-        const email = "harrison.cogan@gmail.com"
+        const email = info.curEmail;
+        // TODO: store current password in db 
         const password = "blocktickets"
 
         switch (name) {
@@ -75,12 +81,15 @@ export default function SecurityWrapper() {
                 }
                 break;
             case 'email':
-                emailVaid({email: info.email})
+                emailVaid({ email: info.email })
                     .then(() => console.log('Valid'))
                     .catch((err) => {
                         console.log('Error ', err)
                         setError({ field: 'new email', type: 'alreadyExist' })
                     })
+                // if (isMatching(info.curEmail, info.email)) {
+                //     setError({ field: 'new email', type: 'sameMatch' })
+                // }
                 break;
             case 'curPassword':
                 if (info.curPassword !== '' && info.curPassword !== password) {
@@ -90,6 +99,9 @@ export default function SecurityWrapper() {
             case 'password':
                 if (isMatching(info.curPassword, info.password)) {
                     // setError({ field: 'new password', type: 'sameMatch' })
+                }
+                else if (!passwordEl.current.validity.valid) {
+                    setError({ field: 'new password', type: 'patternMatch' })
                 }
                 break;
             default:
@@ -106,7 +118,7 @@ export default function SecurityWrapper() {
                 <p className='section-header-desc'>To update your name, email address or password associated with this account, please fill in the following fields</p>
             </header>
             <Card body className='card--sm'>
-                <Security info={info} handleInfo={handleInfo} handleUpdate={handleUpdate} handleInput={handleInput} error={error} success={success} />
+                <Security info={info} handleInfo={handleInfo} handleUpdate={handleUpdate} handleInput={handleInput} passwordRef={passwordEl} error={error} success={success} />
             </Card>
         </section>
     );

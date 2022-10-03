@@ -14,7 +14,7 @@ import { Success } from '../../Success';
 
 import './security.scss';
 
-export default function Security({ info, handleInfo, handleUpdate, handleInput, error, success }) {
+export default function Security({ info, handleInfo, handleUpdate, handleInput, passwordRef, error, success }) {
 
     return (
         <div id="security">
@@ -67,7 +67,7 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                                     type="email"
                                     name="curEmail"
                                     placeholder="Enter current email"
-                                    disabled={true}
+                                    disabled
                                     value={info.curEmail}
                                     onBlur={handleInput}
                                     onChange={handleInfo}
@@ -127,13 +127,14 @@ export default function Security({ info, handleInfo, handleUpdate, handleInput, 
                                     <Form.Label>New password</Form.Label>
                                     <OverlayTrigger
                                         placement="top"
-                                        overlay={<Tooltip>Minimum 8 characters, one upper and lower case & one symbol</Tooltip>}>
+                                        overlay={<Tooltip>Minimum 6 characters</Tooltip>}>
                                         <Button variant="link">
                                             <InfoIcon />
                                         </Button>
                                     </OverlayTrigger>
                                 </div>
                                 <PasswordInput
+                                    reference={passwordRef}
                                     name="password"
                                     placeholder="Enter new password"
                                     value={info.password}
