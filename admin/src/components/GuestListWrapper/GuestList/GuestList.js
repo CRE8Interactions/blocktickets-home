@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import AuthService from '../../../utilities/services/auth.service';
+import { guestList, removeGuestList } from '../../../utilities/api';
 import { checkPermission } from '../../../utilities/helpers';
+
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table'
 
 import { Guest } from './Guest'
 import { EmptyContainer } from '../../EmptyContainer';
 import { DeleteModal } from './DeleteModal';
-import { guestList, removeGuestList } from '../../../utilities/api';
 
-export default function GuestList() {
+export default function GuestList({ eventId }) {
 
     const { getPermissions } = AuthService;
 
@@ -19,8 +21,6 @@ export default function GuestList() {
     const [show, setShow] = useState(false)
 
     const [selectedGuest, setSelectedGuest] = useState()
-
-    const { uuid } = useParams();
 
     useEffect(() => {
         setHasPermission(checkPermission(getPermissions(), 5));
@@ -36,20 +36,20 @@ export default function GuestList() {
         getGL()
     }, [])
 
-    useEffect(( )=> {
+    useEffect(() => {
         // Listen for selected guest changes
     }, [selectedGuest])
 
     const getGL = () => {
-        guestList(uuid)
-        .then((res) => setGuests(res.data))
-        .catch((err) => console.error(err))
+        guestList(eventId)
+            .then((res) => setGuests(res.data))
+            .catch((err) => console.error(err))
     }
 
-    const removeGuest= () => {
+    const removeGuest = () => {
         let data = {
             id: selectedGuest.id,
-            event: uuid
+            event: eventId
         }
         removeGuestList(data)
             .then((res) => getGL())
@@ -78,7 +78,7 @@ export default function GuestList() {
                         <tbody>
                             {guests.map((guest, index) => (
                                 <Guest key={index} guest={guest} handleShow={handleShow}
-                                    hasPermission={hasPermission} setSelectedGuest={setSelectedGuest} 
+                                    hasPermission={hasPermission} setSelectedGuest={setSelectedGuest}
                                 />
                             ))}
                         </tbody>

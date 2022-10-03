@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { createPromoLink, editPromoLink } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
@@ -8,15 +9,13 @@ import Button from 'react-bootstrap/Button';
 
 import { TrackingLink } from './TrackingLink';
 
-export default function TrackingLinkWrapper({ id }) {
+export default function TrackingLinkWrapper({ id, eventId }) {
 
     const navigate = useNavigate();
 
-    const { uuid } = useParams()
-
     const [link, setLink] = useState({
         name: '',
-        uuid: uuid,
+        uuid: eventId,
         id: ''
     })
 
@@ -36,17 +35,17 @@ export default function TrackingLinkWrapper({ id }) {
 
     const handleSave = () => {
         if (id) {
-            editPromoLink({id: id, name: link.name})
-            .then((res) => {
-                navigate(-1)
-            })
-            .catch((err) => console.error(err))
+            editPromoLink({ id: id, name: link.name })
+                .then((res) => {
+                    navigate(-1)
+                })
+                .catch((err) => console.error(err))
         } else {
-            createPromoLink({data: link})
-            .then((res) => {
-                navigate(-1)
-            })
-            .catch((err) => console.error(err))
+            createPromoLink({ data: link })
+                .then((res) => {
+                    navigate(-1)
+                })
+                .catch((err) => console.error(err))
         }
     }
 

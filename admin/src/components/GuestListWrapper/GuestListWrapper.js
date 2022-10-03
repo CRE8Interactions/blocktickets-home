@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GuestList } from './GuestList'
 
-export default function GuestListWrapper() {
+export default function GuestListWrapper({ eventId }) {
 
     return (
         <section className='max-width-wrapper'>
@@ -14,7 +14,7 @@ export default function GuestListWrapper() {
                     <p className='section-header-desc'>Manually add your guests information for complimentary tickets</p>
                 </div>
             </header>
-            <GuestList />
+            <GuestList eventId={eventId} />
         </section>
 
     );

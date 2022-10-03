@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import { createGuestList, getEventTicketTypes } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { GuestInfo } from './GuestInfo';
-import { createGuestList, getEventTicketTypes } from '../../utilities/api';
 
-export default function GuestInformationWrapper({ id }) {
+export default function GuestInformationWrapper({ id, eventId }) {
 
     const navigate = useNavigate();
-
-    const { uuid } = useParams();
 
     const [ticketTypes, setTicketType] = useState()
 
@@ -65,8 +64,8 @@ export default function GuestInformationWrapper({ id }) {
     }, []);
 
     useEffect(() => {
-        getEventTicketTypes(uuid)
-            .then((res) => {setTicketType(res.data)})
+        getEventTicketTypes(eventId)
+            .then((res) => { setTicketType(res.data) })
             .catch((err) => console.log(err))
     }, [])
 
@@ -86,12 +85,12 @@ export default function GuestInformationWrapper({ id }) {
 
     const handleSave = () => {
         guest['quantity'] = Number(guest.quantity)
-        guest['event'] = uuid;
+        guest['event'] = eventId;
         console.log('GL ', guest)
         createGuestList(guest)
             .then(() => navigate(-1))
             .catch((err) => console.error(err))
-        
+
     }
 
     return (
