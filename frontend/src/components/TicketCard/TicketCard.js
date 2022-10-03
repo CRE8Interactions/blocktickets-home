@@ -33,7 +33,6 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
 
     let event = listing ? listing?.event : order?.event;
     if (guestList) event = guestList?.event;
-    if (guestList) console.log(guestList)
 
     if (listing) {
         order = {}
