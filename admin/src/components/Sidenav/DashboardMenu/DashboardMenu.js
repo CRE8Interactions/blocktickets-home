@@ -31,9 +31,9 @@ export default function DashboardMenu({ event }) {
                 <div className="small">
                     <p>{moment(event?.start).format('ddd, MMM DD, YYYY')} {moment(event?.start).format('h:mm A')}</p>
                 </div>
-                <Button variant='outline-light' className='mt-4'>Preview your event</Button>
+                {/* <Button variant='outline-light' className='mt-4'>Preview your event</Button> */}
             </Stack>
-            <Stack as="ul" gap={1} className='mb-3'>
+            <Stack as="ul" gap={1} className='mb-3 secondary-navigation'>
                 <Nav.Item as="li">
                     <LinkContainer to="basic-info">
                         <Nav.Link>Basic Info</Nav.Link>

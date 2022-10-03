@@ -27,7 +27,7 @@ export default function EventsTable({ type, events }) {
     if (events && type === 'published') events = events.filter((event) => event?.status === 'on_sale')
     if (events && (type === 'draft')) events = events.filter((event) => (event?.status === 'unpublished' || event?.status === 'scheduled'))
     if (events && type === 'past') events = events.filter((event) => event?.status === 'published' && (moment(event?.start) <= moment()))
-    
+
     const getStatus = (type) => {
         switch (type) {
             case 'published':
@@ -87,13 +87,13 @@ export default function EventsTable({ type, events }) {
                                     <Badge bg='light' className="badge-label">{event?.primarySold} / {event?.primaryAvailable}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
-                                            { calculatePercentage(event, 'primary') }
+                                            {calculatePercentage(event, 'primary')}
                                         </Stack>)}
                                 </Stack>
                             </td>
                             <td>
                                 <Stack>
-                                ${ event?.primaryGross }
+                                    ${event?.primaryGross}
                                     {type === 'published' && (
                                         <StatRow
                                             stat="up" statAmount="55.8" text="this week" />
@@ -105,14 +105,14 @@ export default function EventsTable({ type, events }) {
                                     <Badge bg='light' className="badge-label">{event?.secondarySold} / {event?.secondaryAvailable}</Badge>
                                     {type === 'published' && (
                                         <Stack direction="horizontal">
-                                            { calculatePercentage(event, 'secondary') }
+                                            {calculatePercentage(event, 'secondary')}
                                         </Stack>
                                     )}
                                 </Stack>
                             </td>
                             <td>
                                 <Stack>
-                                    ${ event?.royalties }
+                                    ${event?.royalties}
                                     {type === 'published' && (
                                         <StatRow
                                             stat="up" statAmount="55.8" text="this week" />
@@ -129,12 +129,7 @@ export default function EventsTable({ type, events }) {
                                         <ul>
                                             <li>
                                                 <LinkContainer to={`/myevent/${event?.eventUUID}`}>
-                                                    <Dropdown.Item className="btn-view">View</Dropdown.Item>
-                                                </LinkContainer>
-                                            </li>
-                                            <li>
-                                                <LinkContainer to={`/myevent/${event?.eventUUID}/basic-info`}>
-                                                    <Dropdown.Item className="btn-edit">Edit</Dropdown.Item>
+                                                    <Dropdown.Item className="btn-view">Manage</Dropdown.Item>
                                                 </LinkContainer>
                                             </li>
                                             <li>
