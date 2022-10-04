@@ -30,7 +30,7 @@ export default function EditDeleteDropdown({ handleShow, canEdit = true, link, o
                             )}
                         </>
                     )}
-                    <li>
+                    <li className='w-100'>
                         <Dropdown.Item as="button" className="btn-delete" onClick={handleShow} disabled={ticket?.status === "on_sale"}>Delete</Dropdown.Item>
                     </li>
                 </Stack>

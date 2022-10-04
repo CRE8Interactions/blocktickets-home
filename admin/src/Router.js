@@ -45,7 +45,6 @@ const Router = () => {
                     <Route path="guest-list" element={<GuestListPage />} >
                         <Route index element={<ViewGuestListPage />} />
                         <Route path="add" element={<GuestInformationPage />} />
-                        <Route path="edit" element={<GuestInformationPage />} />
                     </Route>
                     <Route path="attendees" element={<AttendeesPage />} />
                     <Route path="primary-sales" element={<PrimarySalesPage />} />
@@ -63,7 +62,6 @@ const Router = () => {
                     <Route path="tracking-links" element={<TrackingLinksPage />} >
                         <Route index element={<ViewTrackingLinksPage />} />
                         <Route path="add" element={<TrackingLinkPage />} />
-                        <Route path="edit" element={<TrackingLinkPage />} />
                     </Route>
                 </Route>
                 <Route path="reports" element={<RequireAuth><ReportsPage /></RequireAuth>} />

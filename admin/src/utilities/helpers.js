@@ -173,6 +173,12 @@ export const formatMembers = (members) => {
     return arr
 }
 
+export const copy = (text, setter) => {
+    /* Copy the text */
+    navigator.clipboard.writeText(text);
+    setter(true)
+}
+
 // export const exportHTML = (data) => {
 //     console.log(data);
 //     const excel = create();

@@ -56,7 +56,7 @@ export default function TrackingLinkWrapper({ eventId }) {
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>Cancel</Button>
-                <Button size="lg" disabled={!link.name && !isValid} onClick={handleSave}>Create tracking link</Button>
+                <Button size="lg" disabled={!link.name || !isValid} onClick={handleSave}>Create tracking link</Button>
             </Stack>
         </section>
     );
