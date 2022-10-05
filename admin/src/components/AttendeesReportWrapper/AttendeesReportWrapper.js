@@ -5,7 +5,7 @@ import { formatCurrency, formatNumber } from '../../utilities/helpers';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
-import { ExportSelect } from '../ExportSelect';
+import { ExportBtn } from '../ExportBtn';
 import { SearchBar } from '../SearchBar'
 import { AttendeeRow } from './AttendeeRow'
 
@@ -187,8 +187,6 @@ export default function AttendeesReportWrapper({ orderId, ticketId }) {
         },
     ]
 
-    const [exportTo, setExportTo] = useState('1')
-
     // search query
     const [
         query,
@@ -222,7 +220,7 @@ export default function AttendeesReportWrapper({ orderId, ticketId }) {
                     </div>
                     <div className="actions-group-flex">
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by attendee name, email address" />
-                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
+                        <ExportBtn />
                     </div>
                     <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">

@@ -7,7 +7,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Stack from "react-bootstrap/Stack";
 
 import { SearchBar } from '../../SearchBar';
-import { ExportSelect } from "../../ExportSelect";
+import { ExportBtn } from "../../ExportBtn";
 import { Attendee } from './Attendee';
 
 export default function AttendeeList() {
@@ -26,8 +26,6 @@ export default function AttendeeList() {
             value: 'checked_in'
         },
     ]
-
-    const [exportTo, setExportTo] = useState()
 
     const [attendees, setAttendees] = useState([
         {
@@ -187,7 +185,7 @@ export default function AttendeeList() {
                     </Col>
 
                     <Col className="ps-xl-0">
-                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
+                        <ExportBtn />
                     </Col>
 
                 </Row>
