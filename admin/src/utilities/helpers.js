@@ -1,3 +1,6 @@
+import saveAs from 'file-saver';
+import ExcelJS from 'exceljs';
+
 // global state options 
 export const stateOpt = [
     { value: 'AK', name: 'Alaska' },
@@ -150,8 +153,9 @@ export const formatPhoneNumber = (number) => {
     return number.toString().substring(0, 3) + '.' + number.toString().substring(3, 6) + '.' + number.toString().substring(6)
 }
 
-export const isMatching = (input1, input2) => {
-    return input1 === input2
+// format full date 
+export const formatDateTime = (date) => {
+    return date.format('ddd, MMM D, YYYY h:mm A')
 }
 
 export const formatPermissions = (permissions) => {
@@ -173,110 +177,153 @@ export const formatMembers = (members) => {
     return arr
 }
 
+export const isMatching = (input1, input2) => {
+    return input1 === input2
+}
+
 export const copy = (text, setter) => {
     /* Copy the text */
     navigator.clipboard.writeText(text);
     setter(true)
 }
 
-// export const exportHTML = (data) => {
-//     console.log(data);
-//     const excel = create();
-//     const [
-//         workbook,
-//         worksheet
-//     ] = excel;
+export const exportHTML = (data) => {
+    console.log(data);
+    const excel = create();
+    const [
+        workbook,
+        worksheet
+    ] = excel;
 
-//     // add columns
-//     worksheet.columns = addColumns(Object.keys(formatExportBook(...books)), worksheet);
+    // add columns
+    worksheet.columns = addColumns((Object.keys(formatOrders(...data))), worksheet);
 
-//     // make the header bold
-//     // in Excel the rows are 1 based instead of 0 based
-//     worksheet.getRow(1).font = { bold: true };
+    // make the header bold
+    // in Excel the rows are 1 based instead of 0 based
+    worksheet.getRow(1).font = { bold: true };
 
-//     // add rows
-//     worksheet.addRows(addRows(Object.values(books), worksheet));
+    // add rows
+    worksheet.addRows(addRows(Object.values(data), worksheet));
 
-//     // format rows
-//     let rowIndex = 1;
-//     for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
-//         worksheet.getRow(rowIndex).alignment = {
-//             vertical: 'middle',
-//             horizontal: 'left',
-//             wrapText: true
-//         };
-//         worksheet.getRow(rowIndex).border = {
-//             right: { style: 'thin' }
-//         };
+    // format rows
+    let rowIndex = 1;
+    for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
+        worksheet.getRow(rowIndex).alignment = {
+            vertical: 'middle',
+            horizontal: 'left'
+        };
+        // worksheet.getRow(rowIndex).border = {
+        //     right: { style: 'thin' }
+        // };
 
-//         // fill even rows
-//         if (rowIndex % 2 === 0) {
-//             worksheet.getRow(rowIndex).fill = {
-//                 type: 'pattern',
-//                 pattern: 'solid',
-//                 fgColor: { argb: 'E0E0E0E0' }
-//             };
-//         }
-//     }
+        // fill even rows
+        // if (rowIndex % 2 === 0) {
+        //     worksheet.getRow(rowIndex).fill = {
+        //         type: 'pattern',
+        //         pattern: 'solid',
+        //         fgColor: { argb: 'E0E0E0E0' }
+        //     };
+        // }
+    }
 
-//     // add filters to columns
-//     worksheet.autoFilter = {
-//         from: {
-//             row: 1,
-//             column: 1
-//         },
-//         to: {
-//             row: 1,
-//             column: worksheet.columns.length
-//         }
-//     };
+    worksheet.columns.forEach(function (column, i) {
+        var maxLength = 0;
+        column["eachCell"]({ includeEmpty: true }, function (cell) {
+            var columnLength = cell.value ? cell.value.toString().length : 20;
+            if (columnLength > maxLength) {
+                maxLength = columnLength;
+            }
+        });
+        column.width = maxLength < 20 ? 20 : maxLength;
+    });
 
-//     // save excel worksheet
-//     saveFile(workbook).then(alert('File saved')).catch((err) => alert(err.message));
-// };
+    worksheet.getColumn(3).numFmt = 'ddd, mmm dd, yyyy h:mm AM/PM';
+    worksheet.getColumn(3).width = 30;
+    worksheet.getColumn(4).numFmt = '#,##0';
+    worksheet.getColumn(8).numFmt = '"$"#,##0.00;[Red]\-"$"#,##0.00';
 
-// export const create = () => {
-//     const workbook = new ExcelJS.Workbook();
-//     const sheet = workbook.addWorksheet('my-books', {
-//         properties: { defaultColWidth: 20 },
-//         pageSetup: { orientation: 'landscape' }
-//     });
+    // add filters to columns
+    // worksheet.autoFilter = {
+    //     from: {
+    //         row: 1,
+    //         column: 1
+    //     },
+    //     to: {
+    //         row: 1,
+    //         column: worksheet.columns.length
+    //     }
+    // };
 
-//     return [
-//         workbook,
-//         sheet
-//     ];
-// };
+    console.log(workbook);
+    // save excel worksheet
+    saveFile(workbook).then().catch((err) => alert(err.message));
+};
 
-// const addColumns = (names) => {
-//     return names.map((name) => {
-//         return {
-//             header: `${name.toString().charAt(0).toUpperCase()}${name.slice(1)}`,
-//             key: `${name.toString()}`
-//         };
-//     });
-// };
+export function formatOrders(orders) {
+    console.log(orders)
+    const { orderId, users_permissions_user, processedAt, type, total, intentDetails } = orders;
+    const { ticketCount } = orders.details;
+    const { generalAdmission } = orders.details.ticket;
+    const { brand, last4 } = intentDetails.charges.data[0].payment_method_details.card
+    return {
+        order: orderId,
+        purchased_by: `${capitalizeString(`${users_permissions_user.firstName} ${users_permissions_user.lastName}`)}`,
+        purchase_date: new Date(processedAt),
+        quantity: ticketCount,
+        market_type: `${capitalizeString(type)}`,
+        transaction_type: 'Standard',
+        ticket_type: generalAdmission ? 'General Admission' : 'Seated',
+        paid: total / ticketCount,
+        paid_by: `${brand} ${last4}`
+    };
+}
 
-// const addRows = (data) => {
-//     return data.map((val) => {
-//         return formatExportBook(val);
-//     });
-// };
 
-// const saveFile = async (workbook) => {
-//     workbook.xlsx.writeBuffer().then(function (buffer) {
-//         saveAs(
-//             new Blob(
-//                 [
-//                     buffer
-//                 ],
-//                 {
-//                     type:
-//                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
-//                 }
-//             ),
-//             `my-books.xlsx`
-//         );
-//     });
-// };
+export const create = () => {
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('orders', {
+        properties: { defaultColWidth: 20 },
+        pageSetup: { orientation: 'landscape' }
+    });
+
+    return [
+        workbook,
+        sheet
+    ];
+};
+
+const addColumns = (names) => {
+    console.log(names);
+    return names.map((name) => {
+        return {
+            header: `${formatString(`${name}`)}`,
+            key: `${name}`
+        };
+    });
+};
+
+const addRows = (data) => {
+    console.log(data)
+    return data.map((val) => {
+        return formatOrders(val);
+    });
+};
+
+
+const saveFile = async (workbook) => {
+    workbook.xlsx.writeBuffer().then(function (buffer) {
+        saveAs(
+            new Blob(
+                [
+                    buffer
+                ],
+                {
+                    type:
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+                }
+            ),
+            `Orders - ${new Date()}.xlsx`
+        );
+    });
+};
 
