@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import { formatDateTime } from '../../../utilities/helpers';
+
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
@@ -29,7 +31,7 @@ export default function DashboardMenu({ event }) {
                 {badgeStatus(event)}
                 <h1 className='fs-md'>{event?.name}</h1>
                 <div className="small">
-                    <p>{moment(event?.start).format('ddd, MMM DD, YYYY')} {moment(event?.start).format('h:mm A')}</p>
+                    <p>{formatDateTime(moment(event?.start))}</p>
                 </div>
                 {/* <Button variant='outline-light' className='mt-4'>Preview your event</Button> */}
             </Stack>
