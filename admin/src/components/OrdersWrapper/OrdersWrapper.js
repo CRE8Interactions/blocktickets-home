@@ -10,7 +10,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Stack from 'react-bootstrap/Stack';
 
 import { SearchBar } from '../SearchBar';
-import { ExportSelect } from "../ExportSelect";
+import { ExportBtn } from "../ExportBtn";
 import { OrderSummary } from '../OrderSummary';
 import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
@@ -67,8 +67,6 @@ export default function OrdersWrapper({ eventId }) {
 
     const [ordersView, setOrdersView] = useState(ordersViewOpt[0].value);
 
-    const [exportTo, setExportTo] = useState('1')
-
     // search query
     const [
         query,
@@ -103,7 +101,7 @@ export default function OrdersWrapper({ eventId }) {
                             </Form.Select>
                         </FloatingLabel>
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by Order #, name, phone number or email" />
-                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
+                        <ExportBtn data={details.orders} />
                     </div>
                     <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">

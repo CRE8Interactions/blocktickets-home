@@ -61,14 +61,18 @@ section + section {
 	align-items: center;
 	gap: $gap;
 
-	.form-floating:not(.export-form-floating),
-	.export-group {
+	.form-floating,
+	.btn-download {
 		flex-basis: 240px;
 		height: 64px;
 
 		.form-select {
 			height: 100%;
 		}
+	}
+
+	.btn-download {
+		flex-basis: 135px;
 	}
 
 	.search {
