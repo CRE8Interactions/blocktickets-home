@@ -497,8 +497,20 @@ module.exports = {
             }
           })
 
+          const feeStructure = await strapi.db.query('api::fee-structure.fee-structure').create({
+            data: {
+              stripeServicePecentage: 2.9,
+              stripeCharge: .30,
+              primaryUnder20: 1,
+              primaryOver20: 5,
+              secondaryServiceFeeSeller: 15,
+              secondaryServiceFeeBuyer: 10
+            }
+          })
+
           event.params.data.venue = venue.id
           event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+          event.params.data.fee_structure = feeStructure.id
         }
 
         // Changes on Venue model

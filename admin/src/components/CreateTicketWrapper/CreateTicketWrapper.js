@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment'
 
-import { createTickets, updateTickets, getEvent } from '../../utilities/api';
+import { createTickets, updateTickets, getEvent, getTaxRates } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
@@ -14,6 +14,7 @@ import { CreateEventButtons } from '../CreateEventButtons';
 export default function CreateTicketWrapper({ event, eventId, type }) {
 
     const navigate = useNavigate();
+    const { uuid } = useParams()
 
     // error flag for ticket name because setErrors is asynchronous 
     let nameUniqueError = false;
@@ -45,6 +46,23 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
         minQuantity: '',
         maxQuantity: '',
     })
+
+    const [fees, setFees] = useState({
+        primaryOver20: 0,
+        primaryUnder20: 0,
+        secondaryServiceFeeBuyer: 0,
+        secondaryServiceFeeSeller: 0,
+        stripeCharge: 0,
+        stripeServicePecentage: 0
+    })
+
+    const [taxRates, setTaxRates] = useState({
+        stateTaxRate: 0,
+        localTaxRate: 0,
+        combinedTaxRate: 0
+    })
+
+    const [address, setAddress] = useState()
 
     const [showFooter, setShowFooter] = useState(false);
 
@@ -82,6 +100,13 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
         if (ticket.free) setKey('free')
     }, [ticket])
 
+    useEffect(() => {
+        if (!address) return;
+        getTaxRates(address?.city, address?.state)
+            .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
+            .catch((err) => console.error(err))
+    }, [address])
+
 
     useEffect(() => {
         if (initialState?.ticket !== ticket) setShowFooter(true)
@@ -111,8 +136,18 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                     })
                     setSalesStart(new Date(ticket?.sales_start))
                     setSalesEnd(new Date(ticket?.sales_end))
+                    // setFees(res.data?.fee_structure)
+                    setAddress(res.data.venue.address[0])
                 })
                 .catch((err) => console.error(err))
+        } else {
+            getEvent(eventId)
+            .then((res) => {
+                console.log(res.data)
+                setAddress(res.data.venue.address[0])
+                // setFees(res.data?.fee_structure)
+            })
+            .catch((err) => console.error(err))
         }
     }, [type])
 
@@ -290,11 +325,11 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                     <Tab.Content>
                         <Tab.Pane eventKey="paid">
                             <CreateTicket type={key}
-                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setSalesStart={setSalesStart} salesStart={salesStart} setSalesEnd={setSalesEnd} salesEnd={salesEnd} setHasError={setHasError} hasError={hasError} errors={errors} />
+                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setSalesStart={setSalesStart} salesStart={salesStart} setSalesEnd={setSalesEnd} salesEnd={salesEnd} setHasError={setHasError} hasError={hasError} errors={errors} fees={fees} taxRates={taxRates} />
                         </Tab.Pane>
                         <Tab.Pane eventKey="free">
                             <CreateTicket type={key}
-                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setSalesStart={setSalesStart} salesStart={salesStart} setSalesEnd={setSalesEnd} salesEnd={salesEnd} setHasError={setHasError} hasError={hasError} errors={errors} />
+                                isEdit={type} handleValid={handleValid} handleChange={handleChange} ticket={ticket} setSalesStart={setSalesStart} salesStart={salesStart} setSalesEnd={setSalesEnd} salesEnd={salesEnd} setHasError={setHasError} hasError={hasError} errors={errors} fees={fees} taxRates={taxRates} />
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>

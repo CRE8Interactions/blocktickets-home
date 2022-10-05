@@ -160,5 +160,15 @@ module.exports = {
       path: '/organizations/guest-list',
       handler: 'organization.guestList'
     },
+    {
+      method: 'GET',
+      path: '/organizations/event-attendees',
+      handler: 'organization.getEventAttendees'
+    },
+    {
+      method: 'GET',
+      path: '/organizations/tax-rates',
+      handler: 'organization.getTaxRates'
+    },
   ]
 }

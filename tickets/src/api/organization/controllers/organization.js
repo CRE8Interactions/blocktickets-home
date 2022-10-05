@@ -528,6 +528,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       populate: {
         page_views: true,
         image: true,
+        fee_structure: true,
         venue: {
           populate: {
             address: true
@@ -1380,5 +1381,64 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     const unique = Array.from(new Set(entries.map(item => item.name)));
 
     return unique
+  },
+  async getEventAttendees(ctx) {
+    const {
+      eventUUID,
+      start
+    } = ctx.request.query;
+
+    let ticketsArr = []
+
+    const orders = await strapi.entityService.findMany('api::order.order', {
+      filters: { eventUuid: eventUUID },
+      populate: { 
+        tickets: true,
+        users_permissions_user: {
+          fields: ['email', 'firstName', 'lastName', 'phoneNumber']
+        }
+      },
+      start: start ? start : 0
+    });
+
+    orders.map((order) => {
+      order.tickets.map((ticket) => {
+        let attr = {}
+        attr['email'] = order?.users_permissions_user?.email
+        attr['name'] = `${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`
+        attr['phone'] = `${order?.users_permissions_user?.phoneNumber}`
+        attr['ticketType'] = `${ticket?.name}`
+        attr['marketType'] = ticket?.resale ? 'Secondary' : 'Primary'
+        attr['checkInCode'] = ticket?.checkInCode
+        ticketsArr.push(attr)
+      })
+    })
+
+    return ticketsArr
+  },
+  async getTaxRates(ctx) {
+    const {
+      city,
+      state
+    } = ctx.request.query;
+
+    const entry = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+      where: {
+        abbreviation: {
+          $eq: state.toLowerCase()
+        }
+      },
+      populate: { 
+        sales_tax_rates: {
+          where: {
+            city: {
+              $eq: city.toLowerCase()
+            }
+          }
+        }
+      },
+    });
+
+    return entry
   }
 }));

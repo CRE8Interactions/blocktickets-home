@@ -186,6 +186,14 @@ export const getOrders = async (uuid) => {
   return instance.get(`organizations/event-orders?uuid=${uuid}`)
 }
 
+export const getAttendees = async (uuid) => {
+  return instance.get(`organizations/event-attendees?eventUUID=${uuid}`)
+}
+
+export const getTaxRates = async (city, state) => {
+  return instance.get(`organizations/tax-rates?city=${city}&state=${state}`)
+}
+
 export const publishEvent = async (data) => {
   return instance.post('/events/publish', data)
 }
