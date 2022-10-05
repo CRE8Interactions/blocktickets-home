@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { formatPhoneNumber } from '../../../../utilities/helpers';
+import { formatPhoneNumber, formatDateTime } from '../../../../utilities/helpers';
 
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -75,7 +75,7 @@ export default function Attendee({ attendee, handleToggle }) {
                                         </li>
                                         <li>
                                             <p className='heading-caption'>Status</p>
-                                            <p className='small fw-medium'>{attendee.checked_in ? 'Checked in' : "Check in"} {attendee.checked_in && <span className='text-muted'>Feb 12, 2022 at 3:43pm (EST)</span>}</p>
+                                            <p className='small fw-medium'>{attendee.checked_in ? 'Checked in' : "Check in"} {attendee.checked_in && <span className='text-muted'>Feb 12, 2022 3:43pm</span>}</p>
                                         </li>
                                     </Stack>
                                 </li>
