@@ -39,7 +39,7 @@ export default function OrderSummary({ order }) {
                     </Stack>
                     <Stack direction="horizontal" as="li" className="split-row">
                         <span>Tax</span>
-                        <span className='text-end'>${sum == 0 ? 0 : (5.00).toFixed(2)}</span>
+                        <span className='text-end'>${sum == 0 ? parseFloat(0).toFixed(2) : (5.00).toFixed(2)}</span>
                     </Stack>
                     <Stack direction="horizontal" as="li" className="split-row">
                         <span>Total</span>
