@@ -28,7 +28,12 @@ export default function EventModal({ show, handleClose, event }) {
                     </Col>
                 </Row>
                 <div className="mb-2">
-                    <span className="time-caption">Time</span>
+                    <span className="time-caption">{event?.display_start_time &&
+                        <>Time</>
+                    }
+                        {!event?.display_start_time &&
+                            <>Date</>
+                        }</span>
                     <span className="normal-sm">
                         {formatDateTime(moment(event?.start), getStartDateFormatter(event))} {!event?.hide_end_date && (<span>- {formatDateTime(moment(event?.end), 'timeOnly')}</span>)}
                     </span>
