@@ -53,7 +53,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                         <Badge bg="default" className={`badge-outline badge-outline--${orderType(order)}`}>{orderType(order)}</Badge>
                     </Stack>
                     {showDropdown && (
-                        <Dropdown className="btn-more" align="right">
+                        <Dropdown className="btn-more" placement="left">
                             <Dropdown.Toggle variant="default">
                                 <MoreIcon />
                             </Dropdown.Toggle>

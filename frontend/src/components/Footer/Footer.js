@@ -85,12 +85,12 @@ export default function Footer() {
                             </a>
                         </li>
                         <li>
-                            <a href="https://instagram.com/blocktickets.xyz?igshid=YmMyMTA2M2Y=" target="_blank">
+                            <a href="https://www.instagram.com/blockticketsnft/" target="_blank">
                                 <img src={instagram} alt="instagram" />
                             </a>
                         </li>
                         <li>
-                            <a href="https://twitter.com/BlockticketsUSA" target="_blank">
+                            <a href="https://twitter.com/Blockticketsnft" target="_blank">
                                 <img src={twitter} alt="twitter" />
                             </a>
                         </li>
