@@ -109,7 +109,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
                     <Fragment>
                         <div className="modal-body-heading">
                             <h4 className="modal-body-heading-title">
-                                Enter the recepient phone number{' '}
+                                Enter the recipient phone number{' '}
                             </h4>
                             <p className="small">
                                 The recipient will get notified via sms that you have transferred your tickets to them.
