@@ -24,10 +24,6 @@
 	align-items: center;
 	> .btn {
 		margin: 0px;
-
-		&:not(.btn--icon) {
-			flex: 1;
-		}
 	}
 }
 
