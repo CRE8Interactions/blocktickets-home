@@ -26,7 +26,7 @@ export default function Cards({ stats }) {
                             <h1 className='card-body-title card-body-title--flex tickets-sold'>Tickets sold</h1>
                             <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>
-                        <Row>
+                        <Row className='mb-4'>
                             <Col>
                                 <span><b className="fs-md">{formatNumber(stats?.allTicketsSold)}</b> <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span></span>
                             </Col>
@@ -128,8 +128,8 @@ export default function Cards({ stats }) {
             <Row className='mt-5'>
                 <Col lg={3}>
                     <Card body>
-                        <div className="card-body-heading page-views">
-                            <Stack direction="horizontal" gap={2} className="mt-3 small-label--flex">
+                        <div className="card-body-heading page-views mb-0">
+                            <Stack direction="horizontal" gap={2} className="mt-2 small-label--flex">
                                 <span className='small-label'>Page views</span>
                                 <OverlayTrigger
                                     placement="right"
@@ -145,8 +145,8 @@ export default function Cards({ stats }) {
                 </Col>
                 <Col lg={3}>
                     <Card body>
-                        <div className="card-body-heading payout">
-                            <Stack direction="horizontal" gap={2} className="mt-3 small-label--flex">
+                        <div className="card-body-heading payout mb-0">
+                            <Stack direction="horizontal" gap={2} className="small-label--flex mt-2">
                                 <span className='small-label'>Your payouts</span>
                                 <OverlayTrigger
                                     placement="right"
@@ -162,8 +162,8 @@ export default function Cards({ stats }) {
                 </Col>
                 <Col lg={6}>
                     <Card body>
-                        <div className='heading--flex card-body-heading mb-4'>
-                            <h1 className='card-body-title card-body-title--flex shareable-link'>Shareable link</h1>
+                        <div className='heading--flex card-body-heading'>
+                            <h1 className='card-body-title card-body-title--flex shareable-link gap-1'>Shareable link</h1>
                             <Button variant="outline-light">Copy URL</Button>
                         </div>
                         <p className='text-muted mt-3'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>

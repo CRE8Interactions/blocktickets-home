@@ -12,7 +12,7 @@
 			padding-bottom: rem(24);
 		}
 
-		.card-body-title {
+		.card-body-title:not(.shareable-link):not(.tickets-sold) {
 			@include breakpoint-min(lg) {
 				font-size: $h3-font-size;
 			}
@@ -33,10 +33,6 @@
 			flex-direction: column;
 			@include breakpoint-max(lg) {
 				min-height: 185px;
-			}
-
-			.progress {
-				margin-top: auto;
 			}
 		}
 	}
@@ -100,7 +96,8 @@
 	.shareable-link {
 		&::before {
 			background-image: url('../../../assets/icons/link.svg');
-			transform: scale(2);
+			background-position: center;
+			background-size: 33px;
 		}
 	}
 }
