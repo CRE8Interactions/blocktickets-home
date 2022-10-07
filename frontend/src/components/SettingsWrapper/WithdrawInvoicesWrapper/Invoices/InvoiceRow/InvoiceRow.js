@@ -12,7 +12,7 @@ export default function InvoiceRow({ invoice }) {
             <td>{invoice?.details.ticketCount} Tickets</td>
             <td>${parseFloat(invoice?.total).toFixed(2)}</td>
             <td>
-                <Link to={'invoice/12'} target="_blank">Download</Link>
+                <Link to={'invoice/12'}>Download</Link>
             </td>
         </tr>
     );
