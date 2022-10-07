@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
 import { getEvents, getVenues } from '../../utilities/api';
+import { sortBy } from '../../utilities/helpers';
 
 import { Venues, Hero, Events, Footer } from '../../components';
 
@@ -10,7 +11,7 @@ export default function HomePage() {
 
     useEffect(() => {
         getEvents()
-            .then((res) => setEvents(res.data))
+            .then((res) => setEvents(sortBy(res.data)))
             .catch((err) => console.error(err))
 
         getVenues()
@@ -21,7 +22,7 @@ export default function HomePage() {
     return (
         <Fragment>
             <main>
-                <Hero events={events} />
+                <Hero />
                 <Events events={events} />
                 <Venues venues={venues} />
             </main>
