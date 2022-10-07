@@ -1,6 +1,8 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
+import { sortBy } from '../../../utilities/helpers';
+
 import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
 import TransferCard from '../../TransferCard/TransferCard';
@@ -14,7 +16,7 @@ export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, o
         <div className="page-slider">
             <Slider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} addedModule="pagination">
                 {transfers &&
-                    transfers.map((transfer, index) => {
+                    sortBy(transfers, 'event').map((transfer, index) => {
                         return (
                             <SwiperSlide key={index} className="swiper-lazy">
                                 <TransferCard
@@ -27,7 +29,7 @@ export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, o
                     })}
 
                 {orders &&
-                    filteredEvents.map((o, index) => {
+                    sortBy(filteredEvents, 'event').map((o, index) => {
                         if (o.tickets.length === 0 && o.event !== null) return;
                         return (
                             <SwiperSlide key={index} className="swiper-lazy">
@@ -35,7 +37,7 @@ export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, o
                             </SwiperSlide>
                         );
                     })}
-                
+
                 {guestLists &&
                     guestLists.map((gl, index) => {
                         return (

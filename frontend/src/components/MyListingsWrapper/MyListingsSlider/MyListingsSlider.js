@@ -1,9 +1,10 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 
+import { sortBy } from '../../../utilities/helpers';
+
 import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
-import { TicketModal } from '../../TicketModal';
 
 export default function MyListingsSlider({ navigationNextRef, navigationPrevRef, ticketStatus, ticketState, listings, removeListing, getListings }) {
     if (listings && listings.types && ticketState) listings = listings.types[ticketState];
@@ -13,7 +14,7 @@ export default function MyListingsSlider({ navigationNextRef, navigationPrevRef,
             <Slider addedModule="pagination" navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}>
                 {listings &&
                     listings.length >= 1 &&
-                    listings.map((listing, index) => {
+                    sortBy(listings, 'event').map((listing, index) => {
                         return (
                             <SwiperSlide key={index} className="swiper-lazy">
                                 <TicketCard
