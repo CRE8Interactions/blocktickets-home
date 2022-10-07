@@ -62,14 +62,14 @@ export default function LoginSignupForm() {
         setEmail
     ] = useState('');
 
-    const [
-        dob,
-        setDob
-    ] = useState('');
-    const [
-        gender,
-        setGender
-    ] = useState('');
+    // const [
+    //     dob,
+    //     setDob
+    // ] = useState('');
+    // const [
+    //     gender,
+    //     setGender
+    // ] = useState('');
 
     const { setAuthenticated } = useContext(UserContext);
 
@@ -101,16 +101,14 @@ export default function LoginSignupForm() {
 
     useEffect(
         () => {
-            if (firstName && lastName && email && gender && dob) {
+            if (firstName && lastName && email) {
                 setFormValid(true);
             }
         },
         [
             firstName,
             lastName,
-            email,
-            dob,
-            gender
+            email
         ]
     );
 
@@ -184,11 +182,9 @@ export default function LoginSignupForm() {
     const submitForm = () => {
         let data = {
             data: {
-                dob,
                 email,
                 firstName,
                 lastName,
-                gender,
                 phoneNumber
             }
         };
@@ -383,7 +379,7 @@ export default function LoginSignupForm() {
                                     onChange={(e) => setLastName(e.target.value)}
                                 />
                             </Form.Group>
-                            <Row className="form-group">
+                            {/* <Row className="form-group">
                                 <Col>
                                     <Form.Group className="form-group" controlId="dob">
                                         <Form.Label>Birth Date</Form.Label>
@@ -409,10 +405,10 @@ export default function LoginSignupForm() {
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
-                            </Row>
+                            </Row> */}
                             {hasError && <Error />}
                             <Form.Group className="form-group fw-semi-bold" controlId="upcoming-events">
-                                <Form.Check type="checkbox" label="Opt out of receiving emails and texts for our upcoming events" className='mt-2' />
+                                <Form.Check type="checkbox" label="Opt out of receiving emails and texts for our upcoming events" />
                             </Form.Group>
                             <Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
                                 Sign up

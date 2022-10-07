@@ -11,7 +11,7 @@ import './searchItem.scss';
 export default function SearchItem({ data }) {
     return (
         <li className="search-item">
-            <Link to={`/tickets/${data.id}`} className="d-flex gap-3">
+            <Link to={`/tickets/${data.uuid}`} className="d-flex gap-3">
                 <img
                     width="48"
                     height="48"
