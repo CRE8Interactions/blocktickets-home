@@ -62,7 +62,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                     {(!id && !guestList) && (<span className="num-tickets">{listing ? listing?.tickets?.length : order?.tickets?.length} {listing?.tickets?.length > 1 || order?.tickets?.length > 1 ? 'Tickets' : 'Ticket'} </span>
                     )}
 
-                    { guestList &&
+                    {guestList &&
                         (<span className="num-tickets">{guestList?.guest_passes.length} {guestList?.guest_passes.length > 1 ? 'Guest Passes' : 'Guest Pass'} </span>)
                     }
 
@@ -82,7 +82,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                         }
 
                         {id || ticketStatus ? (<Badge bg="light" className="mt-2 text-dark badge-lg">
-                            General Admission
+                            {order?.details?.ticket.name}
                         </Badge>) : ''}
 
                         {ticketState && ticketState === 'active' &&
@@ -114,8 +114,8 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                         }
 
                         {
-                        /* Guest List button */
-                        guestList &&
+                            /* Guest List button */
+                            guestList &&
                             (
                                 <Link to={``} className="btn btn-primary">
                                     View Passes
