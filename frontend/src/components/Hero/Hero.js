@@ -6,7 +6,7 @@ import { SearchBar } from '../SearchBar';
 
 import './hero.scss';
 
-export default function Hero({ events }) {
+export default function Hero() {
     const windowSize = useWindowSize();
 
     const [show, setShow] = useState(false)

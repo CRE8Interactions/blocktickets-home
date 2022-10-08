@@ -94,8 +94,8 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
         // }
         // let higestPrice = tickets?.listings && tickets?.listings?.length > 0 ? higestResalePrice : tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
         // let lowestPrice = tickets.generalAdmissionTicket?.attributes?.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee;
-        let lowestPrice = Math.min.apply(Math, tickets?.tickets.map(function(o) { return o.cost; }));
-        let higestPrice  = Math.max.apply(Math, tickets?.tickets.map(function(o) { return o.cost; }));
+        let lowestPrice = Math.min.apply(Math, tickets?.tickets.map(function (o) { return o.cost; }));
+        let higestPrice = Math.max.apply(Math, tickets?.tickets.map(function (o) { return o.cost; }));
 
         setSliderValues([lowestPrice, higestPrice])
         setOriginalValues([lowestPrice, higestPrice])
@@ -109,8 +109,8 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
             // console.log('SV0 ', sliderValues[0])
             // console.log('SV1 ', sliderValues[1])
             // console.log('GA Tickets ', gaTickets)
-            let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && (listing.askingPrice + listing.tickets[0].fee) >= sliderValues[0] && (listing.askingPrice + listing.tickets[0].fee) <= sliderValues[1]);
-            setListings(filteredlisting);
+            // let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && (listing.askingPrice + listing.tickets[0].fee) >= sliderValues[0] && (listing.askingPrice + listing.tickets[0].fee) <= sliderValues[1]);
+            // setListings(filteredlisting);
             // if (tickets.generalAdmissionTicket && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) >= sliderValues[0] && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) <= sliderValues[1] && ticketFilters.standard) {
             //     setShowGa(true)
             //     setFilteredTicketCount(1)
@@ -154,7 +154,8 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
     return (
         <Fragment>
-            {gaTicketsAvailable && gaTicketsAvailable >= 1 ? (
+            {/* if there are tickets or listing tickets */}
+            {(gaTicketsAvailable && gaTicketsAvailable >= 1) || (listings && listings.length > 0) ? (
                 <Fragment>
                     <header>
                         <Stack direction="horizontal" gap={2} className="option-btns">

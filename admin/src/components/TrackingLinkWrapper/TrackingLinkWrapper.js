@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { createPromoLink, editPromoLink } from '../../utilities/api';
 
 import Card from 'react-bootstrap/Card';
@@ -8,16 +9,13 @@ import Button from 'react-bootstrap/Button';
 
 import { TrackingLink } from './TrackingLink';
 
-export default function TrackingLinkWrapper({ id }) {
+export default function TrackingLinkWrapper({ eventId }) {
 
     const navigate = useNavigate();
 
-    const { uuid } = useParams()
-
     const [link, setLink] = useState({
         name: '',
-        uuid: uuid,
-        id: ''
+        uuid: eventId
     })
 
     const [isValid, setIsValid] = useState(true)
@@ -35,19 +33,11 @@ export default function TrackingLinkWrapper({ id }) {
     }
 
     const handleSave = () => {
-        if (id) {
-            editPromoLink({id: id, name: link.name})
+        createPromoLink({ data: link })
             .then((res) => {
                 navigate(-1)
             })
             .catch((err) => console.error(err))
-        } else {
-            createPromoLink({data: link})
-            .then((res) => {
-                navigate(-1)
-            })
-            .catch((err) => console.error(err))
-        }
     }
 
     const validInputs = (e) => {
@@ -58,7 +48,7 @@ export default function TrackingLinkWrapper({ id }) {
         <section className='wrapper'>
             <section>
                 <header className="section-header section-heading">
-                    <h1>{id ? 'Edit' : 'Create a new'} tracking link</h1>
+                    <h1>Create a new tracking link</h1>
                 </header>
                 <Card body className='card--sm'>
                     <TrackingLink link={link} handleChange={handleChange} isValid={isValid} validInputs={validInputs} />
@@ -66,7 +56,7 @@ export default function TrackingLinkWrapper({ id }) {
             </section>
             <Stack direction="horizontal" className="btn-group-flex">
                 <Button variant="outline-light" size="lg" onClick={() => navigate(-1)}>Cancel</Button>
-                <Button size="lg" disabled={!isValid} onClick={handleSave}>{id ? 'Update' : 'Create'} tracking link</Button>
+                <Button size="lg" disabled={!link.name || !isValid} onClick={handleSave}>Create tracking link</Button>
             </Stack>
         </section>
     );

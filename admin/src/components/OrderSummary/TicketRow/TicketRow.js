@@ -2,7 +2,7 @@ import React from 'react';
 
 import { formatCurrency, formatString, capitalizeString } from '../../../utilities/helpers';
 
-export default function TicketRow({ orderId, ticket, ticketBuyer, marketType, type, refund, order }) {
+export default function TicketRow({ ticket, ticketBuyer, marketType, order }) {
     const ticketType = (ticket) => {
         return ticket?.generalAdmission ? 'General Admission' : 'Seated';
     }

@@ -40,7 +40,7 @@ export default function Tickets({ ticket, order, handleClick }) {
                     </p>
                     <>
                         <Badge bg="light" className="mt-2 text-dark badge-lg">
-                            General Admission
+                            {order?.details?.ticket.name}
                         </Badge>
                         <Button variant='outline-light' size="xs" onClick={() => handleClick('details')}>Details</Button>
                     </>

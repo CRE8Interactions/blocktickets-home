@@ -102,6 +102,7 @@ export default function TaxStatus({ step, taxDetails, taxCodeOpt, date, setDate,
                             placeholder="__-_______"
                             name="ein"
                             maxLength="10"
+                            value={taxDetails.ein}
                             onChange={handleTaxDetails}
                         />
                         <Form.Text>TIN and EIN type must correspond to the name provided in Step 1</Form.Text>

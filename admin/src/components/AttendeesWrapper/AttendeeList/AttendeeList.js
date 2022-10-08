@@ -7,7 +7,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Stack from "react-bootstrap/Stack";
 
 import { SearchBar } from '../../SearchBar';
-import { ExportSelect } from "../../ExportSelect";
+import { ExportBtn } from "../../ExportBtn";
 import { Attendee } from './Attendee';
 
 export default function AttendeeList() {
@@ -26,8 +26,6 @@ export default function AttendeeList() {
             value: 'checked_in'
         },
     ]
-
-    const [exportTo, setExportTo] = useState()
 
     const [attendees, setAttendees] = useState([
         {
@@ -170,27 +168,20 @@ export default function AttendeeList() {
     return (
         <>
             <header className="section-header">
-                <Row className='actions-group-flex'>
-                    <Col xl={4} className="flex-grow-1 pe-xl-0">
-                        <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} placeholder="Search by name, phone number or email" />
-                    </Col>
-                    <Col className="px-xl-0">
-                        <FloatingLabel controlId="list-status" label="List status">
-                            <Form.Select value={filter} onChange={setFilter}>
-                                {listOpt.map((option, index) => (
-                                    <option key={index} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                        </FloatingLabel>
-                    </Col>
+                <div className='actions-group-flex'>
+                    <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} placeholder="Search by name, phone number or email" />
+                    <FloatingLabel controlId="list-status" label="List status">
+                        <Form.Select value={filter} onChange={setFilter}>
+                            {listOpt.map((option, index) => (
+                                <option key={index} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </FloatingLabel>
 
-                    <Col className="ps-xl-0">
-                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
-                    </Col>
-
-                </Row>
+                    <ExportBtn />
+                </div>
             </header>
             <Stack as="ul" gap={3}>
                 {attendees.map(attendee => (

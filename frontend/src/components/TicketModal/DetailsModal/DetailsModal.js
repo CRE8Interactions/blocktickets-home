@@ -30,7 +30,7 @@ export default function DetailsModal({ order }) {
                     </ListGroup.Item> */}
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Ticket type</p>
-                        <span>{order?.details?.ticket?.generalAdmission ? 'General Admission' : 'Seated'}</span>
+                        <span>{order?.details?.ticket?.name}</span>
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Location</p>

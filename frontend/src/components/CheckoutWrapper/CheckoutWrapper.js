@@ -95,11 +95,11 @@ export default function CheckoutWrapper() {
             
         } else {
             getPaymentIntent(data)
-            .then((res) => {
-                setClientSecret(res.data.client_secret);
-                setIntentId(res.data.id);
-            })
-            .catch((err) => console.error(err));
+                .then((res) => {
+                    setClientSecret(res.data.client_secret);
+                    setIntentId(res.data.id);
+                })
+                .catch((err) => console.error(err));
         }
     }, []);
 

@@ -13,7 +13,6 @@ import { TaxWrapper } from '../TaxWrapper';
 import { BackButton } from "../BackButton";
 import { NoPermissionsContainer } from '../NoPermissionsContainer';
 
-
 export default function TaxStatusWrapper() {
 
     const { getPermissions } = AuthService;
@@ -27,13 +26,14 @@ export default function TaxStatusWrapper() {
     const [step, setStep] = useState();
 
     useEffect(() => {
-        setHasPermission(checkPermission(getPermissions(), 12));
-
-    }, [])
-
-    useEffect(() => {
         window.scrollTo(0, 0)
     }, [step])
+
+    useEffect(() => {
+        setHasPermission(checkPermission(getPermissions(), 12));
+
+        myW9()
+    }, [])
 
     const handleGoBack = () => setStep(step - 1)
 
@@ -55,10 +55,6 @@ export default function TaxStatusWrapper() {
             })
             .catch((err) => console.error(err))
     }
-
-    useEffect(() => {
-        myW9()
-    }, [])
 
     return (
         <div className='position-relative'>

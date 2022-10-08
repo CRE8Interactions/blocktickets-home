@@ -1,4 +1,7 @@
 import React from 'react';
+import * as moment from 'moment';
+
+import { formatDateTime } from '../../../../../utilities/helpers';
 
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -35,7 +38,7 @@ export default function Invoice() {
                             <li>
                                 <p><strong>Pete Davidson Live</strong></p>
                                 <ul className='caption'>
-                                    <li>Fri, Sep 3 2022 <span className='time'>9:00 PM EST</span></li>
+                                    <li>{formatDateTime(moment('Sep 3 2022'), 'dateOnly')}<span className='time'>9:00 PM</span></li>
                                     <li>Madison Square Garden</li>
                                     <li>Toronto, ON</li>
                                 </ul>
@@ -58,7 +61,7 @@ export default function Invoice() {
                 </div>
                 <div className='caption mb-4'>
                     <p><span className='fw-semi-bold'>Order No.: 1933-133924-6690</span></p>
-                    <p><span className='fw-semi-bold'>Order Date: Aug 12th, 2022</span></p>
+                    <p><span className='fw-semi-bold'>Order Date: {formatDateTime(moment('Aug 12 2022'), 'dateOnly')}</span></p>
                 </div>
                 <Card body>
                     <h1 className='caption fw-semi-bold mb-3'>Ticket/s Details</h1>

@@ -79,7 +79,7 @@ export default function SearchBar({ size, showMobile = true, open, setSearchQuer
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate(`search?query=${query}`)
+        if (query) navigate(`search?query=${query}`)
     };
 
     const showResults = (e, flag = setIsComponentVisible) => {
@@ -151,7 +151,7 @@ export default function SearchBar({ size, showMobile = true, open, setSearchQuer
                             </div>
                         </div>
                         {showBtn && (
-                            <Button type="submit" variant="secondary" className='search-btn mt-0 tablet-desktop-only'>Search</Button>
+                            <Button type="submit" variant="secondary" className='search-btn mt-0 tablet-desktop-only' disabled={!query}>Search</Button>
                         )}
                     </Form>
                 </InputGroup>

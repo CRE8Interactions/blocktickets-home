@@ -8,7 +8,7 @@ import authService from '../../../utilities/services/auth.service';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-export default function LoginSecurityForm({user, setShow, showError, setPhone}) {
+export default function LoginSecurityForm({ user, setShow, showError, setPhone }) {
     const [
         formValid,
         setFormValid
@@ -69,7 +69,7 @@ export default function LoginSecurityForm({user, setShow, showError, setPhone}) 
         phoneUnique(data).then(res => {
             if (res.data === 404) { setIsValid(false) }
             if (res.data === 200) { setIsValid(true) }
-            }).catch(err => console.error(err))
+        }).catch(err => console.error(err))
     }
 
     const submitForm = () => {
@@ -91,7 +91,7 @@ export default function LoginSecurityForm({user, setShow, showError, setPhone}) 
             }
         };
         if (length === 4) {
-            updateNumber(data).then((res) => { setShow(false); authService.setUser(res.data); showError(false); setPhone(phoneNumber); setUpdated(true) }).catch((err) => {console.error(err); showError(true)})
+            updateNumber(data).then((res) => { setShow(false); authService.setUser(res.data); showError(false); setPhone(phoneNumber); setUpdated(true) }).catch((err) => { console.error(err); showError(true) })
         }
     }
 
@@ -103,7 +103,7 @@ export default function LoginSecurityForm({user, setShow, showError, setPhone}) 
                     <Form.Label>New Phone Number</Form.Label>
                     <PhoneNumberInput phoneNumber={phoneNumber} setPhoneNumber={setValue} hasError={!isValid} onBlur={handleBlur} disabled={updated} />
                 </Form.Group>
-                { !updated && 
+                {!updated &&
                     <Form.Group className="form-group" controlId="code">
                         <Form.Label>Verify Code</Form.Label>
                         <Form.Control
@@ -112,14 +112,14 @@ export default function LoginSecurityForm({user, setShow, showError, setPhone}) 
                             required
                             name="code"
                             maxLength="4"
-                            onChange={(e) => {setCode(e.target.value); submitCode(e.target.value)}}
+                            onChange={(e) => { setCode(e.target.value); submitCode(e.target.value) }}
                         />
                         <Form.Text className="d-block mt-2">
                             A 4-digit code should have been sent to you using the new phone number specified above.
                         </Form.Text>
                     </Form.Group>
                 }
-                { !verifying &&
+                {!verifying &&
                     <Button disabled={!validNumber()} size="lg" onClick={(e) => submitForm()}>
                         Update
                     </Button>

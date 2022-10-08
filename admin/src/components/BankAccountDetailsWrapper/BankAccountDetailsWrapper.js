@@ -5,7 +5,7 @@ import { isMatching, stateOpt } from '../../utilities/helpers';
 import { BankAccountDetails } from './BankAccountDetails'
 
 // child component used in SignUp and Settings Payment Information 
-export default function BankAccountDetailsWrapper({ getBankAccount, account }) {
+export default function BankAccountDetailsWrapper({ getBankAccount, getIsValid, account }) {
 
     const inputEl = useRef();
 
@@ -44,16 +44,25 @@ export default function BankAccountDetailsWrapper({ getBankAccount, account }) {
     )
 
     // update state with bank account in Settings Payment Information
-    // useEffect(() => {
-    //     if (account) {
-    //         setBankAccount(account)
-    //     }
-    // }, [account])
+    useEffect(() => {
+        if (account) {
+            setBankAccount(account)
+        }
+    }, [account])
 
     // update parent state when state changes 
     useEffect(() => {
         getBankAccount(bankAccount)
     }, [bankAccount])
+
+    // update parent state when state changes 
+    useEffect(() => {
+        if (routingNumError || accountNumError || !isValid) {
+            getIsValid(false)
+        } else {
+            getIsValid(true)
+        }
+    }, [accountNumError, routingNumError, isValid])
 
     // reset error when accountNumber input changed
     useEffect(

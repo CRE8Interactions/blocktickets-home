@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
 import AuthService from '../../../utilities/services/auth.service';
-import { checkPermission } from '../../../utilities/helpers';
+import { checkPermission, formatCurrency, formatNumber } from '../../../utilities/helpers';
 
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
@@ -28,16 +28,22 @@ export default function TrackingLinks({ promos }) {
 
     }, [])
 
+    const totalViews = (object) => {
+        return formatNumber(object?.reduce((accumulator, object) => {
+            return accumulator + (object?.views);
+        }, 0));
+    }
+
     const totalTicketsSold = (object) => {
-        return parseInt(object?.reduce((accumulator, object) => {
+        return formatNumber(object?.reduce((accumulator, object) => {
             return accumulator + (object?.ticketsSold);
         }, 0));
     }
 
     const totalGross = (object) => {
-        return parseFloat(object?.reduce((accumulator, object) => {
+        return formatCurrency(object?.reduce((accumulator, object) => {
             return accumulator + parseFloat(object?.grossSales);
-        }, 0)).toFixed(2);
+        }, 0));
     }
 
     return (
@@ -47,12 +53,12 @@ export default function TrackingLinks({ promos }) {
             </Stack>
             <Card body>
                 {promos && promos.length > 0 ? (
-                    <div className="list-table five-col" role="table">
+                    <div className="list-table four-col" role="table">
                         <div className="flex-row list-table-header" role="rowgroup">
-                            <div className='list-table-col list-table-col-header lg' role="columnheader">
+                            <div className='list-table-col list-table-col-header' role="columnheader">
                                 <span>Name</span>
                             </div>
-                            <div className="list-table-col list-table-col-header lg-2" role="columnheader">
+                            <div className="list-table-col list-table-col-header lg" role="columnheader">
                                 <span>Link</span>
                             </div>
                             <div className="list-table-col list-table-col-header" role="columnheader">
@@ -69,17 +75,20 @@ export default function TrackingLinks({ promos }) {
                             <TrackingLink key={index} link={link} handleShow={handleShow} hasPermission={hasPermission} />
                         ))}
                         <div className="total-row flex-row" role="row">
-                            <div className="list-table-col list-table-col lg" role="cell">
+                            <div className="list-table-col list-table-col total-col" role="cell">
                                 <span>Total</span>
                             </div>
-                            <div className="list-table-col list-table-col" role="cell">
+                            <div className="list-table-col list-table-col total-col lg" role="cell">
                                 <span>&nbsp;</span>
                             </div>
-                            <div className="list-table-col list-table-col" role="cell">
+                            <div className="list-table-col list-table-col total-col" role="cell">
+                                <span>{totalViews(promos)}</span>
+                            </div>
+                            <div className="list-table-col list-table-col total-col" role="cell">
                                 <span>{totalTicketsSold(promos)}</span>
                             </div>
-                            <div className="list-table-col list-table-col" role="cell">
-                                <span>${totalGross(promos)}</span>
+                            <div className="list-table-col list-table-col total-col" role="cell">
+                                <span>{totalGross(promos)}</span>
                             </div>
                         </div>
                     </div>

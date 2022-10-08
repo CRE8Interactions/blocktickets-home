@@ -5,6 +5,23 @@ export const getCopyrightYear = () => {
     return new Date().getFullYear();
 };
 
+// sort events by date
+export const sortBy = (arr, obj) => {
+    return arr.sort(function (a, b) {
+        // orders and events array have different object structures 
+        if (obj) {
+            a = a[obj].start;
+            b = b[obj].start
+        } else {
+            a = a.start;
+            b = b.start;
+        }
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(a) - new Date(b);
+    });
+}
+
 // format full address 
 export const formatAddress = (obj) => {
     return `${obj.address_1}, ${obj.city}, ${obj.state}, ${obj.zipcode}, ${obj.country}`

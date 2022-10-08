@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LinkContainer } from "react-router-bootstrap";
 import moment from 'moment';
 
-import { capitalizeString, formatOrderId, formatCurrency } from '../../utilities/helpers';
+import { capitalizeString, formatCurrency, formatDateTime } from '../../utilities/helpers';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
@@ -34,7 +34,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
     }
 
     const purchaser = (order) => {
-        return `${capitalizeString(order?.users_permissions_user?.firstName)} ${capitalizeString(order?.users_permissions_user?.lastName)} on ${moment(order?.processedAt).format('MMM DD, YYYY')} at ${moment(order?.processedAt).format('h:mma')}`
+        return `${capitalizeString(`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`)} ${formatDateTime(moment(order?.processedAt))}`
     }
 
     return (
@@ -53,7 +53,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                         <Badge bg="default" className={`badge-outline badge-outline--${orderType(order)}`}>{orderType(order)}</Badge>
                     </Stack>
                     {showDropdown && (
-                        <Dropdown className="btn-more" align="right">
+                        <Dropdown className="btn-more" placement="left">
                             <Dropdown.Toggle variant="default">
                                 <MoreIcon />
                             </Dropdown.Toggle>
@@ -87,7 +87,11 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                             <div className="transaction-desc">
                                 <p className='fw-medium'>{purchaser(order)}</p>
                                 <span className='caption'>{order?.details?.ticketCount} tickets</span>
-                                {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(order?.total / order?.details?.ticketCount)} paid by {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand} {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4} </p>)}
+                                {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(order?.total / order?.details?.ticketCount)}
+                                    {!order?.details?.ticket.free && (
+                                        <span> paid by {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand} {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4}</span>
+                                    )}
+                                </p>)}
                             </div>
                             {refund && (
                                 <Stack gap={1} className='mt-2'>
@@ -110,7 +114,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                             </thead>
                             <tbody>
                                 {[...Array(order?.details?.ticketCount)].map((x, i) => {
-                                    return <TicketRow key={i} orderId={order.uuid} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} type={order?.type} refund={refund} order={order} />
+                                    return <TicketRow key={i} ticket={order?.details?.ticket} ticketBuyer={`${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`} marketType={orderType(order?.type)} order={order} />
                                 })}
                                 <tr className='total-row'>
                                     <td colSpan={5}>Total</td>

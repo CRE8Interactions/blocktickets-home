@@ -31,8 +31,9 @@
 			margin-bottom: $text-spacer;
 		}
 
-		.main-navigation {
-			padding: rem(28) 0px;
+		.main-navigation,
+		.secondary-navigation {
+			padding: rem(23) 0px;
 			border-top: border();
 		}
 	}
@@ -48,6 +49,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: $gap-xs;
+		margin-top: rem(5);
 		.nav-item {
 			padding-left: rem(38);
 		}
@@ -55,7 +57,7 @@
 		&::before {
 			content: '';
 			position: absolute;
-			margin-left: rem(27);
+			margin-left: rem(26.6);
 			width: 2px;
 			height: 100%;
 			background-color: #efefef;

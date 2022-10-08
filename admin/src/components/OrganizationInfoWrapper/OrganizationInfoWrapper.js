@@ -21,23 +21,40 @@ export default function OrganizationInfoWrapper() {
 
     const [orgInfo, setOrgInfo] = useState()
 
+    const [loaded, setLoaded] = useState(false)
+
+    const [initialState, setInitialState] = useState()
+
     const [alert, setAlert] = useState({
         show: false,
         variant: '',
         message: ''
     })
 
+    const [disabled, setDisabled] = useState(true)
+
     useEffect(() => {
         getMyOrganizations()
-            .then((res) => setOrgInfo(res.data[0]))
+            .then((res) => {
+                setOrgInfo(res.data[0])
+                // save initial state to check whether to disable button
+                setInitialState(res.data[0])
+                setLoaded(true)
+            })
 
         setHasPermission(checkPermission(getPermissions(), 8));
 
     }, [])
 
+    // enable save button when data has been loaded and object has changed
+    useEffect(() => {
+        if (loaded && (initialState?.name !== orgInfo?.name || initialState?.address !== orgInfo?.address)) {
+            setDisabled(false)
+        }
+    }, [loaded, orgInfo])
 
     const handleSave = () => {
-        // TODO: make orgName unique
+        // TODO: make name unique
 
         updateOrgDetails(orgInfo)
             .then((res) => {
@@ -77,7 +94,7 @@ export default function OrganizationInfoWrapper() {
                     <OrganizationInformationWrapper getOrgInfo={setOrgInfo} orgInfo={orgInfo} />
                 </Card>
                 <Stack direction="horizontal" className="btn-group-flex">
-                    <Button size="lg" onClick={handleSave}>Save</Button>
+                    <Button size="lg" disabled={disabled} onClick={handleSave}>Save</Button>
                 </Stack>
             </section>
             {!hasPermission && (

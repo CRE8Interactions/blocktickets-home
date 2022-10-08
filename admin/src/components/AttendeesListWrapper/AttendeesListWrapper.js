@@ -6,15 +6,13 @@ import { getOrders } from '../../utilities/api';
 
 import Stack from 'react-bootstrap/Stack';
 
-import { ExportSelect } from '../ExportSelect';
+import { ExportBtn } from '../ExportBtn';
 import { SearchBar } from '../SearchBar'
 import { Attendees } from './Attendees'
 
 import './attendeesListWrapper.scss';
 
 export default function AttendeesListWrapper({ eventId }) {
-
-    const [exportTo, setExportTo] = useState('1')
 
     // search query
     const [
@@ -56,7 +54,7 @@ export default function AttendeesListWrapper({ eventId }) {
                     </div>
                     <div className="actions-group-flex">
                         <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="lg" placeholder="Search by attendee name, email address" />
-                        <ExportSelect setExportTo={setExportTo} exportTo={exportTo} />
+                        <ExportBtn />
                     </div>
                     <Stack direction="horizontal" className='mt-4 split-row'>
                         <Stack as="ul" direction="horizontal" className="horizontal-list">

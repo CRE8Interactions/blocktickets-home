@@ -1,15 +1,12 @@
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { GuestInformationWrapper } from "../../components";
 
 export default function GuestInformationPage() {
 
-    // get query from URL
-    const [searchParam] = useSearchParams();
-
-    const id = searchParam.id;
+    const { uuid } = useParams();
 
     return (
-        <GuestInformationWrapper id={id} />
+        <GuestInformationWrapper eventId={uuid} />
     )
 }
