@@ -45,7 +45,7 @@ export default function DetailsModal({ order }) {
                     </ListGroup.Item>
                     <ListGroup.Item as="li" className="list">
                         <p className="heading">Purchase Date</p>
-                        <span>{formatDateTime(moment(order?.event?.createdAt))}</span>
+                        <span>{formatDateTime(moment(order?.event?.processedAt))}</span>
                     </ListGroup.Item>
                     {/* <ListGroup.Item as="li" className="list">
                         <p className="heading">Contact Address</p>
