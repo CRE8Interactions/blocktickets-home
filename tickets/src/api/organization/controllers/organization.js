@@ -528,6 +528,7 @@ module.exports = createCoreController('api::organization.organization', ({ strap
       populate: {
         page_views: true,
         image: true,
+        fee_structure: true,
         venue: {
           populate: {
             address: true
@@ -820,21 +821,21 @@ module.exports = createCoreController('api::organization.organization', ({ strap
           return accumulator + (object.total);
         }, 0)).toFixed(2);
   
-        const primaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == false && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer'))?.reduce((accumulator, object) => {
+        const primaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == false && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer' || ticket.on_sale_status === 'resaleAvailable'))?.reduce((accumulator, object) => {
           return accumulator + (object.fee);
         }, 0)).toFixed(2);
   
-        const secondaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == true && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer')) ?.reduce((accumulator, object) => {
+        const secondaryRoyalties = parseFloat(tickets.filter((ticket) => ticket.resale == true && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer' || ticket.on_sale_status === 'resaleAvailable')) ?.reduce((accumulator, object) => {
           return accumulator + (object.fee);
         }, 0)).toFixed(2);
   
         data['primaryAvailable'] = tickets.filter((ticket) => ticket.resale == false).length;
-        data['primarySold'] = tickets.filter((ticket) => ticket.resale == false && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer')).length;
+        data['primarySold'] = tickets.filter((ticket) => ticket.resale == false && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer' || ticket.on_sale_status === 'resaleAvailable')).length;
         data['primarySoldPercentage'] = data.primarySold > 0 ? ((data.primarySold / data.primaryAvailable) * 100) : 0;
         data['primaryGross'] = Number(primaryGross).toFixed(2);
         data['secondaryGross'] = secondaryGross;
         data['secondaryAvailable'] = tickets.filter((ticket) => ticket.resale == true).length;
-        data['secondarySold'] = tickets.filter((ticket) => ticket.resale == true && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer')).length;
+        data['secondarySold'] = tickets.filter((ticket) => ticket.resale == true && (ticket.on_sale_status === 'sold' || ticket.on_sale_status === 'pendingTransfer' || ticket.on_sale_status === 'resaleAvailable')).length;
         data['secondarySoldPercentage'] = data.secondarySold > 0 ? Number((data.secondarySold / data.secondaryAvailable) * 100).toFixed(2) : 0;
         data['royalties'] = (Number(primaryRoyalties) + Number(secondaryRoyalties)).toFixed(2)
         eventsData.push(data)
@@ -1380,5 +1381,64 @@ module.exports = createCoreController('api::organization.organization', ({ strap
     const unique = Array.from(new Set(entries.map(item => item.name)));
 
     return unique
+  },
+  async getEventAttendees(ctx) {
+    const {
+      eventUUID,
+      start
+    } = ctx.request.query;
+
+    let ticketsArr = []
+
+    const orders = await strapi.entityService.findMany('api::order.order', {
+      filters: { eventUuid: eventUUID },
+      populate: { 
+        tickets: true,
+        users_permissions_user: {
+          fields: ['email', 'firstName', 'lastName', 'phoneNumber']
+        }
+      },
+      start: start ? start : 0
+    });
+
+    orders.map((order) => {
+      order.tickets.map((ticket) => {
+        let attr = {}
+        attr['email'] = order?.users_permissions_user?.email
+        attr['name'] = `${order?.users_permissions_user?.firstName} ${order?.users_permissions_user?.lastName}`
+        attr['phone'] = `${order?.users_permissions_user?.phoneNumber}`
+        attr['ticketType'] = `${ticket?.name}`
+        attr['marketType'] = ticket?.resale ? 'Secondary' : 'Primary'
+        attr['checkInCode'] = ticket?.checkInCode
+        ticketsArr.push(attr)
+      })
+    })
+
+    return ticketsArr
+  },
+  async getTaxRates(ctx) {
+    const {
+      city,
+      state
+    } = ctx.request.query;
+
+    const entry = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+      where: {
+        abbreviation: {
+          $eq: state.toLowerCase()
+        }
+      },
+      populate: { 
+        sales_tax_rates: {
+          where: {
+            city: {
+              $eq: city.toLowerCase()
+            }
+          }
+        }
+      },
+    });
+
+    return entry
   }
 }));

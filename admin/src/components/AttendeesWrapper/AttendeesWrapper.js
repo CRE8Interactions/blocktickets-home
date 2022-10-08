@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import AuthService from '../../utilities/services/auth.service';
 import { checkPermission } from '../../utilities/helpers';
+import { useParams } from 'react-router-dom';
 
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Card from "react-bootstrap/Card";
 
 import { AttendeeList } from './AttendeeList';
 import { NoPermissionsContainer } from '../NoPermissionsContainer';
+import { getAttendees } from '../../utilities/api';
 
 export default function AttendeesWrapper() {
 
@@ -15,9 +17,17 @@ export default function AttendeesWrapper() {
 
     const [hasPermission, setHasPermission] = useState();
 
+    const { uuid } = useParams();
+
+    const getEventAttendees = () => {
+        getAttendees(uuid)
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err))
+    }
+
     useEffect(() => {
         setHasPermission(checkPermission(getPermissions(), 6));
-
+        getEventAttendees()
     }, [])
 
     return (

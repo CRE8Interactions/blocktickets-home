@@ -17,7 +17,7 @@ import { NotAvailableMessage } from './NotAvailableMessage';
 
 import './ticketSelection.scss';
 
-export default function TicketSelection({ handleClick, isZoomed, setTicketCount, ticketCount }) {
+export default function TicketSelection({ handleClick, isZoomed, setTicketCount, ticketCount, taxRates, feeStructure }) {
 
     const tickets = useContext(TicketContext);
 
@@ -209,12 +209,12 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                                                                 }
                                                             </>
                                                         )} */}
-                                                        {availableTickets && availableTickets?.map((ticket, index) => {
-                                                            return <Ticket ticket={ticket} handleNext={handleNext} ticketFilters={ticketFilters} key={index} />
-                                                        })
+                                                        { availableTickets && availableTickets?.map((ticket, index) => {
+                                                           return <Ticket ticket={ticket} handleNext={handleNext} ticketFilters={ticketFilters} key={index} taxRates={taxRates} feeStructure={feeStructure} />
+                                                          })
                                                         }
                                                         <>
-                                                            {listings && listings.map((listing, index) => <Ticket key={index} handleNext={handleNext} ticketFilters={ticketFilters} listing={listing} />)
+                                                            {tickets?.listings && tickets?.listings.map((listing, index) => <Ticket key={index} handleNext={handleNext} ticketFilters={ticketFilters} listing={listing} taxRates={taxRates} feeStructure={feeStructure} />)
                                                             }
                                                         </>
                                                     </ListGroup>

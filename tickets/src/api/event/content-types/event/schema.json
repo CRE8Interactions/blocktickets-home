@@ -146,6 +146,11 @@
     "display_start_time": {
       "type": "boolean",
       "default": true
+    },
+    "fee_structure": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::fee-structure.fee-structure"
     }
   }
 }

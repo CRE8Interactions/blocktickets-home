@@ -84,6 +84,10 @@ export const getEvents = async () => {
   return instance.get(`/events?filters[status][$eq]=on_sale&filters[start][$gte]=${date}`)
 }
 
+export const getTaxRates = async (city, state) => {
+  return instance.get(`organizations/tax-rates?city=${city}&state=${state}`)
+}
+
 export const searchEvents = async (q) => {
   return instance.post(`/events/search`, q)
 }

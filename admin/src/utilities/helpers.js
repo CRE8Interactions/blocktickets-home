@@ -119,6 +119,22 @@ export const toggleSpacing = (url) => {
     }
 }
 
+export const calculateFees = (ticket, feeStructure, taxRates) => {
+    let b = {}
+    if (!ticket?.price) return;
+    if (parseInt(ticket?.price) < 20) b['serviceFees'] = 1;
+    if (parseInt(ticket?.price) >= 20) b['serviceFees'] = (feeStructure?.primaryOver20 / 100) * ticket?.price;
+    if (parseFloat(ticket?.price)) b['paymentProcessingFee'] = (((parseFloat(feeStructure?.stripeServicePecentage) * parseFloat(ticket?.price)) / 100) + feeStructure?.stripeCharge).toFixed(2);
+    b['paymentProcessingFee'] = parseFloat( b['paymentProcessingFee'])
+    b['ticketPrice'] = parseFloat(ticket?.price);
+    b['tax'] = (taxRates?.combinedTaxRate / 100) * ticket?.price
+    b['facilityFee'] = ticket?.fee
+    if (ticket?.fee) b['facilityFee'] = parseFloat(ticket?.fee)
+    b['buyerTotal'] = parseFloat(ticket?.price) + parseFloat(b.serviceFees) + parseFloat(b.facilityFee) + parseFloat(b.paymentProcessingFee) + parseFloat(b.tax)
+    b['payout'] = parseFloat(ticket?.price) + parseFloat(b.facilityFee)
+    return b
+}
+
 export const formatNumber = (num) => {
     return `${parseFloat(num).toLocaleString()}`
 }

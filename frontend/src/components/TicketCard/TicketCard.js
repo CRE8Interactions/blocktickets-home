@@ -73,9 +73,9 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                                     <Stack className='mb-2'>
                                         <Stack direction="horizontal" className="split-row mb-1">
                                             <span className='m-0 caption'>Listing price per ticket</span>
-                                            <span className='text-end fw-medium'>${(listing?.askingPrice).toFixed(2)}</span>
+                                            <span className='text-end fw-medium'>${(listing?.askingPrice / listing?.tickets.length).toFixed(2)}</span>
                                         </Stack>
-                                        <p className='caption text-muted'>You will make ${(listing?.askingPrice / listing?.tickets.length).toFixed(2) - listing?.tickets[0].facilityFee} per ticket</p>
+                                        <p className='caption text-muted'>You will make ${(listing?.askingPrice / listing?.tickets.length).toFixed(2) - listing?.serviceFees} per ticket</p>
                                     </Stack>
                                 </>
                             )

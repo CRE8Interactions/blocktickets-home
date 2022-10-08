@@ -138,6 +138,58 @@ module.exports = {
         })
       }
 
+      const salesTaxCount = await strapi.db.query('api::sales-tax.sales-tax').count()
+
+      if (salesTaxCount === 0) {
+        let taxRates = [
+          {state: 'texas', city: 'dallas', stateTaxRate: 6.25, localTaxRate: 2.0, combinedTaxRate: 8.25, abbreviation: 'tx' },
+          {state: 'texas', city: 'san antonio', stateTaxRate: 6.25, localTaxRate: 2.0, combinedTaxRate: 8.25, abbreviation: 'tx'  },
+          {state: 'texas', city: 'houston', stateTaxRate: 6.25, localTaxRate: 0, combinedTaxRate: 6.25, abbreviation: 'tx'  },
+          {state: 'north carolina', city: 'raleigh', stateTaxRate: 4.75, localTaxRate: .25, combinedTaxRate: 5.0, abbreviation: 'nc'  },
+          {state: 'connecticut', city: 'all', stateTaxRate: 6.35, localTaxRate: 0, combinedTaxRate: 6.35, abbreviation: 'ct'  },
+          {state: 'delaware', city: 'all', stateTaxRate: 0, localTaxRate: 0, combinedTaxRate: 0, abbreviation: 'de'  },
+          {state: 'district of columbia', city: 'washington', stateTaxRate: 6.0, localTaxRate: 0, combinedTaxRate: 6.0, abbreviation: 'dc'  },
+          {state: 'indiana', city: 'all', stateTaxRate: 7.0, localTaxRate: 0, combinedTaxRate: 7.0, abbreviation: 'in'  },
+          {state: 'maryland', city: 'all', stateTaxRate: 6.0, localTaxRate: 0, combinedTaxRate: 6.0, abbreviation: 'md'  },
+        ]
+
+        
+        for await(let rate of taxRates) {
+          let str = await strapi.db.query('api::sales-tax-rate.sales-tax-rate').create({
+            data: {
+              state: rate.state, city: rate.city, stateTaxRate: rate.stateTaxRate, localTaxRate:rate.localTaxRate, combinedTaxRate: rate.combinedTaxRate
+            },
+          });
+
+          let st = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+            where: { state: rate.state.toLowerCase() },
+            populate: {
+              sales_tax_rates: true
+            }
+          });
+
+          if (!st) {
+            let st = await strapi.db.query('api::sales-tax.sales-tax').create({
+              data: {
+                state: rate.state.toLowerCase(),
+                abbreviation: rate.abbreviation.toLowerCase(),
+                sales_tax_rates: str
+              },
+              populate: {
+                sales_tax_rates: true
+              }
+            });
+          } else {
+            await strapi.db.query('api::sales-tax.sales-tax').update({
+              where: { id: st.id },
+              data: {
+                sales_tax_rates: [...st.sales_tax_rates, str],
+              },
+            });
+          }
+        }
+      }
+
       if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "preview") {
 
         const hasUser = await strapi.db.query('plugin::users-permissions.user').findOne({
@@ -497,8 +549,20 @@ module.exports = {
             }
           })
 
+          const feeStructure = await strapi.db.query('api::fee-structure.fee-structure').create({
+            data: {
+              stripeServicePecentage: 2.9,
+              stripeCharge: .30,
+              primaryUnder20: 1,
+              primaryOver20: 5,
+              secondaryServiceFeeSeller: 15,
+              secondaryServiceFeeBuyer: 10
+            }
+          })
+
           event.params.data.venue = venue.id
           event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+          event.params.data.fee_structure = feeStructure.id
         }
 
         // Changes on Venue model

@@ -16,7 +16,6 @@ import './checkout.scss';
 export default function Checkout({ addOns, setStatus, setOrder, intentId }) {
     let order = sessionStorage.getItem('order');
     if (order) order = JSON.parse(order);
-
     const mobileMediaQuery = useMedia('(max-width: 767px)');
     const tabletDesktopMediaQuery = useMedia('(min-width: 768px)');
 

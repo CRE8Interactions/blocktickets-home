@@ -14,7 +14,7 @@ import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 import { TicketBreakdownModal } from './TicketBreakdownModal';
 
-export default function CreateTicket({ type, isEdit, handleChange, handleValid, ticket, setSalesStart, salesStart, setSalesEnd, salesEnd, setHasError, hasError, errors }) {
+export default function CreateTicket({ type, isEdit, handleChange, handleValid, ticket, setSalesStart, salesStart, setSalesEnd, salesEnd, setHasError, hasError, errors, fees, taxRates }) {
 
     const isPaid = type === 'paid';
 
@@ -253,7 +253,7 @@ export default function CreateTicket({ type, isEdit, handleChange, handleValid, 
                 </fieldset>
             </Form>
 
-            <TicketBreakdownModal show={show} handleClose={handleClose} ticket={ticket} />
+            <TicketBreakdownModal show={show} handleClose={handleClose} ticket={ticket} fees={fees} taxRates={taxRates} />
         </>
     );
 }

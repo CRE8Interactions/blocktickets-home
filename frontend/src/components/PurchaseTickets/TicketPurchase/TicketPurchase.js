@@ -14,7 +14,9 @@ export default function TicketPurchase({
     isZoomed,
     ticket,
     listing,
-    code
+    code,
+    taxRates,
+    feeStructure
 }) {
     // how many tickets user wants
     const [
@@ -30,6 +32,8 @@ export default function TicketPurchase({
                     isZoomed={isZoomed}
                     setTicketCount={setTicketCount}
                     ticketCount={ticketCount}
+                    taxRates={taxRates}
+                    feeStructure={feeStructure}
                 />
             )}
 
@@ -42,6 +46,8 @@ export default function TicketPurchase({
                     setTicketCount={setTicketCount}
                     ticketCount={ticketCount}
                     code={code}
+                    taxRates={taxRates}
+                    feeStructure={feeStructure}
                 />
             )}
 

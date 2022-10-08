@@ -12,7 +12,7 @@ import { BackButton } from '../../../BackButton';
 import { TicketDescriptionModal } from './TicketDescriptionModal'
 import './ticketConfirmation.scss';
 
-export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount, code }) {
+export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount, code, taxRates, feeStructure }) {
     let ticketPrice;
     let totalTicketPrice;
     let section;
@@ -30,7 +30,7 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
     const handleClose = () => setShow(false)
 
     if (listing) {
-        let prices = ticketPrices(ticket, listing);
+        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
         ticketPrice = prices.ticketCost;
         section = prices.ticketName;
         sum = prices.ticketCostWithFees;
@@ -39,7 +39,7 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
         totalTicketPrice = prices.ticketCostWithFees;
 
     } else if (ticket) {
-        let prices = ticketPrices(ticket, listing);
+        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
         ticketPrice = prices.ticketCost;
         section = prices.ticketName;
         sum = prices.ticketCostWithFees;

@@ -73,25 +73,26 @@ export default function CheckoutWrapper() {
             promoCode: cart.promoCode
         };
 
-        if (cart.ticket?.free) {
+        if (cart?.ticket?.free) {
             let order = {
                 cart: cart,
                 paymentIntentId: "0"
             };
             createOrder(order)
-                .then((res) => {
-                    // Need better way to store order data
-                    sessionStorage.setItem('order', JSON.stringify(res.data));
-                    setClientSecret('pi_3Lj32nEjx5eLnToD1C9LQPI9_secret_ImFRee2TheUSer2BUY')
-                    setStatus('successful')
-                    setOrder(res.data)
-                })
-                .catch((err) => {
-                    console.error(err);
-                    // setPurchasing(false);
-                    // setHasError(true)
-                })
-
+            .then((res) => {
+                // Need better way to store order data
+                sessionStorage.setItem('order', JSON.stringify(res.data));
+                // Fake payment intent for free tickets
+                setClientSecret('pi_3Lj32nEjx5eLnToD1C9LQPI9_secret_ImFRee2TheUSer2BUY')
+                setStatus('successful')
+                setOrder(res.data)
+            })
+            .catch((err) => {
+                console.error(err);
+                // setPurchasing(false);
+                // setHasError(true)
+            })
+            
         } else {
             getPaymentIntent(data)
                 .then((res) => {

@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
-import { formatCurrency } from "./../../../../utilities/helpers";
+import { formatCurrency,  calculateFees } from "./../../../../utilities/helpers";
 
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
 
 import './ticketBreakdown.scss';
 
-export default function TicketBreakdownModal({ show, handleClose, ticket }) {
+export default function TicketBreakdownModal({ show, handleClose, ticket, fees, taxRates }) {
 
-    const [totals, setTotals] = useState();
-    const [yourTotals, setYourTotals] = useState();
+    const [breakdown, setBreakdown] = useState()
 
     useEffect(() => {
-        setTotals(parseFloat(ticket?.price) + parseFloat(ticket?.fee) + 2 + 3 + 5)
-        setYourTotals(parseFloat(ticket?.price) + 3)
-    }, [ticket])
+        setBreakdown(calculateFees(ticket, fees, taxRates));
+    }, [ticket, fees, taxRates])
 
     return (
         <Modal id="ticket-breakdown" centered animation={false} fullscreen="md-down" show={show} onHide={handleClose}>
@@ -33,23 +31,23 @@ export default function TicketBreakdownModal({ show, handleClose, ticket }) {
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Service Fee</span>
-                                <span>{formatCurrency(2)}</span>
+                                <span>{formatCurrency(breakdown?.serviceFees)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Facility Fee</span>
-                                <span>{formatCurrency(ticket?.fee)}</span>
+                                <span>{formatCurrency(breakdown?.facilityFee)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Processing Fee</span>
-                                <span>{formatCurrency(3)}</span>
+                                <span>{formatCurrency(breakdown?.paymentProcessingFee)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Tax</span>
-                                <span>{formatCurrency(5)}</span>
+                                <span>{formatCurrency(breakdown?.tax)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="mt-2 split-row">
                                 <span className='fw-medium'>Total</span>
-                                <span className='fw-medium'>{formatCurrency(totals)}</span>
+                                <span className='fw-medium'>{formatCurrency(breakdown?.buyerTotal)}</span>
                             </Stack>
                         </ul>
                     </li>
@@ -66,7 +64,7 @@ export default function TicketBreakdownModal({ show, handleClose, ticket }) {
                             </Stack>
                             <Stack as="li" direction="horizontal" className="mt-2 split-row">
                                 <span className='fw-medium'>Total</span>
-                                <span className='fw-medium'>{formatCurrency(yourTotals)}</span>
+                                <span className='fw-medium'>{formatCurrency(breakdown?.payout)}</span>
                             </Stack>
                         </ul>
                     </li>
