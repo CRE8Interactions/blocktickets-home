@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
@@ -7,7 +7,7 @@ import { TicketPurchase } from './TicketPurchase';
 
 import './purchaseTickets.scss';
 
-export default function PurchaseTickets({ code }) {
+export default function PurchaseTickets({ code, taxRates, feeStructure }) {
     // 1 - ticket selection
     // 2 - ticket confirmation
     // 3 - presale
@@ -52,6 +52,9 @@ export default function PurchaseTickets({ code }) {
         []
     );
 
+    useEffect(() => {
+    }, [taxRates, feeStructure])
+
     // demo purposes: will come from database when we have more than one type of ticket
     const eventType = "genAdmission";
 
@@ -89,6 +92,8 @@ export default function PurchaseTickets({ code }) {
                 ticket={ticket}
                 listing={listing}
                 code={code}
+                taxRates={taxRates}
+                feeStructure={feeStructure}
             />
         </div>
     );

@@ -3,7 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 
 import TicketContext from '../../context/Ticket/Ticket';
 
-import { getAllEventTickets } from '../../utilities/api';
+import { getAllEventTickets, getTaxRates } from '../../utilities/api';
 
 import { Event, PurchaseTickets } from '../../components';
 
@@ -45,16 +45,36 @@ export default function TicketsPage() {
         reSaleTickets,
         setResaleTickets
     ] = useState();
+    const [
+        taxRates,
+        setTaxRates
+    ] = useState();
+    const [
+        feeStructure,
+        setfeeStructure
+    ] = useState();
 
 	useEffect(() => {
 		getAllEventTickets(id, code)
 			.then((res) => {
+                setfeeStructure(res.data.event.fee_structure)
 				setTickets(res.data?.tickets)
 				setEvent(res.data?.event)
                 setListings(res.data?.listings)
+                eventTaxRates(res.data?.event?.venue?.address[0]?.city, res.data?.event?.venue?.address[0]?.state)
 			})
 			.catch((err) => console.error(err))
+        
+            
+
+            
 	}, [id, code])
+
+    const eventTaxRates = (city, state) => {
+        getTaxRates(city, state)
+                .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
+                .catch((err) => console.error(err))
+    }
 
     return (
         <div className="full-height-wrapper">
@@ -62,7 +82,7 @@ export default function TicketsPage() {
                 <div className="pt-md-3">
                     <Event event={event} />
                 </div>
-                <PurchaseTickets code={code} />
+                <PurchaseTickets code={code} taxRates={taxRates} feeStructure={feeStructure} />
             </TicketContext.Provider>
         </div>
     );

@@ -47,6 +47,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         }
       },
       populate: {
+        fee_structure: true,
         venue: {
           populate: {
             image: true,
@@ -71,6 +72,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         image: true,
         categories: true,
         page_views: true,
+        fee_structure: true,
         venue: {
           populate: {
             address: true
@@ -102,6 +104,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
             ]
           },
           populate: {
+            fee_structure: true,
             venue: {
               populate: {
                 address: true
@@ -134,6 +137,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         ]
       },
       populate: {
+        fee_structure: true,
         venue: {
           populate: {
             image: true,
@@ -169,7 +173,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
      let eventVenue = await strapi.db.query('api::venue.venue').findOne({
       where: { id: venue }
      })
-     console.log('Doors open ', doorsOpen)
+
     const entry = await strapi.db.query('api::event.event').update({
       where: { uuid: uuid },
       data: {

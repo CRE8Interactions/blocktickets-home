@@ -42,6 +42,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 
     const [priceValid, setPriceValid] = useState(price > 0 && (price > 1000 || price < 2000))
 
+    const [serviceFees, setServiceFees] = useState(0)
+
     // selected tickets
     const [
         selectedTickets,
@@ -56,7 +58,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
             setLabel("Price per ticket")
             setPriceValid(true)
         }
-
+        let fees = (order?.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(price).toFixed(2)
+        setServiceFees((fees).toFixed(2))
     }, [price])
 
     useLayoutEffect(() => {
@@ -78,6 +81,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
             setStep(2)
             setPrice(listing.askingPrice)
             setSelectedTickets(listing.tickets)
+            let fees = (listing.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(listing.askingPrice).toFixed(2)
+            setServiceFees((fees).toFixed(2))
         }
     }, [])
 
@@ -97,10 +102,10 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
         let data = {
             tickets: selectedTickets,
             quantity: selectedTickets.length,
-            askingPrice: price,
+            askingPrice: parseFloat(price * selectedTickets.length),
             event: order?.event,
-            serviceFees: (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length).toFixed(2),
-            payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length)).toFixed(2),
+            serviceFees: parseFloat(serviceFees).toFixed(2),
+            payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(serviceFees).toFixed(2))),
             fromOrder: order?.id
         }
 
@@ -185,15 +190,15 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
                                 <li className="list">
                                     <p className="heading">Service Fees</p>
                                     <ul>
-                                        <Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: {parseFloat(selectedTickets[0]?.fee).toFixed(2)} x {selectedTickets?.length}</span>
-                                            <span className='text-end'>(-${(parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length).toFixed(2)})</span>
+                                        <Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: {parseFloat(serviceFees / selectedTickets?.length).toFixed(2)} x {selectedTickets?.length}</span>
+                                            <span className='text-end'>(-${serviceFees})</span>
 
                                         </Stack>
                                     </ul>
                                 </li>
                                 <Stack direction='horizontal' as="li" className="split-row list">
                                     <span className="heading m-0">Your Payout</span>
-                                    <span className="text-end fw-medium">${((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(selectedTickets[0]?.fee).toFixed(2) * selectedTickets?.length)).toFixed(2)}</span>
+                                    <span className="text-end fw-medium">${(parseFloat(price * selectedTickets?.length) - parseFloat(serviceFees)).toFixed(2)}</span>
                                 </Stack>
                             </ul>
                         </div>

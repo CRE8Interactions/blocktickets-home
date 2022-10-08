@@ -132,6 +132,7 @@ module.exports = createCoreController('api::ticket.ticket', ({
     let event = await strapi.db.query('api::event.event').findOne({
       where: { uuid: eventUUID },
       populate: {
+        fee_structure: true,
         venue: {
           populate: {
             address: true

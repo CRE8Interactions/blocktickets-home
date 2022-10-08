@@ -103,17 +103,23 @@ export const cartTotal = (cart, processingFee, tax) => {
     return total;
 };
 
-export const ticketPrices = (ticket = null, listing = null, showFees = true) => {
+export const ticketPrices = (ticket = null, listing = null, showFees = true, taxRates, feeStructure) => {
     if (ticket) {
         let prices = {}
         prices['ticketCost'] = ticket?.attributes ? ticket?.attributes?.cost : ticket?.cost;
-        prices['ticketServiceFee'] = ticket?.attributes ? ticket?.attributes?.fee : ticket?.fee;
-        prices['ticketFacilityFee'] = ticket?.attributes ? ticket?.attributes?.facilityFee : ticket.facilityFee;
-        prices['tax'] = 5;
-        prices['totalFees'] = prices.ticketCost == 0 ? 0 : prices.ticketServiceFee + prices.ticketFacilityFee;
+        if (parseInt(prices['ticketCost']) < 20) prices['serviceFees'] = 1;
+        if (parseInt(prices['ticketCost']) >= 20) prices['serviceFees'] = (feeStructure?.primaryOver20 / 100) * prices['ticketCost'];
+        if (parseFloat(prices['ticketCost'])) prices['paymentProcessingFee'] = (((parseFloat(feeStructure?.stripeServicePecentage) * parseFloat(prices['ticketCost'])) / 100) + feeStructure?.stripeCharge).toFixed(2);
+        prices['paymentProcessingFee'] = parseFloat( prices['paymentProcessingFee'])
+        prices['ticketServiceFee'] = prices['serviceFees'];
+        prices['ticketFacilityFee'] = ticket?.attributes ? ticket?.attributes?.fee : ticket.fee;
+        prices['tax'] = (taxRates?.combinedTaxRate / 100) * prices['ticketCost'];
+        prices['totalFees'] = prices.ticketCost == 0 ? 0 : parseFloat(prices['serviceFees']) + parseFloat(prices['ticketFacilityFee']) + parseFloat(prices.tax) + parseFloat(prices.paymentProcessingFee);
         prices['ticketType'] = ticket?.attributes ? ticket?.attributes?.resale ? 'Resale Ticket' : 'Standard Ticket' : ticket?.resale ? 'Resale Ticket' : 'Standard Ticket';
-        prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
+        prices['ticketCostWithFees'] = parseFloat(prices['ticketCost']) + parseFloat(prices['ticketServiceFee']) + parseFloat(prices['ticketFacilityFee']) + parseFloat(prices['paymentProcessingFee']) + parseFloat(prices['tax']);
+        prices['ticketCostWithFees'] = parseFloat(prices['ticketCostWithFees'])
         prices['ticketName'] = ticket?.attributes ? ticket?.attributes?.name : ticket?.name;
+        prices['buyerTotal'] = parseFloat(prices['ticketCost']) + parseFloat(prices['ticketServiceFee']) + parseFloat(prices['ticketFacilityFee']) + parseFloat(prices['paymentProcessingFee']) + parseFloat(prices['tax'])
         prices['ticketCount'] = 1;
         prices['listing'] = false;
         return prices;
@@ -121,15 +127,18 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true) => 
     if (listing) {
         let prices = {}
         prices['ticketCost'] = listing.askingPrice;
-        prices['ticketServiceFee'] = listing.tickets[0]?.fee;
+        if (parseFloat(prices['ticketCost'])) prices['paymentProcessingFee'] = (((parseFloat(feeStructure?.stripeServicePecentage) * parseFloat(prices['ticketCost'])) / 100) + feeStructure?.stripeCharge).toFixed(2);
+        prices['paymentProcessingFee'] = parseFloat( prices['paymentProcessingFee'])
+        prices['ticketServiceFee'] = (feeStructure?.secondaryServiceFeeBuyer / 100) * prices.ticketCost;
         prices['ticketFacilityFee'] = 0;
-        prices['tax'] = 5;
-        prices['totalFees'] = (listing.tickets[0].fee + 0);
+        prices['tax'] = (taxRates?.combinedTaxRate / 100) * prices.ticketCost;
+        prices['totalFees'] = parseFloat(prices['ticketServiceFee']) + prices['paymentProcessingFee']
         prices['ticketType'] = listing.tickets[0]?.resale ? 'Resale Ticket' : 'Standard Ticket';
-        prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees).toFixed(2);
+        prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees + prices.tax).toFixed(2);
+        prices['ticketCostWithFees'] = parseFloat(prices['ticketCostWithFees'])
         prices['ticketName'] = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
         prices['ticketCount'] = listing.tickets.length;
-        prices['listingTotal'] = listing.askingPrice * listing.tickets.length;
+        prices['listingTotal'] = listing.askingPrice;
         prices['listing'] = true;
         return prices;
     }

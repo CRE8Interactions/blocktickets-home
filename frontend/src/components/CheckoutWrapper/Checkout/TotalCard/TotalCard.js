@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 
-import { createOrder } from '../../../../utilities/api';
+import { createOrder, getEvent, getTaxRates } from '../../../../utilities/api';
 import { cartTotal, ticketPrices } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
@@ -30,6 +30,16 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
         setHasError
     ] = useState(false);
 
+    const [
+        feeStructure,
+        setfeeStructure
+    ] = useState();
+
+    const [
+        taxRates,
+        setTaxRates
+    ] = useState();
+
     let cart = sessionStorage.getItem('cart');
     if (cart) cart = JSON.parse(cart);
 
@@ -42,29 +52,52 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
     let facilityFee;
     let totalDue;
     let tax;
+    let processingFee;
+    let times;
 
     if (cart.listing) {
+        times = 1;
         let ticket = null;
         let listing = cart.listing;
-        let prices = ticketPrices(ticket, listing);
-        ticketPrice = prices.ticketCost;
+        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
+        ticketPrice = (prices.ticketCost / cart.listing.tickets.length);
         ticketCount = prices.ticketCount;
         ticketFee = prices.ticketServiceFee;
         facilityFee = prices.ticketFacilityFee;
-        totalDue = (Number(prices.ticketCostWithFees) * ticketCount + prices.tax).toFixed(2);
+        processingFee = prices.paymentProcessingFee;
+        totalDue = (Number(prices.ticketCostWithFees)).toFixed(2);
+        processingFee = prices.paymentProcessingFee * times
         tax = prices.tax.toFixed(2);
     }
     else if (cart.ticket) {
         let ticket = cart.ticket;
         let listing = null;
-        let prices = ticketPrices(ticket, listing);
+        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
         ticketPrice = prices.ticketCost;
         ticketCount = cart.ticketCount;
         ticketFee = prices.ticketServiceFee;
         facilityFee = prices.ticketFacilityFee;
-        totalDue = (Number(prices.ticketCostWithFees) * ticketCount + prices.tax).toFixed(2);
+        processingFee = prices.paymentProcessingFee;
+        totalDue = (Number(prices.ticketCostWithFees) * ticketCount).toFixed(2);
         tax = prices.tax.toFixed(2);
+        times = ticketCount
     }
+
+    const eventTaxRates = (city, state) => {
+        getTaxRates(city, state)
+                .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
+                .catch((err) => console.error(err))
+    }
+
+    useEffect(() => {
+        let eventUUID = cart?.ticket ? cart?.ticket?.eventId : cart.listing?.event?.uuid;
+        getEvent(eventUUID)
+            .then((res) => {
+                setfeeStructure(res?.data?.fee_structure)
+                eventTaxRates(res.data?.venue?.address[0]?.city, res.data.venue?.address[0]?.state)
+            })
+            .catch((err) => console.error(err))
+    }, [])
 
     const completePurchase = () => {
         setPurchasing(true);
@@ -162,18 +195,26 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                             <ul>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Service Fee: ${parseFloat(ticketFee).toFixed(2)} x {ticketCount}
+                                        Service Fee: ${parseFloat(ticketFee).toFixed(2)} x {times}
                                     </span>
                                     <span className="text-end">
-                                        ${(parseFloat(ticketFee).toFixed(2) * ticketCount).toFixed(2)}
+                                        ${(parseFloat(ticketFee).toFixed(2) * times).toFixed(2)}
                                     </span>
                                 </Stack>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Facility Fee: ${parseFloat(facilityFee).toFixed(2)} x {ticketCount}
+                                        Facility Fee: ${parseFloat(facilityFee).toFixed(2)} x {times}
                                     </span>
                                     <span className="text-end">
-                                        ${(parseFloat(facilityFee).toFixed(2) * ticketCount).toFixed(2)}
+                                        ${(parseFloat(facilityFee).toFixed(2) * times).toFixed(2)}
+                                    </span>
+                                </Stack>
+                                <Stack direction="horizontal" as="li" className="split-row">
+                                    <span>
+                                        Processing Fee: ${parseFloat(processingFee).toFixed(2)} x {times}
+                                    </span>
+                                    <span className="text-end">
+                                        ${parseFloat(processingFee * times).toFixed(2)}
                                     </span>
                                 </Stack>
                             </ul>
@@ -204,7 +245,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
                         <li className="split-row list">
                             <span className="heading m-0">Tax</span>
-                            <span className="text-end">${tax}</span>
+                            <span className="text-end">${parseFloat(tax * times).toFixed(2)}</span>
                         </li>
                     </ul>
                     <div className="mobile-only mt-4">

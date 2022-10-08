@@ -4,7 +4,7 @@ import { ticketPrices } from '../../../../../utilities/helpers';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
+export default function Ticket({ ticket, handleNext, ticketFilters, listing, taxRates, feeStructure }) {
     let ticketPrice;
     let ticketPriceWithFees;
     let ticketName;
@@ -13,7 +13,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
 
     useEffect(() => {
         // Some actions
-    }, [ticket])
+    }, [ticket, taxRates, feeStructure])
 
     const ticketTypes = (ticket) => {
         if (!ticket?.resale && ticket?.on_sale_status === 'available') return 'Standard Ticket';
@@ -22,17 +22,17 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
     };
 
     if (ticket) {
-        let prices = ticketPrices(ticket, listing);
+        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
         ticketPrice = `${prices.ticketCost} ea`;
         ticketName = prices.ticketName;
         ticketType = prices.ticketType;
         ticketFee = prices.totalFees;
-        ticketPriceWithFees = prices.ticketCostWithFees;
+        ticketPriceWithFees = `${prices.ticketCostWithFees} ea`;
     }
 
     if (listing) {
-        let prices = ticketPrices(ticket, listing);
-        ticketPrice = `${prices.ticketCost} ea`;
+        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
+        ticketPrice = `${prices.ticketCost}`;
         ticketName = prices.ticketName;
         ticketType = `Resale ${listing.tickets.length} Tickets`;
         ticketFee = prices.totalFees;
@@ -57,7 +57,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
                 <div>
                     <span className="fw-bold text-end">
                         {ticketFilters.showFees ? (
-                            `$${ticketPriceWithFees} ea`
+                            `$${ticketPriceWithFees}`
                         ) : (
                             `$${ticketPrice}`
                         )}

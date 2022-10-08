@@ -54,6 +54,7 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         tickets: true,
         event: {
           populate: {
+            fee_structure: true,
             image: true,
             venue: {
               populate: {

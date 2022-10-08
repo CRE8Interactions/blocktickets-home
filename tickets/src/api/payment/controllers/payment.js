@@ -16,11 +16,53 @@ module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
     const ticketCount = ctx.request.body.ticketCount
     let paymentIntent;
     let user = ctx.state.user;
-
+    let event;
+    
     if (listing) {
-      let totalTicketPrices = listing.askingPrice + listing.tickets.map(ticket => ticket.fee).reduce((a, b) => a + b) + listing.tickets.map(ticket => ticket.facilityFee).reduce((a, b) => a + b) + 2.5 + 4.35;
-      let stripePriceConversion = (totalTicketPrices * 100).toFixed()
-      console.log(listing)
+      event = await strapi.db.query('api::event.event').findOne({
+        where: { uuid: listing.event.uuid },
+        populate: { 
+          fee_structure: true,
+          venue: {
+            populate: {
+              address: true
+            }
+          } 
+        },
+      });
+  
+      let taxRates = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+        where: {
+          abbreviation: {
+            $eq: event.venue.address[0].state.toLowerCase()
+          }
+        },
+        populate: { 
+          sales_tax_rates: {
+            where: {
+              city: {
+                $eq: event.venue.address[0].city.toLowerCase()
+              }
+            }
+          }
+        },
+      });
+
+      let hash = {}
+      hash['serviceFees'] = (event.fee_structure.secondaryServiceFeeBuyer / 100) * parseFloat(listing.askingPrice);
+      hash['paymentProcessingFee'] = (((parseFloat(event.fee_structure.stripeServicePecentage) * parseFloat(listing.askingPrice)) / 100) + event.fee_structure.stripeCharge).toFixed(2);
+      hash['paymentProcessingFee'] = parseFloat(hash['paymentProcessingFee'])
+      hash['facilityFee'] = 0
+      hash['ticketPrice'] = parseFloat(listing.askingPrice);
+      hash['tax'] = (taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase()).combinedTaxRate / 100) * hash['ticketPrice']
+      // Fee Totals
+      let feeTotals = parseFloat(hash.serviceFees) + parseFloat(hash.paymentProcessingFee) + parseFloat(hash.facilityFee) + parseFloat(hash.tax) 
+      // per ticket
+      feeTotals = parseFloat(feeTotals).toFixed(2)
+      let total = parseFloat(hash['ticketPrice']) + parseFloat(feeTotals)
+
+      let stripePriceConversion = (total * 100).toFixed()
+
       paymentIntent = await stripe.paymentIntents.create({
         amount: stripePriceConversion,
         currency: 'usd',
@@ -28,7 +70,7 @@ module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
         metadata: {
           ticketType: listing.tickets[0].generalAdmission ? 'General Admission Ticket' : 'Seated Ticket',
           ticketName: listing.tickets[0].name,
-          ticketPrice: totalTicketPrices,
+          ticketPrice: listing.askingPrice,
           eventId: listing.event.id,
           ticketCount: listing.tickets.length,
           userId: user.id,
@@ -36,9 +78,49 @@ module.exports = createCoreController('api::payment.payment', ({ strapi }) => ({
         }
       });
     } else if (ticket) {
-      let totalTicketPrices = Number(parseFloat(ticket.attributes ? ticket.attributes.cost : ticket.cost * ticketCount).toFixed(2))
-      let fees = Number(parseFloat((ticket.attributes ? ticket.attributes.fee : ticket.fee  * ticketCount) + (ticket.attributes ?  ticket.attributes.facilityFee : ticket.facilityFee * ticketCount) + 4.35 + 2.50).toFixed(2))
-      let total = (totalTicketPrices + fees)
+      event = await strapi.db.query('api::event.event').findOne({
+        where: { uuid: ticket.eventId },
+        populate: { 
+          fee_structure: true,
+          venue: {
+            populate: {
+              address: true
+            }
+          } 
+        },
+      });
+  
+      let taxRates = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+        where: {
+          abbreviation: {
+            $eq: event.venue.address[0].state.toLowerCase()
+          }
+        },
+        populate: { 
+          sales_tax_rates: {
+            where: {
+              city: {
+                $eq: event.venue.address[0].city.toLowerCase()
+              }
+            }
+          }
+        },
+      });
+
+      let hash = {}
+      if (parseInt(ticket.cost) < 20) hash['serviceFees'] = 1;
+      if (parseInt(ticket.cost) >= 20) hash['serviceFees'] = (event.fee_structure.primaryOver20 / 100) * parseFloat(ticket.cost);
+      if (parseFloat(ticket.cost)) hash['paymentProcessingFee'] = (((parseFloat(event.fee_structure.stripeServicePecentage) * parseFloat(ticket.cost)) / 100) + event.fee_structure.stripeCharge).toFixed(2);
+      hash['paymentProcessingFee'] = parseFloat(hash['paymentProcessingFee'])
+      hash['facilityFee'] = parseFloat(ticket.fee)
+      hash['ticketPrice'] = parseFloat(ticket.cost);
+      hash['tax'] = (taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase()).combinedTaxRate / 100) * hash['ticketPrice']
+      // Fee Totals
+      let feeTotals = parseFloat(hash.serviceFees) + parseFloat(hash.paymentProcessingFee) + parseFloat(hash.facilityFee) + parseFloat(hash.tax) 
+      // per ticket
+      feeTotals = parseFloat(feeTotals * ticketCount).toFixed(2)
+      let total = parseFloat(hash['ticketPrice'] * ticketCount) + parseFloat(feeTotals)
+
       let stripePriceConversion = (total * 100).toFixed()
       paymentIntent = await stripe.paymentIntents.create({
         amount: stripePriceConversion,

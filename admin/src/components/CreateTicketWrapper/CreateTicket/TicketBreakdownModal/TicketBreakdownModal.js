@@ -31,7 +31,7 @@ export default function TicketBreakdownModal({ show, handleClose, ticket, fees, 
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Service Fee</span>
-                                <span>{formatCurrency(breakdown?.serviceFee)}</span>
+                                <span>{formatCurrency(breakdown?.serviceFees)}</span>
                             </Stack>
                             <Stack as="li" direction="horizontal" className="split-row">
                                 <span>Facility Fee</span>

@@ -136,16 +136,15 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                     })
                     setSalesStart(new Date(ticket?.sales_start))
                     setSalesEnd(new Date(ticket?.sales_end))
-                    // setFees(res.data?.fee_structure)
+                    setFees(res.data?.fee_structure)
                     setAddress(res.data.venue.address[0])
                 })
                 .catch((err) => console.error(err))
         } else {
             getEvent(eventId)
             .then((res) => {
-                console.log(res.data)
                 setAddress(res.data.venue.address[0])
-                // setFees(res.data?.fee_structure)
+                setFees(res.data?.fee_structure)
             })
             .catch((err) => console.error(err))
         }
