@@ -285,7 +285,10 @@ export default function LoginSignupForm() {
                         <div className="heading">
                             <h3 className="title mb-1">Enter 4 Digit Verification</h3>
                             <p className="subtitle">
-                                Code is set to <span className="text-primary">{phoneNumber ? phoneNumber : email}</span>
+                                Code is set to <span className="text-primary">{phoneNumber ? phoneNumber : email} </span>
+                                { email &&
+                                    <>If you havent received an email within 5 minutes check your spam folder.</>
+                                }
                             </p>
                         </div>
                         <Form.Group>
