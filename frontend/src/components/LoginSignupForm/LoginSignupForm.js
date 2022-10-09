@@ -7,6 +7,7 @@ import { verifyUser, verifiyCode, createNewUser, validEmail } from '../../utilit
 import AuthService from '../../utilities/services/auth.service';
 import UserContext from '../../context/User/user';
 
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -61,6 +62,18 @@ export default function LoginSignupForm() {
         email,
         setEmail
     ] = useState('');
+
+    const [
+        resendDisabled,
+        setResendDisabled
+    ] = useState(false)
+
+    const [alert, setAlert] = useState({
+        show: false,
+        variant: '',
+        message: ''
+    })
+
 
     // const [
     //     dob,
@@ -212,10 +225,27 @@ export default function LoginSignupForm() {
         submit()
     }
 
+    const resend = () => {
+        submit()
+        setResendDisabled(true)
+        setAlert({
+            show: true,
+            variant: 'success',
+            message: 'Verification Code has been resent.'
+        })
+    }
+
     return (
         <Row className="spacer-md" id="login-signup-container">
             <Col md={4}>{step > 0 && <BackButton handleGoBack={handleGoBack} />}</Col>
             <Col md={6} className="form-container d-flex-column">
+            {alert.show &&
+                    <>
+                        <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
+                            {alert.message}
+                        </Alert>
+                    </>
+                }
                 {step === 0 && (
                     <Fragment>
                         <div className="heading">
@@ -341,7 +371,7 @@ export default function LoginSignupForm() {
                         </Form.Group>
                         {hasError && <Error type="code" />}
                         <Form.Text>
-                            Did not receive code? <Button variant="link">Resend Code</Button>
+                            Did not receive code? <Button variant="link" onClick={() => resend()} disabled={resendDisabled}>Resend Code</Button>
                         </Form.Text>
                     </Fragment>
                 )}
