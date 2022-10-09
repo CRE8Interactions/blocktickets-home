@@ -276,10 +276,9 @@ export const exportHTML = (data) => {
 };
 
 export function formatOrders(orders) {
-    console.log(orders)
     const { orderId, users_permissions_user, processedAt, type, total, intentDetails } = orders;
-    const { ticketCount } = orders.details;
-    const { generalAdmission } = orders.details.ticket;
+    const { ticketCount } = orders?.details;
+    const { generalAdmission } = orders?.details?.ticket;
     const { brand, last4 } = intentDetails.charges.data[0].payment_method_details.card
     return {
         order: orderId,
