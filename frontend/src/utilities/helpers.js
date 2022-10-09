@@ -1,6 +1,16 @@
 export const COUNTDOWN_NUM = 9;
 export const COUNTDOWN_DURATION = 1000;
 
+export const formatCurreny =(number) => {
+    return parseFloat(number).toFixed(2)
+}
+
+export const titleCase = (str) => {
+    return str?.toLowerCase().split(' ').map(function (word) {
+      return (word?.charAt(0).toUpperCase() + word?.slice(1));
+    }).join(' ');
+}
+
 export const getCopyrightYear = () => {
     return new Date().getFullYear();
 };
