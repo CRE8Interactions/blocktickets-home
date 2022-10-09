@@ -1,0 +1,87 @@
+@use "../../scss/abstracts" as *;
+@use "../../scss/layout/spacing" as *;
+@use "../../scss/layout/images" as *;
+@use "../../scss/theme/buttons" as *;
+@use "../../scss/theme/input" as *;
+@use "../../scss/theme/borders" as *;
+@use "../../scss/theme/colors" as *;
+@use "../../scss/theme/typography" as *;
+
+#reports {
+	#tabs {
+		@include breakpoint-min(lg) {
+			order: 2;
+		}
+
+		ul {
+			gap: rem(15);
+		}
+	}
+
+	.form-select {
+		min-width: 170px;
+		padding: rem(8) $input-padding-x-sm;
+		background-color: transparent;
+	}
+
+	.nav-link {
+		padding: rem(16);
+		display: flex;
+		gap: $gap;
+		border-radius: $border-radius;
+		border: border($color: transparent);
+		background-color: $white;
+		font-weight: $fw-medium;
+		font-family: $font-family-sans-serif;
+		cursor: pointer;
+		width: 100%;
+		color: $body-color;
+
+		&.active {
+			border-color: $primary;
+		}
+	}
+
+	.nav-item {
+		.nav-link {
+			&::before {
+				@extend %img-psuedo-icon;
+			}
+		}
+
+		&:first-of-type {
+			.nav-link:before {
+				background-image: url('../../assets/icons/net-sales.svg');
+				background-color: rgba($success, var(--opac));
+			}
+		}
+
+		&:nth-of-type(2) {
+			.nav-link:before {
+				background-image: url('../../assets/icons/gross-sales.svg');
+				background-color: rgba($secondary, var(--opac));
+			}
+		}
+
+		&:nth-of-type(4) {
+			.nav-link:before {
+				background-image: url('../../assets/icons/eye.svg');
+				background-color: rgba($body-color, var(--opac));
+			}
+		}
+
+		&.royalties {
+			.nav-link:before {
+				background-image: url('../../assets/icons/dollar.svg');
+				background-color: rgba($clr-tertiary, var(--opac));
+			}
+		}
+
+		&.listed {
+			.nav-link:before {
+				background-image: url('../../assets/icons/list.svg');
+				background-color: rgba($success, var(--opac));
+			}
+		}
+	}
+}

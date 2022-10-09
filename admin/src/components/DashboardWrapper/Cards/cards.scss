@@ -1,0 +1,103 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout/spacing' as *;
+@use '../../../scss/layout/images' as *;
+@use '../../../scss/theme/colors' as *;
+
+.cards {
+	.card {
+		height: 100%;
+
+		&-body {
+			padding-top: rem(24);
+			padding-bottom: rem(24);
+		}
+
+		.card-body-title:not(.shareable-link):not(.tickets-sold) {
+			@include breakpoint-min(lg) {
+				font-size: $h3-font-size;
+			}
+		}
+	}
+
+	[class^="col-"] {
+		@include breakpoint-max(lg) {
+			+ [class^="col-"] {
+				margin-top: $text-spacer-sm;
+			}
+		}
+	}
+
+	#tickets-sold-card {
+		.card-body {
+			display: flex;
+			flex-direction: column;
+			@include breakpoint-max(lg) {
+				min-height: 185px;
+			}
+		}
+	}
+
+	.small-text {
+		font-size: $small;
+		color: $text-muted;
+		font-weight: $fw-semi-bold;
+	}
+
+	.total-sales,
+	.royalties,
+	.net-sales,
+	.page-views,
+	.payout,
+	.shareable-link {
+		&::before {
+			display: inline-block;
+			@extend %img-psuedo-icon;
+		}
+	}
+
+	.total-sales {
+		&:before {
+			margin-right: $gap;
+			background-image: url('../../../assets/icons/gross-sales.svg');
+			background-color: rgba($secondary, var(--opac));
+		}
+	}
+
+	.royalties {
+		&:before {
+			background-image: url('../../../assets/icons/dollar.svg');
+			background-color: rgba($clr-tertiary, var(--opac));
+		}
+	}
+
+	.net-sales {
+		&:before {
+			background-image: url('../../../assets/icons/growth.svg');
+			background-color: rgba($primary, var(--opac));
+		}
+	}
+
+	.page-views {
+		&:before {
+			margin-right: $gap;
+			background-image: url('../../../assets/icons/eye.svg');
+			background-color: rgba($body-color, var(--opac));
+		}
+	}
+
+	.payout {
+		&:before {
+			margin-right: $gap;
+			background-image: url('../../../assets/icons/coin.svg');
+			background-color: rgba($success, var(--opac));
+		}
+	}
+
+	.shareable-link {
+		&::before {
+			background-image: url('../../../assets/icons/link.svg');
+			background-position: center;
+			background-size: 33px;
+		}
+	}
+}

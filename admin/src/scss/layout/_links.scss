@@ -1,0 +1,16 @@
+@use '../abstracts' as *;
+@use '../theme/borders' as *;
+
+.btn-link-disabled {
+	pointer-events: none;
+	opacity: .65;
+}
+
+@mixin hover-effect() {
+	background-color: $clr-lightGray;
+	border-radius: $border-radius;
+}
+
+$nav-link-padding-y: rem(12);
+$nav-link-padding-x: rem(16);
+$nav-link-margin: 0px rem(-16);

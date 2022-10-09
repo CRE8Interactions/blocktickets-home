@@ -3,7 +3,9 @@ import { createContext } from 'react';
 const UserContext = createContext({
   authenticated: false,
   setAuthenticated: (auth) => {},
-  user: ''
+  setOrganization: (org) => {},
+  user: '',
+  selectedEvent: ''
 });
 
 export default UserContext;

@@ -1,85 +1,101 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 
 import { getOrder } from '../../utilities/api';
-import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
+import { fullHeightContainer, removeFullHeightContainer, userDevice } from '../../utilities/helpers';
 
 import { BackButton } from '../BackButton';
 import { Event } from '../Event';
 import { MyTickets } from './MyTickets';
-import { MyTicketsSlider } from '../Slider/MyTicketsSlider';
+import { MyTicketsSlider } from './MyTicketsSlider';
 import { ActionBtns } from './ActionBtns';
-import { TicketModal } from '../TicketCard/TicketModal';
+import { TicketModal } from '../TicketModal';
 
 export default function EventDetailsWrapper({ orderId }) {
 
-	const [order, setOrder] = useState()
+    const [order, setOrder] = useState()
 
-	const [
-		show,
-		setShow
-	] = useState(false);
+    const [
+        show,
+        setShow
+    ] = useState(false);
 
-	const [
-		ticketAction,
-		setTicketAction
-	] = useState('');
+    const [
+        ticketAction,
+        setTicketAction
+    ] = useState('');
 
-	const [
-		ticketStatus,
-		setTicketStatus
-	] = useState('');
+    const [
+        ticketStatus,
+        setTicketStatus
+    ] = useState('');
 
-	useLayoutEffect(() => {
-		const el = document.querySelector('#main-container');
-		const body = document.body;
+    const getMyOrders = () => {
+        getOrder(orderId).then((res) => {
+            setOrder(res.data)
+        }).catch((err) => console.error(err));
+    }
 
-		fullHeightContainer(el);
-		body.classList.add('noBodyPadding');
+    const [deviceType, setDeviceType] = useState("");
 
-		return () => {
-			removeFullHeightContainer(el);
-			body.classList.remove('noBodyPadding');
-		};
-	}, []);
+    useLayoutEffect(() => {
+        const el = document.querySelector('#main-container');
+        const body = document.body;
 
-		useEffect(
-		() => {
-			getOrder(orderId).then((res) => setOrder(res.data)).catch((err) => console.error(err));
-		},
-		[
-			orderId
-		]
-	);
+        fullHeightContainer(el);
+        body.classList.add('noBodyPadding');
 
-	const handleShow = () => setShow(true);
+        return () => {
+            removeFullHeightContainer(el);
+            body.classList.remove('noBodyPadding');
+        };
+    }, []);
 
-	const handleClick = (action) => {
-		handleShow();
-		setTicketAction(action);
-	};
-	return (
-		<section className="spacer-xs full-height-wrapper">
-			<div className="section-heading-sm">
-				<h1>Event details</h1>
-				<BackButton />
-			</div>
-			<div className="tablet-desktop-only">
-				<Event event={order?.event} />
-			</div>
-			<div className="mobile-only">
-				<MyTicketsSlider id={'id'} />
-				<ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
-			</div>
-			<div className="tablet-desktop-only">
-				<MyTickets order={order} handleClick={handleClick} ticketStatus={ticketStatus} />
-			</div>
-			<TicketModal
-				ticketAction={ticketAction}
-				setTicketStatus={setTicketStatus}
-				show={show}
-				setShow={setShow}
-				order={order}
-			/>
-		</section>
-	);
+    useEffect(
+        () => {
+            getMyOrders();
+            setDeviceType(userDevice)
+        },
+        [
+            orderId
+        ]
+    );
+
+    const handleShow = () => setShow(true);
+
+    const handleClick = (action) => {
+        handleShow();
+        setTicketAction(action);
+    };
+
+    return (
+        <section className="spacer-xs full-height-wrapper">
+            <div className="section-heading-sm">
+                <h1>{deviceType && deviceType === 'Mobile' ? 'Tickets' : 'Event details'}</h1>
+                <BackButton />
+            </div>
+            <div>
+                {deviceType && deviceType === 'Mobile' ? (
+                    <>
+                        <MyTicketsSlider order={order} handleClick={handleClick} />
+                        <ActionBtns handleClick={handleClick} ticketStatus={ticketStatus} />
+                    </>
+                ) : (
+                    <Event event={order?.event} />
+                )}
+            </div>
+            {deviceType && deviceType === 'Desktop' && (
+                <MyTickets order={order} handleClick={handleClick} ticketStatus={ticketStatus} />
+            )}
+            <div>
+            </div>
+            <TicketModal
+                ticketAction={ticketAction}
+                setTicketStatus={setTicketStatus}
+                show={show}
+                setShow={setShow}
+                order={order}
+                getMyOrders={getMyOrders}
+            />
+        </section>
+    );
 }

@@ -31,7 +31,7 @@ module.exports = createCoreService('api::verify.verify', ({ strapi }) => ({
     return data
   },
   async createUser(userObj) {
-    const user = await strapi.db.query('plugin::users-permissions.user').create(userObj)
+    const user = await strapi.query('plugin::users-permissions.user').create(userObj)
     return user
   }
 })

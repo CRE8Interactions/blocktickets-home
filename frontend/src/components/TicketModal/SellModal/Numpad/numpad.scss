@@ -1,0 +1,22 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout' as *;
+@use '../../../../scss/theme/colors' as *;
+@use '../../../../scss/theme/input' as *;
+
+#numpad {
+	margin: rem(29) 0px;
+	@include breakpoint-max(md) {
+		display: flex;
+	}
+	flex-direction: column;
+
+	.btn {
+		flex-basis: 107px;
+		text-align: center;
+		font-size: $body-1;
+		font-family: $font-body;
+		margin: 0px;
+		padding: rem(12) rem(16);
+		font-weight: $fw-normal;
+	}
+}

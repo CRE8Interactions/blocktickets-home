@@ -11,7 +11,7 @@ const {
 module.exports = createCoreController('api::verify.verify', ({
   strapi
 }) => ({
-  async byPhone(ctx) {
+  async byPhoneOrEmail(ctx) {
     const code = ctx.request.body.data.code
     const verify = await strapi.db.query('api::verify.verify').findOne({
       where: {
@@ -25,13 +25,26 @@ module.exports = createCoreController('api::verify.verify', ({
       })
       return
     } else {
-      // checks if user account is present
-      const user = await strapi.db.query('plugin::users-permissions.user').findOne({
-        where: {
-          phoneNumber: verify.phoneNumber
-        },
-        populate: ["role"],
-      })
+      // checks if user account is present by phone
+      let user;
+      if (verify.phoneNumber) {
+        user = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            phoneNumber: verify.phoneNumber
+          },
+          populate: ["role"],
+        })
+      }
+      // checks if user account is present by email
+      if (verify.email) {
+        user = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            email: verify.email
+          },
+          populate: ["role"],
+        })
+      }
+      
       if (user) {
         // Checks if invite present for user
         const invite = await strapi.db.query('api::invite.invite').findOne({
@@ -109,6 +122,17 @@ module.exports = createCoreController('api::verify.verify', ({
       })
     }
   },
+  async uniquePhone(ctx) {
+    const { phoneNumber } = ctx.request.body.data;
+    const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        phoneNumber: phoneNumber
+      }
+    })
+
+    if (!user) return 200
+    if (user) return 404
+  },
   async newUser(ctx) {
     const {
       username,
@@ -158,12 +182,29 @@ module.exports = createCoreController('api::verify.verify', ({
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
 
     ctx.send(tokenData)
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').signupConfirmation(user)
   },
   async create(ctx) {
-    const response = await super.create(ctx);
-    delete response.data.id
-    delete response.data.attributes.code
-    return response
+    const { phoneNumber, email } = ctx.request.body.data;
+    let verify;
+    if (phoneNumber) {
+      verify = await strapi.entityService.create('api::verify.verify', {
+        data: {
+          phoneNumber
+        }
+      })
+    }
+    if (email) {
+      verify = await strapi.entityService.create('api::verify.verify', {
+        data: {
+          email
+        }
+      })
+    }
+    delete verify.code
+    delete verify.id
+
+    return verify
   },
   async updatePersonalDetails(ctx) {
     let user = ctx.state.user
@@ -188,7 +229,146 @@ module.exports = createCoreController('api::verify.verify', ({
       }
     })
 
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').personalDetailsUpdate(user)
+
     const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+    ctx.send(tokenData)
+  },
+  async emailValid(ctx) {
+    const email = ctx.request.body.data.email;
+
+    const user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        email: email
+      }
+    })
+
+    if (user) return 200
+    if (!user) return 404
+  },
+  async updateNumber(ctx) {
+    const user = ctx.state.user;
+    const { toNumber } = ctx.request.body.data;
+
+    let verify = await strapi.entityService.create('api::update-number.update-number', {
+      data: {
+        users_permissions_user: user.id,
+        fromNumber: user.phoneNumber,
+        toNumber,
+      }
+    })
+    delete verify.code
+    delete verify.id
+    
+    return verify
+  },
+  async confirmUpdate(ctx) {
+    const { code } = ctx.request.body.data;
+    let user = ctx.state.user;
+
+    const entry = await strapi.db.query('api::update-number.update-number').findOne({
+      where: { 
+        $and: [
+          { code: code },
+          { completed: false }
+        ]
+       },
+    });
+
+    if (!entry) return;
+
+    user = await strapi.db.query('plugin::users-permissions.user').update({
+      where: {id: user.id },
+      data: {
+        phoneNumber: entry.toNumber
+      }
+    });
+
+    await strapi.db.query('api::update-number.update-number').update({
+      where: {id: entry.id },
+      data: {
+        completed: true
+      }
+    });
+
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').phoneUpdate(entry.toNumber, user)
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+
     return tokenData
+  },
+  async adminSignUp(ctx) {
+    const {
+      identifier,
+      firstName,
+      lastName,
+      password
+    } = ctx.request.body.data;
+
+    console.log(identifier)
+
+
+    const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: {
+        name: 'Organizer'
+      }
+    })
+
+    const userObj = {
+      data: {
+        username: identifier,
+        email: identifier,
+        phoneNumber: '+12024005000',
+        firstName,
+        lastName,
+        gender: 'other',
+        role,
+        confirmed: true,
+        password
+      }
+    }
+
+    let user = await strapi.service('api::verify.verify').createUser(userObj)
+
+    user = await strapi.db.query("plugin::users-permissions.user").findOne({
+      where: { id: user.id },
+      populate: ["role"],
+    });
+
+    const tokenData = await strapi.service('api::verify.verify').sendJwt(user)
+
+    return tokenData;
+  },
+  async adminCreateOrg(ctx) {
+    let user = ctx.state.user;
+
+    const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: {
+        name: 'Organizer'
+      }
+    })
+
+    const {
+      name,
+      address
+    } = ctx.request.body.data;
+
+    user = await strapi.db.query('plugin::users-permissions.user').update({
+      where: {id: user.id },
+      data: {
+        role: role
+      }
+    });
+
+    let org = await strapi.entityService.create('api::organization.organization', {
+      data: {
+        name: name,
+        creatorId: user.uuid,
+        members: [user],
+        address: address
+      }
+    })
+
+    return org;
   }
 }));

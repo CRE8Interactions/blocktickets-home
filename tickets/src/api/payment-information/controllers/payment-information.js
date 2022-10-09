@@ -31,7 +31,11 @@ module.exports = createCoreController('api::payment-information.payment-informat
         id: user.profile.id
       },
       populate: {
-        payment_information: true
+        payment_information: {
+          where: {
+            active: true
+          }
+        }
       }
     })
 
@@ -41,6 +45,9 @@ module.exports = createCoreController('api::payment-information.payment-informat
       res = await strapi.db.query('api::profile.profile').update({
         where: {
           id: user.profile.id 
+        },
+        populate: {
+          payment_information: true
         },
         data: {
           payment_information: await strapi.db.query('api::payment-information.payment-information').create({
@@ -56,8 +63,9 @@ module.exports = createCoreController('api::payment-information.payment-informat
           })
         }
       })
+      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendPaymentAccount(res, user)
     } else {
-      res = strapi.db.query('api::payment-information.payment-information').update({
+      res = await strapi.db.query('api::payment-information.payment-information').update({
         where: {
           id: profile.payment_information.id
         },
@@ -71,8 +79,8 @@ module.exports = createCoreController('api::payment-information.payment-informat
           accountType
         }
       })
+      if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').updatePaymentAccount(res, user)
     }
-
     return res
   },
   async findOne(ctx) {
@@ -84,15 +92,18 @@ module.exports = createCoreController('api::payment-information.payment-informat
       populate: {
         profile: {
           populate: {
-            payment_information: true
+            payment_information: {
+              where: {
+                active: true
+              }
+            }
           }
         }
       }
     })
 
-    if (!user.profile.payment_information) return 200
-
-    await encryption
+    if (user.profile.payment_information) {
+      await encryption
       .decrypt(user.profile.payment_information.accountNumber)
       .then((text) => {
         user.profile.payment_information.accountNumber = text
@@ -100,6 +111,48 @@ module.exports = createCoreController('api::payment-information.payment-informat
       .catch((err) => {
         // This is to handle errors
       })
-    return user.profile.payment_information
+
+      return user.profile.payment_information
+    } else {
+      return 404
+    }
+
+    
+  },
+  async deactive(ctx) {
+    let user = ctx.state.user;
+
+    user = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        id: user.id
+      },
+      populate: {
+        profile: true
+      }
+    })
+
+    let profile = await strapi.db.query('api::profile.profile').findOne({
+      where: {
+        id: user.profile.id
+      },
+      populate: {
+        payment_information: {
+          where: {
+            active: true
+          }
+        }
+      }
+    })
+
+    await strapi.db.query('api::payment-information.payment-information').update({
+      where: {
+        id: profile.payment_information.id
+      },
+      data: {
+        active: false
+      }
+    })
+
+    return 200
   }
 }));

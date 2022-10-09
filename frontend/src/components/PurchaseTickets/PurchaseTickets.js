@@ -1,7 +1,5 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 
-import { useMedia } from './../../utilities/hooks';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import { SeatingMap } from './SeatingMap';
@@ -9,103 +7,94 @@ import { TicketPurchase } from './TicketPurchase';
 
 import './purchaseTickets.scss';
 
-export default function PurchaseTickets() {
-	// 1 - ticket selection
-	// 2 - ticket confirmation
-	// 3 - presale
-	const steps = {
-		selection: 1,
-		confirmation: 2,
-		presale: 3
-	};
+export default function PurchaseTickets({ code, taxRates, feeStructure }) {
+    // 1 - ticket selection
+    // 2 - ticket confirmation
+    // 3 - presale
+    const steps = {
+        selection: 1,
+        confirmation: 2,
+        presale: 3
+    };
 
-	const { search } = useLocation();
+    const [
+        step,
+        setStep
+    ] = useState('selection');
 
-	let query = new URLSearchParams(search, [
-		search
-	]);
+    // better way? - only on seated map
+    const [
+        isZoomed,
+        setIsZoomed
+    ] = useState(false);
 
-	const [
-		param
-	] = useState(query.get('type'));
+    // current ticket
+    const [
+        ticket,
+        setTicket
+    ] = useState();
 
-	const [
-		step,
-		setStep
-	] = useState('selection');
+    // current listing
+    const [
+        listing,
+        setListing
+    ] = useState();
 
-	// state when filter menu is open for layout change
-	const [
-		isFilterOpen,
-		setIsFilterOpen
-	] = useState(false);
+    useLayoutEffect(
+        () => {
+            const el = document.querySelector('#main-container');
+            fullHeightContainer(el)
 
-	// better way? - only on seated map
-	const [
-		isZoomed,
-		setIsZoomed
-	] = useState(false);
+            return () => {
+                removeFullHeightContainer(el)
+            }
+        },
+        []
+    );
 
-	// current ticket
-	const [
-		ticket,
-		setTicket
-	] = useState();
+    useEffect(() => {
+    }, [taxRates, feeStructure])
 
-	const mediaQuery = useMedia('(min-width: 768px');
+    // demo purposes: will come from database when we have more than one type of ticket
+    const eventType = "genAdmission";
 
-	// layout change to full height only in tablet size or if on ticket selection step and filter menu is closed to allow scrolling on mobile and for mobile menu to display properly
-	useLayoutEffect(
-		() => {
-			if (mediaQuery || (step === 'selection' && !isFilterOpen)) {
-				const el = document.querySelector('#main-container');
+    const handleClick = (step, ticket, listing) => {
+        // find key
+        setStep(Object.keys(steps).find((key) => key === step));
+        if (ticket) setTicket(ticket);
+        if (listing) setListing(listing)
+    };
 
-				fullHeightContainer(el);
+    const handleGoBack = () => {
+        let curStep = steps[step];
+        const prevStep = --curStep;
 
-				return () => {
-					removeFullHeightContainer(el);
-				};
-			}
-		},
-		[
-			mediaQuery,
-			step,
-			isFilterOpen
-		]
-	);
+        // find key based on value
+        setStep(Object.keys(steps).find((key) => steps[key] === prevStep));
+        setListing(null)
+        setTicket(null)
+    };
 
-	const handleClick = (step, ticket) => {
-		// find key
-		setStep(Object.keys(steps).find((key) => key === step));
-		setTicket(ticket);
-	};
+    return (
+        <div className="pt-md-3 flex d-flex flex-column flex-md-row">
+            <SeatingMap
+                styles={(step === 'confirmation' || step === 'presale') && 'tablet-desktop-only'}
+                setIsZoomed={setIsZoomed}
+                eventType={eventType}
+            />
 
-	const handleGoBack = () => {
-		let curStep = steps[step];
-		const prevStep = --curStep;
-
-		// find key based on value
-		setStep(Object.keys(steps).find((key) => steps[key] === prevStep));
-	};
-
-	return (
-		<div className="pt-md-3 flex d-flex flex-column flex-md-row">
-			<SeatingMap
-				styles={(step === 'quantity' || step === 'presale') && 'tablet-desktop-only'}
-				type={param}
-				setIsZoomed={setIsZoomed}
-			/>
-
-			<TicketPurchase
-				handleClick={handleClick}
-				handleGoBack={handleGoBack}
-				setIsFilterOpen={setIsFilterOpen}
-				isFilterOpen={isFilterOpen}
-				step={step}
-				type={param}
-				isZoomed={isZoomed}
-				ticket={ticket}
-			/>
-		</div>
-	);
+            <TicketPurchase
+                handleClick={handleClick}
+                handleGoBack={handleGoBack}
+                step={step}
+                isZoomed={isZoomed}
+                eventType={eventType}
+                ticket={ticket}
+                listing={listing}
+                code={code}
+                taxRates={taxRates}
+                feeStructure={feeStructure}
+            />
+        </div>
+    );
 }

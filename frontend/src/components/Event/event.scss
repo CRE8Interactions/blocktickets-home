@@ -33,28 +33,23 @@
 				}
 			}
 
-			.time {
-				&::before {
-					content: '';
-					margin: 0px;
-				}
+			.time-caption,
+			.venue-caption,
+			.location-caption {
+				margin: 0px;
 			}
-			@include breakpoint-max(md) {
-				.time,
-				.loc {
+
+			.row {
+				align-items: center;
+			}
+
+			.time {
+				@include breakpoint-min(md) {
 					&::before {
-						content: '\2022';
-						position: relative;
-						margin: 0px rem(3);
+						content: '';
+						margin: 0px;
 					}
 				}
-
-				// .time::before {
-				// 	left: em(-2);
-				// }
-				// .loc::before {
-				// 	margin: 0px rem(7);
-				// }
 			}
 
 			.row {

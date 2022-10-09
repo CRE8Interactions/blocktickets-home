@@ -103,9 +103,6 @@
     "uuid": {
       "type": "uid"
     },
-    "eventId": {
-      "type": "string"
-    },
     "resale": {
       "type": "boolean",
       "default": false
@@ -127,6 +124,23 @@
     },
     "listingAskingPrice": {
       "type": "decimal"
+    },
+    "minResalePrice": {
+      "type": "decimal"
+    },
+    "maxResalePrice": {
+      "type": "decimal"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "eventId": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }

@@ -1,49 +1,196 @@
 @use '../abstracts' as *;
+@use './spacing' as *;
+@use './typography' as *;
 @use '../theme/input' as *;
 @use '../theme/buttons' as *;
+@use '../theme/colors' as *;
+@use '../theme/borders' as theme;
 
-.form-control {
-	color: $clr-neutral-4;
-	font-weight: $fw-medium;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	color: $body-color;
+	-webkit-text-fill-color: $body-color;
+	transition: background-color 5000s ease-in-out 0s;
 }
 
-input::placeholder {
-	color: $clr-neutral-4;
-	font-weight: $fw-medium;
+.form-group {
+	& + .form-group {
+		margin-top: $text-spacer-sm;
+	}
+}
+
+.form-switch + .form-switch,
+.form-switch + .form-group,
+.form-group + .form-switch {
+	margin-top: $text-spacer;
+}
+
+.form-control,
+.form-select {
+	&:disabled {
+		opacity: .5;
+	}
+}
+
+.form-floating {
+	label {
+		font-size: $caption;
+	}
+}
+
+.error-border {
+	border-color: $danger;
+}
+
+legend:not(.form-label) {
+	font-weight: $fw-semi-bold;
+	margin-bottom: 0px;
+	padding-bottom: rem(18);
+}
+
+.form-label,
+.form-label--flex {
+	font-weight: $fw-bold;
+	font-size: $caption;
+	padding: 0px;
+	margin-bottom: rem(12);
+	color: $text-muted;
+	text-transform: uppercase;
+}
+
+.form-switch {
+	.form-check-input {
+		height: rem(26);
+	}
+}
+
+.form-text {
+	display: block;
+
+	&.error {
+		color: $danger;
+	}
 }
 
 .form-check {
 	min-height: 0px;
 
-	&-label {
-		font-size: rem(14);
+	&-inline {
+		margin-bottom: 0px;
+	}
+
+	&-label:not(#check-display-checkbox-label) {
+		font-size: $small;
+		font-weight: $fw-medium;
+	}
+
+	&-input:focus {
+		box-shadow: none;
 	}
 }
 
-.form-select {
-	background-size: initial;
-	padding-right: $btn-padding-x-lg;
-	line-height: 1;
+textarea.form-control {
+	&,
+	&:focus {
+		background: $gray-300;
+	}
 }
 
-@mixin input-icon-box($radius: $border-radius, $padding-y: $input-padding-y, $padding-x: $input-padding-x, $color: $clr-neutral-6) {
+.date-picker-card {
 	display: flex;
+	border-radius: theme.$border-radius;
+	border: theme.$border-color solid $border-width;
+	display: flex;
+	width: 100%;
+	cursor: pointer;
+	position: relative;
+
+	&::before {
+		padding-left: rem(12);
+		padding-top: rem(15);
+	}
+
+	&-sm {
+		&::before {
+			padding-top: rem(12);
+		}
+
+		.date-picker input {
+			padding-top: rem(12);
+			padding-bottom: rem(12);
+		}
+	}
+
+	&.day-picker-card {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'calendar'));
+		}
+	}
+
+	&.time-picker-card {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'clock'));
+		}
+	}
+
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+
+	&.error-border {
+		@extend .error-border !optional;
+	}
+
+	.form-label {
+		margin: 0px;
+		text-transform: capitalize;
+		position: relative;
+		padding: $input-padding-y $input-padding-x 0px;
+		font-weight: $fw-medium;
+		color: #6f767e;
+	}
+}
+
+// search field
+@mixin input-icon-box($radius: theme.$border-radius, $color: $clr-neutral-6, $bg: $white, $padding-x: $input-padding-x) {
 	align-items: center;
 	border-radius: $radius;
-	padding: $padding-y $padding-x;
 	border: $input-border-width solid $color;
+	padding-left: $padding-x;
+	background-color: $bg;
 
-	@include breakpoint-min(xl) {
-		padding-left: em(10);
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+
+	.input-group {
+		border: none;
 	}
 
 	.form-control {
+		background-color: transparent;
 		border: none;
-		padding: 0px;
+		border-radius: 0;
 		min-height: auto;
+	}
+
+	.form-control:focus {
+		background-color: transparent;
 	}
 }
 
-#custom-switch {
-	height: 26px;
+// password, tracking link url field
+.input-wrapper {
+	display: flex;
+	@include input-icon-box($bg: transparent);
+	padding-right: $input-padding-x;
+	padding-left: 0px;
+
+	&.input-wrapper-error {
+		@extend .error-border !optional;
+	}
 }

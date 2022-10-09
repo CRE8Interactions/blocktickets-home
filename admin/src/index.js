@@ -1,35 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+// import * as Sentry from "@sentry/react";
+// import { BrowserTracing } from '@sentry/tracing';
+import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import { RequireAuth } from './context/Auth/Auth';
 import App from './App';
-import Home from './pages/Home/Home';
-import Orders from './pages/Orders/Orders';
-import Events from './pages/Events/Events';
-import Sales from './pages/Sales/Sales';
-import Login from './pages/Login/Login';
-// Importing the Bootstrap CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="login" element={<Login />}></Route>
-      <Route path="/" element={
-        <RequireAuth>
-           <App />
-        </RequireAuth>
-      }>
-        <Route path="events" element={<Events />}></Route>
-        <Route path="home" element={<Home />}></Route>
-        <Route path="orders" element={<Orders />}></Route>
-        <Route path="sales" element={<Sales />}></Route>
-      </Route>
-    </Routes>
-  </BrowserRouter>
+import './scss/main.scss';
+
+// Sentry.init({
+// 	dsn: "https://5eae7ca6e6c449aa966af69375b3eb82@o1168708.ingest.sentry.io/6260841",
+// 	integrations: [new BrowserTracing()],
+
+// 	// Set tracesSampleRate to 1.0 to capture 100%
+// 	// of transactions for performance monitoring.
+// 	// We recommend adjusting this value in production
+// 	tracesSampleRate: 1.0,
+// });
+
+ReactDOM.render(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

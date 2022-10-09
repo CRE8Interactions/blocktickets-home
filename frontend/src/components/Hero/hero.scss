@@ -1,81 +1,94 @@
 @use '../../scss/abstracts' as *;
 @use '../../scss/layout/spacing' as *;
-@use '../../scss/layout/typography' as *;
 @use '../../scss/layout/container' as *;
+@use '../../scss/layout/typography' as *;
+@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/borders' as *;
 
-.hero {
-	header {
-		.event-image {
-			@include breakpoint-min(md) {
-				height: 556px;
-			}
-			@include breakpoint-max(lg) {
-				margin-bottom: em(24);
-			}
-			@include breakpoint-inBetween(md, lg) {
-				margin-bottom: em(57);
-			}
+header {
+	&.hero {
+		padding: 10vh $text-spacer 16vh;
+		background-image: url('../../assets/bg.png');
+		background-color: #0000;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		@include full-width();
+
+		@include breakpoint-min(lg) {
+			padding-top: 18vh;
+			padding-bottom: 33vh;
+		}
+
+		.display-1,
+		.subtitle {
+			color: $white;
+			text-align: center;
 		}
 
 		.display-1 {
 			font-size: $h4-font-size;
-			font-family: $font-heading;
-			margin-bottom: $banner-spacer;
-			@extend %multi-line-truncate;
+			font-weight: $fw-semi-bold;
+			margin-bottom: rem(8);
+			line-height: 1.2;
+
+			@include breakpoint-max(lg) {
+				width: 15ch;
+			}
 
 			@include breakpoint-min(md) {
-				font-size: $h1-font-size;
+				font-size: $h2-font-size;
 			}
 		}
 
-		.time-wrapper {
-			span {
-				@include breakpoint-min(xl) {
-					display: block;
+		.subtitle {
+			font-size: $small;
+			font-weight: $fw-medium;
+			line-height: 24px;
+
+			@include breakpoint-max(lg) {
+				width: 35ch;
+			}
+
+			@include breakpoint-min(md) {
+				font-size: $body-2;
+			}
+		}
+
+		.hero-search {
+			margin-top: rem(30);
+
+			.search {
+				flex: 1;
+				padding-right: 0px;
+				padding-left: rem(22);
+
+				&:focus-within {
+					border-right: none;
+				}
+
+				@include breakpoint-min(md) {
+					border-top-right-radius: 0px;
+					border-bottom-right-radius: 0px;
+				}
+
+				input {
+					padding-left: rem(17);
+				}
+
+				.search-icon {
+					order: -1;
 				}
 			}
-		}
 
-		.time-wrapper,
-		.venue-wrapper,
-		.location-wrapper {
-			margin-bottom: $banner-spacer;
-		}
-
-		.venue-wrapper,
-		.location-wrapper {
-			@include breakpoint-inBetween(md, lg) {
-				margin-bottom: 0px;
+			@include breakpoint-min(lg) {
+				width: 863px;
+				margin-left: auto;
+				margin-right: auto;
 			}
-		}
 
-		.venue-wrapper {
-			p:not(.venue-caption) {
-				@extend %multi-line-truncate;
-			}
-		}
-
-		.btn-hero {
-			@include breakpoint-inBetween(md, lg) {
-				width: 50%;
-				margin-top: rem(30);
-			}
-			@include breakpoint-inBetween(lg, xl) {
-				margin-top: auto;
-			}
-		}
-
-		.navigation-buttons {
-			margin-top: em(28);
-			position: relative;
-			z-index: 2;
-
-			@include breakpoint-inBetween(md, lg) {
-				margin-top: em(-49);
-				justify-content: flex-start;
-			}
-			@include breakpoint-min(xl) {
-				margin-top: em(-39);
+			.search-dropdown {
+				top: 71px;
 			}
 		}
 	}

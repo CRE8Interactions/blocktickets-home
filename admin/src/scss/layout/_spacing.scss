@@ -1,98 +1,126 @@
 @use '../abstracts' as *;
-
-// Banner Spacers
-$banner-spacer-md-top: em(100);
-$banner-spacer-md-bottom: em(110);
-$banner-spacer: rem(21);
+@use '../theme/colors' as *;
 
 // Page Spacers
-$spacer-xs: rem(38);
-$spacer-sm: em(64);
-$spacer-md: em(80);
-$spacer-footer-sm-bottom: em(24); // change variable name when you get more pages
-$copyright-spacer: rem(17); // change variable name when you get more pages
+$spacer-md: rem(80);
 
 // Text Spacers
-$heading-spacer: rem(64);
-$title-spacer: rem(30);
-$gap: rem(14);
-$gap-sm: rem(9);
+$heading-spacer: rem(32); // page headings
+$heading-spacer-sm: rem(28);
+$gap: rem(16);
+$gap-sm: rem(10);
 $gap-xs: rem(4);
 
-.spacer-xs {
-	padding: $spacer-xs 0px;
-}
-.spacer {
-	padding: $spacer-sm 0px;
+$text-spacer: rem(32);
+$text-spacer-sm: rem(24);
+$text-spacer-xs: rem(16);
 
-	@include breakpoint-min(md) {
-		padding: $spacer-md 0px;
-	}
+.spacer-md {
+	padding: $spacer-md 0px;
 }
 
-.spacer-lg {
-	padding: $spacer-sm 0px;
-
-	@include breakpoint-min(lg) {
-		padding: $banner-spacer-md-top 0px $banner-spacer-md-bottom;
-	}
+.event-form {
+	padding-bottom: rem(148);
 }
 
-.footer-spacer {
-	padding: $spacer-sm 0px $spacer-footer-sm-bottom;
-
-	@include breakpoint-min(md) {
-		padding-top: $spacer-md;
-	}
-}
-
-.row + .row {
-	margin-top: rem(2);
-
-	@include breakpoint-min(md) {
-		margin-top: rem(3);
-	}
+section + section {
+	margin-top: $text-spacer;
 }
 
 %flex-between {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+}
+
+.row + .row {
+	margin-top: rem(11);
 }
 
 .split-row {
 	@extend %flex-between !optional;
-	* {
-		font-size: $small;
-	}
+	font-size: $small;
 }
 
-.heading--flex {
+.heading--flex,
+.section-heading--flex {
 	@extend %flex-between !optional;
+}
 
+.heading--flex,
+.form-label--flex {
 	& > *,
 	.btn {
-		margin: 0px;
+		margin: 0px !important;
 	}
+}
 
-	.card-title {
-		margin: 0;
+.actions-group-flex,
+.heading--flex {
+	display: flex;
+	align-items: center;
+	gap: $gap;
 
-		&-flex {
-			.card-title {
-				order: 2;
-			}
+	.form-floating,
+	.btn-download {
+		flex-basis: 240px;
+		height: 64px;
+
+		.form-select {
+			height: 100%;
 		}
 	}
-}
-.card-content {
-	margin-top: rem(24);
+
+	.btn-download {
+		flex-basis: 135px;
+	}
+
+	.search {
+		flex: 1;
+		height: 64px;
+	}
 }
 
-@mixin scrollable-padding {
-	padding: rem(8) 0px;
+.form-label--flex {
+	display: flex;
+	gap: $gap-sm;
+
+	legend {
+		width: max-content;
+	}
 }
 
-.scrollable-heading {
-	@include scrollable-padding();
+.stat-row {
+	display: flex;
+	align-items: center;
+	gap: $gap-xs;
+	font-size: $caption;
+	color: $text-muted;
+	font-weight: $fw-semi-bold;
+}
+
+.seperator {
+	padding-top: $text-spacer-sm;
+	margin-top: $text-spacer-sm;
+}
+
+.list-item {
+	padding: $text-spacer-xs $text-spacer-sm;
+	border-radius: 8px;
+	background-color: $gray-300;
+}
+
+#bank-card,
+#tax-card {
+	gap: rem(24);
+
+	@include breakpoint-min(md) {
+		gap: $gap-sm;
+	}
+
+	.info {
+		h1 {
+			margin-bottom: $text-spacer-xs;
+		}
+	}
 }

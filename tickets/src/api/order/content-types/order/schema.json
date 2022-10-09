@@ -56,6 +56,27 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "intentDetails": {
+      "type": "json"
+    },
+    "emailSent": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "eventUuid": {
+      "type": "string"
+    },
+    "gross": {
+      "type": "decimal"
     }
   }
 }

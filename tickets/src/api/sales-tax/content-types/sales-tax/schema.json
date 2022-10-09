@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sales_taxes",
+  "info": {
+    "singularName": "sales-tax",
+    "pluralName": "sales-taxes",
+    "displayName": "salesTax",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "state": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "sales_tax_rates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sales-tax-rate.sales-tax-rate"
+    },
+    "abbreviation": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

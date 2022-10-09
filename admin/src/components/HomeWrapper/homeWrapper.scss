@@ -1,0 +1,13 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/forms' as *;
+@use '../../scss/theme/input' as *;
+
+#events {
+	.search {
+		width: 360px;
+		@include input-icon-box($bg: $clr-lightGray, $color: transparent, $padding-x: $input-padding-y-sm);
+	}
+	.tab-content {
+		flex: 1;
+	}
+}

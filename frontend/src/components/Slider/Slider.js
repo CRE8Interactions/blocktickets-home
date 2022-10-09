@@ -1,42 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-// import { Navigation } from 'swiper';
 import { Swiper } from 'swiper/react';
 // import required modules
-import { Pagination, Navigation } from 'swiper';
+import { Pagination, Navigation, Lazy } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/lazy';
 
-export default function Slider({ addedModule = 'navigation', children }) {
-	let moduleArr;
+export default function Slider({ navigationPrevRef, navigationNextRef, slidesPerView = 'auto', addedModule, children }) {
 
-	if (addedModule === 'pagination') {
-		moduleArr = [
-			Pagination,
-			Navigation
-		];
-	}
-	else {
-		moduleArr = [
-			Navigation
-		];
-	}
+    let moduleArr = [
+        Navigation,
+        Lazy
+    ];
 
-	return (
-		<Swiper
-			preventClicks={false}
-			preventClicksPropagation={false}
-			noSwipingSelector={'button'}
-			spaceBetween={27}
-			slidesPerView={'auto'}
-			pagination={{
-				clickable: true
-			}}
-			navigation={true}
-			modules={moduleArr}>
-			{children}
-		</Swiper>
-	);
+    if (addedModule === 'pagination') {
+        moduleArr = [
+            ...moduleArr,
+            Pagination
+        ];
+    }
+
+    return (
+        <Swiper
+            preventClicks={false}
+            preventClicksPropagation={false}
+            noSwipingSelector={'button'}
+            spaceBetween={27}
+            slidesPerView={slidesPerView}
+            preloadImages={false}
+            watchSlidesProgress={true}
+            lazy={{
+                loadPrevNext: true
+            }}
+            pagination={{
+                clickable: true
+            }}
+            navigation={{
+                nextEl: navigationNextRef?.current,
+                prevEl: navigationPrevRef?.current
+            }}
+            modules={moduleArr}
+            onInit={(swiper) => {
+                swiper.params.navigation.prevEl = navigationPrevRef?.current;
+                swiper.params.navigation.nextEl = navigationNextRef?.current;
+                swiper.navigation.init();
+                swiper.navigation.update()
+            }}>
+            {children}
+        </Swiper>
+    );
 }

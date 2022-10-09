@@ -1,222 +1,286 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { createBankAccount, getBankAccount } from '../../../utilities/api';
 
+import { createBankAccount } from '../../../utilities/api';
+
+import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import { ChequeImg } from '../../ChequeImg';
+import { ChequeImg } from './ChequeImg';
 
-export default function BankAccountDetailsModal({ show, handleClose }) {
-	const [
-		formValid,
-		setFormValid
-	] = useState(false);
+export default function BankAccountDetailsModal({ handleClose, account, show }) {
+    const [
+        formValid,
+        setFormValid
+    ] = useState(false);
 
-	const [
-		routingNumError,
-		setRoutingNumError
-	] = useState(false);
+    const [
+        routingNumError,
+        setRoutingNumError
+    ] = useState(false);
 
-	const [
-		accountNumError,
-		setAccountNumError
-	] = useState(false);
+    const [
+        accountNumError,
+        setAccountNumError
+    ] = useState(false);
 
-	const [
-		formData,
-		setFormData
-	] = useState({});
+    const [
+        formData,
+        setFormData
+    ] = useState(account);
 
-	const [
-		account,
-		setAccount
-	] = useState('checking');
+    const [
+        accountType,
+        setAccountType
+    ] = useState('checking');
 
-	const [
-		firstName,
-		setFirstName
-	] = useState();
+    const [
+        accountName,
+        setAccountName
+    ] = useState('');
 
-	const [
-		lastName,
-		setLastName
-	] = useState();
+    const [
+        firstName,
+        setFirstName
+    ] = useState('');
 
-	const [
-		accountNumber,
-		setAccountNumber
-	] = useState('');
+    const [
+        lastName,
+        setLastName
+    ] = useState('');
 
-	const [
-		routingNumber,
-		setRoutingNumber
-	] = useState('');
+    const [
+        accountNumber,
+        setAccountNumber
+    ] = useState('');
 
-	// reset error when inputs are changed
-	useEffect(
-		() => {
-			validInputs();
-		},
-		[
-			account,
-			firstName,
-			lastName,
-			accountNumber,
-			routingNumber
-		]
-	);
+    const [
+        routingNumber,
+        setRoutingNumber
+    ] = useState('');
 
-	// reset error when accountNumber input changed
-	useEffect(
-		() => {
-			setAccountNumError(false);
-		},
-		[
-			accountNumber
-		]
-	);
+    const [showAlert, setShowAlert] = useState(false);
 
-	// reset error when rountingNumber input change
-	useEffect(
-		() => {
-			setRoutingNumError(false);
-		},
-		[
-			routingNumber
-		]
-	);
+    // update state when there is an account 
+    useEffect(() => {
+        if (account) {
+            setAccountName(account?.accountName);
+            setAccountType(account?.accountType);
+            setFirstName(account?.firstName);
+            setLastName(account?.lastName);
+            setRoutingNumber(account?.routingNumber);
+            setAccountNumber(account?.accountNumber);
+        }
+    }, [account])
 
-	useEffect(() => {
-		validInputs();
 
-		getBankAccount().then((res) => console.log(res)).catch((err) => console.error(err));
-	}, []);
+    // reset error when inputs are changed
+    useEffect(
+        () => {
+            validInputs();
+        },
+        [
+            accountNumber,
+            routingNumber
+        ]
+    );
 
-	const validInputs = () => {
-		if (routingNumber.length < 9) {
-			setRoutingNumError(true);
-		}
-		if (accountNumber.length < 9) {
-			setAccountNumError(true);
-		}
-		if (account && firstName && lastName && accountNumber && routingNumber) {
-			setFormValid(true);
-		}
-		else {
-			setFormValid(false);
-		}
-	};
+    // reset error when state are changed
+    useEffect(
+        () => {
+            checkValid();
+        },
+        [
+            accountType,
+            firstName,
+            lastName,
+            accountNumber,
+            routingNumber,
+            accountName,
+            routingNumError,
+            accountNumError
+        ]
+    );
 
-	const submitForm = () => {
-		let data = {
-			data: {
-				accountType: account,
-				firstName,
-				lastName,
-				accountNumber,
-				routingNumber,
-				currency: 'usd'
-			}
-		};
+    // reset error when accountNumber input changed
+    useEffect(
+        () => {
+            setAccountNumError(false);
+        },
+        [
+            accountNumber
+        ]
+    );
 
-		createBankAccount(data).then((res) => console.log(res)).catch((err) => console.error(err));
-	};
+    // reset error when rountingNumber input change
+    useEffect(
+        () => {
+            setRoutingNumError(false);
+        },
+        [
+            routingNumber
+        ]
+    );
 
-	return (
-		<Fragment>
-			<Modal show={show} centered onHide={handleClose} backdrop={'static'} scrollable animation={false}>
-				<Modal.Header closeButton>
-					<Modal.Title as="h5">Bank Information</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form className="d-flex-column">
-						<Form.Group className="form-group" controlId="account">
-							<Form.Label>Payout Type</Form.Label>
-							<Form.Select
-								name="account"
-								value={account}
-								onChange={(e) => setAccount(e.target.value)}
-								required>
-								<option value="checking">Checking</option>
-								<option value="savings">Savings</option>
-							</Form.Select>
-						</Form.Group>
-						<Form.Group className="form-group" controlId="firstName">
-							<Form.Label>First Name</Form.Label>
-							<Form.Control
-								type="text"
-								placeholder="Enter your first name"
-								required
-								name="firstName"
-								onChange={(e) => setFirstName(e.target.value)}
-							/>
-						</Form.Group>
-						<Form.Group className="form-group" controlId="lastName">
-							<Form.Label>Last Name</Form.Label>
-							<Form.Control
-								type="text"
-								placeholder="Enter your last name"
-								required
-								name="lastName"
-								onChange={(e) => setLastName(e.target.value)}
-							/>
-						</Form.Group>
-						<div className="d-flex-column mt-3 align-items-center">
-							<ChequeImg />
-						</div>
-						<Form.Group className="form-group" controlId="routingNumber">
-							<Form.Label>Routing Number</Form.Label>
-							<Form.Control
-								type="text"
-								placeholder="Enter routing number"
-								required
-								value={routingNumber}
-								pattern="[0-9]*"
-								maxLength="9"
-								name="routingNumber"
-								onChange={(e) =>
-									setRoutingNumber(
-										(routing) =>
-											e.target.validity.valid || e.target.value === '' ? e.target.value : routing
-									)}
-								className={routingNumber && routingNumError ? 'error-border' : ''}
-							/>
-							{routingNumber &&
-							routingNumError && (
-								<Form.Text className="text-danger">Routing Number must be 9 digits</Form.Text>
-							)}
-						</Form.Group>
-						<Form.Group className="form-group" controlId="accountNumber">
-							<Form.Label>Account Number</Form.Label>
-							<Form.Control
-								type="text"
-								placeholder="Enter account number"
-								required
-								value={accountNumber}
-								pattern="[0-9]*"
-								name="accountNumber"
-								onChange={(e) =>
-									setAccountNumber(
-										(acc) =>
-											e.target.validity.valid || e.target.value === '' ? e.target.value : acc
-									)}
-								className={accountNumber && accountNumError ? 'error-border' : ''}
-							/>
-							{accountNumber &&
-							accountNumError && (
-								<Form.Text className="text-danger">
-									Account Number is invalid. Please try again
-								</Form.Text>
-							)}
-						</Form.Group>
+    const validInputs = () => {
+        if (routingNumber && !(routingNumber.length >= 9)) {
+            setRoutingNumError(true);
+        }
+        if (accountNumber && !(accountNumber.length >= 9)) {
+            setAccountNumError(true);
+        }
+    }
 
-						<Button disabled={!formValid} size="lg" onClick={(e) => submitForm()}>
-							Save Bank details
-						</Button>
-					</Form>
-				</Modal.Body>
-			</Modal>
-		</Fragment>
-	);
+    const checkValid = () => {
+        if ((account?.accountType || accountType) && (account?.accountName || accountName) && (account?.firstName || firstName) && (account?.lastName || lastName) && (account?.accountNumber || accountNumber) && (account?.routingNumber || routingNumber) && !routingNumError && !accountNumError) {
+            setFormValid(true);
+        }
+        else {
+            setFormValid(false);
+        }
+    }
+
+    const notificationModal = () => {
+        if (showAlert) {
+            return (
+                <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+                    <p>
+                        Your Bank Details have successfully been updated.
+                    </p>
+                </Alert>
+            );
+        }
+    }
+
+    const submitForm = () => {
+        let data = {
+            data: {
+                accountType: accountType ? accountType : account.accountType,
+                accountName: accountName ? accountName : account.accountName,
+                firstName: firstName ? firstName : account.firstName,
+                lastName: lastName ? lastName : account.lastName,
+                accountNumber: accountNumber ? accountNumber : account.accountNumber,
+                routingNumber: routingNumber ? routingNumber : account.routingNumber,
+                currency: 'usd'
+            }
+        };
+
+        createBankAccount(data).then(() => {
+            location.reload()
+        }).catch(err => console.error(err))
+    };
+
+    return (
+        <Fragment>
+            <Modal show={show} centered onHide={handleClose} backdrop={'static'} scrollable animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title as="h5">Bank Information</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form className="d-flex-column">
+                        {notificationModal()}
+                        <Form.Group className="form-group" controlId="accountName">
+                            <Form.Label>Bank Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter name of bank"
+                                required
+                                name="accountName"
+                                value={accountName}
+                                onChange={(e) => setAccountName(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="form-group" controlId="account">
+                            <Form.Label>Payout Type</Form.Label>
+                            <Form.Select
+                                name="account"
+                                value={accountType}
+                                onChange={(e) => setAccountType(e.target.value)}
+                                required>
+                                <option value="checking">Checking</option>
+                                <option value="savings">Savings</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="form-group" controlId="firstName">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your first name"
+                                required
+                                name="firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="form-group" controlId="lastName">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter your last name"
+                                required
+                                name="lastName"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </Form.Group>
+                        <div className="d-flex-column mt-3 align-items-center">
+                            <ChequeImg />
+                        </div>
+                        <Form.Group className="form-group" controlId="routingNumber">
+                            <Form.Label>Routing Number</Form.Label>
+                            <Form.Control
+                                type="text"
+                                required
+                                value={routingNumber}
+                                pattern="[0-9]*"
+                                placeholder="XXXXXXXX"
+                                maxLength="9"
+                                name="routingNumber"
+                                onBlur={validInputs}
+                                onChange={(e) =>
+                                    setRoutingNumber((routing) =>
+                                        e.target.validity.valid || e.target.value === '' ? e.target.value : routing
+                                    )}
+                                className={routingNumber && routingNumError ? 'error-border' : ''}
+                            />
+                            {routingNumber &&
+                                routingNumError && (
+                                    <Form.Text className="text-danger">Routing Number must be 9 digits</Form.Text>
+                                )}
+                        </Form.Group>
+                        <Form.Group className="form-group" controlId="accountNumber">
+                            <Form.Label>Account Number</Form.Label>
+                            <Form.Control
+                                type="text"
+                                required
+                                value={accountNumber}
+                                pattern="[0-9]*"
+                                placeholder="XXXXXXXX"
+                                maxLength="9"
+                                name="accountNumber"
+                                onBlur={validInputs}
+                                onChange={(e) =>
+                                    setAccountNumber(
+                                        (acc) =>
+                                            e.target.validity.valid || e.target.value === '' ? e.target.value : acc
+                                    )}
+                                className={accountNumber && accountNumError ? 'error-border' : ''}
+                            />
+                            {accountNumber &&
+                                accountNumError && (
+                                    <Form.Text className="text-danger">
+                                        Account Number must be 9 digits
+                                    </Form.Text>
+                                )}
+                        </Form.Group>
+
+                        <Button disabled={!formValid} size="lg" onClick={submitForm}>
+                            Link bank account
+                        </Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+        </Fragment>
+    );
 }

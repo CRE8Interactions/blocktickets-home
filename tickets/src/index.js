@@ -5,14 +5,17 @@ const order = require('./api/order/controllers/order');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const smsNumber = process.env.SMS_NUMBER;
+const smsNotificationsNumber = process.env.SMS_NOTIFICATIONS_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const blockchain = process.env.BLOCKCHAIN;
-const messagingServiceSid = process.env.MG80e1372892690914b598b6478a992c1a;
+const messagingServiceSid = process.env.MESSAGING_SERVICE_SID;
+const notificationsServiceSid = process.env.MESSAGING_NOTIFICATIONS_SERVICE_SID;
 const myPhone = process.env.TWILIO_PHONE;
 const geoURI = process.env.GEO_URI;
 const geoApiKey = process.env.GCP_API_KEY;
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const orderId = require('order-id')('blocktickets');
+const moment = require('moment');
 // Encrypts user data
 const options = {
   password: process.env.EC_PASSWORD || 'blocktickets',
@@ -70,13 +73,262 @@ module.exports = {
           }
         })
       }
+
+      const orgPermissionCount = await strapi.db.query('api::organization-permission.organization-permission').count()
+
+      if (orgPermissionCount === 0) {
+        const permissions = [
+          {
+              key: "settings",
+              name: "Edit organization info"
+          },
+          {
+            key: "settings",
+              name: "Edit roles & add team members"
+          },
+          {
+              key: "settings",
+              name: "Edit payment information"
+          },
+          {
+              key: "settings",
+              name: "View payouts"
+          },
+          {
+              key: "settings",
+              name: "Edit tax status"
+          },
+          {
+              key: "management",
+              name: "Create / edit an event"
+          },
+          {
+            key: "management",
+              name: "View dashboard"
+          },
+          {
+            key: "management",
+              name: "View orders"
+          },
+          {
+            key: "management",
+              name: "Issue refunds"
+          },
+          {
+            key: "management",
+              name: "Edit & add guest list"
+          },
+          {
+            key: "management",
+              name: "Attendees (check in)"
+          },
+          {
+            key: "management",
+              name: "Edit & add tracking links"
+          }
+        ];
+
+        permissions.map(async (permission) => {
+          await strapi.db.query('api::organization-permission.organization-permission').create({
+            data: {
+              name: permission.name,
+              key: permission.key
+            }
+          })
+        })
+      }
+
+      const salesTaxCount = await strapi.db.query('api::sales-tax.sales-tax').count()
+
+      if (salesTaxCount === 0) {
+        let taxRates = [
+          {state: 'texas', city: 'dallas', stateTaxRate: 6.25, localTaxRate: 2.0, combinedTaxRate: 8.25, abbreviation: 'tx' },
+          {state: 'texas', city: 'san antonio', stateTaxRate: 6.25, localTaxRate: 2.0, combinedTaxRate: 8.25, abbreviation: 'tx'  },
+          {state: 'texas', city: 'houston', stateTaxRate: 6.25, localTaxRate: 0, combinedTaxRate: 6.25, abbreviation: 'tx'  },
+          {state: 'north carolina', city: 'raleigh', stateTaxRate: 4.75, localTaxRate: .25, combinedTaxRate: 5.0, abbreviation: 'nc'  },
+          {state: 'connecticut', city: 'all', stateTaxRate: 6.35, localTaxRate: 0, combinedTaxRate: 6.35, abbreviation: 'ct'  },
+          {state: 'delaware', city: 'all', stateTaxRate: 0, localTaxRate: 0, combinedTaxRate: 0, abbreviation: 'de'  },
+          {state: 'district of columbia', city: 'washington', stateTaxRate: 6.0, localTaxRate: 0, combinedTaxRate: 6.0, abbreviation: 'dc'  },
+          {state: 'indiana', city: 'all', stateTaxRate: 7.0, localTaxRate: 0, combinedTaxRate: 7.0, abbreviation: 'in'  },
+          {state: 'maryland', city: 'all', stateTaxRate: 6.0, localTaxRate: 0, combinedTaxRate: 6.0, abbreviation: 'md'  },
+        ]
+
+        
+        for await(let rate of taxRates) {
+          let str = await strapi.db.query('api::sales-tax-rate.sales-tax-rate').create({
+            data: {
+              state: rate.state, city: rate.city, stateTaxRate: rate.stateTaxRate, localTaxRate:rate.localTaxRate, combinedTaxRate: rate.combinedTaxRate
+            },
+          });
+
+          let st = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+            where: { state: rate.state.toLowerCase() },
+            populate: {
+              sales_tax_rates: true
+            }
+          });
+
+          if (!st) {
+            let st = await strapi.db.query('api::sales-tax.sales-tax').create({
+              data: {
+                state: rate.state.toLowerCase(),
+                abbreviation: rate.abbreviation.toLowerCase(),
+                sales_tax_rates: str
+              },
+              populate: {
+                sales_tax_rates: true
+              }
+            });
+          } else {
+            await strapi.db.query('api::sales-tax.sales-tax').update({
+              where: { id: st.id },
+              data: {
+                sales_tax_rates: [...st.sales_tax_rates, str],
+              },
+            });
+          }
+        }
+      }
+
+      if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "preview") {
+
+        const hasUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: {
+            email: {
+              $eq: 'staff@blocktickets.xyz'
+            },
+          },
+        })
+
+        if (hasUser) { console.log('Found User'); return }
+
+        const role = await strapi.db.query('plugin::users-permissions.role').findOne({
+          where: {
+            name: 'Organizer'
+          }
+        })
+
+        const userObj = {
+          data: {
+            username: 'blocktickets',
+            email: 'staff@blocktickets.xyz',
+            phoneNumber: '+12024509090',
+            firstName: 'Block',
+            lastName: 'Mafia',
+            gender: 'other',
+            role,
+            confirmed: true,
+            password: 'blocktickets'
+          }
+        }
+
+        let user = await strapi.service('api::verify.verify').createUser(userObj)
+
+        const org = await strapi.db.query('api::organization.organization').findOne({
+          where: { name: 'BlockTickets' },
+          populate: { members: true },
+        });
+
+        if (org.members.length === 0) {
+          await strapi.db.query('api::organization.organization').update({
+            where: { name: 'BlockTickets' },
+            data: {
+              members: [user],
+            },
+          });
+        }
+      }
+    }
+
+    let resetDevelopmentEnv = async () => {
+      await strapi.db.query('api::ticket.ticket').updateMany({
+        where: {
+          $or: [
+            {
+              on_sale_status: { $notIn: 'available'}
+            },
+            {
+              transferred: true,
+            },
+            {
+              resale: true,
+            }
+          ]
+        },
+        data: {
+          on_sale_status: 'available',
+          trasferred: false,
+          resale: false,
+          listingAskingPrice: null,
+          listingId: null
+        },
+      });
+
+      await strapi.db.query('api::order.order').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::ticket-transfer.ticket-transfer').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::listing.listing').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::history.history').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::payment-information.payment-information').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::verify.verify').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
+
+      await strapi.db.query('api::tracking.tracking').deleteMany({
+        where: {
+          createdAt: {
+            $lte: new Date()
+          },
+        },
+      });
     }
 
     initOrganization()
     initCategories()
-
+    // resetDevelopmentEnv()
+    
     strapi.db.lifecycles.subscribe({
-      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization', 'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information'],
+      models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization',
+                'api::venue.venue', 'api::event.event', 'api::order.order', 'api::ticket-transfer.ticket-transfer', 'api::payment-information.payment-information',
+                'api::update-number.update-number', 'api::listing.listing', 'api::invite-team-member.invite-team-member'],
       async afterCreate(event) {
         // afterCreate lifecycle
         const {
@@ -84,25 +336,54 @@ module.exports = {
           params
         } = event;
 
+        // Changes on Invite
+        if (event.model.singularName === 'invite-team-member') {
+          // Doesnt work
+          if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendMemberInvite(params);
+        }
+
+        // Changes on Organization
+        if (event.model.singularName === 'organization') {
+          let orgPermissions = await strapi.entityService.findMany('api::organization-permission.organization-permission');
+
+          let role = await strapi.db.query('api::organization-role.organization-role').create({
+            data: {
+              name: 'Admin',
+              organization: result.id,
+              organization_permissions: [...orgPermissions]
+            }
+          })
+
+          const org = await strapi.entityService.findOne('api::organization.organization', result.id, {
+            populate: { members: true },
+          }); 
+
+          if (org.members.length === 1) {
+            let admin = org.members[0]
+            await strapi.entityService.update('plugin::users-permissions.user', admin.id, {
+              data: {
+                organization_role: role.id,
+              },
+            }); 
+          }
+        }
+
         // Changes on ticket transer
         if (event.model.singularName === 'ticket-transfer') {
           // dont send SMS when running test
           if (process.env.NODE_ENV === 'test') return;
 
-          await client.messages
-            .create({
-              body: `${params.data.fromUser.firstName} ${params.data.fromUser.lastName} has transferred you ticket(s) to ${params.data.event.name}, Log in or create a new account on BlockTicket.xyz and go to My Wallet and select My Events to claim your ticket(s)`,
-              messagingServiceSid: messagingServiceSid,
-              to: params.data.phoneNumberToUser,
-              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
-            })
-            .then(message => console.log(message.body))
-            .done()
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`${params.data.fromUser.firstName} ${params.data.fromUser.lastName} is sending you ticket(s) to ${params.data.event.name}. To Accept: https://blocktickets.xyz`);
+            return
+          }
+
+          strapi.service('api::notification.notification').transferTickets(params);
         }
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
-          if (params.data.status === 'completeFromTransfer') return
+          if (params.data.status === 'completeFromTransfer' || event.params.data.paymentIntentId === "0") return
           const paymentIntent = await stripe.paymentIntents.update(
             event.params.data.paymentIntentId,
             { metadata: {order_id: result.id }}
@@ -116,7 +397,7 @@ module.exports = {
           const address2 = address.address_2;
           const city = address.city;
           const state = address.state;
-          const query = `${address1},${city},${state}&key=${geoApiKey}`
+          const query = `${address1},${city},${state}&key=${geoApiKey}`;
           let geometry;
 
           const config = {
@@ -131,6 +412,8 @@ module.exports = {
             })
             .catch(err => console.log(err))
 
+          if (!geometry) return;
+
           await strapi.entityService.update('api::venue.venue', result.id, {
             data: {
               address: [{
@@ -139,8 +422,8 @@ module.exports = {
                 address_2: result.address[0].address_2,
                 city: result.address[0].city,
                 state: result.address[0].state,
-                latitude: String(geometry.location.lat),
-                longitude: String(geometry.location.lng)
+                latitude: String(geometry?.location.lat),
+                longitude: String(geometry?.location.lng)
               }],
             },
           });
@@ -173,24 +456,38 @@ module.exports = {
           // Create message based on role
           let message;
           if (role === 'Organizer') {
-            message = `You've been granted ${role} access in BlockTickets.xyz.  You may create or edit Organization information which your a member of.`
+            message = `You've been granted ${role} access in blocktickets.xyz.  You may create or edit Organization information which your a member of.`
           } else {
-            message = `You've been added to the ${organization.name} organization at BlockTickets.xyz`;
+            message = `You've been added to the ${organization.name} organization at blocktickets.xyz`;
+          }
+
+          if (process.env.NODE_ENV === 'test') return;
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log(message);
+            return
           }
 
           await client.messages
             .create({
               body: message,
-              messagingServiceSid: messagingServiceSid,
+              messagingServiceSid: notificationsServiceSid,
               to: phoneNumber,
               from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
             })
             .then(message => console.log(message.body))
+            .catch(error => console.log('Twilio Role Notification Error ', error))
             .done()
         }
       },
       async beforeCreate(event) {
         // beforeCreate lifeclcyle
+
+        // Changes on Invite
+        if (event.model.singularName === 'invite-team-member') {
+          let code = await strapi.service('api::utility.utility').generateCode();
+          event.params.data.inviteCode = code
+        }
 
         // Changes on payment-formation model
         if (event.model.singularName === 'payment-information') {
@@ -204,23 +501,30 @@ module.exports = {
             })
         }
 
+        // Changes on listing model
+        if (event.model.singularName === 'invite-team-member') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
+
+        // Changes on listing model
+        if (event.model.singularName === 'listing') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
+
+        // Changes on ticket model
+        if (event.model.singularName === 'ticket') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
 
         // Changes on Order model
         if (event.model.singularName === 'order') {
           event.params.data.orderId = orderId.generate();
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on Organization model
         if (event.model.singularName === 'organization') {
-          let email = event.params.data.creatorId;
-          const user = await strapi.db.query('plugin::users-permissions.user').findOne({
-            where: {
-              email: email
-            }
-          })
-          event.params.data.uuid = Math.floor(Math.random() * 900000000) + 100000000;
-          event.params.data.creatorId = user.id
-          event.params.data.members = [user];
+          event.params.data.uuid =  await strapi.service('api::utility.utility').generateUUID();
           // Creates web3 wallet for organization
           const web3 = await new Web3API(new Web3API.providers.HttpProvider(blockchain));
           const account = await web3.eth.accounts.create(web3.utils.randomHex(32));
@@ -239,20 +543,36 @@ module.exports = {
 
         // Changes on event model
         if (event.model.singularName === 'event') {
-          const categories = await strapi.db.query('api::category.category').findOne({
-            where: {
-              id: event.params.data.categories
-            }
-          })
-
           const venue = await strapi.db.query('api::venue.venue').findOne({
             where: {
               id: event.params.data.venue
             }
           })
 
+          const feeStructure = await strapi.db.query('api::fee-structure.fee-structure').create({
+            data: {
+              stripeServicePecentage: 2.9,
+              stripeCharge: .30,
+              primaryUnder20: 1,
+              primaryOver20: 5,
+              secondaryServiceFeeSeller: 15,
+              secondaryServiceFeeBuyer: 10
+            }
+          })
+
           event.params.data.venue = venue.id
-          event.params.data.categories = [categories]
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+          event.params.data.fee_structure = feeStructure.id
+        }
+
+        // Changes on Venue model
+        if (event.model.singularName === 'venue') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
+
+        // Changes on Category model
+        if (event.model.singularName === 'category') {
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
         }
 
         // Changes on user model
@@ -268,7 +588,8 @@ module.exports = {
           event.params.data.username = event.params.data.email.toLowerCase()
           event.params.data.firstName = event.params.data.firstName.toLowerCase()
           event.params.data.lastName = event.params.data.lastName.toLowerCase()
-          event.params.data.gender = event.params.data.gender.toLowerCase()
+          // event.params.data.gender = event.params.data.gender.toLowerCase()
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID()
         }
 
         // Changes on profile model
@@ -286,14 +607,37 @@ module.exports = {
           })
 
           event.params.data.wallet = myWallet.id
+          event.params.data.uuid = await strapi.service('api::utility.utility').generateUUID();
+        }
+
+        // Changes on updateNumber
+        if (event.model.singularName === 'update-number') {
+          let code = await strapi.service('api::utility.utility').generateCode();
+          event.params.data.code = code;
+          console.log(`Use code ${code} to update your phone number to ${event.params.data.toNumber} `)
+          if (process.env.NODE_ENV === 'development') return;
+          await client.messages
+            .create({
+              body: `Use code ${code} to update your phone number to ${event.params.data.toNumber} `,
+              messagingServiceSid: notificationsServiceSid,
+              to: event.params.data.toNumber,
+              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
+            })
+            .then(message => console.log(message.body))
+            .catch(error => console.log('Twilio Verification Error ', error))
+            .done()
         }
 
         // Changes on verfiy model
         if (event.model.singularName === 'verify') {
           let phoneNumber = event.params.data.phoneNumber;
+          let email = event.params.data.email;
           const account = await strapi.db.query('api::verify.verify').findOne({
             where: {
-              phoneNumber: phoneNumber
+              $or: [
+                { phoneNumber: phoneNumber },
+                { email: email }
+              ]
             }
           })
           if (account) {
@@ -309,20 +653,24 @@ module.exports = {
           // dont send SMS when running test
           if (process.env.NODE_ENV === 'test') return;
 
-          await client.messages
-            .create({
-              body: `${code} is your temporary verification code to login at BlockTickets.xyz`,
-              messagingServiceSid: messagingServiceSid,
-              to: phoneNumber,
-              from: process.env.NODE_ENV === 'development' ? myPhone : smsNumber,
-            })
-            .then(message => console.log(message.body))
-            .done()
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`Blocktickets: ${code} is your verification code. Code expires in 5 minutes. Do not share with anyone.`);
+            return
+          }
+          
+          if (event.params.data.phoneNumber) {
+            strapi.service('api::notification.notification').loginNotification(code, phoneNumber)
+          }
+
+          if (event.params.data.email) {
+            if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').sendAccessCode(event, code);
+          }
         }
       },
       async beforeUpdate(event) {
         // Updates on payment-formation model
         if (event.model.singularName === 'payment-information') {
+          if (!event.params.data.accountNumber) return
           await encryption
             .encrypt(event.params.data.accountNumber)
             .then(enc => {
@@ -332,6 +680,13 @@ module.exports = {
               console.error('Enc error: ', err)
             })
         }
+        // Updates on Order
+        if (event.model.singularName === 'order') {
+          event.state = event.params;
+        }
+      },
+      async afterUpdateMany(event) {
+        const { result, params, state } = event;
       }
     });
   },

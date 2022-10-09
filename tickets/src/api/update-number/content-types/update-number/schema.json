@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "update_numbers",
+  "info": {
+    "singularName": "update-number",
+    "pluralName": "update-numbers",
+    "displayName": "updateNumber",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fromNumber": {
+      "type": "string"
+    },
+    "toNumber": {
+      "type": "string"
+    },
+    "code": {
+      "type": "biginteger"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

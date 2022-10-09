@@ -1,53 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import React, { useRef, useState, useEffect } from 'react';
 
-import { getMyEvents, getIncomingTransfers, acceptIncomingTransfers } from '../../utilities/api';
+import { getMyEvents, getIncomingTransfers, acceptIncomingTransfers, getGuestList } from '../../utilities/api';
 
+import { EmptyContainer } from '../EmptyContainer';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { MyEventsSlider } from '../Slider/MyEventsSlider';
+import { MyEventsSlider } from './MyEventsSlider';
+import authService from '../../utilities/services/auth.service';
 
 export default function MyEventsWrapper() {
-	const [
-		orders,
-		setOrders
-	] = useState([]);
 
-	const [transfers, setTransfers] = useState([])
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null);
 
-	const getMyTickets = () => {
-		getMyEvents()
-			.then((res) => {
-				setOrders(res.data)
-			})
-			.catch((err) => console.error(err));
+    const { getUser } = authService;
+    const user = getUser().user;
 
-		getIncomingTransfers()
-			.then((res) => setTransfers(res.data))
-			.catch((err) => console.log(err))
-	}
+    const [
+        orders,
+        setOrders
+    ] = useState([]);
 
-	useEffect(() => {
-		getMyTickets()
-	}, []);
+    const [
+        transfers,
+        setTransfers
+    ] = useState([]);
 
-	const acceptTransfer = (transfer) => {
-		let data = {
-			transferId: transfer.id
-		}
-		acceptIncomingTransfers(data)
-			.then((res) => getMyTickets())
-			.catch((err) => console.error(err))
-	}
+    const [
+        guestLists,
+        setGuestLists
+    ] = useState([]);
 
-	return (
-		<section className="spacer-xs">
-			<div className="section-heading-sm">
-				<h1>My Events</h1>
-				<div className="tablet-desktop-only">
-					<SwiperNavigationButtons />
-				</div>
-			</div>
-			<MyEventsSlider orders={orders} transfers={transfers} acceptTransfer={acceptTransfer}  />
-		</section>
-	);
+    const getMyTickets = () => {
+        getMyEvents()
+            .then((res) => {
+                setOrders(res.data);
+            })
+            .catch((err) => console.error(err));
+
+        getIncomingTransfers().then((res) => setTransfers(res.data)).catch((err) => console.log(err));
+
+        getGuestList(encodeURIComponent(user?.phoneNumber))
+            .then((res) => setGuestLists(res.data))
+            .catch((err) => console.error(err))
+    };
+
+    useEffect(() => {
+        getMyTickets();
+    }, []);
+
+    const acceptTransfer = (transfer) => {
+        let data = {
+            transferId: transfer.id
+        };
+        acceptIncomingTransfers(data).then((res) => getMyTickets()).catch((err) => console.error(err));
+    };
+
+    return (
+        <section className="spacer-xs">
+            <div className="section-heading-sm">
+                <h1>My events</h1>
+                <div className="tablet-desktop-only">
+                    <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
+                </div>
+            </div>
+            {orders?.filter(order => order.event !== null).length > 0 || guestLists.length > 0 ? (
+                <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} guestLists={guestLists} />
+            ) : (
+                <EmptyContainer>
+                    <h1>You do not have any events</h1>
+                </EmptyContainer>
+            )}
+        </section>
+    );
 }

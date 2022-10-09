@@ -15,5 +15,15 @@ module.exports = {
       path: '/events/search',
       handler: 'event.search'
     },
+    {
+      method: 'POST',
+      path: '/events/clear-all',
+      handler: 'event.refreshAll'
+    },
+    {
+      method: 'PUT',
+      path: '/events/update-event',
+      handler: 'event.updateEvent'
+    },
   ]
 }

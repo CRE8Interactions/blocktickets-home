@@ -1,72 +1,89 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
-import { getEvent, getEventTickets, getResaleTickets } from '../../utilities/api';
 import TicketContext from '../../context/Ticket/Ticket';
+
+import { getAllEventTickets, getTaxRates } from '../../utilities/api';
 
 import { Event, PurchaseTickets } from '../../components';
 
 export default function TicketsPage() {
-	let { id } = useParams();
+    let { id } = useParams();
 
-	const [
-		event,
-		setEvent
-	] = useState();
-	const [
-		tickets,
-		setTickets
-	] = useState();
-	const [
-		generalAdmissionCount,
-		setGaCount
-	] = useState();
-	const [
-		generalAdmissionTicket,
-		setGaTicket
-	] = useState();
-	const [
-		reSaleTickets,
-		setResaleTickets
-	] = useState();
+    // A custom hook that builds on useLocation to parse
+    // the query string for you.
+    function useQuery() {
+    const { search } = useLocation();
+  
+        return React.useMemo(() => new URLSearchParams(search), [search]);
+    }
 
-	useEffect(
-		() => {
-			getEventTickets(id)
-				.then((res) => {
-					setTickets(res.data.data);
-					let generalAdminssionCount = res.data.data.map(
-						(ticket) =>
-							ticket.attributes.generalAdmission === true &&
-							ticket.attributes.on_sale_status === 'available'
-					).length;
-					let generalAdmissionTicket = res.data.data.find(
-						(ticket, index) =>
-							ticket.attributes.generalAdmission === true &&
-							ticket.attributes.on_sale_status === 'available'
-					);
-					setGaCount(generalAdminssionCount);
-					setGaTicket(generalAdmissionTicket);
-				})
-				.catch((err) => console.error(err));
+    let query = useQuery();
+    let code = query.get("code") ? query.get("code") : 0;
 
-			getEvent(id).then((res) => setEvent(res.data)).catch((err) => console.error(err));
+    const [
+        event,
+        setEvent
+    ] = useState();
+    const [
+        tickets,
+        setTickets
+    ] = useState();
+    const [
+        listings,
+        setListings
+    ] = useState();
+    const [
+        generalAdmissionCount,
+        setGaCount
+    ] = useState();
+    const [
+        generalAdmissionTicket,
+        setGaTicket
+    ] = useState();
+    const [
+        reSaleTickets,
+        setResaleTickets
+    ] = useState();
+    const [
+        taxRates,
+        setTaxRates
+    ] = useState();
+    const [
+        feeStructure,
+        setfeeStructure
+    ] = useState();
 
-			getResaleTickets(id).then((res) => setResaleTickets(res.data.data)).catch((err) => console.error(err));
-		},
-		[
-			id
-		]
-	);
+	useEffect(() => {
+		getAllEventTickets(id, code)
+			.then((res) => {
+                setfeeStructure(res.data.event.fee_structure)
+				setTickets(res.data?.tickets)
+				setEvent(res.data?.event)
+                setListings(res.data?.listings)
+                eventTaxRates(res.data?.event?.venue?.address[0]?.city, res.data?.event?.venue?.address[0]?.state)
+			})
+			.catch((err) => console.error(err))
+        
+            
 
-	return (
-		<div className="full-height-wrapper">
-			<TicketContext.Provider value={{ tickets, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
-				<div className="pt-md-3">
-					<Event event={event} />
-				</div>
-				<PurchaseTickets />
-			</TicketContext.Provider>
-		</div>
-	);
+            
+	}, [id, code])
+
+    const eventTaxRates = (city, state) => {
+        getTaxRates(city, state)
+                .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
+                .catch((err) => console.error(err))
+    }
+
+    return (
+        <div className="full-height-wrapper">
+            <TicketContext.Provider value={{ tickets, listings, generalAdmissionCount, generalAdmissionTicket, reSaleTickets }}>
+                <div className="pt-md-3">
+                    <Event event={event} />
+                </div>
+                <PurchaseTickets code={code} taxRates={taxRates} feeStructure={feeStructure} />
+            </TicketContext.Provider>
+        </div>
+    );
 }

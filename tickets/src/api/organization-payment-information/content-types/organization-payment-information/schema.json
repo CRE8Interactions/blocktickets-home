@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_payment_informations",
+  "info": {
+    "singularName": "organization-payment-information",
+    "pluralName": "organization-payment-informations",
+    "displayName": "organizationPaymentInformation"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "accountType": {
+      "type": "string"
+    },
+    "bankName": {
+      "type": "string",
+      "required": true
+    },
+    "routingNumber": {
+      "type": "string",
+      "required": true
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "currency": {
+      "type": "string",
+      "default": "usd",
+      "required": false
+    },
+    "receivingCountry": {
+      "type": "string",
+      "default": "us"
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "address.address"
+    }
+  }
+}

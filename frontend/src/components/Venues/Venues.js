@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { VenuesSlider } from './../Slider/VenuesSlider';
+import { VenuesSlider } from './VenuesSlider';
 
 import './venues.scss';
 
-export default function Venues(props) {
-	const { venues } = props;
+export default function Venues({ venues }) {
 
-	return (
-		<section className="spacer">
-			<div className="section-heading">
-				<h1>Venues</h1>
-				<SwiperNavigationButtons />
-			</div>
-			<div>
-				<VenuesSlider venues={venues} />
-			</div>
-		</section>
-	);
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null)
+
+    return (
+        <section className="spacer">
+            <div className="section-heading">
+                <h1>Venues</h1>
+                <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
+            </div>
+            <div>
+                <VenuesSlider venues={venues} navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
+            </div>
+        </section>
+    );
 }

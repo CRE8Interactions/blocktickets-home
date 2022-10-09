@@ -1,5 +1,6 @@
 import axios from "axios";
 import authService from './services/auth.service';
+import moment from 'moment';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API,
@@ -27,7 +28,11 @@ export const verifyUser = (data) => {
 }
 
 export const verifiyCode = (data) => {
-  return instance.post('/verifies/byPhone', data)
+  return instance.post('/verifies/by-phone-or-email', data)
+}
+
+export const phoneUnique = (data) => {
+  return instance.post('/verifies/phone-unique', data)
 }
 
 export const createNewUser = (data) => {
@@ -62,12 +67,25 @@ export const getVenues = async () => {
   return instance.get('/venues')
 }
 
+export const getGuestPasses = async (eventId, phoneNumber) => {
+  return instance.get(`/guest-passes?filters[eventId][$eq]=${eventId}&filters[phoneNumber][$eq]=${phoneNumber}`)
+}
+
+export const getGuestList = async (phoneNumber) => {
+  return instance.get(`/guest-lists?phoneNumber=${phoneNumber}`)
+}
+
 export const getVenue = async (id) => {
   return instance.get(`/venues?filters[id][$eq]=${id}`)
 }
 
 export const getEvents = async () => {
-  return instance.get('/events?filters[status][$eq]=on_sale')
+  let date = new Date().toISOString();
+  return instance.get(`/events?filters[status][$eq]=on_sale&filters[start][$gte]=${date}`)
+}
+
+export const getTaxRates = async (city, state) => {
+  return instance.get(`organizations/tax-rates?city=${city}&state=${state}`)
 }
 
 export const searchEvents = async (q) => {
@@ -83,7 +101,12 @@ export const getEvent = async (id) => {
 }
 
 export const getEventTickets = async (id) => {
-  return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available`)
+  let date = moment().toISOString();
+  return instance.get(`/tickets?filters[eventId][$eq]=${id}&filters[on_sale_status][$eq]=available&filters[sales_start][$lte]=${date}&filters[sales_end][$gte]=${date}`)
+}
+
+export const getAllEventTickets = async (id, code) => {
+  return instance.get(`/tickets/available?eventUUID=${id}&code=${code}`)
 }
 
 export const createTicketTransfer = (data) => {
@@ -100,6 +123,10 @@ export const createBankAccount = (data) => {
 
 export const getBankAccount = () => {
   return instance.get('/payment-informations/0')
+}
+
+export const removeBankAccount = () => {
+  return instance.get('/payment-information/deactive')
 }
 
 export const getMyTransfers = () => {
@@ -122,8 +149,16 @@ export const createListing = (data) => {
   return instance.post('/listings', data)
 }
 
+export const getListingsByEvent = (id) => {
+  return instance.get(`/listings/byEvent?id=${id}`)
+}
+
 export const getMyListings = () => {
   return instance.get('/listings/mylisting')
+}
+
+export const getAvailableFunds = () => {
+  return instance.get('/listings/available-funds')
 }
 
 export const removeMyListings = (id) => {
@@ -136,4 +171,16 @@ export const updateMyListings = (id, data) => {
 
 export const getResaleTickets = (eventId) => {
   return instance.get(`/tickets?filters[eventId][$eq]=${eventId}&filters[on_sale_status][$eq]=resaleAvailable`)
+}
+
+export const validEmail = (data) => {
+  return instance.post('/verifies/emailValid', data)
+}
+
+export const requestNumberChange = (data) => {
+  return instance.post('/verifies/change-number', data)
+}
+
+export const updateNumber = (data) => {
+  return instance.post('/verifies/confirm-update', data)
 }

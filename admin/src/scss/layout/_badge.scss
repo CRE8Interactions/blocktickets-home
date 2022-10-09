@@ -1,13 +1,49 @@
 @use '../abstracts' as *;
+@use '../theme/colors' as *;
 
-.badge-outline {
-	text-transform: uppercase;
-	border-style: solid;
-	border-width: $border-width;
-	background-color: $clr-white !important;
+.badge {
+	--opac: 0.10;
 
-	&--primary {
-		color: $clr-primary;
-		border-color: $clr-primary;
+	&--success {
+		background-color: rgba($success, var(--opac));
+	}
+
+	&--danger {
+		background-color: rgba($danger, var(--opac));
+	}
+
+	&-label {
+		text-transform: lowercase;
+		color: $body-color;
+		font-size: $small;
+		font-weight: $fw-normal;
+		border-radius: $br-sm;
+	}
+
+	&-outline {
+		text-transform: uppercase;
+		border-style: solid;
+		border-width: 2px;
+		background-color: transparent;
+
+		&--primary {
+			color: $primary;
+			border-color: $primary;
+		}
+
+		&--secondary {
+			color: $secondary;
+			border-color: $secondary;
+		}
+
+		&--success {
+			color: $success;
+			border-color: $success;
+		}
+
+		&--dark {
+			color: $body-color;
+			border-color: $gray-200;
+		}
 	}
 }

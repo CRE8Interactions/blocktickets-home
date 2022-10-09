@@ -3,10 +3,17 @@
 @use 'spacing' as *;
 @use '../theme/input' as *;
 @use '../theme/colors' as *;
+@use '../theme/borders' as *;
 
 %btn-background {
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+.btn {
+	&:active {
+		border-color: transparent !important;
+	}
 }
 
 .btn + .btn {
@@ -17,10 +24,6 @@
 	align-items: center;
 	> .btn {
 		margin: 0px;
-
-		&:not(.btn--icon) {
-			flex: 1;
-		}
 	}
 }
 
@@ -52,7 +55,7 @@ button,
 	&:hover,
 	&:focus,
 	&:disabled {
-		color: $white;
+		color: $white !important;
 	}
 }
 
@@ -89,11 +92,7 @@ button,
 			flex-basis: 95px;
 		}
 	}
-	// label.btn:hover,
-	// label.btn:focus {
-	// 	outline: 1px solid $primary;
-	// 	outline-offset: inset;
-	// }
+
 	.btn-check {
 		&:checked,
 		&:focus {
@@ -115,6 +114,8 @@ button,
 }
 
 .btn-link {
+	font-family: $font-body;
+	font-weight: $fw-medium;
 	margin-top: 0px;
 	padding: 0px;
 	border: 0;
@@ -125,6 +126,7 @@ button,
 	padding: 0px;
 	margin-top: 0px;
 }
+
 .btn--icon {
 	@extend %btn-icon !optional;
 	width: 40px;
@@ -158,26 +160,6 @@ button,
 	text-align: left;
 }
 
-.btn--input {
-	@extend %btn-background !optional;
-	padding: em(17);
-	border: none;
-
-	&-default {
-		background-color: $secondary;
-		background-image: url('../../assets/icons/right-arrow-white.svg');
-	}
-
-	&-loading {
-		background-image: url('../../assets/icons/loading.svg');
-	}
-
-	&-success {
-		background-color: $green;
-		background-image: url('../../assets/icons/checkmark.svg');
-	}
-}
-
 .icon-button {
 	@extend %icon-text-box !optional;
 	justify-content: center;
@@ -185,6 +167,18 @@ button,
 	&::before,
 	&::after {
 		line-height: 0;
+	}
+}
+
+.btn--icon {
+	@extend .icon-button !optional;
+}
+
+.btn-plus {
+	@extend .icon-button !optional;
+	gap: $gap-sm;
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'plus'));
 	}
 }
 

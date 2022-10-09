@@ -1,8 +1,7 @@
 @use '../../scss/abstracts' as *;
-@use '../../scss/layout/links' as *;
-@use '../../scss/layout/typography' as *;
-@use '../../scss/layout/container' as *;
+@use '../../scss/layout' as *;
 @use '../../scss/theme/buttons' as *;
+@use '../../scss/theme/colors' as *;
 
 .navigation {
 	&.position-sticky {
@@ -39,13 +38,9 @@
 
 		&-brand {
 			padding-top: rem(3);
-			@include breakpoint-min(lg) {
-				border-right: border(2px);
-				padding-right: rem(13);
-			}
 
-			@include breakpoint-min(xl) {
-				padding-right: rem(47);
+			@include breakpoint-min(lg) {
+				padding-right: rem(13);
 			}
 		}
 
@@ -55,6 +50,11 @@
 
 		&-collapse {
 			z-index: 999;
+
+			@include breakpoint-max(lg) {
+				padding: 0px $nav-link-padding-x;
+				margin: $nav-link-margin;
+			}
 		}
 
 		&-nav {
@@ -67,25 +67,34 @@
 			}
 
 			ul {
+				li + li {
+					padding-top: rem(8);
+					@include breakpoint-min(lg) {
+						padding-top: 0px;
+						padding-left: $text-spacer;
+					}
+				}
+
 				&::before {
 					@extend %nav-mobile-headings;
 				}
 				& + ul {
 					margin-top: rem(16);
-					@media screen and(min-device-height: 812px) {
+					@media screen and (min-device-height: 812px) {
 						margin-top: rem(48);
-					}
-
-					&:nth-of-type(2) {
-						&::before {
-							@include breakpoint-max(lg) {
-								content: 'My Wallet';
-							}
-						}
 					}
 				}
 			}
 			#main {
+				@include breakpoint-min(lg) {
+					border-left: border(2px);
+					padding-left: rem(13);
+				}
+
+				@include breakpoint-min(xl) {
+					padding-left: $text-spacer-sm;
+				}
+
 				&::before {
 					@include breakpoint-max(lg) {
 						content: 'Home';
@@ -95,7 +104,7 @@
 				.nav-link {
 					@include breakpoint-max(lg) {
 						font-size: $body-2;
-						padding: $nav-link-padding;
+						padding: $nav-link-padding-y $nav-link-padding-x;
 						margin: $nav-link-margin;
 
 						&:hover,
@@ -106,6 +115,27 @@
 					}
 				}
 			}
+
+			#my-wallet {
+				&::before {
+					@include breakpoint-max(lg) {
+						content: 'My Wallet';
+					}
+				}
+			}
+		}
+	}
+
+	.search {
+		width: 452px;
+	}
+
+	.search-container,
+	#search-mobile {
+		margin-right: rem(6);
+
+		@include breakpoint-min(lg) {
+			margin-right: rem(20);
 		}
 	}
 
@@ -115,6 +145,46 @@
 		&-outline-light {
 			min-width: 102px;
 			padding: rem(11) $btn-padding-x;
+		}
+	}
+
+	&.home-nav {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 999;
+
+		&::after {
+			display: none;
+		}
+
+		.navbar {
+			background-color: transparent;
+
+			&-toggler-icon {
+				filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(215deg)
+					brightness(108%) contrast(104%);
+			}
+
+			.btn-outline-light {
+				background: $white;
+			}
+		}
+
+		&.nav-scrolled:not(#wallet) {
+			.navbar {
+				background-color: #FFFF;
+				color: #0000;
+
+				&-toggler-icon {
+					filter: none;
+				}
+
+				.btn-outline-light {
+					color: initial;
+				}
+			}
 		}
 	}
 }

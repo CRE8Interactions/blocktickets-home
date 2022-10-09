@@ -1,0 +1,5 @@
+@use '../abstracts' as *;
+@use './colors' as *;
+
+$input-group-addon-bg: $gray-300;
+$input-group-addon-font-weight: $fw-semi-bold;

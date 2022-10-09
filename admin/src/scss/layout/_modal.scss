@@ -1,14 +1,107 @@
 @use '../abstracts' as *;
 @use '../layout/container' as *;
+@use '../layout/spacing' as *;
+@use '../layout/buttons' as *;
 
 .modal {
+	line-height: 1.5;
+
+	// upload image modal
 	&-title {
 		font-size: $small;
 	}
 
-	&-body {
-		padding-top: 0px;
-		@extend %remove-scrollbar !optional;
-		line-height: 1.5;
+	&-body-heading {
+		&-title {
+			font-size: $h3-font-size;
+			margin-bottom: $text-spacer-sm;
+			font-weight: $fw-semi-bold;
+		}
+	}
+
+	p {
+		+ p {
+			margin-top: $text-spacer-sm;
+		}
+	}
+
+	// used for message preview, bank information modal
+	&-dialog-scrollable {
+		.modal-header {
+			margin-bottom: $text-spacer-xs;
+		}
+
+		.modal-body {
+			display: flex;
+			flex-direction: column;
+			padding-top: 0px !important;
+			@include remove-scrollbar();
+		}
+	}
+
+	// used for ticket breakdown, role, team, bank information modals
+	&-lg {
+		$m-x: rem(32);
+		$pad-y: rem(24);
+
+		padding-left: 0px;
+		padding-right: 0px;
+
+		.modal {
+			&-header {
+				padding: rem(24) 0px;
+				margin-right: $m-x;
+				margin-left: $m-x;
+
+				.modal-title {
+					font-size: $body-1;
+				}
+			}
+
+			&-body {
+				padding: $pad-y 0px;
+				margin: 0px $m-x;
+				display: flex;
+				flex-direction: column;
+			}
+		}
+	}
+
+	// used for delete, refund, confirmation modal
+	&-xl {
+		$padding: rem(32);
+
+		.modal {
+			&-body {
+				padding: $padding;
+			}
+		}
+	}
+
+	#delete-modal {
+		@extend .modal-xl !optional;
+	}
+
+	.btn-group-flex {
+		gap: $gap;
+		margin-top: $text-spacer-sm;
+
+		&.hstack {
+			> .btn {
+				flex: 0;
+
+				&:last-of-type {
+					flex: 1;
+				}
+			}
+		}
+
+		&.vstack {
+			flex: 0;
+
+			> .btn {
+				width: 100%;
+			}
+		}
 	}
 }

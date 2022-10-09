@@ -1,0 +1,6 @@
+@use '../../scss/theme/input' as *;
+@use '../../scss/layout/forms' as *;
+
+.search {
+	@include input-icon-box();
+}

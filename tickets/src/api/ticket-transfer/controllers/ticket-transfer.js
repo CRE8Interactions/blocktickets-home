@@ -39,6 +39,20 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         status: 'pending',
         event: order.event
       },
+      populate: {
+        tickets: true,
+        event: {
+          populate: {
+            image: true,
+            tickets: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      }
     });
 
     await strapi.db.query('api::ticket.ticket').updateMany({
@@ -50,11 +64,13 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
       },
     });
 
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').pendingTransfer(entry, user, phoneNumber)
+    strapi.service('api::tracking.tracking').pendingTransfer(entry);
+
     return 200
   },
   async find(ctx) {
     const user = ctx.state.user;
-
     const entry = await strapi.entityService.findMany('api::ticket-transfer.ticket-transfer', {
       filters: {
         fromUserId: user.id
@@ -62,6 +78,11 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
       populate: {
         tickets: true,
         event: {
+          filters: {
+            $and: [
+              { start: { $gte: new Date() } }
+            ]
+          },
           populate: {
             image: true,
             venue: {
@@ -79,8 +100,25 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
     const { transferId } = ctx.request.body.data;
 
     const entry = await strapi.entityService.findOne('api::ticket-transfer.ticket-transfer', transferId, {
-      populate: { tickets: true },
+      populate: { 
+        tickets: true,
+        toUser: true,
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      },
     });
+
+    if (entry.complete) {
+      return ctx.badRequest('Transfer has been claimed', { message: `Your transfer was claimed by ${entry.toUser.firstName} ${entry.toUser.lastName}`})
+    }
 
     let ticketIds = entry.ticketIds;
 
@@ -100,6 +138,9 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         cancelledOn: new Date()
       },
     });
+
+    if (!process.env.EMAIL_ENABLED)  strapi.service('api::email.email').cancelTransfer(entry, user, entry)
+    strapi.service('api::tracking.tracking').cancelTransfer(entry, user)
 
     return 200
   },
@@ -142,7 +183,16 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
       populate: {
         tickets: true,
         order: true,
-        event: true
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
       }
     })
 
@@ -196,6 +246,16 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         tickets: originalOrder.tickets.filter((ticket) => !ticketIds.includes(ticket.id))
       }
     })
+
+    const fromUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        id: entry.fromUserId
+      }
+    })
+
+    if (!process.env.EMAIL_ENABLED) strapi.service('api::email.email').acceptTranser(entry, fromUser, user)
+    strapi.service('api::tracking.tracking').acceptTransfer(entry, fromUser, user)
+    strapi.service('api::notification.notification').acceptTransferNotification(entry, fromUser, user)
 
     return 200
   }

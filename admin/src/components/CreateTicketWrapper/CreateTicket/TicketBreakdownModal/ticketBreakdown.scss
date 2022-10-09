@@ -1,0 +1,10 @@
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout/modal' as *;
+
+#ticket-breakdown {
+	@extend .modal-lg;
+
+	@include breakpoint-min(md) {
+		max-width: 416px;
+	}
+}

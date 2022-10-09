@@ -2,6 +2,7 @@ import { createContext } from 'react';
 
 const TicketContext = createContext({
   tickets: [],
+  listings: [],
   generalAdmissionTicket: {},
   generalAdmissionCount: 0,
 });

@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guest_lists",
+  "info": {
+    "singularName": "guest-list",
+    "pluralName": "guest-lists",
+    "displayName": "guestList",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "ticketType": {
+      "type": "string",
+      "required": true
+    },
+    "event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "guest_passes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::guest-pass.guest-pass"
+    },
+    "eventId": {
+      "type": "string",
+      "required": true
+    },
+    "requested": {
+      "type": "datetime"
+    }
+  }
+}

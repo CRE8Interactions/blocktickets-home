@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { VenueInformation } from '../../components';
 import { getVenue } from '../../utilities/api';
+
+import { VenueInformation } from '../../components';
 
 export default function VenuePage() {
 	let { id } = useParams();
@@ -11,14 +12,12 @@ export default function VenuePage() {
 		setVenue
 	] = useState();
 
-	useEffect(
-		() => {
-			getVenue(id).then((res) => setVenue(res.data)).catch((err) => console.error(err));
-		},
-		[
-			id
-		]
-	);
+	useEffect(() => {
+			getVenue(Number(id))
+			.then((res) => {
+				setVenue(res.data?.find((venue) => venue.id == Number(id)))}
+			).catch((err) => console.error(err));
+	},[id]);
 
 	return (
 		<Fragment>

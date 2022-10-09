@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fee_structures",
+  "info": {
+    "singularName": "fee-structure",
+    "pluralName": "fee-structures",
+    "displayName": "feeStructure"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "stripeServicePecentage": {
+      "type": "decimal",
+      "default": 2.9
+    },
+    "stripeCharge": {
+      "type": "decimal",
+      "default": 0.3
+    },
+    "primaryUnder20": {
+      "type": "decimal",
+      "default": 1
+    },
+    "primaryOver20": {
+      "type": "integer",
+      "default": 5
+    },
+    "secondaryServiceFeeSeller": {
+      "type": "integer",
+      "default": 15
+    },
+    "secondaryServiceFeeBuyer": {
+      "type": "integer",
+      "default": 10
+    }
+  }
+}

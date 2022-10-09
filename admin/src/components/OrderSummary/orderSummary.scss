@@ -1,0 +1,31 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+@use '../../scss/theme/colors' as *;
+@use '../../scss/theme/tables' as *;
+
+.order-summary-card {
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		font-size: $small;
+
+		.card-body-subtitle--flex {
+			order: -1;
+			margin-bottom: rem(10);
+		}
+
+		.btn-toggle {
+			&::after {
+				margin-right: rem(5);
+			}
+		}
+
+		.transaction {
+			&-desc {
+				display: flex;
+				flex-direction: column;
+				gap: rem(6);
+			}
+		}
+	}
+}

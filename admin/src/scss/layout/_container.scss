@@ -1,39 +1,95 @@
-@use './spacing' as *;
 @use '../abstracts' as *;
-@use './typography';
+@use '../theme/colors' as *;
+@use '../theme/borders' as *;
+@use './spacing' as *;
 
-$pad-sm: rem(32);
-$pad-md: rem(81);
+$pad: rem(32);
+
+$navbar-height-sm: rem(88);
+$navbar-height: rem(82);
 
 .container {
-	max-width: 1130px;
+	max-width: 1440px;
 	margin: 0 auto;
-	@include breakpoint-max(md) {
-		padding: 0px $pad-sm;
-	}
+	padding-right: $pad;
+	padding-left: $pad;
+}
 
-	@include breakpoint-inBetween(md, xl) {
-		padding: 0px $pad-md;
-	}
+.backgroundWhite {
+	background-color: #ffffff;
+}
 
-	&--full-width {
-		flex: 1;
+.sidebar-container {
+	margin-left: 314px;
+	max-width: 100%;
+	padding-right: $pad;
+	padding-left: $pad;
+}
+
+.max-width-wrapper {
+	max-width: 1130px;
+	margin: auto;
+}
+
+.wrapper {
+	max-width: 736px;
+	margin: auto;
+
+	&-xs {
+		max-width: 352px;
+		margin: auto;
 	}
 }
 
-.full-height-wrapper {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+// if no permission to page
+.overlay {
+	filter: blur(11px);
 }
 
-@mixin full-width() {
-	position: relative;
-	width: 100vw;
-	left: 50%;
-	right: 50%;
-	margin-left: -50vw;
-	margin-right: -50vw;
+.nav-is-open {
+	overflow: hidden;
+}
+
+.btn-footer {
+	position: fixed;
+	left: 314px;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	padding: $text-spacer-sm;
+	background-color: $gray-300;
+	border-top: border();
+	transition: all .32s cubic-bezier(.4, 0, .3, 1);
+
+	&.without-sidebar {
+		left: 0;
+	}
+	.wrapper,
+	.max-width-wrapper {
+		margin-top: 0px;
+		margin-bottom: 0px;
+
+		.btn-width {
+			height: 48px;
+			&-sm {
+				flex-basis: 89px;
+			}
+			&-lg {
+				flex-basis: 226px;
+			}
+		}
+	}
+}
+
+@mixin hide-scrollbars() {
+	& {
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
+
+		&::-webkit-scrollbar {
+			display: none; /* Safari and Chrome */
+		}
+	}
 }
 
 .d-flex-column {
@@ -45,59 +101,24 @@ $pad-md: rem(81);
 	display: flex;
 	gap: $gap;
 	align-items: center;
-	line-height: 0;
-}
 
-.time-caption,
-.venue-caption,
-.location-caption {
-	@extend .caption !optional;
-	@extend %icon-text-box !optional;
-	gap: $gap-xs;
-	color: $clr-neutral-4;
-	font-weight: $fw-semi-bold;
-	line-height: 0;
-}
-
-.time-caption {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'calendar'));
+	&::before,
+	&::after {
+		line-height: 0;
 	}
 }
 
-.venue-caption {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'venue'));
-	}
-}
+.block {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 145px;
+	border-radius: $border-radius-sm;
 
-.location-caption {
-	&::before {
-		content: url($data-svg-prefix + map-get($icons, 'location'));
-	}
-}
-
-.mobile-only {
 	@include breakpoint-min(md) {
-		display: none;
-	}
-}
-
-.mobile-tablet-only {
-	@include breakpoint-min(lg) {
-		display: none;
-	}
-}
-
-.tablet-desktop-only {
-	@include breakpoint-max(md) {
-		display: none;
-	}
-}
-
-.desktop-only {
-	@include breakpoint-max(lg) {
-		display: none;
+		flex-basis: 145px;
 	}
 }
 
@@ -108,8 +129,24 @@ $pad-md: rem(81);
 	}
 }
 
-@mixin scrollable() {
-	overflow-y: auto;
-	height: 100%;
-	@include remove-scrollbar();
+.event-image {
+	aspect-ratio: 1/1;
+}
+
+// browsers that do not support aspect-ratio like Explorer and Safari
+@supports not (aspect-ratio: 1/1) {
+	/* defined that the height of the depends on its width */
+	.image-wrapper {
+		position: relative;
+		padding-top: 100%; // aspect-ratio 1 / 1
+		/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
+		.event-image {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 }

@@ -5,7 +5,7 @@ $pad-sm: rem(32);
 $pad-md: rem(81);
 
 $navbar-height-sm: rem(88);
-$navbar-height: rem(82);
+$navbar-height: rem(83);
 
 .container {
 	max-width: 1130px;
@@ -21,6 +21,11 @@ $navbar-height: rem(82);
 	&--full-height {
 		flex: 1;
 	}
+}
+
+.docs-container {
+	max-width: 672px;
+	margin: 0px auto;
 }
 
 // on body and html
@@ -41,10 +46,6 @@ $navbar-height: rem(82);
 	height: 100%;
 }
 
-.nav-is-open {
-	overflow: hidden;
-}
-
 .noBodyPadding {
 	padding: 0px 0px 0px 0px !important;
 }
@@ -56,14 +57,6 @@ $navbar-height: rem(82);
 	right: 50%;
 	margin-left: -50vw;
 	margin-right: -50vw;
-}
-
-.page-slider {
-	// @include breakpoint-max(md) {
-	// 	@include full-width();
-	// 	left: 0%;
-	// 	margin-left: 0px;
-	// }
 }
 
 .sticky {

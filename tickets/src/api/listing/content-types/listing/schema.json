@@ -45,6 +45,24 @@
     },
     "askingPrice": {
       "type": "decimal"
+    },
+    "fromOrder": {
+      "type": "integer"
+    },
+    "fundsClaimed": {
+      "type": "boolean",
+      "default": false
+    },
+    "claimedOn": {
+      "type": "datetime"
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true
+    },
+    "notified": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

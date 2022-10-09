@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invite_team_members",
+  "info": {
+    "singularName": "invite-team-member",
+    "pluralName": "invite-team-members",
+    "displayName": "inviteTeamMember",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "role": {
+      "type": "string",
+      "required": false
+    },
+    "inviteCode": {
+      "type": "biginteger",
+      "required": false,
+      "unique": true
+    },
+    "claimed": {
+      "type": "boolean",
+      "default": false,
+      "private": true
+    },
+    "claimedOn": {
+      "type": "datetime"
+    },
+    "organization_role": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization-role.organization-role"
+    },
+    "uuid": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    }
+  }
+}

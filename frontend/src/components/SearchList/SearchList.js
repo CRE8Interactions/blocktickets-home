@@ -7,17 +7,16 @@ import { SearchItem } from './SearchItem';
 import './searchList.scss';
 
 export default function SearchList({ queryResults }) {
-	return (
-		<>
-			<span className="caption--uppercase-label mb-1">Events</span>
-			<Stack id="search-list" as="ul">
-				{ queryResults && queryResults.map((result, index) => {
-					return (
-						
-							<SearchItem key={index} data={result} />
-					)
-				})}	
-			</Stack>
-		</>
-	);
+    return (
+        <>
+            <span className="caption--uppercase-label mb-1">Events</span>
+            <Stack id="search-list" as="ul">
+                {queryResults && queryResults.map((result, index) => {
+                    return (
+                        <SearchItem key={index} data={result} />
+                    )
+                })}
+            </Stack>
+        </>
+    );
 }

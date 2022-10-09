@@ -1,112 +1,128 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 
+import { getMyTransfers } from '../../utilities/api';
 import { fullHeightContainer, removeFullHeightContainer } from '../../utilities/helpers';
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+import { EmptyContainer } from '../EmptyContainer';
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
-import { MyTransfersSlider } from '../Slider/MyTransfersSlider';
-import { TicketModal } from '../TicketCard/TicketModal';
-
-import { getMyTransfers } from '../../utilities/api';
+import { MyTransfersSlider } from './MyTransfersSlider';
+import { TicketModal } from '../TicketModal';
 
 import './myTransfersWrapper.scss';
 
 export default function MyTransfersWrapper() {
-	const [
-		key,
-		setKey
-	] = useState('pending');
 
-	const [
-		show,
-		setShow
-	] = useState(false);
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null)
 
-	const [
-		ticketAction,
-		setTicketAction
-	] = useState('');
+    const [
+        key,
+        setKey
+    ] = useState('pending');
 
-	const [
-		transfers,
-		setTransfers
-	] = useState([]);
+    const [
+        show,
+        setShow
+    ] = useState(false);
 
-	const [
-		transfer,
-		setTransfer
-	] = useState('');
+    const [
+        ticketAction,
+        setTicketAction
+    ] = useState('');
 
-	useLayoutEffect(() => {
-		const el = document.querySelector('#main-container');
-		const body = document.body;
+    const [
+        transfers,
+        setTransfers
+    ] = useState([]);
 
-		fullHeightContainer(el);
-		body.classList.add('noBodyPadding');
+    const [
+        transfer,
+        setTransfer
+    ] = useState('');
 
-		return () => {
-			removeFullHeightContainer(el);
-			body.classList.remove('noBodyPadding');
-		};
-	}, []);
+    useLayoutEffect(() => {
+        const el = document.querySelector('#main-container');
+        const body = document.body;
 
-	useEffect(() => {
-		getTransfers();
-	}, []);
+        fullHeightContainer(el);
+        body.classList.add('noBodyPadding');
 
-	const getTransfers = () => {
-		getMyTransfers().then((res) => setTransfers(res.data)).catch((err) => console.error(err));
-	};
+        return () => {
+            removeFullHeightContainer(el);
+            body.classList.remove('noBodyPadding');
+        };
+    }, []);
 
-	const handleShow = () => setShow(true);
+    useEffect(() => {
+        getTransfers();
+    }, []);
 
-	const handleClick = (action, transfer) => {
-		setTransfer(transfer);
-		handleShow();
-		setTicketAction(action);
-	};
+    const getTransfers = () => {
+        getMyTransfers().then((res) => setTransfers(res.data)).catch((err) => console.error(err));
+    };
 
-	return (
-		<section className="spacer-xs" id="my-transfers-wrapper">
-			<div className="section-heading-sm">
-				<h1>My Transfers</h1>
-				<div className="tablet-desktop-only">
-					<SwiperNavigationButtons />
-				</div>
-			</div>
-			<div className="d-flex-column position-relative">
-				<Tabs
-					defaultActiveKey="pending"
-					variant="pills"
-					activeKey={key}
-					onSelect={(k) => setKey(k)}>
-					<Tab eventKey="pending" title="Pending">
-						<MyTransfersSlider
-							transfers={transfers.filter(
-								(transfer) => transfer.status === 'pending'
-							)}
-							cancel={handleClick}
-						/>
-					</Tab>
-					<Tab eventKey="completed" title="Completed">
-						<MyTransfersSlider
-							transfers={transfers.filter(
-								(transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled'
-							)}
-						/>
-					</Tab>
-				</Tabs>
-			</div>
+    const handleShow = () => setShow(true);
 
-			<TicketModal
-				ticketAction={ticketAction}
-				show={show}
-				setShow={setShow}
-				transfer={transfer}
-				getMyTransfers={getTransfers}
-			/>
-		</section>
-	);
+    const handleClick = (action, transfer) => {
+        setTransfer(transfer);
+        handleShow();
+        setTicketAction(action);
+    };
+
+    return (
+        <section className="spacer-xs" id="my-transfers-wrapper">
+            <div className="section-heading-sm">
+                <h1>My transfers</h1>
+                <div className="tablet-desktop-only">
+                    <SwiperNavigationButtons navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} />
+                </div>
+            </div>
+            <div className="d-flex-column position-relative">
+                <Tabs defaultActiveKey="pending" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
+                    <Tab eventKey="pending" title="Pending">
+                        {transfers.map(transfer => transfer.status === 'pending' && transfer.event !== null).length > 0 ? (
+                            <MyTransfersSlider
+                                navigationPrevRef={navigationPrevRef}
+                                navigationNextRef={navigationNextRef}
+                                transfers={transfers.filter((transfer) => transfer.status === 'pending' && transfer.event !== null)}
+                                cancel={handleClick}
+                            />
+                        ) : (
+                            <EmptyContainer>
+                                <h1>You do not have any {key} transfers</h1>
+                            </EmptyContainer>
+                        )}
+                    </Tab>
+                    <Tab eventKey="completed" title="Completed">
+                        {transfers.map(
+                            (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
+                        ).length > 0 ? (
+                            <MyTransfersSlider
+                                navigationPrevRef={navigationPrevRef}
+                                navigationNextRef={navigationNextRef}
+                                transfers={transfers.filter(
+                                    (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
+                                )}
+                            />
+                        ) : (
+                            <EmptyContainer>
+                                <h1>You do not have any {key} transfers</h1>
+                            </EmptyContainer>
+                        )}
+                    </Tab>
+                </Tabs>
+            </div>
+
+            <TicketModal
+                ticketAction={ticketAction}
+                show={show}
+                setShow={setShow}
+                transfer={transfer}
+                getMyTransfers={getTransfers}
+            />
+        </section>
+    );
 }

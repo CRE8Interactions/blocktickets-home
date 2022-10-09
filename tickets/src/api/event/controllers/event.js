@@ -8,22 +8,46 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::event.event', ({ strapi}) => ({
   async publish(ctx) {
-    const eventId = ctx.request.body.id;
-    let event = await strapi.db.query('api::event.event').update({
-      where: { id: eventId },
-      data: {
-        status: 'on_sale'
-      }
-    });
 
-    return 200;
+    const {
+      publishType,
+      publishDate,
+      event
+    } = ctx.request.body.data;
+
+    let entry;
+
+    if (Number(publishType) === 1) {
+      entry = await strapi.db.query('api::event.event').update({
+        where: { id: event.id },
+        data: {
+          status: 'on_sale'
+        }
+      });
+    } else {
+      entry = await strapi.db.query('api::event.event').update({
+        where: { id: event.id },
+        data: {
+          status: 'scheduled',
+          scheduled: true,
+          scheduledTime: publishDate
+        }
+      });
+    }
+
+    return entry;
   },
   async find(ctx) {
     let events = await strapi.db.query('api::event.event').findMany({
+      orderBy: { start: 'asc' },
       where: {
-        status: 'on_sale'
+        status: 'on_sale',
+        start: {
+          $gte: new Date()
+        }
       },
       populate: {
+        fee_structure: true,
         venue: {
           populate: {
             image: true,
@@ -40,11 +64,15 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
   async findOne(ctx) {
     let path = ctx.request.path
     let id = path.split('/')[3];
-    const event = await strapi.entityService.findOne('api::event.event', id, {
-      fields: ['id', 'name', 'start', 'summary', 'end', 'presentedBy'],
+
+    const event = await strapi.db.query('api::event.event').findOne({
+      select: ['id', 'name', 'start', 'summary', 'end', 'presentedBy', 'views', 'hide_end_date'],
+      where: { uuid: id },
       populate: {
         image: true,
         categories: true,
+        page_views: true,
+        fee_structure: true,
         venue: {
           populate: {
             address: true
@@ -52,6 +80,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
         }
       }
     });
+
     return event
   },
   async myUpcomingEvents(ctx) {
@@ -66,13 +95,16 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       },
       populate: {
         users_permissions_user: {
-          fields: ['name', 'username', 'email', 'phoneNumber']
+          fields: ['username', 'email', 'phoneNumber']
         },
         event: {
-          where: {
-            start: { $gte: new Date() }
+          filters: {
+            $and: [
+              { start: { $gte: new Date() } }
+            ]
           },
           populate: {
+            fee_structure: true,
             venue: {
               populate: {
                 address: true
@@ -81,7 +113,13 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
             image: true,
           }
         },
-        tickets: true,
+        tickets: {
+          filters: {
+            on_sale_status: {
+              $notIn: ['resaleAvailable', 'pendingTransfer']
+            }
+          }
+        },
 
       }
     })
@@ -94,10 +132,12 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       where: {
         $and: [
           { status: 'on_sale' },
-          { name: { $containsi: query } }
+          { name: { $containsi: query } },
+          { start: {$gte: new Date().toISOString() }}
         ]
       },
       populate: {
+        fee_structure: true,
         venue: {
           populate: {
             image: true,
@@ -110,5 +150,45 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     })
 
     return events
+  },
+  async refreshAll(ctx) {
+   if (process.env.NODE_ENV === 'production') return;
+    await strapi.service('api::utility.utility').refreshDB();
+   return 200;
+  },
+  async updateEvent(ctx) {
+    const { 
+      uuid,
+      presentedBy,
+      name,
+      start,
+      end,
+      venue,
+      hide_end_date,
+      display_start_time,
+      hide_doors_open,
+      doorsOpen
+     } = ctx.request.body.data;
+
+     let eventVenue = await strapi.db.query('api::venue.venue').findOne({
+      where: { id: venue }
+     })
+
+    const entry = await strapi.db.query('api::event.event').update({
+      where: { uuid: uuid },
+      data: {
+        presentedBy,
+        name,
+        start,
+        end,
+        venue: eventVenue,
+        hide_end_date,
+        display_start_time,
+        hide_doors_open,
+        doorsOpen
+      },
+    });
+
+    return entry
   }
 }));

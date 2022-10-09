@@ -3,6 +3,11 @@
 @use 'container' as *;
 @use './../theme/colors' as *;
 
+pre {
+	white-space: break-spaces;
+	font-family: $font-body;
+}
+
 .normal {
 	font-size: $body-2;
 }
@@ -164,11 +169,13 @@ h4,
 	.card-title,
 	.event-name,
 	.card-subtitle,
-	.subtitle,
+	.presenter-text,
 	.event-detail,
-	.row > .col > * {
+	.row > .col > *,
+	* {
 		@extend %text-truncate !optional;
 	}
+
 	.card-title,
 	.event-name {
 		font-size: $body-1;
@@ -177,7 +184,7 @@ h4,
 	}
 
 	.card-subtitle,
-	.subtitle {
+	.presenter-text {
 		order: -1;
 		margin-bottom: rem(8);
 		@extend .caption !optional;
@@ -192,7 +199,7 @@ h4,
 	color: $text-muted;
 }
 
-// event details: hero, event, event popup
+// event details: event, event popup
 .time-caption,
 .venue-caption,
 .location-caption {
@@ -222,15 +229,20 @@ h4,
 	}
 }
 
-// bulleted event details: event, ticket card, paymentConfirmation
+// bulleted event details: event, ticket card, order preview
 .time,
 .loc,
-.venue {
+.venue,
+.ticket-type {
 	&::before {
 		content: '\2022';
-		position: relative;
-		margin: 0px rem(3);
-		left: em(-2);
+		margin: 0px rem(4);
+	}
+}
+
+.date {
+	@include breakpoint-min(md) {
+		margin-right: rem(4);
 	}
 }
 
@@ -254,5 +266,114 @@ h4,
 
 	& + .list:not(.list.list-group-item) {
 		margin-top: rem(20);
+	}
+}
+
+// docs styling
+.docs {
+	p {
+		font-size: $small;
+
+		+ p {
+			margin-top: $text-spacer-xs;
+		}
+	}
+
+	&-section-heading,
+	&-header-title {
+		font-size: $body-1;
+	}
+
+	&-heading,
+	&-header-title {
+		margin-bottom: $text-spacer-xs;
+	}
+
+	&-heading {
+		font-size: $h3-font-size;
+	}
+
+	&-desc {
+		font-size: $body-2;
+	}
+
+	&-header {
+		margin: $text-spacer-lg 0px;
+	}
+
+	&-section {
+		&-heading {
+			margin: $text-spacer-lg 0px $text-spacer-xs;
+		}
+	}
+
+	&-date {
+		margin-bottom: $text-spacer-xs;
+	}
+
+	ul {
+		padding-left: $text-spacer;
+		li {
+			list-style-type: disc;
+			margin-bottom: rem(4);
+
+			.list-heading {
+				font-weight: $fw-semi-bold;
+				margin-bottom: rem(8);
+			}
+		}
+	}
+
+	.unstyled-list {
+		& {
+			padding-left: $text-spacer-xs;
+		}
+
+		&.float {
+			dt:not(:first-of-type) {
+				float: left;
+				margin-right: rem(3);
+			}
+
+			dt:first-of-type {
+				margin-bottom: rem(4);
+			}
+		}
+
+		dl {
+			dt,
+			dd {
+				display: block;
+			}
+		}
+		li {
+			list-style: none;
+
+			ul {
+				margin-top: 0px;
+				padding: 0px;
+			}
+		}
+	}
+
+	.unstyled-list > li ~ li {
+		padding-top: $text-spacer-xs;
+	}
+
+	dl,
+	ul {
+		font-size: $small;
+		margin: rem(10) 0px;
+	}
+
+	dd {
+		margin-bottom: rem(3);
+	}
+
+	dl {
+		dt,
+		dd {
+			display: inline;
+		}
 	}
 }

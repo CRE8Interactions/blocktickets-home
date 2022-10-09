@@ -1,0 +1,31 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/layout/spacing' as *;
+@use '../../../scss/theme/colors' as *;
+
+.tickets {
+	border-bottom: border();
+}
+
+.ticket-row {
+	font-weight: $fw-medium;
+
+	.vstack {
+		justify-content: center;
+
+		&:first-of-type {
+			flex-basis: 476px;
+		}
+		&:not(:first-of-type):not(:last-of-type) {
+			padding: 0px rem(49);
+
+			align-items: center;
+		}
+		& + .vstack {
+			border-left: border($color: $gray-200);
+		}
+
+		&:last-of-type {
+			align-items: flex-end;
+		}
+	}
+}

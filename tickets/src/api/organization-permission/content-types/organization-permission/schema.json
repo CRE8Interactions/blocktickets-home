@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_permissions",
+  "info": {
+    "singularName": "organization-permission",
+    "pluralName": "organization-permissions",
+    "displayName": "organizationPermission"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

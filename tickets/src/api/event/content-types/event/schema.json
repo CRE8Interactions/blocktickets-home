@@ -14,10 +14,8 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
-    },
-    "summary": {
-      "type": "text"
+      "required": true,
+      "unique": true
     },
     "start": {
       "type": "datetime",
@@ -81,7 +79,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -117,6 +115,42 @@
     },
     "doorsOpen": {
       "type": "datetime"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "page_views": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page-view.page-view",
+      "mappedBy": "event"
+    },
+    "scheduled": {
+      "type": "boolean",
+      "default": false
+    },
+    "scheduledTime": {
+      "type": "datetime"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "hide_doors_open": {
+      "type": "boolean",
+      "default": true
+    },
+    "summary": {
+      "type": "richtext"
+    },
+    "display_start_time": {
+      "type": "boolean",
+      "default": true
+    },
+    "fee_structure": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::fee-structure.fee-structure"
     }
   }
 }

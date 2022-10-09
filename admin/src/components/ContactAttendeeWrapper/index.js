@@ -1,0 +1,1 @@
+export { default as ContactAttendeeWrapper } from './ContactAttendeeWrapper'

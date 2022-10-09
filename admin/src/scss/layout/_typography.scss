@@ -1,5 +1,18 @@
 @use '../abstracts' as *;
 @use 'spacing' as *;
+@use 'images' as *;
+@use './../theme/colors' as *;
+@use './../theme/table' as *;
+
+@mixin heading-psuedo($color: $primary) {
+	h1::before {
+		content: '';
+		width: 16px;
+		margin-right: $text-spacer-xs;
+		background-color: $color;
+		border-radius: $br-xs;
+	}
+}
 
 .normal {
 	font-size: $body-2;
@@ -9,31 +22,35 @@
 	font-size: $body-1;
 }
 
-.normal-sm {
-	font-size: $small;
+.section-header {
+	margin-bottom: $heading-spacer;
 
-	@include breakpoint-min(md) {
-		font-size: $body-2;
+	&-sm {
+		margin-bottom: $heading-spacer-sm;
 	}
-}
 
-.normal-lg {
-	font-size: $body-2;
-
-	@include breakpoint-min(md) {
-		font-size: $body-1;
+	&-desc {
+		color: $text-muted;
+		font-weight: $fw-medium;
+		padding-left: calc(rem(16) + rem(16));
 	}
 }
 
 .section-heading {
+	@include heading-psuedo();
+
 	h1,
 	h2,
 	h3,
 	h4 {
 		margin: 0;
+		font-size: $body-1;
+		display: flex;
 	}
 
-	margin-bottom: $heading-spacer;
+	&--secondary {
+		@include heading-psuedo($success);
+	}
 }
 
 h1,
@@ -57,75 +74,191 @@ h4,
 	font-weight: $fw-medium;
 }
 
-.section-heading h1 {
-	font-size: $h4-font-size;
-	@include breakpoint-min(md) {
-		font-size: $h3-font-size;
-	}
+.fw-semi-bold {
+	font-weight: $fw-semi-bold;
 }
 
-.heading-sm {
-	font-size: $body-1;
-	margin-bottom: rem(16);
-
-	@include breakpoint-min(md) {
-		font-size: $h4-font-size;
-	}
+.small-label {
+	font-size: $small;
+	font-weight: $fw-medium;
 }
 
-.text-uppercase {
+.small-label--flex {
+	margin-bottom: rem(4);
+}
+
+.text-upper {
 	text-transform: uppercase;
 	font-weight: $fw-bold;
 	font-family: $font-body;
-	font-size: rem(16);
+	font-size: $body-2;
 }
 
 .caption {
 	font-size: $caption;
-	margin-bottom: em(3);
 }
 
-.caption--uppercase {
-	@extend .caption !optional;
-	@extend .text-uppercase !optional;
-}
-
-.date,
-.venue,
-.location {
-	font-weight: $fw-semi-bold;
-}
-
-%text-truncate {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-%multi-line-truncate {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	-webkit-line-clamp: 2;
-	text-overflow: ellipsis;
-}
-
-@mixin multi-line-truncate($lines: 2) {
-	@extend %multi-line-truncate;
-	-webkit-line-clamp: $lines;
-}
-
-.nav-link {
+.nav-link,
+.card .nav-link {
 	font-family: $font-heading;
 }
 
-%nav-mobile-headings {
-	@include breakpoint-max(lg) {
-		display: block;
-		margin-bottom: rem(12);
-		font-size: 1rem;
-		color: $clr-neutral-4;
-		font-weight: 500;
-		font-family: $font-body;
+.tickets-sold {
+	&:before {
+		display: inline-block;
+		@extend %img-psuedo-icon !optional;
+		background-image: url('../../assets/icons/ticket.svg');
+		background-color: rgba($primary, var(--opac));
 	}
+}
+
+// bulleted for preview modal
+.time,
+.loc,
+.venue {
+	&::before {
+		content: '\2022';
+		position: relative;
+		margin: 0px rem(3);
+		left: em(-2);
+	}
+}
+
+.list {
+	padding-left: 0px;
+	padding-right: 0px;
+
+	.heading {
+		font-weight: $fw-medium;
+		margin-bottom: rem(10);
+	}
+
+	& + .list:not(.list.list-group-item) {
+		margin-top: $text-spacer-sm;
+	}
+
+	&-with-seperator {
+		& + .list-with-seperator:not(.list.list-group-item) {
+			@extend .seperator;
+		}
+	}
+}
+
+.horizontal-list {
+	li {
+		color: $text-muted;
+
+		+ li {
+			margin-left: $text-spacer-xs;
+		}
+
+		span {
+			margin-left: rem(8);
+			color: $body-color;
+			font-weight: $fw-semi-bold;
+		}
+	}
+}
+
+li {
+	.heading {
+		font-weight: $fw-semi-bold;
+		margin-bottom: rem(3);
+	}
+
+	.heading-caption {
+		font-size: $caption;
+		color: $clr-neutral-3;
+		margin-bottom: rem(6);
+	}
+}
+
+.list-table {
+	font-size: $small;
+	position: relative;
+
+	.btn-more-col {
+		position: absolute;
+		right: 0;
+		padding: 0;
+	}
+
+	.flex-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+
+		& + .flex-row {
+			border-top: border();
+		}
+	}
+
+	&-col {
+		padding: rem(8);
+		text-align: center;
+
+		.vstack,
+		.hstack {
+			align-items: center;
+			justify-content: center;
+
+			.caption {
+				margin: 0px;
+				color: $text-muted;
+			}
+		}
+
+		&:first-of-type {
+			text-align: left;
+		}
+		&:last-of-type,
+		&:nth-last-child(2):not(.list-table-col-header, .total-col) {
+			text-align: right;
+		}
+
+		// &.lg {
+		// 	flex: 1;
+
+		// 	&-2 {
+		// 		flex: 2;
+		// 	}
+		// }
+
+		&-header {
+			font-weight: $table-th-font-weight;
+			color: $text-muted;
+		}
+	}
+
+	// wider columns
+	&.five-col {
+		.list-table-col:not(.btn-more-col) {
+			width: calc(100% / 5.5);
+		}
+	}
+
+	// narrower columns
+	&.four-col {
+		.list-table-col:not(.btn-more-col) {
+			width: calc(100% / 8);
+
+			&.lg {
+				width: 44%;
+			}
+		}
+	}
+}
+
+.total-row {
+	font-weight: $fw-medium;
+	font-size: $body-2;
+}
+
+#bank-card,
+#tax-card {
+	h1 {
+		font-size: rem(20);
+		font-weight: $fw-bold;
+	}
+	line-height: 24px;
 }

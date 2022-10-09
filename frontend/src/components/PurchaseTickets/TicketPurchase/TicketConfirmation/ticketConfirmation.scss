@@ -3,19 +3,38 @@
 .left-col {
 	.ticket-counter {
 		border-top: border();
-		padding: em(23) 0px;
+		padding: rem(23) 0px;
+	}
+
+	.btn-link {
+		font-size: $body-2;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.btn-default {
+		font-size: $body-2;
+		margin-top: 0;
+		padding: 0;
+		border: 0;
+
+		&:hover {
+			text-decoration: none;
+			cursor: default;
+		}
 	}
 
 	.ticket-details {
 		h1 {
 			margin-bottom: rem(6);
 		}
-		height: 161px;
+		flex-basis: 114px;
 		border-bottom: border();
 	}
 
 	.disclaimer {
-		padding: em(23) 0px;
+		padding: rem(23) 0px;
 	}
 
 	.counter {

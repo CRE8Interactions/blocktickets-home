@@ -1,0 +1,49 @@
+@use '../../../../scss/theme/modal' as *;
+@use '../../../../scss/theme/borders' as theme;
+@use '../../../../scss/abstracts' as *;
+@use '../../../../scss/layout' as *;
+
+#preview-modal {
+	.modal-content {
+		@include breakpoint-min(lg) {
+			max-width: 569px;
+		}
+	}
+
+	.header {
+		padding: $modal-inner-padding;
+		padding-top: em(15);
+	}
+	.event-name {
+		font-size: rem(18);
+		font-weight: $fw-semi-bold;
+	}
+
+	.event-image {
+		width: 195px;
+		height: 195px;
+	}
+
+	.card {
+		border-color: theme.$border-color;
+		&-body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.footer {
+		margin-top: rem(40);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: $gap;
+
+		ul {
+			justify-content: center;
+			align-items: center;
+			gap: $gap;
+		}
+	}
+}

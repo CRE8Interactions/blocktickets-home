@@ -2,16 +2,10 @@
 @use 'colors' as *;
 @use 'buttons' as *;
 
-$link-color: $primary;
-$link-hover-color: $primary;
+$link-color: #3e8bf7;
+$link-hover-color: #3e8bf7;
 $link-decoration: none;
-$nav-link-color: $muted;
 
-@include breakpoint-max(md) {
-	$nav-link-font-size: rem(24);
-}
-
+$nav-link-color: $text-muted;
 $nav-link-font-weight: $btn-font-weight;
-$navbar-light-color: $clr-neutral-2;
-$navbar-light-hover-color: $primary;
-$navbar-light-active-color: $primary;
+$nav-link-hover-color: $body-color;
