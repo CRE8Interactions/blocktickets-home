@@ -205,33 +205,31 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     let data = ctx.request.body;
     let type = data.type;
     if (!type) return
-    let paymentIntentId;
-    let paymentMethodOptions;
+    let paymentIntentId = data.data.object.id;
+    let paymentMethodOptions = data.data.object;
+
+    let order = await strapi.db.query('api::order.order').findOne({
+      where: { paymentIntentId },
+      populate: { 
+        tickets: true,
+        history: true,
+        users_permissions_user: true,
+        event: {
+          populate: {
+            image: true,
+            venue: {
+              populate: {
+                address: true
+              }
+            }
+          }
+        }
+      },
+    });
+
     // Handle the event
     switch (type) {
       case 'payment_intent.succeeded':
-        paymentIntentId = data.data.object.id;
-        paymentMethodOptions = data.data.object;
-
-        let order = await strapi.db.query('api::order.order').findOne({
-          where: { paymentIntentId },
-          populate: { 
-            tickets: true,
-            history: true,
-            users_permissions_user: true,
-            event: {
-              populate: {
-                image: true,
-                venue: {
-                  populate: {
-                    address: true
-                  }
-                }
-              }
-            }
-          },
-        });
-
         if (order?.details?.promoCode && order?.details?.promoCode !== 0) {
           const promo = await strapi.db.query('api::promo.promo').findOne({
             where: { code: order?.details?.promoCode },
@@ -341,14 +339,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         strapi.service('api::tracking.tracking').purchaseFromListing(originalOrder, listing);
       break;
       case 'payment_intent.payment_failed':
-        paymentIntentId = data.data.object.id;
-
-        order = await strapi.db.query('api::order.order').findOne({
-          where: { paymentIntentId },
-          populate: { tickets: true },
-        });
-
-        ticketIds = order.tickets.map((ticket) => ticket.id)
+        let ticketIds = order.tickets.map((ticket) => ticket.id)
 
         await strapi.db.query('api::ticket.ticket').updateMany({
           where: {
@@ -362,7 +353,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         await strapi.db.query('api::order.order').update({
           where: { paymentIntentId },
           data: {
-            status: 'failed'
+            status: 'failed',
+            tickets: []
           }
         });
       break;
