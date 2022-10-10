@@ -12,7 +12,6 @@ export default function OrderSummary({order}) {
 	let total;
 
 	if (order.details.listing) {
-		console.log(order.details.listing)
 		sum = (order.details.listing.askingPrice).toFixed(2);
 		fees =(parseFloat(order.details.feeDetails.serviceFees) + parseFloat(order.details.feeDetails.paymentProcessingFee)).toFixed(2);
 		tax = parseFloat(order.details.feeDetails.tax).toFixed(2);
@@ -29,10 +28,10 @@ export default function OrderSummary({order}) {
 	}
 
 	useEffect(() => {
-		console.log(order)
+		
 	}, [order])
 
-	
+
 	return (
 		<ListGroup as="ul" variant="flush" id="order">
 			<ListGroup.Item as="li" className="list">
