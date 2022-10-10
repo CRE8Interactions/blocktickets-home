@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import * as moment from 'moment';
-
-import { formatDateTime } from '../../../../../utilities/helpers';
+import { useParams } from 'react-router-dom';
+import { formatDateTime, formatCurreny, titleCase } from '../../../../../utilities/helpers';
 
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -12,7 +12,15 @@ import logo from '../../../../../assets/logo.svg';
 
 import './invoice.scss';
 
-export default function Invoice() {
+export default function Invoice({details}) {
+    const [invoice, setInvoice] = useState()
+    const { id } = useParams();
+    useEffect(() => {
+        if (!details) return
+        let currInvoice = details.find(d => d.id == id )
+        setInvoice(currInvoice)
+    }, [details])
+
     return (
         <div id="invoice" className='docs-container'>
             <header className="d-flex">
@@ -36,11 +44,11 @@ export default function Invoice() {
                         <h2 className='text-muted mb-2 caption'>Event</h2>
                         <ul>
                             <li>
-                                <p><strong>Pete Davidson Live</strong></p>
+                                <p><strong>{invoice?.event?.name}</strong></p>
                                 <ul className='caption'>
-                                    <li>{formatDateTime(moment('Sep 3 2022'), 'dateOnly')}<span className='time'>9:00 PM</span></li>
-                                    <li>Madison Square Garden</li>
-                                    <li>Toronto, ON</li>
+                                    <li>{formatDateTime(moment(invoice?.event?.start), 'dateOnly')}<span className='time'>{moment(invoice?.event?.start).format('h:mm A')}</span></li>
+                                    <li>{titleCase(invoice?.event?.venue?.name)}</li>
+                                    <li>{titleCase(invoice?.event?.venue?.address[0]?.city)}, {invoice?.event?.venue?.address[0]?.state?.toUpperCase()}</li>
                                 </ul>
                             </li>
                         </ul>
@@ -49,24 +57,24 @@ export default function Invoice() {
                         <h2 className='text-muted mb-2 caption'>Attendee</h2>
                         <ul>
                             <li>
-                                <span><strong>Harrison Cogan</strong></span>
+                                <span><strong>{titleCase(invoice?.users_permissions_user?.firstName)} {titleCase(invoice?.users_permissions_user?.lastName)}</strong></span>
                                 <ul className="caption">
-                                    <li>Payment information: American Express</li>
-                                    <li>Charge: $81.25</li>
-                                    <li>Last 4 digiits: 3411</li>
+                                    <li>Payment information: {titleCase(invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand)}</li>
+                                    <li>Charge: ${formatCurreny(invoice?.intentDetails?.charges?.data[0]?.amount / 100)}</li>
+                                    <li>Last 4 digiits: {invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4}</li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div className='caption mb-4'>
-                    <p><span className='fw-semi-bold'>Order No.: 1933-133924-6690</span></p>
-                    <p><span className='fw-semi-bold'>Order Date: {formatDateTime(moment('Aug 12 2022'), 'dateOnly')}</span></p>
+                    <p><span className='fw-semi-bold'>Order No.: {invoice?.orderId}</span></p>
+                    <p><span className='fw-semi-bold'>Order Date: {formatDateTime(moment(invoice?.processedAt), 'dateOnly')}</span></p>
                 </div>
                 <Card body>
                     <h1 className='caption fw-semi-bold mb-3'>Ticket/s Details</h1>
                     <ul className="ticket-details">
-                        <li><span>Section</span>General Admission</li>
+                        <li><span>Section</span>{invoice?.details?.ticket?.name}</li>
                         <li ><span>Row</span>-</li>
                         <li><span>Seat</span>-</li>
                     </ul>
@@ -74,33 +82,39 @@ export default function Invoice() {
                 <ListGroup as="ul" className="mt-4">
                     <ListGroup.Item as="li">
                         <div className="split-row">
-                            <h1 className="normal">4x Ticket/s</h1>
-                            <span className='fw-bold'>$130.00</span>
+                            <h1 className="normal">{invoice?.details?.ticketCount}x Ticket/s</h1>
+                            <span className='fw-bold'>${formatCurreny(invoice?.details?.ticket?.cost * invoice?.details?.ticketCount)}</span>
                         </div>
                         <ul>
                             <li className='list-item'>
-                                $32.50 x 4
+                                ${formatCurreny(invoice?.details?.ticket?.cost)} x {invoice?.details?.ticketCount}
                             </li>
                         </ul>
                     </ListGroup.Item>
                     <ListGroup.Item as="li">
                         <div className="split-row">
                             <h1 className="normal">Fees</h1>
-                            <span className='fw-bold'>$13.00</span>
+                            <span className='fw-bold'>${formatCurreny(invoice?.total - (invoice?.details?.ticket?.cost * invoice?.details?.ticketCount))}</span>
                         </div>
                         <ul>
                             <li className='list-item'>
-                                $3.00 (Facility Charge)
+                                ${formatCurreny(invoice?.details?.feeDetails?.facilityFee * invoice?.details?.ticketCount)} (Facility Charge)
                             </li>
                             <li className='list-item'>
-                                $10.00 (Service Charge)
+                                ${formatCurreny(invoice?.details?.feeDetails?.serviceFees * invoice?.details?.ticketCount)} (Service Charge)
+                            </li>
+                            <li className='list-item'>
+                                ${formatCurreny(invoice?.details?.feeDetails?.paymentProcessingFee * invoice?.details?.ticketCount)} (Processing Charge)
+                            </li>
+                            <li className='list-item'>
+                                ${formatCurreny(invoice?.details?.feeDetails?.tax)} (Tax)
                             </li>
                         </ul>
                     </ListGroup.Item>
                 </ListGroup>
                 <div className="split-row total-row">
                     <span>Total</span>
-                    <span>$143.00</span>
+                    <span>${formatCurreny(invoice?.total)}</span>
                 </div>
             </div>
         </div>

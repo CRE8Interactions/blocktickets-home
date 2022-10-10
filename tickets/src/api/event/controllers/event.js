@@ -95,14 +95,9 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
       },
       populate: {
         users_permissions_user: {
-          fields: ['username', 'email', 'phoneNumber']
+          fields: ['username', 'email', 'phoneNumber', 'firstName', 'lastName']
         },
         event: {
-          filters: {
-            $and: [
-              { start: { $gte: new Date() } }
-            ]
-          },
           populate: {
             fee_structure: true,
             venue: {
