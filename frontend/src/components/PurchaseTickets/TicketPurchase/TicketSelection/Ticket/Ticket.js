@@ -23,11 +23,11 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing, tax
 
     if (ticket) {
         let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = `${prices.ticketCost} ea`;
+        ticketPrice = `${parseFloat(prices.ticketCost).toFixed(2)} ea`;
         ticketName = prices.ticketName;
         ticketType = prices.ticketType;
         ticketFee = prices.totalFees;
-        ticketPriceWithFees = `${prices.ticketCostWithFees} ea`;
+        ticketPriceWithFees = `${parseFloat(prices.ticketCostWithFees).toFixed(2)} ea`;
     }
 
     if (listing) {
@@ -36,7 +36,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing, tax
         ticketName = prices.ticketName;
         ticketType = `Resale ${listing.tickets.length} Tickets`;
         ticketFee = prices.totalFees;
-        ticketPriceWithFees = prices.ticketCostWithFees;
+        ticketPriceWithFees = parseFloat(prices.ticketCostWithFees).toFixed(2);
     }
 
     return (

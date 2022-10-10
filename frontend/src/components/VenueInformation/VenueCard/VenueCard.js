@@ -29,7 +29,7 @@ export default function VenueCard({ venue }) {
                     <Stack
                         direction="horizontal"
                         className="justify-content-center gap-2 mt-3 btn-group-flex">
-                        <IconButton link="" variant="primary" btn="location" styles="flex-grow-0 mt-0">
+                        <IconButton link={`https:google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`} variant="primary" btn="location" styles="flex-grow-0 mt-0" realtive="path">
                             Location
                         </IconButton>
                         <Button variant="outline-light" className="btn--icon" aria-label="Save Venue">
