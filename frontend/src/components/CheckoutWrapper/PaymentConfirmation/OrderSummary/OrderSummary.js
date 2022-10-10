@@ -23,15 +23,14 @@ export default function OrderSummary({order}) {
 		let serviceFees = order.details.feeDetails.serviceFees;
 		fees = parseFloat(facilityFee) + parseFloat(paymentProcessingFee)+ parseFloat(serviceFees)
 		fees = fees * order.details.ticketCount;
-		tax = parseFloat(order.details.feeDetails.tax) * order.details.ticketCount;
+		tax = parseFloat(order.details.feeDetails.tax).toFixed(2) * order.details.ticketCount;
 		total = fees + tax + parseFloat(sum);
 	}
 
 	useEffect(() => {
-		
 	}, [order])
 
-
+	
 	return (
 		<ListGroup as="ul" variant="flush" id="order">
 			<ListGroup.Item as="li" className="list">
@@ -56,7 +55,7 @@ export default function OrderSummary({order}) {
 							</Stack>
 					<Stack direction="horizontal" as="li"  className="split-row">
 								<span>Total</span>
-								<span className='text-end'>${sum == 0 ? 0 : total}</span>
+								<span className='text-end'>${sum == 0 ? 0 : parseFloat(total).toFixed(2)}</span>
 							</Stack>
 				</ul>
 			</ListGroup.Item>

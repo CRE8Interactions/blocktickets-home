@@ -127,7 +127,7 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         id: ticketIds,
       },
       data: {
-        on_sale_status: 'available',
+        on_sale_status: 'sold',
       },
     });
 
