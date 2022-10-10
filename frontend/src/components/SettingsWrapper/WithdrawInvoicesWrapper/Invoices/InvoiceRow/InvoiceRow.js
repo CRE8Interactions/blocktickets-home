@@ -7,8 +7,8 @@ import { formatDateTime } from '../../../../../utilities/helpers';
 export default function InvoiceRow({ invoice }) {
 
     useEffect(() => {
-        console.log(invoice)
     }, [])
+    
     return (
         <tr>
             <th scope="row">{formatDateTime(moment(invoice?.createdAt))}</th>

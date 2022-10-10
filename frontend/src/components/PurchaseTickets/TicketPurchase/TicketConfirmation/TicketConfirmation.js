@@ -36,7 +36,7 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
         sum = prices.ticketCostWithFees;
         maxQuantity = prices.ticketCount;
         ticketFees = (prices.totalFees).toFixed(2);
-        totalTicketPrice = prices.ticketCostWithFees;
+        totalTicketPrice = parseFloat(prices.ticketCostWithFees).toFixed(2);
 
     } else if (ticket) {
         let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
@@ -45,7 +45,7 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
         sum = prices.ticketCostWithFees;
         maxQuantity = ticket.maximum_quantity;
         ticketFees = (prices.totalFees).toFixed(2);
-        totalTicketPrice = prices.ticketCostWithFees;
+        totalTicketPrice = parseFloat(prices.ticketCostWithFees).toFixed(2);
         hasDesciption = ticket?.description.split('').length > 0 ? true : false;
     }
 
