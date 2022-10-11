@@ -10,6 +10,7 @@ export default function WithdrawInvoicesWrapper({ details }) {
 
     const sortBy = arr => {
         console.log(arr);
+        return arr;
         // return arr.sort(function (a, b) {
         //     return new Date(a.createdAt) - new Date(b.createdAt)
         // })
