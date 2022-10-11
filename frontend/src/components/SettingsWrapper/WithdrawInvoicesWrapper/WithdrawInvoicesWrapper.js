@@ -9,9 +9,10 @@ import './withdrawInvoicesWrapper.scss';
 export default function WithdrawInvoicesWrapper({ details }) {
 
     const sortBy = arr => {
-        return arr.sort(function (a, b) {
-            return new Date(a.createdAt) - new Date(b.createdAt)
-        })
+        console.log(arr);
+        // return arr.sort(function (a, b) {
+        //     return new Date(a.createdAt) - new Date(b.createdAt)
+        // })
     }
 
     return (
