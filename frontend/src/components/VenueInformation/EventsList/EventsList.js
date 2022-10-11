@@ -1,6 +1,8 @@
 import React from 'react';
 import * as moment from 'moment';
 
+import { formatDateTime, getStartDateFormatter } from '../../../utilities/helpers';
+
 import Stack from 'react-bootstrap/Stack';
 
 import { IconButton } from '../../IconButton';
@@ -26,7 +28,7 @@ export default function EventsList({ venue }) {
                             <div className="event-name-date-wrapper">
                                 <p className="event-name">{event?.name}</p>
                                 <div>
-                                    <span className="fw-bold text-muted small">{moment(event?.start).format('MMM DD h:mmA')}</span>
+                                    <span className="fw-bold text-muted small">{formatDateTime(moment(event?.start), getStartDateFormatter(event))}</span>
                                 </div>
                             </div>
                             <IconButton

@@ -239,7 +239,7 @@ export default function LoginSignupForm() {
         <Row className="spacer-md" id="login-signup-container">
             <Col md={4}>{step > 0 && <BackButton handleGoBack={handleGoBack} />}</Col>
             <Col md={6} className="form-container d-flex-column">
-            {alert.show &&
+                {alert.show &&
                     <>
                         <Alert variant={alert.variant} className="mb-5" onClose={() => setAlert({ show: false, variant: '', message: '' })} dismissible>
                             {alert.message}
@@ -316,8 +316,8 @@ export default function LoginSignupForm() {
                             <h3 className="title mb-1">Enter 4 Digit Verification</h3>
                             <p className="subtitle">
                                 Code is set to <span className="text-primary">{phoneNumber ? phoneNumber : email} </span>
-                                { email &&
-                                    <>If you havent received an email within 5 minutes check your spam folder.</>
+                                {email &&
+                                    <span className="d-block">If you haven't received an email within 5 minutes check your spam folder.</span>
                                 }
                             </p>
                         </div>
