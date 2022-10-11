@@ -32,11 +32,6 @@ export default function Footer() {
                     <Stack direction="horizontal" className="main-links">
                         <ul>
                             <li>
-                                <LinkContainer to="/terms-conditions">
-                                    <Nav.Link>Terms & Conditions</Nav.Link>
-                                </LinkContainer>
-                            </li>
-                            <li>
                                 <LinkContainer to="/purchase-policy">
                                     <Nav.Link>Purchase Policy</Nav.Link>
                                 </LinkContainer>
@@ -54,24 +49,18 @@ export default function Footer() {
                         </ul>
                         <ul>
                             <li>
+                                <LinkContainer to="/terms-conditions">
+                                    <Nav.Link>Terms & Conditions</Nav.Link>
+                                </LinkContainer>
+                            </li>
+                            <li>
                                 <LinkContainer to="/disclaimer">
                                     <Nav.Link>Disclaimer</Nav.Link>
                                 </LinkContainer>
                             </li>
                             <li>
-                                <LinkContainer to={{ pathname: "https://admin.blocktickets.xyz" }}>
-                                    <Nav.Link>Creator Login</Nav.Link>
-                                </LinkContainer>
-                            </li>
-                            <li>
-                                <LinkContainer to="/">
-                                    <Nav.Link>About Us</Nav.Link>
-                                </LinkContainer>
-                            </li>
-                            <li>
-                                <LinkContainer to="/">
-                                    <Nav.Link>Help</Nav.Link>
-                                </LinkContainer>
+                                <a href="https://help.blocktickets.xyz" className="nav-link" target="_blank">Help
+                                </a>
                             </li>
                         </ul>
                     </Stack>
