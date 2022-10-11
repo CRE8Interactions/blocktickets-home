@@ -23,7 +23,7 @@ export default function EventCardTop(props) {
                         return (
                             <li key={index}>
                                 <Row>
-                                    <span className="col caption">{formatShortDate(moment(event?.start), getStartDateFormatter(event), 'short')}</span>
+                                    <span className="col caption">{formatShortDate(moment(event?.start), getStartDateFormatter(event))}</span>
                                     <span className="col caption text-end fw-bold">{event?.name}</span>
                                 </Row>
                             </li>
