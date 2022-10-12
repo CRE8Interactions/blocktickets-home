@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { createListing, updateMyListings } from '../../../utilities/api';
 import { useWindowSize } from '../../../utilities/hooks';
 import { toggleElement } from '../../../utilities/helpers';
 
@@ -15,8 +16,7 @@ import { Numpad } from './Numpad';
 import { SuccessContainer } from '../SuccessContainer';
 
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
-
-import { createListing, updateMyListings } from '../../../utilities/api';
+import { Spinner } from "../../SpinnerContainer/Spinner"
 
 export default function SellModal({ handleClose, setTicketStatus, ticketAction, order, listing, getListings }) {
 
@@ -49,6 +49,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
         selectedTickets,
         setSelectedTickets
     ] = useState([]);
+
+    const [isSaving, setIsSaving] = useState(false)
 
     useEffect(() => {
         if (price > 0 && (price < (selectedTickets[0].minResalePrice) || price > (selectedTickets[0].maxResalePrice))) {
@@ -99,6 +101,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
     const ticketPrice = ticketsTotalPrice / selectedTickets.length
 
     const submit = () => {
+        setIsSaving(true)
         let data = {
             tickets: selectedTickets,
             quantity: selectedTickets.length,
@@ -113,16 +116,26 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
             data.event = listing.event
             updateMyListings(listing.id, data)
                 .then((res) => {
+                    setIsSaving(false)
                     if (getListings) {
                         getListings()
                     }
                     setStep(4)
                 })
-                .catch((err) => console.error(err))
+                .catch((err) => {
+                    console.error(err)
+                    setIsSaving(false)
+                })
         } else {
             createListing(data)
-                .then((res) => setStep(4))
-                .catch((err) => console.error(err))
+                .then((res) => {
+                    setStep(4)
+                    setIsSaving(false)
+                })
+                .catch((err) => {
+                    setIsSaving(false)
+                    console.error(err)
+                })
         }
     }
 
@@ -207,7 +220,11 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
                             <small className="disclaimer mb-3">By clicking 'Agree and sell' you are constenting to Blocktickets <a href="">terms and conditions</a>. </small>
                             <Stack direction="horizontal" className="mt-0 btn-group-flex">
                                 <BackButton variant="default" handleGoBack={handleGoBack} />
-                                <Button onClick={(e) => submit()} className="btn-next" size="lg">Agree and sell</Button></Stack></div>
+                                <Button onClick={submit} className={`icon-button ${!isSaving ? 'btn-next' : ''}`} size="lg">{isSaving ? (
+                                    <Spinner />
+                                ) : (
+                                    'Agree and sell'
+                                )}</Button></Stack></div>
 
 
                     </>

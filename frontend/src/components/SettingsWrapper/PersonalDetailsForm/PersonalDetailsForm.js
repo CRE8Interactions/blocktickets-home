@@ -9,6 +9,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { Spinner } from "../../SpinnerContainer/Spinner"
+
 export default function PersonalDetailsForm() {
     let user = sessionStorage.getItem('user');
     user = JSON.parse(user).user;
@@ -41,6 +43,8 @@ export default function PersonalDetailsForm() {
     ] = useState(user.email);
 
     const [disabled, setDisabled] = useState(true);
+
+    const [isSaving, setIsSaving] = useState(false)
 
     // const [
     // 	dob,
@@ -96,6 +100,7 @@ export default function PersonalDetailsForm() {
     }, []);
 
     const submitForm = () => {
+        setIsSaving(true)
         let data = {
             data: {
                 email,
@@ -107,8 +112,10 @@ export default function PersonalDetailsForm() {
         updatePersonalDetails(data).then((res) => {
             authService.setUser(res.data);
             setShow(true)
+            setIsSaving(false)
         }).catch((err) => {
             console.error(err)
+            setIsSaving(false)
         });
     };
 
@@ -191,8 +198,12 @@ export default function PersonalDetailsForm() {
 						</Form.Group>
 					</Col>
 				</Row> */}
-                <Button disabled={disabled} size="lg" onClick={(e) => submitForm()}>
-                    Update
+                <Button disabled={disabled} size="lg" className="icon-button" onClick={submitForm}>
+                    {isSaving ? (
+                        <Spinner />
+                    ) : (
+                        'Update'
+                    )}
                 </Button>
             </Form>
         </Fragment>
