@@ -1,17 +1,6 @@
 version: '3'
 
 services:
-  contract:
-    build:
-      context: ./contract_issuer
-      dockerfile: Dockerfile
-    volumes:
-      - ./contract_issuer:/usr/src/app/contract_issuer
-      - /usr/src/app/contract_issuer/node_modules
-    ports:
-      - '9545:9545'
-    networks:
-      - block-network
   tickets:
     build:
       context: ./tickets
