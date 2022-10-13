@@ -48,7 +48,7 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     const [maxTotalTicketCount, setMaxTotalTicketCount] = useState(8)
 
     // flag for displaying no filtered matches 
-    // set to 0 when no ticket types are selected otherwise 1
+    // set to 0 when no ticket types are selected otherwise ticket count when filters are on/off
     const [
         filteredTicketCount,
         setFilteredTicketCount
@@ -87,6 +87,7 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     const [showGa, setShowGa] = useState(true);
 
     useEffect(() => {
+
         const availableCountGA = parseInt(tickets?.tickets?.filter((ticket) => ticket.generalAdmission === true)?.reduce((accumulator, object) => {
             return accumulator + (object.availableCount);
         }, 0));
@@ -144,23 +145,24 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
             //     setFilteredTicketCount(0)
             // }
 
-            // if all ticket types
-            if (ticketFilters.standard && ticketFilters.resale) {
-                setFilteredTicketCount(1)
+            // if there are ticket types selected
+            if (ticketFilters.standard || ticketFilters.resale) {
+
+                // set total ticket quantity when filtering
+                // always base total ticket quantity off of available tickets
                 handleTotalTicketCount(tickets?.tickets)
+
+                // filter tickets based on selected ticket quantity 
+                // always filter the available tickets and only filter resale tickets when turned on 
+                setAvailableTickets(tickets?.tickets.filter(ticket => ticket.maximum_quantity === ticketCount))
+                ticketFilters.resale && setListings(tickets?.listings.filter(ticket => ticket.quantity === ticketCount))
+
+                // always take the ticket count of the filtered available tickets but only add the filtered resale tickets if turned on 
+                setFilteredTicketCount([tickets?.tickets.filter(ticket => ticket.maximum_quantity === ticketCount).length, ticketFilters.resale && tickets?.listings?.filter(ticket => ticket.quantity === ticketCount).length].reduce((acc, cur) => acc + cur, 0));
             }
-            // if only standard tickets 
-            else if (ticketFilters.standard && !ticketFilters.resale) {
-                setFilteredTicketCount(1)
-                handleTotalTicketCount(tickets?.tickets)
-            }
-            // if only resale tickets 
-            else if (!ticketFilters.standard && ticketFilters.resale) {
-                setFilteredTicketCount(1)
-                handleTotalTicketCount(tickets?.listings)
-            }
-            // if no ticket types
-            else {
+
+            // if no ticket types selected
+            else if (!ticketFilters.standard && !ticketFilters.resale) {
                 handleTotalTicketCount(tickets?.tickets)
                 setFilteredTicketCount(0)
             }
@@ -172,12 +174,22 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
     // set total ticket count filtered or not 
     const handleTotalTicketCount = arr => {
-        const minTotalTicketCount = Math.min.apply(Math, arr?.map(ticket => ticket.minimum_quantity || ticket.quantity));
+        let property;
 
-        const maxTotalTicketCount = Math.max.apply(Math, arr?.map(ticket => ticket.maximum_quantity || ticket.quantity));
+        // only resale tickets 
+        if (!ticketFilters.standard && ticketFilters.resale) {
+            arr = tickets?.listings;
+            property = 'quantity'
+        }
+        const minTotalTicketCount = Math.min.apply(Math, arr?.map(ticket => ticket[property || 'minimum_quantity']));
+
+        const maxTotalTicketCount = Math.max.apply(Math, arr?.map(ticket => ticket[property || 'maximum_quantity']));
 
         setMinTotalTicketCount(minTotalTicketCount)
         setMaxTotalTicketCount(maxTotalTicketCount)
+
+        // sync up filtered ticket count with max ticket count 
+        setFilteredTicketCount(maxTotalTicketCount)
     }
 
     // sort tickets from least expensive to most expensive  
