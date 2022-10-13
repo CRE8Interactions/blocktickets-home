@@ -88,6 +88,10 @@ button,
 		flex: 0 0;
 		flex-basis: 73.5px;
 
+		&:hover {
+			color: $text-muted !important;
+		}
+
 		@media (min-width: 500px) {
 			flex-basis: 95px;
 		}
