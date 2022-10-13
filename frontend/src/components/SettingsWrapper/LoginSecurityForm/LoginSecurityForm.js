@@ -1,12 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
-import { PhoneNumberInput } from '../../PhoneNumberInput';
-import { requestNumberChange, updateNumber, phoneUnique } from '../../../utilities/api';
 import authService from '../../../utilities/services/auth.service';
+import { requestNumberChange, updateNumber, phoneUnique } from '../../../utilities/api';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
+import { PhoneNumberInput } from '../../PhoneNumberInput';
+import { Spinner } from "../../SpinnerContainer/Spinner"
 
 export default function LoginSecurityForm({ user, setShow, showError, setPhone }) {
     const [
@@ -31,6 +33,8 @@ export default function LoginSecurityForm({ user, setShow, showError, setPhone }
     const [isValid, setIsValid] = useState(true);
     const [verifying, setVerifying] = useState(false);
     const [updated, setUpdated] = useState(false)
+
+    const [isSaving, setIsSaving] = useState(false)
 
     useEffect(
         () => {
@@ -73,13 +77,21 @@ export default function LoginSecurityForm({ user, setShow, showError, setPhone }
     }
 
     const submitForm = () => {
+        setIsSaving(true)
         let data = {
             data: {
                 toNumber: phoneNumber,
                 fromNumber: user.phoneNumber
             }
         };
-        requestNumberChange(data).then((res) => { setShow(true); setVerifying(true) }).catch((err) => console.error(err))
+        requestNumberChange(data).then((res) => {
+            setIsSaving(false);
+            setShow(true);
+            setVerifying(true)
+        }).catch((err) => {
+            setIsSaving(false)
+            console.error(err)
+        })
     };
 
     const submitCode = (code) => {
@@ -120,8 +132,12 @@ export default function LoginSecurityForm({ user, setShow, showError, setPhone }
                     </Form.Group>
                 }
                 {!verifying &&
-                    <Button disabled={!validNumber()} size="lg" onClick={(e) => submitForm()}>
-                        Update
+                    <Button disabled={!validNumber()} className="icon-button" size="lg" onClick={submitForm}>
+                        {isSaving ? (
+                            <Spinner />
+                        ) : (
+                            'Update'
+                        )}
                     </Button>
                 }
             </Form>

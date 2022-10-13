@@ -15,6 +15,7 @@ import { DisplayTickets } from '../DisplayTickets';
 import { PhoneNumberInput } from '../../PhoneNumberInput';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
+import { Spinner } from "../../SpinnerContainer/Spinner"
 
 export default function TransferModal({ handleClose, setTicketStatus, order, getMyOrders }) {
 
@@ -39,6 +40,8 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
     ] = useState('');
 
     const [isValid, setIsValid] = useState(true)
+
+    const [isSaving, setIsSaving] = useState(false)
 
     // reset validation
     useEffect(() => {
@@ -67,6 +70,7 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
     };
 
     const submitTransfer = () => {
+        setIsSaving(true)
         let ticketIds = selectedTickets.map((ticket) => ticket.id)
         let data = {
             phoneNumber: phoneNumber,
@@ -77,8 +81,12 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
         createTicketTransfer(data)
             .then((res) => {
                 setStep(4)
+                setIsSaving(false)
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err)
+                setIsSaving(false)
+            });
     }
 
     const validNumber = () => {
@@ -145,9 +153,13 @@ export default function TransferModal({ handleClose, setTicketStatus, order, get
                         <Stack className="btn-group-flex">
                             <Button onClick={handleClose} variant="outline-light" size="lg">Cancel</Button>
                             <Button
-                                onClick={(e) => submitTransfer()}
-                                size="lg" >
-                                Transfer
+                                onClick={submitTransfer}
+                                size="lg" className='icon-button'>
+                                {isSaving ? (
+                                    <Spinner />
+                                ) : (
+                                    'Transfer'
+                                )}
                             </Button>
                         </Stack>
                     </Fragment>
