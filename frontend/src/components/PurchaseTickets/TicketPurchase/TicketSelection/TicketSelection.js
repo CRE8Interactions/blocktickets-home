@@ -153,13 +153,13 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                 handleTotalTicketCount(tickets?.tickets)
 
                 // filter tickets based on selected ticket quantity 
-                // always filter the available tickets where min ticket quantity is less than saelected ticket quantiy and only filter resale tickets when turned on 
+                // always filter the available tickets where min ticket quantity is less than selected ticket quantiy and only filter resale tickets when turned on 
                 setAvailableTickets(tickets?.tickets.filter(ticket => ticket.minimum_quantity <= ticketCount))
                 // quantity is equal to selected ticket quantity
                 ticketFilters.resale && setListings(tickets?.listings.filter(ticket => ticket.quantity === ticketCount))
 
                 // always take the ticket count of the filtered available tickets but only add the filtered resale tickets if turned on 
-                setFilteredTicketCount([tickets?.tickets.filter(ticket => ticket.maximum_quantity === ticketCount).length, ticketFilters.resale && tickets?.listings?.filter(ticket => ticket.quantity === ticketCount).length].reduce((acc, cur) => acc + cur, 0));
+                setFilteredTicketCount([tickets?.tickets.filter(ticket => ticket.minimum_quantity <= ticketCount).length, ticketFilters.resale && tickets?.listings?.filter(ticket => ticket.quantity === ticketCount).length].reduce((acc, cur) => acc + cur, 0));
             }
 
             // if no ticket types selected
