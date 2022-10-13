@@ -1,11 +1,10 @@
 const cronTasks = require("../../cron-tasks");
 
 module.exports = ({ env }) => ({
-  host: env('HOST'),
-  port: env.int('PORT'),
-  url: env('URL'),
-  app: {
-    keys: env.array('APP_KEYS'),
+  proxy: true,
+  url: env('APP_URL'), // replaces `host` and `port` properties in the development environment
+  app: { 
+    keys: env.array('APP_KEYS')
   },
   cron: {
     enabled: env("CRON_ENABLED", false),
