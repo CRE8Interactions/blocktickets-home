@@ -85,8 +85,8 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
     const eventTaxRates = (city, state) => {
         getTaxRates(city, state)
-                .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
-                .catch((err) => console.error(err))
+            .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
+            .catch((err) => console.error(err))
     }
 
     useEffect(() => {
@@ -268,7 +268,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                         onClick={completePurchase}>
                         {purchasing ? (
                             <Fragment>
-                                <Spinner variant="light" size="sm" />
+                                <Spinner />
                                 <span>Purchasing...</span>
                             </Fragment>
                         ) : (

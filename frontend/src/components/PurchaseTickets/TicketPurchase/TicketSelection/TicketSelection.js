@@ -41,31 +41,40 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
         setShowFilter
     ] = useState(false);
 
+    const [minTotalTicketCount, setMinTotalTicketCount] = useState(1)
+
+    const [maxTotalTicketCount, setMaxTotalTicketCount] = useState(8)
+
     const [
         filteredTicketCount,
         setFilteredTicketCount
     ] = useState(1);
 
+    // general admission ticket count 
     const [
         gaTicketsAvailable,
         setGaTicketsAvailable
     ] = useState(0)
 
+    // general admission tickets - don't use 
     const [
         gaTickets,
         setGaTickets
     ] = useState({})
 
+    // all tickets - used to display tickets
     const [
         availableTickets,
         setAvailableTickets
     ] = useState({})
 
+    // tickets for resale 
     const [
         resaleTickets,
         setResaleTickets
     ] = useState({})
 
+    // tickets listed for sale - used to display tickets 
     const [
         listings,
         setListings
@@ -80,11 +89,17 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
 
         const gaTickets = tickets?.tickets?.filter((ticket) => ticket.generalAdmission === true)
 
+        const minTotalTicketCount = Math.min.apply(Math, tickets?.tickets?.map(ticket => ticket.minimum_quantity));
+
+        const maxTotalTicketCount = Math.max.apply(Math, tickets?.tickets?.map(ticket => ticket.maximum_quantity));
+
+        setMinTotalTicketCount(minTotalTicketCount)
+        setMaxTotalTicketCount(maxTotalTicketCount)
         setGaTicketsAvailable(availableCountGA)
         setGaTickets(gaTickets)
-        setAvailableTickets(tickets?.tickets)
+        setAvailableTickets(sortBy(tickets?.tickets))
         setResaleTickets(tickets?.reSaleTickets)
-        setListings(tickets.listings);
+        setListings(sortBy(tickets.listings));
         if (!tickets?.tickets) return;
 
         // let higestResalePrice;
@@ -127,13 +142,20 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
         ]
     );
 
+    // sort tickets from least expensive to most expensive  
+    const sortBy = (arr) => {
+        return arr?.sort(function (a, b) {
+            return a.cost - b.cost
+        })
+    }
+
     const handleShow = () => {
         setShowFilter(!showFilter);
     }
 
     const selectOptions = () => {
         let options = [];
-        for (let i = 1; i <= 8; i++) {
+        for (let i = minTotalTicketCount; i <= maxTotalTicketCount; i++) {
             options.push({ key: i, value: i, name: i === 1 ? `${i} Ticket` : `${i} Tickets` })
         }
         return options;
@@ -142,14 +164,6 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
     const handleNext = (ticket, listing = {}) => {
         if (ticket && ticket.on_sale_status === 'available') handleClick('confirmation', ticket, null)
         if (listing && !ticket) handleClick('confirmation', null, listing)
-    }
-
-    const disableSelect = (element) => {
-        if (element.value > tickets.generalAdmissionCount) {
-            return true;
-        } else {
-            return false
-        }
     }
 
     return (
@@ -163,8 +177,8 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                                 aria-label="Number of Tickets"
                                 value={ticketCount}
                                 onChange={(e) => setTicketCount(parseInt(e.target.value))}>
-                                {selectOptions().map((o, index) => {
-                                    return <option value={o.key} key={o.key} disabled={disableSelect(o)}>{o.name}</option>
+                                {selectOptions().map((o) => {
+                                    return <option value={o.key} key={o.key}>{o.name}</option>
                                 })}
                             </Form.Select>
                             <Button
@@ -209,9 +223,9 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
                                                                 }
                                                             </>
                                                         )} */}
-                                                        { availableTickets && availableTickets?.map((ticket, index) => {
-                                                           return <Ticket ticket={ticket} handleNext={handleNext} ticketFilters={ticketFilters} key={index} taxRates={taxRates} feeStructure={feeStructure} />
-                                                          })
+                                                        {availableTickets && availableTickets?.map((ticket, index) => {
+                                                            return <Ticket ticket={ticket} handleNext={handleNext} ticketFilters={ticketFilters} key={index} taxRates={taxRates} feeStructure={feeStructure} />
+                                                        })
                                                         }
                                                         <>
                                                             {tickets?.listings && tickets?.listings.map((listing, index) => <Ticket key={index} handleNext={handleNext} ticketFilters={ticketFilters} listing={listing} taxRates={taxRates} feeStructure={feeStructure} />)

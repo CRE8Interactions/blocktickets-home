@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import { ChequeImg } from './ChequeImg';
+import { Spinner } from '../../SpinnerContainer/Spinner';
 
 export default function BankAccountDetailsModal({ handleClose, account, show }) {
     const [
@@ -61,6 +62,8 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
     ] = useState('');
 
     const [showAlert, setShowAlert] = useState(false);
+
+    const [isSaving, setIsSaving] = useState(false)
 
     // update state when there is an account 
     useEffect(() => {
@@ -154,6 +157,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
     }
 
     const submitForm = () => {
+        setIsSaving(true)
         let data = {
             data: {
                 accountType: accountType ? accountType : account.accountType,
@@ -167,8 +171,12 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
         };
 
         createBankAccount(data).then(() => {
+            setIsSaving(false)
             location.reload()
-        }).catch(err => console.error(err))
+        }).catch(err => {
+            console.error(err)
+            setIsSaving(false)
+        })
     };
 
     return (
@@ -275,8 +283,12 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                 )}
                         </Form.Group>
 
-                        <Button disabled={!formValid} size="lg" onClick={submitForm}>
-                            Link bank account
+                        <Button disabled={!formValid} className="icon-button" size="lg" onClick={submitForm}>
+                            {isSaving ? (
+                                <Spinner />
+                            ) : (
+                                'Link bank account'
+                            )}
                         </Button>
                     </Form>
                 </Modal.Body>

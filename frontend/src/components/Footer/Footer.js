@@ -59,7 +59,7 @@ export default function Footer() {
                                 </LinkContainer>
                             </li>
                             <li>
-                                <a href="https://help.blocktickets.xyz" className="nav-link" target="_blank">Help
+                                <a href="https://help.blocktickets.xyz" className="nav-link" target="_blank">Help Center
                                 </a>
                             </li>
                         </ul>

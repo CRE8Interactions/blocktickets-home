@@ -17,6 +17,7 @@ import Stack from 'react-bootstrap/Stack';
 import { PhoneNumberInput } from './../PhoneNumberInput';
 import { Error } from '../Error';
 import { BackButton } from './../BackButton';
+import { Spinner } from '../SpinnerContainer/Spinner'
 
 import './loginSignupForm.scss';
 
@@ -73,6 +74,8 @@ export default function LoginSignupForm() {
         variant: '',
         message: ''
     })
+
+    const [isSaving, setIsSaving] = useState(false)
 
 
     // const [
@@ -143,6 +146,7 @@ export default function LoginSignupForm() {
 
     // submit phoneNumber
     function submit() {
+        setIsSaving(true)
         if ((validNumber() || email) && !hasError) {
             let data = {
                 data: {
@@ -152,14 +156,17 @@ export default function LoginSignupForm() {
             };
             verifyUser(data)
                 .then((res) => {
+                    setIsSaving(false)
                     setStep(1);
                 })
                 .catch((err) => {
+                    setIsSaving(false)
                     setHasError(true);
                     console.error(err);
                 });
         } else {
             setHasError(true)
+            setIsSaving(false)
         }
     }
 
@@ -270,10 +277,14 @@ export default function LoginSignupForm() {
                                 </Form.Group>
                                 <Button
                                     size="lg"
-                                    className="icon-button btn-next"
+                                    className={`icon-button ${!isSaving ? 'btn-next' : ''} `}
                                     disabled={!phoneNumber || hasError}
-                                    onClick={(e) => submit()}>
-                                    Validate
+                                    onClick={submit}>
+                                    {isSaving ? (
+                                        <Spinner />
+                                    ) : (
+                                        'Validate'
+                                    )}
                                 </Button>
                                 <Form.Text><p>Don't have access to your phone?</p> <p><Button variant="link" onClick={() => setChoice('email')}>Click here</Button> to use your email to login.</p></Form.Text>
                             </>
@@ -301,10 +312,14 @@ export default function LoginSignupForm() {
 
                                 <Button
                                     size="lg"
-                                    className="icon-button btn-next"
+                                    className={`icon-button ${!isSaving ? 'btn-next' : ''} `}
                                     disabled={!email || hasError}
-                                    onClick={(e) => submitEmailRequest(e)}>
-                                    Send
+                                    onClick={submitEmailRequest}>
+                                    {isSaving ? (
+                                        <Spinner />
+                                    ) : (
+                                        'Send'
+                                    )}
                                 </Button>
                             </>
                         )}

@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
-
+import { Spinner } from "../../SpinnerContainer/Spinner"
 
 export default function CancelModal({ handleClose, ticket, order, transfer, getMyTransfers }) {
     // 1 - confirmation
@@ -19,6 +19,8 @@ export default function CancelModal({ handleClose, ticket, order, transfer, getM
         step,
         setStep
     ] = useState(1);
+
+    const [isSaving, setIsSaving] = useState(false)
 
     useLayoutEffect(() => {
         let el = document.querySelector('.btn-close');
@@ -34,13 +36,17 @@ export default function CancelModal({ handleClose, ticket, order, transfer, getM
     }, [step])
 
     const cancel = () => {
-
+        setIsSaving(true)
         cancelMyTransfers({ data: { transferId: transfer.id } })
             .then((res) => {
+                setIsSaving(false)
                 setStep(2);
                 getMyTransfers()
             })
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                setIsSaving(false)
+                console.error(err)
+            })
     };
 
     return (
@@ -66,8 +72,12 @@ export default function CancelModal({ handleClose, ticket, order, transfer, getM
                                 onClick={cancel}
                                 variant="outline-light"
                                 size="lg"
-                                className="text-danger">
-                                Cancel Transfer
+                                className="icon-button text-danger">
+                                {isSaving ? (
+                                    <Spinner variant='dark' />
+                                ) : (
+                                    'Cancel transfer'
+                                )}
                             </Button>
                             <Button onClick={handleClose} size="lg">
                                 Go back

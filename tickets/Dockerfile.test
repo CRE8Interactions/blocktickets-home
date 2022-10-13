@@ -2,18 +2,19 @@ FROM node:14
 
 # set working directory
 
-WORKDIR /usr/src/app/tickets
+WORKDIR /app/tickets
 
 COPY package.json ./
 
-RUN npm install -g jest 
 RUN npm install
+
+ENV NODE_ENV=test
+
+RUN npm run build --clean
 
 # add app
 COPY . .
 
-ENV NODE_ENV=test
-
 EXPOSE 1337
 
-CMD ["npm", "run", "test"]
+CMD ["npm", "run", "start"]
