@@ -75,7 +75,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                                             <span className='m-0 caption'>Listing price per ticket</span>
                                             <span className='text-end fw-medium'>${(listing?.askingPrice / listing?.tickets.length).toFixed(2)}</span>
                                         </Stack>
-                                        <p className='caption text-muted'>You will make ${(listing?.askingPrice / listing?.tickets.length).toFixed(2) - parseFloat(listing?.serviceFees / listing?.tickets.length).toFixed(2)} per ticket</p>
+                                        <p className='caption text-muted'>You will make ${((listing?.askingPrice / listing?.tickets.length) - (listing?.serviceFees / listing?.tickets.length)).toFixed(2)} per ticket</p>
                                     </Stack>
                                 </>
                             )
@@ -89,7 +89,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                             (
                                 <>
                                     <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-                                        <Button onClick={(e) => handleClick('remove')}>Remove</Button>
+                                        <Button onClick={(e) => handleClick('remove')}>Remove listing</Button>
                                         <Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
                                     </Stack>
                                 </>

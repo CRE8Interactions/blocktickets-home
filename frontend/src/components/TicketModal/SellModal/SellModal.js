@@ -60,8 +60,20 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
             setLabel("Price per ticket")
             setPriceValid(true)
         }
-        let fees = (order?.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(price).toFixed(2)
-        setServiceFees((fees).toFixed(2))
+
+        // update fees when price changes
+        let fees;
+
+        if (ticketAction === 'edit') {
+            setIsUpdate(true)
+            setStep(2)
+            setSelectedTickets(listing.tickets)
+            fees = (listing.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(listing.askingPrice).toFixed(2)
+            setServiceFees((fees).toFixed(2))
+        } else {
+            fees = (order?.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(price).toFixed(2)
+            setServiceFees((fees).toFixed(2))
+        }
     }, [price])
 
     useLayoutEffect(() => {
@@ -78,13 +90,9 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
     }, [step])
 
     useEffect(() => {
+        // set ticket price
         if (ticketAction === 'edit') {
-            setIsUpdate(true)
-            setStep(2)
             setPrice(listing.askingPrice / listing.quantity)
-            setSelectedTickets(listing.tickets)
-            let fees = (listing.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(listing.askingPrice).toFixed(2)
-            setServiceFees((fees).toFixed(2))
         }
     }, [])
 
