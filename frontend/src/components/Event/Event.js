@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as moment from 'moment';
 
-import { formatDateTime, getStartDateFormatter } from '../../utilities/helpers'
+import { formatDateTime, getStartDateFormatter, formatShortAddress } from '../../utilities/helpers'
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -78,7 +78,7 @@ export default function Event(props) {
                             </Col>
                             <Col>
                                 <p className="small">
-                                    {event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state}
+                                    {formatShortAddress(event)}
                                 </p>
                             </Col>
                         </Row>

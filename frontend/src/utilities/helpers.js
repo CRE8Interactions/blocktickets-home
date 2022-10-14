@@ -32,6 +32,10 @@ export const sortBy = (arr, obj) => {
     });
 }
 
+// address - city, state 
+export const formatShortAddress = (obj) => {
+    return `${capitalizeString(obj?.venue?.address[0]?.city)}, ${obj?.venue?.address[0]?.state?.toUpperCase()}`
+}
 // format full address 
 export const formatAddress = (obj) => {
     return `${obj.address_1}, ${obj.city}, ${obj.state.toUpperCase()}, ${obj.zipcode}, ${obj.country.toUpperCase()}`

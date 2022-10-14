@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as moment from 'moment';
 
 import { getEvent } from '../../../../utilities/api';
-import { formatDateTime } from '../../../../utilities/helpers';
+import { formatDateTime, formatShortAddress } from '../../../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -44,7 +44,7 @@ export default function OrderPreview() {
                     </p>
                     <p>
                         {data?.venue?.name}<span className="loc">
-                            {data?.venue?.address[0]?.city}, {data?.venue?.address[0]?.state}
+                            {formatShortAddress(data)}
                         </span>
                     </p>
                     <p className='tickets'>{ticketCount > 1 ? `${ticketCount} Tickets` : `${ticketCount} Ticket`}<span className='ticket-type'>{ticketType}</span></p>

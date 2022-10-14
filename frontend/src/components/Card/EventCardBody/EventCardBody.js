@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import * as moment from 'moment';
 
-import { formatShortDate, getStartDateFormatter } from '../../../utilities/helpers';
+import { formatShortDate, getStartDateFormatter, formatShortAddress } from '../../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -18,7 +18,7 @@ export default function EventCardBody({ event }) {
                 <li>
                     <Row>
                         <span className="col caption">{formatShortDate(moment(event?.start), getStartDateFormatter(event))}</span>
-                        <span className="col caption text-end">{event?.venue?.address[0]?.city}, {event?.venue?.address[0]?.state}</span>
+                        <span className="col caption text-end">{formatShortAddress(event)}</span>
                     </Row>
                 </li>
             </ul>

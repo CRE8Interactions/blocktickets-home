@@ -1,7 +1,7 @@
 import React from 'react';
 import * as moment from 'moment';
 
-import { formatDateTime } from '../../../../../utilities/helpers';
+import { formatDateTime, formatShortAddress } from '../../../../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
@@ -28,7 +28,7 @@ export default function OrderCard({ order }) {
                     </p>
                     <p>
                         {order?.event?.venue?.name}<span className="loc">
-                            {order?.event?.venue?.address[0]?.city}, {order?.event?.venue?.address[0]?.state}
+                            {formatShortAddress(order?.event)}
                         </span>
                     </p>
                     <p className="tickets">
