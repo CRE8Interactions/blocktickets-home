@@ -12,7 +12,7 @@ export default function IconButton({ children, styles, variant, btn = '', size, 
             ) : (
                 <Link
                     to={link}
-                    className={`internal btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
+                    className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
                         ? `btn-${size}`
                         : ''} `}>
                     {children}
