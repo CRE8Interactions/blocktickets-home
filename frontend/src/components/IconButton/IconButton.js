@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function IconButton({ children, styles, variant, btn = '', size, link, isExternal = false }) {
+export default function IconButton({ children, styles, variant, btn = '', size, link, isExternal }) {
 
     return (
         <>
             {isExternal ? (
-                <a href={link} target="_blank" className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
+                <a href={link} target="_blank" rel="noreferrer" className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
                     ? `btn-${size}`
                     : ''} `}>{children}</a>
             ) : (
