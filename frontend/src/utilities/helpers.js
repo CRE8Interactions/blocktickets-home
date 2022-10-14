@@ -156,7 +156,7 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true, tax
         prices['ticketCost'] = listing.askingPrice;
         if (parseFloat(prices['ticketCost'])) prices['paymentProcessingFee'] = (((parseFloat(feeStructure?.stripeServicePecentage) * parseFloat(prices['ticketCost'])) / 100) + feeStructure?.stripeCharge).toFixed(2);
         prices['paymentProcessingFee'] = parseFloat( prices['paymentProcessingFee'])
-        prices['ticketServiceFee'] = (feeStructure?.secondaryServiceFeeBuyer / 100) * prices.ticketCost;
+        prices['ticketServiceFee'] = (feeStructure?.secondaryServiceFeeSeller / 100) * prices.ticketCost;
         prices['ticketFacilityFee'] = 0;
         prices['tax'] = (taxRates?.combinedTaxRate / 100) * prices.ticketCost;
         prices['totalFees'] = parseFloat(prices['ticketServiceFee']) + prices['paymentProcessingFee']

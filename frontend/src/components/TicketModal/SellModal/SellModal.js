@@ -81,7 +81,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
         if (ticketAction === 'edit') {
             setIsUpdate(true)
             setStep(2)
-            setPrice(listing.askingPrice)
+            setPrice(listing.askingPrice / listing.quantity)
             setSelectedTickets(listing.tickets)
             let fees = (listing.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(listing.askingPrice).toFixed(2)
             setServiceFees((fees).toFixed(2))
@@ -107,8 +107,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
             quantity: selectedTickets.length,
             askingPrice: parseFloat(price * selectedTickets.length),
             event: order?.event,
-            serviceFees: parseFloat(serviceFees).toFixed(2),
-            payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(serviceFees).toFixed(2))),
+            serviceFees: parseFloat(serviceFees * selectedTickets?.length).toFixed(2),
+            payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(serviceFees * selectedTickets.length).toFixed(2))),
             fromOrder: order?.id
         }
 
@@ -203,15 +203,15 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
                                 <li className="list">
                                     <p className="heading">Service Fees</p>
                                     <ul>
-                                        <Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: {parseFloat(serviceFees / selectedTickets?.length).toFixed(2)} x {selectedTickets?.length}</span>
-                                            <span className='text-end'>(-${serviceFees})</span>
+                                        <Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: {parseFloat(serviceFees).toFixed(2)} x {selectedTickets?.length}</span>
+                                            <span className='text-end'>(-${parseFloat(serviceFees * selectedTickets?.length).toFixed(2)})</span>
 
                                         </Stack>
                                     </ul>
                                 </li>
                                 <Stack direction='horizontal' as="li" className="split-row list">
                                     <span className="heading m-0">Your Payout</span>
-                                    <span className="text-end fw-medium">${(parseFloat(price * selectedTickets?.length) - parseFloat(serviceFees)).toFixed(2)}</span>
+                                    <span className="text-end fw-medium">${(parseFloat(price * selectedTickets?.length) - parseFloat(serviceFees * selectedTickets?.length)).toFixed(2)}</span>
                                 </Stack>
                             </ul>
                         </div>
