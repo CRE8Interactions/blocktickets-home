@@ -7,6 +7,13 @@ import { InvoiceRow } from './InvoiceRow';
 import './invoices.scss';
 
 export default function Invoices({ details }) {
+
+    const sortBy = arr => {
+        console.log(arr);
+        return arr?.sort(function (a, b) {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+    }
     return (
         <Table id="invoice-table">
             <thead>
@@ -19,7 +26,7 @@ export default function Invoices({ details }) {
                 </tr>
             </thead>
             <tbody>
-                {details && details.map((detail, index) => (
+                {details && sortBy(details).map((detail, index) => (
                     <InvoiceRow key={index} invoice={detail} />
                 ))}
             </tbody>

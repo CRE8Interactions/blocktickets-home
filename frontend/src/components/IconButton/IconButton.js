@@ -6,13 +6,13 @@ export default function IconButton({ children, styles, variant, btn = '', size, 
     return (
         <>
             {isExternal ? (
-                <a href={link} className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
+                <a href={link} target="_blank" className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
                     ? `btn-${size}`
                     : ''} `}>{children}</a>
             ) : (
                 <Link
                     to={link}
-                    className={`internal btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
+                    className={`btn btn-${variant} ${btn && `btn-${btn}`} icon-button ${styles && styles} ${size
                         ? `btn-${size}`
                         : ''} `}>
                     {children}

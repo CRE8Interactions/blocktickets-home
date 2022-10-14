@@ -8,14 +8,6 @@ import './withdrawInvoicesWrapper.scss';
 
 export default function WithdrawInvoicesWrapper({ details }) {
 
-    const sortBy = arr => {
-        console.log(arr);
-        return arr;
-        // return arr.sort(function (a, b) {
-        //     return new Date(a.createdAt) - new Date(b.createdAt)
-        // })
-    }
-
     return (
         <>
             <SettingsWrapper>
@@ -34,7 +26,7 @@ export default function WithdrawInvoicesWrapper({ details }) {
                         <h2 className="settings-subtitle">View / download your previous invoices and transactions below.</h2>
                     </div>
                 </div>
-                <Invoices details={sortBy(details)} />
+                <Invoices details={details} />
             </section>
         </>
     );
