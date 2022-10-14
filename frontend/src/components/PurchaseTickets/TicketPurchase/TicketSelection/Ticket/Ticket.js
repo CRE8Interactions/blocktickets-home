@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { ticketPrices } from '../../../../../utilities/helpers';
+import { ticketPrices, formatCurrency } from '../../../../../utilities/helpers';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
@@ -23,20 +23,20 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing, tax
 
     if (ticket) {
         let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = `${parseFloat(prices.ticketCost).toFixed(2)}`;
+        ticketPrice = prices.ticketCost;
         ticketName = prices.ticketName;
         ticketType = prices.ticketType;
         ticketFee = prices.totalFees;
-        ticketPriceWithFees = `${parseFloat(prices.ticketCostWithFees).toFixed(2)}`;
+        ticketPriceWithFees = prices.ticketCostWithFees;
     }
 
     if (listing) {
         let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = `${prices.ticketCost}`;
+        ticketPrice = prices.ticketCost;
         ticketName = prices.ticketName;
         ticketType = `Resale ${listing.tickets.length} Tickets`;
         ticketFee = prices.totalFees;
-        ticketPriceWithFees = parseFloat(prices.ticketCostWithFees).toFixed(2);
+        ticketPriceWithFees = prices.ticketCostWithFees;
     }
 
     return (
@@ -57,18 +57,16 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing, tax
                 <div>
                     <span className="fw-bold text-end">
                         {ticketFilters.showFees ? (
-                            `$${ticketPriceWithFees} ea`
+                            `${formatCurrency(ticketPriceWithFees)} ea`
                         ) : (
-                            `$${ticketPrice} ea`
+                            `${formatCurrency(ticketPrice)} ea`
                         )}
                     </span>
                 </div>
                 <div>
                     {ticketFilters.showFees && (
                         <span className="text-muted caption">
-                            ${parseFloat(ticketPrice).toFixed(2)} + ${parseFloat(
-                                ticketFee
-                            ).toFixed(2)} Fees
+                            {formatCurrency(ticketPrice)} + {formatCurrency(ticketFee)} Fees
                         </span>
                     )}
                 </div>

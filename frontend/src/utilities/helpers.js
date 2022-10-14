@@ -1,13 +1,13 @@
 export const COUNTDOWN_NUM = 9;
 export const COUNTDOWN_DURATION = 1000;
 
-export const formatCurreny =(number) => {
-    return parseFloat(number).toFixed(2)
+export const formatCurrency = (number) => {
+    return `$${parseFloat(number).toFixed(2)}`
 }
 
-export const titleCase = (str) => {
+export const capitalizeString = (str) => {
     return str?.toLowerCase().split(' ').map(function (word) {
-      return (word?.charAt(0).toUpperCase() + word?.slice(1));
+        return (word?.charAt(0).toUpperCase() + word?.slice(1));
     }).join(' ');
 }
 
@@ -34,7 +34,7 @@ export const sortBy = (arr, obj) => {
 
 // format full address 
 export const formatAddress = (obj) => {
-    return `${obj.address_1}, ${obj.city}, ${obj.state}, ${obj.zipcode}, ${obj.country}`
+    return `${obj.address_1}, ${obj.city}, ${obj.state.toUpperCase()}, ${obj.zipcode}, ${obj.country.toUpperCase()}`
 }
 
 // whether to show full start date or just start time 
@@ -137,7 +137,7 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true, tax
         if (parseInt(prices['ticketCost']) < 20) prices['serviceFees'] = 1;
         if (parseInt(prices['ticketCost']) >= 20) prices['serviceFees'] = (feeStructure?.primaryOver20 / 100) * prices['ticketCost'];
         if (parseFloat(prices['ticketCost'])) prices['paymentProcessingFee'] = (((parseFloat(feeStructure?.stripeServicePecentage) * parseFloat(prices['ticketCost'])) / 100) + feeStructure?.stripeCharge).toFixed(2);
-        prices['paymentProcessingFee'] = parseFloat( prices['paymentProcessingFee'])
+        prices['paymentProcessingFee'] = parseFloat(prices['paymentProcessingFee'])
         prices['ticketServiceFee'] = prices['serviceFees'];
         prices['ticketFacilityFee'] = ticket?.attributes ? ticket?.attributes?.fee : ticket.fee;
         prices['tax'] = (taxRates?.combinedTaxRate / 100) * prices['ticketCost'];
@@ -155,7 +155,7 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true, tax
         let prices = {}
         prices['ticketCost'] = listing.askingPrice;
         if (parseFloat(prices['ticketCost'])) prices['paymentProcessingFee'] = (((parseFloat(feeStructure?.stripeServicePecentage) * parseFloat(prices['ticketCost'])) / 100) + feeStructure?.stripeCharge).toFixed(2);
-        prices['paymentProcessingFee'] = parseFloat( prices['paymentProcessingFee'])
+        prices['paymentProcessingFee'] = parseFloat(prices['paymentProcessingFee'])
         prices['ticketServiceFee'] = (feeStructure?.secondaryServiceFeeSeller / 100) * prices.ticketCost;
         prices['ticketFacilityFee'] = 0;
         prices['tax'] = (taxRates?.combinedTaxRate / 100) * prices.ticketCost;

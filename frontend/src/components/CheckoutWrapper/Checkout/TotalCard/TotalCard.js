@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 
 import { createOrder, getEvent, getTaxRates } from '../../../../utilities/api';
-import { cartTotal, ticketPrices } from '../../../../utilities/helpers';
+import { cartTotal, ticketPrices, formatCurrency } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -65,9 +65,9 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
         ticketFee = prices.ticketServiceFee;
         facilityFee = prices.ticketFacilityFee;
         processingFee = prices.paymentProcessingFee;
-        totalDue = (Number(prices.ticketCostWithFees)).toFixed(2);
+        totalDue = (Number(prices.ticketCostWithFees));
         processingFee = prices.paymentProcessingFee * times
-        tax = prices.tax.toFixed(2);
+        tax = prices.tax;
     }
     else if (cart.ticket) {
         let ticket = cart.ticket;
@@ -78,8 +78,8 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
         ticketFee = prices.ticketServiceFee;
         facilityFee = prices.ticketFacilityFee;
         processingFee = prices.paymentProcessingFee;
-        totalDue = (Number(prices.ticketCostWithFees) * ticketCount).toFixed(2);
-        tax = prices.tax.toFixed(2);
+        totalDue = (prices.ticketCostWithFees) * ticketCount;
+        tax = prices.tax;
         times = ticketCount
     }
 
@@ -158,7 +158,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                     Total
                 </Card.Title>
                 <Stack direction="horizontal" gap={2} className="card-header-price">
-                    <span className="fw-bold fs-md">${totalDue}</span>
+                    <span className="fw-bold fs-md">{formatCurrency(totalDue)}</span>
                     <Button
                         onClick={() => setExpanded(!expanded)}
                         variant="outline-light"
@@ -182,10 +182,10 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                             <ul>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Tickets: ${parseFloat(ticketPrice).toFixed(2)} x {ticketCount}
+                                        Tickets: {formatCurrency(ticketPrice)} x {ticketCount}
                                     </span>
                                     <span className="text-end">
-                                        ${(parseFloat(ticketPrice).toFixed(2) * ticketCount).toFixed(2)}
+                                        {formatCurrency(ticketPrice * ticketCount)}
                                     </span>
                                 </Stack>
                             </ul>
@@ -195,26 +195,26 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
                             <ul>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Service Fee: ${parseFloat(ticketFee).toFixed(2)} x {times}
+                                        Service Fee: {formatCurrency(ticketFee)} x {times}
                                     </span>
                                     <span className="text-end">
-                                        ${(parseFloat(ticketFee).toFixed(2) * times).toFixed(2)}
+                                        {formatCurrency(ticketFee * times)}
                                     </span>
                                 </Stack>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Facility Fee: ${parseFloat(facilityFee).toFixed(2)} x {times}
+                                        Facility Fee: {formatCurrency(facilityFee)} x {times}
                                     </span>
                                     <span className="text-end">
-                                        ${(parseFloat(facilityFee).toFixed(2) * times).toFixed(2)}
+                                        {formatCurrency(facilityFee * times)}
                                     </span>
                                 </Stack>
                                 <Stack direction="horizontal" as="li" className="split-row">
                                     <span>
-                                        Processing Fee: ${parseFloat(processingFee).toFixed(2)} x {times}
+                                        Processing Fee: {formatCurrency(processingFee)} x {times}
                                     </span>
                                     <span className="text-end">
-                                        ${parseFloat(processingFee * times).toFixed(2)}
+                                        {formatCurrency(processingFee * times)}
                                     </span>
                                 </Stack>
                             </ul>
@@ -245,7 +245,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
                         <li className="split-row list">
                             <span className="heading m-0">Tax</span>
-                            <span className="text-end">${parseFloat(tax * times).toFixed(2)}</span>
+                            <span className="text-end">{formatCurrency(tax * times)}</span>
                         </li>
                     </ul>
                     <div className="mobile-only mt-4">

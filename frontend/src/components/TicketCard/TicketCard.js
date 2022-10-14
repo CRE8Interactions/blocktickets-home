@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
-import { formatShortDate, getStartDateFormatter } from '../../utilities/helpers';
+import { formatShortDate, getStartDateFormatter, formatCurrency } from '../../utilities/helpers';
 
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
@@ -73,9 +73,9 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                                     <Stack className='mb-2'>
                                         <Stack direction="horizontal" className="split-row mb-1">
                                             <span className='m-0 caption'>Listing price per ticket</span>
-                                            <span className='text-end fw-medium'>${(listing?.askingPrice / listing?.tickets.length).toFixed(2)}</span>
+                                            <span className='text-end fw-medium'>{formatCurrency(listing?.askingPrice / listing?.tickets.length)}</span>
                                         </Stack>
-                                        <p className='caption text-muted'>You will make ${((listing?.askingPrice / listing?.tickets.length) - (listing?.serviceFees / listing?.tickets.length)).toFixed(2)} per ticket</p>
+                                        <p className='caption text-muted'>You will make {formatCurrency((listing?.askingPrice / listing?.tickets.length) - (listing?.serviceFees / listing?.tickets.length))} per ticket</p>
                                     </Stack>
                                 </>
                             )
