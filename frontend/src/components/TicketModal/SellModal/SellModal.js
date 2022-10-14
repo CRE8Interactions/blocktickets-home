@@ -92,7 +92,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
     useEffect(() => {
         // set ticket price
         if (ticketAction === 'edit') {
-            setPrice(listing.askingPrice / listing.quantity)
+            setPrice(listing.askingPrice)
         }
     }, [])
 
@@ -113,7 +113,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
         let data = {
             tickets: selectedTickets,
             quantity: selectedTickets.length,
-            askingPrice: parseFloat(price * selectedTickets.length),
+            askingPrice: parseFloat(price),
             event: order?.event,
             serviceFees: parseFloat(serviceFees * selectedTickets?.length).toFixed(2),
             payout: ((parseFloat(price).toFixed(2) * selectedTickets?.length) - (parseFloat(serviceFees * selectedTickets.length).toFixed(2))),
