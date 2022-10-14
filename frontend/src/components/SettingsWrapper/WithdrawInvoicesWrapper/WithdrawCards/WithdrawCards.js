@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { getBankAccount, getAvailableFunds } from '../../../../utilities/api';
+import { formatCurrency } from "../../../../utilities/helpers";
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -32,7 +33,7 @@ export default function WithdrawCards() {
         <Stack gap={4}>
             <Card body className="withdraw-card card-md card--dark">
                 <Card.Title as="h5">Available Funds</Card.Title>
-                <span className="total">${parseFloat(funds).toFixed(2)}</span>
+                <span className="total">{formatCurrency(funds)}</span>
                 {account && account.hasOwnProperty('id') ? <Button size="lg" disabled={funds === 0 ? true : false}>Withdraw Funds</Button> : <LinkBankAccountBtn />}
             </Card>
             <Card body className="withdraw-card card-md card--light">
@@ -48,7 +49,7 @@ export default function WithdrawCards() {
                         </Button>
                     </OverlayTrigger>
                 </Stack>
-                <span className="total">${parseFloat(funds).toFixed(2)}</span>
+                <span className="total">{formatCurrency(funds)}</span>
             </Card>
         </Stack>
     );

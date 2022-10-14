@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { formatCurrency } from '../../../../utilities/helpers';
+
 import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 
@@ -13,8 +15,8 @@ export default function OrderSummary({ order }) {
 
     if (order.details.listing) {
         sum = (order.details.listing.askingPrice).toFixed(2);
-        fees = (parseFloat(order.details.feeDetails.serviceFees).toFixed(2) + parseFloat(order.details.feeDetails.paymentProcessingFee)).toFixed(2);
-        tax = parseFloat(order.details.feeDetails.tax).toFixed(2);
+        fees = ((parseFloat(order.details.feeDetails.serviceFees) + parseFloat(order.details.feeDetails.paymentProcessingFee))).toFixed(2);
+        tax = order.details.feeDetails.tax;
         total = parseFloat(fees) + parseFloat(tax) + parseFloat(sum);
     } else if (order.details) {
         sum = order.tickets.map(ticket => ticket.cost).reduce((a, v) => a + v, 0).toFixed(2)
@@ -43,19 +45,19 @@ export default function OrderSummary({ order }) {
                 <ul>
                     <Stack direction="horizontal" as="li" className="split-row">
                         <span>Subtotal</span>
-                        <span className='text-end'>${sum}</span>
+                        <span className='text-end'>{formatCurrency(sum)}</span>
                     </Stack>
                     <Stack direction="horizontal" as="li" className="split-row">
                         <span>Fees</span>
-                        <span className='text-end'>${sum == 0 ? parseFloat(0).toFixed(2) : fees}</span>
+                        <span className='text-end'>{sum == 0 ? formatCurrency(0) : formatCurrency(fees)}</span>
                     </Stack>
                     <Stack direction="horizontal" as="li" className="split-row">
                         <span>Tax</span>
-                        <span className='text-end'>${sum == 0 ? parseFloat(0).toFixed(2) : tax}</span>
+                        <span className='text-end'>{sum == 0 ? formatCurrency(0) : formatCurrency(tax)}</span>
                     </Stack>
                     <Stack direction="horizontal" as="li" className="split-row">
                         <span>Total</span>
-                        <span className='text-end'>${sum == 0 ? parseFloat(0).toFixed(2) : parseFloat(total).toFixed(2)}</span>
+                        <span className='text-end'>{sum == 0 ? formatCurrency(0) : formatCurrency(total)}</span>
                     </Stack>
                 </ul>
             </ListGroup.Item>

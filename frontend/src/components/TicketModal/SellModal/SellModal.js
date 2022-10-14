@@ -2,8 +2,8 @@ import React, { Fragment, useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { createListing, updateMyListings } from '../../../utilities/api';
+import { toggleElement, formatCurrency } from '../../../utilities/helpers';
 import { useWindowSize } from '../../../utilities/hooks';
-import { toggleElement } from '../../../utilities/helpers';
 
 import Modal from 'react-bootstrap/Modal';
 import Stack from 'react-bootstrap/Stack';
@@ -54,7 +54,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
 
     useEffect(() => {
         if (price > 0 && (price < (selectedTickets[0].minResalePrice) || price > (selectedTickets[0].maxResalePrice))) {
-            setLabel(`Enter amount between $${selectedTickets[0].minResalePrice.toFixed(2)} - $${selectedTickets[0].maxResalePrice.toFixed(2)}`);
+            setLabel(`Enter amount between ${formatCurrency(selectedTickets[0].minResalePrice)} - ${formatCurrency(selectedTickets[0].maxResalePrice)}`);
             setPriceValid(false)
         } else {
             setLabel("Price per ticket")
@@ -203,8 +203,8 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
                                     <p className="heading">Tickets</p>
                                     <ul>
                                         <Stack as="li" direction="horizontal" className="split-row">
-                                            <span>Tickets: ${parseFloat(price).toFixed(2)} x {selectedTickets?.length}</span>
-                                            <span className='text-end'>${(parseFloat(price).toFixed(2) * selectedTickets?.length).toFixed(2)}</span>
+                                            <span>Tickets: {formatCurrency(price)} x {selectedTickets?.length}</span>
+                                            <span className='text-end'>{formatCurrency(price * selectedTickets?.length)}</span>
                                         </Stack>
                                     </ul>
                                 </li>
@@ -212,14 +212,13 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
                                     <p className="heading">Service Fees</p>
                                     <ul>
                                         <Stack as="li" direction="horizontal" className="split-row">	<span>Service Fees: {parseFloat(serviceFees).toFixed(2)} x {selectedTickets?.length}</span>
-                                            <span className='text-end'>(-${parseFloat(serviceFees * selectedTickets?.length).toFixed(2)})</span>
-
+                                            <span className='text-end'>(-{formatCurrency(serviceFees * selectedTickets?.length)})</span>
                                         </Stack>
                                     </ul>
                                 </li>
                                 <Stack direction='horizontal' as="li" className="split-row list">
                                     <span className="heading m-0">Your Payout</span>
-                                    <span className="text-end fw-medium">${(parseFloat(price * selectedTickets?.length) - parseFloat(serviceFees * selectedTickets?.length)).toFixed(2)}</span>
+                                    <span className="text-end fw-medium">{formatCurrency((price * selectedTickets?.length) - parseFloat(serviceFees * selectedTickets?.length))}</span>
                                 </Stack>
                             </ul>
                         </div>

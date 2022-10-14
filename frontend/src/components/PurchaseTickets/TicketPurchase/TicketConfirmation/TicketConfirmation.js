@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import TicketContext from '../../../../context/Ticket/Ticket';
-import { ticketPrices } from '../../../../utilities/helpers';
+import { ticketPrices, formatCurrency } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -35,8 +35,8 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
         section = prices.ticketName;
         sum = prices.ticketCostWithFees;
         maxQuantity = prices.ticketCount;
-        ticketFees = (prices.totalFees).toFixed(2);
-        totalTicketPrice = parseFloat(prices.ticketCostWithFees).toFixed(2);
+        ticketFees = prices.totalFees;
+        totalTicketPrice = prices.ticketCostWithFees;
 
     } else if (ticket) {
         let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
@@ -44,8 +44,8 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
         section = prices.ticketName;
         sum = prices.ticketCostWithFees;
         maxQuantity = ticket.maximum_quantity;
-        ticketFees = (prices.totalFees).toFixed(2);
-        totalTicketPrice = parseFloat(prices.ticketCostWithFees).toFixed(2);
+        ticketFees = prices.totalFees;
+        totalTicketPrice = prices.ticketCostWithFees;
         hasDesciption = ticket?.description.split('').length > 0 ? true : false;
     }
 
@@ -122,8 +122,8 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
                             )}
                             <Button variant={hasDesciption ? "link" : "default"} onClick={hasDesciption ? handleShow : () => { }}>{listing ? listing.tickets[0].name : ticket.name}</Button>
                             <span className="fw-bold">
-                                ${totalTicketPrice} ea</span>
-                            <span className="caption fw-normal text-muted"> ${ticketPrice.toFixed(2)} + ${ticketFees} Fees</span>
+                                {formatCurrency(totalTicketPrice)} ea</span>
+                            <span className="caption fw-normal text-muted"> {formatCurrency(ticketPrice)} + {formatCurrency(ticketFees)} Fees</span>
                         </Stack>
                         <Stack direction="horizontal" className="counter fw-bolder">
                             <Button

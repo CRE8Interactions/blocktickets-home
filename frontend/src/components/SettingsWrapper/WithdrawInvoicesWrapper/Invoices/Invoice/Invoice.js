@@ -1,7 +1,8 @@
-import React, { useState, useEffect} from 'react';
-import * as moment from 'moment';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { formatDateTime, formatCurreny, titleCase } from '../../../../../utilities/helpers';
+import * as moment from 'moment';
+
+import { formatDateTime, formatCurrency, capitalizeString } from '../../../../../utilities/helpers';
 
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -12,12 +13,15 @@ import logo from '../../../../../assets/logo.svg';
 
 import './invoice.scss';
 
-export default function Invoice({details}) {
+export default function Invoice({ details }) {
+
     const [invoice, setInvoice] = useState()
+
     const { id } = useParams();
+
     useEffect(() => {
         if (!details) return
-        let currInvoice = details.find(d => d.id == id )
+        let currInvoice = details.find(d => d.id == id)
         setInvoice(currInvoice)
     }, [details])
 
@@ -46,9 +50,9 @@ export default function Invoice({details}) {
                             <li>
                                 <p><strong>{invoice?.event?.name}</strong></p>
                                 <ul className='caption'>
-                                    <li>{formatDateTime(moment(invoice?.event?.start), 'dateOnly')}<span className='time'>{moment(invoice?.event?.start).format('h:mm A')}</span></li>
-                                    <li>{titleCase(invoice?.event?.venue?.name)}</li>
-                                    <li>{titleCase(invoice?.event?.venue?.address[0]?.city)}, {invoice?.event?.venue?.address[0]?.state?.toUpperCase()}</li>
+                                    <li>{formatDateTime(moment(invoice?.event?.start), 'dateOnly')}<span className='time'>{formatDateTime(moment(invoice?.event?.start), 'timeOnly')}</span></li>
+                                    <li>{capitalizeString(invoice?.event?.venue?.name)}</li>
+                                    <li>{capitalizeString(invoice?.event?.venue?.address[0]?.city)}, {invoice?.event?.venue?.address[0]?.state?.toUpperCase()}</li>
                                 </ul>
                             </li>
                         </ul>
@@ -57,10 +61,10 @@ export default function Invoice({details}) {
                         <h2 className='text-muted mb-2 caption'>Attendee</h2>
                         <ul>
                             <li>
-                                <span><strong>{titleCase(invoice?.users_permissions_user?.firstName)} {titleCase(invoice?.users_permissions_user?.lastName)}</strong></span>
+                                <span><strong>{capitalizeString(invoice?.users_permissions_user?.firstName)} {capitalizeString(invoice?.users_permissions_user?.lastName)}</strong></span>
                                 <ul className="caption">
-                                    <li>Payment information: {titleCase(invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand)}</li>
-                                    <li>Charge: ${formatCurreny(invoice?.intentDetails?.charges?.data[0]?.amount / 100)}</li>
+                                    <li>Payment information: {capitalizeString(invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand)}</li>
+                                    <li>Charge: {formatCurrency(invoice?.intentDetails?.charges?.data[0]?.amount / 100)}</li>
                                     <li>Last 4 digiits: {invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4}</li>
                                 </ul>
                             </li>
@@ -83,38 +87,38 @@ export default function Invoice({details}) {
                     <ListGroup.Item as="li">
                         <div className="split-row">
                             <h1 className="normal">{invoice?.details?.ticketCount}x Ticket/s</h1>
-                            <span className='fw-bold'>${formatCurreny(invoice?.details?.ticket?.cost * invoice?.details?.ticketCount)}</span>
+                            <span className='fw-bold'>{formatCurrency(invoice?.details?.ticket?.cost * invoice?.details?.ticketCount)}</span>
                         </div>
                         <ul>
                             <li className='list-item'>
-                                ${formatCurreny(invoice?.details?.ticket?.cost)} x {invoice?.details?.ticketCount}
+                                {formatCurrency(invoice?.details?.ticket?.cost)} x {invoice?.details?.ticketCount}
                             </li>
                         </ul>
                     </ListGroup.Item>
                     <ListGroup.Item as="li">
                         <div className="split-row">
                             <h1 className="normal">Fees</h1>
-                            <span className='fw-bold'>${formatCurreny(invoice?.total - (invoice?.details?.ticket?.cost * invoice?.details?.ticketCount))}</span>
+                            <span className='fw-bold'>{formatCurrency(invoice?.total - (invoice?.details?.ticket?.cost * invoice?.details?.ticketCount))}</span>
                         </div>
                         <ul>
                             <li className='list-item'>
-                                ${formatCurreny(invoice?.details?.feeDetails?.facilityFee * invoice?.details?.ticketCount)} (Facility Charge)
+                                {formatCurrency(invoice?.details?.feeDetails?.facilityFee * invoice?.details?.ticketCount)} (Facility Charge)
                             </li>
                             <li className='list-item'>
-                                ${formatCurreny(invoice?.details?.feeDetails?.serviceFees * invoice?.details?.ticketCount)} (Service Charge)
+                                {formatCurrency(invoice?.details?.feeDetails?.serviceFees * invoice?.details?.ticketCount)} (Service Charge)
                             </li>
                             <li className='list-item'>
-                                ${formatCurreny(invoice?.details?.feeDetails?.paymentProcessingFee * invoice?.details?.ticketCount)} (Processing Charge)
+                                {formatCurrency(invoice?.details?.feeDetails?.paymentProcessingFee * invoice?.details?.ticketCount)} (Processing Charge)
                             </li>
                             <li className='list-item'>
-                                ${formatCurreny(invoice?.details?.feeDetails?.tax)} (Tax)
+                                {formatCurrency(invoice?.details?.feeDetails?.tax)} (Tax)
                             </li>
                         </ul>
                     </ListGroup.Item>
                 </ListGroup>
                 <div className="split-row total-row">
                     <span>Total</span>
-                    <span>${formatCurreny(invoice?.total)}</span>
+                    <span>{formatCurrency(invoice?.total)}</span>
                 </div>
             </div>
         </div>
