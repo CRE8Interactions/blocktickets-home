@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as moment from 'moment';
 
-import { formatDateTime, formatCurrency, capitalizeString } from '../../../../../utilities/helpers';
+import { formatDateTime, formatCurrency, capitalizeString, formatShortAddress } from '../../../../../utilities/helpers';
 
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -52,7 +52,7 @@ export default function Invoice({ details }) {
                                 <ul className='caption'>
                                     <li>{formatDateTime(moment(invoice?.event?.start), 'dateOnly')}<span className='time'>{formatDateTime(moment(invoice?.event?.start), 'timeOnly')}</span></li>
                                     <li>{capitalizeString(invoice?.event?.venue?.name)}</li>
-                                    <li>{capitalizeString(invoice?.event?.venue?.address[0]?.city)}, {invoice?.event?.venue?.address[0]?.state?.toUpperCase()}</li>
+                                    <li>{formatShortAddress(invoice?.event)}</li>
                                 </ul>
                             </li>
                         </ul>
