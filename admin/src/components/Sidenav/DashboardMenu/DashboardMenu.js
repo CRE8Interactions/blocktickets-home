@@ -104,7 +104,7 @@ export default function DashboardMenu({ event }) {
                         </ul>
                     </Collapse>
                 </Nav.Item>
-                {/* <Nav.Item as="li">
+                <Nav.Item as="li">
                     <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setReportsOpen(!reportsOpen)}
                         aria-controls="reports-collapse"
@@ -128,14 +128,14 @@ export default function DashboardMenu({ event }) {
                                     <Nav.Link>Secondary sales</Nav.Link>
                                 </LinkContainer>
                             </Nav.Item>
-                            <Nav.Item as="li">
+                            {/* <Nav.Item as="li">
                                 <LinkContainer to="automatic-reporting">
                                     <Nav.Link>Automatic reporting</Nav.Link>
                                 </LinkContainer>
-                            </Nav.Item>
+                            </Nav.Item> */}
                         </ul>
                     </Collapse>
-                </Nav.Item> */}
+                </Nav.Item>
                 <Nav.Item as="li">
                     <Button variant="link" className='btn-toggle w-100'
                         onClick={() => setMarketingOpen(!marketingOpen)}
