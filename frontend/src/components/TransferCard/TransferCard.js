@@ -6,7 +6,9 @@ import { formatShortDate, getStartDateFormatter } from '../../utilities/helpers'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-export default function TransferCard({ transfer, cancel, status, acceptTransfer }) {
+import { Spinner } from "../SpinnerContainer/Spinner"
+
+export default function TransferCard({ transfer, cancel, status, acceptTransfer, isAccepting }) {
     return (
         <Fragment>
             <Card body className="ticket-card">
@@ -37,8 +39,12 @@ export default function TransferCard({ transfer, cancel, status, acceptTransfer 
                         <Button
                             variant="outline-light"
                             onClick={(e) => acceptTransfer(transfer)}
-                            className="text-primary">
-                            Accept transfer
+                            className="icon-button text-primary">
+                            {isAccepting ? (
+                                <Spinner variant='dark' />
+                            ) : (
+                                'Accept transfer'
+                            )}
                         </Button>
                     }
                 </div>

@@ -7,7 +7,7 @@ import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
 import TransferCard from '../../TransferCard/TransferCard';
 
-export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, orders, transfers, acceptTransfer, guestLists }) {
+export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, orders, transfers, acceptTransfer, isAccepting, guestLists }) {
 
     // filter out past events
     const filteredEvents = orders ? orders.filter((order) => order.event !== null) : '';
@@ -22,6 +22,7 @@ export default function MyEventsSlider({ navigationNextRef, navigationPrevRef, o
                                 <TransferCard
                                     transfer={transfer}
                                     status={'userAccepting'}
+                                    isAccepting={isAccepting}
                                     acceptTransfer={acceptTransfer}
                                 />
                             </SwiperSlide>
