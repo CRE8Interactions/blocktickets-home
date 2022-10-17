@@ -37,6 +37,11 @@
 		}
 	}
 
+	.amount {
+		font-weight: $fw-semi-bold;
+		font-size: $body-2;
+	}
+
 	.small-text {
 		font-size: $small;
 		color: $text-muted;
@@ -58,7 +63,7 @@
 	.total-sales {
 		&:before {
 			margin-right: $gap;
-			background-image: url('../../../assets/icons/gross-sales.svg');
+			background-image: url('../../../assets/icons/chart.svg');
 			background-color: rgba($secondary, var(--opac));
 		}
 	}

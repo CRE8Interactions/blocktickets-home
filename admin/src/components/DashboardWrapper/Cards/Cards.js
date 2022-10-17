@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { formatCurrency, formatNumber } from '../../../utilities/helpers';
+import { formatCurrency, formatNumber, copy } from '../../../utilities/helpers';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -17,6 +17,9 @@ import { InfoIcon } from '../../InfoIcon';
 import './cards.scss';
 
 export default function Cards({ stats }) {
+
+    const [copied, setCopied] = useState(false);
+
     return (
         <section className='cards'>
             <Row>
@@ -28,10 +31,11 @@ export default function Cards({ stats }) {
                         </div>
                         <Row className='mb-4'>
                             <Col>
-                                <span><b className="fs-md">{formatNumber(stats?.allTicketsSold)}</b> <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span></span>
+                                <span className="amount">{formatNumber(stats?.allTicketsSold)}</span>
+                                <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span>
                             </Col>
                             <Col className='text-end'>
-                                <span className='fw-medium'>{stats?.totalSoldPercentage}%</span>
+                                <span className='fw-medium'>{stats?.totalSoldPercentage || 0}%</span>
                             </Col>
                         </Row>
                         <ProgressBar now={stats?.totalSoldPercentage} />
@@ -56,15 +60,17 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span><b>{formatCurrency(stats?.primaryNetSales)}</b> <span className="small-text">Net sales</span></span>
+                                <span className='amount'>{formatCurrency(stats?.primaryNetSales)}</span>
+                                <span className="small-text">Net sales</span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className='mt-2'>
                             <Col>
-                                <span><b>{formatCurrency(0)}</b> <span className="small-text">Royalties</span></span>
+                                <span className='amount'>{formatCurrency(0)}</span>
+                                <span className="small-text">Royalties</span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--secondary'>Resale</Badge>
@@ -94,7 +100,8 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span><b>{formatNumber(stats?.primaryTicketsSold)}</b> <span className="small-text">Tickets sold</span></span>
+                                <span className='amount'>{formatNumber(stats?.primaryTicketsSold)}</span>
+                                <span className="small-text">Tickets sold</span>
                             </Col>
                         </Row>
                     </Card>
@@ -119,7 +126,8 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span><b>{formatCurrency(stats?.primaryGrossSales)}</b> <span className="small-text">Gross sales</span></span>
+                                <span className='amount'>{formatCurrency(stats?.primaryGrossSales)}</span>
+                                <span className="small-text">Gross sales</span>
                             </Col>
                         </Row>
                     </Card>
@@ -164,7 +172,7 @@ export default function Cards({ stats }) {
                     <Card body>
                         <div className='heading--flex card-body-heading'>
                             <h1 className='card-body-title card-body-title--flex shareable-link gap-1'>Shareable link</h1>
-                            <Button variant="outline-light">Copy URL</Button>
+                            <Button variant="outline-light" onClick={() => copy(`https://www.blocktickets.xyz/tickets/${stats?.eventUUID} }`, setCopied)}>{copied ? 'Copied' : 'Copy URL'}</Button>
                         </div>
                         <p className='text-muted mt-3'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>
                     </Card>
