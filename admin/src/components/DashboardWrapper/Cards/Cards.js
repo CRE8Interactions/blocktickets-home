@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { formatCurrency, formatNumber, copy } from '../../../utilities/helpers';
 
@@ -19,6 +19,14 @@ import './cards.scss';
 export default function Cards({ stats }) {
 
     const [copied, setCopied] = useState(false);
+
+    useEffect(() => {
+        if (copied) {
+            setTimeout(() => {
+                setCopied(false)
+            }, 2000)
+        }
+    }, [copied])
 
     return (
         <section className='cards'>
@@ -167,7 +175,13 @@ export default function Cards({ stats }) {
                     <Card body>
                         <div className='heading--flex card-body-heading'>
                             <h1 className='card-body-title card-body-title--flex shareable-link gap-1'>Shareable link</h1>
-                            <Button variant="outline-light" className={`copy-btn ${copied ? 'text-success' : ''} `} onClick={() => copy(`https://www.blocktickets.xyz/tickets/${stats?.eventUUID} }`, setCopied)}>{copied ? 'Copied' : 'Copy URL'}</Button>
+                            <OverlayTrigger
+                                placement="top"
+                                trigger="click"
+                                show={copied}
+                                overlay={<Tooltip>Copied</Tooltip>}>
+                                <Button variant="outline-light" onClick={() => copy(`https://www.blocktickets.xyz/tickets/${stats?.eventUUID}`, setCopied)}>Copy URL</Button>
+                            </OverlayTrigger>
                         </div>
                         <p className='text-muted mt-3'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>
                     </Card>
