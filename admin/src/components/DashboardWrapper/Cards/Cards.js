@@ -29,13 +29,12 @@ export default function Cards({ stats }) {
                             <h1 className='card-body-title card-body-title--flex tickets-sold'>Tickets sold</h1>
                             <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>
-                        <Row className='mb-4'>
+                        <Row className='mb-5'>
                             <Col>
-                                <span className="amount">{formatNumber(stats?.allTicketsSold)}</span>
-                                <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span>
+                                <span className="amount fs-md">{formatNumber(stats?.allTicketsSold)}</span> <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span>
                             </Col>
                             <Col className='text-end'>
-                                <span className='fw-medium'>{stats?.totalSoldPercentage || 0}%</span>
+                                <span className='fw-medium'>{stats?.totalSoldPercentage}%</span>
                             </Col>
                         </Row>
                         <ProgressBar now={stats?.totalSoldPercentage} />
@@ -58,19 +57,17 @@ export default function Cards({ stats }) {
                                 <h1 className='card-body-title'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
                             </Stack>
                         </div>
-                        <Row>
+                        <Row className='split-row'>
                             <Col>
-                                <span className='amount'>{formatCurrency(stats?.primaryNetSales)}</span>
-                                <span className="small-text">Net sales</span>
+                                <span className='amount'>{formatCurrency(stats?.primaryNetSales)}</span> <span className="small-text">Net sales</span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                             </Col>
                         </Row>
-                        <Row className='mt-2'>
+                        <Row className='mt-2 split-row'>
                             <Col>
-                                <span className='amount'>{formatCurrency(0)}</span>
-                                <span className="small-text">Royalties</span>
+                                <span className='amount'>{formatCurrency(0)}</span> <span className="small-text">Royalties</span>
                             </Col>
                             <Col className='text-end'>
                                 <Badge bg="default" className='badge-outline badge-outline--secondary'>Resale</Badge>
@@ -100,8 +97,7 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span className='amount'>{formatNumber(stats?.primaryTicketsSold)}</span>
-                                <span className="small-text">Tickets sold</span>
+                                <span className='amount'>{formatNumber(stats?.primaryTicketsSold)}</span> <span className="small-text">Tickets sold</span>
                             </Col>
                         </Row>
                     </Card>
@@ -126,8 +122,7 @@ export default function Cards({ stats }) {
                         </div>
                         <Row>
                             <Col>
-                                <span className='amount'>{formatCurrency(stats?.primaryGrossSales)}</span>
-                                <span className="small-text">Gross sales</span>
+                                <span className='amount'>{formatCurrency(stats?.primaryGrossSales)}</span> <span className="small-text">Gross sales</span>
                             </Col>
                         </Row>
                     </Card>
@@ -137,7 +132,7 @@ export default function Cards({ stats }) {
                 <Col lg={3}>
                     <Card body>
                         <div className="card-body-heading page-views mb-0">
-                            <Stack direction="horizontal" gap={2} className="mt-2 small-label--flex">
+                            <Stack direction="horizontal" gap={2} className="small-label--flex">
                                 <span className='small-label'>Page views</span>
                                 <OverlayTrigger
                                     placement="right"
@@ -154,7 +149,7 @@ export default function Cards({ stats }) {
                 <Col lg={3}>
                     <Card body>
                         <div className="card-body-heading payout mb-0">
-                            <Stack direction="horizontal" gap={2} className="small-label--flex mt-2">
+                            <Stack direction="horizontal" gap={2} className="small-label--flex">
                                 <span className='small-label'>Your payouts</span>
                                 <OverlayTrigger
                                     placement="right"
@@ -172,7 +167,7 @@ export default function Cards({ stats }) {
                     <Card body>
                         <div className='heading--flex card-body-heading'>
                             <h1 className='card-body-title card-body-title--flex shareable-link gap-1'>Shareable link</h1>
-                            <Button variant="outline-light" onClick={() => copy(`https://www.blocktickets.xyz/tickets/${stats?.eventUUID} }`, setCopied)}>{copied ? 'Copied' : 'Copy URL'}</Button>
+                            <Button variant="outline-light" className={`copy-btn ${copied ? 'text-success' : ''} `} onClick={() => copy(`https://www.blocktickets.xyz/tickets/${stats?.eventUUID} }`, setCopied)}>{copied ? 'Copied' : 'Copy URL'}</Button>
                         </div>
                         <p className='text-muted mt-3'>https://www.blocktickets.xyz/tickets/{stats?.eventUUID}</p>
                     </Card>

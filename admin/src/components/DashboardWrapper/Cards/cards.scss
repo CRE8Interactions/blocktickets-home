@@ -27,16 +27,6 @@
 		}
 	}
 
-	#tickets-sold-card {
-		.card-body {
-			display: flex;
-			flex-direction: column;
-			@include breakpoint-max(lg) {
-				min-height: 185px;
-			}
-		}
-	}
-
 	.amount {
 		font-weight: $fw-semi-bold;
 		font-size: $body-2;
@@ -48,6 +38,14 @@
 		font-weight: $fw-semi-bold;
 	}
 
+	.page-views,
+	.payout {
+		.small-label--flex {
+			margin-top: $text-spacer-xs;
+		}
+	}
+
+	.tickets-sold,
 	.total-sales,
 	.royalties,
 	.net-sales,
@@ -60,9 +58,15 @@
 		}
 	}
 
+	.tickets-sold {
+		&:before {
+			background-image: url('../../../assets/icons/ticket.svg');
+			background-color: rgba($primary, var(--opac));
+		}
+	}
+
 	.total-sales {
 		&:before {
-			margin-right: $gap;
 			background-image: url('../../../assets/icons/chart.svg');
 			background-color: rgba($secondary, var(--opac));
 		}
@@ -84,7 +88,6 @@
 
 	.page-views {
 		&:before {
-			margin-right: $gap;
 			background-image: url('../../../assets/icons/eye.svg');
 			background-color: rgba($body-color, var(--opac));
 		}
@@ -92,7 +95,6 @@
 
 	.payout {
 		&:before {
-			margin-right: $gap;
 			background-image: url('../../../assets/icons/coin.svg');
 			background-color: rgba($success, var(--opac));
 		}
@@ -104,5 +106,9 @@
 			background-position: center;
 			background-size: 33px;
 		}
+	}
+
+	.copy-btn {
+		width: 100px;
 	}
 }
