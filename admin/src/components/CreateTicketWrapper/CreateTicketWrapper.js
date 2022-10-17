@@ -142,11 +142,11 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                 .catch((err) => console.error(err))
         } else {
             getEvent(eventId)
-            .then((res) => {
-                setAddress(res.data.venue.address[0])
-                setFees(res.data?.fee_structure)
-            })
-            .catch((err) => console.error(err))
+                .then((res) => {
+                    setAddress(res.data.venue.address[0])
+                    setFees(res.data?.fee_structure)
+                })
+                .catch((err) => console.error(err))
         }
     }, [type])
 
@@ -228,6 +228,11 @@ export default function CreateTicketWrapper({ event, eventId, type }) {
                     setErrors({
                         field: name,
                         message: 'Maximum quantity cannot be less than minimum quantity or more than available quantity'
+                    })
+                } else if (num > 8) {
+                    setErrors({
+                        field: name,
+                        message: 'Maximum quantity cannot be greater than 8'
                     })
                 } else {
                     setErrors()

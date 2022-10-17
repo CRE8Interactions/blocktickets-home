@@ -103,15 +103,6 @@ h4,
 	font-family: $font-heading;
 }
 
-.tickets-sold {
-	&:before {
-		display: inline-block;
-		@extend %img-psuedo-icon !optional;
-		background-image: url('../../assets/icons/ticket.svg');
-		background-color: rgba($primary, var(--opac));
-	}
-}
-
 // bulleted for preview modal
 .time,
 .loc,

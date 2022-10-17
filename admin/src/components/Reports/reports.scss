@@ -51,14 +51,14 @@
 
 		&:first-of-type {
 			.nav-link:before {
-				background-image: url('../../assets/icons/net-sales.svg');
+				background-image: url('../../assets/icons/growth.svg');
 				background-color: rgba($success, var(--opac));
 			}
 		}
 
 		&:nth-of-type(2) {
 			.nav-link:before {
-				background-image: url('../../assets/icons/gross-sales.svg');
+				background-image: url('../../assets/icons/chart.svg');
 				background-color: rgba($secondary, var(--opac));
 			}
 		}
@@ -77,11 +77,11 @@
 			}
 		}
 
-		&.listed {
-			.nav-link:before {
-				background-image: url('../../assets/icons/list.svg');
-				background-color: rgba($success, var(--opac));
-			}
-		}
+		// &.listed {
+		// 	.nav-link:before {
+		// 		background-image: url('../../assets/icons/list.svg');
+		// 		background-color: rgba($success, var(--opac));
+		// 	}
+		// }
 	}
 }

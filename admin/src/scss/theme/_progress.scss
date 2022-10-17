@@ -1,3 +1,5 @@
+@use '../abstracts' as *;
 @use 'colors' as *;
 
 $progress-bg: $gray-400;
+$progress-height: rem(20);
