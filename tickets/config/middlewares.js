@@ -18,7 +18,7 @@ module.exports = [
     config: {
       enabled: true,
       headers: '*',
-      origin: ['http://localhost:1337', 'http://164.90.139.13:1337', 'http://localhost:3000', 'http://localhost:3001', 'https://blocktickets.xyz', 'https://preview.blocktickets.xyz', 'https://admin.blocktickets.xyz', process.env.PROD_CMS_HOST]
+      origin: [process.env.CMS_HOST, process.env.ADMIN_APP_HOST, process.env.CONSUMER_APP_HOST]
     }
   },
   'strapi::poweredBy',
