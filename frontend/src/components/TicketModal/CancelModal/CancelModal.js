@@ -12,7 +12,7 @@ import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
 import { Spinner } from "../../SpinnerContainer/Spinner"
 
-export default function CancelModal({ handleClose, ticket, order, transfer, getMyTransfers }) {
+export default function CancelModal({ handleClose, transfer, getMyTransfers }) {
     // 1 - confirmation
     // 2 - success
     const [
