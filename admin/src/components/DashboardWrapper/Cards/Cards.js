@@ -37,9 +37,9 @@ export default function Cards({ stats }) {
                             <h1 className='card-body-title card-body-title--flex tickets-sold'>Tickets sold</h1>
                             <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>
-                        <Row className='mb-5'>
+                        <Row className='mb-3'>
                             <Col>
-                                <span className="amount fs-md">{formatNumber(stats?.allTicketsSold)}</span> <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span>
+                                <span className="amount">{formatNumber(stats?.allTicketsSold)}</span> <span className='text-muted'>/ {formatNumber(stats?.totalTickets)}</span>
                             </Col>
                             <Col className='text-end'>
                                 <span className='fw-medium'>{stats?.totalSoldPercentage}%</span>
@@ -62,7 +62,7 @@ export default function Cards({ stats }) {
                                         </Button>
                                     </OverlayTrigger>
                                 </Stack>
-                                <h1 className='card-body-title'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
+                                <h1 className='card-body-title card-body-title-lg'>{formatCurrency(stats?.allTicketsSoldAmount)}</h1>
                             </Stack>
                         </div>
                         <Row className='split-row'>
@@ -99,7 +99,7 @@ export default function Cards({ stats }) {
                                         </Button>
                                     </OverlayTrigger>
                                 </Stack>
-                                <h1 className='card-body-title'>{formatCurrency(0)}</h1>
+                                <h1 className='card-body-title card-body-title-lg'>{formatCurrency(0)}</h1>
                             </Stack>
                             <Badge bg="default" className='badge-outline badge-outline--secondary'>Resale</Badge>
                         </div>
@@ -124,7 +124,7 @@ export default function Cards({ stats }) {
                                         </Button>
                                     </OverlayTrigger>
                                 </Stack>
-                                <h1 className='card-body-title'>{formatCurrency(stats?.primaryNetSales)}</h1>
+                                <h1 className='card-body-title card-body-title-lg'>{formatCurrency(stats?.primaryNetSales)}</h1>
                             </Stack>
                             <Badge bg="default" className='badge-outline badge-outline--primary'>Primary</Badge>
                         </div>

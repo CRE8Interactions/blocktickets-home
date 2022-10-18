@@ -12,99 +12,107 @@
 			padding-bottom: rem(24);
 		}
 
-		.card-body-title:not(.shareable-link):not(.tickets-sold) {
-			@include breakpoint-min(lg) {
-				font-size: $h3-font-size;
+		.card-body-title {
+			&-lg {
+				@include breakpoint-min(lg) {
+					font-size: $h3-font-size;
+				}
 			}
 		}
-	}
 
-	[class^="col-"] {
-		@include breakpoint-max(lg) {
-			+ [class^="col-"] {
-				margin-top: $text-spacer-sm;
+		[class^="col-"] {
+			@include breakpoint-max(lg) {
+				+ [class^="col-"] {
+					margin-top: $text-spacer-sm;
+				}
 			}
 		}
-	}
 
-	.amount {
-		font-weight: $fw-semi-bold;
-		font-size: $body-2;
-	}
-
-	.small-text {
-		font-size: $small;
-		color: $text-muted;
-		font-weight: $fw-semi-bold;
-	}
-
-	.page-views,
-	.payout {
-		.small-label--flex {
-			margin-top: $text-spacer-xs;
+		&#tickets-sold-card {
+			.amount {
+				font-size: $body-1;
+			}
 		}
-	}
 
-	.tickets-sold,
-	.total-sales,
-	.royalties,
-	.net-sales,
-	.page-views,
-	.payout,
-	.shareable-link {
-		&::before {
-			display: inline-block;
-			@extend %img-psuedo-icon;
+		.amount {
+			font-weight: $fw-semi-bold;
+			font-size: $body-2;
 		}
-	}
 
-	.tickets-sold {
-		&:before {
-			background-image: url('../../../assets/icons/ticket.svg');
-			background-color: rgba($primary, var(--opac));
+		.small-text {
+			font-size: $small;
+			color: $text-muted;
+			font-weight: $fw-semi-bold;
 		}
-	}
 
-	.total-sales {
-		&:before {
-			background-image: url('../../../assets/icons/chart.svg');
-			background-color: rgba($secondary, var(--opac));
+		.page-views,
+		.payout {
+			.small-label--flex {
+				margin-top: rem(12);
+			}
 		}
-	}
 
-	.royalties {
-		&:before {
-			background-image: url('../../../assets/icons/dollar.svg');
-			background-color: rgba($clr-tertiary, var(--opac));
+		.tickets-sold,
+		.total-sales,
+		.royalties,
+		.net-sales,
+		.page-views,
+		.payout,
+		.shareable-link {
+			&::before {
+				display: inline-block;
+				@extend %img-psuedo-icon;
+			}
 		}
-	}
 
-	.net-sales {
-		&:before {
-			background-image: url('../../../assets/icons/growth.svg');
-			background-color: rgba($primary, var(--opac));
+		.tickets-sold {
+			&:before {
+				background-image: url('../../../assets/icons/ticket.svg');
+				background-color: rgba($primary, var(--opac));
+			}
 		}
-	}
 
-	.page-views {
-		&:before {
-			background-image: url('../../../assets/icons/eye.svg');
-			background-color: rgba($body-color, var(--opac));
+		.total-sales {
+			&:before {
+				background-image: url('../../../assets/icons/chart.svg');
+				background-color: rgba($secondary, var(--opac));
+			}
 		}
-	}
 
-	.payout {
-		&:before {
-			background-image: url('../../../assets/icons/coin.svg');
-			background-color: rgba($success, var(--opac));
+		.royalties {
+			&:before {
+				background-image: url('../../../assets/icons/dollar.svg');
+				background-color: rgba($clr-tertiary, var(--opac));
+			}
 		}
-	}
 
-	.shareable-link {
-		&::before {
-			background-image: url('../../../assets/icons/link.svg');
-			background-position: center;
-			background-size: 33px;
+		.net-sales {
+			&:before {
+				background-image: url('../../../assets/icons/growth.svg');
+				background-color: rgba($primary, var(--opac));
+			}
+		}
+
+		.page-views {
+			&:before {
+				background-image: url('../../../assets/icons/eye.svg');
+				background-color: rgba($body-color, var(--opac));
+			}
+		}
+
+		.payout {
+			&:before {
+				background-image: url('../../../assets/icons/coin.svg');
+				background-color: rgba($success, var(--opac));
+			}
+		}
+
+		.shareable-link {
+			&::before {
+				background-image: url('../../../assets/icons/link.svg');
+				background-position: center;
+				background-size: 33px;
+			}
 		}
 	}
 }
