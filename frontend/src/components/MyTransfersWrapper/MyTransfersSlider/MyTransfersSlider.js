@@ -7,6 +7,7 @@ import { Slider } from '../../Slider';
 import { TransferCard } from '../../TransferCard';
 
 export default function MyTransfersSlider({ navigationNextRef, navigationPrevRef, transfers, cancel }) {
+    console.log(transfers)
     return (
         <div className="page-slider">
             <Slider addedModule="pagination" navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef}>
