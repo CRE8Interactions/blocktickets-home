@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image'
+import Stack from 'react-bootstrap/Stack'
 
 export default function Tickets({ ticket, order, handleClick }) {
     const eventStart = moment(order.event.start);
@@ -40,9 +41,13 @@ export default function Tickets({ ticket, order, handleClick }) {
                     </p>
                     <>
                         <Badge bg="light" className="mt-2 text-dark badge-lg">
-                            {order?.details?.ticket.name}
+                            {ticket?.name}
                         </Badge>
-                        <Button variant='outline-light' size="xs" onClick={() => handleClick('details')}>Details</Button>
+                        <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
+                            {/* <Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
+                                </Button> */}
+                            <Button variant='outline-light' size="xs" onClick={() => handleClick('details')}>Details</Button>
+                        </Stack>
                     </>
                 </div>
             </Card>

@@ -9,19 +9,16 @@ import Button from 'react-bootstrap/Button';
 import { SuccessContainer } from '../SuccessContainer';
 import { SuccessDisclaimer } from '../SuccessDisclaimer';
 import { DisplayTickets } from '../DisplayTickets';
+import { Spinner } from '../../SpinnerContainer/Spinner'
 
-export default function RemoveModal({ handleClose, removeListing, listing }) {
+export default function RemoveModal({ handleClose, listing, isRemoving, removeListing }) {
+
     // 1 - confirmation
     // 2 - success
     const [
         step,
         setStep
     ] = useState(1);
-
-    const remove = () => {
-        removeListing(listing.id);
-        setStep(2);
-    };
 
     useLayoutEffect(() => {
         let el = document.querySelector('.btn-close');
@@ -35,6 +32,11 @@ export default function RemoveModal({ handleClose, removeListing, listing }) {
             }
         };
     }, [step])
+
+    const remove = () => {
+        removeListing(listing.id);
+        setStep(2);
+    };
 
     return (
         <Fragment>
@@ -53,8 +55,12 @@ export default function RemoveModal({ handleClose, removeListing, listing }) {
                                 onClick={remove}
                                 variant="outline-light"
                                 size="lg"
-                                className="text-danger">
-                                Remove
+                                className="icon-button text-danger">
+                                {isRemoving ? (
+                                    <Spinner variant="dark" />
+                                ) : (
+                                    'Remove'
+                                )}
                             </Button>
                             <Button onClick={handleClose} size="lg">
                                 Cancel

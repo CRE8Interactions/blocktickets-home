@@ -25,6 +25,8 @@ export default function MyEventsWrapper() {
         setTransfers
     ] = useState([]);
 
+    const [isAccepting, setIsAccepting] = useState(false)
+
     const [
         guestLists,
         setGuestLists
@@ -34,6 +36,7 @@ export default function MyEventsWrapper() {
         getMyEvents()
             .then((res) => {
                 setOrders(res.data);
+                setIsAccepting(false)
             })
             .catch((err) => console.error(err));
 
@@ -49,10 +52,16 @@ export default function MyEventsWrapper() {
     }, []);
 
     const acceptTransfer = (transfer) => {
+        setIsAccepting(true)
         let data = {
             transferId: transfer.id
         };
-        acceptIncomingTransfers(data).then((res) => getMyTickets()).catch((err) => console.error(err));
+        acceptIncomingTransfers(data).then((res) => {
+            getMyTickets()
+        }).catch((err) => {
+            console.error(err)
+            setIsAccepting(false)
+        });
     };
 
     return (
@@ -64,7 +73,8 @@ export default function MyEventsWrapper() {
                 </div>
             </div>
             {orders?.filter(order => order.event !== null).length > 0 || guestLists.length > 0 ? (
-                <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer} guestLists={guestLists} />
+                <MyEventsSlider navigationPrevRef={navigationPrevRef} navigationNextRef={navigationNextRef} orders={orders} transfers={transfers} acceptTransfer={acceptTransfer}
+                    isAccepting={isAccepting} guestLists={guestLists} />
             ) : (
                 <EmptyContainer>
                     <h1>You do not have any events</h1>

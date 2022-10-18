@@ -6,7 +6,7 @@ import { sortBy } from '../../../utilities/helpers';
 import { Slider } from '../../Slider';
 import { TicketCard } from '../../TicketCard';
 
-export default function MyListingsSlider({ navigationNextRef, navigationPrevRef, ticketStatus, ticketState, listings, removeListing, getListings }) {
+export default function MyListingsSlider({ navigationNextRef, navigationPrevRef, ticketStatus, ticketState, listings, handleClick }) {
     if (listings && listings.types && ticketState) listings = listings.types[ticketState];
 
     return (
@@ -22,8 +22,7 @@ export default function MyListingsSlider({ navigationNextRef, navigationPrevRef,
                                     ticketState={ticketState}
                                     listing={listing}
                                     key={index}
-                                    removeListing={removeListing}
-                                    getListings={getListings}
+                                    handleClick={handleClick}
                                 />
                             </SwiperSlide>
                         );

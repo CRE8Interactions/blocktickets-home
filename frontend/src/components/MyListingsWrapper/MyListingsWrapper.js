@@ -9,6 +9,7 @@ import Tab from 'react-bootstrap/Tab';
 import { EmptyContainer } from "./../EmptyContainer";
 import { SwiperNavigationButtons } from '../SwiperNavigationButtons';
 import { MyListingsSlider } from './MyListingsSlider';
+import { TicketModal } from '../TicketModal';
 
 import './myListingsWrapper.scss';
 
@@ -27,6 +28,17 @@ export default function MyListingsWrapper() {
         setListings
     ] = useState();
 
+    const [listing, setListing] = useState()
+
+    const [
+        show,
+        setShow
+    ] = useState(false);
+
+    const [ticketAction, setTicketAction] = useState();
+
+    const [isRemoving, setIsRemoving] = useState(false)
+
     useLayoutEffect(() => {
         const el = document.querySelector('#main-container');
         const body = document.body;
@@ -39,6 +51,12 @@ export default function MyListingsWrapper() {
             body.classList.remove('noBodyPadding');
         };
     }, []);
+
+    const handleClick = (action, listing) => {
+        setListing(listing);
+        handleShow();
+        setTicketAction(action);
+    };
 
     const myListings = () => {
         getMyListings()
@@ -61,8 +79,16 @@ export default function MyListingsWrapper() {
     };
 
     const removeListing = (id) => {
-        removeMyListings(id).then((res) => myListings()).catch((err) => console.error(err));
+        setIsRemoving(true)
+        removeMyListings(id).then((res) => {
+            myListings()
+            setIsRemoving(false)
+        }).catch((err) => {
+            console.error(err)
+            setIsRemoving(false)
+        });
     };
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         myListings();
@@ -84,8 +110,8 @@ export default function MyListingsWrapper() {
                             ticketStatus={'listed'}
                             ticketState={key}
                             listings={listings.active}
-                            removeListing={removeListing}
-                            getListings={myListings}
+                            handleClick={handleClick}
+                            setTicketAction={setTicketAction}
                         />
                     ) : (
                         <EmptyContainer>
@@ -101,6 +127,8 @@ export default function MyListingsWrapper() {
                             ticketStatus={'listed'}
                             ticketState={key}
                             listings={listings.sold}
+                            handleClick={handleClick}
+                            setTicketAction={setTicketAction}
                         />
                     ) : (
                         <EmptyContainer>
@@ -115,6 +143,8 @@ export default function MyListingsWrapper() {
                             ticketStatus={'listed'}
                             ticketState={key}
                             listings={listings.expired}
+                            handleClick={handleClick}
+                            setTicketAction={setTicketAction}
                         />
                     ) : (
                         <EmptyContainer>
@@ -124,6 +154,15 @@ export default function MyListingsWrapper() {
                     )}
                 </Tab>
             </Tabs>
+            <TicketModal
+                listing={listing}
+                order={listing}
+                removeListing={removeListing}
+                ticketAction={ticketAction}
+                show={show}
+                setShow={setShow}
+                isRemoving={isRemoving}
+            />
         </section>
     );
 }

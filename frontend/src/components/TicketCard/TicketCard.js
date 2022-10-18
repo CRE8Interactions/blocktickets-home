@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
@@ -9,27 +9,9 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { TicketModal } from '../TicketModal';
-
 import './ticketCard.scss';
 
-export default function TicketCard({ id, ticketStatus, ticketState, order, listing, removeListing, getListings, guestList }) {
-    const [
-        ticketAction,
-        setTicketAction
-    ] = useState('');
-
-    const [
-        show,
-        setShow
-    ] = useState(false);
-
-    const handleShow = () => setShow(true);
-
-    const handleClick = (action) => {
-        handleShow();
-        setTicketAction(action)
-    };
+export default function TicketCard({ id, ticketStatus, ticketState, order, listing, guestList, handleClick }) {
 
     let event = listing ? listing?.event : order?.event;
     if (guestList) event = guestList?.event;
@@ -89,20 +71,18 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                             (
                                 <>
                                     <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-                                        <Button onClick={(e) => handleClick('remove')}>Remove listing</Button>
-                                        <Button onClick={(e) => handleClick('edit')} variant="outline-light" size="xs">Edit</Button>
+                                        <Button onClick={() => handleClick('remove', listing)}>Remove listing</Button>
+                                        <Button onClick={() => handleClick('edit', listing)} variant="outline-light" size="xs">Edit</Button>
                                     </Stack>
                                 </>
                             )
                         }
 
-                        {id || (ticketState && ticketState !== "active") ? (
+                        {id || (ticketState && ticketState !== "active") && (
                             <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
-                                {/* <Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg"> 
-                                </Button> */}
-                                <Button variant='outline-light' size="xs" onClick={() => handleClick('details')}>Details</Button>
+                                <Button variant='outline-light' size="xs" className="flex-grow-1" onClick={() => handleClick('details', listing)}>Details</Button>
                             </Stack>
-                        ) : ''}
+                        )}
 
                         {
                             !id && !ticketStatus && !guestList &&
@@ -125,7 +105,6 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                     </>
                 </div>
             </Card>
-            <TicketModal ticketAction={ticketAction} show={show} setShow={setShow} order={order} removeListing={removeListing} listing={listing} getListings={getListings} />
         </Fragment>
     );
 }
