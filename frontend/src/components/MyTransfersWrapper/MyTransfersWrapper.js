@@ -36,7 +36,7 @@ export default function MyTransfersWrapper() {
     const [
         transfers,
         setTransfers
-    ] = useState([]);
+    ] = useState();
 
     const [
         transfer,
@@ -83,7 +83,7 @@ export default function MyTransfersWrapper() {
             <div className="d-flex-column position-relative">
                 <Tabs defaultActiveKey="pending" variant="pills" activeKey={key} onSelect={(k) => setKey(k)}>
                     <Tab eventKey="pending" title="Pending">
-                        {transfers.map(transfer => transfer.status === 'pending' && transfer.event !== null).length > 0 ? (
+                        {transfers && transfers.filter(transfer => transfer.status === 'pending' && transfer.event !== null).length > 0 ? (
                             <MyTransfersSlider
                                 navigationPrevRef={navigationPrevRef}
                                 navigationNextRef={navigationNextRef}
@@ -97,7 +97,7 @@ export default function MyTransfersWrapper() {
                         )}
                     </Tab>
                     <Tab eventKey="completed" title="Completed">
-                        {transfers.map(
+                        {transfers && transfers.filter(
                             (transfer) => transfer.status === 'claimed' || transfer.status === 'cancelled' && transfer.event !== null
                         ).length > 0 ? (
                             <MyTransfersSlider
