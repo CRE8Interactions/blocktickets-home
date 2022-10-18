@@ -13,6 +13,9 @@ import Alert from 'react-bootstrap/Alert';
 import { DateInputWrapper } from '../../DateInputWrapper';
 import { TimeInputWrapper } from '../../TimeInputWrapper';
 
+import placeholder from '../../../assets/placeholder.png'
+
+
 export default function PublishEvent({ setDate, date, setPublishType, publishType, eventStarted, eventStatus, event }) {
     const [startDate, setStartDate] = useState('');
 
@@ -27,7 +30,7 @@ export default function PublishEvent({ setDate, date, setPublishType, publishTyp
         <>
             <Row>
                 <Col lg={5} className="w-auto">
-                    <Image src={event?.image?.url} rounded alt={event?.name} width="291" height="291" className="event-image">
+                    <Image src={event?.image?.url || placeholder} rounded alt={event?.name} width="291" height="291" className="event-image">
                     </Image>
                 </Col>
                 <Col>

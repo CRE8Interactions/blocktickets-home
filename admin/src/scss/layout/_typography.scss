@@ -171,7 +171,6 @@ li {
 	.btn-more-col {
 		position: absolute;
 		right: 0;
-		padding: 0;
 	}
 
 	.flex-row {
@@ -221,13 +220,6 @@ li {
 		}
 	}
 
-	// wider columns
-	&.five-col {
-		.list-table-col:not(.btn-more-col) {
-			width: calc(100% / 5.5);
-		}
-	}
-
 	// narrower columns
 	&.four-col {
 		.list-table-col:not(.btn-more-col) {
@@ -236,6 +228,20 @@ li {
 			&.lg {
 				width: 44%;
 			}
+		}
+	}
+
+	// widest columns - home page
+	&.three-col {
+		.list-table-col:not(.btn-more-col) {
+			width: calc(100% / 4);
+		}
+	}
+
+	// wider columns
+	&.five-col {
+		.list-table-col:not(.btn-more-col) {
+			width: calc(100% / 5.5);
 		}
 	}
 }

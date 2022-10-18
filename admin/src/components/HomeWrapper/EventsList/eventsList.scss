@@ -1,0 +1,39 @@
+@use '../../../scss/abstracts' as *;
+@use '../../../scss/theme/colors' as *;
+
+#events-table {
+	.flex-row {
+		&:not(.list-table-header):hover {
+			box-shadow: 0 4px 15px 0 rgb(40 44 53 / 6%), 0 2px 2px 0 rgb(40 44 53 / 8%);
+		}
+
+		&:nth-of-type(2) {
+			padding-top: rem(11);
+		}
+	}
+
+	.event-image {
+		width: 80px;
+		height: 80px;
+	}
+
+	.event-details {
+		flex: 1;
+		min-width: 0px;
+	}
+
+	.vstack {
+		> * {
+			flex-basis: rem(24);
+		}
+		.progress {
+			height: 4px;
+			width: 67px;
+			background-color: $gray-400;
+		}
+
+		.stat-row {
+			margin-top: rem(9);
+		}
+	}
+}
