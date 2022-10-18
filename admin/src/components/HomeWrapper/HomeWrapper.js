@@ -1,34 +1,33 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import OrganizationContext from '../../context/Organization/Organization';
+import { getVenues } from '../../utilities/api';
 
-import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 import { SearchBar } from '../SearchBar';
-import { EventsTable } from './EventsTable';
+import { EventsList } from './EventsList';
 
 import './homeWrapper.scss';
 
 export default function HomeWrapper({ events }) {
-    const [
-        key,
-        setKey
-    ] = useState('published');
 
-    const [
-        show,
-        setShow
-    ] = useState(false);
-    const [
-        step,
-        setStep
-    ] = useState();
-    const [
-        event,
-        setEvent
-    ] = useState();
+    const eventStatusOpt = [
+        {
+            label: 'Published',
+            value: 'published'
+        },
+        {
+            label: 'Draft',
+            value: 'draft'
+        },
+        {
+            label: 'Past',
+            value: 'past'
+        }
+    ]
+
+    const [eventStatus, setEventStatus] = useState(eventStatusOpt[0].value)
 
     // search query
     const [
@@ -41,55 +40,33 @@ export default function HomeWrapper({ events }) {
         setQueryResults
     ] = useState('');
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => {
-        setStep(1);
-        setShow(true);
-    };
-
-    const fullscreen = useState(true);
-    const orgs = useContext(OrganizationContext);
-
     const handleSearch = (query) => { }
 
     return (
-        <Card body>
-            <Tab.Container defaultActiveKey={key} activeKey={key} onSelect={(k) => setKey(k)}>
-                <div className="flex-wrap d-flex align-items-center   justify-content-between" id="events">
-                    <div className="section-header section-heading section-heading--flex gap-4">
-                        <h1>Events</h1>
-                        <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} size="sm" placeholder="Search events" />
-                    </div>
-                    <Nav as="ul" variant="pills" className="ms-auto" justify>
-                        <Nav.Item as="li">
-                            <Nav.Link as="button" eventKey="published">
-                                Published
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item as="li">
-                            <Nav.Link as="button" eventKey="draft">
-                                Draft
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item as="li">
-                            <Nav.Link as="button" eventKey="past">
-                                Past
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                    <Tab.Content>
-                        <Tab.Pane eventKey="published">
-                            <EventsTable type={key} events={events} />
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="draft">
-                            <EventsTable type={key} events={events} />
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="past">
-                            <EventsTable type={key} events={events} />
-                        </Tab.Pane>
-                    </Tab.Content>
+        <section>
+            <header className='section-header heading--flex'>
+                <div className="section-heading">
+                    <h1>Events</h1>
                 </div>
-            </Tab.Container>
-        </Card>
+                <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} placeholder="Search by order #, data, buyer" />
+                {/* <FloatingLabel controlId="venue" label="Venue">
+                    <Form.Select name="venue" value={venue} onChange={(e) => setVenue(e.target.value)}>
+                        <option disabled hidden value="">Select venue</option>
+                        <option value="all">All</option>
+                        {venues?.map((option, index) => (
+                            <option key={index} value={option.id}>{option.name}</option>
+                        ))}
+                    </Form.Select>
+                </FloatingLabel> */}
+                <FloatingLabel controlId="status" label="Event status">
+                    <Form.Select name="status" value={eventStatus} onChange={(e) => setEventStatus(e.target.value)}>
+                        {eventStatusOpt.map((option, index) => (
+                            <option key={index} value={option.value}>{option.label}</option>
+                        ))}
+                    </Form.Select>
+                </FloatingLabel>
+            </header>
+            <EventsList events={events} eventStatus={eventStatus} />
+        </section>
     );
 }
