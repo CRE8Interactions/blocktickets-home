@@ -74,20 +74,24 @@ export default function MyListingsWrapper() {
                     if (listing.status === 'expired') types.expired.push(listing);
                 });
                 setListings(types);
+                setIsRemoving(false)
             })
             .catch((err) => console.error(err));
     };
 
     const removeListing = (id) => {
-        setIsRemoving(true)
-        removeMyListings(id).then((res) => {
-            myListings()
-            setIsRemoving(false)
-        }).catch((err) => {
-            console.error(err)
-            setIsRemoving(false)
+        return new Promise((resolve, reject) => {
+            setIsRemoving(true)
+            removeMyListings(id).then((res) => {
+                myListings()
+                resolve()
+            }).catch((err) => {
+                console.error(err)
+                setIsRemoving(false)
+                reject()
+            });
         });
-    };
+    }
     const handleShow = () => setShow(true);
 
     useEffect(() => {
