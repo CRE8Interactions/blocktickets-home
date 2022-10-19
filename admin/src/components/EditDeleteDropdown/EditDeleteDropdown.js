@@ -8,7 +8,7 @@ import { MoreIcon } from '../MoreIcon';
 
 export default function EditDeleteDropdown({ handleShow, canEdit = true, canDelete = true, link, onClick, hasPermission = true }) {
     return (
-        <Dropdown className='btn-more'>
+        <Dropdown className='btn-more' drop="start">
             <Dropdown.Toggle variant="default" id="btn-more-toggle">
                 <MoreIcon />
             </Dropdown.Toggle>
