@@ -60,7 +60,7 @@ export default function VenueCard({ venue }) {
                             trigger="click"
                             show={copied}
                             overlay={<Tooltip>Copied</Tooltip>}>
-                            <Button variant="outline-light" className="btn--icon" aria-label="Save Venue" onClick={() => handleCopy(`https:google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`)}>
+                            <Button variant="outline-light" className="btn--icon" aria-label="Save Venue" onClick={() => handleCopy(`https://google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`)}>
                                 <svg
                                     role="img"
                                     title="save"
