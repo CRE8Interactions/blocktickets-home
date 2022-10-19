@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import { InfoIcon } from '../InfoIcon';
 import { EventModal } from './EventModal';
 
+import placeholder from '../../assets/placeholder.png';
+
 import './event.scss';
 
 export default function Event(props) {
@@ -28,7 +30,7 @@ export default function Event(props) {
                 <Row gap={2} className="py-2 pt-md-0 pb-md-3 align-items-center">
                     <Col md={2} id="event-image-col" className="image-wrapper tablet-desktop-only">
                         <img
-                            src={event?.image?.url}
+                            src={event?.image?.url || placeholder}
                             alt={event?.name}
                             width="139"
                             height="139"

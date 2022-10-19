@@ -8,6 +8,8 @@ import Stack from 'react-bootstrap/Stack';
 import { IconButton } from '../../IconButton';
 import { SpinnerContainer } from '../../SpinnerContainer';
 
+import placeholder from '../../../assets/placeholder.png'
+
 import './eventsList.scss';
 
 export default function EventsList({ venue }) {
@@ -17,7 +19,7 @@ export default function EventsList({ venue }) {
                 return (
                     <Stack as="li" direction="horizontal" className="item" gap={3} key={index}>
                         <img
-                            src={event?.image?.url}
+                            src={event?.image?.url || placeholder}
                             alt={event?.name}
                             width="100"
                             height="100"

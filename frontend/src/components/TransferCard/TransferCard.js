@@ -8,12 +8,15 @@ import Button from 'react-bootstrap/Button';
 
 import { Spinner } from "../SpinnerContainer/Spinner"
 
+import placeholder from '../../assets/placeholder.png'
+
 export default function TransferCard({ transfer, cancel, status, acceptTransfer, isAccepting }) {
     return (
         <Fragment>
             <Card body className="ticket-card">
                 <Card.Img
-                    src={transfer?.event?.image?.url}
+                    src={transfer?.event?.image?.url || placeholder}
+                    alt={transfer?.event?.name}
                     width="217"
                     height="217"
                     className="event-image-lg mb-3"

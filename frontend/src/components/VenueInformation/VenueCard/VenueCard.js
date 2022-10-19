@@ -84,7 +84,7 @@ export default function VenueCard({ venue }) {
                                 </svg>
                             </Button>
                         </OverlayTrigger>
-                        <IconButton link="#" variant="outline-light" styles="btn--icon" aria-label="Visit Website">
+                        <IconButton link={`${venue?.website}`} isExternal={true} variant="outline-light" styles="btn--icon" aria-label="Visit Website">
                             <svg
                                 role="img"
                                 title="Visit Website"
