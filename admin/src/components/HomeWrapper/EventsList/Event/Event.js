@@ -105,7 +105,7 @@ export default function Event({ event, eventStatus, handleShow }) {
                 </div>
             </Link>
             <div className="btn-more-col list-table-col" role="cell">
-                <Dropdown className="btn-more" align="right">
+                <Dropdown className="btn-more" drop="start">
                     <Dropdown.Toggle variant="default">
                         <MoreIcon />
                     </Dropdown.Toggle>

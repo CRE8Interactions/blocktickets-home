@@ -53,7 +53,7 @@ export default function Ticket({ ticket, handleShow }) {
             <Stack>
                 <span>{ticket?.price && ticket?.price > 0 ? formatCurrency(ticket?.price) : 'Free'}</span>
             </Stack>
-            <EditDeleteDropdown handleShow={handleShow} ticket={ticket} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket?.name))}`)} />
+            <EditDeleteDropdown canDelete={ticket?.status !== "on_sale"} handleShow={handleShow} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket?.name))}`)} />
         </Stack>
     );
 }
