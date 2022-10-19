@@ -79,6 +79,7 @@ export default function MyListingsWrapper() {
             .catch((err) => console.error(err));
     };
 
+    // create function that is a promise so button spinner works 
     const removeListing = (id) => {
         return new Promise((resolve, reject) => {
             setIsRemoving(true)
