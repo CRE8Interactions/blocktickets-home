@@ -2,20 +2,20 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
-import { formatShortDate, getStartDateFormatter } from "./../../../utilities/helpers";
+import { formatShortDate, getStartDateFormatter, formatShortAddress } from "./../../../utilities/helpers";
 
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 
 import './venueCardBody.scss';
 
-export default function EventCardTop(props) {
+export default function VenueCardBody(props) {
     const venue = props.venue;
 
     return (
         <Fragment>
             <Card.Title as="h5">{venue?.name}</Card.Title>
-            <Card.Text as="p">{venue?.address[0].city}, {venue?.address[0].state}</Card.Text>
+            <Card.Text as="p">{formatShortAddress(venue, 'venue')}</Card.Text>
             <hr />
             <ul className='venue-list'>
                 {venue && venue.allEvents &&
