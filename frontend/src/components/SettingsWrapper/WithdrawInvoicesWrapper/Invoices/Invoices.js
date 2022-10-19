@@ -15,7 +15,7 @@ export default function Invoices({ details }) {
     }
     return (
         <>
-            {details.length > 0 ? (
+            {details.length === 0 ? (
                 <Table id="invoice-table">
                     <thead>
                         <tr>
@@ -33,7 +33,7 @@ export default function Invoices({ details }) {
                     </tbody>
                 </Table>
             ) : (
-                <h1 className='text-center fs-md'>You do not have any invoices</h1>
+                <h1 className='text-center fs-md'>No invoices to show</h1>
             )}
         </>
     );
