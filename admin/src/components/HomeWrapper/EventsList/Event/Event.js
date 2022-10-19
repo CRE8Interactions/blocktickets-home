@@ -109,7 +109,7 @@ export default function Event({ event, eventStatus, handleShow }) {
                     <Dropdown.Toggle variant="default">
                         <MoreIcon />
                     </Dropdown.Toggle>
-                    <Dropdown.Menu align="start">
+                    <Dropdown.Menu>
                         <ul>
                             <li>
                                 <LinkContainer to={`/myevent/${event?.eventUUID}`}>
