@@ -33,12 +33,20 @@ export const sortBy = (arr, obj) => {
 }
 
 // address - city, state 
-export const formatShortAddress = (obj) => {
-    return `${capitalizeString(obj?.venue?.address[0]?.city)}, ${obj?.venue?.address[0]?.state?.toUpperCase()}`
+export const formatShortAddress = (obj, type) => {
+    // venue and events array have different object structures 
+    if (!type) {
+        obj = obj?.venue
+    } else {
+        obj = obj
+    }
+
+    return `${capitalizeString(obj?.address[0]?.city)}, ${obj?.address[0]?.state?.toUpperCase()}`
 }
+
 // format full address 
 export const formatAddress = (obj) => {
-    return `${obj.address_1}, ${obj.city}, ${obj.state.toUpperCase()}, ${obj.zipcode}, ${obj.country.toUpperCase()}`
+    return `${obj?.address_1}, ${obj?.city}, ${obj?.state.toUpperCase()}, ${obj?.zipcode}, ${obj?.country.toUpperCase()}`
 }
 
 // whether to show full start date or just start time 
