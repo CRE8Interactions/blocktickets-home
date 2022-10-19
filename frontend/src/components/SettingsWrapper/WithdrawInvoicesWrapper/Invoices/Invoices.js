@@ -15,7 +15,7 @@ export default function Invoices({ details }) {
     }
     return (
         <>
-            {details.length === 0 ? (
+            {details.length > 0 ? (
                 <Table id="invoice-table">
                     <thead>
                         <tr>
