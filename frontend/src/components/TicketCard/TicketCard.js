@@ -9,6 +9,8 @@ import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
+import placeholder from '../../assets/placeholder.png';
+
 import './ticketCard.scss';
 
 export default function TicketCard({ id, ticketStatus, ticketState, order, listing, guestList, handleClick }) {
@@ -28,7 +30,8 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
         <Fragment>
             <Card body className="ticket-card">
                 <Card.Img
-                    src={event?.image?.url}
+                    src={event?.image?.url || placeholder}
+                    alt={event?.name}
                     width="217"
                     height="217"
                     className="event-image-lg mb-3"
