@@ -129,7 +129,11 @@ select:-webkit-autofill:focus {
 	}
 }
 
-// login & security new phone number field
+// login & security new phone number field, ssn number
 .input-wrapper {
 	@include input-icon-box();
+
+	&.input-wrapper-error {
+		@extend .error-border !optional;
+	}
 }

@@ -188,7 +188,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
         }
 
         if (ssn && !(ssn.length >= 4)) {
-            setSSnNumError(true)
+            setSsnNumError(true)
         }
     }
 
@@ -429,6 +429,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                 placeholder="MM / DD / YYYY"
                                 name="dob"
                                 onBlur={isValidDate}
+                                className={`${!isDobValid ? 'error-border' : ''}`}
                                 formatChars={formatChars}
                                 beforeMaskedValueChange={beforeMaskedValueChange}
                                 onChange={(e) => setDob(e.target.value)}>
@@ -437,7 +438,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                             <Form.Text>Format: MM/DD/YYYY</Form.Text>
                             {dob &&
                                 !isDobValid && (
-                                    <Form.Text className="text-danger">Date must be in the format: MM/DD/YYYY</Form.Text>
+                                    <Form.Text className="d-block text-danger">Date must be a valid date</Form.Text>
                                 )}
                         </Form.Group>
                         <div className="d-flex-column mt-3 align-items-center">
@@ -492,7 +493,7 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                         </Form.Group>
                         <Form.Group className="form-group" controlId="ssn">
                             <Form.Label>Last 4 digits of Social Security number</Form.Label>
-                            <div className="input-wrapper ps-2">
+                            <div className={`input-wrapper ps-2 ${ssn && ssnNumError ? 'input-wrapper-error' : ''}`}>
                                 <span style={{ whiteSpace: 'nowrap' }}>&bull; &bull; &bull; - &bull; &bull; -</span>
                                 <Form.Control
                                     type="text"
@@ -507,13 +508,13 @@ export default function BankAccountDetailsModal({ handleClose, account, show }) 
                                         setSsn((ssn) =>
                                             e.target.validity.valid || e.target.value === '' ? e.target.value : ssn
                                         )}
-                                    className={`ps-1 ${ssn && ssnNumError ? 'error-border' : ''}`}
+                                    className="ps-1"
                                 />
                             </div>
                             <Form.Text>The last 4 digits of your SSN are only used to verify your identity—no credit checks.</Form.Text>
                             {ssn &&
                                 ssnNumError && (
-                                    <Form.Text className="text-danger">
+                                    <Form.Text className="d-block text-danger">
                                         Social Security Number must be 4 digits
                                     </Form.Text>
                                 )}
