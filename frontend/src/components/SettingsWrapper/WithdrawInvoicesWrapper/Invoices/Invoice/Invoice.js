@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as moment from 'moment';
 
-import { formatDateTime, formatCurrency, capitalizeString, formatShortAddress } from '../../../../../utilities/helpers';
+import { formatDateTime, getStartDateFormatter, formatCurrency, capitalizeString, formatShortAddress } from '../../../../../utilities/helpers';
 
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -50,7 +50,7 @@ export default function Invoice({ details }) {
                             <li>
                                 <p><strong>{invoice?.event?.name}</strong></p>
                                 <ul className='caption'>
-                                    <li>{formatDateTime(moment(invoice?.event?.start), 'dateOnly')}<span className='time'>{formatDateTime(moment(invoice?.event?.start), 'timeOnly')}</span></li>
+                                    <li>{formatDateTime(moment(invoice?.event?.start), getStartDateFormatter(invoice?.event))}</li>
                                     <li>{capitalizeString(invoice?.event?.venue?.name)}</li>
                                     <li>{formatShortAddress(invoice?.event)}</li>
                                 </ul>
@@ -65,7 +65,7 @@ export default function Invoice({ details }) {
                                 <ul className="caption">
                                     <li>Payment information: {capitalizeString(invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand)}</li>
                                     <li>Charge: {formatCurrency(invoice?.intentDetails?.charges?.data[0]?.amount / 100)}</li>
-                                    <li>Last 4 digiits: {invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4}</li>
+                                    <li>Last 4 digits: {invoice?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4}</li>
                                 </ul>
                             </li>
                         </ul>
@@ -73,7 +73,7 @@ export default function Invoice({ details }) {
                 </div>
                 <div className='caption mb-4'>
                     <p><span className='fw-semi-bold'>Order No.: {invoice?.orderId}</span></p>
-                    <p><span className='fw-semi-bold'>Order Date: {formatDateTime(moment(invoice?.processedAt), 'dateOnly')}</span></p>
+                    <p><span className='fw-semi-bold'>Order Date: {formatDateTime(moment(invoice?.processedAt))}</span></p>
                 </div>
                 <Card body>
                     <h1 className='caption fw-semi-bold mb-3'>Ticket/s Details</h1>

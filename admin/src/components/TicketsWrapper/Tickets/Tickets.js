@@ -17,6 +17,11 @@ export default function Tickets({ tickets }) {
 
     const handleShow = () => setShow(true);
 
+    const sortBy = arr => {
+        return arr?.sort(function (a, b) {
+            return a.price - b.price
+        })
+    }
     return (
         <>
             <Card body>
@@ -24,7 +29,7 @@ export default function Tickets({ tickets }) {
                     {tickets && tickets.length > 0 ? (
                         <>
                             <Stack gap={2} as="ul" className="pb-4 tickets">
-                                {(tickets).map((ticket, id) => 
+                                {sortBy(tickets).map((ticket, id) =>
                                     <Ticket key={id} ticket={ticket} handleShow={handleShow} />
                                 )}
                             </Stack>

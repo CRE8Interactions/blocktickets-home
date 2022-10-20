@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 
 import { IconButton } from '../../IconButton';
 
+import placeholder from "../../../assets/placeholder.png"
 import twitter from '../../../assets/icons/twitter.svg';
 import instagram from '../../../assets/icons/instagram.svg';
 import facebook from '../../../assets/icons/facebook.svg';
@@ -39,7 +40,7 @@ export default function VenueCard({ venue }) {
         <Card body className="card--light text-center d-flex flex-column">
             {venue && (
                 <>
-                    <Card.Img className="rounded-circle" width="160" height="160" src={venue?.image[0]?.url} />
+                    <Card.Img className="rounded-circle" width="160" alt={venue?.name} height="160" src={venue?.image[0]?.url || placeholder} />
                     <Card.Title as="h5" className="fs-md">
                         {venue?.name}
                     </Card.Title>
@@ -52,7 +53,7 @@ export default function VenueCard({ venue }) {
                     <Stack
                         direction="horizontal"
                         className="justify-content-center gap-2 mt-3 btn-group-flex">
-                        <IconButton link={`https:google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`} variant="primary" btn="location" styles="flex-grow-0 mt-0" isExternal={true}>
+                        <IconButton link={`https://google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`} variant="primary" btn="location" styles="flex-grow-0 mt-0" isExternal={true}>
                             Location
                         </IconButton>
                         <OverlayTrigger
@@ -60,7 +61,7 @@ export default function VenueCard({ venue }) {
                             trigger="click"
                             show={copied}
                             overlay={<Tooltip>Copied</Tooltip>}>
-                            <Button variant="outline-light" className="btn--icon" aria-label="Save Venue" onClick={() => handleCopy(`https:google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`)}>
+                            <Button variant="outline-light" className="btn--icon" aria-label="Save Venue" onClick={() => handleCopy(`https://google.com/maps?q=${venue?.address[0]?.address_1}+${venue?.address[0]?.city}+${venue?.address[0]?.state}`)}>
                                 <svg
                                     role="img"
                                     title="save"
@@ -84,7 +85,7 @@ export default function VenueCard({ venue }) {
                                 </svg>
                             </Button>
                         </OverlayTrigger>
-                        <IconButton link="#" variant="outline-light" styles="btn--icon" aria-label="Visit Website">
+                        <IconButton link={`${venue?.website}`} isExternal={true} variant="outline-light" styles="btn--icon" aria-label="Visit Website">
                             <svg
                                 role="img"
                                 title="Visit Website"

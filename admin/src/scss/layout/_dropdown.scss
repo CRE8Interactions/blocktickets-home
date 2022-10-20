@@ -38,12 +38,12 @@
 			color: $body-color;
 		}
 	}
-
-	&.btn-more {
-		&:hover,
-		&:focus {
-			background-color: $gray-300;
-			border-radius: $br-xs;
-		}
+}
+.btn-more {
+	&:hover,
+	&:focus,
+	&.show {
+		background-color: $gray-300;
+		border-radius: $br-xs;
 	}
 }

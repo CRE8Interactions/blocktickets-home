@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import Badge from 'react-bootstrap/Badge';
 
+import placeholder from '../../../assets/placeholder.png'
+
 import './eventModal.scss';
 
 export default function EventModal({ show, handleClose, event }) {
@@ -51,7 +53,7 @@ export default function EventModal({ show, handleClose, event }) {
             </div>
             <Modal.Body>
                 <img
-                    src={event?.image?.url}
+                    src={event?.image?.url || placeholder}
                     alt={event?.name}
                     width="225"
                     height="225"

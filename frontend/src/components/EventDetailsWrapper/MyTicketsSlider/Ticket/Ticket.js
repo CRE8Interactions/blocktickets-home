@@ -46,7 +46,7 @@ export default function Tickets({ ticket, order, handleClick }) {
                         <Stack direction="horizontal" gap={3} className="mt-3 btn-group-flex">
                             {/* <Button variant="info" id="apple-wallet-btn" aria-label="Add to Apple Wallet" className="br-lg">
                                 </Button> */}
-                            <Button variant='outline-light' size="xs" onClick={() => handleClick('details')}>Details</Button>
+                            <Button variant='outline-light' className="flex-grow-1" size="xs" onClick={() => handleClick('details')}>Details</Button>
                         </Stack>
                     </>
                 </div>

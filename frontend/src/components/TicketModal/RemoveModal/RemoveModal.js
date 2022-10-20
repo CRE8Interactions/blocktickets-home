@@ -34,8 +34,10 @@ export default function RemoveModal({ handleClose, listing, isRemoving, removeLi
     }, [step])
 
     const remove = () => {
-        removeListing(listing.id);
-        setStep(2);
+        removeListing(listing.id).then(() => {
+            setStep(2);
+
+        });
     };
 
     return (

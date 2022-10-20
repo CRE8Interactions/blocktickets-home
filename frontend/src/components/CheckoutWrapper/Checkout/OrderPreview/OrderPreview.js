@@ -7,6 +7,8 @@ import { formatDateTime, formatShortAddress } from '../../../../utilities/helper
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
+import placeholder from '../../../../assets/placeholder.png';
+
 export default function OrderPreview() {
     const [data, setData] = useState()
     let cart = sessionStorage.getItem('cart');
@@ -29,7 +31,7 @@ export default function OrderPreview() {
         <Card body className="order-card card--light">
             <Stack direction="horizontal" gap={3}>
                 <img
-                    src={data?.image?.url}
+                    src={data?.image?.url || placeholder}
                     alt={data?.name}
                     width="64"
                     height="64"

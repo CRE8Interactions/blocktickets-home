@@ -6,12 +6,14 @@ import { formatDateTime, formatShortAddress } from '../../../../../utilities/hel
 import Card from 'react-bootstrap/Card';
 import Stack from 'react-bootstrap/Stack';
 
+import placeholder from '../../../../../assets/placeholder.png';
+
 export default function OrderCard({ order }) {
     return (
         <Card body className="card--light order-card">
             <Stack direction="horizontal" gap={3}>
                 <img
-                    src={order?.event?.image?.url}
+                    src={order?.event?.image?.url || placeholder}
                     alt={order?.event?.name}
                     width="64"
                     height="64"
