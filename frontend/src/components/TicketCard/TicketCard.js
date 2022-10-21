@@ -60,7 +60,7 @@ export default function TicketCard({ id, ticketStatus, ticketState, order, listi
                                             <span className='m-0 caption'>Listing price per ticket</span>
                                             <span className='text-end fw-medium'>{formatCurrency(listing?.askingPrice)}</span>
                                         </Stack>
-                                        <p className='caption text-muted'>You will make {formatCurrency((listing?.askingPrice / listing?.tickets.length) - (listing?.serviceFees / listing?.tickets.length))} per ticket</p>
+                                        <p className='caption text-muted'>You will make {formatCurrency((listing?.payout / listing?.tickets.length))} per ticket</p>
                                     </Stack>
                                 </>
                             )
