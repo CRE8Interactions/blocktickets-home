@@ -66,7 +66,7 @@ module.exports = createCoreController('api::event.event', ({ strapi}) => ({
     let id = path.split('/')[3];
 
     const event = await strapi.db.query('api::event.event').findOne({
-      select: ['id', 'name', 'start', 'summary', 'end', 'presentedBy', 'views', 'hide_end_date'],
+      select: ['id', 'name', 'start', 'summary', 'end', 'presentedBy', 'views', 'hide_end_date', 'display_start_time'],
       where: { uuid: id },
       populate: {
         image: true,

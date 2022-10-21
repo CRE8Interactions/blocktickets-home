@@ -25,6 +25,7 @@ export default function TransferCard({ transfer, cancel, status, acceptTransfer,
                     <Card.Title as="h5">{transfer?.event?.name}</Card.Title>
                     <p className="event-details">
                         {formatShortDate(moment(transfer?.event?.start), getStartDateFormatter(transfer?.event))} <span className="venue">{transfer?.event?.venue?.name}</span> <span className="loc">
+                        {transfer?.event?.venue?.address[0]?.city}, {transfer?.event?.venue?.address[0]?.state}
                         </span>
                     </p>
                     <span className="num-tickets">{transfer?.tickets.length} {status ? 'Pending' : ''} {transfer?.tickets.length > 1 ? 'Tickets' : 'Ticket'} </span>
