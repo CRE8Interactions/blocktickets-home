@@ -81,10 +81,10 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     if (cart.ticket) {
       let hash = {}
       // Calculate Fees
-      if (parseInt(cart.ticket.cost) < 20) hash['serviceFees'] = 1;
-      if (parseInt(cart.ticket.cost) >= 20) hash['serviceFees'] = (event.fee_structure.primaryOver20 / 100) * parseFloat(cart.ticket.cost);
+      if (parseInt(cart.ticket.cost) < 20) hash['serviceFees'] = cart.ticket.free ? 0 : 1;
+      if (parseInt(cart.ticket.cost) >= 20) hash['serviceFees'] = cart.ticket.free ? 0 : (event.fee_structure.primaryOver20 / 100) * parseFloat(cart.ticket.cost);
       if (parseFloat(cart.ticket.cost)) hash['paymentProcessingFee'] = (((parseFloat(event.fee_structure.stripeServicePecentage) * parseFloat(cart.ticket.cost)) / 100) + event.fee_structure.stripeCharge).toFixed(2);
-      hash['paymentProcessingFee'] = parseFloat(hash['paymentProcessingFee'])
+      hash['paymentProcessingFee'] = cart.ticket.free ? 0 : parseFloat(hash['paymentProcessingFee'])
       hash['facilityFee'] = parseFloat(cart.ticket.fee)
       hash['ticketPrice'] = parseFloat(cart.ticket.cost);
       hash['tax'] = (taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase()).combinedTaxRate / 100) * hash['ticketPrice']

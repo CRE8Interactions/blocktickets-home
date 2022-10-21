@@ -2,6 +2,7 @@ export const COUNTDOWN_NUM = 9;
 export const COUNTDOWN_DURATION = 1000;
 
 export const formatCurrency = (number) => {
+    if (isNaN(number)) number = 0;
     return `$${parseFloat(number).toFixed(2)}`
 }
 
@@ -74,13 +75,13 @@ export const formatShortDate = (date, formatter) => {
 export const formatDateTime = (date, formatter) => {
     switch (formatter) {
         case 'dateOnly':
-            return date.format('ddd, MMM D, YYYY')
+            return date?.format('ddd, MMM D, YYYY')
 
         case 'timeOnly':
-            return date.format('h:mm A')
+            return date?.format('h:mm A')
 
         default:
-            return date.format('ddd, MMM D, YYYY h:mm A')
+            return date?.format('ddd, MMM D, YYYY h:mm A')
     }
 }
 
