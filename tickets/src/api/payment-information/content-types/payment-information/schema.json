@@ -43,6 +43,9 @@
     "active": {
       "type": "boolean",
       "default": true
+    },
+    "stripeConnectedAccount": {
+      "type": "json"
     }
   }
 }

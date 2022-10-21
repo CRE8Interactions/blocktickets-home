@@ -71,22 +71,23 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
   },
   async find(ctx) {
     const user = ctx.state.user;
+
     const entry = await strapi.entityService.findMany('api::ticket-transfer.ticket-transfer', {
       filters: {
-        fromUserId: user.id
+        $or: [
+          {fromUserId: {$eq: user.id }},
+          {phoneNumberToUser: { $eq: user.phoneNumber }}
+        ]
       },
       populate: {
         tickets: true,
         event: {
-          filters: {
-            $and: [
-              { start: { $gte: new Date() } }
-            ]
-          },
           populate: {
             image: true,
             venue: {
-              address: true
+              populate: {
+                address: true
+              }
             }
           }
         }
@@ -146,7 +147,6 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
   },
   async incoming(ctx) {
     const user = ctx.state.user;
-
     const entry = await await strapi.db.query('api::ticket-transfer.ticket-transfer').findMany({
       where: {
         phoneNumberToUser: user.phoneNumber,
@@ -157,13 +157,17 @@ module.exports = createCoreController('api::ticket-transfer.ticket-transfer', ({
         event: {
           populate: {
             image: true,
-            venue: true
+            venue: {
+              populate: {
+                address: true
+              }
+            }
           }
         },
         tickets: true
       }
     })
-
+    
     return entry
   },
   async accept(ctx) {

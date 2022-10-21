@@ -52,9 +52,9 @@ export default function BankAccount({ account, getAccount }) {
                         <Button variant="link" onClick={handleShow}>
                             Edit
                         </Button>
-                        <Button variant="link" className="text-danger" onClick={removeBank}>
+                        {/* <Button variant="link" className="text-danger" onClick={removeBank}>
                             Delete
-                        </Button>
+                        </Button> */}
                     </Stack>
                 </Card>
             ) : (

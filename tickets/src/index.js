@@ -240,90 +240,8 @@ module.exports = {
       }
     }
 
-    let resetDevelopmentEnv = async () => {
-      await strapi.db.query('api::ticket.ticket').updateMany({
-        where: {
-          $or: [
-            {
-              on_sale_status: { $notIn: 'available'}
-            },
-            {
-              transferred: true,
-            },
-            {
-              resale: true,
-            }
-          ]
-        },
-        data: {
-          on_sale_status: 'available',
-          trasferred: false,
-          resale: false,
-          listingAskingPrice: null,
-          listingId: null
-        },
-      });
-
-      await strapi.db.query('api::order.order').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-
-      await strapi.db.query('api::ticket-transfer.ticket-transfer').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-
-      await strapi.db.query('api::listing.listing').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-
-      await strapi.db.query('api::history.history').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-
-      await strapi.db.query('api::payment-information.payment-information').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-
-      await strapi.db.query('api::verify.verify').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-
-      await strapi.db.query('api::tracking.tracking').deleteMany({
-        where: {
-          createdAt: {
-            $lte: new Date()
-          },
-        },
-      });
-    }
-
     initOrganization()
     initCategories()
-    // resetDevelopmentEnv()
     
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user', 'api::profile.profile', 'api::verify.verify', 'api::invite.invite', 'api::organization.organization',
@@ -390,6 +308,71 @@ module.exports = {
           );
         }
 
+        // Changes on Payment-information model
+        if (event.model.singularName === 'payment-information') {
+          let data = event.params.data;
+          let resultId = result.id;
+
+          // await encryption
+          //   .decrypt(result.accountNumber)
+          //   .then((text) => {
+          //     result.accountNumber = text
+          //   })
+          //   .catch((err) => {
+          //     // This is to handle errors
+          //   })
+
+          // const account = await stripe.accounts.create({
+          //   type: 'custom',
+          //   business_type: 'individual',
+          //   country: 'US',
+          //   email: data.user.email,
+          //   capabilities: {
+          //     card_payments: {requested: true},
+          //     transfers: {requested: true},
+          //     us_bank_account_ach_payments: {requested: true}
+          //   },
+          //   individual: {
+          //     first_name: data.user.firstName,
+          //     last_name: data.user.lastName,
+          //     email: data.user.email
+          //   },
+          //   business_profile: {
+          //     product_description: 'Ticket Purchase'
+          //   }
+          // });
+
+          // const bankAccount = await stripe.accounts.createExternalAccount(
+          //   account.id,
+          //   {
+          //     external_account: {
+          //       country: 'US',
+          //       currency: 'usd',
+          //       // bank_name: result.accountName,
+          //       account_holder_name: `${data.user.firstName} ${data.user.lastName}`,
+          //       account_holder_type: 'individual',
+          //       routing_number: result.routingNumber,
+          //       // last4: result.accountNumber.substr(result.accountNumber.length - 4),
+          //       object: 'bank_account'
+          //     }
+          //   }
+          // );
+
+          // await strapi.db.query('api::payment-information.payment-information').update({
+          //   where: {
+          //     id: resultId
+          //   },
+          //   data: {
+          //     stripeConnectedAccount: account,
+          //   }
+          // })
+
+          // await stripe.accounts.update(
+          //   account.id,
+          //   {tos_acceptance: {date: Math.round(Date.now() / 1000), ip: data.ip}}
+          // );
+        }
+        
         // Changes on venue
         if (event.model.singularName === 'venue') {
           const address = result.address[0];

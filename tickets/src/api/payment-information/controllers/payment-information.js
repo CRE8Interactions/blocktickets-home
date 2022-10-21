@@ -58,7 +58,9 @@ module.exports = createCoreController('api::payment-information.payment-informat
               currency,
               firstName,
               lastName,
-              accountType
+              accountType,
+              user,
+              ip: ctx.request.ip
             }
           })
         }
