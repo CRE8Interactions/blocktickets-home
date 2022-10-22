@@ -228,9 +228,9 @@ export const ticketPrices = (ticket = null, listing = null, showFees = true, tax
         prices['ticketServiceFee'] = (feeStructure?.secondaryServiceFeeSeller / 100) * prices.ticketCost;
         prices['ticketFacilityFee'] = 0;
         prices['tax'] = (taxRates?.combinedTaxRate / 100) * prices.ticketCost;
-        prices['totalFees'] = parseFloat(prices['ticketServiceFee']) + prices['paymentProcessingFee']
+        prices['totalFees'] = parseFloat(prices['ticketServiceFee']) + prices['paymentProcessingFee'] + parseFloat(prices.tax)
         prices['ticketType'] = listing.tickets[0]?.resale ? 'Resale Ticket' : 'Standard Ticket';
-        prices['ticketCostWithFees'] = (prices.ticketCost + prices.totalFees + prices.tax).toFixed(2);
+        prices['ticketCostWithFees'] = parseFloat(prices.ticketCost) + parseFloat(prices.totalFees);
         prices['ticketCostWithFees'] = parseFloat(prices['ticketCostWithFees'])
         prices['ticketName'] = listing.tickets.length > 0 ? listing.tickets[0]?.name : '';
         prices['ticketCount'] = listing.tickets.length;
