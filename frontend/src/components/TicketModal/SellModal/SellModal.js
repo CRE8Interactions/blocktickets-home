@@ -68,7 +68,7 @@ export default function SellModal({ handleClose, setTicketStatus, ticketAction, 
             setIsUpdate(true)
             setStep(2)
             setSelectedTickets(listing.tickets)
-            fees = (listing.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(listing.askingPrice).toFixed(2)
+            fees = (listing.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(price).toFixed(2)
             setServiceFees((fees).toFixed(2))
         } else {
             fees = (order?.event?.fee_structure.secondaryServiceFeeSeller / 100) * parseFloat(price).toFixed(2)
