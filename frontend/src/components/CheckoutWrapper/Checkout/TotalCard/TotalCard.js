@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 
-import { createOrder, getEvent, getTaxRates } from '../../../../utilities/api';
-import { cartTotal, ticketPrices, formatCurrency } from '../../../../utilities/helpers';
+import { createOrder, getEvent } from '../../../../utilities/api';
+import { formatCurrency } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -30,16 +30,6 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
         setHasError
     ] = useState(false);
 
-    const [
-        feeStructure,
-        setfeeStructure
-    ] = useState();
-
-    const [
-        taxRates,
-        setTaxRates
-    ] = useState();
-
     let cart = sessionStorage.getItem('cart');
     if (cart) cart = JSON.parse(cart);
 
@@ -57,47 +47,27 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
     if (cart.listing) {
         times = 1;
-        let ticket = null;
-        let listing = cart.listing;
-        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = (prices.ticketCost / cart.listing.tickets.length);
-        ticketCount = prices.ticketCount;
-        ticketFee = prices.ticketServiceFee;
-        facilityFee = prices.ticketFacilityFee;
-        processingFee = prices.paymentProcessingFee;
-        totalDue = (Number(prices.ticketCostWithFees));
-        processingFee = prices.paymentProcessingFee * times
-        tax = prices.tax;
+        console.log(cart.listing)
+        let listing = cart?.listing;
+        ticketPrice = listing?.pricing?.ticketCost;
+        ticketCount = listing?.quantity;
+        ticketFee = listing?.pricing?.serviceFees * listing?.quantity;
+        facilityFee = listing?.pricing?.ticketFacilityFee;
+        processingFee = listing?.pricing?.paymentProcessingFee * listing?.quantity;
+        totalDue = listing?.pricing?.listingTotalWithFees;
+        tax = listing?.pricing?.taxPerTicket * listing?.quantity;
     }
     else if (cart.ticket) {
-        let ticket = cart.ticket;
-        let listing = null;
-        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = prices.ticketCost;
+        let ticket = cart?.ticket;
+        ticketPrice = ticket?.pricing?.ticketCost;
         ticketCount = cart.ticketCount;
-        ticketFee = prices.ticketServiceFee;
-        facilityFee = prices.ticketFacilityFee;
-        processingFee = prices.paymentProcessingFee;
-        totalDue = (prices.ticketCostWithFees) * ticketCount;
-        tax = prices.tax;
+        ticketFee = ticket?.pricing?.serviceFees;
+        facilityFee = ticket?.pricing?.ticketFacilityFee;
+        processingFee = ticket?.pricing?.paymentProcessingFee;
+        totalDue = (ticket?.pricing?.ticketCostWithFeesAndTax) * ticketCount;
+        tax = ticket?.pricing?.taxPerTicket * ticketCount;
         times = ticketCount
     }
-
-    const eventTaxRates = (city, state) => {
-        getTaxRates(city, state)
-            .then((res) => setTaxRates(res?.data?.sales_tax_rates[0]))
-            .catch((err) => console.error(err))
-    }
-
-    useEffect(() => {
-        let eventUUID = cart?.ticket ? cart?.ticket?.eventId : cart.listing?.event?.uuid;
-        getEvent(eventUUID)
-            .then((res) => {
-                setfeeStructure(res?.data?.fee_structure)
-                eventTaxRates(res.data?.venue?.address[0]?.city, res.data.venue?.address[0]?.state)
-            })
-            .catch((err) => console.error(err))
-    }, [])
 
     const completePurchase = () => {
         setPurchasing(true);
@@ -245,7 +215,7 @@ export default function TotalCard({ setStatus, addOns, setOrder, intentId, payme
 
                         <li className="split-row list">
                             <span className="heading m-0">Tax</span>
-                            <span className="text-end">{formatCurrency(tax * times)}</span>
+                            <span className="text-end">{formatCurrency(tax)}</span>
                         </li>
                     </ul>
                     <div className="mobile-only mt-4">

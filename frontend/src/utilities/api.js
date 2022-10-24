@@ -43,6 +43,10 @@ export const createOrder = (data) => {
   return instance.post('/orders', data)
 }
 
+export const getPricing = (data) => {
+  return instance.post('/orders/pricing', data)
+}
+
 export const getOrder = (orderId) => {
   return instance.get(`/orders?filters[orderId][$eq]=${orderId}`)
 }

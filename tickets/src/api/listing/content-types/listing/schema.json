@@ -63,6 +63,9 @@
     "notified": {
       "type": "boolean",
       "default": false
+    },
+    "total": {
+      "type": "decimal"
     }
   }
 }

@@ -128,22 +128,6 @@ export default function TicketSelection({ handleClick, isZoomed, setTicketCount,
         () => {
             // if no ticket type is selected, display filter message 
             if (!tickets || !tickets.listings) return;
-            // console.log('Filtered ', tickets)
-            // console.log('SV0 ', sliderValues[0])
-            // console.log('SV1 ', sliderValues[1])
-            // console.log('GA Tickets ', gaTickets)
-            // let filteredlisting = tickets.listings.filter(listing => listing.tickets.length >= ticketCount && (listing.askingPrice + listing.tickets[0].fee) >= sliderValues[0] && (listing.askingPrice + listing.tickets[0].fee) <= sliderValues[1]);
-            // setListings(filteredlisting);
-            // if (tickets.generalAdmissionTicket && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) >= sliderValues[0] && (tickets.generalAdmissionTicket.attributes.cost + tickets.generalAdmissionTicket?.attributes?.fee + tickets.generalAdmissionTicket?.attributes?.facilityFee) <= sliderValues[1] && ticketFilters.standard) {
-            //     setShowGa(true)
-            //     setFilteredTicketCount(1)
-            // } else if (tickets.listings && ticketFilters.resale) {
-            //     setShowGa(false)
-            //     if (filteredlisting.length === 0) setFilteredTicketCount(0)
-            //     if (filteredlisting.length > 0) setFilteredTicketCount(1)
-            // } else if (!ticketFilters.standard && !ticketFilters.resale) {
-            //     setFilteredTicketCount(0)
-            // }
 
             // if there are ticket types selected
             if (ticketFilters.standard || ticketFilters.resale) {

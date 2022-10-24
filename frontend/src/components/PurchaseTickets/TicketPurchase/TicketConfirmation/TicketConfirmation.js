@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import TicketContext from '../../../../context/Ticket/Ticket';
-import { ticketPrices, formatCurrency } from '../../../../utilities/helpers';
+import { formatCurrency } from '../../../../utilities/helpers';
 
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -12,7 +12,7 @@ import { BackButton } from '../../../BackButton';
 import { TicketDescriptionModal } from './TicketDescriptionModal'
 import './ticketConfirmation.scss';
 
-export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount, code, taxRates, feeStructure }) {
+export default function TicketConfirmation({ handleGoBack, eventType, ticket, listing, setTicketCount, ticketCount, code }) {
     let ticketPrice;
     let totalTicketPrice;
     let section;
@@ -30,22 +30,19 @@ export default function TicketConfirmation({ handleGoBack, eventType, ticket, li
     const handleClose = () => setShow(false)
 
     if (listing) {
-        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = prices.ticketCost;
-        section = prices.ticketName;
-        sum = prices.ticketCostWithFees;
-        maxQuantity = prices.ticketCount;
-        ticketFees = prices.totalFees;
-        totalTicketPrice = prices.ticketCostWithFees;
-
+        ticketPrice = listing?.pricing?.ticketCost;
+        section = listing?.pricing?.ticketName;
+        sum = listing?.pricing?.ticketCostWithFeesAndTax;
+        maxQuantity = listing?.ticketCount;
+        ticketFees = listing?.pricing?.totalFees;
+        totalTicketPrice = listing?.pricing?.ticketCostWithFeesAndTax;
     } else if (ticket) {
-        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = prices.ticketCost;
-        section = prices.ticketName;
-        sum = prices.ticketCostWithFees;
-        maxQuantity = ticket.maximum_quantity;
-        ticketFees = prices.totalFees;
-        totalTicketPrice = prices.ticketCostWithFees;
+        ticketPrice = ticket?.pricing?.ticketCost;
+        section = ticket?.pricing?.ticketName;
+        sum = ticket?.pricing?.totalFees;
+        maxQuantity = ticket?.maximum_quantity;
+        ticketFees = ticket?.pricing?.totalFees;
+        totalTicketPrice = ticket?.pricing?.ticketCostWithFeesAndTax;
         hasDesciption = ticket?.description.split('').length > 0 ? true : false;
     }
 

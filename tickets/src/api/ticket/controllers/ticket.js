@@ -141,6 +141,23 @@ module.exports = createCoreController('api::ticket.ticket', ({
         image: true
       }
     });
+    
+    let taxRates = await strapi.db.query('api::sales-tax.sales-tax').findOne({
+      where: {
+        abbreviation: {
+          $eq: event.venue.address[0].state.toLowerCase()
+        }
+      },
+      populate: { 
+        sales_tax_rates: {
+          where: {
+            city: {
+              $eq: event.venue.address[0].city.toLowerCase()
+            }
+          }
+        }
+      },
+    });
 
     if (code !== 0) {
       let promo = await strapi.db.query('api::promo.promo').findOne({
@@ -200,9 +217,15 @@ module.exports = createCoreController('api::ticket.ticket', ({
       }
     });
 
+    for (let listing of listings) {
+      let feeStructure = event.fee_structure
+      let ticket = false
+      listing['pricing'] = await strapi.service('api::utility.utility').calculateTicketPrices(ticket, listing, true, taxRates.sales_tax_rates[0], feeStructure);
+    }
+
     let ticketTypes = [];
 
-    eventTickets?.map((ticket) => {
+    for (let ticket of eventTickets) {
       const t = ticketTypes.find(element => {
         if (element.name === ticket?.name) {
           return true;
@@ -213,11 +236,14 @@ module.exports = createCoreController('api::ticket.ticket', ({
 
       if (t === undefined) {
         delete ticket?.checkInCode
+        let feeStructure = event.fee_structure
+        let listing = false
         ticket['availableCount'] = eventTickets?.filter((t) => t.name === ticket?.name).length;
+        ticket['pricing'] = await strapi.service('api::utility.utility').calculateTicketPrices(ticket, listing, true, taxRates.sales_tax_rates[0], feeStructure);
         if (moment(ticket?.sales_start) >= moment()) return
         ticketTypes.push(ticket)
       }
-    })
+    }
 
     let data = {}
     delete event?.tickets;

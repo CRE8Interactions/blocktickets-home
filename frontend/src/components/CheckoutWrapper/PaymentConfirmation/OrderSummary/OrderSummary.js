@@ -14,19 +14,15 @@ export default function OrderSummary({ order }) {
     let total;
 
     if (order.details.listing) {
-        sum = (order.details.listing.askingPrice).toFixed(2);
-        fees = ((parseFloat(order.details.feeDetails.serviceFees) + parseFloat(order.details.feeDetails.paymentProcessingFee))).toFixed(2);
-        tax = order.details.feeDetails.tax;
-        total = parseFloat(fees) + parseFloat(tax) + parseFloat(sum);
+        sum = (order?.details?.listing?.pricing?.listingTotal).toFixed(2);
+        tax = order?.details?.listing?.pricing?.taxPerTicket * order?.details?.listing?.quantity;
+        fees = (order?.details?.listing?.pricing?.totalFees * order?.details?.listing?.quantity - tax).toFixed(2);
+        total = order?.details?.listing?.pricing?.listingTotalWithFees;
     } else if (order.details) {
-        sum = order.tickets.map(ticket => ticket.cost).reduce((a, v) => a + v, 0).toFixed(2)
-        let facilityFee = order.details.feeDetails.facilityFee;
-        let paymentProcessingFee = order.details.feeDetails.paymentProcessingFee;
-        let serviceFees = order.details.feeDetails.serviceFees;
-        fees = parseFloat(facilityFee) + parseFloat(paymentProcessingFee) + parseFloat(serviceFees)
-        fees = fees * order.details.ticketCount;
-        tax = parseFloat(order.details.feeDetails.tax).toFixed(2) * order.details.ticketCount;
-        total = fees + tax + parseFloat(sum);
+        sum = (order.details?.ticket?.pricing?.ticketCost * order.details?.ticketCount).toFixed(2)
+        fees = order.details?.ticket?.pricing?.feesWithoutTax * order.details?.ticketCount;
+        tax = order.details?.ticket?.pricing?.taxPerTicket * order.details?.ticketCount;
+        total = order.details?.ticket?.pricing?.ticketCostWithFeesAndTax * order.details?.ticketCount;
     }
 
     useEffect(() => {
