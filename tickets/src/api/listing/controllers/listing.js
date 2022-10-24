@@ -21,7 +21,8 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         payout,
         serviceFees,
         askingPrice,
-        fromOrder
+        fromOrder,
+        total: askingPrice * quantity
       },
       populate: {
         users_permissions_user: true,
@@ -112,7 +113,8 @@ module.exports = createCoreController('api::listing.listing', ({ strapi}) => ({
         quantity,
         payout,
         serviceFees,
-        askingPrice
+        askingPrice,
+        total: askingPrice * quantity
       },
       populate: {
         tickets: true

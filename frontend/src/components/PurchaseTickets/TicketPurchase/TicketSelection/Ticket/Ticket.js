@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-
-import { ticketPrices, formatCurrency } from '../../../../../utilities/helpers';
+import { formatCurrency } from '../../../../../utilities/helpers';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function Ticket({ ticket, handleNext, ticketFilters, listing, taxRates, feeStructure }) {
+export default function Ticket({ ticket, handleNext, ticketFilters, listing }) {
     let ticketPrice;
     let ticketPriceWithFees;
     let ticketName;
@@ -13,7 +12,7 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing, tax
 
     useEffect(() => {
         // Some actions
-    }, [ticket, taxRates, feeStructure])
+    }, [ticket])
 
     const ticketTypes = (ticket) => {
         if (!ticket?.resale && ticket?.on_sale_status === 'available') return 'Standard Ticket';
@@ -22,21 +21,19 @@ export default function Ticket({ ticket, handleNext, ticketFilters, listing, tax
     };
 
     if (ticket) {
-        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = prices.ticketCost;
-        ticketName = prices.ticketName;
-        ticketType = prices.ticketType;
-        ticketFee = prices.totalFees;
-        ticketPriceWithFees = prices.ticketCostWithFees;
+        ticketPrice = ticket?.pricing?.ticketCost;
+        ticketName = ticket?.pricing?.ticketName;
+        ticketType = ticket?.pricing?.ticketType;
+        ticketFee = ticket?.pricing?.totalFees;
+        ticketPriceWithFees = ticket?.pricing?.ticketCostWithFeesAndTax;
     }
 
     if (listing) {
-        let prices = ticketPrices(ticket, listing, true, taxRates, feeStructure);
-        ticketPrice = prices.ticketCost;
-        ticketName = prices.ticketName;
-        ticketType = `Resale ${listing.tickets.length} Tickets`;
-        ticketFee = prices.totalFees;
-        ticketPriceWithFees = prices.ticketCostWithFees;
+        ticketPrice = listing?.pricing?.ticketCost;
+        ticketName = listing?.pricing?.ticketName;
+        ticketType = `Resale ${listing?.tickets.length} Tickets`;
+        ticketFee = listing?.pricing?.totalFees;
+        ticketPriceWithFees = listing?.pricing?.ticketCostWithFeesAndTax;
     }
 
     return (
