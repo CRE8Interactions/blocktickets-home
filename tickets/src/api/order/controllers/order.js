@@ -79,32 +79,39 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     });
 
     if (cart.ticket) {
-      let hash = {}
-      // Calculate Fees
-      if (parseInt(cart.ticket.cost) < 20) hash['serviceFees'] = cart.ticket.free ? 0 : 1;
-      if (parseInt(cart.ticket.cost) >= 20) hash['serviceFees'] = cart.ticket.free ? 0 : (event.fee_structure.primaryOver20 / 100) * parseFloat(cart.ticket.cost);
-      if (parseFloat(cart.ticket.cost)) hash['paymentProcessingFee'] = (((parseFloat(event.fee_structure.stripeServicePecentage) * parseFloat(cart.ticket.cost)) / 100) + event.fee_structure.stripeCharge).toFixed(2);
-      hash['paymentProcessingFee'] = cart.ticket.free ? 0 : parseFloat(hash['paymentProcessingFee'])
-      hash['facilityFee'] = parseFloat(cart.ticket.fee)
-      hash['ticketPrice'] = parseFloat(cart.ticket.cost);
-      hash['tax'] = (taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase()).combinedTaxRate / 100) * hash['ticketPrice']
-      // Fee Totals
-      let feeTotals = parseFloat(hash.serviceFees) + parseFloat(hash.paymentProcessingFee) + parseFloat(hash.facilityFee) + parseFloat(hash.tax) 
-      // per ticket
-      feeTotals = parseFloat(feeTotals * cart.ticketCount).toFixed(2)
-      gross = (parseFloat(hash['ticketPrice']).toFixed(2) * cart.ticketCount) + (parseFloat(hash['facilityFee']).toFixed(2) * cart.ticketCount)
-      total = parseFloat(hash['ticketPrice'] * cart.ticketCount) + parseFloat(feeTotals)
-      cart['feeDetails'] = hash
+      let ticket = await strapi.db.query('api::ticket.ticket').findOne({
+        where: {
+          uuid: {
+            $eq: cart.ticket.uuid
+          }
+        }
+      });
+
+      let rates = taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase())
+      let feeStructure = event.fee_structure
+      let listing = false
+      let prices = await strapi.service('api::utility.utility').calculateTicketPrices(ticket, listing, true, rates, feeStructure);
+      gross = prices.ticketCost * cart.ticketCount
+      total = prices.ticketCostWithFeesAndTax * cart.ticketCount
+      cart['feeDetails'] = prices
     } else if (cart.listing) {
-      let hash = {}
-      // Calculate Fees
-      hash['ticketPrice'] = parseFloat(cart.listing.askingPrice).toFixed(2);
-      hash['serviceFees'] = (event.fee_structure.secondaryServiceFeeBuyer / 100) * parseFloat(cart.listing.askingPrice);
-      hash['paymentProcessingFee'] = (((parseFloat(event.fee_structure.stripeServicePecentage) * parseFloat(cart.listing.askingPrice)) / 100) + event.fee_structure.stripeCharge).toFixed(2);
-      hash['tax'] = (taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase()).combinedTaxRate / 100) * hash['ticketPrice']
-      total = parseFloat(hash['ticketPrice']) + parseFloat(hash['serviceFees']) + parseFloat(hash['paymentProcessingFee']) + parseFloat(hash['tax'])
-      gross = parseFloat(hash['ticketPrice'])
-      cart['feeDetails'] = hash
+      let listing = await strapi.db.query('api::listing.listing').findOne({
+        where: {
+          uuid: {
+            $eq: cart.listing.uuid
+          }
+        },
+        populate: {
+          tickets: true
+        }
+      });
+      let rates = taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase())
+      let feeStructure = event.fee_structure
+      let ticket = false
+      let prices = await strapi.service('api::utility.utility').calculateTicketPrices(ticket, listing, true, rates, feeStructure);
+      gross = prices.ticketCost * cart.listing.quantity
+      total = prices.ticketCostWithFeesAndTax * cart.listing.quantity
+      cart['feeDetails'] = prices
     }
 
 
@@ -391,5 +398,15 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     }); 
 
     return order
+  },
+  async getPricingInfo(ctx) {
+    let {ticket, listing } = ctx.request.body;
+    // console.log('Ticket', ticket)
+    // console.log('Listing ', listing)
+    // let rates = taxRates.sales_tax_rates.find(r => r.city == event.venue.address[0].city.toLowerCase())
+    // let feeStructure = event.fee_structure
+    // let ticket = false
+    // let prices = await strapi.service('api::utility.utility').calculateTicketPrices(ticket, listing, true, rates, feeStructure);
+    return 200
   }
 }));
