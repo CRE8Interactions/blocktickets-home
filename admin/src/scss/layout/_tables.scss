@@ -33,7 +33,7 @@
 		td {
 			padding-right: rem(32);
 			padding-left: rem(32);
-			@extend .text-truncate !optional;
+			@extend %text-truncate !optional;
 		}
 
 		th:first-of-type,
@@ -62,7 +62,7 @@
 
 	th,
 	td {
-		@extend .text-truncate !optional;
+		@extend %text-truncate !optional;
 	}
 
 	tbody {
