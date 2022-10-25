@@ -21,7 +21,7 @@ export default function Payout({ payout }) {
                     <h2 className='normal m-0 fw-medium'>{payout.date}</h2>
                 </Stack>
                 <Stack className='gap-3'>
-                    <p className='normal fw-semi-bold'>{payout.event}</p>
+                    <p className='event normal fw-semi-bold text-truncate'>{payout.event}</p>
                     <small>Invoice {formatOrderId(payout.invoice)}</small>
                 </Stack>
                 <Stack className='align-items-center'>

@@ -14,10 +14,13 @@
 
 		&:first-of-type {
 			flex-basis: 476px;
+
+			.ticket-name {
+				width: 40ch;
+			}
 		}
 		&:not(:first-of-type):not(:last-of-type) {
-			padding: 0px rem(49);
-
+			flex-basis: rem(219);
 			align-items: center;
 		}
 		& + .vstack {

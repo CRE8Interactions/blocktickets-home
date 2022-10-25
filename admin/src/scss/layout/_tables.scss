@@ -23,6 +23,7 @@
 
 .table {
 	margin-bottom: 0px;
+	table-layout: fixed;
 
 	> *,
 	th {
@@ -41,6 +42,7 @@
 		td {
 			padding-right: rem(32);
 			padding-left: rem(32);
+			@extend .text-truncate !optional;
 		}
 
 		th:first-of-type,

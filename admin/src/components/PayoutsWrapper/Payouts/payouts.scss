@@ -10,15 +10,23 @@
 				gap: $gap-sm;
 				align-items: flex-start;
 
-				& + .vstack {
-					border-left: border();
-					padding-left: $text-spacer;
+				&:not(:first-of-type) {
+					flex-basis: rem(200);
 				}
 
-				&:last-of-type {
-					border-right: border();
-					margin-right: $text-spacer;
+				.event {
+					width: 13ch;
 				}
+
+				& + .vstack {
+					border-left: border();
+					padding: 0px $text-spacer;
+				}
+
+				// &:last-of-type {
+				// 	border-right: border();
+				// 	margin-right: $text-spacer;
+				// }
 			}
 		}
 		#payout-desc {

@@ -39,7 +39,7 @@ export default function Ticket({ ticket, handleShow }) {
     return (
         <Stack direction='horizontal' as="li" className='list-item ticket-row'>
             <Stack>
-                <h2 className='normal'>{ticket?.name}</h2>
+                <h2 className='ticket-name normal text-truncate'>{ticket?.name}</h2>
                 <Stack direction='horizontal' gap={2}>
                     <Badge bg={getTicketStatusColor(ticket?.status)} className='text-uppercase'>{formatTicketStatus(ticket?.status)}</Badge>
                     <span className='text-muted small'>{getDescription(ticket?.desc)}</span>
