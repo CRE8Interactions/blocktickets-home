@@ -19,16 +19,17 @@
 				width: 40ch;
 			}
 		}
-		&:not(:first-of-type):not(:last-of-type) {
+		&:not(:first-of-type) {
 			flex-basis: rem(219);
 			align-items: center;
 		}
+
 		& + .vstack {
 			border-left: border($color: $gray-200);
 		}
 
-		&:last-of-type {
-			align-items: flex-end;
-		}
+		// &:last-of-type {
+		// 	align-items: flex-end;
+		// }
 	}
 }
