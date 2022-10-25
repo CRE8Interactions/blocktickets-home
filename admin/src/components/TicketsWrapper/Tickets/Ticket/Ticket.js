@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { removeHyphens, formatCurrency } from '../../../../utilities/helpers';
 
@@ -10,7 +9,6 @@ import moment from 'moment';
 import { EditDeleteDropdown } from '../../../EditDeleteDropdown';
 
 export default function Ticket({ ticket, handleShow }) {
-    const navigate = useNavigate();
 
     const ticketStatusColors = [
         {
@@ -53,7 +51,7 @@ export default function Ticket({ ticket, handleShow }) {
             <Stack>
                 <span>{ticket?.price && ticket?.price > 0 ? formatCurrency(ticket?.price) : 'Free'}</span>
             </Stack>
-            <EditDeleteDropdown canDelete={ticket?.status !== "on_sale"} handleShow={handleShow} onClick={() => navigate(`edit?type=${encodeURIComponent((ticket?.name))}`)} />
+            <EditDeleteDropdown canDelete={ticket?.status !== "on_sale"} handleShow={handleShow} link='edit' search={`?type=${encodeURIComponent((ticket?.name))}`} />
         </Stack>
     );
 }
