@@ -86,7 +86,7 @@ export default function Invoice({ details }) {
                 <ListGroup as="ul" className="mt-4">
                     <ListGroup.Item as="li">
                         <div className="split-row">
-                            <h1 className="normal">{invoice?.details?.ticketCount}x Ticket/s  {invoice?.details.listing && (<span className='text-uppercase'>Resale</span>)}</h1>
+                            <h1 className="normal">{invoice?.details?.ticketCount}x Ticket/s  {invoice?.details.listing && (<span className='text-uppercase'>Resale</span>)} {invoice?.paymentProcessor === 'transfer' && (<span className='text-uppercase'>Transfer</span>)}</h1>
 
                             <span className='fw-bold'>{formatCurrency(invoice?.details?.ticket?.cost * invoice?.details?.ticketCount)}</span>
                         </div>
