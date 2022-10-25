@@ -7,7 +7,7 @@ export default function TrackingLink({ link, handleShow, hasPermission }) {
 
     return (
         <div className='flex-row' role="rowgroup">
-            <div className='list-table-col' role="cell">
+            <div className='list-table-col text-truncate' role="cell">
                 <span>{link.name}</span>
             </div>
             <div className="list-table-col lg" role="cell">
