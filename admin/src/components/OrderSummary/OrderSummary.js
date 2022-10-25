@@ -94,7 +94,7 @@ export default function OrderSummary({ order, showDropdown = true, isOpen = fals
                                 <p className='fw-medium'>{purchaser(order)}</p>
                                 <span className='caption'>{order?.details?.ticketCount} tickets</span>
                                 {status.key !== 'Transferred by' && (<p className='fw-medium'>Total {formatCurrency(order?.total / order?.details?.ticketCount)}
-                                    {!order?.details?.ticket.free && (
+                                    {!order?.details?.ticket?.free && (
                                         <span> paid by {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.brand} {order?.intentDetails?.charges?.data[0]?.payment_method_details?.card?.last4}</span>
                                     )}
                                 </p>)}
