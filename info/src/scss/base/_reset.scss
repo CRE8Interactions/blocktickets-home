@@ -1,0 +1,56 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Set core root defaults */
+body {
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: antialiased;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	font: inherit;
+	text-decoration: none;
+	word-wrap: break-word;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select,
+legend {
+	font: inherit;
+}
+
+ul,
+ol,
+dl {
+	list-style: none;
+	margin-bottom: 0;
+	padding: 0;
+}
+
+figure {
+	margin: 0;
+}
+
+img,
+svg {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+}

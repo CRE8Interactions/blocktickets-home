@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+@use 'colors' as *;
+@use 'buttons' as *;
+
+$link-color: $secondary;
+$link-hover-color: $secondary;
+$link-decoration: none;
+
+$nav-link-color: $muted;
+$nav-link-font-weight: $btn-font-weight;
+$nav-link-hover-color: $body-color;

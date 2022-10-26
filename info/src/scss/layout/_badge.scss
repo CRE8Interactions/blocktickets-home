@@ -1,0 +1,18 @@
+@use '../abstracts' as *;
+@use '../theme/colors' as *;
+
+.badge {
+	border-radius: rem(40);
+	$opac: 0.10;
+	font-weight: $fw-medium;
+	font-size: $small;
+
+	&--primary {
+		color: $primary;
+		border-color: $primary;
+	}
+
+	&--light {
+		background-color: rgba($primary, $opac);
+	}
+}

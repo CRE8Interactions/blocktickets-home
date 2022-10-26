@@ -1,0 +1,119 @@
+@use '../abstracts' as *;
+
+// Banner Spacers
+
+// Page Spacers
+$spacer-xs: rem(32);
+$spacer-sm: rem(64);
+$spacer-md: rem(80);
+$spacer-xl-top: rem(100);
+$spacer-xl-bottom: rem(110);
+
+// Text Spacers
+$heading-spacer: rem(64); // page headings
+$heading-spacer-sm: rem(27); // page headings
+$gap: rem(14);
+$gap-sm: rem(10);
+$gap-xs: rem(4);
+
+$text-spacer-lg: rem(40);
+$text-spacer: rem(32);
+$text-spacer-sm: rem(24);
+$text-spacer-xs: rem(16);
+
+.spacer-xs {
+	padding: $spacer-xs 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-sm 0px;
+	}
+}
+
+.spacer {
+	padding: $spacer-sm 0px;
+}
+
+.spacer-md {
+	padding: $spacer-md 0px;
+
+	@include breakpoint-min(md) {
+		padding: $spacer-sm 0px;
+	}
+}
+
+.spacer-lg {
+	padding: $spacer-sm 0px;
+
+	@include breakpoint-min(lg) {
+		padding: $spacer-xl-top 0px $spacer-xl-bottom;
+	}
+}
+
+.footer-spacer {
+	padding: $spacer-sm 0px $spacer-xs;
+
+	@include breakpoint-min(md) {
+		padding-top: $spacer-md;
+	}
+}
+
+.page-slider .swiper {
+	padding-bottom: rem(50);
+
+	@include breakpoint-min(md) {
+		padding-bottom: rem(90);
+	}
+}
+
+.row + .row {
+	margin-top: rem(3);
+
+	@include breakpoint-min(md) {
+		margin-top: rem(7);
+	}
+}
+
+%flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.split-row {
+	@extend %flex-between !optional;
+	font-size: $small;
+}
+
+.heading--flex,
+.section-heading,
+.section-heading-sm {
+	@extend %flex-between !optional;
+}
+
+.heading--flex {
+	& > *,
+	.btn {
+		margin: 0px !important;
+	}
+
+	.card-title {
+		margin: 0;
+
+		&-flex {
+			.card-title {
+				order: 2;
+			}
+		}
+	}
+}
+.card-content {
+	margin-top: rem(24);
+}
+
+@mixin scrollable-padding {
+	padding: rem(8) 0px;
+}
+
+.scrollable-heading {
+	@include scrollable-padding();
+}

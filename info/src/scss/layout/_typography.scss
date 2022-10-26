@@ -1,0 +1,379 @@
+@use '../abstracts' as *;
+@use 'spacing' as *;
+@use 'container' as *;
+@use './../theme/colors' as *;
+
+pre {
+	white-space: break-spaces;
+	font-family: $font-body;
+}
+
+.normal {
+	font-size: $body-2;
+}
+
+.fs-md {
+	font-size: $body-1;
+}
+
+.normal-sm {
+	font-size: $small;
+
+	@include breakpoint-min(md) {
+		font-size: $body-2;
+	}
+}
+
+.normal-lg {
+	font-size: $body-2;
+
+	@include breakpoint-min(md) {
+		font-size: $body-1;
+	}
+}
+
+.heading-font {
+	font-family: $font-heading;
+}
+
+.section-heading {
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+		@extend .heading-font !optional;
+	}
+
+	margin-bottom: $heading-spacer;
+
+	h1,
+	h2 {
+		font-size: $h4-font-size;
+		@include breakpoint-min(md) {
+			font-size: $h3-font-size;
+		}
+	}
+
+	&-sm {
+		@extend .section-heading !optional;
+		margin-bottom: $heading-spacer-sm;
+
+		h1,
+		h2 {
+			@extend .heading-sm !optional;
+			@extend .heading-font !optional;
+			margin: 0px !important;
+		}
+	}
+}
+
+.heading-sm {
+	font-size: $body-1;
+	margin-bottom: $heading-spacer-sm;
+
+	@include breakpoint-min(md) {
+		font-size: $h4-font-size;
+	}
+}
+
+h1,
+.h1 {
+	font-size: $h1-font-size;
+}
+h2,
+.h2 {
+	font-size: $h2-font-size;
+}
+h3,
+.h3 {
+	font-size: $h3-font-size;
+}
+h4,
+.h4 {
+	font-size: $h4-font-size;
+}
+
+.fw-medium {
+	font-weight: $fw-medium;
+}
+
+.fw-semi-bold {
+	font-weight: $fw-semi-bold;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+	font-weight: $fw-bold;
+	font-family: $font-body;
+}
+
+.caption {
+	font-size: $caption;
+	margin-bottom: rem(3);
+}
+
+.normal--uppercase {
+	@extend .text-uppercase !optional;
+	font-size: $body-2;
+}
+
+.caption--uppercase {
+	@extend .caption !optional;
+	@extend .text-uppercase !optional;
+}
+
+.caption--uppercase-label {
+	font-size: $caption;
+	@extend .text-uppercase !optional;
+	color: $muted;
+	margin-bottom: rem(12);
+}
+
+%text-truncate {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+%multi-line-truncate {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+}
+
+@mixin multi-line-truncate($lines: 2) {
+	@extend %multi-line-truncate;
+	-webkit-line-clamp: $lines;
+}
+
+.nav-link {
+	font-family: $font-heading;
+}
+
+%nav-mobile-headings {
+	@include breakpoint-max(lg) {
+		display: block;
+		margin-bottom: $text-spacer-xs;
+		font-size: $caption;
+		color: $text-muted;
+		text-transform: uppercase;
+		font-weight: $fw-bold;
+		font-family: $font-body;
+	}
+}
+
+.details {
+	.card-title,
+	.event-name,
+	.card-subtitle,
+	.presenter-text,
+	.event-detail,
+	.row > .col > *,
+	* {
+		@extend %text-truncate !optional;
+	}
+
+	.card-title,
+	.event-name {
+		font-size: $body-1;
+		margin-bottom: rem(13);
+		font-weight: $fw-semi-bold;
+	}
+
+	.card-subtitle,
+	.presenter-text {
+		order: -1;
+		margin-bottom: rem(8);
+		@extend .caption !optional;
+		@extend .text-uppercase !optional;
+		color: $muted;
+	}
+}
+
+.disclaimer {
+	display: block;
+	font-size: $caption;
+	color: $text-muted;
+}
+
+// event details: event, event popup
+.time-caption,
+.venue-caption,
+.location-caption {
+	@extend .caption !optional;
+	@extend %icon-text-box !optional;
+	gap: $gap-xs;
+	color: $clr-neutral-4;
+	font-weight: $fw-semi-bold;
+	line-height: 0;
+}
+
+.time-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'calendar'));
+	}
+}
+
+.venue-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'venue'));
+	}
+}
+
+.location-caption {
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'location'));
+	}
+}
+
+// bulleted event details: event, ticket card, order preview
+.time,
+.loc,
+.venue,
+.ticket-type {
+	&::before {
+		content: '\2022';
+		margin: 0px rem(4);
+	}
+}
+
+.date {
+	@include breakpoint-min(md) {
+		margin-right: rem(4);
+	}
+}
+
+.num-tickets {
+	font-size: $caption;
+	font-weight: $fw-semi-bold;
+	@extend %icon-text-box !optional;
+	gap: $gap-sm;
+	&::before {
+		content: url($data-svg-prefix + map-get($icons, 'ticketOutline'));
+	}
+}
+
+.list {
+	padding-left: 0px;
+	padding-right: 0px;
+	.heading {
+		font-weight: $fw-medium;
+		margin-bottom: rem(8);
+	}
+
+	& + .list:not(.list.list-group-item) {
+		margin-top: rem(20);
+	}
+}
+
+// docs styling
+.docs {
+	p {
+		font-size: $small;
+
+		+ p {
+			margin-top: $text-spacer-xs;
+		}
+	}
+
+	&-section-heading,
+	&-header-title {
+		font-size: $body-1;
+	}
+
+	&-heading,
+	&-header-title {
+		margin-bottom: $text-spacer-xs;
+	}
+
+	&-heading {
+		font-size: $h3-font-size;
+	}
+
+	&-desc {
+		font-size: $body-2;
+	}
+
+	&-header {
+		margin: $text-spacer-lg 0px;
+	}
+
+	&-section {
+		&-heading {
+			margin: $text-spacer-lg 0px $text-spacer-xs;
+		}
+	}
+
+	&-date {
+		margin-bottom: $text-spacer-xs;
+	}
+
+	ul {
+		padding-left: $text-spacer;
+		li {
+			list-style-type: disc;
+			margin-bottom: rem(4);
+
+			.list-heading {
+				font-weight: $fw-semi-bold;
+				margin-bottom: rem(8);
+			}
+		}
+	}
+
+	.unstyled-list {
+		& {
+			padding-left: $text-spacer-xs;
+		}
+
+		&.float {
+			dt:not(:first-of-type) {
+				float: left;
+				margin-right: rem(3);
+			}
+
+			dt:first-of-type {
+				margin-bottom: rem(4);
+			}
+		}
+
+		dl {
+			dt,
+			dd {
+				display: block;
+			}
+		}
+		li {
+			list-style: none;
+
+			ul {
+				margin-top: 0px;
+				padding: 0px;
+			}
+		}
+	}
+
+	.unstyled-list > li ~ li {
+		padding-top: $text-spacer-xs;
+	}
+
+	dl,
+	ul {
+		font-size: $small;
+		margin: rem(10) 0px;
+	}
+
+	dd {
+		margin-bottom: rem(3);
+	}
+
+	dl {
+		dt,
+		dd {
+			display: inline;
+		}
+	}
+}

@@ -1,0 +1,144 @@
+@use './spacing' as *;
+@use '../abstracts' as *;
+
+$pad-sm: rem(32);
+$pad-md: rem(81);
+
+$navbar-height-sm: rem(88);
+$navbar-height: rem(83);
+
+.container {
+	max-width: 1130px;
+	margin: 0 auto;
+	@include breakpoint-max(md) {
+		padding: 0px $pad-sm;
+	}
+
+	@include breakpoint-inBetween(md, xl) {
+		padding: 0px $pad-md;
+	}
+
+	&--full-height {
+		flex: 1;
+	}
+}
+
+.docs-container {
+	max-width: 672px;
+	margin: 0px auto;
+}
+
+// on body and html
+.full-height {
+	height: 100%;
+}
+
+// on the root element
+.full-height-flex {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.full-height-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.noBodyPadding {
+	padding: 0px 0px 0px 0px !important;
+}
+
+@mixin full-width() {
+	position: relative;
+	width: 100vw;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+
+.sticky {
+	@include breakpoint-max(md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 999;
+		margin-top: auto;
+	}
+}
+
+.d-flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+%icon-text-box {
+	display: flex;
+	gap: $gap;
+	align-items: center;
+
+	&::before,
+	&::after {
+		line-height: 0;
+	}
+}
+
+.mobile-only {
+	@include breakpoint-min(md) {
+		display: none;
+	}
+}
+
+.mobile-tablet-only {
+	@include breakpoint-min(lg) {
+		display: none;
+	}
+}
+
+.tablet-desktop-only {
+	@include breakpoint-max(md) {
+		display: none;
+	}
+}
+
+.desktop-only {
+	@include breakpoint-max(lg) {
+		display: none;
+	}
+}
+
+@mixin remove-scrollbar() {
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@mixin scrollable() {
+	overflow-y: auto;
+	height: 100%;
+	@include remove-scrollbar();
+}
+
+.event-image {
+	aspect-ratio: 1/1;
+}
+
+// browsers that do not support aspect-ratio like Explorer and Safari
+@supports not (aspect-ratio: 1/1) {
+	/* defined that the height of the depends on its width */
+	.image-wrapper {
+		position: relative;
+		padding-top: 100%; // aspect-ratio 1 / 1
+		/* image is absolutely positioned and it has the full width and height of its parent, with object-fit: cover for cases of uploading a different-sized image.  */
+		.event-image {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}

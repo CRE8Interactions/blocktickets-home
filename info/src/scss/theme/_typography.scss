@@ -1,0 +1,20 @@
+@use '../abstracts' as *;
+@use '../layout' as *;
+
+// Fonts
+$font-family-sans-serif: $font-body;
+$small-font-size: $small;
+
+$font-weight-normal: $fw-normal;
+$font-weight-bold: $fw-semi-bold;
+$font-weight-bolder: $fw-bold;
+
+$display-font-weight: $fw-bold;
+$headings-font-weight: $fw-semi-bold;
+$line-height-base: 1.4;
+$display-line-height: 1;
+$nav-link-font-size: $small;
+
+$badge-font-size: $caption;
+$badge-font-weight: $fw-bold;
+$badge-border-radius: 4px;

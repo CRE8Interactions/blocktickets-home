@@ -1,0 +1,113 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+@use '../../scss/theme/buttons' as *;
+@use '../../scss/theme/colors' as *;
+
+.navigation {
+	&.position-sticky {
+		top: 0;
+		z-index: 999;
+	}
+
+	&::after {
+		@include full-width-border();
+		top: $navbar-height-sm;
+
+		@include breakpoint-min(lg) {
+			top: $navbar-height;
+		}
+	}
+
+	.container {
+		position: relative;
+	}
+
+	.navbar {
+		background-color: $clr-white;
+
+		@include breakpoint-min(lg) {
+			padding-top: rem(21);
+			padding-bottom: rem(21);
+		}
+
+		&-brand {
+			padding-top: rem(3);
+
+			@include breakpoint-min(lg) {
+				padding-right: rem(13);
+			}
+		}
+
+		&-toggler {
+			margin-right: 0px !important;
+		}
+
+		&-collapse {
+			z-index: 999;
+
+			@include breakpoint-max(lg) {
+				padding: 0px $nav-link-padding-x;
+				margin: $nav-link-margin;
+			}
+		}
+
+		&-nav {
+			padding-top: em(73);
+			padding-bottom: em(60);
+
+			@include breakpoint-max(lg) {
+				min-height: -webkit-fill-available;
+				height: calc(100vh - 88px);
+			}
+
+			ul {
+				li + li {
+					padding-top: rem(8);
+					@include breakpoint-min(lg) {
+						padding-top: 0px;
+						padding-left: $text-spacer;
+					}
+				}
+			}
+
+			#main {
+				@include breakpoint-min(lg) {
+					border-left: border(2px);
+					padding-left: rem(13);
+				}
+
+				@include breakpoint-min(xl) {
+					padding-left: $text-spacer-sm;
+				}
+
+				.nav-link {
+					@include breakpoint-max(lg) {
+						font-size: $body-2;
+						padding: $nav-link-padding-y $nav-link-padding-x;
+						margin: $nav-link-margin;
+
+						&:hover,
+						&:focus,
+						&.active {
+							@include hover-effect();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	li:last-of-type {
+		@include breakpoint-max(md) {
+			width: 100%;
+		}
+	}
+	.btn {
+		margin-top: 0px;
+		&-secondary,
+		&-outline-light {
+			min-width: 102px;
+			padding: rem(11) $btn-padding-x;
+		}
+	}
+}

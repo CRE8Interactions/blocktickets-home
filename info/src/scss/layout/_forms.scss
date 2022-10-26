@@ -1,0 +1,139 @@
+@use '../abstracts' as *;
+@use './spacing' as *;
+@use './typography' as *;
+@use '../theme/input' as *;
+@use '../theme/buttons' as *;
+@use '../theme/colors' as *;
+@use '../theme/borders' as theme;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	color: $body-color;
+	-webkit-text-fill-color: $body-color;
+	transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-group + .form-group {
+	margin-top: $text-spacer-sm;
+}
+
+.form-control {
+	&-xs {
+		border-radius: $br-xs;
+		width: 40%;
+		font-size: $caption;
+		font-weight: $fw-normal;
+		text-align: center;
+		padding: rem(2) rem(8);
+		margin-top: 0px;
+	}
+
+	&--borderless {
+		border: none;
+	}
+
+	&:disabled {
+		opacity: .5;
+	}
+}
+
+.form-card {
+	border-radius: theme.$border-radius;
+	padding: rem(12) rem(16);
+
+	&-lg {
+		.form-control {
+			font-size: $h4-font-size;
+		}
+	}
+
+	&,
+	& .form-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.form-label {
+			text-transform: initial;
+			font-weight: $fw-normal;
+			margin: 0px;
+		}
+
+		.form-control {
+			font-weight: $fw-bold;
+			padding: 0px;
+			order: -1;
+			text-align: center;
+		}
+
+		.form-control {
+			font-family: $font-heading;
+			margin: 0px;
+			background-color: transparent;
+			@extend .form-control--borderless !optional;
+		}
+	}
+}
+
+.error-border {
+	border-color: $danger;
+}
+
+.form-label {
+	@extend .caption--uppercase-label !optional;
+}
+
+.form-check {
+	min-height: 0px;
+
+	&-label {
+		font-size: rem(14);
+	}
+
+	&-input:focus {
+		box-shadow: none;
+	}
+}
+
+.form-select {
+	padding: $input-padding-y $input-padding-x;
+}
+
+#custom-switch {
+	height: 26px;
+}
+
+// search field
+@mixin input-icon-box($radius: theme.$border-radius, $color: $light) {
+	display: flex;
+	align-items: center;
+	background-color: $white;
+	border-radius: $radius;
+	border: $input-border-width solid $color;
+	padding-right: rem(8);
+
+	&:focus-within {
+		border-color: $input-focus-border-color;
+	}
+
+	.form-control,
+	.form-control:focus {
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		min-height: auto;
+	}
+}
+
+// login & security new phone number field, ssn number
+.input-wrapper {
+	@include input-icon-box();
+
+	&.input-wrapper-error {
+		@extend .error-border !optional;
+	}
+}

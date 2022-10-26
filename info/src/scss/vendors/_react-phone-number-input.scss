@@ -1,0 +1,42 @@
+@use '../abstracts' as *;
+@use '../layout' as *;
+@use '../theme/input' as *;
+@use '../theme/borders' as theme;
+
+:root {
+	--PhoneInput-color--focus: $input-focus-border-color;
+	--PhoneInputCountryFlag-borderColor: transparent;
+	--PhoneInputCountrySelect-marginRight: 1em;
+	--PhoneInputCountryFlag-borderColor: transparent;
+}
+
+.PhoneInput {
+	border: $input-border-width solid theme.$border-color;
+	padding: $input-padding-y $input-padding-x;
+	border-radius: theme.$border-radius;
+
+	&--focus {
+		border-color: $input-focus-border-color;
+	}
+
+	&.error-border {
+		@extend .error-border;
+	}
+
+	.PhoneInputInput,
+	.PhoneInputInput:focus-visible {
+		border: none;
+		border-color: transparent;
+		border-width: 0;
+		background-color: transparent;
+		outline: none;
+	}
+
+	.PhoneInputCountryIcon {
+		height: auto;
+
+		&--border {
+			background-color: transparent;
+		}
+	}
+}
