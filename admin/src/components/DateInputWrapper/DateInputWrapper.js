@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import moment from 'moment'
 
 import Stack from 'react-bootstrap/Stack';
@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form';
 import { DateInput } from './DateInput';
 
 export default function DateInputWrapper({ label, id, setDate, selectedDate, startDate, endDate, setEndDate, setError, error, size, displayEndDate = false }) {
+
+    const inputRef = useRef();
 
     // make end date the same as start date when start date changes 
     useEffect(() => {
@@ -37,10 +39,10 @@ export default function DateInputWrapper({ label, id, setDate, selectedDate, sta
 
     return (
         <Form.Group>
-            <div className={`date-picker-card day-picker-card ${size ? `date-picker-card-${size}` : ''} ${error ? 'error-border' : ''}`}>
+            <div className={`date-picker-card day-picker-card ${size ? `date-picker-card-${size}` : ''} ${error ? 'error-border' : ''}`} ref={inputRef}>
                 <Stack>
                     {label && (<Form.Label htmlFor={id} className={`${error ? 'error' : ''}`}>{label}</Form.Label>)}
-                    <DateInput id={id} setDate={setDate} selectedDate={selectedDate} startDate={startDate} endDate={endDate} />
+                    <DateInput id={id} setDate={setDate} selectedDate={selectedDate} startDate={startDate} endDate={endDate} reference={inputRef} />
                 </Stack>
             </div>
             {error && (
