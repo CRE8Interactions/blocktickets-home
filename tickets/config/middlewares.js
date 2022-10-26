@@ -18,7 +18,7 @@ module.exports = [
     config: {
       enabled: true,
       headers: '*',
-      origin: [process.env.CMS_HOST, process.env.ADMIN_APP_HOST, process.env.CONSUMER_APP_HOST]
+      origin: [process.env.CMS_HOST, process.env.ADMIN_APP_HOST, process.env.CONSUMER_APP_HOST, process.env.MOBILE_HOST]
     }
   },
   'strapi::poweredBy',
