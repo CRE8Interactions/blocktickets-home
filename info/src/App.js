@@ -1,7 +1,7 @@
-import React, { Fragment, useLayoutEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 
 import Router from './Router';
-import { Navigation } from './components'
+import { Navigation, Footer } from './components'
 
 function App() {
 
@@ -10,6 +10,7 @@ function App() {
             <Navigation />
             <div className="container" id="main-container">
                 <Router />
+                <Footer />
             </div>
         </Fragment>
     );

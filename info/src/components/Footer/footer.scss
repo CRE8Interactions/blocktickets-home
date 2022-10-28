@@ -1,0 +1,97 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
+@use '../../scss/theme/colors' as *;
+@use '../../scss/layout' as *;
+
+footer {
+	&::before {
+		@include full-width-border();
+	}
+
+	.nav-link {
+		padding-left: 0px;
+	}
+
+	.copyright {
+		border-top: border();
+		padding: $text-spacer-sm 0px;
+
+		@include breakpoint-min(lg) {
+			padding: $text-spacer 0px;
+		}
+
+		p {
+			font-weight: $fw-normal;
+		}
+	}
+
+	.main-links {
+		@include breakpoint-max(lg) {
+			justify-content: space-between;
+		}
+
+		@include breakpoint-min(lg) {
+			gap: rem(46);
+		}
+
+		@include breakpoint-min(xl) {
+			gap: rem(100);
+		}
+	}
+
+	.main-links,
+	.col:last-of-type {
+		@include breakpoint-max(lg) {
+			padding-top: $text-spacer;
+		}
+
+		ul li:first-child a {
+			padding-top: 0px;
+		}
+	}
+
+	.col {
+		padding-bottom: $text-spacer;
+
+		@include breakpoint-max(lg) {
+			&:first-of-type {
+				border-bottom: border();
+			}
+			&:last-of-type {
+				border-top: border();
+				padding-bottom: 0px;
+			}
+		}
+		@include breakpoint-min(lg) {
+			padding-bottom: rem(12);
+		}
+
+		.footer-title {
+			margin-bottom: $text-spacer-xs;
+			font-weight: $fw-bold;
+			font-family: $font-heading;
+			font-size: $small;
+		}
+
+		.social-icons {
+			justify-content: space-between;
+
+			@include breakpoint-inBetween(md, lg) {
+				gap: $text-spacer;
+				justify-content: initial;
+			}
+		}
+	}
+}
+
+.tag-line {
+	margin-top: $text-spacer;
+	font-weight: $fw-normal;
+	color: $body-color;
+
+	@include breakpoint-min(lg) {
+		margin-top: rem(29);
+		font-size: rem(24);
+		width: 18ch;
+	}
+}

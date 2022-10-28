@@ -1,0 +1,88 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout/spacing' as *;
+@use '../../scss/layout/container' as *;
+@use '../../scss/theme/borders' as *;
+
+.features {
+	&-container {
+		gap: rem(200);
+	}
+	.feature {
+		&-box {
+			gap: $gap;
+
+			> * {
+				flex: 1;
+			}
+			@include breakpoint-min(lg) {
+				gap: rem(200);
+				flex-direction: row;
+				align-items: center;
+			}
+
+			@include breakpoint-min(lg) {
+				&:nth-child(even) {
+					.feature-img-container {
+						order: -1;
+					}
+				}
+			}
+
+			&:first-of-type {
+				.feature-desc::before {
+					content: url($data-svg-prefix + map-get($icons, 'ticket'));
+				}
+			}
+
+			&:nth-of-type(2) {
+				.feature-desc::before {
+					content: url($data-svg-prefix + map-get($icons, 'settings'));
+				}
+			}
+			&:nth-of-type(3) {
+				.feature-desc::before {
+					content: url($data-svg-prefix + map-get($icons, 'coin'));
+				}
+			}
+
+			&:last-of-type {
+				.feature-desc::before {
+					content: url($data-svg-prefix + map-get($icons, 'parachut'));
+				}
+			}
+		}
+
+		&-desc {
+			text-align: left;
+			@extend .d-flex-column;
+		}
+
+		&-img {
+			// height: 231px;
+
+			&-container {
+				position: relative;
+				transform-origin: center;
+				transform: scale(0.9);
+				border-radius: $border-radius;
+				background: linear-gradient(103.1deg, #fbfcff -0.03%, #f4f5ff 100%);
+				width: 520px;
+				height: 250px;
+				@include breakpoint-max(md) {
+					@include full-width();
+					height: 180px;
+				}
+
+				// &::before {
+				// 	content: '';
+				// 	position: absolute;
+				// 	z-index: -1;
+
+				// 	// @include breakpoint-min(md) {
+				// 	// 	transform: translateX(-58px);
+				// 	// }
+				// }
+			}
+		}
+	}
+}

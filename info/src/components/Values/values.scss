@@ -1,0 +1,44 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+@use '../../scss/theme/colors' as *;
+
+.values {
+	background-color: $body-color;
+	@include full-width();
+	padding: rem(80) rem(32);
+
+	.heading {
+		font-family: $font-heading;
+		color: $clr-white;
+		font-size: $body-1;
+	}
+
+	.value {
+		@extend .d-flex-column;
+		&::before {
+			@extend %img-background;
+		}
+		&-1 {
+			&::before {
+				content: url("../../assets/icons/messages.svg");
+			}
+		}
+		&-2 {
+			&::before {
+				content: url("../../assets/icons/community.svg");
+			}
+		}
+		&-3 {
+			&::before {
+				content: url("../../assets/icons/schedule.svg");
+			}
+		}
+	}
+
+	p {
+		font-weight: $fw-normal;
+		font-size: $small;
+		max-width: 61ch;
+		margin: auto;
+	}
+}

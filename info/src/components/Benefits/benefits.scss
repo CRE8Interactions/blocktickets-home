@@ -1,0 +1,43 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+@use '../../scss/theme/colors' as *;
+
+.benefits {
+	.card {
+		flex: 1;
+		&-body {
+			&::before {
+				@extend %img-psuedo-icon;
+				padding: rem(10);
+			}
+		}
+
+		&:first-of-type {
+			.card-body {
+				&::before {
+					background-image: url('../../assets/icons/blockchain.svg');
+					background-color: rgba($primary, var(--opac));
+				}
+			}
+		}
+		&:nth-of-type(2) {
+			.card-body {
+				&::before {
+					background-image: url('../../assets/icons/sync.svg');
+					background-color: rgba(#9757d7, var(--opac));
+				}
+			}
+			@include breakpoint-min(lg) {
+				box-shadow: $box-shadow;
+			}
+		}
+		&:last-of-type {
+			.card-body {
+				&::before {
+					background-image: url('../../assets/icons/dollar.svg');
+					background-color: rgba($success, var(--opac));
+				}
+			}
+		}
+	}
+}

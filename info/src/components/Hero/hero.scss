@@ -1,0 +1,53 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+
+.hero {
+	&-content {
+		max-width: 695px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.display-1 {
+		width: 17ch;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero-text {
+		@include breakpoint-min(md) {
+			font-size: rem(18);
+		}
+	}
+
+	.badge {
+		order: -1;
+		margin-bottom: $text-spacer-xs;
+		width: 297px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.image {
+		transition: all ease-in 1000ms;
+	}
+
+	.opacity-1 {
+		opacity: 1;
+	}
+
+	.opacity-0 {
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes shrinkGrow {
+	from {
+		width: 0px;
+		top: 10px;
+	}
+	to {
+		width: 300px;
+		top: 100px;
+	}
+}
