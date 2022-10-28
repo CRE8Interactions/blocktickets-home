@@ -3,11 +3,11 @@
 @use 'container' as *;
 @use './../theme/colors' as *;
 
-pre {
-	white-space: break-spaces;
-	font-family: $font-body;
+p {
+	line-height: 24px;
+	font-weight: $fw-semi-bold;
+	color: $text-muted;
 }
-
 .normal {
 	font-size: $body-2;
 }
@@ -32,50 +32,62 @@ pre {
 	}
 }
 
-.heading-font {
-	font-family: $font-heading;
-}
-
 .section-heading {
-	h1,
-	h2,
-	h3,
-	h4 {
-		margin: 0;
-		@extend .heading-font !optional;
+	font-weight: $fw-bold;
+	margin-bottom: $heading-spacer;
+	font-size: $h3-font-size;
+	@include breakpoint-min(md) {
+		font-size: $h2-font-size;
+	}
+	@include breakpoint-min(lg) {
+		font-size: $h1-font-size;
 	}
 
-	margin-bottom: $heading-spacer;
+	&.display-1 {
+		font-size: $h3-font-size;
+		line-height: 1.4;
 
-	h1,
-	h2 {
-		font-size: $h4-font-size;
 		@include breakpoint-min(md) {
-			font-size: $h3-font-size;
+			font-size: rem(54);
+			line-height: 1.2;
+		}
+		@include breakpoint-min(lg) {
+			font-size: rem(66);
 		}
 	}
 
 	&-sm {
 		@extend .section-heading !optional;
 		margin-bottom: $heading-spacer-sm;
-
-		h1,
-		h2 {
-			@extend .heading-sm !optional;
-			@extend .heading-font !optional;
-			margin: 0px !important;
-		}
 	}
 }
 
-.heading-sm {
-	font-size: $body-1;
-	margin-bottom: $heading-spacer-sm;
-
-	@include breakpoint-min(md) {
-		font-size: $h4-font-size;
-	}
+.subtitle {
+	font-size: $body-2;
+	line-height: 24px;
 }
+
+// 	&-sm {
+// 		@extend .section-heading !optional;
+// 		margin-bottom: $heading-spacer-sm;
+
+// 		h1,
+// 		h2 {
+// 			@extend .heading-sm !optional;
+// 			@extend .heading-font !optional;
+// 			margin: 0px !important;
+// 		}
+// 	}
+// }
+
+// .heading-sm {
+// 	font-size: $body-1;
+// 	margin-bottom: $heading-spacer-sm;
+
+// 	@include breakpoint-min(md) {
+// 		font-size: $h4-font-size;
+// 	}
+// }
 
 h1,
 .h1 {

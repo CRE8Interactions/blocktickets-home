@@ -1,0 +1,21 @@
+@use '../abstracts' as *;
+@use './spacing' as *;
+
+.nav-tabs {
+	margin-bottom: $spacer-md;
+	gap: rem(8);
+	border-bottom: none;
+	justify-content: center;
+
+	.nav-link {
+		font-weight: $fw-normal;
+		font-size: $body-2;
+		font-family: $font-body;
+		text-align: center;
+		white-space: nowrap;
+
+		&.active {
+			font-weight: $fw-semi-bold;
+		}
+	}
+}

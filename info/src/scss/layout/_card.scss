@@ -5,140 +5,51 @@
 @use '../theme/card' as *;
 @use '../theme/colors' as *;
 
-%plain-card {
-	background: transparent;
-	border-color: transparent;
-	border-radius: 0px;
-
-	.card-body {
-		padding: em(21);
-
-		& * {
-			@extend %text-truncate !optional;
-		}
-	}
-
-	.card-title {
-		margin-bottom: em(10);
-	}
-}
-
-.myCard,
-.ticket-card {
-	width: rem(256);
-}
 .card {
-	&-subtitle {
-		margin-top: 0px;
-	}
-	&--light {
-		background-color: $white;
+	&-body {
+		@extend .d-flex-column !optional;
+		gap: $gap-sm;
 
-		.card-header,
-		.card-footer {
-			background-color: inherit;
+		> * {
+			flex: 1;
+			margin: 0px;
 		}
 	}
-
-	&--dark {
-		background-color: $clr-neutral-3;
-
-		* {
-			color: $clr-white;
-		}
-	}
-
-	&--popup {
-		@include breakpoint-max(md) {
-			@include full-width();
-			border-bottom-right-radius: 0px;
-			border-bottom-left-radius: 0px;
-			box-shadow: $box-shadow-popupCard;
-		}
-	}
-
-	.event-details {
-		margin-bottom: rem(16);
-		.event-detail {
-			margin-bottom: rem(10);
-		}
-	}
-
-	& * {
-		font-family: $font-body;
-	}
-
-	.btn,
-	.btn * {
-		font-family: $font-heading;
-	}
-
 	&-title {
-		font-weight: $fw-medium;
+		font-size: $body-1;
+		font-weight: $fw-semi-bold;
 		color: $body-color;
 	}
 
 	&-subtitle {
-		font-weight: $fw-bold;
-		font-size: $caption;
+		margin-top: 0px;
+		font-size: $body-2;
 	}
 
-	// used in addons, checkout ticket card
-	&-xs {
-		$padding: em(14) em(16);
+	// cta card
+	&--dark {
+		background-color: $gray-100;
 
 		.card-body {
-			padding: $padding;
-		}
-	}
-
-	// used in settings options
-	&-lg {
-		$padding: em(30) em(20);
-
-		.card-body {
-			padding: $padding;
-		}
-	}
-
-	// used in total card
-	&-xl {
-		$m-x: em(39);
-		$pad-y: em(24);
-
-		padding-left: 0px;
-		padding-right: 0px;
-
-		.card-header {
-			padding: $pad-y 0px;
-			margin: 0px $m-x;
-		}
-
-		.card-heading {
-			margin-bottom: $text-spacer-sm;
-		}
-
-		.card-title,
-		.card-heading-title {
-			font-size: $body-1;
-			font-weight: $fw-semi-bold;
-		}
-
-		.card-body {
-			padding: $pad-y 0px;
-			margin: 0px $m-x;
-			display: flex;
-			flex-direction: column;
-
-			&-header {
-				padding-bottom: $pad-y;
-				border-bottom: border();
+			@include breakpoint-min(md) {
+				padding: rem(60);
 			}
 		}
 
-		.card-footer {
-			padding: em(24) 0px;
-			margin: 0px $m-x;
+		.card-title {
+			color: $clr-white;
+			font-size: rem(32);
+			line-height: 1.2;
+			font-family: $font-heading;
+
+			@include breakpoint-min(md) {
+				line-height: 1.7;
+			}
+		}
+
+		.card-subtitle {
+			color: $gray-200;
+			font-weight: $fw-medium;
 		}
 	}
 }

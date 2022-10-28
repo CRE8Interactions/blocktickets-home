@@ -1,4 +1,5 @@
 @use '../abstracts' as *;
+@use '../layout/container' as *;
 @use '../theme/colors' as *;
 
 .badge {
@@ -6,13 +7,24 @@
 	$opac: 0.10;
 	font-weight: $fw-medium;
 	font-size: $small;
+	@extend %icon-text-box !optional;
 
 	&--primary {
 		color: $primary;
 		border-color: $primary;
+
+		&-light {
+			background-color: rgba($primary, $opac);
+		}
 	}
 
-	&--light {
-		background-color: rgba($primary, $opac);
+	&--tickets {
+		&::before {
+			content: url($data-svg-prefix + map-get($icons, 'ticket'));
+			width: 16px;
+			height: 16px;
+			transform: scale(0.2);
+			transform-origin: 19% 19%;
+		}
 	}
 }

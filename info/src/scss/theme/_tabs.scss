@@ -1,0 +1,8 @@
+@use '../abstracts/borders' as *;
+@use './colors' as *;
+
+$nav-tabs-border-width: $border-width;
+$nav-tabs-border-radius: 0;
+$nav-tabs-link-active-color: $body-color;
+$nav-tabs-link-active-border-color: transparent transparent $secondary;
+$nav-tabs-link-hover-border-color: transparent;
