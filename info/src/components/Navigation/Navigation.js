@@ -7,7 +7,6 @@ import { useWindowSize } from '../../utilities/hooks';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Stack from 'react-bootstrap/Stack';
 
 import mobileLogo from '../../assets/logo-mobile.svg';
 import desktopLogo from '../../assets/logo.svg';
