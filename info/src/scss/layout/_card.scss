@@ -24,11 +24,21 @@
 	&-subtitle {
 		margin-top: 0px;
 		font-size: $body-2;
+		color: $muted;
+	}
+
+	&-sm {
+		box-shadow: $box-shadow;
+
+		.card-body {
+			padding: em(16);
+		}
 	}
 
 	// cta card
 	&--dark {
 		background-color: $gray-100;
+		border: none;
 
 		.card-body {
 			@include breakpoint-min(md) {

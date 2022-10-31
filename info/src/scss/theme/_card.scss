@@ -3,10 +3,8 @@
 @use '../theme/colors' as *;
 
 $card-bg: $clr-neutral-8;
-$card-border-color: transparent;
+$card-border-color: $gray-400;
 $card-border-radius: theme.$border-radius;
-// $card-title-spacer-y: em(10);
-$card-color: $text-muted;
 
 // card body
 $card-spacer-y: em(32);

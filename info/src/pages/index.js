@@ -1,1 +1,2 @@
-export { AboutUsPage } from './AboutUsPage' 
+export { AboutUsPage } from './AboutUsPage'
+export { TeamPage } from './TeamPage' 

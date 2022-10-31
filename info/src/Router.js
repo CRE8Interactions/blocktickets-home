@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import {
-    AboutUsPage
+    AboutUsPage,
+    TeamPage
 } from './pages';
 import { ScrollToTop } from './components';
 
@@ -13,6 +14,7 @@ const Router = () => {
         <ScrollToTop>
             <Routes>
                 <Route path="/" element={<AboutUsPage />} />
+                <Route path="/team" element={<TeamPage />} />
             </Routes>
         </ScrollToTop>
     );

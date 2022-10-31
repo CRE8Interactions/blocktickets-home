@@ -32,10 +32,15 @@ p {
 	}
 }
 
+.section-header {
+	text-align: center;
+}
+
 .section-heading {
 	font-weight: $fw-bold;
 	margin-bottom: $heading-spacer;
 	font-size: $h3-font-size;
+
 	@include breakpoint-min(md) {
 		font-size: $h2-font-size;
 	}
