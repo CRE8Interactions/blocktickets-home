@@ -20,9 +20,9 @@ export default function Hero() {
         <section className='hero d-flex-column text-center'>
             <div className="section-header d-flex-column">
                 <div className="hero-content d-flex-column">
-                    <h1 className='section-heading display-1'>Control and security through <span className='text-primary'>blockchain</span>.</h1>
-                    <Badge bg="default" className='small text-secondary badge--primary-light badge--tickets'>Innovative ticket selling</Badge>
-                    <p className='hero-text'>Blocktickets uses blockchain technology to eliminate ticket fraud, and provide fans and organizers control of the secondary market with innovative features not available anywhere else.</p>
+                    <h1 className='section-heading display-1'>Event experiences that go beyond <span className='text-primary'>tickets</span>.</h1>
+                    <Badge bg="default" className='small text-secondary badge--primary-light badge--tickets'>Web3's NFT ticketing platform</Badge>
+                    <p className='hero-text'>We combine digital collectibles with tickets to capture secondary market revenue, eliminate ticket fraud, and build community between event organizers, artists, and fans like never before.</p>
                     <Stack gap={3} className="my-5 align-items-center justify-content-center">
                         <Button variant='link' className='text-dark'>Learn more</Button>
                         <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

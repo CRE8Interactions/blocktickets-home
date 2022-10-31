@@ -3,6 +3,7 @@ import React from 'react'
 import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 
+import smartTickets from '../../../assets/smart-tickets.png'
 import control from '../../../assets/control.png'
 import royalties from '../../../assets/royalties.png'
 import airdrops from '../../../assets/airdrops.png'
@@ -13,7 +14,20 @@ export default function OrganizerFeatures() {
             <Stack className='feature-box'>
                 <div className="feature-desc">
                     <h4 className="feature-title">Smart Tickets</h4>
-                    <p>Total control and insight during the event cycle due to the real-time data showing ticket ownership and activity.</p>
+                    <p>Ticket fraud is impossible as each ticket is registered on the blockchain and self-updates in real-time with the latest activity and ownership details.</p>
+                </div>
+                <div className="feature-img-container">
+                    <Image
+                        src={smartTickets}
+                        alt=""
+                        className='feature-img'
+                    />
+                </div>
+            </Stack>
+            <Stack className='feature-box'>
+                <div className="feature-desc">
+                    <h4 className="feature-title">Secondary market ownership</h4>
+                    <p>You determine the pricing for ticket resales, which gives true fans the chance to buy tickets at a fair prices, while also taking in the profit that would have previously gone to scalpers.</p>
                 </div>
                 <div className="feature-img-container">
                     <Image
@@ -25,21 +39,8 @@ export default function OrganizerFeatures() {
             </Stack>
             <Stack className='feature-box'>
                 <div className="feature-desc">
-                    <h4 className="feature-title">Control</h4>
-                    <p>Optimize the min and max ticket prices for resales to prevent scalpers from under cutting your primary ticket inventory and give true fans the opportunity to buy tickets at fair prices. </p>
-                </div>
-                <div className="feature-img-container">
-                    <Image
-                        src={control}
-                        alt=""
-                        className='feature-img'
-                    />
-                </div>
-            </Stack>
-            <Stack className='feature-box'>
-                <div className="feature-desc">
-                    <h4 className="feature-title">Royalties</h4>
-                    <p>Earn royalties from every ticket sold on the secondary market turning resales from your events into a new revenue stream.</p>
+                    <h4 className="feature-title">Organizer royalties</h4>
+                    <p>For the first time, you get a percentage of every single ticket sold on the multi-billion dollar secondary market, turning ticket resales from your events into a new revenue stream.</p>
                 </div>
                 <div className="feature-img-container">
                     <Image
@@ -52,7 +53,7 @@ export default function OrganizerFeatures() {
             <Stack className='feature-box'>
                 <div className="feature-desc">
                     <h4 className="feature-title">Airdrops (coming soon) </h4>
-                    <p>Transfer NFT moments, special offers, tickets for future events and more directly into the wallets of your fans.</p>
+                    <p>Connect with your fans before and after your events by airdropping gifts, VIP perks, offers, and limited-edition collectibles that can be resold, all while organically building exclusive communities with aligned incentives</p>
                 </div>
                 <div className="feature-img-container">
                     <Image
