@@ -9,7 +9,9 @@ function App() {
         <Fragment>
             <Navigation />
             <div className="container" id="main-container">
-                <Router />
+                <div className="spacer">
+                    <Router />
+                </div>
                 <Footer />
             </div>
         </Fragment>

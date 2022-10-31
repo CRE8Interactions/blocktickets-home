@@ -40,7 +40,7 @@ export default function Navigation() {
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" id="toggle" className="pe-0" />
                     <Navbar.Collapse id="responsive-navbar-nav align-items-center">
-                        <Nav activeKey={window.location.pathname} className="py-lg-0" as="nav">
+                        <Nav className="py-lg-0" as="nav">
                             <ul
                                 id="main"
                                 role="main-navigation"
@@ -62,7 +62,7 @@ export default function Navigation() {
                                 </li>
                             </ul>
                         </Nav>
-                        <Nav activeKey={window.location.pathname} className="py-lg-0 d-flex ms-lg-auto" as="nav">
+                        <Nav className="py-lg-0 d-flex ms-lg-auto" as="nav">
                             <ul className='d-flex flex-lg-row'>
                                 <li>
                                     <LinkContainer to="/sell" className="btn btn-secondary">

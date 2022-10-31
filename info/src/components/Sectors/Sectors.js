@@ -8,7 +8,7 @@ import { MyCarousel } from './MyCarousel'
 
 export default function Sectors() {
     return (
-        <section className='benefits d-flex-column text-center'>
+        <section className='d-flex-column text-center'>
             <div className="section-header">
                 <h1 className='section-heading-sm'>Tracking all sectors</h1>
                 <Tabs
