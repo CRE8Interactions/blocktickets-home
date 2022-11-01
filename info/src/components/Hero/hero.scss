@@ -2,18 +2,6 @@
 @use '../../scss/layout' as *;
 
 .hero {
-	&-content {
-		max-width: 695px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.display-1 {
-		width: 17ch;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
 	.hero-text {
 		@include breakpoint-min(md) {
 			font-size: rem(18);

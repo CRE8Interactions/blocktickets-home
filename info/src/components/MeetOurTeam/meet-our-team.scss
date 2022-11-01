@@ -1,0 +1,20 @@
+@use '../../scss/abstracts' as *;
+
+.team {
+	&-members-container {
+		align-items: center;
+		justify-content: center;
+
+		@include breakpoint-min(md) {
+			flex-direction: row;
+		}
+
+		@include breakpoint-max(lg) {
+			flex-wrap: wrap;
+		}
+
+		.member-card {
+			flex-basis: 256px;
+		}
+	}
+}

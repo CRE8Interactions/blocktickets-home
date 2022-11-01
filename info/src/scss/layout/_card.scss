@@ -32,6 +32,10 @@
 
 		.card-body {
 			padding: em(16);
+
+			.card-subtitle {
+				font-weight: $fw-medium;
+			}
 		}
 	}
 

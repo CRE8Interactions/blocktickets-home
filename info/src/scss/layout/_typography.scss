@@ -72,6 +72,15 @@ p {
 	line-height: 24px;
 }
 
+.section-heading,
+.subtitle,
+.hero-text,
+.mission-card {
+	max-width: 70ch;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 // 	&-sm {
 // 		@extend .section-heading !optional;
 // 		margin-bottom: $heading-spacer-sm;

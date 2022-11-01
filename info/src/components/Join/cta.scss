@@ -1,0 +1,34 @@
+@use '../../scss/abstracts' as *;
+@use '../../scss/layout' as *;
+
+.cta {
+	.card {
+		position: relative;
+
+		&::after {
+			@extend %img-background;
+			content: '';
+			background-image: url('../../assets/card-pattern.svg');
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-position: right;
+
+			@include breakpoint-max(md) {
+				background-image: url('../../assets/card-pattern-mobile.svg');
+			}
+		}
+	}
+
+	.row {
+		@include breakpoint-max(md) {
+			gap: $gap;
+		}
+	}
+	.card-title,
+	.card-subtitle {
+		@include breakpoint-min(md) {
+			text-align: left;
+		}
+	}
+}
