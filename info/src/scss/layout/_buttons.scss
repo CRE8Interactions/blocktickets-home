@@ -54,13 +54,13 @@ button,
 	}
 }
 
-// .btn-outline-light {
-// 	color: $body-color;
+.btn-outline-light {
+	color: $body-color;
 
-// 	&:disabled {
-// 		color: inherit;
-// 	}
-// }
+	&:disabled {
+		color: inherit;
+	}
+}
 
 // .btn-group {
 // 	column-gap: rem(18);

@@ -13,7 +13,7 @@
 .PhoneInput {
 	border: $input-border-width solid theme.$border-color;
 	padding: $input-padding-y $input-padding-x;
-	border-radius: theme.$border-radius;
+	border-radius: $input-border-radius;
 
 	&--focus {
 		border-color: $input-focus-border-color;

@@ -6,8 +6,7 @@
 $spacer-xs: rem(32);
 $spacer-sm: rem(64);
 $spacer-md: rem(80);
-$spacer-xl-top: rem(100);
-$spacer-xl-bottom: rem(110);
+$spacer-lg: rem(110);
 
 // Text Spacers
 $heading-spacer: rem(24); // section headings
@@ -25,36 +24,16 @@ section + section {
 	margin-top: $spacer-sm;
 }
 
-.section-header {
-	padding-bottom: $spacer-sm;
-}
-
-.spacer-xs {
-	padding: $spacer-xs 0px;
-
-	@include breakpoint-min(md) {
-		padding: $spacer-sm 0px;
-	}
-}
-
 .spacer {
 	padding: $spacer-sm 0px;
 }
 
-.spacer-md {
-	padding: $spacer-md 0px;
-
-	@include breakpoint-min(md) {
-		padding: $spacer-sm 0px;
-	}
+.section-lg {
+	margin: $spacer-lg 0px;
 }
 
-.spacer-lg {
-	padding: $spacer-sm 0px;
-
-	@include breakpoint-min(lg) {
-		padding: $spacer-xl-top 0px $spacer-xl-bottom;
-	}
+.section-header {
+	padding-bottom: $spacer-sm;
 }
 
 .footer-spacer {

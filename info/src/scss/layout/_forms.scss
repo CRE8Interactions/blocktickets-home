@@ -17,6 +17,12 @@ select:-webkit-autofill:focus {
 	transition: background-color 5000s ease-in-out 0s;
 }
 
+form,
+.contact-form {
+	max-width: 608px;
+	margin: auto;
+}
+
 .form-group + .form-group {
 	margin-top: $text-spacer-sm;
 }
