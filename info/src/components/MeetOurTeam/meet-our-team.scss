@@ -1,13 +1,10 @@
 @use '../../scss/abstracts' as *;
+@use '../../scss/theme/card' as *;
 
 .team {
 	&-members-container {
 		align-items: center;
 		justify-content: center;
-
-		@include breakpoint-min(md) {
-			flex-direction: row;
-		}
 
 		@include breakpoint-max(lg) {
 			flex-wrap: wrap;

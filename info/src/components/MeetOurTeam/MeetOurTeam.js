@@ -41,7 +41,7 @@ export default function MeetOurTeam() {
                 <h1 className='section-heading-sm'>Meet our team</h1>
                 <h2 className="subtitle">We are a tight knit team of four that specialize in project management, sales, user interface/experience, frontend and backend development.</h2>
             </div>
-            <Stack gap={5} className="team-members-container">
+            <Stack gap={5} className="team-members-container flex-md-row">
                 {teamMembers.map((member, index) => (
                     <Member key={index} member={member} />
                 ))}

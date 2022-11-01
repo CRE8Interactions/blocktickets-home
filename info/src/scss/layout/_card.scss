@@ -30,6 +30,9 @@
 	&-sm {
 		box-shadow: $box-shadow;
 
+		.card-img-top {
+			padding: em(16);
+		}
 		.card-body {
 			padding: em(16);
 
